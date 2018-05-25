@@ -1,0 +1,36 @@
+{% block settings_content %}
+
+    <div id="settings_div" class="wrap">
+        <h2>{{ __( 'Settings', 'planet4-gpnl-blocks' ) }}</h2>
+    </div>
+
+    {{ fn( 'settings_errors' ) }}
+
+    <form id="p4nlbks_main_settings_form" name="p4nlbks_main_settings_form" method="post" action="options.php"> {# ../../../../wp-admin/options.php #}
+
+        {{ fn( 'settings_fields', 'p4nlbks_main_settings_group' ) }}
+        {{ fn( 'do_settings_sections', 'p4nlbks_main_settings_group' ) }}
+
+        <br /><br />
+        <table class="form-table">
+            <tr valign="top">
+                <th>{{ __( 'Language', planet4-gpnl-blocks ) }}:</th>
+                <td>
+                    <select id="p4nlbks_lang" name="p4nlbks_main_settings[p4nlbks_lang]">
+                        <option selected disabled>- {{ __( 'Select Language', 'planet4-gpnl-blocks' ) }} -</option>
+                        {% for key, language in available_languages %}
+                            {% if key == settings.p4nlbks_lang %}
+                                <option value="{{ key }}" selected>{{ language }}</option>
+                            {% else %}
+                                <option value="{{ key }}">{{ language }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+        </table>
+        {{ fn( 'submit_button', __( 'Save Changes', domain ), 'primary', 'p4nlbks_main_settings_save_button' ) }}
+    </form>
+    <div class="clear"></div>
+
+{% endblock %}
