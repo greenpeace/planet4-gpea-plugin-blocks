@@ -9,10 +9,10 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
-            'P4NLBKS\\Controllers\\Menu\\' => 23,
-            'P4NLBKS\\Controllers\\Blocks\\' => 25,
-            'P4NLBKS\\Controllers\\' => 18,
-            'P4NLBKS\\' => 6,
+            'P4NLBKS\\Controllers\\Menu\\' => 25,
+            'P4NLBKS\\Controllers\\Blocks\\' => 27,
+            'P4NLBKS\\Controllers\\' => 20,
+            'P4NLBKS\\' => 8,
         ),
     );
 
@@ -36,25 +36,9 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
     );
 
     public static $classMap = array (
-        'P4NLBKS\\Controllers\\Blocks\\Articles_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-articles-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\CampaignThumbnail_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-campaignthumbnail-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\CarouselHeader_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-carouselheader-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\CarouselSplit_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-carouselsplit-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Carousel_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-carousel-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\ContentFourColumn_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-contentfourcolumn-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\ContentThreeColumn_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-contentthreecolumn-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Covers_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-covers-controllers.php',
-        'P4NLBKS\\Controllers\\Blocks\\HappyPoint_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-happypoint-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\MediaBlock_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-mediablock-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\MediaVideo_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-mediavideo-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\SplitTwoColumns_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-splittwocolumns-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\StaticFourColumn_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-staticfourcolumn-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\SubMenu_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-submenu-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Subheader_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-subheader-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\TakeActionBoxout_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-takeactionboxout-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Tasks_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-tasks-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\TwoColumn_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-twocolumn-controller.php',
+        'P4NLBKS\\Controllers\\Blocks\\DonationForm_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-donationform-controller.php',
+        'P4NLBKS\\Controllers\\Blocks\\PetitionColumnRight_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-petitioncolumnright-controller.php',
         'P4NLBKS\\Controllers\\Menu\\Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-controller.php',
         'P4NLBKS\\Controllers\\Menu\\Settings_Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-settings-controller.php',
         'P4NLBKS\\Controllers\\Uninstall_Controller' => __DIR__ . '/../..' . '/classes/controller/class-uninstall-controller.php',

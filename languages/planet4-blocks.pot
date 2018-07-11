@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"Project-Id-Version: Planet4 - Blocks\n"
+"Project-Id-Version: Planet4 - NL - Blocks\n"
 "POT-Creation-Date: 2018-05-02 14:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -112,7 +112,7 @@ msgstr ""
 #: classes/controller/blocks/class-covers-controllers.php:25
 #: classes/controller/blocks/class-staticfourcolumn-controller.php:32
 #: classes/controller/blocks/class-staticfourcolumn-controller.php:51
-#: classes/controller/blocks/class-subheader-controller.php:24
+#: classes/controller/blocks/class-petitieblokrechts-controller.php:24
 #: classes/controller/blocks/class-twocolumn-controller.php:44
 #: classes/controller/blocks/class-twocolumn-controller.php:81
 msgid "Title"
@@ -226,21 +226,21 @@ msgid "Enter header of %s image"
 msgstr ""
 
 #: classes/controller/blocks/class-carouselheader-controller.php:71
-#: classes/controller/blocks/class-subheader-controller.php:37
-msgid "Subheader"
+#: classes/controller/blocks/class-petitieblokrechts-controller.php:37
+msgid "petitieblokrechts"
 msgstr ""
 
 #. translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
 #: classes/controller/blocks/class-carouselheader-controller.php:76
 #, php-format
-msgid "Enter subheader of %s image"
+msgid "Enter petitieblokrechts of %s image"
 msgstr ""
 
 #: classes/controller/blocks/class-carouselheader-controller.php:81
 #: classes/controller/blocks/class-contentthreecolumn-controller.php:35
 #: classes/controller/blocks/class-covers-controllers.php:34
 #: classes/controller/blocks/class-staticfourcolumn-controller.php:61
-#: classes/controller/blocks/class-subheader-controller.php:29
+#: classes/controller/blocks/class-petitieblokrechts-controller.php:29
 #: classes/controller/blocks/class-twocolumn-controller.php:53
 #: classes/controller/blocks/class-twocolumn-controller.php:89
 msgid "Description"
@@ -391,7 +391,7 @@ msgid "Three Columns"
 msgstr ""
 
 #: classes/controller/blocks/class-controller.php:74
-msgid "Shortcode UI plugin must be active for Planet4 - Blocks plugin to work."
+msgid "Shortcode UI plugin must be active for Planet4 - NL - Blocks plugin to work."
 msgstr ""
 
 #: classes/controller/blocks/class-covers-controllers.php:44
@@ -840,7 +840,7 @@ msgid "Select Language"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "Planet4 - Blocks"
+msgid "Planet4 - NL - Blocks"
 msgstr ""
 
 #. Description of the plugin/theme

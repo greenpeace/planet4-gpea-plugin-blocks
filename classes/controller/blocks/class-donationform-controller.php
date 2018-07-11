@@ -2,10 +2,10 @@
 
 namespace P4NLBKS\Controllers\Blocks;
 
-if ( ! class_exists( 'DontationForm_Controller' ) ) {
+if ( ! class_exists( 'DonationForm_Controller' ) ) {
 
 	/**
-	 * Class TwoColumn_Controller
+	 * Class DontationForm_Controller
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */

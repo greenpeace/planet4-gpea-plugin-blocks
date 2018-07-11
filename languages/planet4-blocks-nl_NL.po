@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"Project-Id-Version: Planet4 - Blocks\n"
+"Project-Id-Version: Planet4 - NL - Blocks\n"
 "POT-Creation-Date: 2018-03-03 18:41+0000\n"
 "PO-Revision-Date: 2018-03-23 10:14+0000\n"
 "Last-Translator: Konstantinos Kokkorogiannis <kkokkoro@greenpeace.org>\n"
@@ -128,7 +128,7 @@ msgid "READ ALL THE NEWS"
 msgstr ""
 
 #: classes/controller/blocks/class-controller.php:74
-msgid "Shortcode UI plugin must be active for Planet4 - Blocks plugin to work."
+msgid "Shortcode UI plugin must be active for Planet4 - NL - Blocks plugin to work."
 msgstr ""
 
 #: classes/controller/blocks/class-mediavideo-controller.php:27
@@ -152,7 +152,7 @@ msgid "Youtube Video"
 msgstr ""
 
 #: classes/controller/blocks/class-campaignthumbnail-controller.php:25
-#: classes/controller/blocks/class-subheader-controller.php:24
+#: classes/controller/blocks/class-petitieblokrechts-controller.php:24
 #: classes/controller/blocks/class-staticfourcolumn-controller.php:32
 #: classes/controller/blocks/class-staticfourcolumn-controller.php:51
 #: classes/controller/blocks/class-twocolumn-controller.php:44
@@ -253,7 +253,7 @@ msgstr ""
 msgid "Take action tasks"
 msgstr ""
 
-#: classes/controller/blocks/class-subheader-controller.php:29
+#: classes/controller/blocks/class-petitieblokrechts-controller.php:29
 #: classes/controller/blocks/class-carouselheader-controller.php:81
 #: classes/controller/blocks/class-staticfourcolumn-controller.php:61
 #: classes/controller/blocks/class-twocolumn-controller.php:53
@@ -263,9 +263,9 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: classes/controller/blocks/class-subheader-controller.php:37
+#: classes/controller/blocks/class-petitieblokrechts-controller.php:37
 #: classes/controller/blocks/class-carouselheader-controller.php:71
-msgid "Subheader"
+msgid "petitieblokrechts"
 msgstr ""
 
 #: classes/controller/blocks/class-happypoint-controller.php:24
@@ -376,7 +376,7 @@ msgstr ""
 #. translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
 #: classes/controller/blocks/class-carouselheader-controller.php:76
 #, php-format
-msgid "Enter subheader of %s image"
+msgid "Enter petitieblokrechts of %s image"
 msgstr ""
 
 #. translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
@@ -774,7 +774,7 @@ msgid "Load More"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "Planet4 - Blocks"
+msgid "Planet4 - NL - Blocks"
 msgstr ""
 
 #. Description of the plugin/theme

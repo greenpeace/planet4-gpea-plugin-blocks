@@ -34,7 +34,7 @@ if ( ! class_exists( 'Uninstall_Controller' ) ) {
 		/**
 		 * Cleanup options
 		 *
-		 * Deletes Planet4 - Blocks options and transients.
+		 * Deletes Planet4 - NL - Blocks options and transients.
 		 *
 		 * @return void
 		 */

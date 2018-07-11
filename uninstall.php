@@ -1,6 +1,6 @@
 <?php
 /**
- * Planet4 - Blocks uninstaller
+ * Planet4 - NL - Blocks uninstaller
  *
  * Used when clicking "Delete" from inside of WordPress's plugins page.
  */
