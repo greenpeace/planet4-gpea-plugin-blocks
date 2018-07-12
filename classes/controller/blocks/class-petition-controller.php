@@ -2,20 +2,20 @@
 
 namespace P4NLBKS\Controllers\Blocks;
 
-if ( ! class_exists( 'PetitionColumnRight_Controller' ) ) {
+if ( ! class_exists( 'Petition_Controller' ) ) {
 
 	/**
-	 * Class PetitionColumnRight_Controller
+	 * Class Petition_Controller
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */
-	class PetitionColumnRight_Controller extends Controller {
+	class Petition_Controller extends Controller {
 
 		/** @const string BLOCK_NAME */
-		const BLOCK_NAME = 'petitioncolumnright';
+		const BLOCK_NAME = 'petition';
 
 		/**
-		 * Shortcode UI setup for the petitieblokrechts shortcode.
+		 * Shortcode UI setup for the petitionblock shortcode.
 		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
 		 */
 		public function prepare_fields() {
@@ -34,7 +34,7 @@ if ( ! class_exists( 'PetitionColumnRight_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = array(
-				'label'         => __( 'petitieblokrechts', 'planet4-gpnl-blocks' ),
+				'label'         => __( 'Petition Ask', 'planet4-gpnl-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/images/icon_petition_colum_right.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4NLBKS_ALLOWED_PAGETYPE,

@@ -62,7 +62,7 @@ msgstr ""
 #: classes/controller/blocks/class-twocolumn-controller.php:44
 #: classes/controller/blocks/class-twocolumn-controller.php:81
 #: classes/controller/blocks/class-contentthreecolumn-controller.php:27
-#: classes/controller/blocks/class-petitieblokrechts-controller.php:24
+#: classes/controller/blocks/class-petitionblock-controller.php:24
 #: classes/controller/blocks/class-campaignthumbnail-controller.php:25
 #: classes/controller/blocks/class-covers-controllers.php:25
 msgid "Title"
@@ -93,7 +93,7 @@ msgstr ""
 #: classes/controller/blocks/class-twocolumn-controller.php:53
 #: classes/controller/blocks/class-twocolumn-controller.php:89
 #: classes/controller/blocks/class-contentthreecolumn-controller.php:35
-#: classes/controller/blocks/class-petitieblokrechts-controller.php:29
+#: classes/controller/blocks/class-petitionblock-controller.php:29
 #: classes/controller/blocks/class-covers-controllers.php:34
 #: classes/controller/blocks/class-splittwocolumns-controller.php:87
 #: classes/controller/blocks/class-carouselheader-controller.php:80
@@ -358,9 +358,9 @@ msgstr ""
 msgid "Carousel Split"
 msgstr ""
 
-#: classes/controller/blocks/class-petitieblokrechts-controller.php:37
+#: classes/controller/blocks/class-petitionblock-controller.php:37
 #: classes/controller/blocks/class-carouselheader-controller.php:70
-msgid "petitieblokrechts"
+msgid "Petition Ask"
 msgstr ""
 
 #: classes/controller/blocks/class-campaignthumbnail-controller.php:36
@@ -532,7 +532,7 @@ msgstr ""
 
 #: classes/controller/blocks/class-carouselheader-controller.php:75
 #, php-format
-msgid "Enter petitieblokrechts of %s image"
+msgid "Enter petitionblock of %s image"
 msgstr ""
 
 #: classes/controller/blocks/class-carouselheader-controller.php:85

@@ -152,7 +152,7 @@ msgid "Youtube Video"
 msgstr ""
 
 #: classes/controller/blocks/class-campaignthumbnail-controller.php:25
-#: classes/controller/blocks/class-petitieblokrechts-controller.php:24
+#: classes/controller/blocks/class-petitionblock-controller.php:24
 #: classes/controller/blocks/class-staticfourcolumn-controller.php:32
 #: classes/controller/blocks/class-staticfourcolumn-controller.php:51
 #: classes/controller/blocks/class-twocolumn-controller.php:44
@@ -253,7 +253,7 @@ msgstr ""
 msgid "Take action tasks"
 msgstr ""
 
-#: classes/controller/blocks/class-petitieblokrechts-controller.php:29
+#: classes/controller/blocks/class-petitionblock-controller.php:29
 #: classes/controller/blocks/class-carouselheader-controller.php:81
 #: classes/controller/blocks/class-staticfourcolumn-controller.php:61
 #: classes/controller/blocks/class-twocolumn-controller.php:53
@@ -263,9 +263,9 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: classes/controller/blocks/class-petitieblokrechts-controller.php:37
+#: classes/controller/blocks/class-petitionblock-controller.php:37
 #: classes/controller/blocks/class-carouselheader-controller.php:71
-msgid "petitieblokrechts"
+msgid "Petition Ask"
 msgstr ""
 
 #: classes/controller/blocks/class-happypoint-controller.php:24
@@ -376,7 +376,7 @@ msgstr ""
 #. translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
 #: classes/controller/blocks/class-carouselheader-controller.php:76
 #, php-format
-msgid "Enter petitieblokrechts of %s image"
+msgid "Enter petitionblock of %s image"
 msgstr ""
 
 #. translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.

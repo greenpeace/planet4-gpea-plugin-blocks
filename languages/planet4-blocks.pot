@@ -112,7 +112,7 @@ msgstr ""
 #: classes/controller/blocks/class-covers-controllers.php:25
 #: classes/controller/blocks/class-staticfourcolumn-controller.php:32
 #: classes/controller/blocks/class-staticfourcolumn-controller.php:51
-#: classes/controller/blocks/class-petitieblokrechts-controller.php:24
+#: classes/controller/blocks/class-petitionblock-controller.php:24
 #: classes/controller/blocks/class-twocolumn-controller.php:44
 #: classes/controller/blocks/class-twocolumn-controller.php:81
 msgid "Title"
@@ -226,21 +226,21 @@ msgid "Enter header of %s image"
 msgstr ""
 
 #: classes/controller/blocks/class-carouselheader-controller.php:71
-#: classes/controller/blocks/class-petitieblokrechts-controller.php:37
-msgid "petitieblokrechts"
+#: classes/controller/blocks/class-petitionblock-controller.php:37
+msgid "Petition Ask"
 msgstr ""
 
 #. translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
 #: classes/controller/blocks/class-carouselheader-controller.php:76
 #, php-format
-msgid "Enter petitieblokrechts of %s image"
+msgid "Enter petitionblock of %s image"
 msgstr ""
 
 #: classes/controller/blocks/class-carouselheader-controller.php:81
 #: classes/controller/blocks/class-contentthreecolumn-controller.php:35
 #: classes/controller/blocks/class-covers-controllers.php:34
 #: classes/controller/blocks/class-staticfourcolumn-controller.php:61
-#: classes/controller/blocks/class-petitieblokrechts-controller.php:29
+#: classes/controller/blocks/class-petitionblock-controller.php:29
 #: classes/controller/blocks/class-twocolumn-controller.php:53
 #: classes/controller/blocks/class-twocolumn-controller.php:89
 msgid "Description"
