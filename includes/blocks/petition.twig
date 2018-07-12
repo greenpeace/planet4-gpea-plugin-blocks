@@ -1,25 +1,18 @@
 {% block petition %}
 	{% if ( fields ) %}
-		<div class="LR_wrapper">&nbsp;</div>
-		<div class="LR_wrapper">
-			<div class="cta">
+		<section class="petition-ask">
+			<div class="petition-ask__wrapper">
 				{% if ( fields.title ) %}
-					<h2>{{ fields.title }}</h2>
+					<div class="petition-ask__title">
+						<h1>{{ fields.title }}</h1>
+					</div>
 				{% endif %}
-                {% if ( fields.description ) %}
-					<p>{{ fields.description|e('wp_kses_post')|raw }}</p>
-                {% endif %}
+        {% if ( fields.description ) %}
+					<div class="petition-ask__description">
+						<p>{{ fields.description|e('wp_kses_post')|raw }}</p>
+					</div>
+        {% endif %}
 			</div>
-			<div class="cta" id="bedankt">
-				<h2>Bedankt <span id="naam_formulier"></span>! Dankzij jou begint het al goed te kriebelen.</h2><br>
-				In de wereld van voordeelpakkers, laagste prijsgaranties en bonuskaarten ben jij koning(in). Laat de supermarkten daarom weten wie écht de dienst uitmaakt: deel of doneer!<br>
-				<br>
-				<a href="#" class="donatie_link">DONEER</a>
-				<a href="#" class="share_link_FB" id="correctie_fb_share_link">FACEBOOK</a>
-				<a href="#" class="share_link_Twitter">TWITTER</a>
-				<div class="clear_both"></div>
-			</div>
-		</div>
-			
+		</section>
 	{% endif %}
 {% endblock %}
