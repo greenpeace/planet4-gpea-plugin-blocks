@@ -40,8 +40,6 @@ if ( ! defined( 'P4NLBKS_PLUGIN_BASENAME' ) )     define( 'P4NLBKS_PLUGIN_BASENA
 if ( ! defined( 'P4NLBKS_PLUGIN_DIRNAME' ) )      define( 'P4NLBKS_PLUGIN_DIRNAME',     dirname( P4NLBKS_PLUGIN_BASENAME ) );
 if ( ! defined( 'P4NLBKS_PLUGIN_DIR' ) )          define( 'P4NLBKS_PLUGIN_DIR',         WP_PLUGIN_DIR . '/' . P4NLBKS_PLUGIN_DIRNAME );
 if ( ! defined( 'P4NLBKS_PLUGIN_NAME' ) )         define( 'P4NLBKS_PLUGIN_NAME',        'Planet4 - GPNL - Blocks' );
-//if ( ! defined( 'P4NLBKS_PLUGIN_SHORT_NAME' ) )   define( 'P4NLBKS_PLUGIN_SHORT_NAME',  'GPNLBlocks' );
-//if ( ! defined( 'P4NLBKS_PLUGIN_SLUG_NAME' ) )    define( 'P4NLBKS_PLUGIN_SLUG_NAME',   'gpnlblocks' );
 if ( ! defined( 'P4NLBKS_PLUGIN_SHORT_NAME' ) )   define( 'P4NLBKS_PLUGIN_SHORT_NAME',  'Blocks' );
 if ( ! defined( 'P4NLBKS_PLUGIN_SLUG_NAME' ) )    define( 'P4NLBKS_PLUGIN_SLUG_NAME',   'blocks' );
 if ( ! defined( 'P4NLBKS_INCLUDES_DIR' ) )        define( 'P4NLBKS_INCLUDES_DIR',       P4NLBKS_PLUGIN_DIR . '/includes/' );
@@ -64,6 +62,6 @@ require_once ABSPATH . 'wp-admin/includes/plugin.php';
    ========================== */
 P4NLBKS\Loader::get_instance( [
 	// --- Add here your own Block Controller ---
-	//'P4NLBKS\Controllers\Blocks\DonationForm_Controller',
+	'P4NLBKS\Controllers\Blocks\Donation_Controller',
 	'P4NLBKS\Controllers\Blocks\Petition_Controller',
 ], 'P4NLBKS\Views\View' );

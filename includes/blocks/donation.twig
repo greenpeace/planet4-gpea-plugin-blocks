@@ -1,0 +1,62 @@
+{% block donation %}
+    {% if ( fields ) %}
+        <section class="donation">
+            <div class="donationwrapper">
+                {% if ( fields.title ) %}
+                    <div class="donationtitle">
+                        <h2>{{ fields.title }}</h2>
+                    </div>
+                {% endif %}
+        {% if ( fields.subtitle ) %}
+                    <div class="donationsubtitle">
+                        <p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+                    </div>
+        {% endif %}
+            </div>
+        </section>
+         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-8SXR');</script>
+            <div id="app">
+      <div class="gp-donation-form">
+        <form-wizard @on-complete="onComplete"
+          shape="tab"
+          color="#66CC00"
+          error-color="#FF0000"
+          title=""
+          subtitle=""
+          back-button-text="Vorige"
+          next-button-text="Volgende"
+          finish-button-text="Verstuur"
+        >
+          <tab-content title="Donatie" icon="icon-euro" :before-change="()=>validateStep('step1')">
+            <step1 ref="step1" @on-validate="mergePartialModels"></step1>
+          </tab-content>
+          <tab-content title="Gegevens" icon="icon-user" :before-change="()=>validateStep('step2')">
+            <step2 ref="step2" @on-validate="mergePartialModels"></step2>
+          </tab-content>
+          <tab-content title="Adres" icon="icon-home" :before-change="()=>validateStep('step3')">
+            <step3 ref="step3" @on-validate="mergePartialModels"></step3>
+          </tab-content>
+          <div class="secure-icons">
+            <img class="privacywaarborg" src="https://secured.greenpeace.nl/Global/nederland/image/template/privacy/PW-logo.png" height="30px" width="auto">
+            <img src="https://secured.greenpeace.nl/Global/nederland/image/2018/fondsenwerving/secure.png" height="30px" width="auto"/>
+            <img src="https://secured.greenpeace.nl/Global/nederland/image/2018/fondsenwerving/logoanbi_kl.png" height="30px" width="auto"/>
+          </div>
+        </form-wizard>
+      </div>
+    </div>
+    <script>
+      dataLayer.push({
+          'event': 'virtualPageViewDonatie',
+          'virtualPageviewStep': 'Stap 0', //Vul hier de stap in. E.g. Stap 1, Stap 2, Stap 3, Bedankt
+          'virtuelPageviewName': 'Landing' // Vul hier de stapnaam in. E.g. Donatie, gegevens, adres, Bedankt
+          });
+    </script>
+
+
+    {% endif %}
+{% endblock %}
+
