@@ -4,15 +4,34 @@
 			<div class="petition-ask__wrapper">
 				{% if ( fields.title ) %}
 					<div class="petition-ask__title">
-						<h1>{{ fields.title }}</h1>
+						<h2>{{ fields.title }}</h2>
 					</div>
 				{% endif %}
-        {% if ( fields.description ) %}
-					<div class="petition-ask__description">
-						<p>{{ fields.description|e('wp_kses_post')|raw }}</p>
+        {% if ( fields.subtitle ) %}
+					<div class="petition-ask__subtitle">
+						<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
 					</div>
         {% endif %}
+				<form>
+					<fieldset class="form-group">
+						<label for="naam">Naam</label>
+						<input required type="text" class="form-control" id="naam" placeholder="Uw naam">
+					</fieldset>
+						<fieldset class="form-group">
+						<label for="email">Email</label>
+						<input required type="email" class="form-control" id="email" placeholder="Uw emailadres">
+					</fieldset>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" id="toestemming">
+						<small class="text-muted">Ja, ik wil weten hoe dit afloopt! Als je dit aanvinkt, mag Greenpeace je per e-mail op de hoogte houden over onze campagnes. Ook zullen we je af en toe om steun vragen. Afmelden kan natuurlijk altijd.</small>
+						</label>
+					</div>
+					<input type="text" name="petitie" value="{{ fields.petition }}" hidden readonly>
+					<button type="submit" class="btn btn-primary">TEKEN</button>
+				</form>
 			</div>
 		</section>
 	{% endif %}
 {% endblock %}
+
