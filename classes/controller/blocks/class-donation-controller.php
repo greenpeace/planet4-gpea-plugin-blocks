@@ -26,8 +26,8 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'type'  => 'text',
 				),
 				array(
-					'label' => __( 'Ondertitel', 'planet4-gpnl-blocks' ),
-					'attr'  => 'subtitle',
+					'label' => __( 'Omschrijving', 'planet4-gpnl-blocks' ),
+					'attr'  => 'description',
 					'type'  => 'textarea',
 				),
 			);
@@ -57,7 +57,7 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 
 			$fields = shortcode_atts( array(
 				'title'       => '',
-				'subtitle' => '',
+				'description' => '',
 			), $fields, $shortcode_tag );
 
 			$data = [
