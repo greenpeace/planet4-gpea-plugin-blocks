@@ -24,11 +24,12 @@
 					<div class="checkbox">
 						<label>
 							<input type="checkbox" id="toestemming">
-						<small class="text-muted">Ja, ik wil weten hoe dit afloopt! Als je dit aanvinkt, mag Greenpeace je per e-mail op de hoogte houden over onze campagnes. Ook zullen we je af en toe om steun vragen. Afmelden kan natuurlijk altijd.</small>
+						<small class="text-muted">{{ fields.consent }}</small>
 						</label>
 					</div>
-					<input type="text" name="petitie" value="{{ fields.petition }}" hidden readonly>
-					<button type="submit" class="btn btn-primary">TEKEN</button>
+					<input type="text" name="id" value="{{ fields.ID }}" hidden readonly>
+					<input type="text" name="type" value="{{ fields.type }}" hidden readonly>
+					<button type="submit" class="btn btn-primary">{{ fields.sign }}</button>
 				</form>
 			</div>
 		</section>
