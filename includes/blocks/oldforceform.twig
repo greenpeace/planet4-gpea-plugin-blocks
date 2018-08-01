@@ -1,0 +1,27 @@
+{% block petition %}
+  {% if ( fields ) %}
+  <section class="petition-ask">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js" type="text/javascript" charset="utf-8"></script>
+    <div class="row">
+      <div class="col-md-6 order-last order-md-first">
+        <img  src="holder.js/800x400" class="img-fluid">
+        {% if ( fields.image ) %}
+          <div class="petition-ask__title">
+            <img src="{{ fields.image }}" alt="">
+          </div>
+        {% endif %}
+      </div>
+      <div class="col-md-6 order-first order-md-last">
+        <div class="petition-ask__wrapper">
+          {% if ( fields.form ) %}
+            <div class="petition-ask__title">
+               <iframe src="{{ fields.form }}"></iframe>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% endblock %}
+
