@@ -24,6 +24,7 @@ if ( ! class_exists( 'Force_Form_Old_Controller' ) ) {
 					'label'   => __( 'Afbeelding', 'planet4-gpnl-blocks' ),
 					'attr'    => 'image',
 					'type'    => 'image',
+					// make this image type work
 				),
 				array(
 					'label'   => __( 'Formulier voor?', 'planet4-gpnl-blocks' ),
@@ -77,6 +78,8 @@ if ( ! class_exists( 'Force_Form_Old_Controller' ) ) {
 			$data = [
 				'fields' => $fields,
 			];
+
+			// Here a dirty switch statement to select which form to iframe
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
