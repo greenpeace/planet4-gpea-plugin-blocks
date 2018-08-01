@@ -41,13 +41,13 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'type'  => 'text',
 				),
 				array(
-					'label' => __( 'Petitie ID', 'planet4-gpnl-blocks' ),
-					'attr'  => 'ID',
+					'label' => __( 'Marketingcode', 'planet4-gpnl-blocks' ),
+					'attr'  => 'marketingcode',
 					'type'  => 'text',
 				),
 				array(
-					'label' => __( 'Soort', 'planet4-gpnl-blocks' ),
-					'attr'  => 'type',
+					'label' => __( 'Literatuurcode', 'planet4-gpnl-blocks' ),
+					'attr'  => 'literatuurcode',
 					'type'  => 'text',
 				),
 			);
@@ -80,8 +80,8 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				'subtitle' => '',
 				'consent' => '',
 				'sign' => '',
-				'ID' => '',
-				'type' => '',
+				'marketingcode' => '',
+				'literatuurcode' => '',
 			), $fields, $shortcode_tag );
 
 			$data = [
