@@ -7,7 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
 {
     public static $prefixLengthsPsr4 = array (
-        'P' =>
+        'P' => 
         array (
             'P4NLBKS\\Controllers\\Menu\\' => 25,
             'P4NLBKS\\Controllers\\Blocks\\' => 27,
@@ -17,19 +17,19 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
     );
 
     public static $prefixDirsPsr4 = array (
-        'P4NLBKS\\Controllers\\Menu\\' =>
+        'P4NLBKS\\Controllers\\Menu\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes/controller/menu',
         ),
-        'P4NLBKS\\Controllers\\Blocks\\' =>
+        'P4NLBKS\\Controllers\\Blocks\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes/controller/blocks',
         ),
-        'P4NLBKS\\Controllers\\' =>
+        'P4NLBKS\\Controllers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes/controller',
         ),
-        'P4NLBKS\\' =>
+        'P4NLBKS\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes',
         ),
@@ -37,7 +37,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
 
     public static $classMap = array (
         'P4NLBKS\\Controllers\\Blocks\\Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\DonationForm_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-donationform-controller.php',
+        'P4NLBKS\\Controllers\\Blocks\\Donation_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-donation-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Force_Form_Old_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-forceform-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Petition_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-petition-controller.php',
         'P4NLBKS\\Controllers\\Menu\\Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-controller.php',
