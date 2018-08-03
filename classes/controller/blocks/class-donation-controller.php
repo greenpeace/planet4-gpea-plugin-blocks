@@ -64,8 +64,8 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'fields' => $fields,
 			];
 
-			wp_enqueue_script( 'donationform', P4NLBKS_ADMIN_DIR . 'js/donationform.js' );
-			wp_enqueue_style( 'style', P4NLBKS_ADMIN_DIR . 'css/style.css' );
+			wp_enqueue_script( 'donationform', P4NLBKS_ASSETS_DIR . 'js/donationform.js' );
+			wp_enqueue_style( 'style', P4NLBKS_ASSETS_DIR . 'css/donationform.css' );
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();

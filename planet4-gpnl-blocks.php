@@ -59,47 +59,49 @@ require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 
 /* ========================
-         C S S / JS
+	C S S / JS
    ======================== */
 // javascript
-function wpbootstrap_scripts_with_jquery(){
+function wpbootstrap_scripts_with_jquery() {
 	// Register the script like this for a theme:
-	wp_register_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR  . 'js/docReady.js', array( 'jquery' ) );
+	wp_register_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/docReady.js', array( 'jquery' ) );
 	// Enqueue the script:
 	wp_enqueue_script( 'jquery-docready-script' );
 	// petition form related code
-	wp_localize_script( "jquery-docready-script",
+	wp_localize_script( 'jquery-docready-script',
 		'theUniqueNameForOurJSObjectPetitionForm',
 		array(
-			'ajaxUrl' => admin_url( 'admin-ajax.php' )/*, //url for php file that process ajax request to WP
-			'nonce' => wp_create_nonce( "unique_id_nonce" ),// this is a unique token to prevent form hijacking
-			'someData' => 'extra data you want  available to JS'*/
+			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+			//url for php file that process ajax request to WP
+			// 'nonce' => wp_create_nonce( "unique_id_nonce" ),// this is a unique token to prevent form hijacking
+			// 'someData' => 'extra data you want  available to JS'*/
 		)
 	);
 }
 add_action( 'wp_enqueue_scripts', 'wpbootstrap_scripts_with_jquery' );
 // stylesheets
-function stylesheets() {
-	// stylesheets
-	wp_enqueue_style('style', P4NLBKS_ASSETS_DIR . 'css/style.css');
-}
-add_action('wp_enqueue_scripts', 'stylesheets');
+// function stylesheets() {
+// 	// stylesheets
+// 	wp_enqueue_style( 'style', P4NLBKS_ASSETS_DIR . 'css/style.css' );
+// }
+// add_action( 'wp_enqueue_scripts', 'stylesheets' );
 
 
 /* ========================
-    P E T I T I O N F O R M
+	P E T I T I O N F O R M
    ======================== */
 function petition_form_process() {
-  # do whatever you need in order to process the form.
-	
+	# do whatever you need in order to process the form.
+
 	# This will send the post variables to the specified url, and what the page returns will be in $response
 	# get data from form
-	$marketingcode  = $_POST["marketingcode"];
-	$literatuurcode = $_POST["literatuurcode"];
-	$naam           = $_POST["naam"];
-	$email          = $_POST["email"];
-	$telefoonnummer = $_POST["telefoonnummer"];
-	$toestemming    = $_POST["toestemming"];
+	# TODO: Add nonce verification
+	$marketingcode  = $_POST['marketingcode'];
+	$literatuurcode = $_POST['literatuurcode'];
+	$naam           = $_POST['naam'];
+	$email          = $_POST['email'];
+	$telefoonnummer = $_POST['telefoonnummer'];
+	$toestemming    = $_POST['toestemming'];
 	# set-up your url
 	$url = 'https://secured.greenpeace.nl';
 	$myvars = '?source=' . $marketingcode . '&per=' . $literatuurcode . '&fn=' . $naam . '&email=' . $email . '&tel=' . $telefoonnummer . '&stop=' . $toestemming;
@@ -112,27 +114,21 @@ function petition_form_process() {
 	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
 
 	$response = curl_exec( $ch );
-	
+
 	return $response;
 }
 # use this version for if you want the callback to work for users who are logged in
 //add_action("wp_ajax_petition_form", "petition_form_process");
 # use this version for if you want the callback to work for users who are not logged in
-add_action("wp_ajax_nopriv_petition_form", "petition_form_process");
-
-function doStuff() {
-	//add this below what you currently have in your enqueue scripts function.
-	
-}
-add_action('wp_enqueue_scripts', 'doStuff');
+add_action( 'wp_ajax_nopriv_petition_form', 'petition_form_process' );
 
 
 /* ==========================
-      L O A D  P L U G I N
+	L O A D  P L U G I N
    ========================== */
 P4NLBKS\Loader::get_instance( [
 	// --- Add here your own Block Controller ---
-	//'P4NLBKS\Controllers\Blocks\DonationForm_Controller',
-  'P4NLBKS\Controllers\Blocks\Petition_Controller',
+	'P4NLBKS\Controllers\Blocks\Donation_Controller',
+	'P4NLBKS\Controllers\Blocks\Petition_Controller',
 	'P4NLBKS\Controllers\Blocks\Force_Form_Old_Controller',
 ], 'P4NLBKS\Views\View' );
