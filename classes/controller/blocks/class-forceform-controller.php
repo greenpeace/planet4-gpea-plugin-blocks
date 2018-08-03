@@ -20,17 +20,23 @@ if ( ! class_exists( 'Force_Form_Old_Controller' ) ) {
 		 */
 		public function prepare_fields() {
 			$fields = array(
-				array(
-					'label'   => __( 'Afbeelding', 'planet4-gpnl-blocks' ),
-					'attr'    => 'image',
-					'type'    => 'image',
-					// make this image type work
-				),
+				[
+					'label'       => __( 'Image', 'planet4-blocks-backend' ),
+					'attr'        => 'image',
+					'type'        => 'attachment',
+					'libraryType' => [ 'image' ],
+					'addButton'   => __( 'Select Image', 'planet4-blocks-backend' ),
+					'frameTitle'  => __( 'Select Image', 'planet4-blocks-backend' ),
+				],
 				array(
 					'label'   => __( 'Formulier voor?', 'planet4-gpnl-blocks' ),
 					'attr'    => 'form',
 					'type'    => 'select',
 					'options' => [
+						[
+							'value' => 'climate',
+							'label' => __( 'Climate Force' ),
+						],
 						[
 							'value' => 'food',
 							'label' => __( 'Food Force' ),
@@ -38,10 +44,6 @@ if ( ! class_exists( 'Force_Form_Old_Controller' ) ) {
 						[
 							'value' => 'ocean',
 							'label' => __( 'Ocean Force' ),
-						],
-						[
-							'value' => 'force',
-							'label' => __( 'Climate Force' ),
 						],
 					],
 				),
@@ -69,17 +71,42 @@ if ( ! class_exists( 'Force_Form_Old_Controller' ) ) {
 		 * @return string The complete html of the block
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
-
 			$fields = shortcode_atts( array(
 				'image'       => '',
 				'form' => '',
 			), $fields, $shortcode_tag );
 
+			$oceanlink = 'https://secured.greenpeace.nl/doneren2/oceanforce/';
+			$climatelink = 'https://secured.greenpeace.nl/climateforce/';
+			$foodlink = 'https://secured.greenpeace.nl/actie/reddebijen/Food-Force/';
+
+			$image_id           = $attributes['attachment'];
+			$image              = wp_get_attachment_image_src( $image_id, 'full' );
+			$fields['image']    = '';
+			$fields['alt_text'] = '';
+
+			if ( false !== $image && ! empty( $image ) ) {
+				$fields['image']        = $image[0];
+				$fields['alt_text']     = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
+				$fields['image_srcset'] = wp_get_attachment_image_srcset( $image_id, 'full', wp_get_attachment_metadata( $image_id ) );
+				$fields['image_sizes']  = wp_calculate_image_sizes( 'full', null, null, $image_id );
+			}
+
+			switch ( $form ) {
+				case 'climate':
+					$fields['form'] = $climatelink;
+					continue;
+				case 'food':
+					$fields['form'] = $foodlink;
+					continue;
+				case 'ocean':
+					$fields['form'] = $oceanlink;
+					continue;
+			}
+
 			$data = [
 				'fields' => $fields,
 			];
-
-			// Here a dirty switch statement to select which form to iframe
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
