@@ -28,12 +28,27 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				array(
 					'label' => __( 'Ondertitel', 'planet4-gpnl-blocks' ),
 					'attr'  => 'subtitle',
+					'type'  => 'text',
+				),
+				array(
+					'label' => __( 'Opt in tekst', 'planet4-gpnl-blocks' ),
+					'attr'  => 'consent',
 					'type'  => 'textarea',
 				),
 				array(
-					'label' => __( 'Petitie ID', 'planet4-gpnl-blocks' ),
-					'attr'  => 'petition',
-					'type'  => 'textarea',
+					'label' => __( 'Teken knop', 'planet4-gpnl-blocks' ),
+					'attr'  => 'sign',
+					'type'  => 'text',
+				),
+				array(
+					'label' => __( 'Marketingcode', 'planet4-gpnl-blocks' ),
+					'attr'  => 'marketingcode',
+					'type'  => 'text',
+				),
+				array(
+					'label' => __( 'Literatuurcode', 'planet4-gpnl-blocks' ),
+					'attr'  => 'literatuurcode',
+					'type'  => 'text',
 				),
 			);
 
@@ -63,7 +78,10 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 			$fields = shortcode_atts( array(
 				'title'       => '',
 				'subtitle' => '',
-				'petition' => '',
+				'consent' => '',
+				'sign' => '',
+				'marketingcode' => '',
+				'literatuurcode' => '',
 			), $fields, $shortcode_tag );
 
 			$data = [
