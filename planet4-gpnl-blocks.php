@@ -14,10 +14,6 @@
  * Copyright (C) 2018 Greenpeace Netherlands
  */
 
-# error tonen
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die( 'Direct access is forbidden !' );
 
