@@ -1,27 +1,20 @@
 {% block oldforceform %}
   {% if ( fields ) %}
   <section class="forcesform">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js" type="text/javascript" charset="utf-8"></script>
     <div class="row">
       <div class="col-md-6 order-last order-md-first">
-        <img  src="holder.js/800x400" class="img-fluid">
         {% if ( fields.image ) %}
-          <div class="block-media container">
-            <img src="{{ fields.image }}"
-                 srcset="{{ fields.image_srcset }}"
-                 sizes="{{ fields.image_sizes }}"
-                 alt="{{ fields.alt_text }}">
-          </div>
+          <img class="img-fluid"
+               src="{{ fields.image }}"
+               srcset="{{ fields.image_srcset }}"
+               sizes="{{ fields.image_sizes }}"
+               alt="{{ fields.alt_text }}">
          {% endif %}
       </div>
       <div class="col-md-6 order-first order-md-last">
-        <div >
           {% if ( fields.form ) %}
-            <div>
-               <iframe src="{{ fields.form }}"></iframe>
-            </div>
+               <iframe class="forceframe" src="{{ fields.form }}"></iframe>
           {% endif %}
-        </div>
       </div>
     </div>
   </section>

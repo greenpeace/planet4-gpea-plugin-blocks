@@ -76,11 +76,11 @@ if ( ! class_exists( 'Force_Form_Old_Controller' ) ) {
 				'form' => '',
 			), $fields, $shortcode_tag );
 
-			$oceanlink = 'https://secured.greenpeace.nl/doneren2/oceanforce/';
-			$climatelink = 'https://secured.greenpeace.nl/climateforce/';
-			$foodlink = 'https://secured.greenpeace.nl/actie/reddebijen/Food-Force/';
+			$oceanlink   = 'https://www.mygreenpeace.nl/registreren/machtiging.aspx?scr=3885&source=09341&focus=0&cg=undefined';
+			$climatelink = 'https://www.mygreenpeace.nl/registreren/machtiging.aspx?scr=2835&source=07532&focus=0&cg=undefined';
+			$foodlink    = 'https://www.mygreenpeace.nl/registreren/machtiging.aspx?scr=3185&source=07939&cg=undefined';
 
-			$image_id           = $attributes['attachment'];
+			$image_id           = $fields['image'];
 			$image              = wp_get_attachment_image_src( $image_id, 'full' );
 			$fields['image']    = '';
 			$fields['alt_text'] = '';
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Force_Form_Old_Controller' ) ) {
 				$fields['image_sizes']  = wp_calculate_image_sizes( 'full', null, null, $image_id );
 			}
 
-			switch ( $form ) {
+			switch ( $fields['form'] ) {
 				case 'climate':
 					$fields['form'] = $climatelink;
 					continue;
@@ -107,6 +107,8 @@ if ( ! class_exists( 'Force_Form_Old_Controller' ) ) {
 			$data = [
 				'fields' => $fields,
 			];
+
+			wp_enqueue_style( 'style', P4NLBKS_ASSETS_DIR . 'css/forceform.css' );
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
