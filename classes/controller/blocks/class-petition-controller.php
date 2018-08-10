@@ -50,6 +50,11 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'attr'  => 'literatuurcode',
 					'type'  => 'text',
 				),
+				array(
+					'label' => __( 'Tellercode', 'planet4-gpnl-blocks' ),
+					'attr'  => 'tellercode',
+					'type'  => 'text',
+				),
 			);
 
 			// Define the Shortcode UI arguments.
@@ -82,13 +87,16 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				'sign' => '',
 				'marketingcode' => '',
 				'literatuurcode' => '',
+				'tellercode' => '',
 			), $fields, $shortcode_tag );
 
 			$data = [
 				'fields' => $fields,
 			];
 
-			// not working atm
+			wp_enqueue_script( 'petitioncounter', P4NLBKS_ASSETS_DIR . 'js/petitioncounter.js' );
+
+			wp_enqueue_style( 'style', P4NLBKS_ASSETS_DIR . 'css/petitioncounter.css' );
 			wp_enqueue_style( 'style', P4NLBKS_ASSETS_DIR . 'css/checkbox.css' );
 
 			/* ========================

@@ -20,3 +20,6 @@ Thumbs.db
 # IDE generated files #
 #######################
 .idea
+
+gitflow/
+.editorconfig

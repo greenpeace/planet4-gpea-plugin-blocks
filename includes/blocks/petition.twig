@@ -1,5 +1,6 @@
 {% block petition %}
 	{% if ( fields ) %}
+		<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
 	<section class="petition-ask">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js" type="text/javascript" charset="utf-8"></script>
 		<div class="row">
@@ -18,28 +19,32 @@
 							<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
 						</div>
 	        {% endif %}
+	        <div class="counter">
+	          <div class="counter__slider"></div>
+	          <div class="counter__text">
+	            <span class="counter__gettext"></span>
+	          </div>
+	        </div>
 					<form id="petitionForm" onsubmit="return false;">
-						<fieldset class="form-group">
+						<div class="form-group">
 							<label for="naam">Naam</label>
 							<input required type="text" class="form-control" id="naam" placeholder="Uw naam">
-						</fieldset>
-						<fieldset class="form-group">
+						</div>
+						<div class="form-group">
 							<label for="email">Email</label>
 							<input required type="email" class="form-control" id="email" placeholder="Uw emailadres">
-						</fieldset>
-						<fieldset class="form-group">
+						</div>
+						<div class="form-group">
 							<label for="telefoonnummer">Telefoonnummer</label>
 							<input required type="telefoonnummer" class="form-control" id="telefoonnummer" placeholder="Uw telefoonnummer">
-						</fieldset>
-						<div class="checkbox">
-							<label>
-								<!--<input required type="checkbox" id="toestemming">-->
-								<input name="toestemming" type="checkbox" checked="checked" value="1" id="toestemming" />
-								<small class="text-muted">{{ fields.consent }}</small>
-							</label>
+						</div>
+						<div class="form-group checkbox">
+							<input class="form-check-input" name="toestemming" type="checkbox" checked id="toestemming" />
+							<label for="toestemming"><small class="text-muted form-check-label">{{ fields.consent }}</small></label>
 						</div>
 						<input type="text" name="marketingcode" value="{{ fields.marketingcode }}" hidden readonly>
 						<input type="text" name="literatuurcode" value="{{ fields.literatuurcode }}" hidden readonly>
+						<input type="text" name="tellercode" value="{{ fields.tellercode }}" hidden readonly>
 						<button type="submit" class="btn btn-primary">{{ fields.sign }}</button>
 					</form>
 				</div>
