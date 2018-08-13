@@ -1,57 +1,35 @@
-(function($){
-	
-	$('#petitionForm').on('submit', function() {
-    var post_form_value = jQuery(this).serialize();
-    jQuery.ajax({
-      action:  'petition_form',
+  $('#petitionForm').on('submit', function() {
+    var post_form_value = getFormObj('petitionForm');
+    post_form_value["action"] = "petition_form_process";
+    post_form_value["nonce"] = petition_form_object.nonce;
+
+    $button = $('#petitionForm').find(':button');
+    $button.width( $button.width() ).text('...');
+    $('#petitionForm *').prop("disabled", true);
+
+
+    console.log(post_form_value);
+
+    $.ajax({
       type:    "POST",
-      url:     theUniqueNameForOurJSObjectPetitionForm.admin_url,
+      url:     petition_form_object.ajaxUrl,
       data:    post_form_value,
-      success: function(data) {
-         jQuery("#petitionForm").html(data);
+      success: function(data, response) {
+        console.log("^-^");
+        console.log(data);
+      },
+      error: function(jqXHR, textStatus, errorThrown, data, url){
+    //    // Handle errors here
+        console.log("o_o");
+        // console.log(this.data);
+        // console.log(this.url);
+       console.log('ERRORS: ' + textStatus + ': ' + errorThrown);
+        console.log(response);
       }
     });
-		
-		
-		/*
-		var options = { 
-			url: theUniqueNameForOurJSObjectPetitionForm.ajaxUrl, // this is part of the JS object you pass in from wp_localize_scripts.
-			type: 'post', // 'get' or 'post', override for form's 'method' attribute 
-			dataType:  'json' , // 'xml', 'script', or 'json' (expected server response type) 
-			success : function(responseText, statusText, xhr, $form) {
-				$('#petitionForm').html('Jaaaaaaaaaa, gelukt!');
-			},
-			// use beforeSubmit to add your nonce to the form data before submitting.
-			beforeSubmit : function(arr, $form, options){
-				arr.push( { "name" : "nonce", "value" : theUniqueNameForOurJSObjectPetitionForm.nonce });
-			},
-    }; 
-    // you should probably use an id more unique than "form"
-    $('#petitionForm').ajaxForm(options);
-		*/
-		
-		
-		
-		/*
-		var post_form_value = getFormObj('petitionForm');
-		$.ajax({
-			url: 'iets/naar_iets.php',
-			type: 'POST',
-			data: post_form_value,
-			success: function(msg){
-				console.log(msg);
-			},
-			error: function(jqXHR, textStatus, errorThrown){
-				// Handle errors here
-				console.log('ERRORS: ' + textStatus + ': ' + errorThrown);
-			}
-		});
-		*/
 	});
 
-})(jQuery);
 
-/*
 // get form object
 function getFormObj(formId) {
 	var formObj = {};
@@ -61,4 +39,3 @@ function getFormObj(formId) {
 	});
 	return formObj;
 }
-*/
