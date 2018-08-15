@@ -132,29 +132,36 @@ function petition_form_process() {
 	# get data from form
 	check_ajax_referer( 'GPNL_Petitions', 'nonce' );
 
-	$marketingcode  = $_POST['marketingcode'];
-	$literatuurcode = $_POST['literatuurcode'];
+	$marketingcode  = '09481';
+	$literatuurcode = 'EN119';
+	// $marketingcode  = $_POST['marketingcode'];
+	// $literatuurcode = $_POST['literatuurcode'];
 	$naam           = $_POST['name'];
 	$email          = $_POST['mail'];
 	$telefoonnummer = $_POST['phone'];
 	$toestemming    = $_POST['consent'];
 	# set-up your url
-	// $url = 'https://secured.greenpeace.nl';
-	$baseurl    = 'p4.local';
+	$baseurl = 'https://www.mygreenpeace.nl/registreren/pixel.aspx';
+	// $baseurl = 'https://secured.greenpeace.nl';
+	// $baseurl    = 'p4.local';
 	$querystring = '?source=' . $marketingcode . '&per=' . $literatuurcode . '&fn=' . $naam . '&email=' . $email . '&tel=' . $telefoonnummer . '&stop=' . $toestemming;
+	$url = $baseurl . $querystring;
+	echo $url;
+	die();
+	// $ch = curl_init( $baseurl );
+	// curl_setopt( $ch, CURLOPT_POST, 1 );
+	// curl_setopt( $ch, CURLOPT_POSTFIELDS, $querystring );
+	// curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
+	// curl_setopt( $ch, CURLOPT_HEADER, 0 );
+	// curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
 
-	$ch = curl_init( $baseurl );
-	curl_setopt( $ch, CURLOPT_POST, 1 );
-	curl_setopt( $ch, CURLOPT_POSTFIELDS, $querystring );
-	curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
-	curl_setopt( $ch, CURLOPT_HEADER, 0 );
-	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-
-	$result = curl_exec( $ch );
-	if ( false === $result ) {
-		wp_send_json_success( 'ERROR', 500 );
-	}
-	wp_send_json_success( $querystring, 200 );
+	// $result   = curl_exec( $ch );
+	// $httpcode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
+	// curl_close( $ch );
+	// if ( false === $result ) {
+	// 	wp_send_json_success( 'ERROR', 500 );
+	// }
+	// wp_send_json_success( [ $baseurl . $querystring, $httpcode ], 200 );
 
 }
 
