@@ -32,12 +32,12 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				),
 				array(
 					'label' => __( 'Minmum bedrag', 'planet4-gpnl-blocks' ),
-					'attr'  => 'minAmount',
+					'attr'  => 'min_amount',
 					'type'  => 'number',
 				),
 				array(
 					'label' => __( 'Voorgesteld bedrag', 'planet4-gpnl-blocks' ),
-					'attr'  => 'suggestedAmount',
+					'attr'  => 'suggested_amount',
 					'type'  => 'number',
 				),
 			);
@@ -68,8 +68,8 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 			$fields = shortcode_atts( array(
 				'title'       => '',
 				'description' => '',
-				'minAmount' => '',
-				'suggestedAmount' => '',
+				'min_amount' => '',
+				'suggested_amount' => '',
 			), $fields, $shortcode_tag );
 
 			$data = [
