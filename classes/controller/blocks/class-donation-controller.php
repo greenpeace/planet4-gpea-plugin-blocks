@@ -30,6 +30,16 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'attr'  => 'description',
 					'type'  => 'textarea',
 				),
+				array(
+					'label' => __( 'Minmum bedrag', 'planet4-gpnl-blocks' ),
+					'attr'  => 'minAmount',
+					'type'  => 'number',
+				),
+				array(
+					'label' => __( 'Voorgesteld bedrag', 'planet4-gpnl-blocks' ),
+					'attr'  => 'suggestedAmount',
+					'type'  => 'number',
+				),
 			);
 
 			// Define the Shortcode UI arguments.
@@ -58,6 +68,8 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 			$fields = shortcode_atts( array(
 				'title'       => '',
 				'description' => '',
+				'minAmount' => '',
+				'suggestedAmount' => '',
 			), $fields, $shortcode_tag );
 
 			$data = [
