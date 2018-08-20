@@ -36,6 +36,21 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'type'  => 'number',
 				),
 				array(
+					'label' => __( 'Bedrag 1', 'planet4-gpnl-blocks' ),
+					'attr'  => 'amount1',
+					'type'  => 'number',
+				),
+				array(
+					'label' => __( 'Bedrag 2', 'planet4-gpnl-blocks' ),
+					'attr'  => 'amount2',
+					'type'  => 'number',
+				),
+				array(
+					'label' => __( 'Bedrag 3', 'planet4-gpnl-blocks' ),
+					'attr'  => 'amount3',
+					'type'  => 'number',
+				),
+				array(
 					'label' => __( 'Voorgesteld bedrag', 'planet4-gpnl-blocks' ),
 					'attr'  => 'suggested_amount',
 					'type'  => 'number',
@@ -107,6 +122,9 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'title'       => '',
 				'description' => '',
 				'min_amount' => '',
+				'amount1' => '5',
+				'amount2' => '10',
+				'amount3' => '25',
 				'suggested_amount' => '',
 				'suggested_frequency' => '',
 				'allow_frequency_override' => '',

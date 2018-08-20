@@ -3,3 +3,9 @@
     display: inline-block;
     margin-right: 20px;
 }
+
+input[name="amount1"],
+input[name="amount2"],
+input[name="amount3"] {
+  display: inline-block;
+}

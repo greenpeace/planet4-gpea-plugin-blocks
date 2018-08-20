@@ -37,14 +37,14 @@
                   <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.bedrag.$error }">
                     <label>Met een bedrag van:</label>
                     <div class="radio-list">
-                      <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag1" id="bedrag1" value="5">
-                      <label class="form-check-label form-control left" for="bedrag1">&euro;5</label>
+                      <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag1" id="bedrag1" value="{% if ( fields.amount1 ) %}{{ fields.amount1 }}{% endif %}">
+                      <label class="form-check-label form-control left" for="bedrag1">&euro;{% if ( fields.amount1 ) %}{{ fields.amount1 }}{% endif %}</label>
 
-                      <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag2" id="bedrag2" value="10" checked="checked">
-                      <label class="form-check-label form-control" for="bedrag2">&euro;10</label>
+                      <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag2" id="bedrag2" value="{% if ( fields.amount2 ) %}{{ fields.amount2 }}{% endif %}" checked="checked">
+                      <label class="form-check-label form-control" for="bedrag2">&euro;{% if ( fields.amount2 ) %}{{ fields.amount2 }}{% endif %}</label>
 
-                      <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag3" id="bedrag3" value="25">
-                      <label class="form-check-label form-control" for="bedrag3">&euro;25</label>
+                      <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag3" id="bedrag3" value="{% if ( fields.amount3 ) %}{{ fields.amount3 }}{% endif %}">
+                      <label class="form-check-label form-control" for="bedrag3">&euro;{% if ( fields.amount3 ) %}{{ fields.amount3 }}{% endif %}</label>
                     </div>
                   </div>
 
