@@ -40,6 +40,44 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'attr'  => 'suggested_amount',
 					'type'  => 'number',
 				),
+				array(
+					'label'   => __( 'Voorgestelde periodiek', 'planet4-gpnl-blocks' ),
+					'attr'    => 'suggested_frequency',
+					'type'    => 'select',
+					'options' => [
+						[
+							'value' => 'E',
+							'label' => __( 'Eenmalig' ),
+						],
+						[
+							'value' => 'M',
+							'label' => __( 'Maandelijks' ),
+						],
+						[
+							'value' => 'H',
+							'label' => __( 'Halfjaarlijks' ),
+						],
+						[
+							'value' => 'J',
+							'label' => __( 'Jaarlijks' ),
+						],
+					],
+				),
+				array(
+					'label' => __( 'Donateur kan periodiek wijzigen', 'planet4-gpnl-blocks' ),
+					'attr'  => 'allow_frequency_override',
+					'type'  => 'checkbox',
+				),
+				array(
+					'label' => __( 'Literatuurcode', 'planet4-gpnl-blocks' ),
+					'attr'  => 'literatuurcode',
+					'type'  => 'text',
+				),
+				array(
+					'label' => __( 'Marketingcode', 'planet4-gpnl-blocks' ),
+					'attr'  => 'marketingcode',
+					'type'  => 'text',
+				),
 			);
 
 			// Define the Shortcode UI arguments.
@@ -70,7 +108,21 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'description' => '',
 				'min_amount' => '',
 				'suggested_amount' => '',
+				'suggested_frequency' => '',
+				'allow_frequency_override' => '',
+				'literatuurcode' => '',
+				'marketingcode' => '',
 			), $fields, $shortcode_tag );
+
+			$frequencies = [
+				'E' => 'Eenmalig',
+				'M' => 'Maandelijks',
+				'K' => 'Kwartaal',
+				'H' => 'Halfjaarlijks',
+				'J' => 'Jaarlijks',
+			];
+
+			$fields['suggested_frequency'] = [$fields['suggested_frequency'], $frequencies[$fields['suggested_frequency']]];
 
 			$data = [
 				'fields' => $fields,
