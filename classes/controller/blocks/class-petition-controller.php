@@ -50,6 +50,11 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'attr'  => 'literatuurcode',
 					'type'  => 'text',
 				),
+				array(
+					'label' => __( 'Tellercode', 'planet4-gpnl-blocks' ),
+					'attr'  => 'tellercode',
+					'type'  => 'text',
+				),
 			);
 
 			// Define the Shortcode UI arguments.
@@ -82,72 +87,33 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				'sign' => '',
 				'marketingcode' => '',
 				'literatuurcode' => '',
+				'tellercode' => '',
 			), $fields, $shortcode_tag );
 
 			$data = [
 				'fields' => $fields,
 			];
 
-			// not working atm
-			wp_enqueue_style( 'style', P4NLBKS_ASSETS_DIR . 'css/checkbox.css' );
+			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/petitioncounter.js' );
+
+			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/petitioncounter.css' );
+			wp_enqueue_style( 'checkboxcss', P4NLBKS_ASSETS_DIR . 'css/checkbox.css' );
 
 			/* ========================
 				C S S / JS
 			   ======================== */
-			// javascript
-			function wpbootstrap_scripts_with_jquery() {
-				// Register the script like this for a theme:
-				wp_register_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/docReady.js', array( 'jquery' ) );
 				// Enqueue the script:
-				wp_enqueue_script( 'jquery-docready-script' );
-				// petition form related code
+				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/docReady.js', array( 'jquery' ), null, true );
+
+				// Pass options to frontend code
 				wp_localize_script( 'jquery-docready-script',
-					'theUniqueNameForOurJSObjectPetitionForm',
+					'petition_form_object',
 					array(
 						'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 						//url for php file that process ajax request to WP
-						// 'nonce' => wp_create_nonce( "unique_id_nonce" ),// this is a unique token to prevent form hijacking
-						// 'someData' => 'extra data you want  available to JS'*/
+						'nonce'   => wp_create_nonce( 'GPNL_Petitions' ),
 					)
 				);
-			}
-			add_action( 'wp_enqueue_scripts', 'wpbootstrap_scripts_with_jquery' );
-
-			/* ========================
-				P E T I T I O N F O R M
-			   ======================== */
-			function petition_form_process() {
-				# do whatever you need in order to process the form.
-
-				# This will send the post variables to the specified url, and what the page returns will be in $response
-				# get data from form
-				# TODO: Add nonce verification
-				$marketingcode  = $_POST['marketingcode'];
-				$literatuurcode = $_POST['literatuurcode'];
-				$naam           = $_POST['naam'];
-				$email          = $_POST['email'];
-				$telefoonnummer = $_POST['telefoonnummer'];
-				$toestemming    = $_POST['toestemming'];
-				# set-up your url
-				$url = 'https://secured.greenpeace.nl';
-				$myvars = '?source=' . $marketingcode . '&per=' . $literatuurcode . '&fn=' . $naam . '&email=' . $email . '&tel=' . $telefoonnummer . '&stop=' . $toestemming;
-
-				$ch = curl_init( $url );
-				curl_setopt( $ch, CURLOPT_POST, 1);
-				curl_setopt( $ch, CURLOPT_POSTFIELDS, $myvars);
-				curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
-				curl_setopt( $ch, CURLOPT_HEADER, 0);
-				curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
-
-				$response = curl_exec( $ch );
-
-				return $response;
-			}
-			# use this version for if you want the callback to work for users who are logged in
-			//add_action("wp_ajax_petition_form", "petition_form_process");
-			# use this version for if you want the callback to work for users who are not logged in
-			add_action( 'wp_ajax_nopriv_petition_form', 'petition_form_process' );
-
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
 			$this->view->block( self::BLOCK_NAME, $data );
@@ -156,3 +122,50 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 		}
 	}
 }
+	/* ========================
+		P E T I T I O N F O R M
+   ======================== */
+function petition_form_process() {
+	# do whatever you need in order to process the form.
+
+	# This will send the post variables to the specified url, and what the page returns will be in $response
+	# get data from form
+	check_ajax_referer( 'GPNL_Petitions', 'nonce' );
+
+	$marketingcode  = '09481';
+	$literatuurcode = 'EN119';
+	// $marketingcode  = $_POST['marketingcode'];
+	// $literatuurcode = $_POST['literatuurcode'];
+	$naam           = $_POST['name'];
+	$email          = $_POST['mail'];
+	$telefoonnummer = $_POST['phone'];
+	$toestemming    = $_POST['consent'];
+	# set-up your url
+	$baseurl = 'https://www.mygreenpeace.nl/registreren/pixel.aspx';
+	// $baseurl = 'https://secured.greenpeace.nl';
+	// $baseurl    = 'p4.local';
+	$querystring = '?source=' . $marketingcode . '&per=' . $literatuurcode . '&fn=' . $naam . '&email=' . $email . '&tel=' . $telefoonnummer . '&stop=' . $toestemming;
+	$url = $baseurl . $querystring;
+	echo $url;
+	die();
+	// $ch = curl_init( $baseurl );
+	// curl_setopt( $ch, CURLOPT_POST, 1 );
+	// curl_setopt( $ch, CURLOPT_POSTFIELDS, $querystring );
+	// curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
+	// curl_setopt( $ch, CURLOPT_HEADER, 0 );
+	// curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+
+	// $result   = curl_exec( $ch );
+	// $httpcode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
+	// curl_close( $ch );
+	// if ( false === $result ) {
+	// 	wp_send_json_success( 'ERROR', 500 );
+	// }
+	// wp_send_json_success( [ $baseurl . $querystring, $httpcode ], 200 );
+
+}
+
+# use this version for if you want the callback to work for users who are logged in
+add_action( 'wp_ajax_petition_form_process', 'P4NLBKS\Controllers\Blocks\petition_form_process' );
+# use this version for if you want the callback to work for users who are not logged in
+add_action( 'wp_ajax_nopriv_petition_form_process', 'P4NLBKS\Controllers\Blocks\petition_form_process' );

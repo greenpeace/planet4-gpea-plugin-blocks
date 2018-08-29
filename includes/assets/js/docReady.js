@@ -1,58 +1,43 @@
-(function($){
-	
 	$('#petitionForm').on('submit', function() {
-    var post_form_value = jQuery(this).serialize();
-    jQuery.ajax({
-      action:  'petition_form',
-      type:    "POST",
-      url:     theUniqueNameForOurJSObjectPetitionForm.admin_url,
-      data:    post_form_value,
-      success: function(data) {
-         jQuery("#petitionForm").html(data);
-      }
-    });
-		
-		
-		/*
-		var options = { 
-			url: theUniqueNameForOurJSObjectPetitionForm.ajaxUrl, // this is part of the JS object you pass in from wp_localize_scripts.
-			type: 'post', // 'get' or 'post', override for form's 'method' attribute 
-			dataType:  'json' , // 'xml', 'script', or 'json' (expected server response type) 
-			success : function(responseText, statusText, xhr, $form) {
-				$('#petitionForm').html('Jaaaaaaaaaa, gelukt!');
-			},
-			// use beforeSubmit to add your nonce to the form data before submitting.
-			beforeSubmit : function(arr, $form, options){
-				arr.push( { "name" : "nonce", "value" : theUniqueNameForOurJSObjectPetitionForm.nonce });
-			},
-    }; 
-    // you should probably use an id more unique than "form"
-    $('#petitionForm').ajaxForm(options);
-		*/
-		
-		
-		
-		/*
+
+		// Get the parameter from the petition form and add the action and CSRF protection
 		var post_form_value = getFormObj('petitionForm');
+		post_form_value["action"] = "petition_form_process";
+		post_form_value["nonce"] = petition_form_object.nonce;
+
+		// Disable the form so people don't resubmit
+		// $button = $('#petitionForm').find(':button');
+		// $button.width( $button.width() ).text('...');
+		// $('#petitionForm *').prop("disabled", true);
+
+		// Do a ajax call to the wp_admin admin_ajax.php,
+		// which triggers our own processing function in the petition block
 		$.ajax({
-			url: 'iets/naar_iets.php',
-			type: 'POST',
-			data: post_form_value,
-			success: function(msg){
-				console.log(msg);
+			type:    "POST",
+			url:     petition_form_object.ajaxUrl,
+			data:    post_form_value,
+			success: function(data, response) {
+				console.log("^-^");
+				console.log(data);
+				// placePixel(data);
 			},
-			error: function(jqXHR, textStatus, errorThrown){
-				// Handle errors here
-				console.log('ERRORS: ' + textStatus + ': ' + errorThrown);
+			error: function(jqXHR, textStatus, errorThrown, data, url){
+		//    // Handle errors here
+				console.log("o_o");
+				// console.log(this.data);
+				// console.log(this.url);
+			 console.log('ERRORS: ' + textStatus + ': ' + errorThrown);
+				console.log(response);
 			}
 		});
-		*/
 	});
 
-})(jQuery);
+function placePixel (url){
+$('#petitionForm').append('<img id="pixel" src="'+url+'" width="1" height="1">');
+	// pas als pixel image is geladen de bedanktdiv tonen
+}
 
-/*
-// get form object
+// Get the key+value from the input fields in the form
 function getFormObj(formId) {
 	var formObj = {};
 	var inputs = $('#'+formId).serializeArray();
@@ -61,4 +46,3 @@ function getFormObj(formId) {
 	});
 	return formObj;
 }
-*/
