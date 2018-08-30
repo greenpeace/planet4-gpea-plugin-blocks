@@ -1,0 +1,23 @@
+{% block oldforceform %}
+  {% if ( fields ) %}
+  <section class="forcesform">
+    <div class="row">
+      <div class="col-md-6 order-last order-md-first">
+        {% if ( fields.image ) %}
+          <img class="img-fluid"
+               src="{{ fields.image }}"
+               srcset="{{ fields.image_srcset }}"
+               sizes="{{ fields.image_sizes }}"
+               alt="{{ fields.alt_text }}">
+         {% endif %}
+      </div>
+      <div class="col-md-6 order-first order-md-last">
+          {% if ( fields.form ) %}
+               <iframe class="forceframe" src="{{ fields.form }}"></iframe>
+          {% endif %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+{% endblock %}
+
