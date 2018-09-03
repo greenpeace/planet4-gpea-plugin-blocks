@@ -4,7 +4,11 @@
 	<section class="petition-ask">
 		<div class="row">
 			<div class="col-md-6 order-last order-md-first">
-				<img src="{{ fields.image }}" alt="{{ fields.alt }}">
+				<img src="{{ fields.image }}"
+					 srcset="{{ fields.image_srcset }}"
+					 sizes="{{ fields.image_sizes }}"
+					 alt="{{ fields.alt_text }}"
+				>
 			</div>
 			<div class="col-md-6 order-first order-md-last">
 				<div class="petition-ask__wrapper">
@@ -49,7 +53,6 @@
 				</div>
 			</div>
 		</div>
-		{{ dump(fields) }}
 	</section>
 {% endif %}
 {% endblock %}

@@ -98,12 +98,18 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				'literatuurcode' => '',
 				'tellercode' => '',
 				'image' => '',
+				'alt_text' => '',
 			), $fields, $shortcode_tag );
-
-			if ( $fields[ "image" ] ) {
-				$img = wp_get_attachment_image_src( $fields[ "image" ], 'medium_large' );
-				$fields[ "alt" ]   = get_post_meta( $fields[ "image" ], '_wp_attachment_image_alt', true );
-				$fields[ "image" ] = $img;
+			
+			// If an image is selected
+			if ( isset( $fields['image'] ) ) {
+				// If the selected image is succesfully found
+				if ( $image = wp_get_attachment_image_src( $fields['image'], 'full' ) ) {
+					$fields['image']        = $image[0];
+					$fields['alt_text']     = get_post_meta( $fields['image'], '_wp_attachment_image_alt', true );
+					$fields['image_srcset'] = wp_get_attachment_image_srcset( $fields['image'], 'full', wp_get_attachment_metadata( $fields['image'] ) );
+					$fields['image_sizes']  = wp_calculate_image_sizes( 'full', null, null, $fields['image'] );
+				}
 			}
 
 			$data = [
