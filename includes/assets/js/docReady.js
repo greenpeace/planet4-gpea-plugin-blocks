@@ -9,6 +9,8 @@
 		// $button = $('#petitionForm').find(':button');
 		// $button.width( $button.width() ).text('...');
 		// $('#petitionForm *').prop("disabled", true);
+		$('.petition-form').addClass('flipped');
+		$('.petition-thank').removeClass('flipped');
 
 		// Do a ajax call to the wp_admin admin_ajax.php,
 		// which triggers our own processing function in the petition block

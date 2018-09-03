@@ -1,9 +1,9 @@
 {% block petition %}
 	{% if ( fields ) %}
 		<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
-	<section class="petition-ask">
+	<section class="petition-block">
 		<div class="row">
-			<div class="col-md-6 order-last order-md-first">
+			<div class="col-md-6 order-last order-md-first petition-img">
 				<img src="{{ fields.image }}"
 					 srcset="{{ fields.image_srcset }}"
 					 sizes="{{ fields.image_sizes }}"
@@ -11,23 +11,23 @@
 				>
 			</div>
 			<div class="col-md-6 order-first order-md-last">
-				<div class="petition-ask__wrapper">
+				<div class="petition-form" style="">
 					{% if ( fields.title ) %}
-						<div class="petition-ask__title">
+						<div class="petition-title">
 							<h2>{{ fields.title }}</h2>
 						</div>
 					{% endif %}
-	        {% if ( fields.subtitle ) %}
-						<div class="petition-ask__subtitle">
+			        {% if ( fields.subtitle ) %}
+						<div class="petition-subtitle">
 							<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
 						</div>
-	        {% endif %}
-	        <div class="counter">
-	          <div class="counter__slider"></div>
-	          <div class="counter__text">
-	            <span class="counter__gettext"></span>
-	          </div>
-	        </div>
+			        {% endif %}
+			        <div class="counter">
+			          <div class="counter__slider"></div>
+			          <div class="counter__text">
+			            <span class="counter__gettext"></span>
+			          </div>
+			        </div>
 					<form id="petitionForm" onsubmit="return false;">
 						<div class="form-group">
 							<label hidden for="naam">Naam</label>
@@ -39,7 +39,7 @@
 						</div>
 						<div class="form-group">
 							<label hidden for="telefoonnummer">Telefoonnummer</label>
-							<input name="phone" required type="telefoonnummer" class="form-control" id="telefoonnummer" placeholder="Uw telefoonnummer">
+							<input name="phone" type="telefoonnummer" class="form-control" id="telefoonnummer" placeholder="Uw telefoonnummer">
 						</div>
 						<div class="form-group checkbox">
 							<input class="form-check-input" name="consent" type="checkbox" checked id="toestemming" />
@@ -50,6 +50,9 @@
 						<input type="text" name="tellercode" value="{{ fields.tellercode }}" hidden readonly>
 						<button type="submit" class="btn btn-primary" id="signBtn">{{ fields.sign }}</button>
 					</form>
+				</div>
+				<div class="petition-thank flipped">
+					<p>Test tekst</p>
 				</div>
 			</div>
 		</div>
