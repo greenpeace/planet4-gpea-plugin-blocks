@@ -2,10 +2,9 @@
 	{% if ( fields ) %}
 		<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
 	<section class="petition-ask">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js" type="text/javascript" charset="utf-8"></script>
 		<div class="row">
 			<div class="col-md-6 order-last order-md-first">
-				<img  src="holder.js/800x400" class="img-fluid">
+				<img src="{{ fields.image }}" alt="{{ fields.alt }}">
 			</div>
 			<div class="col-md-6 order-first order-md-last">
 				<div class="petition-ask__wrapper">
@@ -50,6 +49,7 @@
 				</div>
 			</div>
 		</div>
+		{{ dump(fields) }}
 	</section>
 {% endif %}
 {% endblock %}

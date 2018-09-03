@@ -18,7 +18,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 		 * Shortcode UI setup for the petitionblock shortcode.
 		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
 		 */
-		public function prepare_fields() {
+		public function prepare_fields() { 
 			$fields = array(
 				array(
 					'label' => __( 'Titel', 'planet4-gpnl-blocks' ),
@@ -29,6 +29,14 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'label' => __( 'Ondertitel', 'planet4-gpnl-blocks' ),
 					'attr'  => 'subtitle',
 					'type'  => 'text',
+				),
+				array(
+					'label'       => __( 'Afbeelding', 'planet4-blocks-backend' ),
+					'attr'        => 'image',
+					'type'        => 'attachment',
+					'libraryType' => [ 'image' ],
+					'addButton'   => __( 'Selecteer afbeelding', 'planet4-blocks-backend' ),
+					'frameTitle'  => __( 'Selecteer afbeelding', 'planet4-blocks-backend' ),
 				),
 				array(
 					'label' => __( 'Opt in tekst', 'planet4-gpnl-blocks' ),
@@ -80,6 +88,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
+
 			$fields = shortcode_atts( array(
 				'title'       => '',
 				'subtitle' => '',
@@ -88,7 +97,14 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				'marketingcode' => '',
 				'literatuurcode' => '',
 				'tellercode' => '',
+				'image' => '',
 			), $fields, $shortcode_tag );
+
+			if ( $fields[ "image" ] ) {
+				$img = wp_get_attachment_image_src( $fields[ "image" ], 'medium_large' );
+				$fields[ "alt" ]   = get_post_meta( $fields[ "image" ], '_wp_attachment_image_alt', true );
+				$fields[ "image" ] = $img;
+			}
 
 			$data = [
 				'fields' => $fields,
