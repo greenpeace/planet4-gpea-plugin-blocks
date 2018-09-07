@@ -42,11 +42,30 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'label' => __( 'Opt in tekst', 'planet4-gpnl-blocks' ),
 					'attr'  => 'consent',
 					'type'  => 'textarea',
+					'value' => 'Ja, ik wil weten hoe dit afloopt! Als je dit aanvinkt, mag Greenpeace je per e-mail op de hoogte houden over campagnes. 			Ook zullen we je af en toe om steun vragen. Afmelden kan natuurlijk altijd.',
 				),
 				array(
 					'label' => __( 'Teken knop', 'planet4-gpnl-blocks' ),
 					'attr'  => 'sign',
 					'type'  => 'text',
+					'value' => 'TEKEN NU'
+				),
+				array(
+					'label' => __( 'Bedankt tekst', 'planet4-gpnl-blocks' ),
+					'attr'  => 'thanktext',
+					'type'  => 'textarea',
+				),
+				array(
+					'label' => __( 'Doneer knop bij bedankttekst', 'planet4-gpnl-blocks' ),
+					'attr'  => 'donatebuttontext',
+					'type'  => 'text',
+					'value' => 'Doneer',
+				),
+				array(
+					'label' => __( 'Link van doneerknop', 'planet4-gpnl-blocks' ),
+					'attr'  => 'donatebuttonlink',
+					'type'  => 'text',
+					'value' => '/doneren',
 				),
 				array(
 					'label' => __( 'Marketingcode', 'planet4-gpnl-blocks' ),
@@ -94,6 +113,9 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				'subtitle' => '',
 				'consent' => '',
 				'sign' => '',
+				'thanktext' => '',
+				'donatebuttontext' => '',
+				'donatebuttonlink' => '',
 				'marketingcode' => '',
 				'literatuurcode' => '',
 				'tellercode' => '',
@@ -116,7 +138,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				'fields' => $fields,
 			];
 
-			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/petitioncounter.js' );
+			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/petitioncounter.js', array( 'jquery' ), null, true );
 
 			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/petitioncounter.css' );
 			wp_enqueue_style( 'checkboxcss', P4NLBKS_ASSETS_DIR . 'css/checkbox.css' );
@@ -134,6 +156,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 						'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 						//url for php file that process ajax request to WP
 						'nonce'   => wp_create_nonce( 'GPNL_Petitions' ),
+						'counter'   => $fields['tellercode'],
 					)
 				);
 			// Shortcode callbacks must return content, hence, output buffering here.

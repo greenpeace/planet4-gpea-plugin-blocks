@@ -10,52 +10,56 @@
 					 alt="{{ fields.alt_text }}"
 				>
 			</div>
-			<div class="col-md-6 order-first order-md-last">
-				<div class="petition-form" style="">
-					{% if ( fields.title ) %}
-						<div class="petition-title">
-							<h2>{{ fields.title }}</h2>
-						</div>
-					{% endif %}
-			        {% if ( fields.subtitle ) %}
-						<div class="petition-subtitle">
-							<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-						</div>
-			        {% endif %}
-			        <div class="counter">
-			          <div class="counter__slider"></div>
-			          <div class="counter__text">
-			            <span class="counter__gettext"></span>
-			          </div>
-			        </div>
-					<form id="petitionForm" onsubmit="return false;">
-						<div class="form-group">
-							<label hidden for="naam">Naam</label>
-							<input name="name" required type="text" class="form-control" id="naam" placeholder="Uw naam">
-						</div>
-						<div class="form-group">
-							<label hidden for="email">Email</label>
-							<input name="mail" required type="email" class="form-control" id="email" placeholder="Uw emailadres">
-						</div>
-						<div class="form-group">
-							<label hidden for="telefoonnummer">Telefoonnummer</label>
-							<input name="phone" type="telefoonnummer" class="form-control" id="telefoonnummer" placeholder="Uw telefoonnummer">
-						</div>
-						<div class="form-group checkbox">
-							<input class="form-check-input" name="consent" type="checkbox" checked id="toestemming" />
-							<label for="toestemming"><small class="text-muted form-check-label">{{ fields.consent }}</small></label>
-						</div>
-						<input type="text" name="marketingcode" value="{{ fields.marketingcode }}" hidden readonly>
-						<input type="text" name="literatuurcode" value="{{ fields.literatuurcode }}" hidden readonly>
-						<input type="text" name="tellercode" value="{{ fields.tellercode }}" hidden readonly>
-						<button type="submit" class="btn btn-primary" id="signBtn">{{ fields.sign }}</button>
-					</form>
-				</div>
-				<div class="petition-thank flipped">
-					<p>Test tekst</p>
+			<div class="col-md-6 order-first order-md-last gpnl-petition-wrapper">
+				<div class="gpnl-petition">
+					<div class="gpnl-petition-form front">
+						{% if ( fields.title ) %}
+							<div class="petition-title">
+								<h2>{{ fields.title }}</h2>
+							</div>
+						{% endif %}
+				        {% if ( fields.subtitle ) %}
+							<div class="petition-subtitle">
+								<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+							</div>
+				        {% endif %}
+				        <div class="counter">
+				          <div class="counter__slider"></div>
+				          <div class="counter__text">
+				            <span class="counter__gettext"></span>
+				          </div>
+				        </div>
+						<form id="gpnl-petitionform" onsubmit="return false;">
+							<div class="form-group">
+								<label hidden for="name">Naam</label>
+								<input name="name" required type="text" class="form-control" id="naam" placeholder="Uw naam">
+							</div>
+							<div class="form-group">
+								<label hidden for="mail">Email</label>
+								<input name="mail" required type="email" class="form-control" id="email" placeholder="Uw emailadres">
+							</div>
+							<div class="form-group">
+								<label hidden for="phone">Telefoonnummer</label>
+								<input name="phone" type="telefoonnummer" class="form-control" id="telefoonnummer" placeholder="Uw telefoonnummer">
+							</div>
+							<div class="form-group checkbox">
+								<input class="form-check-input" name="consent" type="checkbox" checked id="toestemming" />
+								<label for="consent"><small class="text-muted form-check-label">{{ fields.consent }}</small></label>
+							</div>
+							<input type="text" name="marketingcode" value="{{ fields.marketingcode }}" hidden readonly>
+							<input type="text" name="literatuurcode" value="{{ fields.literatuurcode }}" hidden readonly>
+							<input type="text" name="tellercode" value="{{ fields.tellercode }}" hidden readonly>
+							<input type="submit" class="btn btn-primary" id="signBtn">
+						</form>
+					</div>
+					<div class="gpnl-petition-thank back">
+						<p>{{ fields.thanktext }}</p>
+						<a class="btn btn-primary" href="{{ fields.donatebuttonlink }}" role="button">{{ fields.donatebuttontext }}</a>
+					</div>
 				</div>
 			</div>
 		</div>
+		{# {{ dump(fields) }} #}
 	</section>
 {% endif %}
 {% endblock %}
