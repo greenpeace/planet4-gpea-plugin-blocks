@@ -18,7 +18,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 		 * Shortcode UI setup for the petitionblock shortcode.
 		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
 		 */
-		public function prepare_fields() {
+		public function prepare_fields() { 
 			$fields = array(
 				array(
 					'label' => __( 'Titel', 'planet4-gpnl-blocks' ),
@@ -31,14 +31,41 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'type'  => 'text',
 				),
 				array(
+					'label'       => __( 'Afbeelding', 'planet4-blocks-backend' ),
+					'attr'        => 'image',
+					'type'        => 'attachment',
+					'libraryType' => [ 'image' ],
+					'addButton'   => __( 'Selecteer afbeelding', 'planet4-blocks-backend' ),
+					'frameTitle'  => __( 'Selecteer afbeelding', 'planet4-blocks-backend' ),
+				),
+				array(
 					'label' => __( 'Opt in tekst', 'planet4-gpnl-blocks' ),
 					'attr'  => 'consent',
 					'type'  => 'textarea',
+					'value' => 'Ja, ik wil weten hoe dit afloopt! Als je dit aanvinkt, mag Greenpeace je per e-mail op de hoogte houden over campagnes. 			Ook zullen we je af en toe om steun vragen. Afmelden kan natuurlijk altijd.',
 				),
 				array(
 					'label' => __( 'Teken knop', 'planet4-gpnl-blocks' ),
 					'attr'  => 'sign',
 					'type'  => 'text',
+					'value' => 'TEKEN NU'
+				),
+				array(
+					'label' => __( 'Bedankt tekst', 'planet4-gpnl-blocks' ),
+					'attr'  => 'thanktext',
+					'type'  => 'textarea',
+				),
+				array(
+					'label' => __( 'Doneer knop bij bedankttekst', 'planet4-gpnl-blocks' ),
+					'attr'  => 'donatebuttontext',
+					'type'  => 'text',
+					'value' => 'Doneer',
+				),
+				array(
+					'label' => __( 'Link van doneerknop', 'planet4-gpnl-blocks' ),
+					'attr'  => 'donatebuttonlink',
+					'type'  => 'text',
+					'value' => '/doneren',
 				),
 				array(
 					'label' => __( 'Marketingcode', 'planet4-gpnl-blocks' ),
@@ -47,12 +74,17 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				),
 				array(
 					'label' => __( 'Literatuurcode', 'planet4-gpnl-blocks' ),
-					'attr'  => 'literatuurcode',
+					'attr'  => 'literaturecode',
 					'type'  => 'text',
 				),
 				array(
 					'label' => __( 'Tellercode', 'planet4-gpnl-blocks' ),
-					'attr'  => 'tellercode',
+					'attr'  => 'countercode',
+					'type'  => 'text',
+				),
+				array(
+					'label' => __( 'Teller maximum', 'planet4-gpnl-blocks' ),
+					'attr'  => 'countermax',
 					'type'  => 'text',
 				),
 			);
@@ -80,24 +112,41 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
+
 			$fields = shortcode_atts( array(
 				'title'       => '',
 				'subtitle' => '',
 				'consent' => '',
 				'sign' => '',
+				'thanktext' => '',
+				'donatebuttontext' => '',
+				'donatebuttonlink' => '',
 				'marketingcode' => '',
-				'literatuurcode' => '',
-				'tellercode' => '',
+				'literaturecode' => '',
+				'countercode' => '',
+				'countermax' => '',
+				'image' => '',
+				'alt_text' => '',
 			), $fields, $shortcode_tag );
+			
+			// If an image is selected
+			if ( isset( $fields['image'] ) ) {
+				// If the selected image is succesfully found
+				if ( $image = wp_get_attachment_image_src( $fields['image'], 'full' ) ) {
+					$fields['image']        = $image[0];
+					$fields['alt_text']     = get_post_meta( $fields['image'], '_wp_attachment_image_alt', true );
+					$fields['image_srcset'] = wp_get_attachment_image_srcset( $fields['image'], 'full', wp_get_attachment_metadata( $fields['image'] ) );
+					$fields['image_sizes']  = wp_calculate_image_sizes( 'full', null, null, $fields['image'] );
+				}
+			}
 
 			$data = [
 				'fields' => $fields,
 			];
 
-			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/petitioncounter.js' );
+			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/gpnl-petitioncounter.js', array( 'jquery' ), null, true );
 
-			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/petitioncounter.css' );
-			wp_enqueue_style( 'checkboxcss', P4NLBKS_ASSETS_DIR . 'css/checkbox.css' );
+			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.css' );
 
 			/* ========================
 				C S S / JS
@@ -112,6 +161,8 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 						'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 						//url for php file that process ajax request to WP
 						'nonce'   => wp_create_nonce( 'GPNL_Petitions' ),
+						'countercode'   => $fields['countercode'],
+						'countermax'   => $fields['countermax'],
 					)
 				);
 			// Shortcode callbacks must return content, hence, output buffering here.
