@@ -32,24 +32,24 @@
 						<form id="gpnl-petitionform" onsubmit="return false;">
 							<div class="form-group">
 								<label hidden for="name">Naam</label>
-								<input name="name" required type="text" class="form-control" id="naam" placeholder="Uw naam">
+								<input name="name" required type="text" class="form-control" placeholder="Uw naam">
 							</div>
 							<div class="form-group">
 								<label hidden for="mail">Email</label>
-								<input name="mail" required type="email" class="form-control" id="email" placeholder="Uw emailadres">
+								<input name="mail" required type="email" class="form-control" placeholder="Uw emailadres">
 							</div>
 							<div class="form-group">
 								<label hidden for="phone">Telefoonnummer</label>
-								<input name="phone" type="telefoonnummer" class="form-control" id="telefoonnummer" placeholder="Uw telefoonnummer">
+								<input name="phone" type="text" class="form-control" placeholder="Uw telefoonnummer">
 							</div>
 							<div class="form-group optin">
-								<input class="form-check-input gpnl-petition-checkbox" name="consent" type="checkbox" id="toestemming" />
+								<input class="form-check-input gpnl-petition-checkbox" name="consent" type="checkbox" />
 								<label for="consent"><small class="text-muted form-check-label gpnl-petition-checkbox-label">{{ fields.consent }}</small></label>
 							</div>
 							<input type="text" name="marketingcode" value="{{ fields.marketingcode }}" hidden readonly>
-							<input type="text" name="literatuurcode" value="{{ fields.literatuurcode }}" hidden readonly>
-							<input type="text" name="tellercode" value="{{ fields.tellercode }}" hidden readonly>
-							<input type="submit" class="btn btn-primary" id="signBtn">
+							<input type="text" name="literaturecode" value="{{ fields.literaturecode }}" hidden readonly>
+							{# <input type="text" name="tellercode" value="{{ fields.countercode }}" hidden readonly> #}
+							<input type="submit" class="btn btn-primary" id="signBtn" value="{{ fields.sign }}">
 						</form>
 					</div>
 					<div class="gpnl-petition-thank back">

@@ -42,7 +42,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'label' => __( 'Opt in tekst', 'planet4-gpnl-blocks' ),
 					'attr'  => 'consent',
 					'type'  => 'textarea',
-					'value' => 'Ja, ik wil weten hoe dit afloopt! Als je dit aanvinkt, mag Greenpeace je per e-mail op de hoogte houden over campagnes. 			Ook zullen we je af en toe om steun vragen. Afmelden kan natuurlijk altijd.',
+					'value' => 'Ja, ik wil weten hoe dit afloopt! Als je dit aanvinkt, mag Greenpeace je per e-mail op de hoogte houden over campagnes. Ook zullen we je af en toe om steun vragen. Afmelden kan natuurlijk altijd.',
 				),
 				array(
 					'label' => __( 'Teken knop', 'planet4-gpnl-blocks' ),
@@ -176,43 +176,48 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 	/* ========================
 		P E T I T I O N F O R M
    ======================== */
-function petition_form_process() {
-	# do whatever you need in order to process the form.
-
-	# This will send the post variables to the specified url, and what the page returns will be in $response
-	# get data from form
+function petition_form_process($fields) {
+	
+	// First check if the nonce is correct
 	check_ajax_referer( 'GPNL_Petitions', 'nonce' );
 
-	$marketingcode  = '09481';
-	$literatuurcode = 'EN119';
-	// $marketingcode  = $_POST['marketingcode'];
-	// $literatuurcode = $_POST['literatuurcode'];
-	$naam           = $_POST['name'];
-	$email          = $_POST['mail'];
-	$telefoonnummer = $_POST['phone'];
-	$toestemming    = $_POST['consent'];
-	# set-up your url
-	$baseurl = 'https://www.mygreenpeace.nl/registreren/pixel.aspx';
-	// $baseurl = 'https://secured.greenpeace.nl';
-	// $baseurl    = 'p4.local';
-	$querystring = '?source=' . $marketingcode . '&per=' . $literatuurcode . '&fn=' . $naam . '&email=' . $email . '&tel=' . $telefoonnummer . '&stop=' . $toestemming;
-	$url = $baseurl . $querystring;
-	echo $url;
-	die();
-	// $ch = curl_init( $baseurl );
-	// curl_setopt( $ch, CURLOPT_POST, 1 );
-	// curl_setopt( $ch, CURLOPT_POSTFIELDS, $querystring );
-	// curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
-	// curl_setopt( $ch, CURLOPT_HEADER, 0 );
-	// curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+	// get petition specific codes for processing in the database and sanitize
+	$marketingcode  = htmlspecialchars(strip_tags($_POST['marketingcode']));
+	$literatuurcode = htmlspecialchars(strip_tags($_POST['literaturecode']));
+	
+	// Get and sanitize the formdata
+	$naam           = strip_tags($_POST['name']);
+	$email          = strip_tags($_POST['mail']);
+	// Accept only numeric characters in the phonenumber
+	$phonenumber    = preg_replace("/[^0-9]/", "",strip_tags($_POST['phone']));
+	$consent        = htmlspecialchars(strip_tags($_POST['consent']));
 
-	// $result   = curl_exec( $ch );
-	// $httpcode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
-	// curl_close( $ch );
-	// if ( false === $result ) {
-	// 	wp_send_json_success( 'ERROR', 500 );
-	// }
-	// wp_send_json_success( [ $baseurl . $querystring, $httpcode ], 200 );
+	// Accept only phonenumbers of 10 characters long
+	$phonenumber    = (strlen($phonenumber) == 10 ? $phonenumber : "");
+	// Flip the consent checkbox
+	$consent        = ($consent == "on" ? 0 : 1);
+
+	// $baseurl = 'https://www.mygreenpeace.nl/registreren/pixel.aspx';
+	$baseurl    = 'p4.local';
+	$querystring = '?source=' . $marketingcode . '&per=' . $literatuurcode . '&fn=' . $naam . '&email=' . $email . '&tel=' . $phonenumber . '&stop=' . $consent;
+
+	// initiate a cUrl request to the database
+	$ch = curl_init( $baseurl );
+	curl_setopt( $ch, CURLOPT_POST, 1 );
+	curl_setopt( $ch, CURLOPT_POSTFIELDS, $querystring );
+	curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
+	curl_setopt( $ch, CURLOPT_HEADER, 0 );
+	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+
+	$result   = curl_exec( $ch );
+	$httpcode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
+	curl_close( $ch );
+
+	// Give the appropriate response to the frontend
+	if ( false === $result ) {
+		wp_send_json_error( 'ERROR', 500 );
+	}
+	wp_send_json_success( [ $baseurl . $querystring, $httpcode ], 200 );
 
 }
 

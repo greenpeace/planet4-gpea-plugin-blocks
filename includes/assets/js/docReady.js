@@ -2,50 +2,32 @@
 
 		// Get the parameter from the petition form and add the action and CSRF protection
 		var post_form_value = getFormObj('gpnl-petitionform');
-		// post_form_value["action"] = "petition_form_process";
-		// post_form_value["nonce"] = petition_form_object.nonce;
+		post_form_value["action"] = "petition_form_process";
+		post_form_value["nonce"] = petition_form_object.nonce;
 
-		// Disable the form so people don't resubmit
-		$button = $('#petitionForm').find(':button');
-		$button.width( $button.width() ).text('...');
-		// $('#petitionForm *').prop("disabled", true);
-		$('.gpnl-petition').toggleClass('flipped');
-		placePixel(post_form_value);
-
+		// Disable the form so people can't resubmit
+		toggle('#gpnl-petitionform *');
 
 		// Do a ajax call to the wp_admin admin_ajax.php,
-		// which triggers our own processing function in the petition block
-		// $.ajax({
-		// 	type:    "POST",
-		// 	url:     petition_form_object.ajaxUrl,
-		// 	data:    post_form_value,
-		// 	success: function(data, response) {
-		// 		console.log("^-^");
-		// 		console.log(data);
-		// 	},
-		// 	error: function(jqXHR, textStatus, errorThrown, data, url){
-		// //    // Handle errors here
-		// 		console.log("o_o");
-		// 		// console.log(this.data);
-		// 		// console.log(this.url);
-		// 	 console.log('ERRORS: ' + textStatus + ': ' + errorThrown);
-		// 		console.log(response);
-		// 	}
-		// });
+		// which triggers processing function in the petition block
+		$.ajax({
+			type:    "POST",
+			url:     petition_form_object.ajaxUrl,
+			data:    post_form_value,
+			success: function(data, response) {
+				console.log("^-^");
+				console.log(data);
+				flip('.gpnl-petition');
+			},
+			error: function(jqXHR, textStatus, errorThrown, data, url){
+				console.log("o_o");
+				console.log('ERRORS: ' + textStatus + ': ' + errorThrown);
+				$('.gpnl-petition-thank').empty()
+				$('.gpnl-petition-thank').append("<p>Sorry, er gaat momenteel iets fout, probeer het nu of later opnieuw.</p>")
+				$('.gpnl-petition-thank').append("<button type=\"button\" class=\"btn btn-primary\" onclick=\"flip('.gpnl-petition');toggle('#gpnl-petitionform *');\">Probeer opnieuw</button>")
+			}
+		});
 	});
-
-function placePixel (url){
-// $('#petitionForm').append('<img id="pixel" src="'+url+'" width="1" height="1">');
-var pixel_url = 'https://www.mygreenpeace.nl/registreren/pixel.aspx';
-var marketingcode = getFormObj('gpnl-petitionform')['marketingcode'];
-var literatuurcode = getFormObj('gpnl-petitionform')['literatuurcode'];
-var fn = getFormObj('gpnl-petitionform')['name'];
-var email = getFormObj('gpnl-petitionform')['mail'];
-var tel = getFormObj('gpnl-petitionform')['phone'];
-var akkoord = getFormObj('gpnl-petitionform')['consent'];
-$('#gpnl-petitionform').append('<p id="pixel">'+pixel_url+'?source='+marketingcode+'&per='+literatuurcode+'&fn='+fn+'&email='+email+'&tel='+tel+'&stop='+akkoord+'</p>');
-	// pas als pixel image is geladen de bedanktdiv tonen
-}
 
 // Get the key+value from the input fields in the form
 function getFormObj(formId) {
@@ -55,4 +37,12 @@ function getFormObj(formId) {
 			formObj[input.name] = input.value;
 	});
 	return formObj;
+}
+
+function toggle(id) {
+	$(id).prop("disabled", !$(id).prop("disabled"));
+}
+
+function flip(id) {
+	$(id).toggleClass('flipped');
 }
