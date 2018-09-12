@@ -37,6 +37,8 @@
   
   -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+
+    background-color: #FAF7EC
 }
 
 /* flipping the card on hover */
@@ -44,4 +46,13 @@
   -ms-transform: rotateY(-180deg); /* IE 9 */
     -webkit-transform: rotateY(-180deg); /* Safari */
     transform: rotateY(-180deg);
+}
+
+input[type=checkbox].gpnl-petition-checkbox{
+  opacity: 1;
+  margin-left: 0;
+}
+
+.gpnl-petition-checkbox-label{
+  margin-left: 1rem;
 }

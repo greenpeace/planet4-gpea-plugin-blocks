@@ -42,9 +42,9 @@
 								<label hidden for="phone">Telefoonnummer</label>
 								<input name="phone" type="telefoonnummer" class="form-control" id="telefoonnummer" placeholder="Uw telefoonnummer">
 							</div>
-							<div class="form-group checkbox">
-								<input class="form-check-input" name="consent" type="checkbox" checked id="toestemming" />
-								<label for="consent"><small class="text-muted form-check-label">{{ fields.consent }}</small></label>
+							<div class="form-group optin">
+								<input class="form-check-input gpnl-petition-checkbox" name="consent" type="checkbox" id="toestemming" />
+								<label for="consent"><small class="text-muted form-check-label gpnl-petition-checkbox-label">{{ fields.consent }}</small></label>
 							</div>
 							<input type="text" name="marketingcode" value="{{ fields.marketingcode }}" hidden readonly>
 							<input type="text" name="literatuurcode" value="{{ fields.literatuurcode }}" hidden readonly>

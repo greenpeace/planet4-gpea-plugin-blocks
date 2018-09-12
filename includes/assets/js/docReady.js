@@ -9,6 +9,7 @@
 		$button = $('#petitionForm').find(':button');
 		$button.width( $button.width() ).text('...');
 		// $('#petitionForm *').prop("disabled", true);
+		$('.gpnl-petition').toggleClass('flipped');
 		placePixel(post_form_value);
 
 
