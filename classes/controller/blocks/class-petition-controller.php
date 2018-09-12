@@ -74,12 +74,17 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				),
 				array(
 					'label' => __( 'Literatuurcode', 'planet4-gpnl-blocks' ),
-					'attr'  => 'literatuurcode',
+					'attr'  => 'literaturecode',
 					'type'  => 'text',
 				),
 				array(
 					'label' => __( 'Tellercode', 'planet4-gpnl-blocks' ),
-					'attr'  => 'tellercode',
+					'attr'  => 'countercode',
+					'type'  => 'text',
+				),
+				array(
+					'label' => __( 'Teller maximum', 'planet4-gpnl-blocks' ),
+					'attr'  => 'countermax',
 					'type'  => 'text',
 				),
 			);
@@ -117,8 +122,9 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				'donatebuttontext' => '',
 				'donatebuttonlink' => '',
 				'marketingcode' => '',
-				'literatuurcode' => '',
-				'tellercode' => '',
+				'literaturecode' => '',
+				'countercode' => '',
+				'countermax' => '',
 				'image' => '',
 				'alt_text' => '',
 			), $fields, $shortcode_tag );
@@ -138,10 +144,9 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				'fields' => $fields,
 			];
 
-			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/petitioncounter.js', array( 'jquery' ), null, true );
+			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/gpnl-petitioncounter.js', array( 'jquery' ), null, true );
 
-			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/petitioncounter.css' );
-			wp_enqueue_style( 'checkboxcss', P4NLBKS_ASSETS_DIR . 'css/checkbox.css' );
+			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.css' );
 
 			/* ========================
 				C S S / JS
@@ -156,7 +161,8 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 						'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 						//url for php file that process ajax request to WP
 						'nonce'   => wp_create_nonce( 'GPNL_Petitions' ),
-						'counter'   => $fields['tellercode'],
+						'countercode'   => $fields['countercode'],
+						'countermax'   => $fields['countermax'],
 					)
 				);
 			// Shortcode callbacks must return content, hence, output buffering here.

@@ -1,7 +1,15 @@
 $(document).ready(function() {
-  var tellerCode = petition_form_object.counter;
+
+  var opt=getUrlVars()['opt'];
+  if(opt!= undefined && $('.optin').length != 0 && opt=='in'){
+    $('.optin').hide();
+    $('.gpnl-petition-checkbox').prop( "checked", true );
+  }
+
+  var tellerCode = petition_form_object.countercode;
   var teller_min = 1500;
-  var teller_max = 50000;
+  // var teller_max = 50000;
+  var teller_max = petition_form_object.countermax;
 
   prefillByGuid('teller');
 
@@ -76,3 +84,15 @@ $(document).ready(function() {
     return x1 + x2;
   }
 });
+
+function getUrlVars(){
+  var vars = [], hash;
+  var uri = window.location.href.split("#")[0];
+  var hashes = uri.slice(window.location.href.indexOf('?') + 1).split('&');
+  for(var i = 0; i < hashes.length; i++){
+    hash = hashes[i].split('=');
+    vars.push(hash[0]);
+    vars[hash[0]] = hash[1];
+  }
+  return vars;
+}
