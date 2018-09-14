@@ -197,8 +197,8 @@ function petition_form_process($fields) {
 	// Flip the consent checkbox
 	$consent        = ($consent == "on" ? 0 : 1);
 
-	// $baseurl = 'https://www.mygreenpeace.nl/registreren/pixel.aspx';
-	$baseurl    = 'p4.local';
+	$baseurl = 'https://www.mygreenpeace.nl/registreren/pixel.aspx';
+	// $baseurl    = 'p4.local';
 	$querystring = '?source=' . $marketingcode . '&per=' . $literatuurcode . '&fn=' . $naam . '&email=' . $email . '&tel=' . $phonenumber . '&stop=' . $consent;
 
 	// initiate a cUrl request to the database
