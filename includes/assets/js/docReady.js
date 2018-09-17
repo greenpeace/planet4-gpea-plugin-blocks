@@ -41,6 +41,7 @@ function getFormObj(formId) {
 
 function toggle(id) {
 	$(id).prop("disabled", !$(id).prop("disabled"));
+	$('#signBtn').toggle();
 }
 
 function flip(id) {

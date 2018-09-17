@@ -217,20 +217,20 @@ function petition_form_process() {
 	if ( false === $result ) {
 		wp_send_json_error(
 			[
-				'url'           => $baseurl . $querystring,
+				// 'url'           => $baseurl . $querystring,
 				'statuscode'    => $httpcode,
-				'cUrlresult'    => $result,
-				'cUrlavailable' => function_exists( 'curl_version' ),
+				// 'cUrlresult'    => $result,
+				// 'cUrlavailable' => function_exists( 'curl_version' ),
 			],
 			500
 		);
 	}
 	wp_send_json_success(
 		[
-			'url'           => $baseurl . $querystring,
+			// 'url'           => $baseurl . $querystring,
 			'statuscode'    => $httpcode,
-			'cUrlresult'    => $result,
-			'cUrlavailable' => function_exists( 'curl_version' ),
+			// 'cUrlresult'    => $result,
+			// 'cUrlavailable' => function_exists( 'curl_version' ),
 		],
 		200
 	);
