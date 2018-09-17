@@ -18,7 +18,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 		 * Shortcode UI setup for the petitionblock shortcode.
 		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
 		 */
-		public function prepare_fields() { 
+		public function prepare_fields() {
 			$fields = array(
 				array(
 					'label' => __( 'Titel', 'planet4-gpnl-blocks' ),
@@ -48,7 +48,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'label' => __( 'Teken knop', 'planet4-gpnl-blocks' ),
 					'attr'  => 'sign',
 					'type'  => 'text',
-					'value' => 'TEKEN NU'
+					'value' => 'TEKEN NU',
 				),
 				array(
 					'label' => __( 'Bedankt tekst', 'planet4-gpnl-blocks' ),
@@ -112,23 +112,25 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
-
-			$fields = shortcode_atts( array(
-				'title'       => '',
-				'subtitle' => '',
-				'consent' => '',
-				'sign' => '',
-				'thanktext' => '',
-				'donatebuttontext' => '',
-				'donatebuttonlink' => '',
-				'marketingcode' => '',
-				'literaturecode' => '',
-				'countercode' => '',
-				'countermax' => '',
-				'image' => '',
-				'alt_text' => '',
-			), $fields, $shortcode_tag );
-			
+			$fields = shortcode_atts(
+				array(
+					'title'            => '',
+					'subtitle'         => '',
+					'consent'          => '',
+					'sign'             => '',
+					'thanktext'        => '',
+					'donatebuttontext' => '',
+					'donatebuttonlink' => '',
+					'marketingcode'    => '',
+					'literaturecode'   => '',
+					'countercode'      => '',
+					'countermax'       => '',
+					'image'            => '',
+					'alt_text'         => '',
+				),
+				$fields,
+				$shortcode_tag
+			);
 			// If an image is selected
 			if ( isset( $fields['image'] ) ) {
 				// If the selected image is succesfully found
@@ -155,14 +157,15 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/docReady.js', array( 'jquery' ), null, true );
 
 				// Pass options to frontend code
-				wp_localize_script( 'jquery-docready-script',
+				wp_localize_script(
+					'jquery-docready-script',
 					'petition_form_object',
 					array(
-						'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+						'ajaxUrl'     => admin_url( 'admin-ajax.php' ),
 						//url for php file that process ajax request to WP
-						'nonce'   => wp_create_nonce( 'GPNL_Petitions' ),
-						'countercode'   => $fields['countercode'],
-						'countermax'   => $fields['countermax'],
+						'nonce'       => wp_create_nonce( 'GPNL_Petitions' ),
+						'countercode' => $fields['countercode'],
+						'countermax'  => $fields['countermax'],
 					)
 				);
 			// Shortcode callbacks must return content, hence, output buffering here.
@@ -176,46 +179,61 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 	/* ========================
 		P E T I T I O N F O R M
    ======================== */
-function petition_form_process($fields) {
-	
+function petition_form_process() {
 	// First check if the nonce is correct
 	check_ajax_referer( 'GPNL_Petitions', 'nonce' );
 
 	// get petition specific codes for processing in the database and sanitize
-	$marketingcode  = htmlspecialchars(strip_tags($_POST['marketingcode']));
-	$literatuurcode = htmlspecialchars(strip_tags($_POST['literaturecode']));
-	
+	$marketingcode  = htmlspecialchars( strip_tags( $_POST['marketingcode'] ) );
+	$literatuurcode = htmlspecialchars( strip_tags( $_POST['literaturecode'] ) );
+
 	// Get and sanitize the formdata
-	$naam           = strip_tags($_POST['name']);
-	$email          = strip_tags($_POST['mail']);
+	$naam  = strip_tags( $_POST['name'] );
+	$email = strip_tags( $_POST['mail'] );
 	// Accept only numeric characters in the phonenumber
-	$phonenumber    = preg_replace("/[^0-9]/", "",strip_tags($_POST['phone']));
-	$consent        = htmlspecialchars(strip_tags($_POST['consent']));
+	$phonenumber = preg_replace( '/[^0-9]/', '', strip_tags( $_POST['phone'] ) );
+	$consent     = htmlspecialchars( strip_tags( $_POST['consent'] ) );
 
 	// Accept only phonenumbers of 10 characters long
-	$phonenumber    = (strlen($phonenumber) == 10 ? $phonenumber : "");
+	$phonenumber = ( strlen( $phonenumber ) == 10 ? $phonenumber : '' );
 	// Flip the consent checkbox
-	$consent        = ($consent == "on" ? 0 : 1);
+	$consent = ( 'on' == $consent ? 0 : 1 );
 
 	$baseurl = 'https://www.mygreenpeace.nl/registreren/pixel.aspx';
 	// $baseurl    = 'p4.local';
 	$querystring = '?source=' . $marketingcode . '&per=' . $literatuurcode . '&fn=' . $naam . '&email=' . $email . '&tel=' . $phonenumber . '&stop=' . $consent;
 
 	// initiate a cUrl request to the database
-	$ch = curl_init( $baseurl.$querystring );
-	curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
-	curl_setopt( $ch, CURLOPT_HEADER, 0 );
-	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
+	$request = curl_init( $baseurl . $querystring );
+	curl_setopt( $request, CURLOPT_FOLLOWLOCATION, 1 );
+	curl_setopt( $request, CURLOPT_HEADER, 0 );
+	curl_setopt( $request, CURLOPT_RETURNTRANSFER, 1 );
 
-	$result   = curl_exec( $ch );
-	$httpcode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
-	curl_close( $ch );
+	$result   = curl_exec( $request );
+	$httpcode = curl_getinfo( $request, CURLINFO_HTTP_CODE );
+	curl_close( $request );
 
 	// Give the appropriate response to the frontend
 	if ( false === $result ) {
-		wp_send_json_error( [ 'url'=>$baseurl . $querystring, 'statuscode'=>$httpcode, 'cUrlresult'=>$result, 'cUrlavailable'=>function_exists('curl_version') ], 500 );
+		wp_send_json_error(
+			[
+				'url'           => $baseurl . $querystring,
+				'statuscode'    => $httpcode,
+				'cUrlresult'    => $result,
+				'cUrlavailable' => function_exists( 'curl_version' ),
+			],
+			500
+		);
 	}
-	wp_send_json_success( [ 'url'=>$baseurl . $querystring, 'statuscode'=>$httpcode, 'cUrlresult'=>$result, 'cUrlavailable'=>function_exists('curl_version') ], 200 );
+	wp_send_json_success(
+		[
+			'url'           => $baseurl . $querystring,
+			'statuscode'    => $httpcode,
+			'cUrlresult'    => $result,
+			'cUrlavailable' => function_exists( 'curl_version' ),
+		],
+		200
+	);
 
 }
 
