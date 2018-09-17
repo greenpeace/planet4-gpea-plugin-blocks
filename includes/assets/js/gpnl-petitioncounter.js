@@ -59,12 +59,14 @@ $(document).ready(function() {
   function toonTeller(aantal_tekeningen){
     if (aantal_tekeningen >= teller_min){
       $('.counter').show(0);
-      var perc_slider = Math.round((aantal_tekeningen * 100) / teller_max);
+      var perc_slider = Math.round(100 *(aantal_tekeningen / teller_max));
+
       // check of het aantal tekeningen > dan teller_max, toon in dat geval een volle slider ...
-      if (aantal_tekeningen >= teller_max) {
+      if (Number(aantal_tekeningen) >= Number(teller_max)) {
         perc_slider = 100;
       }
 
+      console.log(perc_slider);
       $('.counter__slider').animate({width: perc_slider+'%', opacity: 1}, 2000, 'easeInOutCubic');
       $('.counter__gettext').html(beautifulThousands(aantal_tekeningen)+' handtekeningen');
       $('.counter__text').fadeIn(2000);

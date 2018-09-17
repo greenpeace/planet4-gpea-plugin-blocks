@@ -118,19 +118,23 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
-			$fields = shortcode_atts( array(
-				'title'       => '',
-				'description' => '',
-				'min_amount' => '',
-				'amount1' => '5',
-				'amount2' => '10',
-				'amount3' => '25',
-				'suggested_amount' => '',
-				'suggested_frequency' => '',
-				'allow_frequency_override' => '',
-				'literatuurcode' => '',
-				'marketingcode' => '',
-			), $fields, $shortcode_tag );
+			$fields = shortcode_atts(
+				array(
+					'title'                    => '',
+					'description'              => '',
+					'min_amount'               => '',
+					'amount1'                  => '5',
+					'amount2'                  => '10',
+					'amount3'                  => '25',
+					'suggested_amount'         => '',
+					'suggested_frequency'      => '',
+					'allow_frequency_override' => '',
+					'literatuurcode'           => '',
+					'marketingcode'            => '',
+				),
+				$fields,
+				$shortcode_tag
+			);
 
 			$frequencies = [
 				'E' => 'Eenmalig',
@@ -140,7 +144,7 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'J' => 'Jaarlijks',
 			];
 
-			$fields['suggested_frequency'] = [$fields['suggested_frequency'], $frequencies[$fields['suggested_frequency']]];
+			$fields['suggested_frequency'] = [$fields['suggested_frequency'], $frequencies[ $fields['suggested_frequency'] ] ];
 
 			$data = [
 				'fields' => $fields,
