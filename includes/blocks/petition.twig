@@ -4,10 +4,12 @@
 	<section class="petition-block">
 		<div class="row">
 			<div class="col-md-6 order-last order-md-first petition-img">
-				<img src="{{ fields.image }}"
-					 srcset="{{ fields.image_srcset }}"
-					 sizes="{{ fields.image_sizes }}"
-					 alt="{{ fields.alt_text }}"
+				<img
+					class="img-fluid"
+					src="{{ fields.image }}"
+					srcset="{{ fields.image_srcset }}"
+					sizes="{{ fields.image_sizes }}"
+					alt="{{ fields.alt_text }}"
 				>
 			</div>
 			<div class="col-md-6 order-first order-md-last gpnl-petition-wrapper">
@@ -32,15 +34,15 @@
 						<form id="gpnl-petitionform" onsubmit="return false;">
 							<div class="form-group">
 								<label hidden for="name">Naam</label>
-								<input name="name" required type="text" class="form-control" placeholder="Uw naam">
+								<input name="name" required type="text" class="form-control" placeholder="Voornaam *">
 							</div>
 							<div class="form-group">
 								<label hidden for="mail">Email</label>
-								<input name="mail" required type="email" class="form-control" placeholder="Uw emailadres">
+								<input name="mail" required type="email" class="form-control" placeholder="E-mailadres *">
 							</div>
 							<div class="form-group">
 								<label hidden for="phone">Telefoonnummer</label>
-								<input name="phone" type="text" class="form-control" placeholder="Uw telefoonnummer">
+								<input name="phone" type="text" class="form-control" placeholder="Telefoonnummer">
 							</div>
 							<div class="form-group optin">
 								<input class="form-check-input gpnl-petition-checkbox" name="consent" type="checkbox" />
@@ -48,7 +50,6 @@
 							</div>
 							<input type="text" name="marketingcode" value="{{ fields.marketingcode }}" hidden readonly>
 							<input type="text" name="literaturecode" value="{{ fields.literaturecode }}" hidden readonly>
-							{# <input type="text" name="tellercode" value="{{ fields.countercode }}" hidden readonly> #}
 							<input type="submit" class="btn btn-primary" id="signBtn" value="{{ fields.sign }}">
 						</form>
 					</div>
@@ -59,7 +60,6 @@
 				</div>
 			</div>
 		</div>
-		{# {{ dump(fields) }} #}
 	</section>
 {% endif %}
 {% endblock %}
