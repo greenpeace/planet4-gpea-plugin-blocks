@@ -34,26 +34,35 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'label' => __( 'Minmum bedrag', 'planet4-gpnl-blocks' ),
 					'attr'  => 'min_amount',
 					'type'  => 'number',
+					'value' => 5,
+
 				),
 				array(
 					'label' => __( 'Bedrag 1', 'planet4-gpnl-blocks' ),
 					'attr'  => 'amount1',
 					'type'  => 'number',
+					'value' => 5,
 				),
 				array(
 					'label' => __( 'Bedrag 2', 'planet4-gpnl-blocks' ),
 					'attr'  => 'amount2',
 					'type'  => 'number',
+					'value' => 10,
+
 				),
 				array(
 					'label' => __( 'Bedrag 3', 'planet4-gpnl-blocks' ),
 					'attr'  => 'amount3',
 					'type'  => 'number',
+					'value' => 25,
+
 				),
 				array(
 					'label' => __( 'Voorgesteld bedrag', 'planet4-gpnl-blocks' ),
 					'attr'  => 'suggested_amount',
 					'type'  => 'number',
+					'value' => 10,
+
 				),
 				array(
 					'label'   => __( 'Voorgestelde periodiek', 'planet4-gpnl-blocks' ),
@@ -79,9 +88,10 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					],
 				),
 				array(
-					'label' => __( 'Donateur kan periodiek wijzigen', 'planet4-gpnl-blocks' ),
-					'attr'  => 'allow_frequency_override',
-					'type'  => 'checkbox',
+					'label'     => __( 'Donateur kan periodiek wijzigen', 'planet4-gpnl-blocks' ),
+					'attr'      => 'allow_frequency_override',
+					'type'      => 'checkbox',
+					'checked'   => 'checked',
 				),
 				array(
 					'label' => __( 'Literatuurcode', 'planet4-gpnl-blocks' ),
@@ -122,9 +132,9 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'title'       => '',
 				'description' => '',
 				'min_amount' => '',
-				'amount1' => '5',
-				'amount2' => '10',
-				'amount3' => '25',
+				'amount1' => '',
+				'amount2' => '',
+				'amount3' => '',
 				'suggested_amount' => '',
 				'suggested_frequency' => '',
 				'allow_frequency_override' => '',
