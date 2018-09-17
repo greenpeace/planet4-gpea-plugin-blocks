@@ -202,9 +202,7 @@ function petition_form_process($fields) {
 	$querystring = '?source=' . $marketingcode . '&per=' . $literatuurcode . '&fn=' . $naam . '&email=' . $email . '&tel=' . $phonenumber . '&stop=' . $consent;
 
 	// initiate a cUrl request to the database
-	$ch = curl_init( $baseurl );
-	curl_setopt( $ch, CURLOPT_POST, 1 );
-	curl_setopt( $ch, CURLOPT_POSTFIELDS, $querystring );
+	$ch = curl_init( $baseurl.$querystring );
 	curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
 	curl_setopt( $ch, CURLOPT_HEADER, 0 );
 	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
@@ -215,9 +213,9 @@ function petition_form_process($fields) {
 
 	// Give the appropriate response to the frontend
 	if ( false === $result ) {
-		wp_send_json_error( 'ERROR', 500 );
+		wp_send_json_error( [ 'url'=>$baseurl . $querystring, 'statuscode'=>$httpcode, 'cUrlresult'=>$result, 'cUrlavailable'=>function_exists('curl_version') ], 500 );
 	}
-	wp_send_json_success( [ $baseurl . $querystring, $httpcode ], 200 );
+	wp_send_json_success( [ 'url'=>$baseurl . $querystring, 'statuscode'=>$httpcode, 'cUrlresult'=>$result, 'cUrlavailable'=>function_exists('curl_version') ], 200 );
 
 }
 
