@@ -13,18 +13,19 @@
 				>
 			</div>
 			<div class="col-md-6 order-first order-md-last gpnl-petition-wrapper">
+				{% if ( fields.title ) %}
+					<div class="petition-title">
+						<h2>{{ fields.title }}</h2>
+					</div>
+				{% endif %}
+		        {% if ( fields.subtitle ) %}
+					<div class="petition-subtitle">
+						<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+						{# <p>{{ dump( fields ) }}</p> #}
+					</div>
+		        {% endif %}
 				<div class="gpnl-petition">
 					<div class="gpnl-petition-form front">
-						{% if ( fields.title ) %}
-							<div class="petition-title">
-								<h2>{{ fields.title }}</h2>
-							</div>
-						{% endif %}
-				        {% if ( fields.subtitle ) %}
-							<div class="petition-subtitle">
-								<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-							</div>
-				        {% endif %}
 				        <div class="counter">
 				          <div class="counter__slider"></div>
 				          <div class="counter__text">
@@ -50,12 +51,28 @@
 							</div>
 							<input type="text" name="marketingcode" value="{{ fields.marketingcode }}" hidden readonly>
 							<input type="text" name="literaturecode" value="{{ fields.literaturecode }}" hidden readonly>
-							<input type="submit" class="btn btn-primary" id="signBtn" value="{{ fields.sign }}">
+							<input type="submit" class="btn btn-primary btn-block" id="signBtn" value="{{ fields.sign }}">
 						</form>
 					</div>
 					<div class="gpnl-petition-thank back">
-						<p>{{ fields.thanktext }}</p>
-						<a class="btn btn-primary" href="{{ fields.donatebuttonlink }}" role="button">{{ fields.donatebuttontext }}</a>
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">BEDANKT VOOR JE HANDTEKENING!</h5>
+								<p class="card-text">{{ fields.thanktext|e('wp_kses_post')|raw }}</p>
+								<a class="btn btn-primary btn-block" href="{{ fields.donatebuttonlink }}" role="button">{{ fields.donatebuttontext }}</a>
+								<div class="gpnl-petitionshare">
+									<a class="btn btn-primary btn-block gpnl-facebook-btn" 
+									href="https://www.facebook.com/sharer/sharer.php?u={{ fields.current_url|url_encode }}" role="button">
+										FACEBOOK
+									</a>
+									<a class="btn btn-primary btn-block gpnl-twitter-btn" 
+										href="https://twitter.com/share?url={{ fields.current_url }}&text=test&via={{ fields.social_accounts.twitter }}&related={{ fields.social_accounts.twitter }}" role="button">
+										TWITTER
+									</a>
+									<a class="btn btn-primary btn-block gpnl-whatsapp-btn" href="{{ fields.donatebuttonlink }}" role="button">WHATSAPP</a>							
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
