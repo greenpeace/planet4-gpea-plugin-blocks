@@ -1,5 +1,8 @@
 	$('#gpnl-petitionform').on('submit', function() {
 
+
+		analytics_campaign = petition_form_object.analytics_campaign
+
 		// Get the parameter from the petition form and add the action and CSRF protection
 		var post_form_value = getFormObj('gpnl-petitionform');
 		post_form_value["action"] = "petition_form_process";
@@ -19,6 +22,7 @@
 				console.log(data);
 				flip('.gpnl-petition');
 				$('#gpnl-petitionform *').toggle();
+				SendAnalyticsEvent(petition_form_object.ga_action,'Registreren')
 			},
 			error: function(jqXHR, textStatus, errorThrown, data, url){
 				console.log("o_o");
@@ -62,3 +66,7 @@ $( document ).ready(function() {
 		}
 	});     
 });
+
+function SendAnalyticsEvent(action, label){
+  ga('send', 'event', analytics_campaign, action, label);
+}

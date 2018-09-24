@@ -51,6 +51,12 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'value' => 'TEKEN NU',
 				),
 				array(
+					'label' => __( 'Bedankt titel', 'planet4-gpnl-blocks' ),
+					'attr'  => 'thankttitle',
+					'type'  => 'text',
+					'value' => 'Bedankt voor je handtekening!',
+				),
+				array(
 					'label' => __( 'Bedankt tekst', 'planet4-gpnl-blocks' ),
 					'attr'  => 'thanktext',
 					'type'  => 'textarea',
@@ -93,9 +99,15 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'type'  => 'text',
 				),
 				array(
-					'label' => __( 'Tellercode', 'planet4-gpnl-blocks' ),
-					'attr'  => 'countercode',
+					'label' => __( 'Campagnecode', 'planet4-gpnl-blocks' ),
+					'attr'  => 'campaigncode',
 					'type'  => 'text',
+				),
+				array(
+					'label' => __( 'Google Analytics action', 'planet4-gpnl-blocks' ),
+					'attr'  => 'ga_action',
+					'type'  => 'text',
+					'value' => 'Petitie',
 				),
 				array(
 					'label' => __( 'Teller maximum', 'planet4-gpnl-blocks' ),
@@ -132,7 +144,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 			//Get the HTTP_HOST.
 			$host = $server['HTTP_HOST'];
 			//Get the REQUEST_URI. i.e. The Uniform Resource Identifier.
-			$request_uri = $server['REQUEST_URI'];
+			$request_uri = strtok( $_SERVER['REQUEST_URI'], '?' );
 			//Finally, construct the full URL.
 			//Use the function htmlentities to prevent XSS attacks.
 			return $http . '://' . htmlentities( $host ) . htmlentities( $request_uri );
@@ -187,7 +199,8 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'whatsapptext'       => '',
 					'marketingcode'      => '',
 					'literaturecode'     => '',
-					'countercode'        => '',
+					'campaigncode'       => '',
+					'ga_action'          => '',
 					'countermax'         => '',
 					'image'              => '',
 					'alt_text'           => '',
@@ -208,13 +221,14 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 
 			$social_menu               = wp_get_nav_menu_items( 'Footer Social' );
 			$fields['social_accounts'] = $this->get_social_accounts( $social_menu );
-			$fields['current_url']            = $this->current_url( $_SERVER );;
+			$fields['current_url']     = $this->current_url( $_SERVER );
 
 			$data = [
 				'fields' => $fields,
 			];
 
 			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/gpnl-petitioncounter.js', array( 'jquery' ), null, true );
+			wp_enqueue_script( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js', array( 'jquery' ), null, true );
 
 			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.css' );
 
@@ -229,11 +243,12 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'jquery-docready-script',
 					'petition_form_object',
 					array(
-						'ajaxUrl'     => admin_url( 'admin-ajax.php' ),
+						'ajaxUrl'            => admin_url( 'admin-ajax.php' ),
 						//url for php file that process ajax request to WP
-						'nonce'       => wp_create_nonce( 'GPNL_Petitions' ),
-						'countercode' => $fields['countercode'],
-						'countermax'  => $fields['countermax'],
+						'nonce'              => wp_create_nonce( 'GPNL_Petitions' ),
+						'analytics_campaign' => $fields['campaigncode'],
+						'countermax'         => $fields['countermax'],
+						'ga_action'          => $fields['ga_action'],
 					)
 				);
 			// Shortcode callbacks must return content, hence, output buffering here.
@@ -286,7 +301,7 @@ function petition_form_process() {
 		wp_send_json_error(
 			[
 				// 'url'           => $baseurl . $querystring,
-				'statuscode'    => $httpcode,
+				'statuscode' => $httpcode,
 				// 'cUrlresult'    => $result,
 				// 'cUrlavailable' => function_exists( 'curl_version' ),
 			],
@@ -296,7 +311,7 @@ function petition_form_process() {
 	wp_send_json_success(
 		[
 			// 'url'           => $baseurl . $querystring,
-			'statuscode'    => $httpcode,
+			'statuscode' => $httpcode,
 			// 'cUrlresult'    => $result,
 			// 'cUrlavailable' => function_exists( 'curl_version' ),
 		],

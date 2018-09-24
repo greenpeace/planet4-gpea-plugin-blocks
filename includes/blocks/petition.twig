@@ -1,6 +1,5 @@
 {% block petition %}
 	{% if ( fields ) %}
-		<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
 	<section class="petition-block">
 		<div class="row">
 			<div class="col-md-6 order-last order-md-first petition-img">
@@ -24,7 +23,7 @@
 						{# <p>{{ dump( fields ) }}</p> #}
 					</div>
 		        {% endif %}
-				<div class="gpnl-petition">
+				<div class="gpnl-petition ">
 					<div class="gpnl-petition-form front">
 				        <div class="counter">
 				          <div class="counter__slider"></div>
@@ -57,7 +56,7 @@
 					<div class="gpnl-petition-thank back">
 						<div class="card">
 							<div class="card-body">
-								<h5 class="card-title">BEDANKT VOOR JE HANDTEKENING!</h5>
+								<h5 class="card-title">{{ fields.thanktitle|e('wp_kses_post')|raw }}</h5>
 								<p class="card-text">{{ fields.thanktext|e('wp_kses_post')|raw }}</p>
 								<a class="btn btn-primary btn-block" href="{{ fields.donatebuttonlink }}" role="button">{{ fields.donatebuttontext }}</a>
 								{% if not fields.hidesharingbuttons %}
