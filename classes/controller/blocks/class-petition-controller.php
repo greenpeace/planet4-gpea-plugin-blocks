@@ -68,6 +68,21 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'value' => '/doneren',
 				),
 				array(
+					'label' => __( 'Verberg sharing buttons?', 'planet4-gpnl-blocks' ),
+					'attr'  => 'hidesharingbuttons',
+					'type'  => 'checkbox',
+				),
+				array(
+					'label' => __( 'Sharingtekst voor Twitter', 'planet4-gpnl-blocks' ),
+					'attr'  => 'twittertext',
+					'type'  => 'text',
+				),
+				array(
+					'label' => __( 'Sharingtekst voor Whatsapp', 'planet4-gpnl-blocks' ),
+					'attr'  => 'whatsapptext',
+					'type'  => 'text',
+				),
+				array(
 					'label' => __( 'Marketingcode', 'planet4-gpnl-blocks' ),
 					'attr'  => 'marketingcode',
 					'type'  => 'text',
@@ -101,6 +116,52 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 		}
 
 		/**
+		 * Get the HTTP(S) URL of the current page.
+		 *
+		 * @param $server The $_SERVER superglobals array.
+		 * @return string The URL.
+		 */
+		function current_url( $server ) {
+			//Figure out whether we are using http or https.
+			$http = 'http';
+			//If HTTPS is present in our $_SERVER array, the URL should
+			//start with https:// instead of http://
+			if ( isset( $server['HTTPS'] ) ) {
+				$http = 'https';
+			}
+			//Get the HTTP_HOST.
+			$host = $server['HTTP_HOST'];
+			//Get the REQUEST_URI. i.e. The Uniform Resource Identifier.
+			$request_uri = $server['REQUEST_URI'];
+			//Finally, construct the full URL.
+			//Use the function htmlentities to prevent XSS attacks.
+			return $http . '://' . htmlentities( $host ) . htmlentities( $request_uri );
+		}
+
+		function get_social_accounts( $social_menu ) : array {
+			$social_accounts = [];
+			if ( isset( $social_menu ) ) {
+
+				$brands = [
+					'facebook',
+					'twitter',
+					'youtube',
+					'instagram',
+				];
+				foreach ( $social_menu as $social_menu_item ) {
+					$url_parts = explode( '/', rtrim( $social_menu_item->url, '/' ) );
+					foreach ( $brands as $brand ) {
+						if ( false !== strpos( $social_menu_item->url, $brand ) ) {
+							$social_accounts[ $brand ] = count( $url_parts ) > 0 ? $url_parts[ count( $url_parts ) - 1 ] : '';
+						}
+					}
+				}
+			}
+
+			return $social_accounts;
+		}
+
+		/**
 		 * Callback for the shortcake_twocolumn shortcode.
 		 * It renders the shortcode based on supplied attributes.
 		 *
@@ -114,19 +175,22 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 
 			$fields = shortcode_atts(
 				array(
-					'title'            => '',
-					'subtitle'         => '',
-					'consent'          => '',
-					'sign'             => '',
-					'thanktext'        => '',
-					'donatebuttontext' => '',
-					'donatebuttonlink' => '',
-					'marketingcode'    => '',
-					'literaturecode'   => '',
-					'countercode'      => '',
-					'countermax'       => '',
-					'image'            => '',
-					'alt_text'         => '',
+					'title'              => '',
+					'subtitle'           => '',
+					'consent'            => '',
+					'sign'               => '',
+					'thanktext'          => '',
+					'donatebuttontext'   => '',
+					'donatebuttonlink'   => '',
+					'hidesharingbuttons' => '',
+					'twittertext'        => '',
+					'whatsapptext'       => '',
+					'marketingcode'      => '',
+					'literaturecode'     => '',
+					'countercode'        => '',
+					'countermax'         => '',
+					'image'              => '',
+					'alt_text'           => '',
 				),
 				$fields,
 				$shortcode_tag
@@ -141,6 +205,10 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					$fields['image_sizes']  = wp_calculate_image_sizes( 'full', null, null, $fields['image'] );
 				}
 			}
+
+			$social_menu               = wp_get_nav_menu_items( 'Footer Social' );
+			$fields['social_accounts'] = $this->get_social_accounts( $social_menu );
+			$fields['current_url']            = $this->current_url( $_SERVER );;
 
 			$data = [
 				'fields' => $fields,

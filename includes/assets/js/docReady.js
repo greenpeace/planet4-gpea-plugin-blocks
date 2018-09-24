@@ -6,7 +6,7 @@
 		post_form_value["nonce"] = petition_form_object.nonce;
 
 		// Disable the form so people can't resubmit
-		toggle('#gpnl-petitionform *');
+		toggleDisable('#gpnl-petitionform *');
 
 		// Do a ajax call to the wp_admin admin_ajax.php,
 		// which triggers processing function in the petition block
@@ -18,13 +18,14 @@
 				console.log("^-^");
 				console.log(data);
 				flip('.gpnl-petition');
+				$('#gpnl-petitionform *').toggle();
 			},
 			error: function(jqXHR, textStatus, errorThrown, data, url){
 				console.log("o_o");
 				console.log('ERRORS: ' + textStatus + ': ' + errorThrown);
 				$('.gpnl-petition-thank').empty()
 				$('.gpnl-petition-thank').append("<p>Sorry, er gaat momenteel iets fout, probeer het nu of later opnieuw.</p>")
-				$('.gpnl-petition-thank').append("<button type=\"button\" class=\"btn btn-primary\" onclick=\"flip('.gpnl-petition');toggle('#gpnl-petitionform *');\">Probeer opnieuw</button>")
+				$('.gpnl-petition-thank').append("<button type=\"button\" class=\"btn btn-primary btn-block\" onclick=\"flip('.gpnl-petition');toggleDisable('#gpnl-petitionform *');$('#gpnl-petitionform *').toggle();\">Probeer opnieuw</button>")
 			}
 		});
 	});
@@ -39,11 +40,25 @@ function getFormObj(formId) {
 	return formObj;
 }
 
-function toggle(id) {
+function toggleDisable(id) {
 	$(id).prop("disabled", !$(id).prop("disabled"));
-	$('#signBtn').toggle();
+	
 }
 
 function flip(id) {
 	$(id).toggleClass('flipped');
 }
+
+
+$( document ).ready(function() {
+	$.ajax({
+		type: 'HEAD',
+		url: 'whatsapp://send?text=text=Hello%20World!',
+		success: function() {
+			window.location='whatsapp://send?text=text=Hello%20World!';   
+		},
+		error: function() {
+			$('.gpnl-whatsapp-btn').toggle()
+		}
+	});     
+});

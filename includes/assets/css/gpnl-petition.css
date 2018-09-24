@@ -38,7 +38,7 @@
   -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 
-    background-color: #FAF7EC
+    /*background-color: #FAF7EC*/
 }
 
 /* flipping the card on hover */
@@ -55,4 +55,19 @@ input[type=checkbox].gpnl-petition-checkbox{
 
 .gpnl-petition-checkbox-label{
   margin-left: 1.5rem;
+}
+
+.gpnl-petitionshare{
+  margin-top: 1rem;
+}
+.gpnl-facebook-btn{
+  background-color: #4267B2;
+}
+
+.gpnl-twitter-btn{
+  background-color: #5CB8FF;
+}
+
+.gpnl-whatsapp-btn{
+  background-color: #48C251;
 }
