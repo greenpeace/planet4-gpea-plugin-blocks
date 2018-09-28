@@ -42,7 +42,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'label' => __( 'Opt in tekst', 'planet4-gpnl-blocks' ),
 					'attr'  => 'consent',
 					'type'  => 'textarea',
-					'value' => 'Ja, ik wil weten hoe dit afloopt! Als je dit aanvinkt, mag Greenpeace je per e-mail op de hoogte houden over campagnes. Ook zullen we je af en toe om steun vragen. Afmelden kan natuurlijk altijd.',
+					'value' => 'Als je dit aanvinkt, mag Greenpeace je per e-mail op de hoogte houden over onze campagnes. Ook vragen we je af en toe om steun. Afmelden kan natuurlijk altijd. Vul je je telefoonnummer in? Dan kan Greenpeace jou telefonisch benaderen voor giftverzoeken of updates rondom lopende campagnes.',
 				),
 				array(
 					'label' => __( 'Teken knop', 'planet4-gpnl-blocks' ),
@@ -216,7 +216,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 
 			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/gpnl-petitioncounter.js', array( 'jquery' ), null, true );
 
-			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.css' );
+			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.min.css' );
 
 			/* ========================
 				C S S / JS

@@ -3,7 +3,7 @@
 		<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
 	<section class="petition-block">
 		<div class="row">
-			<div class="col-md-6 order-last order-md-first petition-img">
+			<div class="col-lg-6 order-last order-md-first petition-img">
 				<img
 					class="img-fluid"
 					src="{{ fields.image }}"
@@ -12,70 +12,73 @@
 					alt="{{ fields.alt_text }}"
 				>
 			</div>
-			<div class="col-md-6 order-first order-md-last gpnl-petition-wrapper">
-				{% if ( fields.title ) %}
-					<div class="petition-title">
-						<h2>{{ fields.title }}</h2>
-					</div>
-				{% endif %}
-		        {% if ( fields.subtitle ) %}
-					<div class="petition-subtitle">
-						<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-						{# <p>{{ dump( fields ) }}</p> #}
-					</div>
-		        {% endif %}
-				<div class="gpnl-petition">
-					<div class="gpnl-petition-form front">
-				        <div class="counter">
-				          <div class="counter__slider"></div>
-				          <div class="counter__text">
-				            <span class="counter__gettext"></span>
-				          </div>
-				        </div>
-						<form id="gpnl-petitionform" onsubmit="return false;">
-							<div class="form-group">
-								<label hidden for="name">Naam</label>
-								<input name="name" required type="text" class="form-control" placeholder="Voornaam *">
-							</div>
-							<div class="form-group">
-								<label hidden for="mail">Email</label>
-								<input name="mail" required type="email" class="form-control" placeholder="E-mailadres *">
-							</div>
-							<div class="form-group">
-								<label hidden for="phone">Telefoonnummer</label>
-								<input name="phone" type="text" class="form-control" placeholder="Telefoonnummer">
-							</div>
-							<div class="form-group optin">
-								<input class="form-check-input gpnl-petition-checkbox" name="consent" type="checkbox" />
-								<label for="consent"><small class="text-muted form-check-label gpnl-petition-checkbox-label">{{ fields.consent }}</small></label>
-							</div>
-							<input type="text" name="marketingcode" value="{{ fields.marketingcode }}" hidden readonly>
-							<input type="text" name="literaturecode" value="{{ fields.literaturecode }}" hidden readonly>
-							<input type="submit" class="btn btn-primary btn-block" id="signBtn" value="{{ fields.sign }}">
-						</form>
-					</div>
-					<div class="gpnl-petition-thank back">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">BEDANKT VOOR JE HANDTEKENING!</h5>
-								<p class="card-text">{{ fields.thanktext|e('wp_kses_post')|raw }}</p>
-								<a class="btn btn-primary btn-block" href="{{ fields.donatebuttonlink }}" role="button">{{ fields.donatebuttontext }}</a>
-								{% if not fields.hidesharingbuttons %}
-									<div class="gpnl-petitionshare">
-										<a class="btn btn-primary btn-block gpnl-facebook-btn" 
-										href="https://www.facebook.com/sharer/sharer.php?u={{ fields.current_url|url_encode }}" role="button">
-											FACEBOOK
-										</a>
-										<a class="btn btn-primary btn-block gpnl-twitter-btn" 
-											href="https://twitter.com/share?url={{ fields.current_url }}&text={{ fields.twittertext }}&via={{ fields.social_accounts.twitter }}&related={{ fields.social_accounts.twitter }}" role="button">
-											TWITTER
-										</a>
-										<a class="btn btn-primary btn-block gpnl-whatsapp-btn" href="whatsapp://send?text={{ fields.whatsapptext }} via {{ fields.current_url }}" role="button">WHATSAPP</a>							
-									</div>
-								{% endif %}
+			<div class="col-lg-6 order-first order-md-last gpnl-petition-wrapper card">
+				<div class="card-body">
+					{% if ( fields.title ) %}
+						<div class="petition-title">
+							<h2 class="card-title">{{ fields.title }}</h2>
+						</div>
+					{% endif %}
+			        {% if ( fields.subtitle ) %}
+						<div class="petition-subtitle">
+							<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+							{# <p>{{ dump( fields ) }}</p> #}
+						</div>
+			        {% endif %}
+					<div class="gpnl-petition">
+						<div class="gpnl-petition-form front">
+					        <div class="counter">
+					          <div class="counter__slider"></div>
+					          <div class="counter__text">
+					            <span class="counter__gettext"></span>
+					          </div>
+					        </div>
+							<form id="gpnl-petitionform" onsubmit="return false;">
+								<div class="form-group">
+									<label hidden for="name">Naam</label>
+									<input name="name" required type="text" class="form-control" placeholder="Voornaam *">
+								</div>
+								<div class="form-group">
+									<label hidden for="mail">Email</label>
+									<input name="mail" required type="email" class="form-control" placeholder="E-mailadres *">
+								</div>
+								<div class="form-group">
+									<label hidden for="phone">Telefoonnummer</label>
+									<input name="phone" type="text" class="form-control" placeholder="Telefoonnummer">
+								</div>
+								<div class="form-group optin">
+									<input class="form-check-input gpnl-petition-checkbox" name="consent" type="checkbox" />
+									<label for="consent"><small class="form-check-label gpnl-petition-checkbox-label">{{ fields.consent }}</small></label>
+								</div>
+								<input type="text" name="marketingcode" value="{{ fields.marketingcode }}" hidden readonly>
+								<input type="text" name="literaturecode" value="{{ fields.literaturecode }}" hidden readonly>
+								<input type="submit" class="btn btn-primary btn-block" id="signBtn" value="{{ fields.sign }}">
+							</form>
+						</div>
+						<div class="gpnl-petition-thank back">
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">BEDANKT VOOR JE HANDTEKENING!</h5>
+									<p class="card-text">{{ fields.thanktext|e('wp_kses_post')|raw }}</p>
+									<a class="btn btn-primary btn-block" href="{{ fields.donatebuttonlink }}" role="button">{{ fields.donatebuttontext }}</a>
+									{% if not fields.hidesharingbuttons %}
+										<div class="gpnl-petitionshare">
+											<a class="btn btn-primary btn-block gpnl-facebook-btn" 
+											href="https://www.facebook.com/sharer/sharer.php?u={{ fields.current_url|url_encode }}" role="button">
+												FACEBOOK
+											</a>
+											<a class="btn btn-primary btn-block gpnl-twitter-btn" 
+												href="https://twitter.com/share?url={{ fields.current_url }}&text={{ fields.twittertext }}&via={{ fields.social_accounts.twitter }}&related={{ fields.social_accounts.twitter }}" role="button">
+												TWITTER
+											</a>
+											<a class="btn btn-primary btn-block gpnl-whatsapp-btn" href="whatsapp://send?text={{ fields.whatsapptext }} via {{ fields.current_url }}" role="button">WHATSAPP</a>							
+										</div>
+									{% endif %}
+								</div>
 							</div>
 						</div>
 					</div>
+					
 				</div>
 			</div>
 		</div>
