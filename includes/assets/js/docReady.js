@@ -19,10 +19,12 @@
 			success: function(data, response) {
 				console.log("^-^");
 				console.log(data);
+				$('#signBtn').toggle();
+				$(".gpnl-petition-thank").css( "position", "relative");
+				$(".gpnl-petition-form").css( "position", "absolute");
 				flip('.gpnl-petition');
 				cardfront.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',   
 				function(e) {
-					console.log("animation done, hiding front");
 					$('.gpnl-petition-form').toggle();
 				});
 			},
