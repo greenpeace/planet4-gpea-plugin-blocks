@@ -7,7 +7,7 @@
 		post_form_value["action"] = "petition_form_process";
 		post_form_value["nonce"] = petition_form_object.nonce;
 
-		var cardfront = $('.gpnl-petition');
+		cardfront = $('.gpnl-petition');
 
 		// Disable the form so people can't resubmit
 		toggleDisable('#gpnl-petitionform *');
@@ -27,7 +27,7 @@
 				flip('.gpnl-petition');
 				cardfront.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',   
 				function(e) {
-					$('.gpnl-petition-form').toggle();
+					$('.gpnl-petition-form').hide();
 				});
 			},
 			error: function(jqXHR, textStatus, errorThrown, data, url){
