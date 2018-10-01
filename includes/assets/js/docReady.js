@@ -79,7 +79,7 @@ $( document ).ready(function() {
 			window.location='whatsapp://send?text=text=Hello%20World!';   
 		},
 		error: function() {
-			$('.gpnl-whatsapp-btn').toggle()
+			$('.gpnl-share-whatsapp').toggle()
 		}
 	});     
 });
