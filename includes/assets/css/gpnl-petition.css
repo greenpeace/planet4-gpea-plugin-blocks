@@ -88,15 +88,15 @@ input[type=checkbox].gpnl-petition-checkbox {
     margin-top: 1rem;
 }
 
-.gpnl-facebook-btn {
+.gpnl-share-facebook {
     background-color: #4267B2;
 }
 
-.gpnl-twitter-btn {
+.gpnl-share-twitter {
     background-color: #5CB8FF;
 }
 
-.gpnl-whatsapp-btn {
+.gpnl-share-whatsapp {
     background-color: #48C251;
 }
 
