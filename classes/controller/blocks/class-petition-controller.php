@@ -136,7 +136,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				array(
 					'label' => __( 'Social blue _apRef', 'planet4-gpnl-blocks' ),
 					'attr'  => 'apref',
-					'type'  => 'number',
+					'type'  => 'text',
 					'description' => 'Vul hier de _apRef uit de Social Blue pixel bedankpagina in',
 				),
 			);
@@ -264,7 +264,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 			}
 
 			//  Include the script and styling for the counter
-			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/gpnl-petitioncounter.js', array( 'jquery' ), null, true );
+			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/onload.js', array( 'jquery' ), null, true );
 			wp_enqueue_script( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js', array( 'jquery' ), null, true );
 			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.min.css' );
 
@@ -272,7 +272,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				C S S / JS
 			   ======================== */
 				// Enqueue the script:
-				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/docReady.js', array( 'jquery' ), null, true );
+				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/onsubmit.js', array( 'jquery' ), null, true );
 
 				// Pass options to frontend code
 				wp_localize_script(

@@ -34,12 +34,10 @@ $('#gpnl-petitionform').on('submit', function () {
             }
 
             // If an ad campaign is run by an external company fire the conversiontracking
+            fbq('track', 'Lead');
+            // if it is run by social blue, also deduplicate
             if (petition_form_object.ad_campaign === 'SB') {
-                // fbq('track', 'Lead');
-                // socialBlueDeDuplicate(post_form_value['email'], data['data']['phone'], petition_form_object.apref)
-            } else if (petition_form_object.ad_campaign === 'JA') {
-                // fbq('track', 'Lead');
-
+                socialBlueDeDuplicate(post_form_value['mail'], data['data']['phone'], petition_form_object.apref)
             }
 
             // flip the card, positionattribute flips to make sure no problems arises with different lengths of the front and back of the card, finally hide the front
@@ -104,18 +102,18 @@ function fireShareEvent (platform){
 
 // Send the supporter data to for deduplication
 function socialBlueDeDuplicate(email, phone, apref) {
-var apHost = ("https:" == document.location.protocol ? "https://secure.event." : "http://www.") + "affiliatepartners.com";
-var apSrc = "/js/ApConversionPixel.js";
-_apOrderValue = 0;
-_apOrderNumber = 'email=' + email + '-telefoonnumer=' + phone;
-_apRef = apref;
+    var apHost = ("https:" == document.location.protocol ? "https://secure.event." : "http://www.") + "affiliatepartners.com";
+    var apSrc = "/js/ApConversionPixel.js";
+    _apOrderValue = 0;
+    _apOrderNumber = 'email=' + email + '-telefoonnumer=' + phone;
+    _apRef = apref;
 
-try {
-    document.write(unescape("%3Cscript src='" + apHost + apSrc + "' type='text/javascript'%3E%3C/script%3E"));
-} catch (err) {
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = apHost + apSrc;
-    document.getElementsByTagName('head')[0].appendChild(script);
-}
+    try {
+        $('body').append(unescape("%3Cscript src='" + apHost + apSrc + "' type='text/javascript'%3E%3C/script%3E"))
+    } catch (err) {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = apHost + apSrc;
+        document.getElementsByTagName('head')[0].appendChild(script);
+    }
 }
