@@ -33,13 +33,16 @@ $('#gpnl-petitionform').on('submit', function () {
                 console.log("GTM not defined?")
             }
 
-            // If an ad campaign is run by an external company fire the conversiontracking
-            // if it is run by social blue, also deduplicate
-            if (petition_form_object.ad_campaign === 'SB') {
-                fbq('track', 'Lead');
-                socialBlueDeDuplicate(post_form_value['mail'], data['data']['phone'], petition_form_object.apref)
-            } else if (petition_form_object.ad_campaign === 'JA') {
-                fbq('track', 'Lead');
+            // if the consent was ticked or consent was given by entering phonenumber
+            if (post_form_value.consent === "on" || post_form_value.phone !== "") {
+                // If an ad campaign is run by an external company fire the conversiontracking
+                if (petition_form_object.ad_campaign === 'SB') {
+                    fbq('track', 'Lead');
+                    // if it is run by social blue, also deduplicate
+                    socialBlueDeDuplicate(post_form_value['mail'], data['data']['phone'], petition_form_object.apref)
+                } else if (petition_form_object.ad_campaign === 'JA') {
+                    fbq('track', 'Lead');
+                }
             }
 
             // flip the card, positionattribute flips to make sure no problems arises with different lengths of the front and back of the card, finally hide the front
