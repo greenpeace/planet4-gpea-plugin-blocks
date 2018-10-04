@@ -42,7 +42,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'label' => __( 'Opt in tekst', 'planet4-gpnl-blocks' ),
 					'attr'  => 'consent',
 					'type'  => 'textarea',
-					'value' => 'Als je dit aanvinkt, mag Greenpeace je per e-mail op de hoogte houden over onze campagnes. Ook vragen we je af en toe om steun. Afmelden kan natuurlijk altijd. Vul je je telefoonnummer in? Dan kan Greenpeace jou telefonisch benaderen voor giftverzoeken of updates rondom lopende campagnes.',
+					'value' => 'Als je dit aanvinkt, mag Greenpeace je per e-mail op de hoogte houden over onze campagnes. Ook vragen we je af en toe om steun. Afmelden kan natuurlijk altijd.',
 				),
 				array(
 					'label' => __( 'Teken knop', 'planet4-gpnl-blocks' ),
