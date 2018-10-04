@@ -112,7 +112,32 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				array(
 					'label' => __( 'Teller maximum', 'planet4-gpnl-blocks' ),
 					'attr'  => 'countermax',
-					'type'  => 'text',
+					'type'  => 'number',
+				),
+				array(
+					'label'   => __( 'Advertentiecampagne?', 'planet4-gpnl-blocks' ),
+					'attr'    => 'ad_campaign',
+					'type'    => 'select',
+					'options' => [
+						[
+							'value' => 'GP',
+							'label' => __( 'Greenpeace' ),
+						],
+						[
+							'value' => 'SB',
+							'label' => __( 'Social Blue' ),
+						],
+						[
+							'value' => 'JA',
+							'label' => __( 'Jalt' ),
+						],
+					],
+				),
+				array(
+					'label' => __( 'Social blue _apRef', 'planet4-gpnl-blocks' ),
+					'attr'  => 'apref',
+					'type'  => 'number',
+					'description' => 'Vul hier de _apRef uit de Social Blue pixel bedankpagina in',
 				),
 			);
 
@@ -204,6 +229,8 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'countermax'         => '',
 					'image'              => '',
 					'alt_text'           => '',
+					'ad_campaign'        => '',
+					'apref'             => '',
 				),
 				$fields,
 				$shortcode_tag
@@ -212,6 +239,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 			if ( isset( $fields['image'] ) ) {
 				// If the selected image is succesfully found
 				if ( $image = wp_get_attachment_image_src( $fields['image'], 'full' ) ) {
+					// load the image from the library
 					$fields['image']        = $image[0];
 					$fields['alt_text']     = get_post_meta( $fields['image'], '_wp_attachment_image_alt', true );
 					$fields['image_srcset'] = wp_get_attachment_image_srcset( $fields['image'], 'full', wp_get_attachment_metadata( $fields['image'] ) );
@@ -219,6 +247,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				}
 			}
 
+			// Fetch the data from the social accounts and the current url for sharing buttons
 			$social_menu               = wp_get_nav_menu_items( 'Footer Social' );
 			$fields['social_accounts'] = $this->get_social_accounts( $social_menu );
 			$fields['current_url']     = $this->current_url( $_SERVER );
@@ -227,9 +256,16 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				'fields' => $fields,
 			];
 
+			// Include de approptiate scripts for ad campaign tracking
+			if ( 'SB' == $fields['ad_campaign'] ) {
+				wp_enqueue_script( 'social-blue-landing-script', P4NLBKS_ASSETS_DIR . 'js/social-blue-landing.js' );
+			} elseif ( 'JA' == $fields['ad_campaign'] ) {
+				wp_enqueue_script( 'jalt-landing-script', P4NLBKS_ASSETS_DIR . 'js/jalt-landing.js' );
+			}
+
+			//  Include the script and styling for the counter
 			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/gpnl-petitioncounter.js', array( 'jquery' ), null, true );
 			wp_enqueue_script( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js', array( 'jquery' ), null, true );
-
 			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.min.css' );
 
 			/* ========================
@@ -249,6 +285,8 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 						'analytics_campaign' => $fields['campaigncode'],
 						'countermax'         => $fields['countermax'],
 						'ga_action'          => $fields['ga_action'],
+						'ad_campaign'        => $fields['ad_campaign'],
+						'apref'              => $fields['apref'],
 					)
 				);
 			// Shortcode callbacks must return content, hence, output buffering here.
@@ -312,6 +350,7 @@ function petition_form_process() {
 		[
 			// 'url'           => $baseurl . $querystring,
 			'statuscode' => $httpcode,
+			'phone'      => $phonenumber,
 			// 'cUrlresult'    => $result,
 			// 'cUrlavailable' => function_exists( 'curl_version' ),
 		],

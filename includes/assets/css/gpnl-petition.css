@@ -125,3 +125,7 @@ input[type=checkbox].gpnl-petition-checkbox {
 .card-title{
   font-weight: normal;
 }
+
+.form-group{
+    margin-bottom: .5rem;
+}
