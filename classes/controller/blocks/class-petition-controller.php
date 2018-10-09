@@ -42,13 +42,19 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'label' => __( 'Opt in tekst', 'planet4-gpnl-blocks' ),
 					'attr'  => 'consent',
 					'type'  => 'textarea',
-					'value' => 'Ja, ik wil weten hoe dit afloopt! Als je dit aanvinkt, mag Greenpeace je per e-mail op de hoogte houden over campagnes. Ook zullen we je af en toe om steun vragen. Afmelden kan natuurlijk altijd.',
+					'value' => 'Als je dit aanvinkt, mag Greenpeace je per e-mail op de hoogte houden over onze campagnes. Ook vragen we je af en toe om steun. Afmelden kan natuurlijk altijd.',
 				),
 				array(
 					'label' => __( 'Teken knop', 'planet4-gpnl-blocks' ),
 					'attr'  => 'sign',
 					'type'  => 'text',
 					'value' => 'TEKEN NU',
+				),
+				array(
+					'label' => __( 'Bedankt titel', 'planet4-gpnl-blocks' ),
+					'attr'  => 'thankttitle',
+					'type'  => 'text',
+					'value' => 'Bedankt voor je handtekening!',
 				),
 				array(
 					'label' => __( 'Bedankt tekst', 'planet4-gpnl-blocks' ),
@@ -68,6 +74,21 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'value' => '/doneren',
 				),
 				array(
+					'label' => __( 'Verberg sharing buttons?', 'planet4-gpnl-blocks' ),
+					'attr'  => 'hidesharingbuttons',
+					'type'  => 'checkbox',
+				),
+				array(
+					'label' => __( 'Sharingtekst voor Twitter', 'planet4-gpnl-blocks' ),
+					'attr'  => 'twittertext',
+					'type'  => 'text',
+				),
+				array(
+					'label' => __( 'Sharingtekst voor Whatsapp', 'planet4-gpnl-blocks' ),
+					'attr'  => 'whatsapptext',
+					'type'  => 'text',
+				),
+				array(
 					'label' => __( 'Marketingcode', 'planet4-gpnl-blocks' ),
 					'attr'  => 'marketingcode',
 					'type'  => 'text',
@@ -78,14 +99,45 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'type'  => 'text',
 				),
 				array(
-					'label' => __( 'Tellercode', 'planet4-gpnl-blocks' ),
-					'attr'  => 'countercode',
+					'label' => __( 'Campagnecode', 'planet4-gpnl-blocks' ),
+					'attr'  => 'campaigncode',
 					'type'  => 'text',
+				),
+				array(
+					'label' => __( 'Google Analytics action', 'planet4-gpnl-blocks' ),
+					'attr'  => 'ga_action',
+					'type'  => 'text',
+					'value' => 'Petitie',
 				),
 				array(
 					'label' => __( 'Teller maximum', 'planet4-gpnl-blocks' ),
 					'attr'  => 'countermax',
+					'type'  => 'number',
+				),
+				array(
+					'label'   => __( 'Advertentiecampagne?', 'planet4-gpnl-blocks' ),
+					'attr'    => 'ad_campaign',
+					'type'    => 'select',
+					'options' => [
+						[
+							'value' => 'GP',
+							'label' => __( 'Greenpeace' ),
+						],
+						[
+							'value' => 'SB',
+							'label' => __( 'Social Blue' ),
+						],
+						[
+							'value' => 'JA',
+							'label' => __( 'Jalt' ),
+						],
+					],
+				),
+				array(
+					'label' => __( 'Social blue _apRef', 'planet4-gpnl-blocks' ),
+					'attr'  => 'apref',
 					'type'  => 'text',
+					'description' => 'Vul hier de _apRef uit de Social Blue pixel bedankpagina in',
 				),
 			);
 
@@ -98,6 +150,52 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 			);
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
+		}
+
+		/**
+		 * Get the HTTP(S) URL of the current page.
+		 *
+		 * @param $server The $_SERVER superglobals array.
+		 * @return string The URL.
+		 */
+		function current_url( $server ) {
+			//Figure out whether we are using http or https.
+			$http = 'http';
+			//If HTTPS is present in our $_SERVER array, the URL should
+			//start with https:// instead of http://
+			if ( isset( $server['HTTPS'] ) ) {
+				$http = 'https';
+			}
+			//Get the HTTP_HOST.
+			$host = $server['HTTP_HOST'];
+			//Get the REQUEST_URI. i.e. The Uniform Resource Identifier.
+			$request_uri = strtok( $_SERVER['REQUEST_URI'], '?' );
+			//Finally, construct the full URL.
+			//Use the function htmlentities to prevent XSS attacks.
+			return $http . '://' . htmlentities( $host ) . htmlentities( $request_uri );
+		}
+
+		function get_social_accounts( $social_menu ) : array {
+			$social_accounts = [];
+			if ( isset( $social_menu ) ) {
+
+				$brands = [
+					'facebook',
+					'twitter',
+					'youtube',
+					'instagram',
+				];
+				foreach ( $social_menu as $social_menu_item ) {
+					$url_parts = explode( '/', rtrim( $social_menu_item->url, '/' ) );
+					foreach ( $brands as $brand ) {
+						if ( false !== strpos( $social_menu_item->url, $brand ) ) {
+							$social_accounts[ $brand ] = count( $url_parts ) > 0 ? $url_parts[ count( $url_parts ) - 1 ] : '';
+						}
+					}
+				}
+			}
+
+			return $social_accounts;
 		}
 
 		/**
@@ -114,19 +212,25 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 
 			$fields = shortcode_atts(
 				array(
-					'title'            => '',
-					'subtitle'         => '',
-					'consent'          => '',
-					'sign'             => '',
-					'thanktext'        => '',
-					'donatebuttontext' => '',
-					'donatebuttonlink' => '',
-					'marketingcode'    => '',
-					'literaturecode'   => '',
-					'countercode'      => '',
-					'countermax'       => '',
-					'image'            => '',
-					'alt_text'         => '',
+					'title'              => '',
+					'subtitle'           => '',
+					'consent'            => '',
+					'sign'               => '',
+					'thanktext'          => '',
+					'donatebuttontext'   => '',
+					'donatebuttonlink'   => '',
+					'hidesharingbuttons' => '',
+					'twittertext'        => '',
+					'whatsapptext'       => '',
+					'marketingcode'      => '',
+					'literaturecode'     => '',
+					'campaigncode'       => '',
+					'ga_action'          => '',
+					'countermax'         => '',
+					'image'              => '',
+					'alt_text'           => '',
+					'ad_campaign'        => '',
+					'apref'             => '',
 				),
 				$fields,
 				$shortcode_tag
@@ -135,6 +239,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 			if ( isset( $fields['image'] ) ) {
 				// If the selected image is succesfully found
 				if ( $image = wp_get_attachment_image_src( $fields['image'], 'full' ) ) {
+					// load the image from the library
 					$fields['image']        = $image[0];
 					$fields['alt_text']     = get_post_meta( $fields['image'], '_wp_attachment_image_alt', true );
 					$fields['image_srcset'] = wp_get_attachment_image_srcset( $fields['image'], 'full', wp_get_attachment_metadata( $fields['image'] ) );
@@ -142,30 +247,46 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				}
 			}
 
+			// Fetch the data from the social accounts and the current url for sharing buttons
+			$social_menu               = wp_get_nav_menu_items( 'Footer Social' );
+			$fields['social_accounts'] = $this->get_social_accounts( $social_menu );
+			$fields['current_url']     = $this->current_url( $_SERVER );
+
 			$data = [
 				'fields' => $fields,
 			];
 
-			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/gpnl-petitioncounter.js', array( 'jquery' ), null, true );
+			// Include de approptiate scripts for ad campaign tracking
+			if ( 'SB' == $fields['ad_campaign'] ) {
+				wp_enqueue_script( 'social-blue-landing-script', P4NLBKS_ASSETS_DIR . 'js/social-blue-landing.js' );
+			} elseif ( 'JA' == $fields['ad_campaign'] ) {
+				wp_enqueue_script( 'jalt-landing-script', P4NLBKS_ASSETS_DIR . 'js/jalt-landing.js' );
+			}
 
-			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.css' );
+			//  Include the script and styling for the counter
+			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/onload.js', array( 'jquery' ), null, true );
+			wp_enqueue_script( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js', array( 'jquery' ), null, true );
+			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.min.css' );
 
 			/* ========================
 				C S S / JS
 			   ======================== */
 				// Enqueue the script:
-				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/docReady.js', array( 'jquery' ), null, true );
+				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/onsubmit.js', array( 'jquery' ), null, true );
 
 				// Pass options to frontend code
 				wp_localize_script(
 					'jquery-docready-script',
 					'petition_form_object',
 					array(
-						'ajaxUrl'     => admin_url( 'admin-ajax.php' ),
+						'ajaxUrl'            => admin_url( 'admin-ajax.php' ),
 						//url for php file that process ajax request to WP
-						'nonce'       => wp_create_nonce( 'GPNL_Petitions' ),
-						'countercode' => $fields['countercode'],
-						'countermax'  => $fields['countermax'],
+						'nonce'              => wp_create_nonce( 'GPNL_Petitions' ),
+						'analytics_campaign' => $fields['campaigncode'],
+						'countermax'         => $fields['countermax'],
+						'ga_action'          => $fields['ga_action'],
+						'ad_campaign'        => $fields['ad_campaign'],
+						'apref'              => $fields['apref'],
 					)
 				);
 			// Shortcode callbacks must return content, hence, output buffering here.
@@ -217,20 +338,21 @@ function petition_form_process() {
 	if ( false === $result ) {
 		wp_send_json_error(
 			[
-				'url'           => $baseurl . $querystring,
-				'statuscode'    => $httpcode,
-				'cUrlresult'    => $result,
-				'cUrlavailable' => function_exists( 'curl_version' ),
+				// 'url'           => $baseurl . $querystring,
+				'statuscode' => $httpcode,
+				// 'cUrlresult'    => $result,
+				// 'cUrlavailable' => function_exists( 'curl_version' ),
 			],
 			500
 		);
 	}
 	wp_send_json_success(
 		[
-			'url'           => $baseurl . $querystring,
-			'statuscode'    => $httpcode,
-			'cUrlresult'    => $result,
-			'cUrlavailable' => function_exists( 'curl_version' ),
+			// 'url'           => $baseurl . $querystring,
+			'statuscode' => $httpcode,
+			'phone'      => $phonenumber,
+			// 'cUrlresult'    => $result,
+			// 'cUrlavailable' => function_exists( 'curl_version' ),
 		],
 		200
 	);

@@ -150,7 +150,7 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'J' => 'Jaarlijks',
 			];
 
-			$fields['suggested_frequency'] = [$fields['suggested_frequency'], $frequencies[$fields['suggested_frequency']]];
+			$fields['suggested_frequency'] = [$fields['suggested_frequency'], $frequencies[ $fields['suggested_frequency'] ] ];
 
 			$data = [
 				'fields' => $fields,

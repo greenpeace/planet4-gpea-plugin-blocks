@@ -1,15 +1,36 @@
 $(document).ready(function() {
 
+  // Hide the consentbox if the opt=in url var is set. (this is for set for ie mailings)
   var opt=getUrlVars()['opt'];
   if(opt!= undefined && $('.optin').length != 0 && opt=='in'){
     $('.optin').hide();
     $('.gpnl-petition-checkbox').prop( "checked", true );
+
+    // Here we check if we know the mail being entered if the opt=in var is set.
+    // If we don't know the entered mail we should display the consentbox
+    $('#mail').keyup(function(event) {
+      // First loosely check if the value in the mailinput is indeed a mailadress, if it indeed is, we pass it onto the database checker
+      var mailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+      if (mailRegex.test(this.value)) {
+        mail = encodeURIComponent(this.value),
+        $.ajax({
+          type: 'GET',
+          url: "https://secure.greenpeacephp.nl/kenikdeze.php?mail=" + mail,
+          complete: function(data) {
+            // If we do not know the email, we display the consentbox again
+            if (data.responseText.includes('false')) {
+              $('.optin').show();
+              $('.gpnl-petition-checkbox').prop( "checked", false ); 
+            }
+          }
+        });
+      }
+    });
   }
 
-  var tellerCode = petition_form_object.countercode;
-  var teller_min = 1500;
-  // var teller_max = 50000;
-  var teller_max = petition_form_object.countermax;
+  var tellerCode = petition_form_object.analytics_campaign;
+  var counter_min = 1000;
+  var counter_max = petition_form_object.countermax;
 
   prefillByGuid('teller');
 
@@ -57,11 +78,12 @@ $(document).ready(function() {
 
   // teller tonen
   function toonTeller(aantal_tekeningen){
-    if (aantal_tekeningen >= teller_min){
+    if (aantal_tekeningen >= counter_min){
       $('.counter').show(0);
-      var perc_slider = Math.round((aantal_tekeningen * 100) / teller_max);
-      // check of het aantal tekeningen > dan teller_max, toon in dat geval een volle slider ...
-      if (aantal_tekeningen >= teller_max) {
+      var perc_slider = Math.round(100 *(aantal_tekeningen / counter_max));
+
+      // check of het aantal tekeningen > dan counter_max, toon in dat geval een volle slider ...
+      if (Number(aantal_tekeningen) >= Number(counter_max)) {
         perc_slider = 100;
       }
 
@@ -83,6 +105,19 @@ $(document).ready(function() {
     }
     return x1 + x2;
   }
+
+//  try to get an response from whatsapp, else hide the whatsappbutton
+//  ATM not working because ajax doesn't support custom schemes...
+  $.ajax({
+    type: 'HEAD',
+    url: 'whatsapp://send?text=text=Hello%20World!',
+    success: function() {
+        window.location='whatsapp://send?text=text=Hello%20World!';   
+    },
+    error: function() {
+        $('.gpnl-share-whatsapp').toggle()
+    }
+  });
 });
 
 function getUrlVars(){
@@ -95,4 +130,8 @@ function getUrlVars(){
     vars[hash[0]] = hash[1];
   }
   return vars;
+}
+
+function checkKnownEmail(mail) {
+
 }
