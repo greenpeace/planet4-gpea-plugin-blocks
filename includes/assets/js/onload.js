@@ -1,9 +1,31 @@
 $(document).ready(function() {
 
+  // Hide the consentbox if the opt=in url var is set. (this is for set for ie mailings)
   var opt=getUrlVars()['opt'];
   if(opt!= undefined && $('.optin').length != 0 && opt=='in'){
     $('.optin').hide();
     $('.gpnl-petition-checkbox').prop( "checked", true );
+
+    // Here we check if we know the mail being entered if the opt=in var is set.
+    // If we don't know the entered mail we should display the consentbox
+    $('#mail').keyup(function(event) {
+      // First loosely check if the value in the mailinput is indeed a mailadress, if it indeed is, we pass it onto the database checker
+      var mailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+      if (mailRegex.test(this.value)) {
+        mail = encodeURIComponent(this.value),
+        $.ajax({
+          type: 'GET',
+          url: "https://secure.greenpeacephp.nl/kenikdeze.php?mail=" + mail,
+          complete: function(data) {
+            // If we do not know the email, we display the consentbox again
+            if (data.responseText.includes('false')) {
+              $('.optin').show();
+              $('.gpnl-petition-checkbox').prop( "checked", false ); 
+            }
+          }
+        });
+      }
+    });
   }
 
   var tellerCode = petition_form_object.analytics_campaign;
@@ -108,4 +130,8 @@ function getUrlVars(){
     vars[hash[0]] = hash[1];
   }
   return vars;
+}
+
+function checkKnownEmail(mail) {
+
 }
