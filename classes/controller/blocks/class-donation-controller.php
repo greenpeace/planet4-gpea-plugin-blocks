@@ -94,6 +94,16 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'checked'   => 'checked',
 				),
 				array(
+					'label' => __( 'Bedankt Titel', 'planet4-gpnl-blocks' ),
+					'attr'  => 'thanktitle',
+					'type'  => 'text',
+				),
+				array(
+					'label' => __( 'Bedankt Omschrijving', 'planet4-gpnl-blocks' ),
+					'attr'  => 'thankdescription',
+					'type'  => 'textarea',
+				),
+				array(
 					'label' => __( 'Literatuurcode', 'planet4-gpnl-blocks' ),
 					'attr'  => 'literatuurcode',
 					'type'  => 'text',
@@ -138,6 +148,8 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'suggested_amount' => '',
 				'suggested_frequency' => '',
 				'allow_frequency_override' => '',
+				'thanktitle'       => '',
+				'thankdescription' => '',
 				'literatuurcode' => '',
 				'marketingcode' => '',
 			), $fields, $shortcode_tag );

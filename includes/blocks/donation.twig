@@ -114,18 +114,6 @@
                       <option value="O">Beste</option>
                     </select>
 
-                    <!-- label>Geslacht</label-->
-                    <!-- div class="radio-list">
-                      <input class="form-check-input" v-model.trim="geslacht" type="radio" name="inlineRadioOptions" id="geslacht3" value="O">
-                      <label class="form-check-label form-control geslacht" for="geslacht3">Beste,</label>
-
-                      <input class="form-check-input" v-model.trim="geslacht" type="radio" name="inlineRadioOptions" id="geslacht1" value="M">
-                      <label class="form-check-label form-control left geslacht" for="geslacht1">Mijnheer,</label>
-
-                      <input class="form-check-input" v-model.trim="geslacht" type="radio" name="inlineRadioOptions" id="geslacht2" value="V">
-                      <label class="form-check-label form-control geslacht" for="geslacht2">Mevrouw,</label>
-                    </div-->
-
                     <span class="help-block" v-if="$v.geslacht.$error && !$v.geslacht.required">Geslacht is verplicht</span>
                   </div>
                 </div>
@@ -191,13 +179,13 @@
           data() {
             return {
               initialen: '',
-              voornaam: '',
+              voornaam: 'Oscar',
               tussenvoegsel: '',
-              achternaam: '',
+              achternaam: 'Keur',
               geslacht: '',
-              email: '',
+              email: 'okeur@greenpeace.org',
               telefoonnummer: '',
-              rekeningnummer: ''
+              rekeningnummer: 'NL74ABNA0526127228'
             }
           },
           validations: {
@@ -508,11 +496,11 @@
               </div>`,
           data() {
             return {
-              straat: '',
-              postcode: '',
-              huisnummer: '',
+              straat: 'Beukenplein',
+              postcode: '1092BB',
+              huisnummer: '41',
               huisnummertoevoeging: '',
-              woonplaats: '',
+              woonplaats: 'Amsterdam',
               landcode: 'NL'
             }
           },
@@ -613,7 +601,7 @@
             onSucces: function(result) {
               console.log(result.msg);
               var appContainer = document.getElementById("app");
-              appContainer.innerHTML = '<h1>Bedankt voor je steun!</h1>';
+              appContainer.innerHTML = '<h2>{% if ( fields.thanktitle ) %}{{ fields.thanktitle }}{% endif %}</h2>';
               // Push step to tag manager
               dataLayer.push({
               'event': 'virtualPageViewDonatie',
@@ -658,6 +646,14 @@
             },
 
             submit: function () {
+              inputs = $('#app input');
+              buttons = $('#app button');
+              inputs.each( function() {
+                this.setAttribute('disabled', 'true');
+              })
+              buttons.each( function() {
+                this.setAttribute('disabled', 'true');
+              })
                 this.result.msg = '';
                 this.result.hasError = false;
                 this.$http.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi/machtiging/register", this.finalModel)
@@ -690,7 +686,21 @@
 
     <section class="donation">
       <div class="row">
-        <div class="col-md-6">
+      <div class="col-md-6 order-last order-md-first">
+        <div class="donationwrapper">
+          {% if ( fields.title ) %}
+            <div class="donationtitle">
+              <h2>{{ fields.title }}</h2>
+            </div>
+          {% endif %}
+          {% if ( fields.description ) %}
+            <div class="donationdescription">
+              <p>{{ fields.description|e('wp_kses_post')|raw }}</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+        <div class="col-md-6 order-first order-md-last">
           <script>
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -734,20 +744,6 @@
               'virtuelPageviewName': 'Landing' // Vul hier de stapnaam in. E.g. Donatie, gegevens, adres, Bedankt
               });
           </script>
-        </div>
-        <div class="col-md-6">
-          <div class="donationwrapper">
-            {% if ( fields.title ) %}
-              <div class="donationtitle">
-                <h2>{{ fields.title }}</h2>
-              </div>
-            {% endif %}
-            {% if ( fields.description ) %}
-              <div class="donationdescription">
-                <p>{{ fields.description|e('wp_kses_post')|raw }}</p>
-              </div>
-            {% endif %}
-          </div>
         </div>
       </div>
     </section>
