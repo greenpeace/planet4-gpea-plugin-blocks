@@ -179,13 +179,13 @@
           data() {
             return {
               initialen: '',
-              voornaam: 'Oscar',
+              voornaam: '',
               tussenvoegsel: '',
-              achternaam: 'Keur',
+              achternaam: '',
               geslacht: '',
-              email: 'okeur@greenpeace.org',
+              email: '',
               telefoonnummer: '',
-              rekeningnummer: 'NL74ABNA0526127228'
+              rekeningnummer: ''
             }
           },
           validations: {
@@ -496,11 +496,11 @@
               </div>`,
           data() {
             return {
-              straat: 'Beukenplein',
-              postcode: '1092BB',
-              huisnummer: '41',
+              straat: '',
+              postcode: '',
+              huisnummer: '',
               huisnummertoevoeging: '',
-              woonplaats: 'Amsterdam',
+              woonplaats: '',
               landcode: 'NL'
             }
           },
@@ -653,8 +653,7 @@
             },
 
             onFailure: function(result) {
-              // alert('Helaas gaat er iets mis met de donatieverwerking. Er wordt geen geld afgeschreven, probeer het later nog eens. '+result.msg);
-              this.onSucces();
+              alert('Helaas gaat er iets mis met de donatieverwerking. Er wordt geen geld afgeschreven, probeer het later nog eens. '+result.msg);
             },
 
             submit: function () {
