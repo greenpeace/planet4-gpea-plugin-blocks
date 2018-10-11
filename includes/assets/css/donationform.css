@@ -1671,7 +1671,7 @@ select.form-control-lg:not([size]):not([multiple]) {
     flex-direction: column;
     padding: 0;
     margin: 0 auto;
-    color: rgba(0, 0, 0, .5);
+    color: grey;
     position: relative
 }
 

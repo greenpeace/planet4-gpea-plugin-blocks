@@ -324,7 +324,7 @@
                     <option value="EC">ECUADOR</option>
                     <option value="EG">EGYPTE</option>
                     <option value="SV">EL SALVADOR</option>
-binarcode.github                    <option value="CQ">EQUATORIAAL GUINEA</option>
+                    <option value="CQ">EQUATORIAAL GUINEA</option>
                     <option value="ER">ERITREA</option>
                     <option value="EE">ESTLAND</option>
                     <option value="ET">ETHIOPIE</option>
@@ -600,6 +600,7 @@ binarcode.github                    <option value="CQ">EQUATORIAAL GUINEA</optio
 
             onSucces: function(result) {
               // console.log(result.msg);
+              console.log(this.finalModel);
               var formBody = $("#Adres4");
               formBody.addClass('card');
               formBody.empty();
@@ -663,7 +664,7 @@ binarcode.github                    <option value="CQ">EQUATORIAAL GUINEA</optio
               this.disableFormElements(buttons);
               this.result.msg = '';
               this.result.hasError = false;
-              this.$http.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi/machtiging/register", this.finalModel)
+              this.$http.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register", this.finalModel)
               .then(function (response) {
                   this.result.msg = response.bodyText;
                   this.result.hasError = false;
