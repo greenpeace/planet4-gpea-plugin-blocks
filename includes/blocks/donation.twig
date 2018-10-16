@@ -22,7 +22,7 @@
                 <div class="form-group" v-bind:class="{ 'has-error': $v.machtigingType }">
                   <label>Ja ik steun Greenpeace{% if ( fields.suggested_frequency ) and not ( fields.allow_frequency_override ) %} <strong>{{ fields.suggested_frequency[1]|lower }}<strong>{% endif %}:</label>
                   {% if ( fields.allow_frequency_override ) %}
-                    <select class="form-control" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()">
+                    <select class="form-control"  id="frequency" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()" v-on:change="iDealToggle()">
                       <option value="E">Eenmalig</option>
                       <option value="M">Maandelijks</option>
                       <!-- option value="K">Kwartaal</option>
@@ -93,7 +93,7 @@
                 });
               }
               return isValid
-            }
+            },
           }
         })
 
@@ -699,7 +699,7 @@
 
     <section class="donation">
       <div class="row">
-      <div class="col-md-6 order-last order-md-first">
+      <div class="col-lg-6 order-last order-md-first">
         <div class="donationwrapper">
           {% if ( fields.title ) %}
             <div class="donationtitle">
@@ -713,7 +713,7 @@
           {% endif %}
         </div>
       </div>
-        <div class="col-md-6 order-first order-md-last card">
+        <div class="col-lg-6 order-first order-md-last card">
           <script>
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
