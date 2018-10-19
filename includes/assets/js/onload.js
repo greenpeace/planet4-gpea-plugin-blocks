@@ -31,15 +31,25 @@ $(document).ready(function() {
   var tellerCode = petition_form_object.analytics_campaign;
   var counter_min = 1000;
   var counter_max = petition_form_object.countermax;
+  var url_cg = getUrlVars()["cg"];
+  var isfacebook = document.referrer.indexOf('facebook') !== -1;
+  var istwitter = document.referrer.indexOf('twitter') !== -1;
+
+	if ( !(istwitter || isfacebook)   ){
+		prefillByGuid('prefill');
+	}
 
   prefillByGuid('teller');
 
-  function prefillByGuid(soort){
+  function prefillByGuid(type){
     var xmlhttp = new XMLHttpRequest();
     var query_id = '';
     var requestValue = '';
     // waar gaat het om? Een teller of een prefill?
-    if (soort == 'teller'){
+	  if (type === 'prefill'){
+		  query_id = 'GET_FIRST_NAME_EMAIL';
+		  requestValue = url_cg;
+	  } else if (type === 'teller'){
       query_id = 'CAMP_TTL_PETITIONS';
       requestValue = tellerCode;//'CABO1-2016';
     }
@@ -56,21 +66,24 @@ $(document).ready(function() {
     "</soap:Envelope>";
 
     xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState == 4) { // 4 = request finished and response is ready
-        if (xmlhttp.status == 200) { // 200 = OK
-          response = xmlhttp.responseXML.getElementsByTagName("WatIsDestandResult")[0].firstChild.nodeValue;
-          if (response!=""){
-            var res = response.split("|");
-            // waar gaat het om? Een teller of een prefill
-            if (soort == 'teller'){
-              toonTeller(res[0]);
-            }
-          }
-        }
-      }
-    }
-    // Send the POST request
-    xmlhttp.setRequestHeader("Content-Type", "text/xml");
+		if (xmlhttp.readyState === 4 && xmlhttp.status === 200){ // 200 = OK
+			response = xmlhttp.responseXML.getElementsByTagName("WatIsDestandResult")[0].firstChild.nodeValue;
+			if (response!==""){
+				var res = response.split("|");
+				// waar gaat het om? Een teller of een prefill
+				if (type === 'prefill'){
+					var naam = res[0];
+					$('#name').val(naam);
+					var email = res[1];
+					$('#mail').val(email);
+				} else if (type === 'teller'){
+					toonTeller(res[0]);
+				}
+			}
+		}
+	};
+	  // Send the POST request
+	  xmlhttp.setRequestHeader("Content-Type", "text/xml");
     xmlhttp.setRequestHeader("SOAPAction", "http://www.mygreenpeace.nl/GPN.WebServices/WatIsDestand");
     xmlhttp.send(sr);
     // send request
