@@ -108,7 +108,7 @@ function fireShareEvent (platform){
 // Send the supporter data to for deduplication
 function socialBlueDeDuplicate(email, phone, apref) {
     var apHost = ("https:" == document.location.protocol ? "https://secure.event." : "http://www.") + "affiliatepartners.com";
-    var apSrc = "/js/ApConversionPixel.js";
+    var apSrc = "/js/ApConversionPixelV1.1.js";
     _apOrderValue = 0;
     _apOrderNumber = 'email=' + email + '-telefoonnumer=' + phone;
     _apRef = apref;
