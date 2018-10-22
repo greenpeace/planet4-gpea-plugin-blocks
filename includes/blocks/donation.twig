@@ -92,8 +92,10 @@
                 'virtuelPageviewName': 'Donatie' // Vul hier de stapnaam in. E.g. Donatie, gegevens, adres, Bedankt
                 });
               }
-              if (this.$data.machtigingType == 'E'){
-              	iDealToggle();
+              if (this.$data.machtigingType === 'E'){
+              	if (!$('#iDealBtn').length ){
+					iDealToggle();
+				}
 			  };
               return isValid
             },
