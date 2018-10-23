@@ -87,9 +87,11 @@ add_action( 'wp_head', 'wp_no_robots' );
 add_action( 'save_post', 'P4NLBKS\Controllers\Blocks\delete_tags' );
 
 function delete_tags() {
-	$id = $_POST['ID'];
-	wp_set_post_terms($id, [], 'post_tag');
-	wp_set_post_terms($id, [], 'category');
+	if (!empty($_POST)) {
+		$id = $_POST['ID'];
+		wp_set_post_terms($id, [], 'post_tag');
+		wp_set_post_terms($id, [], 'category');
+	}
 }
 
 
