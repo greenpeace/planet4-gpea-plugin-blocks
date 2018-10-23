@@ -20,6 +20,13 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 		 */
 		public function prepare_fields() {
 			$fields = array(
+				array(
+					'label' => __( 'Waarschuwing!', 'planet4-gpnl-blocks' ),
+					'attr'  => 'title',
+					'type'  => 'textarea',
+					'value' => "Dit blok dient om pagina's te 'verbergen'. Gebruik dit enkel voor dingen als kopie-pagina's voor petities en speciale pagina's maar mailmarketing.\nWat dit doet?\n-Een instructie aan zoekmachines om deze pagina niet te indexeren\n-Verwijderen van tags\n-Verwijderen van categorien",
+					'meta' => array( 'readonly' => true ),
+				),
 			);
 
 
@@ -39,6 +46,8 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 
 
 
+
+
 		/**
 		 * Callback for the shortcake_twocolumn shortcode.
 		 * It renders the shortcode based on supplied attributes.
@@ -53,6 +62,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 
 			$fields = shortcode_atts(
 				array(
+					'test' => ''
 				),
 				$fields,
 				$shortcode_tag
@@ -74,3 +84,12 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 }
 
 add_action( 'wp_head', 'wp_no_robots' );
+add_action( 'save_post', 'P4NLBKS\Controllers\Blocks\delete_tags' );
+
+function delete_tags() {
+	$id = $_POST['ID'];
+	wp_set_post_terms($id, [], 'post_tag');
+	wp_set_post_terms($id, [], 'category');
+}
+
+
