@@ -29,11 +29,11 @@ function getUrlVars(){
 }
 
 
-function iDealToggle() {
+function iDealToggle(data) {
    if ($('#frequency option:selected')[0].value === "E"){
 	   $('.wizard-footer-right > span > button').attr('onClick', 'removeIdealBtn();');
 	   $('.wizard-footer-right > span > button').text("Eenmalige machtiging");
-	   $('.wizard-footer-right').prepend('<span id="iDealBtn" role="button" tabindex="0"><button tabindex="-1" type="button" class="wizard-btn" style="background-color: rgb(238, 86, 45); border-color: rgb(238, 86, 45); color: white;" onclick="">iDeal</button></span>');
+	   $('.wizard-footer-right').prepend('<span id="iDealBtn" role="button" tabindex="0"><button tabindex="-1" type="button" class="wizard-btn" style="background-color: rgb(238, 86, 45); border-color: rgb(238, 86, 45); color: white;" onclick="idealTransaction('+data+')">iDeal</button></span>');
 	   checkExist = setInterval(function() {
 		   if ($('.wizard-footer-left > span > button').length) {
 			   $('.wizard-footer-left > span > button').attr('onClick', 'resetNextBtn();');
@@ -62,3 +62,6 @@ function removeIdealBtn() {
 	$('#iDealBtn').remove();
 }
 
+function idealTransaction(data) {
+	console.log(data);
+}
