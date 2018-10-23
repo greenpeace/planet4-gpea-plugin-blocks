@@ -22,7 +22,7 @@
                 <div class="form-group" v-bind:class="{ 'has-error': $v.machtigingType }">
                   <label>Ja ik steun Greenpeace{% if ( fields.suggested_frequency ) and not ( fields.allow_frequency_override ) %} <strong>{{ fields.suggested_frequency[1]|lower }}<strong>{% endif %}:</label>
                   {% if ( fields.allow_frequency_override ) %}
-                    <select class="form-control"  id="frequency" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()" v-on:change="iDealToggle()">
+                    <select class="form-control"  id="frequency" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()">
                       <option value="E">Eenmalig</option>
                       <option value="M">Maandelijks</option>
                       <!-- option value="K">Kwartaal</option>
@@ -92,6 +92,11 @@
                 'virtuelPageviewName': 'Donatie' // Vul hier de stapnaam in. E.g. Donatie, gegevens, adres, Bedankt
                 });
               }
+              if (this.$data.machtigingType === 'E'){
+              	if (!$('#iDealBtn').length ){
+					iDealToggle();
+				}
+			  };
               return isValid
             },
           }
@@ -605,7 +610,7 @@
               formBody.addClass('card');
               formBody.empty();
               formBody.append('<div class="card-body donation-card"></div>')
-              var cardBody = $('.donation-card');         
+              var cardBody = $('.donation-card');
               cardBody.append('<h2 class="card-title">{% if ( fields.thanktitle ) %}{{ fields.thanktitle }}{% endif %}</h2>');
               cardBody.append('<p class="card-text">{% if ( fields.thankdescription ) %}{{ fields.thankdescription }}{% endif %}</p>');
               buttons = $('#app button');
