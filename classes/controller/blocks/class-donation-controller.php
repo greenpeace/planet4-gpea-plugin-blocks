@@ -118,7 +118,7 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = array(
 				'label'         => __( 'GPNL | Donation', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/images/donation_form.png' ) . '" />',
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/images/icon_donation.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4NLBKS_ALLOWED_PAGETYPE,
 			);
