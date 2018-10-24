@@ -34,8 +34,8 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = array(
-				'label'         => __( 'Hide Page', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/images/icon_petition_colum_right.png' ) . '" />',
+				'label'         => __( 'GPNL | Hide Page', 'planet4-gpnl-blocks' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/images/icon_noindex.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4NLBKS_ALLOWED_PAGETYPE,
 			);
@@ -87,9 +87,11 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 add_action( 'wp_head', 'wp_no_robots' );
 
 function delete_tags() {
-	$id = $_POST['ID'];
-	wp_set_post_terms($id, [], 'post_tag');
-	wp_set_post_terms($id, [], 'category');
+	if (!empty($_POST)) {
+		$id = $_POST['ID'];
+		wp_set_post_terms($id, [], 'post_tag');
+		wp_set_post_terms($id, [], 'category');
+	}
 }
 // Run delete_tags_and_Categories on save of the page, to automatically remove taxonomies
 add_action( 'save_post', 'P4NLBKS\Controllers\Blocks\delete_tags_and_categories' );

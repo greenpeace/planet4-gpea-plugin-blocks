@@ -94,7 +94,8 @@
               }
               if (this.$data.machtigingType === 'E'){
               	if (!$('#iDealBtn').length ){
-					iDealToggle();
+              		console.log(this.$data);
+					iDealToggle(this.$data);
 				}
 			  };
               return isValid
@@ -585,7 +586,7 @@
             }
           },
         })
-        new Vue({
+        donationformVue = new Vue({
           el: '#app',
           data: {
             finalModel: {
