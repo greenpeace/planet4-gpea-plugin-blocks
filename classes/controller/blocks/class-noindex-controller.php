@@ -83,13 +83,51 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 	}
 }
 
+// Add the standard wp_no_robots to set de robots tag to 'noindex, follow'
 add_action( 'wp_head', 'wp_no_robots' );
-add_action( 'save_post', 'P4NLBKS\Controllers\Blocks\delete_tags' );
 
 function delete_tags() {
 	$id = $_POST['ID'];
 	wp_set_post_terms($id, [], 'post_tag');
 	wp_set_post_terms($id, [], 'category');
 }
+// Run delete_tags_and_Categories on save of the page, to automatically remove taxonomies
+add_action( 'save_post', 'P4NLBKS\Controllers\Blocks\delete_tags_and_categories' );
 
 
+
+
+function rel_canonical() {
+	if ( !is_singular() )
+		return;
+
+	global $wp_the_query;
+	if ( !$id = $wp_the_query->get_queried_object_id() )
+		return;
+
+	$link = get_permalink( $id );
+	echo "<link rel='canonical' href='$link' />\n";
+}
+
+// A copy of rel_canonical but to allow an override on a custom tag
+function rel_canonical_override()
+{
+	if( !is_singular() )
+		return;
+
+	global $wp_the_query;
+	if( !$id = $wp_the_query->get_queried_object_id() )
+		return;
+
+	$link = get_permalink(wp_get_post_parent_id( $id ));
+
+	echo "<link rel='canonical' href='" . esc_url( $link ) . "' />\n";
+}
+
+if( function_exists( 'rel_canonical' ) )
+{
+	// remove the default WordPress canonical URL function
+	remove_action( 'wp_head', 'rel_canonical' );
+}
+// replace the default WordPress canonical URL function with your own
+add_action( 'wp_head', 'P4NLBKS\Controllers\Blocks\rel_canonical_override' );
