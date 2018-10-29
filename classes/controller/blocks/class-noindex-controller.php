@@ -2,7 +2,7 @@
 
 namespace P4NLBKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Petition_Controller' ) ) {
+if ( ! class_exists( 'No_Index_Controller' ) ) {
 
 	/**
 	 * Class No_Index_Controller
@@ -11,11 +11,20 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 	 */
 	class No_Index_Controller extends Controller {
 
+
 		/** @const string BLOCK_NAME */
 		const BLOCK_NAME = 'noindex';
 
+		public function load() {
+			parent::load();
+			global $post;
+			$test = $post;
+			add_action( 'save_post', [ $this, 'delete_tags_and_categories' ] );
+		}
+
+
 		/**
-		 * Shortcode UI setup for the petitionblock shortcode.
+		 Shortcode UI setup for the noindexblock shortcode.
 		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
 		 */
 		public function prepare_fields() {
@@ -29,9 +38,6 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				),
 			);
 
-
-
-
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = array(
 				'label'         => __( 'GPNL | Hide Page', 'planet4-gpnl-blocks' ),
@@ -42,14 +48,13 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
 
+
+
+
 		}
 
-
-
-
-
 		/**
-		 * Callback for the shortcake_twocolumn shortcode.
+		 * Callback for the shortcake_noindex shortcode.
 		 * It renders the shortcode based on supplied attributes.
 		 *
 		 * @param array  $fields Array of fields that are to be used in the template.
@@ -80,56 +85,18 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 
 			return ob_get_clean();
 		}
+
+		public function delete_tags_and_categories() {
+			if (!empty($_POST)) {
+				$id = $_POST['post_ID'];
+				if ( has_shortcode($_POST['content'], 'shortcake_noindex') ) {
+					wp_set_post_terms($id, [], 'post_tag');
+					wp_set_post_terms($id, [], 'category');
+//					add_post_meta( $id, 'my_key', 47 );
+				}
+			}
+		}
+
 	}
 }
 
-// Add the standard wp_no_robots to set de robots tag to 'noindex, follow'
-add_action( 'wp_head', 'wp_no_robots' );
-
-function delete_tags() {
-	if (!empty($_POST)) {
-		$id = $_POST['ID'];
-		wp_set_post_terms($id, [], 'post_tag');
-		wp_set_post_terms($id, [], 'category');
-	}
-}
-// Run delete_tags_and_Categories on save of the page, to automatically remove taxonomies
-add_action( 'save_post', 'P4NLBKS\Controllers\Blocks\delete_tags_and_categories' );
-
-
-
-
-function rel_canonical() {
-	if ( !is_singular() )
-		return;
-
-	global $wp_the_query;
-	if ( !$id = $wp_the_query->get_queried_object_id() )
-		return;
-
-	$link = get_permalink( $id );
-	echo "<link rel='canonical' href='$link' />\n";
-}
-
-// A copy of rel_canonical but to allow an override on a custom tag
-function rel_canonical_override()
-{
-	if( !is_singular() )
-		return;
-
-	global $wp_the_query;
-	if( !$id = $wp_the_query->get_queried_object_id() )
-		return;
-
-	$link = get_permalink(wp_get_post_parent_id( $id ));
-
-	echo "<link rel='canonical' href='" . esc_url( $link ) . "' />\n";
-}
-
-if( function_exists( 'rel_canonical' ) )
-{
-	// remove the default WordPress canonical URL function
-	remove_action( 'wp_head', 'rel_canonical' );
-}
-// replace the default WordPress canonical URL function with your own
-add_action( 'wp_head', 'P4NLBKS\Controllers\Blocks\rel_canonical_override' );
