@@ -121,15 +121,15 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'GP',
-							'label' => __( 'Greenpeace' ),
+							'label' => ( 'Greenpeace' ),
 						],
 						[
 							'value' => 'SB',
-							'label' => __( 'Social Blue' ),
+							'label' => ( 'Social Blue' ),
 						],
 						[
 							'value' => 'JA',
-							'label' => __( 'Jalt' ),
+							'label' => ( 'Jalt' ),
 						],
 					],
 				),
@@ -139,6 +139,27 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'type'  => 'text',
 					'description' => 'Vul hier de _apRef uit de Social Blue pixel bedankpagina in',
 				),
+				array(
+					'label' => __( 'Gebruik email campaign?', 'planet4-gpnl-blocks' ),
+					'attr'  => 'mailto',
+					'type'  => 'checkbox',
+					'description' => 'Let op! Het hangt volledig af van de instellingen van de computer van de bezoeker af of dit wel of niet zal werken. Het is echter even de beste optie.'
+					),
+				array(
+				    'label' => __( 'Email aan', 'planet4-gpnl-blocks' ),
+					'attr'  => 'to',
+					'type'  => 'email',
+					),
+				array(
+					'label' => __( 'Email onderwerp', 'planet4-gpnl-blocks' ),
+					'attr'  => 'subject',
+					'type'  => 'text',
+					),
+				array(
+					'label' => __( 'Email body', 'planet4-gpnl-blocks' ),
+					'attr'  => 'body',
+					'type'  => 'textarea',
+					),
 			);
 
 			// Define the Shortcode UI arguments.
