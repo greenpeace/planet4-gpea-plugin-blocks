@@ -12,7 +12,8 @@
           maxLength,
           email,
           numeric,
-          alphaNum
+          alphaNum,
+          requiredIf
         } = window.validators
         Vue.use(VueFormWizard)
 
@@ -195,7 +196,8 @@
               rekeningnummer: ''
             }
           },
-			validations: {
+			validations () {
+          	return{
 				initialen: {},
 				voornaam: {
 					required
@@ -215,18 +217,21 @@
 					maxLength: maxLength(10)
 				},
 				rekeningnummer: {
-					required,
+					requiredIf: requiredIf(function () {
+								console.log(donationformVue.ideal);
+								return !donationformVue.ideal;
+							  }),
 					alphaNum
 				},
 
+				form: ['initialen', 'voornaam', 'tussenvoegsel', 'achternaam', 'geslacht', 'email', 'telefoonnummer', 'rekeningnummer']
 
-            form: ['initialen', 'voornaam', 'tussenvoegsel', 'achternaam', 'geslacht', 'email', 'telefoonnummer', 'rekeningnummer']
+          	}
           },
+
           methods: {
-            validate() {
-            	if (donationformVue.ideal){
-            		console.log(this);
-				}
+            validate(ideal) {
+           	  ideal ? donationformVue.ideal = true : donationformVue.ideal = false;
               this.$v.form.$touch();
               var isValid = !this.$v.form.$invalid;
               this.$emit('on-validate', this.$data, isValid);
@@ -693,9 +698,9 @@
               })
             },
 
-            validateStep(name) {
+            validateStep(name, ideal) {
               var refToValidate = this.$refs[name];
-              return refToValidate.validate();
+              return refToValidate.validate(ideal);
             },
 
             mergePartialModels(model, isValid) {
