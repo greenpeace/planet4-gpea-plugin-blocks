@@ -21,8 +21,10 @@
               <div>
                 <div class="form-group" v-bind:class="{ 'has-error': $v.machtigingType }">
                   <label>Ja ik steun Greenpeace{% if ( fields.suggested_frequency ) and not ( fields.allow_frequency_override ) %} <strong>{{ fields.suggested_frequency[1]|lower }}<strong>{% endif %}:</label>
-                  {% if ( fields.allow_frequency_override ) %}
-                    <select class="form-control"  id="frequency" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()">
+
+                    <select class="form-control"  id="frequency"
+						{% if not ( fields.allow_frequency_override ) %} hidden {% endif %}
+					v-model.trim="machtigingType" @input="$v.machtigingType.$touch()">
                       <option value="E">Eenmalig</option>
                       <option value="M">Maandelijks</option>
                       <!-- option value="K">Kwartaal</option>
@@ -30,7 +32,7 @@
                       <option value="J">Jaar</option-->
                     </select>
                     <span class="help-block" v-if="$v.machtigingType.$error && !$v.machtigingType.required">Periodiek is verplicht</span>
-                  {% endif %}
+
                 </div>
 
                 <div class="form-row">
@@ -193,33 +195,38 @@
               rekeningnummer: ''
             }
           },
-          validations: {
-            initialen: {},
-            voornaam: {
-              required
-            },
-            tussenvoegsel: {},
-            achternaam: {
-              required
-            },
-            geslacht: {},
-            email: {
-              required,
-              email
-            },
-            telefoonnummer: {
-              numeric,
-              minLength: minLength(10),
-              maxLength: maxLength(10)
-            },
-            rekeningnummer: {
-              required,
-              alphaNum
-            },
+			validations: {
+				initialen: {},
+				voornaam: {
+					required
+				},
+				tussenvoegsel: {},
+				achternaam: {
+					required
+				},
+				geslacht: {},
+				email: {
+					required,
+					email
+				},
+				telefoonnummer: {
+					numeric,
+					minLength: minLength(10),
+					maxLength: maxLength(10)
+				},
+				rekeningnummer: {
+					required,
+					alphaNum
+				},
+
+
             form: ['initialen', 'voornaam', 'tussenvoegsel', 'achternaam', 'geslacht', 'email', 'telefoonnummer', 'rekeningnummer']
           },
           methods: {
             validate() {
+            	if (donationformVue.ideal){
+            		console.log(this);
+				}
               this.$v.form.$touch();
               var isValid = !this.$v.form.$invalid;
               this.$emit('on-validate', this.$data, isValid);

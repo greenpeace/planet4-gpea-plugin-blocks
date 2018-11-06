@@ -29,11 +29,15 @@ function getUrlVars(){
 }
 
 
-function iDealToggle(data) {
+function iDealToggle() {
    if ($('#frequency option:selected')[0].value === "E"){
 	   $('.wizard-footer-right > span > button').attr('onClick', 'removeIdealBtn();');
 	   $('.wizard-footer-right > span > button').text("Eenmalige machtiging");
+<<<<<<< Updated upstream
 	   $('.wizard-footer-right').prepend('<span id="iDealBtn" role="button" tabindex="0"><button tabindex="-1" type="button" class="wizard-btn" style="background-color: rgb(238, 86, 45); border-color: rgb(238, 86, 45); color: white;" onclick="donationformVue.validateStep(\'step2\')">iDeal</button></span>');
+=======
+	   $('.wizard-footer-right').prepend('<span id="iDealBtn" role="button" tabindex="0"><button tabindex="-1" type="button" class="wizard-btn" style="background-color: rgb(238, 86, 45); border-color: rgb(238, 86, 45); color: white;" onclick="idealTransaction()">iDeal</button></span>');
+>>>>>>> Stashed changes
 	   checkExist = setInterval(function() {
 		   if ($('.wizard-footer-left > span > button').length) {
 			   $('.wizard-footer-left > span > button').attr('onClick', 'resetNextBtn();');
@@ -62,7 +66,8 @@ function removeIdealBtn() {
 	$('#iDealBtn').remove();
 }
 
-function idealTransaction(data) {
-	data = donationformVue._data.finalModel
-	console.log(data.marketingcode);
+function idealTransaction() {
+	donationformVue.ideal = true;
+isValid = donationformVue.validateStep('step2');
+	// console.log(donationformVue.finalModel);
 }

@@ -77,14 +77,14 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 							'value' => 'M',
 							'label' => __( 'Maandelijks' ),
 						],
-						[
-							'value' => 'H',
-							'label' => __( 'Halfjaarlijks' ),
-						],
-						[
-							'value' => 'J',
-							'label' => __( 'Jaarlijks' ),
-						],
+//						[
+//							'value' => 'H',
+//							'label' => __( 'Halfjaarlijks' ),
+//						],
+//						[
+//							'value' => 'J',
+//							'label' => __( 'Jaarlijks' ),
+//						],
 					],
 				),
 				array(

@@ -179,7 +179,7 @@ html {
 }
 
 @-ms-viewport {
-    width: device-width
+    width: device-width;
 }
 
 article,
@@ -3289,4 +3289,7 @@ pre .key {
     }
 }
 
-/*# sourceMappingURL=maps/style.css.map */
+.card {
+	background-color: #323842;
+	color: white;
+}
