@@ -51,6 +51,11 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'value' => 'TEKEN NU',
 				),
 				array(
+					'label' => __( 'Link naar actievoorwaarden', 'planet4-gpnl-blocks' ),
+					'attr'  => 'campaignpolicy',
+					'type'  => 'text',
+				),
+				array(
 					'label' => __( 'Bedankt titel', 'planet4-gpnl-blocks' ),
 					'attr'  => 'thankttitle',
 					'type'  => 'text',
@@ -139,33 +144,33 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'type'  => 'text',
 					'description' => 'Vul hier de _apRef uit de Social Blue pixel bedankpagina in',
 				),
-				array(
-					'label' => __( 'Gebruik email campaign?', 'planet4-gpnl-blocks' ),
-					'attr'  => 'mailto',
-					'type'  => 'checkbox',
-					'description' => 'Let op! Het hangt volledig af van de instellingen van de computer van de bezoeker af of dit wel of niet zal werken. Het is echter voorlopige de beste optie.'
-					),
-				array(
-				    'label' => __( 'Email aan', 'planet4-gpnl-blocks' ),
-					'attr'  => 'to',
-					'type'  => 'email',
-					),
-				array(
-					'label' => __( 'Email tracker', 'planet4-gpnl-blocks' ),
-					'attr'  => 'bcc',
-					'type'  => 'email',
-					'value' => 'vuiletracker@groenevrede.nl',
-				),
-				array(
-					'label' => __( 'Email onderwerp', 'planet4-gpnl-blocks' ),
-					'attr'  => 'subject',
-					'type'  => 'text',
-					),
-				array(
-					'label' => __( 'Email body', 'planet4-gpnl-blocks' ),
-					'attr'  => 'body',
-					'type'  => 'textarea',
-					),
+//				array(
+//					'label' => __( 'Gebruik email campaign?', 'planet4-gpnl-blocks' ),
+//					'attr'  => 'mailto',
+//					'type'  => 'checkbox',
+//					'description' => 'Let op! Het hangt volledig af van de instellingen van de computer van de bezoeker af of dit wel of niet zal werken. Het is echter voorlopige de beste optie.'
+//					),
+//				array(
+//				    'label' => __( 'Email aan', 'planet4-gpnl-blocks' ),
+//					'attr'  => 'to',
+//					'type'  => 'email',
+//					),
+//				array(
+//					'label' => __( 'Email tracker', 'planet4-gpnl-blocks' ),
+//					'attr'  => 'bcc',
+//					'type'  => 'email',
+//					'value' => 'vuiletracker@groenevrede.nl',
+//				),
+//				array(
+//					'label' => __( 'Email onderwerp', 'planet4-gpnl-blocks' ),
+//					'attr'  => 'subject',
+//					'type'  => 'text',
+//					),
+//				array(
+//					'label' => __( 'Email body', 'planet4-gpnl-blocks' ),
+//					'attr'  => 'body',
+//					'type'  => 'textarea',
+//					),
 			);
 
 			// Define the Shortcode UI arguments.
@@ -243,6 +248,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'subtitle'           => '',
 					'consent'            => '',
 					'sign'               => '',
+					'campaignpolicy'     => '',
 					'thanktext'          => '',
 					'donatebuttontext'   => '',
 					'donatebuttonlink'   => '',
@@ -258,11 +264,11 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'alt_text'           => '',
 					'ad_campaign'        => '',
 					'apref'              => '',
-					'mailto'             => '',
-					'to'                 => '',
-					'bcc'                 => '',
-					'subject'            => '',
-					'body'               => '',
+//					'mailto'             => '',
+//					'to'                 => '',
+//					'bcc'                => '',
+//					'subject'            => '',
+//					'body'               => '',
 				),
 				$fields,
 				$shortcode_tag
@@ -285,10 +291,10 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 			$fields['current_url']     = $this->current_url( $_SERVER );
 
 
-			$fields['to']       = rawurlencode( str_replace( ' ', '', strip_tags( $fields['to'] ) ) );
-			$fields['bcc']      = rawurlencode( str_replace( ' ', '', strip_tags( $fields['bcc'] ) ) );
-			$fields['subject']  = rawurlencode( strip_tags( $fields['subject'] ) );
-			$fields['body']    = rawurlencode( strip_tags( $fields['body'] ) );
+//			$fields['to']      = rawurlencode( str_replace( ' ', '', strip_tags( $fields['to'] ) ) );
+//			$fields['bcc']     = rawurlencode( str_replace( ' ', '', strip_tags( $fields['bcc'] ) ) );
+//			$fields['subject'] = rawurlencode( strip_tags( $fields['subject'] ) );
+//			$fields['body']    = rawurlencode( strip_tags( $fields['body'] ) );
 
 			$data = [
 				'fields' => $fields,
@@ -325,7 +331,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 						'ga_action'          => $fields['ga_action'],
 						'ad_campaign'        => $fields['ad_campaign'],
 						'apref'              => $fields['apref'],
-						'mailto'             => 'mailto:' . $fields['to'] . '?bcc=' . $fields['bcc'] . '&subject=' . $fields['subject'] . '&body=' . $fields['body'],
+//						'mailto'             => 'mailto:' . $fields['to'] . '?bcc=' . $fields['bcc'] . '&subject=' . $fields['subject'] . '&body=' . $fields['body'],
 					)
 				);
 			// Shortcode callbacks must return content, hence, output buffering here.
