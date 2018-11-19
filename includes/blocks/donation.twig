@@ -197,40 +197,74 @@
             }
           },
 			validations () {
-          	return{
-				initialen: {},
-				voornaam: {
-					required
-				},
-				tussenvoegsel: {},
-				achternaam: {
-					required
-				},
-				geslacht: {},
-				email: {
-					required,
-					email
-				},
-				telefoonnummer: {
-					numeric,
-					minLength: minLength(10),
-					maxLength: maxLength(10)
-				},
-				rekeningnummer: {
-					requiredIf: requiredIf(function () {
-								console.log(donationformVue.ideal);
-								return !donationformVue.ideal;
-							  }),
-					alphaNum
-				},
+          	if (true) {
+          		return{
+					initialen: {},
+					voornaam: {
+						required
+					},
+					tussenvoegsel: {},
+					achternaam: {
+						required
+					},
+					geslacht: {},
+					email: {
+						required,
+						email
+					},
+					telefoonnummer: {
+						numeric,
+						minLength: minLength(10),
+						maxLength: maxLength(10)
+					},
+					rekeningnummer: {
+						requiredIf: requiredIf(function () {
+							console.log(donationformVue.ideal);
+							return !donationformVue.ideal;
+						}),
+						alphaNum
+					},
 
-				form: ['initialen', 'voornaam', 'tussenvoegsel', 'achternaam', 'geslacht', 'email', 'telefoonnummer', 'rekeningnummer']
+					form: ['initialen', 'voornaam', 'tussenvoegsel', 'achternaam', 'geslacht', 'email', 'telefoonnummer', 'rekeningnummer']
 
-          	}
+				}
+			} else {
+				return{
+					initialen: {},
+					voornaam: {
+						required
+					},
+					tussenvoegsel: {},
+					achternaam: {
+						required
+					},
+					geslacht: {},
+					email: {
+						required,
+						email
+					},
+					telefoonnummer: {
+						numeric,
+						minLength: minLength(10),
+						maxLength: maxLength(10)
+					},
+					rekeningnummer: {
+						requiredIf: requiredIf(function () {
+							console.log(donationformVue.ideal);
+							return !donationformVue.ideal;
+						}),
+						alphaNum
+					},
+
+					form: ['initialen', 'voornaam', 'tussenvoegsel', 'achternaam', 'geslacht', 'email', 'telefoonnummer', 'rekeningnummer']
+
+				}
+			}
           },
 
           methods: {
             validate(ideal) {
+              this.$v.form.$reset();
            	  ideal ? donationformVue.ideal = true : donationformVue.ideal = false;
               this.$v.form.$touch();
               var isValid = !this.$v.form.$invalid;
