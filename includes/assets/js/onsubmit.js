@@ -48,9 +48,11 @@ $('#gpnl-petitionform').on('submit', function () {
 
             // flip the card, positionattribute flips to make sure no problems arises with different lengths of the front and back of the card, finally hide the front
             flip();
-            // openMailTarget(petition_form_object.mailto);
-        },
-        error: function(jqXHR, textStatus, errorThrown, data, url){
+			if (petition_form_object.mailcampaign === "true"){
+				openMailTarget(petition_form_object.maillink);
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown, data, url){
             console.log("o_o");
             console.log('ERRORS: ' + textStatus + ': ' + errorThrown);
             // If the backend send an error, hide the thank element and show an error urging to try again
