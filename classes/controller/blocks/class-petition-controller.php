@@ -57,7 +57,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				),
 				array(
 					'label' => __( 'Bedankt titel', 'planet4-gpnl-blocks' ),
-					'attr'  => 'thankttitle',
+					'attr'  => 'thanktitle',
 					'type'  => 'text',
 					'value' => 'Bedankt voor je handtekening!',
 				),
@@ -126,15 +126,15 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'GP',
-							'label' => ( 'Greenpeace' ),
+							'label' => 'Greenpeace',
 						],
 						[
 							'value' => 'SB',
-							'label' => ( 'Social Blue' ),
+							'label' => 'Social Blue',
 						],
 						[
 							'value' => 'JA',
-							'label' => ( 'Jalt' ),
+							'label' => 'Jalt',
 						],
 					],
 				),
@@ -149,13 +149,13 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'attr'        => 'mailcampaign',
 					'type'        => 'checkbox',
 					'description' => 'Let op! Het hangt volledig af van de instellingen van de computer van de bezoeker af of dit wel of niet zal werken. Het is echter voorlopige de beste optie.',
-					),
+				),
 				array(
-				    'label'       => __( 'Email aan', 'planet4-gpnl-blocks' ),
+					'label'       => __( 'Email aan', 'planet4-gpnl-blocks' ),
 					'attr'        => 'to',
 					'type'        => 'email',
-				    'description' => 'Wil je meerdere mailtargets? Scheid deze door een komma, zonder omliggende spaties.',
-					),
+					'description' => 'Wil je meerdere mailtargets? Scheid deze door een komma, zonder omliggende spaties.',
+				),
 				array(
 					'label' => __( 'Email tracker', 'planet4-gpnl-blocks' ),
 					'attr'  => 'bcc',
@@ -166,12 +166,12 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'label' => __( 'Email onderwerp', 'planet4-gpnl-blocks' ),
 					'attr'  => 'subject',
 					'type'  => 'text',
-					),
+				),
 				array(
 					'label' => __( 'Email body', 'planet4-gpnl-blocks' ),
 					'attr'  => 'body',
 					'type'  => 'textarea',
-					),
+				),
 			);
 
 			// Define the Shortcode UI arguments.
@@ -191,7 +191,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 		 * @param $server The $_SERVER superglobals array.
 		 * @return string The URL.
 		 */
-		function current_url( $server ) {
+		private function current_url( $server ): string {
 			//Figure out whether we are using http or https.
 			$http = 'http';
 			//If HTTPS is present in our $_SERVER array, the URL should
@@ -208,9 +208,16 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 			return $http . '://' . htmlentities( $host ) . htmlentities( $request_uri );
 		}
 
-		function get_social_accounts( $social_menu ) : array {
+		/**
+		 * Get the defined menu with social accounts for usage in sharing buttons
+		 *
+		 * @param $social_menu
+		 *
+		 * @return array
+		 */
+		private function get_social_accounts( $social_menu ) : array {
 			$social_accounts = [];
-			if ( isset( $social_menu ) ) {
+			if ( null !== $social_menu ) {
 
 				$brands = [
 					'facebook',
@@ -222,7 +229,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					$url_parts = explode( '/', rtrim( $social_menu_item->url, '/' ) );
 					foreach ( $brands as $brand ) {
 						if ( false !== strpos( $social_menu_item->url, $brand ) ) {
-							$social_accounts[ $brand ] = count( $url_parts ) > 0 ? $url_parts[ count( $url_parts ) - 1 ] : '';
+							$social_accounts[ $brand ] = \count( $url_parts ) > 0 ? $url_parts[ \count( $url_parts ) - 1 ] : '';
 						}
 					}
 				}
@@ -250,6 +257,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'consent'            => '',
 					'sign'               => '',
 					'campaignpolicy'     => '',
+					'thanktitle'         => '',
 					'thanktext'          => '',
 					'donatebuttontext'   => '',
 					'donatebuttonlink'   => '',
@@ -275,15 +283,12 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				$shortcode_tag
 			);
 			// If an image is selected
-			if ( isset( $fields['image'] ) ) {
-				// If the selected image is succesfully found
-				if ( $image = wp_get_attachment_image_src( $fields['image'], 'full' ) ) {
-					// load the image from the library
-					$fields['image']        = $image[0];
-					$fields['alt_text']     = get_post_meta( $fields['image'], '_wp_attachment_image_alt', true );
-					$fields['image_srcset'] = wp_get_attachment_image_srcset( $fields['image'], 'full', wp_get_attachment_metadata( $fields['image'] ) );
-					$fields['image_sizes']  = wp_calculate_image_sizes( 'full', null, null, $fields['image'] );
-				}
+			if ( isset( $fields['image'] ) && $image = wp_get_attachment_image_src( $fields['image'], 'full' ) ) {
+				// load the image from the library
+				$fields['image']        = $image[0];
+				$fields['alt_text']     = get_post_meta( $fields['image'], '_wp_attachment_image_alt', true );
+				$fields['image_srcset'] = wp_get_attachment_image_srcset( $fields['image'], 'full', wp_get_attachment_metadata( $fields['image'] ) );
+				$fields['image_sizes']  = wp_calculate_image_sizes( 'full', null, null, $fields['image'] );
 			}
 
 			// Fetch the data from the social accounts and the current url for sharing buttons
@@ -291,11 +296,10 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 			$fields['social_accounts'] = $this->get_social_accounts( $social_menu );
 			$fields['current_url']     = $this->current_url( $_SERVER );
 
-
-			$fields['to']      = rawurlencode( strip_tags( $fields['to'] ) );
-			$fields['bcc']     = rawurlencode( strip_tags( $fields['bcc'] ) );
-			$fields['subject'] = rawurlencode( strip_tags( $fields['subject'] ) );
-			$fields['body']    = rawurlencode( strip_tags( $fields['body'] ) );
+			$fields['to']      = rawurlencode( wp_strip_all_tags( $fields['to'] ) );
+			$fields['bcc']     = rawurlencode( wp_strip_all_tags( $fields['bcc'] ) );
+			$fields['subject'] = rawurlencode( wp_strip_all_tags( $fields['subject'] ) );
+			$fields['body']    = rawurlencode( wp_strip_all_tags( $fields['body'] ) );
 
 			$data = [
 				'fields' => $fields,
@@ -303,21 +307,21 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 
 			// Include de approptiate scripts for ad campaign tracking
 			if ( 'SB' === $fields['ad_campaign'] ) {
-				wp_enqueue_script( 'social-blue-landing-script', P4NLBKS_ASSETS_DIR . 'js/social-blue-landing.js' );
+				wp_enqueue_script( 'social-blue-landing-script', P4NLBKS_ASSETS_DIR . 'js/social-blue-landing.js', [], '1.0.0', true );
 			} elseif ( 'JA' === $fields['ad_campaign'] ) {
-				wp_enqueue_script( 'jalt-landing-script', P4NLBKS_ASSETS_DIR . 'js/jalt-landing.js' );
+				wp_enqueue_script( 'jalt-landing-script', P4NLBKS_ASSETS_DIR . 'js/jalt-landing.js', [], '1.0.0', true );
 			}
 
 			//  Include the script and styling for the counter
-			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/onload.js', array( 'jquery' ), null, true );
-			wp_enqueue_script( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js', array( 'jquery' ), null, true );
-			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.min.css' );
+			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/onload.js', array( 'jquery' ), '1.0.0', true );
+			wp_enqueue_script( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js', array( 'jquery' ), '1.0.0', true );
+			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.min.css', [], '1.0.0' );
 
 			/* ========================
 				C S S / JS
 			   ======================== */
 				// Enqueue the script:
-				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/onsubmit.js', array( 'jquery' ), null, true );
+				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/onsubmit.js', array( 'jquery' ), '1.0.0', true );
 
 				// Pass options to frontend code
 				wp_localize_script(
@@ -352,23 +356,30 @@ function petition_form_process() {
 	check_ajax_referer( 'GPNL_Petitions', 'nonce' );
 
 	// get petition specific codes for processing in the database and sanitize
-	$marketingcode  = htmlspecialchars( strip_tags( $_POST['marketingcode'] ) );
-	$literatuurcode = htmlspecialchars( strip_tags( $_POST['literaturecode'] ) );
+	$marketingcode  = htmlspecialchars( wp_strip_all_tags( $_POST['marketingcode'] ) );
+	$literatuurcode = htmlspecialchars( wp_strip_all_tags( $_POST['literaturecode'] ) );
 
 	// Get and sanitize the formdata
-	$naam  = strip_tags( $_POST['name'] );
-	$email = strip_tags( $_POST['mail'] );
+	$naam  = wp_strip_all_tags( $_POST['name'] );
+	$email = wp_strip_all_tags( $_POST['mail'] );
+
 	// Accept only numeric characters in the phonenumber
-	$phonenumber = preg_replace( '/[^0-9]/', '', strip_tags( $_POST['phone'] ) );
-	$consent     = htmlspecialchars( strip_tags( $_POST['consent'] ) );
-
+	$phonenumber = preg_replace( '/[^0-9]/', '', wp_strip_all_tags( $_POST['phone'] ) );
+	// Remove countrycode from phonenumber
+	if ( \strlen( $phonenumber ) === 13 && ! strpos( $phonenumber, '0031' ) ) {
+		$phonenumber = substr( $phonenumber, 2 );
+	}
+	if ( \strlen( $phonenumber ) === 11 && ! strpos( $phonenumber, '31' ) ) {
+		$phonenumber = str_replace( '31', '0', $phonenumber );
+	}
 	// Accept only phonenumbers of 10 characters long
-	$phonenumber = ( strlen( $phonenumber ) === 10 ? $phonenumber : '' );
-	// Flip the consent checkbox
-	$consent = ( 'on' == $consent ? 0 : 1 );
+	$phonenumber = ( \strlen( $phonenumber ) === 10 ? $phonenumber : '' );
 
-	$baseurl = 'https://www.mygreenpeace.nl/registreren/pixel.aspx';
-	// $baseurl    = 'p4.local';
+	// Flip the consent checkbox
+	$consent = htmlspecialchars( wp_strip_all_tags( $_POST['consent'] ) );
+	$consent = ( 'on' === $consent ? 0 : 1 );
+
+	$baseurl     = 'https://www.mygreenpeace.nl/registreren/pixel.aspx';
 	$querystring = '?source=' . $marketingcode . '&per=' . $literatuurcode . '&fn=' . $naam . '&email=' . $email . '&tel=' . $phonenumber . '&stop=' . $consent;
 
 	// initiate a cUrl request to the database
