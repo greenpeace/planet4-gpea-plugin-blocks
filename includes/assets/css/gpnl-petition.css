@@ -79,8 +79,11 @@ input[type=checkbox].gpnl-petition-checkbox {
     opacity: 1;
     margin-left: 0;
 }
-
 .gpnl-petition-checkbox-label {
+	margin-bottom: 0;
+}
+
+.gpnl-petition-checkbox-label small {
     margin-left: 1.5rem;
 }
 
@@ -130,6 +133,14 @@ input[type=checkbox].gpnl-petition-checkbox {
     margin-bottom: .5rem;
 }
 
+.optin{
+	margin-bottom: 0;
+}
+
 h2.card-title{
     line-height: 1;
+}
+
+.signBtn{
+	margin-bottom: 1rem;
 }
