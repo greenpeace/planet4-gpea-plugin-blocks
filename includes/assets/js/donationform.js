@@ -75,6 +75,7 @@ Vue.use(VueFormWizard)
     },
     methods: {
       validate() {
+        this.$v.form.$reset();
         this.$v.form.$touch();
         var isValid = !this.$v.form.$invalid;
         this.$emit('on-validate', this.$data, isValid);
@@ -221,6 +222,7 @@ Vue.use(VueFormWizard)
     },
     methods: {
       validate() {
+        this.$v.form.$reset();
         this.$v.form.$touch();
         var isValid = !this.$v.form.$invalid;
         this.$emit('on-validate', this.$data, isValid);
@@ -537,6 +539,7 @@ Vue.use(VueFormWizard)
     },
     methods: {
       validate() {
+        this.$v.form.$reset();
         this.$v.form.$touch();
         var isValid = !this.$v.form.$invalid;
         this.$emit('on-validate', this.$data, isValid);
@@ -586,6 +589,96 @@ Vue.use(VueFormWizard)
       }
     },
   })
+
+Vue.component('ideal', {
+    template: `
+        <div>
+          <div class="form-group" v-bind:class="{ 'has-error': $v.machtigingType }">
+            <label>
+            	Ja ik steun Greenpeace <strong>eenmalig</strong>:
+            </label>
+
+          <div class="form-row">
+            <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.bedrag.$error }">
+              <label>Met een bedrag van:</label>
+              <div class="radio-list">
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag1" id="bedrag1" v-bind:value="formconfig.amount1">
+                <label class="form-check-label form-control left" for="bedrag1">&euro;{{ formconfig.amount1 }}</label>
+
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag2" id="bedrag2" v-bind:value="formconfig.amount2" checked="checked">
+                <label class="form-check-label form-control" for="bedrag2">&euro;{{ formconfig.amount2 }}</label>
+
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag3" id="bedrag3" v-bind:value="formconfig.amount3">
+                <label class="form-check-label form-control" for="bedrag3">&euro;{{ formconfig.amount3 }}</label>
+              </div>
+            </div>
+
+            <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.bedrag.$error }">
+              <label>Ander bedrag:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">&euro;</div>
+                </div>
+                <input class="form-control" v-model.trim="bedrag" @input="$v.bedrag.$touch()">
+                <span class="help-block" v-if="$v.bedrag.$error && !$v.bedrag.required">Bedrag is verplicht</span>
+                <span class="help-block" v-if="$v.bedrag.$error && $v.bedrag.required && !$v.bedrag.numeric">Bedrag moet een nummer zijn</span>
+                <span class="help-block" v-if="$v.bedrag.$error && $v.bedrag.required && $v.bedrag.numeric && !$v.bedrag.between">Het minimale donatiebedrag is {{ formconfig.min_amount }} euro</span>
+              </div>
+            </div>
+          </div>
+          
+          
+          <div class="form-row">
+            <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.email.$error }">
+              <!-- label>Email</label-->
+              <input class="form-control" v-model.trim="email" @input="$v.email.$touch()" placeholder="E-mail*">
+              <span class="help-block" v-if="$v.email.$error && !$v.email.required">E-mail is verplicht</span>
+              <span class="help-block" v-if="$v.email.$error && !$v.email.email">Dit is geen valide e-mail adres</span>
+            </div>
+          </div>
+        </div>`,
+    data() {
+        return {
+            machtigingType: 'E',
+            bedrag: formconfig.suggested_amount,
+            email: '',
+        }
+    },
+    validations: {
+        bedrag: {
+            required,
+            numeric,
+            between: between(formconfig.min_amount, 999)
+        },
+        email: {
+            required,
+            email
+        },
+        form: [, 'bedrag', 'email' ]
+    },
+    methods: {
+        validate() {
+            this.$v.form.$reset();
+            this.$v.form.$touch();
+            var isValid = !this.$v.form.$invalid;
+            this.$emit('on-validate', this.$data, isValid);
+            if(isValid){
+                // Push step to tag manager
+                dataLayer.push({
+                    'event': 'virtualPageViewDonatie',
+                    'virtualPageviewStep': 'Stap 1', //Vul hier de stap in. E.g. Stap 1, Stap 2, Stap 3, Bedankt
+                    'virtuelPageviewName': 'Donatie' // Vul hier de stapnaam in. E.g. Donatie, gegevens, adres, Bedankt
+                });
+            }
+            return isValid
+        }
+    }
+})
+
+Vue.component('test', {
+    template: '<p>Hallo, dit is een testbericht</p>'
+})
+
   donationformVue = new Vue({
     el: '#app',
     data: {
@@ -600,8 +693,17 @@ Vue.use(VueFormWizard)
       },
     },
     methods: {
-      onComplete: function() {
-        this.submit();
+      onComplete: function(ideal) {
+        inputs = $('#app input');
+        buttons = $('#app button');
+        this.disableFormElements(inputs);
+        this.disableFormElements(buttons);
+        if (ideal){
+          alert("IDEAL");
+        }
+        else{
+            this.submit();
+        }
       },
 
       onSucces: function(result) {
@@ -663,10 +765,7 @@ Vue.use(VueFormWizard)
       },
 
       submit: function () {
-          inputs = $('#app input');
-          buttons = $('#app button');
-          this.disableFormElements(inputs);
-          this.disableFormElements(buttons);
+
           this.result.msg = '';
           this.result.hasError = false;
           this.$http.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register", this.finalModel)
@@ -735,7 +834,6 @@ function removeIdealBtn() {
     donationformVue.ideal = false;
 	$('#iDealBtn').remove();
 }
-
 function idealTransaction() {
 	donationformVue.ideal = true;
 	isValid = donationformVue.validateStep('step2', true);
