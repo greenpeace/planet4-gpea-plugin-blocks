@@ -183,6 +183,8 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'allow_frequency_override' => $fields['allow_frequency_override'],
 					'literatuurcode'           => $fields['literatuurcode'],
 					'marketingcode'            => $fields['marketingcode'],
+					'thanktitle'               => $fields['thanktitle'],
+					'thankdescription'         => $fields['thankdescription'],
 				)
 			);
 

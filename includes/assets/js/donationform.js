@@ -32,10 +32,12 @@ Vue.use(VueFormWizard)
     template: `
         <div>
           <div class="form-group" v-bind:class="{ 'has-error': $v.machtigingType }">
-            <label v-if="formconfig.allow_frequency_override != true">Ja ik steun Greenpeace: {{ formconfig.suggested_frequency[1] }}</label>
-            <label v-else>Ja ik steun Greenpeace:</label>
+            <label v-if="formconfig.allow_frequency_override == 'true'">Ja ik steun Greenpeace:</label>
+            <label v-else>
+            	Ja ik steun Greenpeace <strong>{{ formconfig.suggested_frequency[1] }}</strong>:
+            </label>
             
-            <select class="form-control" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()" v-show="formconfig.allow_frequency_override == true">
+            <select class="form-control" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()" v-show="formconfig.allow_frequency_override == 'true'">
               <option value="E">Eenmalig</option>
               <option value="M">Maandelijks</option>
             </select>
@@ -46,14 +48,14 @@ Vue.use(VueFormWizard)
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.bedrag.$error }">
               <label>Met een bedrag van:</label>
               <div class="radio-list">
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag1" id="bedrag1" value="5">
-                <label class="form-check-label form-control left" for="bedrag1">&euro;5</label>
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag1" id="bedrag1" v-bind:value="formconfig.amount1">
+                <label class="form-check-label form-control left" for="bedrag1">&euro;{{ formconfig.amount1 }}</label>
 
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag2" id="bedrag2" value="10" checked="checked">
-                <label class="form-check-label form-control" for="bedrag2">&euro;10</label>
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag2" id="bedrag2" v-bind:value="formconfig.amount2" checked="checked">
+                <label class="form-check-label form-control" for="bedrag2">&euro;{{ formconfig.amount2 }}</label>
 
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag3" id="bedrag3" value="25">
-                <label class="form-check-label form-control" for="bedrag3">&euro;25</label>
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag3" id="bedrag3" v-bind:value="formconfig.amount3">
+                <label class="form-check-label form-control" for="bedrag3">&euro;{{ formconfig.amount3 }}</label>
               </div>
             </div>
 
@@ -66,15 +68,15 @@ Vue.use(VueFormWizard)
                 <input class="form-control" v-model.trim="bedrag" @input="$v.bedrag.$touch()">
                 <span class="help-block" v-if="$v.bedrag.$error && !$v.bedrag.required">Bedrag is verplicht</span>
                 <span class="help-block" v-if="$v.bedrag.$error && $v.bedrag.required && !$v.bedrag.numeric">Bedrag moet een nummer zijn</span>
-                <span class="help-block" v-if="$v.bedrag.$error && $v.bedrag.required && $v.bedrag.numeric && !$v.bedrag.between">Het minimale donatiebedrag is 5 euro</span>
+                <span class="help-block" v-if="$v.bedrag.$error && $v.bedrag.required && $v.bedrag.numeric && !$v.bedrag.between">Het minimale donatiebedrag is {{ formconfig.min_amount }} euro</span>
               </div>
             </div>
           </div>
         </div>`,
     data() {
       return {
-        machtigingType: 'M',
-        bedrag: '10'
+        machtigingType: formconfig.suggested_frequency[0],
+        bedrag: formconfig.suggested_amount
       }
     },
     validations: {
@@ -84,7 +86,7 @@ Vue.use(VueFormWizard)
       bedrag: {
         required,
         numeric,
-        between: between(5, 999)
+        between: between(formconfig.min_amount, 999)
       },
       form: ['machtigingType', 'bedrag' ]
     },
@@ -627,8 +629,8 @@ Vue.use(VueFormWizard)
           formBody.empty();
           formBody.append('<div class="card-body donation-card"></div>')
           var cardBody = $('.donation-card');
-          cardBody.append('<h2 class="card-title">{% if ( fields.thanktitle ) %}{{ fields.thanktitle }}{% endif %}</h2>');
-          cardBody.append('<p class="card-text">{% if ( fields.thankdescription ) %}{{ fields.thankdescription }}{% endif %}</p>');
+          cardBody.append('<h2 class="card-title">{{ formconfig.thanktitle }}</h2>');
+          cardBody.append('<p class="card-text">{{ formconfig.thankdescription}}</p>');
           buttons = $('#app button');
           buttons.each(function() {
               button = $(this);
@@ -696,6 +698,12 @@ Vue.use(VueFormWizard)
           });
       },
 
+      disableFormElements: function (elements) {
+          elements.each( function() {
+              this.setAttribute('disabled', 'true');
+          })
+      },
+
       validateStep(name) {
         var refToValidate = this.$refs[name];
         return refToValidate.validate();
@@ -709,20 +717,6 @@ Vue.use(VueFormWizard)
       }
     }
   })
-
-// retrieve URL variables
-function getUrlVars(){
-  var vars = [], hash;
-  var uri = window.location.href.split("#")[0];
-  var hashes = uri.slice(window.location.href.indexOf('?') + 1).split('&');
-  for(var i = 0; i < hashes.length; i++){
-    hash = hashes[i].split('=');
-    vars.push(hash[0]);
-    vars[hash[0]] = hash[1];
-  }
-  return vars;
-}
-
 
 function iDealToggle() {
    if ($('#frequency option:selected')[0].value === "E"){
