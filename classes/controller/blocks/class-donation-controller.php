@@ -168,7 +168,9 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'fields' => $fields,
 			];
 
-			wp_enqueue_script( 'donationform', P4NLBKS_ASSETS_DIR . 'js/donationform.js', null, null, true );
+			wp_enqueue_script( 'vue', P4NLBKS_ASSETS_DIR . 'js/vue.js', null, null, true );
+			wp_enqueue_script( 'vueresource', P4NLBKS_ASSETS_DIR . 'js/vueresource.js', ['vue'], null, true );
+			wp_enqueue_script( 'donationform', P4NLBKS_ASSETS_DIR . 'js/donationform.js', ['vue', 'vueresource'], null, true );
 			// Pass options to frontend code
 			wp_localize_script(
 				'donationform',
