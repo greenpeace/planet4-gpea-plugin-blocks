@@ -38,7 +38,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
     public static $classMap = array (
         'P4NLBKS\\Controllers\\Blocks\\Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Donation_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-donation-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Force_Form_Old_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-forceform-controller.php',
+        'P4NLBKS\\Controllers\\Blocks\\No_Index_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-noindex-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Petition_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-petition-controller.php',
         'P4NLBKS\\Controllers\\Menu\\Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-controller.php',
         'P4NLBKS\\Controllers\\Menu\\Settings_Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-settings-controller.php',

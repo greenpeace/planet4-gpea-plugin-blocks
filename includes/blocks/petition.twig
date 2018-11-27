@@ -1,47 +1,100 @@
 {% block petition %}
 	{% if ( fields ) %}
-	<section class="petition-ask">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.js" type="text/javascript" charset="utf-8"></script>
+	<section class="petition-block">
 		<div class="row">
-			<div class="col-md-6 order-last order-md-first">
-				<img  src="holder.js/800x400" class="img-fluid">
+			<div class="col-lg-6 order-last order-md-first petition-img">
+				<img
+					class="img-fluid"
+					src="{{ fields.image }}"
+					srcset="{{ fields.image_srcset }}"
+					sizes="{{ fields.image_sizes }}"
+					alt="{{ fields.alt_text }}"
+				>
 			</div>
-			<div class="col-md-6 order-first order-md-last">
-				<div class="petition-ask__wrapper">
+			<div class="col-lg-6 order-first order-md-last gpnl-petition-wrapper card">
+				<div class="card-body">
 					{% if ( fields.title ) %}
-						<div class="petition-ask__title">
-							<h2>{{ fields.title }}</h2>
+						<div class="petition-title">
+							<h2 class="card-title">{{ fields.title }}</h2>
 						</div>
 					{% endif %}
-	        {% if ( fields.subtitle ) %}
-						<div class="petition-ask__subtitle">
+			        {% if ( fields.subtitle ) %}
+						<div class="petition-subtitle">
 							<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+							{# <p>{{ dump( fields ) }}</p> #}
 						</div>
-	        {% endif %}
-					<form id="petitionForm" onsubmit="return false;">
-						<fieldset class="form-group">
-							<label for="naam">Naam</label>
-							<input required type="text" class="form-control" id="naam" placeholder="Uw naam">
-						</fieldset>
-						<fieldset class="form-group">
-							<label for="email">Email</label>
-							<input required type="email" class="form-control" id="email" placeholder="Uw emailadres">
-						</fieldset>
-						<fieldset class="form-group">
-							<label for="telefoonnummer">Telefoonnummer</label>
-							<input required type="telefoonnummer" class="form-control" id="telefoonnummer" placeholder="Uw telefoonnummer">
-						</fieldset>
-						<div class="checkbox">
-							<label>
-								<!--<input required type="checkbox" id="toestemming">-->
-								<input name="toestemming" type="checkbox" checked="checked" value="1" id="toestemming" />
-								<small class="text-muted">{{ fields.consent }}</small>
-							</label>
+			        {% endif %}
+					<div class="gpnl-petition">
+						<div class="gpnl-petition-form front">
+					        <div class="counter">
+					          <div class="counter__slider"></div>
+					          <div class="counter__text">
+					            <span class="counter__gettext"></span>
+					          </div>
+					        </div>
+							<form id="gpnl-petitionform" onsubmit="return false;">
+								<div class="form-group">
+									<label hidden for="name">Naam</label>
+									<input name="name" id="name" required type="text" class="form-control" placeholder="Voornaam">
+								</div>
+								<div class="form-group">
+									<label hidden for="mail">Email</label>
+									<input name="mail" id="mail" required type="email" class="form-control" placeholder="E-mail">
+								</div>
+
+								<div class="form-group">
+									<label hidden for="phone">Telefoonnummer</label>
+									<input name="phone" type="text" class="form-control" placeholder="Telefoonnummer">
+								</div>
+								<div class="form-group optin">
+									<input class="form-check-input gpnl-petition-checkbox" name="consent" type="checkbox" />
+									<label class="gpnl-petition-checkbox-label" for="consent"><small class="form-check-label">{{ fields.consent }}</small></label>
+								</div>
+								<label for="phone"><small >Vul je je telefoonnummer in? Dan kan Greenpeace jou telefonisch benaderen voor giftverzoeken of updates rondom lopende campagnes.</small></label>
+								<input type="text" name="marketingcode" value="{{ fields.marketingcode }}" hidden readonly>
+								<input type="text" name="literaturecode" value="{{ fields.literaturecode }}" hidden readonly>
+								<input type="submit" class="btn btn-primary btn-block signBtn" value="{{ fields.sign }}">
+								<div class="small">
+									<div class="row policies">
+										<div class="col-8">
+											Greenpeace beschermt je gegevens en geeft ze niet aan derden voor commerci&euml;le
+											doeleinden. Lees ook ons
+											<a href="https://www.greenpeace.org/nl/privacystatement/" target="_blank">privacy-beleid</a> en
+											de <a href="{{ fields.campaignpolicy }}" target="_blank" >algemene voorwaarden</a> van deze actie.
+										</div>
+										<div class="col-4">
+											<a href="https://privacywaarborg.nl/bedrijven/stichting-greenpeace-nederland/" target="_blank" class="privacywaarborg">
+												<img class="img-fluid" src="https://secured.greenpeace.nl/Global/nederland/image/template/privacy/PW-logo.png">
+											</a>
+										</div>
+									</div>
+								</div>
+							</form>
 						</div>
-						<input type="text" name="marketingcode" value="{{ fields.marketingcode }}" hidden readonly>
-						<input type="text" name="literatuurcode" value="{{ fields.literatuurcode }}" hidden readonly>
-						<button type="submit" class="btn btn-primary">{{ fields.sign }}</button>
-					</form>
+						<div class="gpnl-petition-thank back">
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">{{ fields.thanktitle|e('wp_kses_post')|raw }}</h5>
+									<p class="card-text">{{ fields.thanktext|e('wp_kses_post')|raw }}</p>
+									<a class="btn btn-primary btn-block" href="{{ fields.donatebuttonlink }}" role="button">{{ fields.donatebuttontext }}</a>
+									{% if not fields.hidesharingbuttons %}
+										<div class="gpnl-petitionshare">
+											<a class="btn btn-primary btn-block gpnl-share-facebook" 
+											href="https://www.facebook.com/sharer/sharer.php?u={{ fields.current_url|url_encode }}" role="button" onclick="fireShareEvent('facebook');">
+												FACEBOOK
+											</a>
+											<a class="btn btn-primary btn-block gpnl-share-twitter" 
+												href="https://twitter.com/share?url={{ fields.current_url }}&text={{ fields.twittertext }}&via={{ fields.social_accounts.twitter }}&related={{ fields.social_accounts.twitter }}" role="button" onclick="fireShareEvent('twitter');">
+												TWITTER
+											</a>
+											<a class="btn btn-primary btn-block gpnl-share-whatsapp" href="whatsapp://send?text={{ fields.whatsapptext }} via {{ fields.current_url }}" role="button" onclick="fireShareEvent('whatsapp');">WHATSAPP</a>							
+										</div>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+					</div>
+					
 				</div>
 			</div>
 		</div>

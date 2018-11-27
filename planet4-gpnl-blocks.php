@@ -3,7 +3,7 @@
  * Plugin Name: Planet4 - GPNL Blocks
  * Description: Creates all the blocks that will be available for usage by Shortcake.
  * Plugin URI: https://github.com/greenpeace/planet4-gpnl-plugin-blocks
- * Version: 0.1
+ * Version: 2.2.26
  * Php Version: 7.0
  *
  * Author: Greenpeace Netherlands
@@ -13,10 +13,6 @@
  * License:     GPLv3
  * Copyright (C) 2018 Greenpeace Netherlands
  */
-
-# error tonen
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die( 'Direct access is forbidden !' );
@@ -62,7 +58,7 @@ require_once ABSPATH . 'wp-admin/includes/plugin.php';
    ========================== */
 P4NLBKS\Loader::get_instance( [
 	// --- Add here your own Block Controller ---
-	'P4NLBKS\Controllers\Blocks\Donation_Controller',
+	 'P4NLBKS\Controllers\Blocks\No_Index_Controller',
+	 'P4NLBKS\Controllers\Blocks\Donation_Controller',
 	'P4NLBKS\Controllers\Blocks\Petition_Controller',
-	'P4NLBKS\Controllers\Blocks\Force_Form_Old_Controller',
 ], 'P4NLBKS\Views\View' );
