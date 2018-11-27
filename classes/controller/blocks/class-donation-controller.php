@@ -30,12 +30,95 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'attr'  => 'description',
 					'type'  => 'textarea',
 				),
+				array(
+					'label' => __( 'Minmum bedrag', 'planet4-gpnl-blocks' ),
+					'attr'  => 'min_amount',
+					'type'  => 'number',
+					'value' => 5,
+
+				),
+				array(
+					'label' => __( 'Bedrag 1', 'planet4-gpnl-blocks' ),
+					'attr'  => 'amount1',
+					'type'  => 'number',
+					'value' => 5,
+				),
+				array(
+					'label' => __( 'Bedrag 2', 'planet4-gpnl-blocks' ),
+					'attr'  => 'amount2',
+					'type'  => 'number',
+					'value' => 10,
+
+				),
+				array(
+					'label' => __( 'Bedrag 3', 'planet4-gpnl-blocks' ),
+					'attr'  => 'amount3',
+					'type'  => 'number',
+					'value' => 25,
+
+				),
+				array(
+					'label' => __( 'Voorgesteld bedrag', 'planet4-gpnl-blocks' ),
+					'attr'  => 'suggested_amount',
+					'type'  => 'number',
+					'value' => 10,
+
+				),
+				array(
+					'label'   => __( 'Voorgestelde periodiek', 'planet4-gpnl-blocks' ),
+					'attr'    => 'suggested_frequency',
+					'type'    => 'select',
+					'options' => [
+						[
+							'value' => 'E',
+							'label' => __( 'Eenmalig' ),
+						],
+						[
+							'value' => 'M',
+							'label' => __( 'Maandelijks' ),
+						],
+//						[
+//							'value' => 'H',
+//							'label' => __( 'Halfjaarlijks' ),
+//						],
+//						[
+//							'value' => 'J',
+//							'label' => __( 'Jaarlijks' ),
+//						],
+					],
+				),
+				array(
+					'label'     => __( 'Donateur kan periodiek wijzigen', 'planet4-gpnl-blocks' ),
+					'attr'      => 'allow_frequency_override',
+					'type'      => 'checkbox',
+					'checked'   => 'checked',
+				),
+				array(
+					'label' => __( 'Bedankt Titel', 'planet4-gpnl-blocks' ),
+					'attr'  => 'thanktitle',
+					'type'  => 'text',
+				),
+				array(
+					'label' => __( 'Bedankt Omschrijving', 'planet4-gpnl-blocks' ),
+					'attr'  => 'thankdescription',
+					'type'  => 'textarea',
+				),
+				array(
+					'label' => __( 'Literatuurcode', 'planet4-gpnl-blocks' ),
+					'attr'  => 'literatuurcode',
+					'type'  => 'text',
+				),
+				array(
+					'label' => __( 'Marketingcode', 'planet4-gpnl-blocks' ),
+					'attr'  => 'marketingcode',
+					'type'  => 'text',
+				),
 			);
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = array(
-				'label'         => __( 'Donatie', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/images/donation_form.png' ) . '" />',
+				'label'         => __( 'GPNL | Donation', 'planet4-gpnl-blocks' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/images/icon_donation.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4NLBKS_ALLOWED_PAGETYPE,
 			);
@@ -58,7 +141,28 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 			$fields = shortcode_atts( array(
 				'title'       => '',
 				'description' => '',
+				'min_amount' => '',
+				'amount1' => '',
+				'amount2' => '',
+				'amount3' => '',
+				'suggested_amount' => '',
+				'suggested_frequency' => '',
+				'allow_frequency_override' => '',
+				'thanktitle'       => '',
+				'thankdescription' => '',
+				'literatuurcode' => '',
+				'marketingcode' => '',
 			), $fields, $shortcode_tag );
+
+			$frequencies = [
+				'E' => 'Eenmalig',
+				'M' => 'Maandelijks',
+				'K' => 'Kwartaal',
+				'H' => 'Halfjaarlijks',
+				'J' => 'Jaarlijks',
+			];
+
+			$fields['suggested_frequency'] = [$fields['suggested_frequency'], strtolower($frequencies[ $fields['suggested_frequency'] ] ) ];
 
 			$data = [
 				'fields' => $fields,
@@ -68,9 +172,19 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 			// Pass options to frontend code
 			wp_localize_script(
 				'donationform',
-				'donation_form_object',
+				'formconfig',
 				array(
-					'foo' => 'bar',
+					'min_amount'               => $fields['min_amount'],
+					'amount1'                  => $fields['amount1'],
+					'amount2'                  => $fields['amount2'],
+					'amount3'                  => $fields['amount3'],
+					'suggested_amount'         => $fields['suggested_amount'],
+					'suggested_frequency'      => $fields['suggested_frequency'],
+					'allow_frequency_override' => $fields['allow_frequency_override'],
+					'literatuurcode'           => $fields['literatuurcode'],
+					'marketingcode'            => $fields['marketingcode'],
+					'thanktitle'               => $fields['thanktitle'],
+					'thankdescription'         => $fields['thankdescription'],
 				)
 			);
 

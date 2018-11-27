@@ -8,7 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'P4NLBKS\\Controllers\\Blocks\\Controller' => $baseDir . '/classes/controller/blocks/class-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Donation_Controller' => $baseDir . '/classes/controller/blocks/class-donation-controller.php',
-    'P4NLBKS\\Controllers\\Blocks\\Force_Form_Old_Controller' => $baseDir . '/classes/controller/blocks/class-forceform-controller.php',
+    'P4NLBKS\\Controllers\\Blocks\\No_Index_Controller' => $baseDir . '/classes/controller/blocks/class-noindex-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Petition_Controller' => $baseDir . '/classes/controller/blocks/class-petition-controller.php',
     'P4NLBKS\\Controllers\\Menu\\Controller' => $baseDir . '/classes/controller/menu/class-controller.php',
     'P4NLBKS\\Controllers\\Menu\\Settings_Controller' => $baseDir . '/classes/controller/menu/class-settings-controller.php',
