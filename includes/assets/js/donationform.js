@@ -601,7 +601,7 @@ window.onload = function() {
       }
     },
   })
-  new Vue({
+  donationformVue = new Vue({
     el: '#app',
     data: {
       finalModel: {
@@ -613,6 +613,7 @@ window.onload = function() {
           msg: '',
           hasError: false
       },
+      formconfig: donation_form_object,
     },
     methods: {
       onComplete: function() {
