@@ -172,6 +172,8 @@
                   </div>
                 </div>
 
+
+
                 <div class="form-group" v-bind:class="{ 'has-error': $v.rekeningnummer.$error }">
                   <!-- label>rekeningnummer</label-->
                   <div class="input-group">
@@ -179,7 +181,7 @@
                       <span class="input-group-text" id="inputGroupPrepend">IBAN:</span>
                     </div>
                     <input class="form-control" v-model.trim="rekeningnummer" @input="$v.rekeningnummer.$touch()" placeholder="*">
-                    <span class="help-block" v-if="$v.rekeningnummer.$error && !$v.rekeningnummer.required">Rekeningnummer is verplicht</span>
+                    <span class="help-block" v-if="$v.rekeningnummer.$error && !$v.rekeningnummer.requiredIf">Rekeningnummer is verplicht</span>
                     <span class="help-block" v-if="$v.rekeningnummer.$error && $v.rekeningnummer.required && !$v.rekeningnummer.alphaNum">Rekeningnummer mag alleen letters en cijfers bevatten</span>
                   </div>
                 </div>
@@ -196,80 +198,55 @@
               rekeningnummer: ''
             }
           },
-			validations () {
-          	if (true) {
-          		return{
-					initialen: {},
-					voornaam: {
-						required
-					},
-					tussenvoegsel: {},
-					achternaam: {
-						required
-					},
-					geslacht: {},
-					email: {
-						required,
-						email
-					},
-					telefoonnummer: {
-						numeric,
-						minLength: minLength(10),
-						maxLength: maxLength(10)
-					},
-					rekeningnummer: {
-						requiredIf: requiredIf(function () {
-							console.log(donationformVue.ideal);
-							return !donationformVue.ideal;
-						}),
-						alphaNum
-					},
-
-					form: ['initialen', 'voornaam', 'tussenvoegsel', 'achternaam', 'geslacht', 'email', 'telefoonnummer', 'rekeningnummer']
-
-				}
-			} else {
-				return{
-					initialen: {},
-					voornaam: {
-						required
-					},
-					tussenvoegsel: {},
-					achternaam: {
-						required
-					},
-					geslacht: {},
-					email: {
-						required,
-						email
-					},
-					telefoonnummer: {
-						numeric,
-						minLength: minLength(10),
-						maxLength: maxLength(10)
-					},
-					rekeningnummer: {
-						requiredIf: requiredIf(function () {
-							console.log(donationformVue.ideal);
-							return !donationformVue.ideal;
-						}),
-						alphaNum
-					},
-
-					form: ['initialen', 'voornaam', 'tussenvoegsel', 'achternaam', 'geslacht', 'email', 'telefoonnummer', 'rekeningnummer']
-
-				}
-			}
-          },
+            validations: {
+                initialen: {},
+                voornaam: {
+                    required
+                },
+                tussenvoegsel: {},
+                achternaam: {
+                    required
+                },
+                geslacht: {},
+                email: {
+                    required,
+                    email
+                },
+                telefoonnummer: {
+                    numeric,
+                    minLength: minLength(10),
+                    maxLength: maxLength(10)
+                },
+                rekeningnummer: {
+                    required : {
+                        requiredIf: requiredIf(() => {
+                            console.log(donationformVue.ideal);
+                            return !donationformVue.ideal;
+                        })
+                    },
+                    alphaNum
+                },
+                form: ['initialen', 'voornaam', 'tussenvoegsel', 'achternaam', 'geslacht', 'email', 'telefoonnummer', 'rekeningnummer']
+            },
 
           methods: {
             validate(ideal) {
-              this.$v.form.$reset();
-           	  ideal ? donationformVue.ideal = true : donationformVue.ideal = false;
+                step = this;
+                this.$v.form.$reset();
+                if (ideal){
+                  console.log("ideal");
+                  delete this.$options.validations.rekeningnummer.required;
+              }
+              else{
+                  console.log("not ideal");
+                  this.$options.validations.rekeningnummer = {required, alphaNum};
+              }
+              // console.log(this.$options.validations.rekeningnummer)
               this.$v.form.$touch();
               var isValid = !this.$v.form.$invalid;
               this.$emit('on-validate', this.$data, isValid);
               if(isValid){
+                  console.log("VALID");
                 // Push step to tag manager
                 dataLayer.push({
                 'event': 'virtualPageViewDonatie',
@@ -632,6 +609,7 @@
           },
         })
         donationformVue = new Vue({
+            ideal: false,
           el: '#app',
           data: {
             finalModel: {

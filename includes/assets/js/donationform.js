@@ -60,10 +60,14 @@ function resetNextBtn() {
 	}, 50);
 }
 function removeIdealBtn() {
+    donationformVue.ideal = false;
 	$('#iDealBtn').remove();
 }
 
 function idealTransaction() {
+	donationformVue.ideal = true;
 	isValid = donationformVue.validateStep('step2', true);
-	// console.log(donationformVue.finalModel);
+	if (isValid){
+        console.log(donationformVue.finalModel);
+    }
 }
