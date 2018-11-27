@@ -162,7 +162,7 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'J' => 'Jaarlijks',
 			];
 
-			$fields['suggested_frequency'] = [$fields['suggested_frequency'], $frequencies[ $fields['suggested_frequency'] ] ];
+			$fields['suggested_frequency'] = [$fields['suggested_frequency'], strtolower($frequencies[ $fields['suggested_frequency'] ] ) ];
 
 			$data = [
 				'fields' => $fields,
@@ -172,9 +172,17 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 			// Pass options to frontend code
 			wp_localize_script(
 				'donationform',
-				'donation_form_object',
+				'formconfig',
 				array(
-					'foo' => 'bar',
+					'min_amount'               => $fields['min_amount'],
+					'amount1'                  => $fields['amount1'],
+					'amount2'                  => $fields['amount2'],
+					'amount3'                  => $fields['amount3'],
+					'suggested_amount'         => $fields['suggested_amount'],
+					'suggested_frequency'      => $fields['suggested_frequency'],
+					'allow_frequency_override' => $fields['allow_frequency_override'],
+					'literatuurcode'           => $fields['literatuurcode'],
+					'marketingcode'            => $fields['marketingcode'],
 				)
 			);
 
