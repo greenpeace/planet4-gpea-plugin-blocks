@@ -48,9 +48,6 @@ $('#gpnl-petitionform').on('submit', function () {
 
             // flip the card, positionattribute flips to make sure no problems arises with different lengths of the front and back of the card, finally hide the front
             flip();
-			if (petition_form_object.mailcampaign === "true"){
-				openMailTarget(petition_form_object.maillink);
-			}
 		},
 		error: function(jqXHR, textStatus, errorThrown, data, url){
             console.log("o_o");
@@ -127,8 +124,4 @@ function socialBlueDeDuplicate(email, phone, apref) {
         script.src = apHost + apSrc;
         document.getElementsByTagName('head')[0].appendChild(script);
     }
-}
-
-function openMailTarget(link) {
-	window.open(link);
 }
