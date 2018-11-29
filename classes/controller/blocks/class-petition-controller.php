@@ -115,7 +115,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'value' => 'Petitie',
 				),
 				array(
-					'label' => __( 'Teller mainimum', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Teller minimum', 'planet4-gpnl-blocks' ),
 					'attr'  => 'countermin',
 					'type'  => 'number',
 					'value' => 1000,
