@@ -115,6 +115,12 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'value' => 'Petitie',
 				),
 				array(
+					'label' => __( 'Teller mainimum', 'planet4-gpnl-blocks' ),
+					'attr'  => 'countermin',
+					'type'  => 'number',
+					'value' => 1000,
+				),
+				array(
 					'label' => __( 'Teller maximum', 'planet4-gpnl-blocks' ),
 					'attr'  => 'countermax',
 					'type'  => 'number',
@@ -240,6 +246,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'literaturecode'     => '',
 					'campaigncode'       => '',
 					'ga_action'          => '',
+					'countermin'         => '',
 					'countermax'         => '',
 					'image'              => '',
 					'alt_text'           => '',
@@ -294,6 +301,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 						//url for php file that process ajax request to WP
 						'nonce'              => wp_create_nonce( 'GPNL_Petitions' ),
 						'analytics_campaign' => $fields['campaigncode'],
+						'countermin'         => $fields['countermin'],
 						'countermax'         => $fields['countermax'],
 						'ga_action'          => $fields['ga_action'],
 						'ad_campaign'        => $fields['ad_campaign'],
