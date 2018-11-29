@@ -29,7 +29,7 @@ $(document).ready(function() {
   }
 
   var tellerCode = petition_form_object.analytics_campaign;
-  var counter_min = 1000;
+  var counter_min = petition_form_object.countermin;
   var counter_max = petition_form_object.countermax;
   var url_cg = getUrlVars()["cg"];
   var isfacebook = document.referrer.indexOf('facebook') !== -1;
@@ -92,7 +92,7 @@ $(document).ready(function() {
   // teller tonen
   function toonTeller(aantal_tekeningen){
     if (aantal_tekeningen >= counter_min){
-      $('.counter').show(0);
+      $('.counter').show();
       var perc_slider = Math.round(100 *(aantal_tekeningen / counter_max));
 
       // check of het aantal tekeningen > dan counter_max, toon in dat geval een volle slider ...
