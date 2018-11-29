@@ -75,6 +75,7 @@ Vue.use(VueFormWizard)
     },
     methods: {
       validate() {
+        this.$v.form.$reset();
         this.$v.form.$touch();
         var isValid = !this.$v.form.$invalid;
         this.$emit('on-validate', this.$data, isValid);
@@ -221,6 +222,7 @@ Vue.use(VueFormWizard)
     },
     methods: {
       validate() {
+        this.$v.form.$reset();
         this.$v.form.$touch();
         var isValid = !this.$v.form.$invalid;
         this.$emit('on-validate', this.$data, isValid);
@@ -537,6 +539,7 @@ Vue.use(VueFormWizard)
     },
     methods: {
       validate() {
+        this.$v.form.$reset();
         this.$v.form.$touch();
         var isValid = !this.$v.form.$invalid;
         this.$emit('on-validate', this.$data, isValid);
@@ -586,6 +589,7 @@ Vue.use(VueFormWizard)
       }
     },
   })
+
   donationformVue = new Vue({
     el: '#app',
     data: {
@@ -600,8 +604,17 @@ Vue.use(VueFormWizard)
       },
     },
     methods: {
-      onComplete: function() {
-        this.submit();
+      onComplete: function(ideal) {
+        inputs = $('#app input');
+        buttons = $('#app button');
+        this.disableFormElements(inputs);
+        this.disableFormElements(buttons);
+        if (ideal){
+          alert("IDEAL");
+        }
+        else{
+            this.submit();
+        }
       },
 
       onSucces: function(result) {
@@ -663,10 +676,7 @@ Vue.use(VueFormWizard)
       },
 
       submit: function () {
-          inputs = $('#app input');
-          buttons = $('#app button');
-          this.disableFormElements(inputs);
-          this.disableFormElements(buttons);
+
           this.result.msg = '';
           this.result.hasError = false;
           this.$http.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register", this.finalModel)
@@ -735,7 +745,6 @@ function removeIdealBtn() {
     donationformVue.ideal = false;
 	$('#iDealBtn').remove();
 }
-
 function idealTransaction() {
 	donationformVue.ideal = true;
 	isValid = donationformVue.validateStep('step2', true);
