@@ -29,33 +29,9 @@
 
           <div id="app" class="card">
 
-            <div class="gp-donation-form card-body">
-              <form-wizard @on-complete="onComplete('ideal');"
-                           shape="tab"
-                           color="rgb(238, 86, 45)"
-                           error-color="#FF0000"
-                           title=""
-                           subtitle=""
-                           back-button-text="Vorige"
-                           next-button-text="Volgende"
-                           finish-button-text="Verstuur"
-              >
-                <tab-content title="iDeal" icon="icon-euro" :before-change="()=>validateStep('step1')">
-                  <step1 ref="step1"></step1>
-                </tab-content>
-                <tab-content title="Gegevens" icon="icon-user" :before-change="()=>validateStep('step2')">
-                  <step2 ref="step2" @on-validate="mergePartialModels"></step2>
-                </tab-content>
-                <div class="secure-icons">
-                  <img class="privacywaarborg" src="https://secured.greenpeace.nl/Global/nederland/image/template/privacy/PW-logo.png" height="30px" width="auto">
-                  <img src="https://secured.greenpeace.nl/Global/nederland/image/2018/fondsenwerving/secure.png" height="30px" width="auto"/>
-                  <img src="https://secured.greenpeace.nl/Global/nederland/image/2018/fondsenwerving/logoanbi_kl.png" height="30px" width="auto"/>
-                </div>
-
-              </form-wizard>
-            </div>
 
             <div class="gp-donation-form card-body">
+
               <form-wizard @on-complete="onComplete"
                 shape="tab"
                 color="rgb(238, 86, 45)"
@@ -65,14 +41,16 @@
                 back-button-text="Vorige"
                 next-button-text="Volgende"
                 finish-button-text="Verstuur"
-              > 
-                <tab-content title="Donatie" icon="icon-euro" :before-change="()=>validateStep('step1')">
+              >
+                <tab-content title="Donatie" icon="icon-euro" :before-change="()=>validateStep('step1')" >
                   <step1 ref="step1" @on-validate="mergePartialModels"></step1>
                 </tab-content>
                 <tab-content title="Gegevens" icon="icon-user" :before-change="()=>validateStep('step2')">
-                  <step2 ref="step2" @on-validate="mergePartialModels"></step2>
+
+                  <step2 ref="step2" @on-validate="mergePartialModels"
+                  v-bind:ideal="isiDeal()"></step2>
                 </tab-content>
-                <tab-content title="Adres" icon="icon-home" :before-change="()=>validateStep('step3')">
+                <tab-content v-if="!isiDeal()" title="Adres" icon="icon-home" :before-change="()=>validateStep('step3')">
                   <step3 ref="step3" @on-validate="mergePartialModels"></step3>
                 </tab-content>
                 <div class="secure-icons">
