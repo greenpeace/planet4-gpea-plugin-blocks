@@ -179,7 +179,7 @@ html {
 }
 
 @-ms-viewport {
-    width: device-width
+    width: device-width;
 }
 
 article,
@@ -2011,7 +2011,7 @@ fieldset[disabled] .vue-form-wizard .wizard-btn {
     margin-left: 0
 }
 
-.radio-list label {
+.radio-list .form-check-label {
     position: relative;
     color: #333;
     font-family: Arial, sans-serif;
@@ -2019,10 +2019,10 @@ fieldset[disabled] .vue-form-wizard .wizard-btn {
     font-weight: 700;
     padding: 8px;
     cursor: pointer;
-    width: 31.33333%;
     float: left;
     text-align: center;
-    margin-left: 3%
+    margin-left: 3%;
+    flex-grow: 1;
 }
 
 .radio-list label:first-child {
@@ -2047,6 +2047,10 @@ fieldset[disabled] .vue-form-wizard .wizard-btn {
 
 .radio-list .left {
     margin-left: 0
+}
+
+.radio-list{
+    display: flex;
 }
 
 .geslacht {
@@ -3289,4 +3293,7 @@ pre .key {
     }
 }
 
-/*# sourceMappingURL=maps/style.css.map */
+.card {
+	background-color: #323842;
+	color: white;
+}
