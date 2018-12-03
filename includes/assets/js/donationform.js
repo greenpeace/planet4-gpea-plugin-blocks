@@ -205,14 +205,14 @@ Vue.component('step2', {
         </div>`,
     data() {
         return {
-            initialen: 'o.e.',
-            voornaam: 'Oscar',
+            initialen: '',
+            voornaam: '',
             tussenvoegsel: '',
-            achternaam: 'Keur',
-            geslacht: 'M',
-            email: 'o.e.keur@gmail.com',
+            achternaam: '',
+            geslacht: '',
+            email: '',
             telefoonnummer: '',
-            rekeningnummer: 'NL74ABNA0526127228',
+            rekeningnummer: '',
         }
     },
     validations: {
@@ -526,12 +526,12 @@ Vue.component('step3', {
         </div>`,
     data() {
         return {
-            straat: 'Beukenplein',
-            postcode: '1092BB',
-            huisnummer: '41',
+            straat: '',
+            postcode: '',
+            huisnummer: '',
             huisnummertoevoeging: '',
-            woonplaats: 'Amsterdam',
-            landcode: 'NL'
+            woonplaats: '',
+            landcode: ''
         }
     },
     validations: {
@@ -627,37 +627,37 @@ donationformVue = new Vue({
             hasError: false
         },
         idealData: {
-            "initials": "",
-            "firstname": "",
-            "middlename": "",
-            "lastname": "",
-            "gender": "",
-            "birthday": "",
-            "street": "",
-            "housenumber": "",
-            "housenumberAddition": "",
-            "postcode": "",
-            "city": "",
-            "email": "",
-            "phonenumber": "",
-            "description": "",
-            "amount": 0,
-            "comment": "",
-            "issuersBank": "",
-            "clientIp": "",
-            "clientUserAgent": "",
-            "returnUrlSuccess": "https://www.greenpeace.nl",
-            "returnUrlCancel": "https://www.greenpeace.nl",
-            "returnUrlError": "https://www.greenpeace.nl",
-            "returnUrlReject": "https://www.greenpeace.nl",
-            "marketingCode": "",
-            "literatureCode": 0,
-            "guid": null,
-            "countryId": null,
-            "accountNumber": null,
-            "subscriptionCode": null,
-            "subscriptionEndDate": null,
-            "subscriptionMonths": null
+            initials: "",
+            firstname: "",
+            middlename: "",
+            lastname: "",
+            gender: "",
+            birthday: "",
+            street: "",
+            housenumber: "",
+            housenumberAddition: "",
+            postcode: "",
+            city: "",
+            email: "",
+            phonenumber: "",
+            description: "",
+            amount: 0,
+            comment: "",
+            issuersBank: "",
+            clientIp: "",
+            clientUserAgent: "",
+            returnUrlSuccess: "https://www.greenpeace.nl",
+            returnUrlCancel: "https://www.greenpeace.nl",
+            returnUrlError: "https://www.greenpeace.nl",
+            returnUrlReject: "https://www.greenpeace.nl",
+            marketingCode: "",
+            literatureCode: 0,
+            guid: null,
+            countryId: null,
+            accountNumber: null,
+            subscriptionCode: null,
+            subscriptionEndDate: null,
+            subscriptionMonths: null
         }
 },
     methods: {
@@ -775,7 +775,11 @@ donationformVue = new Vue({
                     alert('Successfully called');
                 },
                 error: function(jqxhr, status, exception) {
-                    alert('Exception:', exception);
+                    // alert('Exception:', exception);
+                    console.log("Data:");
+                    console.log(this.data);
+                    console.log('AjaxCall:');
+                    console.log(this);
                 }
             });
         },
