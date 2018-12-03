@@ -1,5 +1,4 @@
 Vue.use(window.vuelidate.default)
-Vue.config.devtools = true
 const {
     required,
     between,
@@ -650,8 +649,8 @@ donationformVue = new Vue({
             returnUrlCancel: "https://www.greenpeace.nl",
             returnUrlError: "https://www.greenpeace.nl",
             returnUrlReject: "https://www.greenpeace.nl",
-            marketingCode: "",
-            literatureCode: 0,
+            marketingCode: '"' + formconfig.marketingcode + '"',
+            literatureCode: formconfig.literatuurcode,
             guid: null,
             countryId: null,
             accountNumber: null,
@@ -757,24 +756,24 @@ donationformVue = new Vue({
             this.idealData.gender = this.finalModel.geslacht;
             this.idealData.email = this.finalModel.email;
             this.idealData.phonenumber = this.finalModel.telefoonnummer;
-            this.idealData.description = "Eenmalige donatie Greenpeace tnv" + this.finalModel.voornaam + " " + this.finalModel.voornaam;
+            this.idealData.description = "Eenmalige donatie Greenpeace tnv " + this.finalModel.voornaam + " " + this.finalModel.voornaam;
             this.idealData.amount = this.finalModel.bedrag;
             this.idealData.returnUrlSuccess = "https://www.greenpeace.nl";
             this.idealData.returnUrlCancel = "https://www.greenpeace.nl";
             this.idealData.returnUrlError = "https://www.greenpeace.nl";
             this.idealData.returnUrlReject = "https://www.greenpeace.nl";
-            this.idealData.marketingCode = "";
-            this.idealData.literatureCode = 0;
             tmp = $.ajax({
-                method: "post",
+                method: "POST",
                 url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/payment/ideal",
                 data: JSON.stringify(this.idealData),
-                contentType: "application/json",
+                contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function(result) {
                     alert('Successfully called');
+                    // window.open(result.transaction.redirectUrl);
                 },
                 error: function(jqxhr, status, exception) {
+
                     // alert('Exception:', exception);
                     console.log("Data:");
                     console.log(this.data);
