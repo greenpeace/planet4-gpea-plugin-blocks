@@ -3297,3 +3297,8 @@ pre .key {
 	background-color: #323842;
 	color: white;
 }
+
+.secure-icons .privacywaarborg {
+    height: 30px;
+    width: auto;
+}
