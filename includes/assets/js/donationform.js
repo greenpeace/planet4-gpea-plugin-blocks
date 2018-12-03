@@ -22,7 +22,7 @@ Vue.component('step1', {
             	Ja ik steun Greenpeace <strong>{{ formconfig.suggested_frequency[1] }}</strong>:
             </label>
             
-            <select class="form-control" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()" v-show="formconfig.allow_frequency_override == 'true'" v-on:change="donationformVue.validateStep('step1');">
+            <select class="form-control" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()" v-show="formconfig.allow_frequency_override == 'true'" v-on:change="changePeriodic">
               <option value="E">Eenmalig</option>
               <option value="M">Maandelijks</option>
             </select>
@@ -112,6 +112,15 @@ Vue.component('step1', {
                 });
             }
             return isValid
+        },
+        changePeriodic() {
+            if (this.$data.machtigingType === "M") {
+                this.$data.betaling =  "EM";
+            }
+            else{
+                this.$data.betaling =  "ID";
+            }
+            this.validate();
         }
     }
 })
@@ -196,14 +205,14 @@ Vue.component('step2', {
         </div>`,
     data() {
         return {
-            initialen: '',
-            voornaam: '',
+            initialen: 'o.e.',
+            voornaam: 'Oscar',
             tussenvoegsel: '',
-            achternaam: '',
-            geslacht: '',
-            email: '',
+            achternaam: 'Keur',
+            geslacht: 'M',
+            email: 'o.e.keur@gmail.com',
             telefoonnummer: '',
-            rekeningnummer: '',
+            rekeningnummer: 'NL74ABNA0526127228',
         }
     },
     validations: {
@@ -517,11 +526,11 @@ Vue.component('step3', {
         </div>`,
     data() {
         return {
-            straat: '',
-            postcode: '',
-            huisnummer: '',
+            straat: 'Beukenplein',
+            postcode: '1092BB',
+            huisnummer: '41',
             huisnummertoevoeging: '',
-            woonplaats: '',
+            woonplaats: 'Amsterdam',
             landcode: 'NL'
         }
     },
@@ -618,45 +627,45 @@ donationformVue = new Vue({
             hasError: false
         },
         idealData: {
-            "initials": "",
-            "firstname": "",
-            "middlename": "",
-            "lastname": "",
-            "gender": "",
-            "birthday": "",
-            "street": "",
-            "housenumber": "",
-            "housenumberAddition": "",
-            "postcode": "",
-            "city": "",
-            "email": "",
-            "phonenumber": "",
-            "description": "",
-            "amount": 0,
-            "comment": "",
-            "issuersBank": "",
-            "clientIp": "",
-            "clientUserAgent": "",
-            "returnUrlSuccess": "https://www.greenpeace.nl",
-            "returnUrlCancel": "https://www.greenpeace.nl",
-            "returnUrlError": "https://www.greenpeace.nl",
-            "returnUrlReject": "https://www.greenpeace.nl",
-            "marketingCode": "",
-            "literatureCode": 0,
-            "guid": null,
-            "countryId": null,
-            "accountNumber": null,
-            "subscriptionCode": null,
-            "subscriptionEndDate": null,
-            "subscriptionMonths": null
+            initials: "",
+            firstname: "",
+            middlename: "",
+            lastname: "",
+            gender: "",
+            birthday: "",
+            street: "",
+            housenumber: "",
+            housenumberAddition: "",
+            postcode: "",
+            city: "",
+            email: "",
+            phonenumber: "",
+            description: "",
+            amount: 0,
+            comment: "",
+            issuersBank: "",
+            clientIp: "",
+            clientUserAgent: "",
+            returnUrlSuccess: "https://www.greenpeace.nl",
+            returnUrlCancel: "https://www.greenpeace.nl",
+            returnUrlError: "https://www.greenpeace.nl",
+            returnUrlReject: "https://www.greenpeace.nl",
+            marketingCode: "",
+            literatureCode: 0,
+            guid: null,
+            countryId: null,
+            accountNumber: null,
+            subscriptionCode: null,
+            subscriptionEndDate: null,
+            subscriptionMonths: null
         }
 },
     methods: {
         onComplete: function() {
             inputs = $('#app input');
             buttons = $('#app button');
-            this.disableFormElements(inputs);
-            this.disableFormElements(buttons);
+            // this.disableFormElements(inputs);
+            // this.disableFormElements(buttons);
             if (this.finalModel.betaling === "ID"){
                 this.submitiDeal();
             }
@@ -676,10 +685,10 @@ donationformVue = new Vue({
             cardBody.append('<h2 class="card-title">{{ formconfig.thanktitle }}</h2>');
             cardBody.append('<p class="card-text">{{ formconfig.thankdescription}}</p>');
             buttons = $('#app button');
-            buttons.each(function() {
-                button = $(this);
-                button.hide();
-            });
+            // buttons.each(function() {
+            //     button = $(this);
+            //     button.hide();
+            // });
             // Push step to tag manager
             dataLayer.push({
                 'event': 'virtualPageViewDonatie',
@@ -728,15 +737,15 @@ donationformVue = new Vue({
             this.result.msg = '';
             this.result.hasError = false;
             this.$http.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register", this.finalModel)
-                .then(function (response) {
-                    this.result.msg = response.bodyText;
-                    this.result.hasError = false;
-                    this.onSucces(this.result);
-                }, function (error) {
-                    this.result.msg = error.bodyText;
-                    this.result.hasError = true;
-                    this.onFailure(this.result);
-                });
+            .then(function (response) {
+                this.result.msg = response.bodyText;
+                this.result.hasError = false;
+                this.onSucces(this.result);
+            }, function (error) {
+                this.result.msg = error.bodyText;
+                this.result.hasError = true;
+                this.onFailure(this.result);
+            });
         },
         submitiDeal: function () {
             this.result.msg = '';
@@ -756,16 +765,21 @@ donationformVue = new Vue({
             this.idealData.returnUrlReject = "https://www.greenpeace.nl";
             this.idealData.marketingCode = "";
             this.idealData.literatureCode = 0;
-            $.ajax({
-                type: "POST",
+            tmp = $.ajax({
+                method: "post",
                 url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/payment/ideal",
-                // The key needs to match your method's input parameter (case-sensitive).
                 data: JSON.stringify(this.idealData),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function(data){alert(data);},
-                failure: function(errMsg) {
-                    alert(errMsg);
+                success: function(result) {
+                    alert('Successfully called');
+                },
+                error: function(jqxhr, status, exception) {
+                    // alert('Exception:', exception);
+                    console.log("Data:");
+                    console.log(this.data);
+                    console.log('AjaxCall:');
+                    console.log(this);
                 }
             });
         },
@@ -790,7 +804,12 @@ donationformVue = new Vue({
             }
         },
         isiDeal() {
-            return this.finalModel.betaling === "ID";
+            if (typeof this.$refs.step1 != 'undefined'){
+                return this.$refs.step1._data.betaling === "ID";
+            }
+            else{
+                return this.finalModel.betaling === "ID";
+            }
         }
     }
 });
