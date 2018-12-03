@@ -45,14 +45,16 @@
                 <tab-content title="Donatie" icon="icon-euro" :before-change="()=>validateStep('step1')" >
                   <step1 ref="step1" @on-validate="mergePartialModels"></step1>
                 </tab-content>
-                <tab-content title="Gegevens" icon="icon-user" :before-change="()=>validateStep('step2')">
 
+                <tab-content title="Gegevens" icon="icon-user" :before-change="()=>validateStep('step2')">
                   <step2 ref="step2" @on-validate="mergePartialModels"
                   v-bind:ideal="isiDeal()"></step2>
                 </tab-content>
+
                 <tab-content v-if="!isiDeal()" title="Adres" icon="icon-home" :before-change="()=>validateStep('step3')">
                   <step3 ref="step3" @on-validate="mergePartialModels"></step3>
                 </tab-content>
+
                 <div class="secure-icons">
                   <img class="privacywaarborg" src="https://secured.greenpeace.nl/Global/nederland/image/template/privacy/PW-logo.png" height="30px" width="auto">
                   <img src="https://secured.greenpeace.nl/Global/nederland/image/2018/fondsenwerving/secure.png" height="30px" width="auto"/>
