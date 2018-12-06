@@ -31,6 +31,7 @@ $(document).ready(function() {
   var tellerCode = petition_form_object.analytics_campaign;
   var counter_min = petition_form_object.countermin;
   var counter_max = petition_form_object.countermax;
+  var counter_text = petition_form_object.countertext;
   var url_cg = getUrlVars()["cg"];
   var isfacebook = document.referrer.indexOf('facebook') !== -1;
   var istwitter = document.referrer.indexOf('twitter') !== -1;
@@ -91,7 +92,7 @@ $(document).ready(function() {
 
   // teller tonen
   function toonTeller(aantal_tekeningen){
-    if (aantal_tekeningen >= counter_min){
+    if (Number(aantal_tekeningen) >= counter_min){
       $('.counter').show();
       var perc_slider = Math.round(100 *(aantal_tekeningen / counter_max));
 
@@ -101,7 +102,7 @@ $(document).ready(function() {
       }
 
       $('.counter__slider').animate({width: perc_slider+'%', opacity: 1}, 2000, 'easeInOutCubic');
-      $('.counter__gettext').html(beautifulThousands(aantal_tekeningen)+' handtekeningen');
+      $('.counter__gettext').html(beautifulThousands(aantal_tekeningen)+' '+counter_text);
       $('.counter__text').fadeIn(2000);
     }
   }
