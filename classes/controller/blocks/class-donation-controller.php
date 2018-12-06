@@ -77,14 +77,14 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 							'value' => 'M',
 							'label' => __( 'Maandelijks' ),
 						],
-						[
-							'value' => 'H',
-							'label' => __( 'Halfjaarlijks' ),
-						],
-						[
-							'value' => 'J',
-							'label' => __( 'Jaarlijks' ),
-						],
+//						[
+//							'value' => 'H',
+//							'label' => __( 'Halfjaarlijks' ),
+//						],
+//						[
+//							'value' => 'J',
+//							'label' => __( 'Jaarlijks' ),
+//						],
 					],
 				),
 				array(
@@ -162,14 +162,35 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'J' => 'Jaarlijks',
 			];
 
-			$fields['suggested_frequency'] = [$fields['suggested_frequency'], $frequencies[ $fields['suggested_frequency'] ] ];
+			$fields['suggested_frequency'] = [$fields['suggested_frequency'], strtolower($frequencies[ $fields['suggested_frequency'] ] ) ];
 
 			$data = [
 				'fields' => $fields,
 			];
 
-			wp_enqueue_script( 'donationform', P4NLBKS_ASSETS_DIR . 'js/donationform.js' );
-			wp_enqueue_style( 'style', P4NLBKS_ASSETS_DIR . 'css/donationform.min.css' );
+			wp_enqueue_script( 'vue', P4NLBKS_ASSETS_DIR . 'js/vue.js', null, null, true );
+			wp_enqueue_script( 'vueresource', P4NLBKS_ASSETS_DIR . 'js/vueresource.js', ['vue'], null, true );
+			wp_enqueue_script( 'donationform', P4NLBKS_ASSETS_DIR . 'js/donationform.js', ['vue', 'vueresource'] );
+			// Pass options to frontend code
+			wp_localize_script(
+				'donationform',
+				'formconfig',
+				array(
+					'min_amount'               => $fields['min_amount'],
+					'amount1'                  => $fields['amount1'],
+					'amount2'                  => $fields['amount2'],
+					'amount3'                  => $fields['amount3'],
+					'suggested_amount'         => $fields['suggested_amount'],
+					'suggested_frequency'      => $fields['suggested_frequency'],
+					'allow_frequency_override' => $fields['allow_frequency_override'],
+					'literatuurcode'           => $fields['literatuurcode'],
+					'marketingcode'            => $fields['marketingcode'],
+					'thanktitle'               => $fields['thanktitle'],
+					'thankdescription'         => $fields['thankdescription'],
+				)
+			);
+
+			wp_enqueue_style( 'style', P4NLBKS_ASSETS_DIR . 'css/donationform.css' );
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
