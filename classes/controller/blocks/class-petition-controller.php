@@ -126,6 +126,12 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'type'  => 'number',
 				),
 				array(
+					'label' => __( 'Teller tekst', 'planet4-gpnl-blocks' ),
+					'attr'  => 'countertext',
+					'type'  => 'text',
+					'value' => 'handtekeningen',
+				),
+				array(
 					'label'   => __( 'Advertentiecampagne?', 'planet4-gpnl-blocks' ),
 					'attr'    => 'ad_campaign',
 					'type'    => 'select',
@@ -248,6 +254,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'ga_action'          => '',
 					'countermin'         => '',
 					'countermax'         => '',
+					'countertext'        => '',
 					'image'              => '',
 					'alt_text'           => '',
 					'ad_campaign'        => '',
@@ -276,21 +283,21 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 
 			// Include de approptiate scripts for ad campaign tracking
 			if ( 'SB' === $fields['ad_campaign'] ) {
-				wp_enqueue_script( 'social-blue-landing-script', P4NLBKS_ASSETS_DIR . 'js/social-blue-landing.js', [], '1.0.0', true );
+				wp_enqueue_script( 'social-blue-landing-script', P4NLBKS_ASSETS_DIR . 'js/social-blue-landing.js', [], '2.2.29', true );
 			} elseif ( 'JA' === $fields['ad_campaign'] ) {
-				wp_enqueue_script( 'jalt-landing-script', P4NLBKS_ASSETS_DIR . 'js/jalt-landing.js', [], '1.0.0', true );
+				wp_enqueue_script( 'jalt-landing-script', P4NLBKS_ASSETS_DIR . 'js/jalt-landing.js', [], '2.2.29', true );
 			}
 
 			//  Include the script and styling for the counter
-			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/onload.js', array( 'jquery' ), '1.0.0', true );
-			wp_enqueue_script( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js', array( 'jquery' ), '1.0.0', true );
-			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.min.css', [], '1.0.0' );
+			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/onload.js', array( 'jquery' ), '2.2.29', true );
+			wp_enqueue_script( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js', array( 'jquery' ), '2.2.29', true );
+			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.min.css', [], '2.2.29' );
 
 			/* ========================
 				C S S / JS
 			   ======================== */
 				// Enqueue the script:
-				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/onsubmit.js', array( 'jquery' ), '1.0.0', true );
+				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/onsubmit.js', array( 'jquery' ), '2.2.29', true );
 
 				// Pass options to frontend code
 				wp_localize_script(
@@ -303,6 +310,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 						'analytics_campaign' => $fields['campaigncode'],
 						'countermin'         => $fields['countermin'],
 						'countermax'         => $fields['countermax'],
+						'countertext'        => $fields['countertext'],
 						'ga_action'          => $fields['ga_action'],
 						'ad_campaign'        => $fields['ad_campaign'],
 						'apref'              => $fields['apref'],
