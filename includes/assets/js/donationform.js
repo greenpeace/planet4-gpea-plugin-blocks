@@ -769,7 +769,7 @@ donationformVue = new Vue({
                 method: "post",
                 url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/payment/ideal",
                 data: JSON.stringify(this.idealData),
-                contentType: "application/json; charset=utf-8",
+                contentType: "application/json",
                 dataType: "json",
                 success: function(result) {
                     alert('Successfully called');
