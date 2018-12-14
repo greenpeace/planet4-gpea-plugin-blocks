@@ -13,8 +13,7 @@
   "require-dev": {
     "squizlabs/php_codesniffer": "2.9.*",
     "wp-coding-standards/wpcs": "0.13.*",
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.4.0",
-    "frenck/php-compatibility": "^7.1"
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.4.0"
   },
   "require": {},
   "autoload": {

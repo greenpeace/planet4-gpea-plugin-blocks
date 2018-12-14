@@ -616,7 +616,7 @@ donationformVue = new Vue({
     el: '#app',
     data: {
         finalModel: {
-            marketingcode: formconfig.marketingcode,
+            marketingcode: (formconfig.suggested_frequency[0] === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff ,
             literatuurcode: formconfig.literatuurcode,
             guid: '',
             betaling: (formconfig.suggested_frequency[0] === "M") ? 'EM' : 'ID'
@@ -649,7 +649,7 @@ donationformVue = new Vue({
             returnUrlCancel: "https://www.greenpeace.nl",
             returnUrlError: "https://www.greenpeace.nl",
             returnUrlReject: "https://www.greenpeace.nl",
-            marketingCode: '"' + formconfig.marketingcode + '"',
+            marketingCode: formconfig.marketingcode_oneoff,
             literatureCode: formconfig.literatuurcode,
             guid: null,
             countryId: null,
@@ -735,16 +735,18 @@ donationformVue = new Vue({
 
             this.result.msg = '';
             this.result.hasError = false;
-            this.$http.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register", this.finalModel)
-            .then(function (response) {
-                this.result.msg = response.bodyText;
-                this.result.hasError = false;
-                this.onSucces(this.result);
-            }, function (error) {
-                this.result.msg = error.bodyText;
-                this.result.hasError = true;
-                this.onFailure(this.result);
-            });
+            this.finalModel.marketingcode = (this.finalModel.machtigingType === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff;
+            console.log(this.finalModel.marketingcode);
+            // this.$http.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register", this.finalModel)
+            // .then(function (response) {
+            //     this.result.msg = response.bodyText;
+            //     this.result.hasError = false;
+            //     this.onSucces(this.result);
+            // }, function (error) {
+            //     this.result.msg = error.bodyText;
+            //     this.result.hasError = true;
+            //     this.onFailure(this.result);
+            // });
         },
         submitiDeal: function () {
             this.result.msg = '';
