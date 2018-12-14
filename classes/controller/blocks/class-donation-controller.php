@@ -107,6 +107,7 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'label' => __( 'Literatuurcode', 'planet4-gpnl-blocks' ),
 					'attr'  => 'literatuurcode',
 					'type'  => 'text',
+					'value' => 'EN999',
 				),
 				array(
 					'label' => __( 'Marketingcode - Terugkerende betalingen', 'planet4-gpnl-blocks' ),
@@ -118,6 +119,7 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'label' => __( 'Marketingcode  - Eenmalige betalingen', 'planet4-gpnl-blocks' ),
 					'attr'  => 'marketingcode_oneoff',
 					'type'  => 'text',
+					'value' => '04888',
 				),
 			);
 
