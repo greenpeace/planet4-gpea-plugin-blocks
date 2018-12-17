@@ -156,7 +156,7 @@ if ( ! class_exists( 'GPNL_statistics_Controller' ) ) {
 				'fields' => $fields,
 			];
 
-			wp_enqueue_style( 'gpnl_quote_css', P4NLBKS_ASSETS_DIR . 'css/gpnl-statistics.css', [], '2.2.29' );
+			wp_enqueue_style( 'gpnl_statistics_css', P4NLBKS_ASSETS_DIR . 'css/gpnl-statistics.css', [], '2.2.29' );
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
