@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "content-hash": "09896cf89f9921a10a5fec31a548c3a1",
-=======
-    "content-hash": "2811648e90544f87e8e07af1382f893d",
->>>>>>> statistics-block
     "packages": [],
     "packages-dev": [
         {
