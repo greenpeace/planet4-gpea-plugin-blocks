@@ -747,10 +747,10 @@ donationformVue = new Vue({
             this.idealData.phonenumber = this.finalModel.telefoonnummer;
             this.idealData.description = "Eenmalige donatie Greenpeace tnv " + this.finalModel.voornaam + " " + this.finalModel.achternaam;
             this.idealData.amount = this.finalModel.bedrag;
-            this.idealData.returnUrlSuccess = "https://www.greenpeace.nl";
-            this.idealData.returnUrlCancel = "https://www.greenpeace.nl";
-            this.idealData.returnUrlError = "https://www.greenpeace.nl";
-            this.idealData.returnUrlReject = "https://www.greenpeace.nl";
+            this.idealData.returnUrlSuccess = "https://www.greenpeace.org/nl";
+            this.idealData.returnUrlCancel = "https://www.greenpeace.org/nl";
+            this.idealData.returnUrlError = "https://www.greenpeace.org/nl";
+            this.idealData.returnUrlReject = "https://www.greenpeace.org/nl";
             tmp = $.ajax({
                 method: "POST",
                 url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/payment/ideal",
@@ -758,15 +758,14 @@ donationformVue = new Vue({
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function(result) {
-                    alert('Successfully called');
-                    console.log(result);
+                    window.location.replace(result.transaction.redirectUrl);
                 },
                 error: function(jqxhr, status, exception) {
-                    // alert('Exception:', exception);
-                    console.log("Data:");
-                    console.log(this.data);
-                    console.log('AjaxCall:');
-                    console.log(this);
+                    this.onFailure(result.messages);
+                    // console.log("Data:");
+                    // console.log(this.data);
+                    // console.log('AjaxCall:');
+                    // console.log(this);
                 }
             });
         },
