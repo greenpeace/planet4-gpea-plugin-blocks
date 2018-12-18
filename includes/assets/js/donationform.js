@@ -32,13 +32,13 @@ Vue.component('step1', {
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.bedrag.$error }">
               <label>Met een bedrag van:</label>
               <div class="radio-list">
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag1" id="bedrag1" v-bind:value="formconfig.amount1">
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag1" v-bind:value="formconfig.amount1">
                 <label class="form-check-label form-control left" for="bedrag1">&euro;{{ formconfig.amount1 }}</label>
 
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag2" id="bedrag2" v-bind:value="formconfig.amount2" checked="checked">
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag2" v-bind:value="formconfig.amount2" checked="checked">
                 <label class="form-check-label form-control" for="bedrag2">&euro;{{ formconfig.amount2 }}</label>
 
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag3" id="bedrag3" v-bind:value="formconfig.amount3">
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag3" v-bind:value="formconfig.amount3">
                 <label class="form-check-label form-control" for="bedrag3">&euro;{{ formconfig.amount3 }}</label>
               </div>
             </div>
@@ -49,7 +49,7 @@ Vue.component('step1', {
                 <div class="input-group-prepend">
                   <div class="input-group-text">&euro;</div>
                 </div>
-                <input class="form-control" v-model.trim="bedrag" @input="$v.bedrag.$touch()">
+                <input class="form-control" v-model.trim="bedrag" @input="$v.bedrag.$touch()" name="transaction-amount">
                 <span class="help-block" v-if="$v.bedrag.$error && !$v.bedrag.required">Bedrag is verplicht</span>
                 <span class="help-block" v-if="$v.bedrag.$error && $v.bedrag.required && !$v.bedrag.numeric">Bedrag moet een nummer zijn</span>
                 <span class="help-block" v-if="$v.bedrag.$error && $v.bedrag.required && $v.bedrag.numeric && !$v.bedrag.between">Het minimale donatiebedrag is {{ formconfig.min_amount }} euro</span>
@@ -135,7 +135,7 @@ Vue.component('step2', {
                 </div>
 
               <!-- label>Land</label-->
-              <select class="form-control" v-model.trim="geslacht" @input="$v.geslacht.$touch()">
+              <select class="form-control" v-model.trim="geslacht" @input="$v.geslacht.$touch()" name="honorific-prefix">
                 <option value="V">Mevrouw</option>
                 <option value="M">Meneer</option>
                 <option value="O">Beste</option>
@@ -148,13 +148,13 @@ Vue.component('step2', {
           <div class="form-row">
             <div class="form-group col-md-8" v-bind:class="{ 'has-error': $v.voornaam.$error }">
               <!-- label>Voornaam</label-->
-              <input class="form-control" v-model.trim="voornaam" @input="$v.voornaam.$touch()" placeholder="Voornaam*">
+              <input class="form-control" v-model.trim="voornaam" @input="$v.voornaam.$touch()" placeholder="Voornaam*" name="given-name">
                <span class="help-block" v-if="$v.voornaam.$error && !$v.voornaam.required">Voornaam is verplicht</span>
             </div>
 
             <div class="form-group col-md-4" v-bind:class="{ 'has-error': $v.initialen.$error }">
               <!-- label>Initialen</label-->
-              <input class="form-control" v-model.trim="initialen" @input="$v.initialen.$touch()" placeholder="Initialen">
+              <input class="form-control" v-model.trim="initialen" @input="$v.initialen.$touch()" placeholder="Initialen" name="initials">
                <span class="help-block" v-if="$v.initialen.$error && !$v.initialen.required">Initialen zijn verplicht</span>
             </div>
           </div>
@@ -167,7 +167,7 @@ Vue.component('step2', {
 
             <div class="form-group col-md-8" v-bind:class="{ 'has-error': $v.achternaam.$error }">
               <!-- label>Achternaam</label-->
-              <input class="form-control" v-model.trim="achternaam" @input="$v.achternaam.$touch()" placeholder="Achternaam*">
+              <input class="form-control" v-model.trim="achternaam" @input="$v.achternaam.$touch()" placeholder="Achternaam*" name="surname">
                <span class="help-block" v-if="$v.achternaam.$error && !$v.achternaam.required">Achternaam is verplicht</span>
             </div>
           </div>
@@ -175,7 +175,7 @@ Vue.component('step2', {
           <div class="form-row">
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.email.$error }">
               <!-- label>Email</label-->
-              <input class="form-control" v-model.trim="email" @input="$v.email.$touch()" placeholder="E-mail*">
+              <input class="form-control" v-model.trim="email" @input="$v.email.$touch()" placeholder="E-mail*" name="email">
               <span class="help-block" v-if="$v.email.$error && !$v.email.required">E-mail is verplicht</span>
               <span class="help-block" v-if="$v.email.$error && !$v.email.email">Dit is geen valide e-mail adres</span>
             </div>
@@ -184,7 +184,7 @@ Vue.component('step2', {
           <div class="form-row">
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.telefoonnummer.$error }">
               <!-- label>Telefoonnummer</label-->
-              <input class="form-control" v-model.trim="telefoonnummer" @input="$v.telefoonnummer.$touch()" placeholder="Tel. nr.">
+              <input class="form-control" v-model.trim="telefoonnummer" @input="$v.telefoonnummer.$touch()" placeholder="Tel. nr." name="tel">
                <span class="help-block" v-if="$v.telefoonnummer.$error && !$v.telefoonnummer.required">Telefoonnummer is verplicht</span>
                <span class="help-block" v-if="$v.telefoonnummer.$error && $v.telefoonnummer.required && !$v.telefoonnummer.numeric">Telefoonnummer moet een nummer zijn</span>
                <span class="help-block" v-if="$v.telefoonnummer.$error && $v.telefoonnummer.required && $v.telefoonnummer.numeric && !$v.telefoonnummer.between">Telefoonnummer moet uit 10 cijfers bestaan</span>
@@ -266,7 +266,7 @@ Vue.component('step3', {
           <div class="form-row">
             <div class="form-group col-md-5" v-bind:class="{ 'has-error': $v.postcode.$error }">
               <!-- label>Postcode</label-->
-              <input id="postcode" class="form-control" v-model.trim="postcode" @input="$v.postcode.$touch()" placeholder="Postcode*">
+              <input id="postcode" class="form-control" v-model.trim="postcode" @input="$v.postcode.$touch()" placeholder="Postcode*" name="postal-code">
                <span class="help-block" v-if="$v.postcode.$error && !$v.postcode.required">Postcode is verplicht</span>
                <span class="help-block" v-if="$v.postcode.$error && $v.postcode.required && !$v.postcode.alphaNum">Postcode mag alleen letters en cijfers bevatten, geen spaties</span>
                <span class="help-block" v-if="$v.postcode.$error && $v.postcode.required && $v.postcode.alphaNum && !$v.postcode.between">Postcode moet in 0000AA formaat</span>
@@ -297,7 +297,7 @@ Vue.component('step3', {
 
           <div class="form-group" v-bind:class="{ 'has-error': $v.landcode.$error }">
             <!-- label>Land</label-->
-            <select class="form-control" v-model.trim="landcode" @input="$v.landcode.$touch()">
+            <select class="form-control" v-model.trim="landcode" @input="$v.landcode.$touch()" name="country-name">
         			<option value="  "> Selecteer een land</option>
         			<option value="AF">AFGHANISTAN</option>
         			<option value="AL">ALBANIE</option>
@@ -616,7 +616,7 @@ donationformVue = new Vue({
     el: '#app',
     data: {
         finalModel: {
-            marketingcode: formconfig.marketingcode,
+            marketingcode: (formconfig.suggested_frequency[0] === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff ,
             literatuurcode: formconfig.literatuurcode,
             guid: '',
             betaling: (formconfig.suggested_frequency[0] === "M") ? 'EM' : 'ID'
@@ -649,7 +649,7 @@ donationformVue = new Vue({
             returnUrlCancel: "https://www.greenpeace.nl",
             returnUrlError: "https://www.greenpeace.nl",
             returnUrlReject: "https://www.greenpeace.nl",
-            marketingCode: '"' + formconfig.marketingcode + '"',
+            marketingCode: formconfig.marketingcode_oneoff,
             literatureCode: formconfig.literatuurcode,
             guid: null,
             countryId: null,
@@ -735,6 +735,7 @@ donationformVue = new Vue({
 
             this.result.msg = '';
             this.result.hasError = false;
+            this.finalModel.marketingcode = (this.finalModel.machtigingType === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff;
             this.$http.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register", this.finalModel)
             .then(function (response) {
                 this.result.msg = response.bodyText;
@@ -756,13 +757,13 @@ donationformVue = new Vue({
             this.idealData.gender = this.finalModel.geslacht;
             this.idealData.email = this.finalModel.email;
             this.idealData.phonenumber = this.finalModel.telefoonnummer;
-            this.idealData.description = "Eenmalige donatie Greenpeace tnv " + this.finalModel.voornaam + " " + this.finalModel.voornaam;
+            this.idealData.description = "Eenmalige donatie Greenpeace tnv " + this.finalModel.voornaam + " " + this.finalModel.achternaam;
             this.idealData.amount = this.finalModel.bedrag;
             this.idealData.returnUrlSuccess = "https://www.greenpeace.nl";
             this.idealData.returnUrlCancel = "https://www.greenpeace.nl";
             this.idealData.returnUrlError = "https://www.greenpeace.nl";
             this.idealData.returnUrlReject = "https://www.greenpeace.nl";
-            tmp = $.ajax({
+            $.ajax({
                 method: "POST",
                 url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/payment/ideal",
                 data: JSON.stringify(this.idealData),
@@ -773,7 +774,6 @@ donationformVue = new Vue({
                     // window.open(result.transaction.redirectUrl);
                 },
                 error: function(jqxhr, status, exception) {
-
                     // alert('Exception:', exception);
                     console.log("Data:");
                     console.log(this.data);
