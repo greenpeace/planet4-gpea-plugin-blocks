@@ -3,7 +3,7 @@
   "description": "This repository contains the WordPress plugin that provides the blocks to be used with Shortcake UI plugin.",
   "type": "wordpress-plugin",
   "version": "2.2.28",
-  "license": "GPL-3.0+",
+  "license": "GPL-3.0-or-later",
   "authors": [
     {
       "name": "Greenpeace Netherlands",
