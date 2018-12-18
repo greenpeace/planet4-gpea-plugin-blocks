@@ -107,11 +107,19 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'label' => __( 'Literatuurcode', 'planet4-gpnl-blocks' ),
 					'attr'  => 'literatuurcode',
 					'type'  => 'text',
+					'value' => 'EN999',
 				),
 				array(
-					'label' => __( 'Marketingcode', 'planet4-gpnl-blocks' ),
-					'attr'  => 'marketingcode',
+					'label' => __( 'Marketingcode - Terugkerende betalingen', 'planet4-gpnl-blocks' ),
+					'attr'  => 'marketingcode_recurring',
 					'type'  => 'text',
+					'value' => '04888',
+				),
+				array(
+					'label' => __( 'Marketingcode  - Eenmalige betalingen', 'planet4-gpnl-blocks' ),
+					'attr'  => 'marketingcode_oneoff',
+					'type'  => 'text',
+					'value' => '04888',
 				),
 			);
 
@@ -151,7 +159,8 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'thanktitle'       => '',
 				'thankdescription' => '',
 				'literatuurcode' => '',
-				'marketingcode' => '',
+				'marketingcode_recurring' => '',
+				'marketingcode_oneoff' => '',
 			), $fields, $shortcode_tag );
 
 			$frequencies = [
@@ -184,7 +193,8 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'suggested_frequency'      => $fields['suggested_frequency'],
 					'allow_frequency_override' => $fields['allow_frequency_override'],
 					'literatuurcode'           => $fields['literatuurcode'],
-					'marketingcode'            => $fields['marketingcode'],
+					'marketingcode_recurring'  => $fields['marketingcode_recurring'],
+					'marketingcode_oneoff'     => $fields['marketingcode_oneoff'],
 					'thanktitle'               => $fields['thanktitle'],
 					'thankdescription'         => $fields['thankdescription'],
 				)

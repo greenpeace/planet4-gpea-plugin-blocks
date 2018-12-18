@@ -1,0 +1,25 @@
+.stats {
+	background-color: #66cc00;
+	text-align: center;
+}
+
+.stats strong {
+	color: white;
+	font-weight: 600;
+	font-size: 30px;
+}
+
+.stat__text {
+	margin-bottom: 0;
+	color: #044465
+}
+
+.stat-column {
+	padding: 20px;
+}
+
+.stat--bigwhite {
+	color: white;
+	font-weight: 600;
+	font-size: 20px;
+}
