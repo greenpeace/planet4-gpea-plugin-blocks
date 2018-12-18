@@ -650,9 +650,10 @@ donationformVue = new Vue({
         onComplete: function() {
             inputs = $('#app input');
             buttons = $('#app button');
-            $('.wizard-footer-right .wizard-btn').text('Laden...');
-            // this.disableFormElements(inputs);
-            // this.disableFormElements(buttons);
+            $('.wizard-footer-right .wizard-btn').text('');
+            $('.wizard-footer-right .wizard-btn').addClass('loader');
+            this.disableFormElements(inputs);
+            this.disableFormElements(buttons);
             if (this.finalModel.betaling === "ID"){
                 this.submitiDeal();
             }

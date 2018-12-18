@@ -23,3 +23,5 @@ Thumbs.db
 
 gitflow/
 .editorconfig
+
+node_modules/
