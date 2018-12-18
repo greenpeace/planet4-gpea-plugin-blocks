@@ -751,7 +751,7 @@ donationformVue = new Vue({
             this.idealData.returnUrlCancel = "https://www.greenpeace.org/nl";
             this.idealData.returnUrlError = "https://www.greenpeace.org/nl";
             this.idealData.returnUrlReject = "https://www.greenpeace.org/nl";
-            tmp = $.ajax({
+            $.ajax({
                 method: "POST",
                 url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/payment/ideal",
                 data: JSON.stringify(this.idealData),
