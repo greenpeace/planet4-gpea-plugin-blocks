@@ -508,19 +508,6 @@ Vue.component('step3', {
           </div>
           <div class="machtiging_info">
             Ik machtig hierbij Greenpeace tot wederopzegging (of éénmalig indien hierboven gekozen) bovengenoemd bedrag van mijn rekening af te schrijven.<br/><br/>
-            Greenpeace beschermt je gegevens en geeft ze niet aan derden voor commerciële doeleinden. Lees ook ons <a href="/privacy" target="_blank">privacy-beleid</a>.<br/><br/>
-          <label><a href="#privacyModal">Over jouw privacy</a></label><br/>
-            <div id="privacyModal" class="modalDialog">
-              <a href="#close" title="Close" class="close">X</a>
-              <p>Greenpeace informeert en betrekt jou als supporter natuurlijk heel graag bij onze doelen. Hiervoor vragen we jou om jouw persoonsgegevens met ons te delen.<br/><br/>Greenpeace gebruikt je (persoons)gegevens om uitvoering te geven aan je donatie en om je op de hoogte te houden van haar activiteiten. Daarnaast kan Greenpeace jouw (persoons)gegevens gebruiken voor marketingdoeleinden per telefoon, post en email. Zie www.greenpeace.nl/privacy voor meer informatie over hoe Greenpeace met jouw gegevens omgaat.</p>
-              <p>Vul je je adresgegevens in? Dan kan Greenpeace je per post op de hoogte houden van haar werk. Je ontvangt dan bijvoorbeeld periodiek ons geweldige magazine! Vul je je telefoonnummer in? Dan kan Greenpeace jou telefonisch benaderen voor giftverzoeken of updates rondom lopende campagnes.</p>
-              <p>Wil je geen informatie meer van Greenpeace ontvangen? Neem dan kosteloos contact op met ons Supporter Care team: 0800 422 33 44 of ga naar greenpeace.nl</p>
-            </div>
-          <label><a href="#sepaModal"SEPA machtiging</a></label>
-            <div id="sepaModal" class="modalDialog">
-              <a href="#close" title="Close" class="close">X</a>
-              <p>Door ondertekening van dit formulier geef je toestemming aan Greenpeace om eenmalig of doorlopend incasso-opdrachten naar jouw bank te sturen wegens je donateurschap aan Greenpeace zodat een bedrag van je rekening afgeschreven kan worden en aan jouw bank om eenmalig of doorlopend een bedrag van je rekening af te schrijven overeenkomstig de opdracht van Greenpeace. Als je het niet eens bent met deze afschrijving kun je deze laten terugboeken. Neem hiervoor 1binnen acht weken na afschrijving contact op met jouw bank.<br/>Vraag je bank naar de voorwaarden.</p>
-              </div>
           </div>
         </div>`,
     data() {
@@ -530,7 +517,7 @@ Vue.component('step3', {
             huisnummer: '',
             huisnummertoevoeging: '',
             woonplaats: '',
-            landcode: ''
+            landcode: 'NL'
         }
     },
     validations: {
@@ -663,6 +650,7 @@ donationformVue = new Vue({
         onComplete: function() {
             inputs = $('#app input');
             buttons = $('#app button');
+            $('.wizard-footer-right .wizard-btn').text('Laden...');
             // this.disableFormElements(inputs);
             // this.disableFormElements(buttons);
             if (this.finalModel.betaling === "ID"){
@@ -763,7 +751,7 @@ donationformVue = new Vue({
             this.idealData.returnUrlCancel = "https://www.greenpeace.nl";
             this.idealData.returnUrlError = "https://www.greenpeace.nl";
             this.idealData.returnUrlReject = "https://www.greenpeace.nl";
-            $.ajax({
+            tmp = $.ajax({
                 method: "POST",
                 url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/payment/ideal",
                 data: JSON.stringify(this.idealData),
@@ -771,7 +759,7 @@ donationformVue = new Vue({
                 dataType: "json",
                 success: function(result) {
                     alert('Successfully called');
-                    // window.open(result.transaction.redirectUrl);
+                    console.log(result);
                 },
                 error: function(jqxhr, status, exception) {
                     // alert('Exception:', exception);
