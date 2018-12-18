@@ -725,7 +725,7 @@ donationformVue = new Vue({
             this.result.msg = '';
             this.result.hasError = false;
             this.finalModel.marketingcode = (this.finalModel.machtigingType === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff;
-            this.$http.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register", this.finalModel)
+            $.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register", this.finalModel)
             .then(function (response) {
                 this.result.msg = response.bodyText;
                 this.result.hasError = false;
