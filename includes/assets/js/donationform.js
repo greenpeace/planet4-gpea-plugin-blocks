@@ -650,7 +650,7 @@ donationformVue = new Vue({
         onComplete: function() {
             inputs = $('#app input');
             buttons = $('#app button');
-            // $('.wizard-btn').addClass('loading')
+            $('.wizard-footer-right .wizard-btn').text('Laden...');
             // this.disableFormElements(inputs);
             // this.disableFormElements(buttons);
             if (this.finalModel.betaling === "ID"){
@@ -751,7 +751,7 @@ donationformVue = new Vue({
             this.idealData.returnUrlCancel = "https://www.greenpeace.nl";
             this.idealData.returnUrlError = "https://www.greenpeace.nl";
             this.idealData.returnUrlReject = "https://www.greenpeace.nl";
-            $.ajax({
+            tmp = $.ajax({
                 method: "POST",
                 url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/payment/ideal",
                 data: JSON.stringify(this.idealData),
@@ -759,7 +759,7 @@ donationformVue = new Vue({
                 dataType: "json",
                 success: function(result) {
                     alert('Successfully called');
-                    // window.open(result.transaction.redirectUrl);
+                    console.log(result);
                 },
                 error: function(jqxhr, status, exception) {
                     // alert('Exception:', exception);
