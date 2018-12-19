@@ -672,11 +672,6 @@ donationformVue = new Vue({
             var cardBody = $('.donation-card');
             cardBody.append('<h2 class="card-title">{{ formconfig.thanktitle }}</h2>');
             cardBody.append('<p class="card-text">{{ formconfig.thankdescription}}</p>');
-            buttons = $('#app button');
-            // buttons.each(function() {
-            //     button = $(this);
-            //     button.hide();
-            // });
             // Push step to tag manager
             dataLayer.push({
                 'event': 'virtualPageViewDonatie',
@@ -717,7 +712,7 @@ donationformVue = new Vue({
         },
 
         onFailure: function(result) {
-            alert('Helaas gaat er iets mis met de donatieverwerking. Er wordt geen geld afgeschreven, probeer het later nog eens. '+result.msg);
+            alert('Helaas gaat er iets mis met de donatieverwerking. Er wordt geen geld afgeschreven, probeer het later nog eens.');
         },
 
         submit: function () {
@@ -727,13 +722,14 @@ donationformVue = new Vue({
             this.finalModel.marketingcode = (this.finalModel.machtigingType === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff;
             $.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register", this.finalModel)
             .then(function (response) {
-                this.result.msg = response.bodyText;
-                this.result.hasError = false;
-                this.onSucces(this.result);
+                if (response.success === 'true'){
+					donationformVue.onSucces();
+				}
+                else{
+					donationformVue.onFailure();
+				}
             }, function (error) {
-                this.result.msg = error.bodyText;
-                this.result.hasError = true;
-                this.onFailure(this.result);
+                donationformVue.onFailure();
             });
         },
         submitiDeal: function () {
@@ -759,7 +755,7 @@ donationformVue = new Vue({
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function(result) {
-                    window.location.replace(result.transaction.redirectUrl);
+                    window.location.href(result.transaction.redirectUrl);
                 },
                 error: function(jqxhr, status, exception) {
                     this.onFailure(result.messages);
