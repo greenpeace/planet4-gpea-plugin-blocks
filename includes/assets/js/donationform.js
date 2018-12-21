@@ -715,23 +715,45 @@ donationformVue = new Vue({
             alert('Helaas gaat er iets mis met de donatieverwerking. Er wordt geen geld afgeschreven, probeer het later nog eens.');
         },
 
-        submit: function () {
+		submit: function () {
 
-            this.result.msg = '';
-            this.result.hasError = false;
-            this.finalModel.marketingcode = (this.finalModel.machtigingType === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff;
-            $.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register", this.finalModel)
-            .then(function (response) {
-                if (response.success === 'true'){
-					donationformVue.onSucces();
+			this.result.msg = '';
+			this.result.hasError = false;
+			this.finalModel.marketingcode = (this.finalModel.machtigingType === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff;
+			// this.$http.post("", this.finalModel)
+			// .then(function (response) {
+			//     this.result.msg = response.bodyText;
+			//     this.result.hasError = false;
+			//
+			// }, function (error) {
+			//     this.result.msg = error.bodyText;
+			//     this.result.hasError = true;
+			//     this.onFailure(this.result);
+			// });
+			$.ajax({
+				method: "POST",
+				url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register",
+				data: JSON.stringify(this.finalModel),
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function(result) {
+					alert('Successfully called');
+					// donationformVue.onSucces(this.result);
+				},
+				error: function(jqxhr, status, exception) {
+
+					// alert('Exception:', exception);
+					console.log("Data:");
+					console.log(this.data);
+					console.log('AjaxCall:');
+					console.log(this);
+					// this.result.msg = error.bodyText;
+				//     this.result.hasError = true;
+				    donationformVue.onFailure();
 				}
-                else{
-					donationformVue.onFailure();
-				}
-            }, function (error) {
-                donationformVue.onFailure();
-            });
-        },
+			});
+		},
+
         submitiDeal: function () {
             this.result.msg = '';
             this.result.hasError = false;
