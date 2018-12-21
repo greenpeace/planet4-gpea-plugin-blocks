@@ -672,6 +672,8 @@ donationformVue = new Vue({
 			var cardBody = $('.donation-card');
 			cardBody.append('<h2 class="card-title">'+formconfig.thanktitle+'</h2>');
 			cardBody.append('<p class="card-text">'+formconfig.thankdescription+'</p>');
+			$('.wizard-footer-right .wizard-btn').removeClass('loader');
+			$('.wizard-footer-right .wizard-btn').text('Afgerond');
 			// Push step to tag manager
             dataLayer.push({
                 'event': 'virtualPageViewDonatie',
@@ -711,7 +713,7 @@ donationformVue = new Vue({
             /** End Google Tag Manager E-commerce */
         },
 
-        onFailure: function(result) {
+        onFailure: function() {
 			var formBody = $("#Adres4");
 			formBody.addClass('card');
 			formBody.empty();
@@ -719,6 +721,8 @@ donationformVue = new Vue({
 			var cardBody = $('.donation-card');
 			cardBody.append('<h2 class="card-title">Sorry..</h2>');
 			cardBody.append('<p class="card-text">Helaas gaat er iets mis met de donatieverwerking. Er wordt geen geld afgeschreven, probeer het later nog eens.</p>');
+			$('.wizard-footer-right .wizard-btn').removeClass('loader');
+			$('.wizard-footer-right .wizard-btn').text('Afgerond');
         },
 
 		submit: function () {
@@ -726,29 +730,24 @@ donationformVue = new Vue({
 			this.result.msg = '';
 			this.result.hasError = false;
 			this.finalModel.marketingcode = (this.finalModel.machtigingType === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff;
-			this.onSucces();
-			// $.ajax({
-			// 	method: "POST",
-			// 	url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register",
-			// 	data: JSON.stringify(this.finalModel),
-			// 	contentType: "application/json; charset=utf-8",
-			// 	dataType: "json",
-			// 	success: function(result) {
-			// 		alert('Successfully called');
-			// 		// donationformVue.onSucces(this.result);
-			// 	},
-			// 	error: function(jqxhr, status, exception) {
-			//
-			// 		// alert('Exception:', exception);
-			// 		console.log("Data:");
-			// 		console.log(this.data);
-			// 		console.log('AjaxCall:');
-			// 		console.log(this);
-			// 		// this.result.msg = error.bodyText;
-			// 	//     this.result.hasError = true;
-			// 	    donationformVue.onFailure();
-			// 	}
-			// });
+			$.ajax({
+				method: "POST",
+				url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi/machtiging/register",
+				data: JSON.stringify(this.finalModel),
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function(result) {
+					donationformVue.onSucces();
+				},
+				error: function(jqxhr, status, exception) {
+
+					console.log("Data:");
+					console.log(this.data);
+					console.log('AjaxCall:');
+					console.log(this);
+				    donationformVue.onFailure();
+				}
+			});
 		},
 
         submitiDeal: function () {
@@ -769,7 +768,7 @@ donationformVue = new Vue({
             this.idealData.returnUrlReject = "https://www.greenpeace.org/nl";
             $.ajax({
                 method: "POST",
-                url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/payment/ideal",
+                url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi/payment/ideal",
                 data: JSON.stringify(this.idealData),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -777,7 +776,7 @@ donationformVue = new Vue({
                     window.location.href(result.transaction.redirectUrl);
                 },
                 error: function(jqxhr, status, exception) {
-                    this.onFailure(result.messages);
+                    donationformVue.onFailure();
                     // console.log("Data:");
                     // console.log(this.data);
                     // console.log('AjaxCall:');
