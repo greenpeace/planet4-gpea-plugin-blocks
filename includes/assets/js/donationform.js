@@ -773,7 +773,7 @@ donationformVue = new Vue({
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function(result) {
-                    window.location.href(result.transaction.redirectUrl);
+                    window.location.href = result.transaction.redirectUrl;
                 },
                 error: function(jqxhr, status, exception) {
                     donationformVue.onFailure();
