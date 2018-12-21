@@ -654,6 +654,7 @@ donationformVue = new Vue({
             $('.wizard-footer-right .wizard-btn').addClass('loader');
             this.disableFormElements(inputs);
             this.disableFormElements(buttons);
+			$('.wizard-nav > li > a').addClass('disabled');
             if (this.finalModel.betaling === "ID"){
                 this.submitiDeal();
             }
@@ -662,17 +663,16 @@ donationformVue = new Vue({
             }
         },
 
-        onSucces: function(result) {
-            // console.log(result.msg);
-            console.log(this.finalModel);
+        onSucces: function() {
+            // console.log(this.finalModel);
             var formBody = $("#Adres4");
             formBody.addClass('card');
             formBody.empty();
             formBody.append('<div class="card-body donation-card"></div>')
-            var cardBody = $('.donation-card');
-            cardBody.append('<h2 class="card-title">{{ formconfig.thanktitle }}</h2>');
-            cardBody.append('<p class="card-text">{{ formconfig.thankdescription}}</p>');
-            // Push step to tag manager
+			var cardBody = $('.donation-card');
+			cardBody.append('<h2 class="card-title">'+formconfig.thanktitle+'</h2>');
+			cardBody.append('<p class="card-text">'+formconfig.thankdescription+'</p>');
+			// Push step to tag manager
             dataLayer.push({
                 'event': 'virtualPageViewDonatie',
                 'virtualPageviewStep': 'Bedankt', //Vul hier de stap in. E.g. Stap 1, Stap 2, Stap 3, Bedankt
@@ -712,7 +712,13 @@ donationformVue = new Vue({
         },
 
         onFailure: function(result) {
-            alert('Helaas gaat er iets mis met de donatieverwerking. Er wordt geen geld afgeschreven, probeer het later nog eens.');
+			var formBody = $("#Adres4");
+			formBody.addClass('card');
+			formBody.empty();
+			formBody.append('<div class="card-body donation-card"></div>')
+			var cardBody = $('.donation-card');
+			cardBody.append('<h2 class="card-title">Sorry..</h2>');
+			cardBody.append('<p class="card-text">Helaas gaat er iets mis met de donatieverwerking. Er wordt geen geld afgeschreven, probeer het later nog eens.</p>');
         },
 
 		submit: function () {
@@ -720,38 +726,29 @@ donationformVue = new Vue({
 			this.result.msg = '';
 			this.result.hasError = false;
 			this.finalModel.marketingcode = (this.finalModel.machtigingType === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff;
-			// this.$http.post("", this.finalModel)
-			// .then(function (response) {
-			//     this.result.msg = response.bodyText;
-			//     this.result.hasError = false;
+			this.onSucces();
+			// $.ajax({
+			// 	method: "POST",
+			// 	url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register",
+			// 	data: JSON.stringify(this.finalModel),
+			// 	contentType: "application/json; charset=utf-8",
+			// 	dataType: "json",
+			// 	success: function(result) {
+			// 		alert('Successfully called');
+			// 		// donationformVue.onSucces(this.result);
+			// 	},
+			// 	error: function(jqxhr, status, exception) {
 			//
-			// }, function (error) {
-			//     this.result.msg = error.bodyText;
-			//     this.result.hasError = true;
-			//     this.onFailure(this.result);
+			// 		// alert('Exception:', exception);
+			// 		console.log("Data:");
+			// 		console.log(this.data);
+			// 		console.log('AjaxCall:');
+			// 		console.log(this);
+			// 		// this.result.msg = error.bodyText;
+			// 	//     this.result.hasError = true;
+			// 	    donationformVue.onFailure();
+			// 	}
 			// });
-			$.ajax({
-				method: "POST",
-				url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register",
-				data: JSON.stringify(this.finalModel),
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function(result) {
-					alert('Successfully called');
-					// donationformVue.onSucces(this.result);
-				},
-				error: function(jqxhr, status, exception) {
-
-					// alert('Exception:', exception);
-					console.log("Data:");
-					console.log(this.data);
-					console.log('AjaxCall:');
-					console.log(this);
-					// this.result.msg = error.bodyText;
-				//     this.result.hasError = true;
-				    donationformVue.onFailure();
-				}
-			});
 		},
 
         submitiDeal: function () {
