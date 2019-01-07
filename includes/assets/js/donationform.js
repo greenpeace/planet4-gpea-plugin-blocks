@@ -650,9 +650,11 @@ donationformVue = new Vue({
         onComplete: function() {
             inputs = $('#app input');
             buttons = $('#app button');
-            $('.wizard-footer-right .wizard-btn').text('Laden...');
-            // this.disableFormElements(inputs);
-            // this.disableFormElements(buttons);
+            $('.wizard-footer-right .wizard-btn').text('');
+            $('.wizard-footer-right .wizard-btn').addClass('loader');
+            this.disableFormElements(inputs);
+            this.disableFormElements(buttons);
+			$('.wizard-nav > li > a').addClass('disabled');
             if (this.finalModel.betaling === "ID"){
                 this.submitiDeal();
             }
@@ -661,22 +663,18 @@ donationformVue = new Vue({
             }
         },
 
-        onSucces: function(result) {
-            // console.log(result.msg);
-            console.log(this.finalModel);
+        onSucces: function() {
+            // console.log(this.finalModel);
             var formBody = $("#Adres4");
             formBody.addClass('card');
             formBody.empty();
             formBody.append('<div class="card-body donation-card"></div>')
-            var cardBody = $('.donation-card');
-            cardBody.append('<h2 class="card-title">{{ formconfig.thanktitle }}</h2>');
-            cardBody.append('<p class="card-text">{{ formconfig.thankdescription}}</p>');
-            buttons = $('#app button');
-            // buttons.each(function() {
-            //     button = $(this);
-            //     button.hide();
-            // });
-            // Push step to tag manager
+			var cardBody = $('.donation-card');
+			cardBody.append('<h2 class="card-title">'+formconfig.thanktitle+'</h2>');
+			cardBody.append('<p class="card-text">'+formconfig.thankdescription+'</p>');
+			$('.wizard-footer-right .wizard-btn').removeClass('loader');
+			$('.wizard-footer-right .wizard-btn').text('Afgerond');
+			// Push step to tag manager
             dataLayer.push({
                 'event': 'virtualPageViewDonatie',
                 'virtualPageviewStep': 'Bedankt', //Vul hier de stap in. E.g. Stap 1, Stap 2, Stap 3, Bedankt
@@ -715,26 +713,43 @@ donationformVue = new Vue({
             /** End Google Tag Manager E-commerce */
         },
 
-        onFailure: function(result) {
-            alert('Helaas gaat er iets mis met de donatieverwerking. Er wordt geen geld afgeschreven, probeer het later nog eens. '+result.msg);
+        onFailure: function() {
+			var formBody = $("#Adres4");
+			formBody.addClass('card');
+			formBody.empty();
+			formBody.append('<div class="card-body donation-card"></div>')
+			var cardBody = $('.donation-card');
+			cardBody.append('<h2 class="card-title">Sorry..</h2>');
+			cardBody.append('<p class="card-text">Helaas gaat er iets mis met de donatieverwerking. Er wordt geen geld afgeschreven, probeer het later nog eens.</p>');
+			$('.wizard-footer-right .wizard-btn').removeClass('loader');
+			$('.wizard-footer-right .wizard-btn').text('Afgerond');
         },
 
-        submit: function () {
+		submit: function () {
 
-            this.result.msg = '';
-            this.result.hasError = false;
-            this.finalModel.marketingcode = (this.finalModel.machtigingType === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff;
-            this.$http.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register", this.finalModel)
-            .then(function (response) {
-                this.result.msg = response.bodyText;
-                this.result.hasError = false;
-                this.onSucces(this.result);
-            }, function (error) {
-                this.result.msg = error.bodyText;
-                this.result.hasError = true;
-                this.onFailure(this.result);
-            });
-        },
+			this.result.msg = '';
+			this.result.hasError = false;
+			this.finalModel.marketingcode = (this.finalModel.machtigingType === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff;
+			$.ajax({
+				method: "POST",
+				url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi/machtiging/register",
+				data: JSON.stringify(this.finalModel),
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function(result) {
+					donationformVue.onSucces();
+				},
+				error: function(jqxhr, status, exception) {
+
+					console.log("Data:");
+					console.log(this.data);
+					console.log('AjaxCall:');
+					console.log(this);
+				    donationformVue.onFailure();
+				}
+			});
+		},
+
         submitiDeal: function () {
             this.result.msg = '';
             this.result.hasError = false;
@@ -747,26 +762,25 @@ donationformVue = new Vue({
             this.idealData.phonenumber = this.finalModel.telefoonnummer;
             this.idealData.description = "Eenmalige donatie Greenpeace tnv " + this.finalModel.voornaam + " " + this.finalModel.achternaam;
             this.idealData.amount = this.finalModel.bedrag;
-            this.idealData.returnUrlSuccess = "https://www.greenpeace.nl";
-            this.idealData.returnUrlCancel = "https://www.greenpeace.nl";
-            this.idealData.returnUrlError = "https://www.greenpeace.nl";
-            this.idealData.returnUrlReject = "https://www.greenpeace.nl";
-            tmp = $.ajax({
+            this.idealData.returnUrlSuccess = "https://www.greenpeace.org/nl";
+            this.idealData.returnUrlCancel = "https://www.greenpeace.org/nl";
+            this.idealData.returnUrlError = "https://www.greenpeace.org/nl";
+            this.idealData.returnUrlReject = "https://www.greenpeace.org/nl";
+            $.ajax({
                 method: "POST",
-                url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/payment/ideal",
+                url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi/payment/ideal",
                 data: JSON.stringify(this.idealData),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function(result) {
-                    alert('Successfully called');
-                    console.log(result);
+                    window.location.href = result.transaction.redirectUrl;
                 },
                 error: function(jqxhr, status, exception) {
-                    // alert('Exception:', exception);
-                    console.log("Data:");
-                    console.log(this.data);
-                    console.log('AjaxCall:');
-                    console.log(this);
+                    donationformVue.onFailure();
+                    // console.log("Data:");
+                    // console.log(this.data);
+                    // console.log('AjaxCall:');
+                    // console.log(this);
                 }
             });
         },
