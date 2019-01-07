@@ -7,9 +7,11 @@ const {
     email,
     numeric,
     alphaNum,
-    requiredUnless
+	requiredUnless
 } = window.validators
 Vue.use(VueFormWizard)
+
+Vue.config.devtools = true;
 
 
 Vue.component('step1', {
@@ -32,14 +34,14 @@ Vue.component('step1', {
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.bedrag.$error }">
               <label>Met een bedrag van:</label>
               <div class="radio-list">
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag1" v-bind:value="formconfig.amount1">
-                <label class="form-check-label form-control left" for="bedrag1">&euro;{{ formconfig.amount1 }}</label>
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag1" v-bind:value="amount1">
+                <label class="form-check-label form-control left" for="bedrag1">&euro;{{ amount1 }}</label>
 
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag2" v-bind:value="formconfig.amount2" checked="checked">
-                <label class="form-check-label form-control" for="bedrag2">&euro;{{ formconfig.amount2 }}</label>
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag2" v-bind:value="amount2" checked="checked">
+                <label class="form-check-label form-control" for="bedrag2">&euro;{{ amount2 }}</label>
 
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag3" v-bind:value="formconfig.amount3">
-                <label class="form-check-label form-control" for="bedrag3">&euro;{{ formconfig.amount3 }}</label>
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag3" v-bind:value="amount3">
+                <label class="form-check-label form-control" for="bedrag3">&euro;{{ amount3 }}</label>
               </div>
             </div>
 
@@ -78,8 +80,11 @@ Vue.component('step1', {
     data() {
         return {
             machtigingType: formconfig.suggested_frequency[0],
-            bedrag: formconfig.suggested_amount,
-            betaling: (formconfig.suggested_frequency[0] === "M") ? 'EM' : 'ID',
+			amount1:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount1          : formconfig.oneoff_amount1,
+			amount2:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount2          : formconfig.oneoff_amount2,
+			amount3:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount3          : formconfig.oneoff_amount3,
+            bedrag:        (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_suggested_amount : formconfig.oneoff_suggested_amount,
+            betaling:      (formconfig.suggested_frequency[0] === "M") ? 'EM' : 'ID',
         }
     },
     validations: {
@@ -113,15 +118,15 @@ Vue.component('step1', {
             return isValid
         },
         changePeriodic() {
-            if (this.$data.machtigingType === "M") {
-                this.$data.betaling =  "EM";
-            }
-            else{
-                this.$data.betaling =  "ID";
-            }
+			this.$data.amount1    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount1          : formconfig.oneoff_amount1 ;
+			this.$data.amount2    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount2          : formconfig.oneoff_amount2 ;
+			this.$data.amount3    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount3          : formconfig.oneoff_amount3 ;
+			this.$data.bedrag     = (this.$data.machtigingType === "M") ? formconfig.recurring_suggested_amount : formconfig.oneoff_suggested_amount ;
+			this.$data.min_amount = (this.$data.machtigingType === "M") ? formconfig.recurring_min_amount       : formconfig.oneoff_min_amount ;
+			this.$data.betaling   = (this.$data.machtigingType === "M") ? "EM" : "ID";
             this.validate();
         }
-    }
+	}
 })
 
 Vue.component('step2', {
