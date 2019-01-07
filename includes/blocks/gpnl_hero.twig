@@ -2,20 +2,16 @@
 
   {% if ( fields ) %}
 
-	  <div class="row quote quote--dark">
-		  <div class="col-2">
+	  <div class="hero">
 			  <img
-					  class="quote__img"
+					  class="hero__img"
 					  src="{{ fields.image }}"
 					  srcset="{{ fields.image_srcset }}"
 					  sizes="{{ fields.image_sizes }}"
 					  alt="{{ fields.alt_text }}"
 			  >
-		  </div>
-		  <div class="col-10">
-			  <p class="quote__text">“{{ fields.quote|e('wp_kses_post')|raw }}”</p>
-			  <p class="quote__author">- {{ fields.quotee }}</p>
-		  </div>
+			  <p class="hero__title">“{{ fields.title }}”</p>
+			  <p class="hero__description">- {{ fields.description|e('wp_kses_post')|raw }}</p>
 	  </div>
 
 

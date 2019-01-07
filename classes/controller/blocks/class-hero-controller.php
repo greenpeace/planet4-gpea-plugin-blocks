@@ -29,17 +29,14 @@ if ( ! class_exists( 'GPNL_hero_Controller' ) ) {
 		public function prepare_fields() {
 			$fields = array(
 				array(
-					'label' => __( 'Quote', 'planet4-gpnl-blocks' ),
-					'attr'  => 'quote',
-					'type'  => 'textarea',
-					'value' => "We are going to exit the fossil fuel era.
-It is inevitable",
+					'label' => __( 'Kop', 'planet4-gpnl-blocks' ),
+					'attr'  => 'title',
+					'type'  => 'text',
 				),
 				array(
-					'label' => __( 'Quotee', 'planet4-gpnl-blocks' ),
-					'attr'  => 'quotee',
-					'type'  => 'text',
-					'value' => "Elon Musk",
+					'label' => __( 'Abstract', 'planet4-gpnl-blocks' ),
+					'attr'  => 'description',
+					'type'  => 'textarea',
 				),
 				array(
 					'label'       => __( 'Afbeelding', 'planet4-blocks-backend' ),
@@ -77,9 +74,9 @@ It is inevitable",
 
 			$fields = shortcode_atts(
 				array(
-					'quote'  => '',
-					'quotee' => '',
-					'image'  => '',
+					'title'       => '',
+					'description' => '',
+					'image'       => '',
 				),
 				$fields,
 				$shortcode_tag
@@ -98,7 +95,7 @@ It is inevitable",
 				'fields' => $fields,
 			];
 
-			wp_enqueue_style( 'gpnl_quote_css', P4NLBKS_ASSETS_DIR . 'css/gpnl-quote.css', [], '2.2.29' );
+			wp_enqueue_style( 'gpnl_hero_css', P4NLBKS_ASSETS_DIR . 'css/gpnl-hero.css', [], '2.2.29' );
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
