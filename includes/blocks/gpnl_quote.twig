@@ -3,7 +3,7 @@
   {% if ( fields ) %}
 
 	  <div class="row quote quote--dark">
-		  <div class="col-4">
+		  <div class="col-2">
 			  <img
 					  class="quote__img"
 					  src="{{ fields.image }}"
@@ -12,7 +12,7 @@
 					  alt="{{ fields.alt_text }}"
 			  >
 		  </div>
-		  <div class="col-8">
+		  <div class="col-10">
 			  <p class="quote__text">“{{ fields.quote|e('wp_kses_post')|raw }}”</p>
 			  <p class="quote__author">- {{ fields.quotee }}</p>
 		  </div>
