@@ -1,4 +1,4 @@
-{% block gpnl_quote %}
+{% block gpnl_hero %}
 
   {% if ( fields ) %}
 
@@ -12,6 +12,10 @@
 			  >
 			  <p class="hero__title">“{{ fields.title }}”</p>
 			  <p class="hero__description">- {{ fields.description|e('wp_kses_post')|raw }}</p>
+		  <div class="col-xs-12 col-sm-8 col-md-4 action-button">
+			  <a href="{{ fields.link_url_ }}"
+				 class="btn btn-small btn-medium btn-primary btn-block">{{ fields.link_text }}</a>
+		  </div>
 	  </div>
 
 

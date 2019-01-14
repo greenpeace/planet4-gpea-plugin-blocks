@@ -28,24 +28,44 @@ if ( ! class_exists( 'GPNL_hero_Controller' ) ) {
 		 */
 		public function prepare_fields() {
 			$fields = array(
-				array(
+				[
 					'label' => __( 'Kop', 'planet4-gpnl-blocks' ),
 					'attr'  => 'title',
 					'type'  => 'text',
-				),
-				array(
+				],
+				[
 					'label' => __( 'Abstract', 'planet4-gpnl-blocks' ),
 					'attr'  => 'description',
 					'type'  => 'textarea',
-				),
-				array(
+				],
+				[
 					'label'       => __( 'Afbeelding', 'planet4-blocks-backend' ),
 					'attr'        => 'image',
 					'type'        => 'attachment',
 					'libraryType' => [ 'image' ],
 					'addButton'   => __( 'Selecteer afbeelding', 'planet4-blocks-backend' ),
 					'frameTitle'  => __( 'Selecteer afbeelding', 'planet4-blocks-backend' ),
-				),
+				],
+				[
+					'label' => __( 'Text for link', 'planet4-blocks-backend' ),
+					'attr'  => 'link_text',
+					'type'  => 'url',
+					'meta'  => [
+						// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
+						'placeholder' => sprintf( __( 'Enter link text for %s image', 'planet4-blocks-backend' ) ),
+						'data-plugin' => 'planet4-blocks',
+					],
+				],
+				[
+					'label' => __( 'Url for link', 'planet4-blocks-backend' ),
+					'attr'  => 'link_url',
+					'type'  => 'url',
+					'meta'  => [
+						// translators: placeholder needs to represent the ordinal of the image, eg. 1st, 2nd etc.
+						'placeholder' => sprintf( __( 'Enter link url for %s image', 'planet4-blocks-backend' ) ),
+						'data-plugin' => 'planet4-blocks',
+					],
+				],
 			);
 
 			// Define the Shortcode UI arguments.
@@ -77,6 +97,8 @@ if ( ! class_exists( 'GPNL_hero_Controller' ) ) {
 					'title'       => '',
 					'description' => '',
 					'image'       => '',
+					'link_text'   => '',
+					'link_url'    => '',
 				),
 				$fields,
 				$shortcode_tag
