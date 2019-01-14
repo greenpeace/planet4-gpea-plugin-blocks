@@ -7,79 +7,87 @@ const {
     email,
     numeric,
     alphaNum,
-    requiredUnless
+	requiredUnless
 } = window.validators
 Vue.use(VueFormWizard)
+
+Vue.config.devtools = true;
 
 
 Vue.component('step1', {
     template: `
         <div>
           <div class="form-group" v-bind:class="{ 'has-error': $v.machtigingType }">
-            <label v-if="formconfig.allow_frequency_override == 'true'">Ja ik steun Greenpeace:</label>
-            <label v-else>
+            <label for="machtigingType" v-if="formconfig.allow_frequency_override == 'true'">Ja ik steun Greenpeace:</label>
+            <label for="machtigingType" v-else>
             	Ja ik steun Greenpeace <strong>{{ formconfig.suggested_frequency[1] }}</strong>:
             </label>
             
-            <select class="form-control" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()" v-show="formconfig.allow_frequency_override == 'true'" v-on:change="changePeriodic">
+            <select id="machtigingType" class="form-control" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()" v-show="formconfig.allow_frequency_override == 'true'" v-on:change="changePeriodic">
               <option value="E">Eenmalig</option>
               <option value="M">Maandelijks</option>
             </select>
             <span class="help-block" v-if="$v.machtigingType.$error && !$v.machtigingType.required">Periodiek is verplicht</span>
           </div>
-
-          <div class="form-row">
+          
+		<fieldset>
+		<legend class="sr-only">Bedrag</legend>
+		 <div class="form-row">
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.bedrag.$error }">
-              <label>Met een bedrag van:</label>
-              <div class="radio-list">
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag1" v-bind:value="formconfig.amount1">
-                <label class="form-check-label form-control left" for="bedrag1">&euro;{{ formconfig.amount1 }}</label>
+              <label for="amountList">Met een bedrag van:</label>
+              <div id="amountList" class="radio-list" role="radiogroup">
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag1" role="radio" v-bind:value="amount1">
+                <label class="form-check-label form-control left" for="bedrag1">&euro;{{ amount1 }}</label>
 
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag2" v-bind:value="formconfig.amount2" checked="checked">
-                <label class="form-check-label form-control" for="bedrag2">&euro;{{ formconfig.amount2 }}</label>
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag2" role="radio" v-bind:value="amount2" checked="checked" tabindex="0">
+                <label class="form-check-label form-control" for="bedrag2">&euro;{{ amount2 }}</label>
 
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag3" v-bind:value="formconfig.amount3">
-                <label class="form-check-label form-control" for="bedrag3">&euro;{{ formconfig.amount3 }}</label>
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag3" role="radio" v-bind:value="amount3">
+                <label class="form-check-label form-control" for="bedrag3">&euro;{{ amount3 }}</label>
               </div>
             </div>
 
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.bedrag.$error }">
-              <label>Ander bedrag:</label>
+              <label for="customAmount">Ander bedrag:</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <div class="input-group-text">&euro;</div>
                 </div>
-                <input class="form-control" v-model.trim="bedrag" @input="$v.bedrag.$touch()" name="transaction-amount">
+                <input id="customAmount" class="form-control" v-model.trim="bedrag" @input="$v.bedrag.$touch()" name="transaction-amount">
                 <span class="help-block" v-if="$v.bedrag.$error && !$v.bedrag.required">Bedrag is verplicht</span>
                 <span class="help-block" v-if="$v.bedrag.$error && $v.bedrag.required && !$v.bedrag.numeric">Bedrag moet een nummer zijn</span>
                 <span class="help-block" v-if="$v.bedrag.$error && $v.bedrag.required && $v.bedrag.numeric && !$v.bedrag.between">Het minimale donatiebedrag is {{ formconfig.min_amount }} euro</span>
               </div>
             </div>
           </div>
-          
-           <div class="form-row" v-if="machtigingType ==='E'">
-            <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.betaling.$error }">
-              <label>Betalingswijze:</label>
-              <div class="radio-list">
-                <input class="form-check-input" v-model.trim="betaling" type="radio" name="ideal" id="ideal" value="ID"
-                v-on:click="donationformVue.validateStep('step1');">
-                <label class="form-check-label form-control left" for="ideal">iDeal</label>
-
-                <input class="form-check-input" v-model.trim="betaling" type="radio" name="machtiging" id="machtiging" value="EM" v-on:click="donationformVue.validateStep('step1');">
-                <label class="form-check-label form-control" for="machtiging">Eenmalige machtiging</label>
-                
-                <!--<span class="help-block" v-if="$v.betaling.$error && !$v.betaling.required">Betalingswijze is verplicht</span>-->
-            </div>
-          </div>
-                
-              </div>
+		</fieldset>
+         
+	  
+	  <fieldset v-if="machtigingType ==='E'">
+	  <legend class="sr-only">Betalingsmethode</legend>
+		   <div class="form-row">
+			<div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.betaling.$error }">
+			  <label for="paymentMethods">Betalingswijze:</label>
+			  <div id="paymentMethods" class="radio-list" role="radiogroup">
+				<input class="form-check-input" v-model.trim="betaling" type="radio" name="ideal" id="ideal" value="ID" checked="checked" tabindex="0" role="radio"
+				v-on:click="donationformVue.validateStep('step1');">
+				<label class="form-check-label form-control left" for="ideal">iDeal</label>
+				<input class="form-check-input" v-model.trim="betaling" type="radio" name="machtiging" id="machtiging" value="EM" role="radio" v-on:click="donationformVue.validateStep('step1');">
+				<label class="form-check-label form-control" for="machtiging">Eenmalige machtiging</label>
+			  </div>
+			</div> 
+		  </div>
+	  </fieldset>
           
            </div>`,
     data() {
         return {
             machtigingType: formconfig.suggested_frequency[0],
-            bedrag: formconfig.suggested_amount,
-            betaling: (formconfig.suggested_frequency[0] === "M") ? 'EM' : 'ID',
+			amount1:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount1          : formconfig.oneoff_amount1,
+			amount2:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount2          : formconfig.oneoff_amount2,
+			amount3:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount3          : formconfig.oneoff_amount3,
+            bedrag:        (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_suggested_amount : formconfig.oneoff_suggested_amount,
+            betaling:      (formconfig.suggested_frequency[0] === "M") ? 'EM' : 'ID',
         }
     },
     validations: {
@@ -113,15 +121,15 @@ Vue.component('step1', {
             return isValid
         },
         changePeriodic() {
-            if (this.$data.machtigingType === "M") {
-                this.$data.betaling =  "EM";
-            }
-            else{
-                this.$data.betaling =  "ID";
-            }
+			this.$data.amount1    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount1          : formconfig.oneoff_amount1 ;
+			this.$data.amount2    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount2          : formconfig.oneoff_amount2 ;
+			this.$data.amount3    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount3          : formconfig.oneoff_amount3 ;
+			this.$data.bedrag     = (this.$data.machtigingType === "M") ? formconfig.recurring_suggested_amount : formconfig.oneoff_suggested_amount ;
+			this.$data.min_amount = (this.$data.machtigingType === "M") ? formconfig.recurring_min_amount       : formconfig.oneoff_min_amount ;
+			this.$data.betaling   = (this.$data.machtigingType === "M") ? "EM" : "ID";
             this.validate();
         }
-    }
+	}
 })
 
 Vue.component('step2', {
@@ -132,10 +140,10 @@ Vue.component('step2', {
 
               <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroupPrepend">Aanhef:</span>
-                </div>
+              </div>
 
-              <!-- label>Land</label-->
-              <select class="form-control" v-model.trim="geslacht" @input="$v.geslacht.$touch()" name="honorific-prefix">
+              <label for="prefix" class="sr-only">Aanhef:</label>
+              <select id="prefix" class="form-control" v-model.trim="geslacht" @input="$v.geslacht.$touch()" name="honorific-prefix" tabindex="0">
                 <option value="V">Mevrouw</option>
                 <option value="M">Meneer</option>
                 <option value="O">Beste</option>
@@ -147,35 +155,35 @@ Vue.component('step2', {
 
           <div class="form-row">
             <div class="form-group col-md-8" v-bind:class="{ 'has-error': $v.voornaam.$error }">
-              <!-- label>Voornaam</label-->
-              <input class="form-control" v-model.trim="voornaam" @input="$v.voornaam.$touch()" placeholder="Voornaam*" name="given-name">
+               <label class="sr-only" for="given-name">Voornaam</label>
+              <input class="form-control" v-model.trim="voornaam" @input="$v.voornaam.$touch()" placeholder="Voornaam*" name="given-name" id="given-name">
                <span class="help-block" v-if="$v.voornaam.$error && !$v.voornaam.required">Voornaam is verplicht</span>
             </div>
 
             <div class="form-group col-md-4" v-bind:class="{ 'has-error': $v.initialen.$error }">
-              <!-- label>Initialen</label-->
-              <input class="form-control" v-model.trim="initialen" @input="$v.initialen.$touch()" placeholder="Initialen" name="initials">
+              <label class="sr-only" for="initials">Initialen</label>
+              <input class="form-control" v-model.trim="initialen" @input="$v.initialen.$touch()" placeholder="Initialen" name="initials" id="initials">
                <span class="help-block" v-if="$v.initialen.$error && !$v.initialen.required">Initialen zijn verplicht</span>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group col-md-4">
-              <!-- label>Tussenvoegsel</label-->
-              <input class="form-control" v-model.trim="tussenvoegsel" @input="$v.tussenvoegsel.$touch()" placeholder="Tussenv.">
+               <label class="sr-only" for="middle-name">Tussenvoegsel</label>
+              <input class="form-control" v-model.trim="tussenvoegsel" @input="$v.tussenvoegsel.$touch()" placeholder="Tussenv." id="middle-name">
             </div>
 
             <div class="form-group col-md-8" v-bind:class="{ 'has-error': $v.achternaam.$error }">
-              <!-- label>Achternaam</label-->
-              <input class="form-control" v-model.trim="achternaam" @input="$v.achternaam.$touch()" placeholder="Achternaam*" name="surname">
+               <label class="sr-only" for="surname">Achternaam</label>
+              <input class="form-control" v-model.trim="achternaam" @input="$v.achternaam.$touch()" placeholder="Achternaam*" name="surname" id="surname">
                <span class="help-block" v-if="$v.achternaam.$error && !$v.achternaam.required">Achternaam is verplicht</span>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.email.$error }">
-              <!-- label>Email</label-->
-              <input class="form-control" v-model.trim="email" @input="$v.email.$touch()" placeholder="E-mail*" name="email">
+               <label class="sr-only" for="email">Email</label>
+              <input class="form-control" v-model.trim="email" @input="$v.email.$touch()" placeholder="E-mail*" name="email" id="email">
               <span class="help-block" v-if="$v.email.$error && !$v.email.required">E-mail is verplicht</span>
               <span class="help-block" v-if="$v.email.$error && !$v.email.email">Dit is geen valide e-mail adres</span>
             </div>
@@ -183,8 +191,8 @@ Vue.component('step2', {
 
           <div class="form-row">
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.telefoonnummer.$error }">
-              <!-- label>Telefoonnummer</label-->
-              <input class="form-control" v-model.trim="telefoonnummer" @input="$v.telefoonnummer.$touch()" placeholder="Tel. nr." name="tel">
+               <label class="sr-only" for="tel">Telefoonnummer</label>
+              <input class="form-control" v-model.trim="telefoonnummer" @input="$v.telefoonnummer.$touch()" placeholder="Tel. nr." name="tel" id="tel">
                <span class="help-block" v-if="$v.telefoonnummer.$error && !$v.telefoonnummer.required">Telefoonnummer is verplicht</span>
                <span class="help-block" v-if="$v.telefoonnummer.$error && $v.telefoonnummer.required && !$v.telefoonnummer.numeric">Telefoonnummer moet een nummer zijn</span>
                <span class="help-block" v-if="$v.telefoonnummer.$error && $v.telefoonnummer.required && $v.telefoonnummer.numeric && !$v.telefoonnummer.between">Telefoonnummer moet uit 10 cijfers bestaan</span>
@@ -196,7 +204,8 @@ Vue.component('step2', {
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupPrepend">IBAN:</span>
               </div>
-              <input class="form-control" v-model.trim="rekeningnummer" @input="$v.rekeningnummer.$touch()" placeholder="*">
+              <label class="sr-only" for="bankaccount">IBAN:</label>
+              <input class="form-control" v-model.trim="rekeningnummer" @input="$v.rekeningnummer.$touch()" placeholder="*" id="bankaccount">
               <span class="help-block" v-if="$v.rekeningnummer.$error && !$v.rekeningnummer.required">Rekeningnummer is verplicht</span>
               <span class="help-block" v-if="$v.rekeningnummer.$error && $v.rekeningnummer.required && !$v.rekeningnummer.alphaNum">Rekeningnummer mag alleen letters en cijfers bevatten</span>
             </div>
@@ -265,39 +274,39 @@ Vue.component('step3', {
         <div>
           <div class="form-row">
             <div class="form-group col-md-5" v-bind:class="{ 'has-error': $v.postcode.$error }">
-              <!-- label>Postcode</label-->
-              <input id="postcode" class="form-control" v-model.trim="postcode" @input="$v.postcode.$touch()" placeholder="Postcode*" name="postal-code">
+              <label class="sr-only" for="postal-code">Postcode</label>
+              <input class="form-control" v-model.trim="postcode" @input="$v.postcode.$touch()" placeholder="Postcode*" name="postal-code" id="postal-code">
                <span class="help-block" v-if="$v.postcode.$error && !$v.postcode.required">Postcode is verplicht</span>
                <span class="help-block" v-if="$v.postcode.$error && $v.postcode.required && !$v.postcode.alphaNum">Postcode mag alleen letters en cijfers bevatten, geen spaties</span>
                <span class="help-block" v-if="$v.postcode.$error && $v.postcode.required && $v.postcode.alphaNum && !$v.postcode.between">Postcode moet in 0000AA formaat</span>
             </div>
 
             <div class="form-group col-md-4" v-bind:class="{ 'has-error': $v.huisnummer.$error }">
-              <!-- label>Huisnummer</label-->
-              <input id="huisnummer" class="form-control" v-on:blur="fetchAddress()" v-model.trim="huisnummer" @input="$v.huisnummer.$touch()" placeholder="Huisnr.*">
+              <label class="sr-only" for="housenumber">Huisnummer</label>
+              <input class="form-control" v-on:blur="fetchAddress()" v-model.trim="huisnummer" @input="$v.huisnummer.$touch()" placeholder="Huisnr.*" id="housenumber">
                <span class="help-block" v-if="$v.huisnummer.$error && !$v.huisnummer.required">Huisnummer is verplicht</span>
                <span class="help-block" v-if="$v.huisnummer.$error && $v.huisnummer.required && !$v.huisnummer.numeric">Huisnummer moet een nummer zijn</span>
             </div>
 
             <div class="form-group col-md-3" v-bind:class="{ 'has-error': $v.huisnummertoevoeging.$error }">
-              <!-- label>Toevoeging</label-->
-              <input class="form-control" v-model.trim="huisnummertoevoeging" @input="$v.huisnummertoevoeging.$touch()" placeholder="Toev.">
+              <label class="sr-only" for="housenumberaddition">Toevoeging</label>
+              <input class="form-control" v-model.trim="huisnummertoevoeging" @input="$v.huisnummertoevoeging.$touch()" placeholder="Toev." id="housenumberaddition">
             </div>
           </div>
 
           <div class="form-group">
-            <!-- label>Straatnaam</label-->
-            <input id="straatnaam" class="form-control" v-model.trim="straat" placeholder="Straat">
+            <label class="sr-only" for="street">Straatnaam</label>
+            <input class="form-control" v-model.trim="straat" placeholder="Straat" id="street">
           </div>
 
           <div class="form-group">
-            <!-- label>Woonplaats</label-->
-            <input id="woonplaats" class="form-control" v-model.trim="woonplaats" placeholder="Plaats">
+             <label class="sr-only" for="city">Woonplaats</label>
+            <input class="form-control" v-model.trim="woonplaats" placeholder="Plaats" id="city">
           </div>
 
           <div class="form-group" v-bind:class="{ 'has-error': $v.landcode.$error }">
-            <!-- label>Land</label-->
-            <select class="form-control" v-model.trim="landcode" @input="$v.landcode.$touch()" name="country-name">
+             <label class="sr-only" for="country-name">Land</label>
+            <select class="form-control" v-model.trim="landcode" @input="$v.landcode.$touch()" id="country-name" name="country-name">
         			<option value="  "> Selecteer een land</option>
         			<option value="AF">AFGHANISTAN</option>
         			<option value="AL">ALBANIE</option>
@@ -563,8 +572,8 @@ Vue.component('step3', {
         },
 
         fetchAddress: function() {
-            var zipcodeInput = document.getElementById('postcode');
-            var houseNoInput = document.getElementById('huisnummer');
+            var zipcodeInput = document.getElementById('postal-code');
+            var houseNoInput = document.getElementById('housenumber');
             var zipcodeValue = zipcodeInput.value;
             var houseNoValue = houseNoInput.value;
 
@@ -586,8 +595,8 @@ Vue.component('step3', {
         },
 
         populateFields: function(street, city) {
-            var streetInput = document.getElementById('straatnaam');
-            var cityInput = document.getElementById('woonplaats');
+            var streetInput = document.getElementById('street');
+            var cityInput = document.getElementById('city');
 
             streetInput.setAttribute('disabled', 'disabled');
             cityInput.setAttribute('disabled', 'disabled');
