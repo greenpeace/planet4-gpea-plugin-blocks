@@ -1989,7 +1989,6 @@ fieldset[disabled] .vue-form-wizard .wizard-btn {
     box-shadow: none
 }
 
-.radio-list input[type=radio],
 .wizard-header,
 .wizard-progress-with-circle {
     display: none
@@ -1997,9 +1996,9 @@ fieldset[disabled] .vue-form-wizard .wizard-btn {
 
 .radio-list input[type=radio]:checked+label {
     color: #fff;
-    background-color: rgb(238, 86, 45);
+    background-color: #F36D3A;
     font-weight: bolder;
-    border-color: rgb(238, 86, 45);
+    border-color: #F36D3A;
 }
 
 .radio-list input[type=radio]:checked+label:before {
@@ -3301,4 +3300,29 @@ pre .key {
 .secure-icons .privacywaarborg {
     height: 30px;
     width: auto;
+}
+
+.loader {
+	display: inline-block;
+	/*! width: 64px; */
+	/*! height: 64px; */
+}
+.loader:after {
+	content: " ";
+	display: block;
+	width: 20px;
+	height: 20px;
+	margin: 5px auto;
+	border-radius: 50%;
+	border: 3px solid #fff;
+	border-color: #fff transparent #fff transparent;
+	animation: loader 1.2s linear infinite;
+}
+@keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }

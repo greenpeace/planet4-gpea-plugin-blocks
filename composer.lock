@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be9e30ae3637d63362e5380aa46a9b66",
+    "content-hash": "b8e48584fe6b2d4c1bfc61037e6198a3",
     "packages": [],
     "packages-dev": [
         {
@@ -74,54 +74,6 @@
                 "tests"
             ],
             "time": "2017-12-06T16:27:17+00:00"
-        },
-        {
-            "name": "frenck/php-compatibility",
-            "version": "7.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/frenck/PHPCompatibility.git",
-                "reference": "9364ba95121843ea9b86305d9c3582f1a85e10ff"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/frenck/PHPCompatibility/zipball/9364ba95121843ea9b86305d9c3582f1a85e10ff",
-                "reference": "9364ba95121843ea9b86305d9c3582f1a85e10ff",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "php": ">=5.1.2",
-                "squizlabs/php_codesniffer": "~2.0"
-            },
-            "require-dev": {
-                "satooshi/php-coveralls": "dev-master"
-            },
-            "type": "phpcodesniffer-standard",
-            "autoload": {
-                "psr-4": {
-                    "PHPCompatibility\\": "PHPCompatibility/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Wim Godden",
-                    "role": "lead"
-                }
-            ],
-            "description": "This is a set of sniffs for PHP_CodeSniffer that checks for PHP version compatibility, composer compatible.",
-            "homepage": "http://github.com/frenck/PHPCompatibility",
-            "keywords": [
-                "compatibility",
-                "phpcs",
-                "standards"
-            ],
-            "abandoned": "wimg/php-compatibility",
-            "time": "2017-02-24T14:15:44+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",

@@ -1,0 +1,48 @@
+	{% block gpnl_quote %}
+
+	  {% if ( fields ) %}
+
+		  <div class="stats">
+			  <div class="row container">
+
+				  <div class="col-lg-4 col-md-12 stat-column">
+					  <p class="stat__text
+						{% if fields.txt_l_top_emphasis  %}stat--bigwhite{% endif %}">
+						  {{ fields.txt_l_top }}
+					  </p>
+					  <strong>{{ fields.text_l_mid }}</strong>
+					  <p class="stat__text
+						{% if fields.txt_l_bottom_emphasis  %}stat--bigwhite {% endif %}">
+						  {{ fields.txt_l_bottom }}
+					  </p>
+				  </div>
+
+				  <div class="col-lg-4 col-md-12 stat-column">
+					  <p class="stat__text
+						{% if fields.txt_m_top_emphasis  %}stat--bigwhite {% endif %}">
+						  {{ fields.txt_m_top }}
+					  </p>
+					  <strong>{{ fields.text_m_mid }}</strong>
+					  <p class="stat__text
+						{% if fields.txt_m_bottom_emphasis  %}stat--bigwhite {% endif %}">
+						  {{ fields.txt_m_bottom }}
+					  </p>
+				  </div>
+
+				  <div class="col-lg-4 col-md-12 stat-column">
+					   <p class="stat__text
+						{% if fields.txt_r_top_emphasis  %}stat--bigwhite {% endif %}">
+						  {{ fields.txt_r_top }}
+					  </p>
+					  <strong>{{ fields.text_r_mid }}</strong>
+					   <p class="stat__text
+						{% if fields.txt_r_bottom_emphasis  %}stat--bigwhite {% endif %}">
+						  {{ fields.txt_r_bottom }}
+					  </p>
+				  </div>
+
+			  </div>
+		  </div>
+
+	  {% endif %}
+	{% endblock %}

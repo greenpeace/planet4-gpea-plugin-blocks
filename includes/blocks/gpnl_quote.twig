@@ -1,0 +1,23 @@
+{% block gpnl_quote %}
+
+  {% if ( fields ) %}
+
+	  <div class="row quote quote--dark">
+		  <div class="col-2">
+			  <img
+					  class="quote__img"
+					  src="{{ fields.image }}"
+					  srcset="{{ fields.image_srcset }}"
+					  sizes="{{ fields.image_sizes }}"
+					  alt="{{ fields.alt_text }}"
+			  >
+		  </div>
+		  <div class="col-10">
+			  <p class="quote__text">“{{ fields.quote|e('wp_kses_post')|raw }}”</p>
+			  <p class="quote__author">- {{ fields.quotee }}</p>
+		  </div>
+	  </div>
+
+
+  {% endif %}
+{% endblock %}

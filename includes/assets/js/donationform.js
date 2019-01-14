@@ -7,79 +7,87 @@ const {
     email,
     numeric,
     alphaNum,
-    requiredUnless
+	requiredUnless
 } = window.validators
 Vue.use(VueFormWizard)
+
+Vue.config.devtools = true;
 
 
 Vue.component('step1', {
     template: `
         <div>
           <div class="form-group" v-bind:class="{ 'has-error': $v.machtigingType }">
-            <label v-if="formconfig.allow_frequency_override == 'true'">Ja ik steun Greenpeace:</label>
-            <label v-else>
+            <label for="machtigingType" v-if="formconfig.allow_frequency_override == 'true'">Ja ik steun Greenpeace:</label>
+            <label for="machtigingType" v-else>
             	Ja ik steun Greenpeace <strong>{{ formconfig.suggested_frequency[1] }}</strong>:
             </label>
             
-            <select class="form-control" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()" v-show="formconfig.allow_frequency_override == 'true'" v-on:change="changePeriodic">
+            <select id="machtigingType" class="form-control" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()" v-show="formconfig.allow_frequency_override == 'true'" v-on:change="changePeriodic">
               <option value="E">Eenmalig</option>
               <option value="M">Maandelijks</option>
             </select>
             <span class="help-block" v-if="$v.machtigingType.$error && !$v.machtigingType.required">Periodiek is verplicht</span>
           </div>
-
-          <div class="form-row">
+          
+		<fieldset>
+		<legend class="sr-only">Bedrag</legend>
+		 <div class="form-row">
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.bedrag.$error }">
-              <label>Met een bedrag van:</label>
-              <div class="radio-list">
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag1" id="bedrag1" v-bind:value="formconfig.amount1">
-                <label class="form-check-label form-control left" for="bedrag1">&euro;{{ formconfig.amount1 }}</label>
+              <label for="amountList">Met een bedrag van:</label>
+              <div id="amountList" class="radio-list" role="radiogroup">
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag1" role="radio" v-bind:value="amount1">
+                <label class="form-check-label form-control left" for="bedrag1">&euro;{{ amount1 }}</label>
 
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag2" id="bedrag2" v-bind:value="formconfig.amount2" checked="checked">
-                <label class="form-check-label form-control" for="bedrag2">&euro;{{ formconfig.amount2 }}</label>
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag2" role="radio" v-bind:value="amount2" checked="checked" tabindex="0">
+                <label class="form-check-label form-control" for="bedrag2">&euro;{{ amount2 }}</label>
 
-                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="bedrag3" id="bedrag3" v-bind:value="formconfig.amount3">
-                <label class="form-check-label form-control" for="bedrag3">&euro;{{ formconfig.amount3 }}</label>
+                <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag3" role="radio" v-bind:value="amount3">
+                <label class="form-check-label form-control" for="bedrag3">&euro;{{ amount3 }}</label>
               </div>
             </div>
 
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.bedrag.$error }">
-              <label>Ander bedrag:</label>
+              <label for="customAmount">Ander bedrag:</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <div class="input-group-text">&euro;</div>
                 </div>
-                <input class="form-control" v-model.trim="bedrag" @input="$v.bedrag.$touch()">
+                <input id="customAmount" class="form-control" v-model.trim="bedrag" @input="$v.bedrag.$touch()" name="transaction-amount">
                 <span class="help-block" v-if="$v.bedrag.$error && !$v.bedrag.required">Bedrag is verplicht</span>
                 <span class="help-block" v-if="$v.bedrag.$error && $v.bedrag.required && !$v.bedrag.numeric">Bedrag moet een nummer zijn</span>
                 <span class="help-block" v-if="$v.bedrag.$error && $v.bedrag.required && $v.bedrag.numeric && !$v.bedrag.between">Het minimale donatiebedrag is {{ formconfig.min_amount }} euro</span>
               </div>
             </div>
           </div>
-          
-           <div class="form-row" v-if="machtigingType ==='E'">
-            <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.betaling.$error }">
-              <label>Betalingswijze:</label>
-              <div class="radio-list">
-                <input class="form-check-input" v-model.trim="betaling" type="radio" name="ideal" id="ideal" value="ID"
-                v-on:click="donationformVue.validateStep('step1');">
-                <label class="form-check-label form-control left" for="ideal">iDeal</label>
-
-                <input class="form-check-input" v-model.trim="betaling" type="radio" name="machtiging" id="machtiging" value="EM" v-on:click="donationformVue.validateStep('step1');">
-                <label class="form-check-label form-control" for="machtiging">Eenmalige machtiging</label>
-                
-                <!--<span class="help-block" v-if="$v.betaling.$error && !$v.betaling.required">Betalingswijze is verplicht</span>-->
-            </div>
-          </div>
-                
-              </div>
+		</fieldset>
+         
+	  
+	  <fieldset v-if="machtigingType ==='E'">
+	  <legend class="sr-only">Betalingsmethode</legend>
+		   <div class="form-row">
+			<div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.betaling.$error }">
+			  <label for="paymentMethods">Betalingswijze:</label>
+			  <div id="paymentMethods" class="radio-list" role="radiogroup">
+				<input class="form-check-input" v-model.trim="betaling" type="radio" name="ideal" id="ideal" value="ID" checked="checked" tabindex="0" role="radio"
+				v-on:click="donationformVue.validateStep('step1');">
+				<label class="form-check-label form-control left" for="ideal">iDeal</label>
+				<input class="form-check-input" v-model.trim="betaling" type="radio" name="machtiging" id="machtiging" value="EM" role="radio" v-on:click="donationformVue.validateStep('step1');">
+				<label class="form-check-label form-control" for="machtiging">Eenmalige machtiging</label>
+			  </div>
+			</div> 
+		  </div>
+	  </fieldset>
           
            </div>`,
     data() {
         return {
             machtigingType: formconfig.suggested_frequency[0],
-            bedrag: formconfig.suggested_amount,
-            betaling: (formconfig.suggested_frequency[0] === "M") ? 'EM' : 'ID',
+			amount1:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount1          : formconfig.oneoff_amount1,
+			amount2:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount2          : formconfig.oneoff_amount2,
+			amount3:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount3          : formconfig.oneoff_amount3,
+            bedrag:        (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_suggested_amount : formconfig.oneoff_suggested_amount,
+            betaling:      (formconfig.suggested_frequency[0] === "M") ? 'EM' : 'ID',
         }
     },
     validations: {
@@ -113,15 +121,15 @@ Vue.component('step1', {
             return isValid
         },
         changePeriodic() {
-            if (this.$data.machtigingType === "M") {
-                this.$data.betaling =  "EM";
-            }
-            else{
-                this.$data.betaling =  "ID";
-            }
+			this.$data.amount1    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount1          : formconfig.oneoff_amount1 ;
+			this.$data.amount2    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount2          : formconfig.oneoff_amount2 ;
+			this.$data.amount3    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount3          : formconfig.oneoff_amount3 ;
+			this.$data.bedrag     = (this.$data.machtigingType === "M") ? formconfig.recurring_suggested_amount : formconfig.oneoff_suggested_amount ;
+			this.$data.min_amount = (this.$data.machtigingType === "M") ? formconfig.recurring_min_amount       : formconfig.oneoff_min_amount ;
+			this.$data.betaling   = (this.$data.machtigingType === "M") ? "EM" : "ID";
             this.validate();
         }
-    }
+	}
 })
 
 Vue.component('step2', {
@@ -132,10 +140,10 @@ Vue.component('step2', {
 
               <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroupPrepend">Aanhef:</span>
-                </div>
+              </div>
 
-              <!-- label>Land</label-->
-              <select class="form-control" v-model.trim="geslacht" @input="$v.geslacht.$touch()">
+              <label for="prefix" class="sr-only">Aanhef:</label>
+              <select id="prefix" class="form-control" v-model.trim="geslacht" @input="$v.geslacht.$touch()" name="honorific-prefix" tabindex="0">
                 <option value="V">Mevrouw</option>
                 <option value="M">Meneer</option>
                 <option value="O">Beste</option>
@@ -147,35 +155,35 @@ Vue.component('step2', {
 
           <div class="form-row">
             <div class="form-group col-md-8" v-bind:class="{ 'has-error': $v.voornaam.$error }">
-              <!-- label>Voornaam</label-->
-              <input class="form-control" v-model.trim="voornaam" @input="$v.voornaam.$touch()" placeholder="Voornaam*">
+               <label class="sr-only" for="given-name">Voornaam</label>
+              <input class="form-control" v-model.trim="voornaam" @input="$v.voornaam.$touch()" placeholder="Voornaam*" name="given-name" id="given-name">
                <span class="help-block" v-if="$v.voornaam.$error && !$v.voornaam.required">Voornaam is verplicht</span>
             </div>
 
             <div class="form-group col-md-4" v-bind:class="{ 'has-error': $v.initialen.$error }">
-              <!-- label>Initialen</label-->
-              <input class="form-control" v-model.trim="initialen" @input="$v.initialen.$touch()" placeholder="Initialen">
+              <label class="sr-only" for="initials">Initialen</label>
+              <input class="form-control" v-model.trim="initialen" @input="$v.initialen.$touch()" placeholder="Initialen" name="initials" id="initials">
                <span class="help-block" v-if="$v.initialen.$error && !$v.initialen.required">Initialen zijn verplicht</span>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group col-md-4">
-              <!-- label>Tussenvoegsel</label-->
-              <input class="form-control" v-model.trim="tussenvoegsel" @input="$v.tussenvoegsel.$touch()" placeholder="Tussenv.">
+               <label class="sr-only" for="middle-name">Tussenvoegsel</label>
+              <input class="form-control" v-model.trim="tussenvoegsel" @input="$v.tussenvoegsel.$touch()" placeholder="Tussenv." id="middle-name">
             </div>
 
             <div class="form-group col-md-8" v-bind:class="{ 'has-error': $v.achternaam.$error }">
-              <!-- label>Achternaam</label-->
-              <input class="form-control" v-model.trim="achternaam" @input="$v.achternaam.$touch()" placeholder="Achternaam*">
+               <label class="sr-only" for="surname">Achternaam</label>
+              <input class="form-control" v-model.trim="achternaam" @input="$v.achternaam.$touch()" placeholder="Achternaam*" name="surname" id="surname">
                <span class="help-block" v-if="$v.achternaam.$error && !$v.achternaam.required">Achternaam is verplicht</span>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.email.$error }">
-              <!-- label>Email</label-->
-              <input class="form-control" v-model.trim="email" @input="$v.email.$touch()" placeholder="E-mail*">
+               <label class="sr-only" for="email">Email</label>
+              <input class="form-control" v-model.trim="email" @input="$v.email.$touch()" placeholder="E-mail*" name="email" id="email">
               <span class="help-block" v-if="$v.email.$error && !$v.email.required">E-mail is verplicht</span>
               <span class="help-block" v-if="$v.email.$error && !$v.email.email">Dit is geen valide e-mail adres</span>
             </div>
@@ -183,8 +191,8 @@ Vue.component('step2', {
 
           <div class="form-row">
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.telefoonnummer.$error }">
-              <!-- label>Telefoonnummer</label-->
-              <input class="form-control" v-model.trim="telefoonnummer" @input="$v.telefoonnummer.$touch()" placeholder="Tel. nr.">
+               <label class="sr-only" for="tel">Telefoonnummer</label>
+              <input class="form-control" v-model.trim="telefoonnummer" @input="$v.telefoonnummer.$touch()" placeholder="Tel. nr." name="tel" id="tel">
                <span class="help-block" v-if="$v.telefoonnummer.$error && !$v.telefoonnummer.required">Telefoonnummer is verplicht</span>
                <span class="help-block" v-if="$v.telefoonnummer.$error && $v.telefoonnummer.required && !$v.telefoonnummer.numeric">Telefoonnummer moet een nummer zijn</span>
                <span class="help-block" v-if="$v.telefoonnummer.$error && $v.telefoonnummer.required && $v.telefoonnummer.numeric && !$v.telefoonnummer.between">Telefoonnummer moet uit 10 cijfers bestaan</span>
@@ -196,7 +204,8 @@ Vue.component('step2', {
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupPrepend">IBAN:</span>
               </div>
-              <input class="form-control" v-model.trim="rekeningnummer" @input="$v.rekeningnummer.$touch()" placeholder="*">
+              <label class="sr-only" for="bankaccount">IBAN:</label>
+              <input class="form-control" v-model.trim="rekeningnummer" @input="$v.rekeningnummer.$touch()" placeholder="*" id="bankaccount">
               <span class="help-block" v-if="$v.rekeningnummer.$error && !$v.rekeningnummer.required">Rekeningnummer is verplicht</span>
               <span class="help-block" v-if="$v.rekeningnummer.$error && $v.rekeningnummer.required && !$v.rekeningnummer.alphaNum">Rekeningnummer mag alleen letters en cijfers bevatten</span>
             </div>
@@ -265,39 +274,39 @@ Vue.component('step3', {
         <div>
           <div class="form-row">
             <div class="form-group col-md-5" v-bind:class="{ 'has-error': $v.postcode.$error }">
-              <!-- label>Postcode</label-->
-              <input id="postcode" class="form-control" v-model.trim="postcode" @input="$v.postcode.$touch()" placeholder="Postcode*">
+              <label class="sr-only" for="postal-code">Postcode</label>
+              <input class="form-control" v-model.trim="postcode" @input="$v.postcode.$touch()" placeholder="Postcode*" name="postal-code" id="postal-code">
                <span class="help-block" v-if="$v.postcode.$error && !$v.postcode.required">Postcode is verplicht</span>
                <span class="help-block" v-if="$v.postcode.$error && $v.postcode.required && !$v.postcode.alphaNum">Postcode mag alleen letters en cijfers bevatten, geen spaties</span>
                <span class="help-block" v-if="$v.postcode.$error && $v.postcode.required && $v.postcode.alphaNum && !$v.postcode.between">Postcode moet in 0000AA formaat</span>
             </div>
 
             <div class="form-group col-md-4" v-bind:class="{ 'has-error': $v.huisnummer.$error }">
-              <!-- label>Huisnummer</label-->
-              <input id="huisnummer" class="form-control" v-on:blur="fetchAddress()" v-model.trim="huisnummer" @input="$v.huisnummer.$touch()" placeholder="Huisnr.*">
+              <label class="sr-only" for="housenumber">Huisnummer</label>
+              <input class="form-control" v-on:blur="fetchAddress()" v-model.trim="huisnummer" @input="$v.huisnummer.$touch()" placeholder="Huisnr.*" id="housenumber">
                <span class="help-block" v-if="$v.huisnummer.$error && !$v.huisnummer.required">Huisnummer is verplicht</span>
                <span class="help-block" v-if="$v.huisnummer.$error && $v.huisnummer.required && !$v.huisnummer.numeric">Huisnummer moet een nummer zijn</span>
             </div>
 
             <div class="form-group col-md-3" v-bind:class="{ 'has-error': $v.huisnummertoevoeging.$error }">
-              <!-- label>Toevoeging</label-->
-              <input class="form-control" v-model.trim="huisnummertoevoeging" @input="$v.huisnummertoevoeging.$touch()" placeholder="Toev.">
+              <label class="sr-only" for="housenumberaddition">Toevoeging</label>
+              <input class="form-control" v-model.trim="huisnummertoevoeging" @input="$v.huisnummertoevoeging.$touch()" placeholder="Toev." id="housenumberaddition">
             </div>
           </div>
 
           <div class="form-group">
-            <!-- label>Straatnaam</label-->
-            <input id="straatnaam" class="form-control" v-model.trim="straat" placeholder="Straat">
+            <label class="sr-only" for="street">Straatnaam</label>
+            <input class="form-control" v-model.trim="straat" placeholder="Straat" id="street">
           </div>
 
           <div class="form-group">
-            <!-- label>Woonplaats</label-->
-            <input id="woonplaats" class="form-control" v-model.trim="woonplaats" placeholder="Plaats">
+             <label class="sr-only" for="city">Woonplaats</label>
+            <input class="form-control" v-model.trim="woonplaats" placeholder="Plaats" id="city">
           </div>
 
           <div class="form-group" v-bind:class="{ 'has-error': $v.landcode.$error }">
-            <!-- label>Land</label-->
-            <select class="form-control" v-model.trim="landcode" @input="$v.landcode.$touch()">
+             <label class="sr-only" for="country-name">Land</label>
+            <select class="form-control" v-model.trim="landcode" @input="$v.landcode.$touch()" id="country-name" name="country-name">
         			<option value="  "> Selecteer een land</option>
         			<option value="AF">AFGHANISTAN</option>
         			<option value="AL">ALBANIE</option>
@@ -508,19 +517,6 @@ Vue.component('step3', {
           </div>
           <div class="machtiging_info">
             Ik machtig hierbij Greenpeace tot wederopzegging (of éénmalig indien hierboven gekozen) bovengenoemd bedrag van mijn rekening af te schrijven.<br/><br/>
-            Greenpeace beschermt je gegevens en geeft ze niet aan derden voor commerciële doeleinden. Lees ook ons <a href="/privacy" target="_blank">privacy-beleid</a>.<br/><br/>
-          <label><a href="#privacyModal">Over jouw privacy</a></label><br/>
-            <div id="privacyModal" class="modalDialog">
-              <a href="#close" title="Close" class="close">X</a>
-              <p>Greenpeace informeert en betrekt jou als supporter natuurlijk heel graag bij onze doelen. Hiervoor vragen we jou om jouw persoonsgegevens met ons te delen.<br/><br/>Greenpeace gebruikt je (persoons)gegevens om uitvoering te geven aan je donatie en om je op de hoogte te houden van haar activiteiten. Daarnaast kan Greenpeace jouw (persoons)gegevens gebruiken voor marketingdoeleinden per telefoon, post en email. Zie www.greenpeace.nl/privacy voor meer informatie over hoe Greenpeace met jouw gegevens omgaat.</p>
-              <p>Vul je je adresgegevens in? Dan kan Greenpeace je per post op de hoogte houden van haar werk. Je ontvangt dan bijvoorbeeld periodiek ons geweldige magazine! Vul je je telefoonnummer in? Dan kan Greenpeace jou telefonisch benaderen voor giftverzoeken of updates rondom lopende campagnes.</p>
-              <p>Wil je geen informatie meer van Greenpeace ontvangen? Neem dan kosteloos contact op met ons Supporter Care team: 0800 422 33 44 of ga naar greenpeace.nl</p>
-            </div>
-          <label><a href="#sepaModal"SEPA machtiging</a></label>
-            <div id="sepaModal" class="modalDialog">
-              <a href="#close" title="Close" class="close">X</a>
-              <p>Door ondertekening van dit formulier geef je toestemming aan Greenpeace om eenmalig of doorlopend incasso-opdrachten naar jouw bank te sturen wegens je donateurschap aan Greenpeace zodat een bedrag van je rekening afgeschreven kan worden en aan jouw bank om eenmalig of doorlopend een bedrag van je rekening af te schrijven overeenkomstig de opdracht van Greenpeace. Als je het niet eens bent met deze afschrijving kun je deze laten terugboeken. Neem hiervoor 1binnen acht weken na afschrijving contact op met jouw bank.<br/>Vraag je bank naar de voorwaarden.</p>
-              </div>
           </div>
         </div>`,
     data() {
@@ -530,7 +526,7 @@ Vue.component('step3', {
             huisnummer: '',
             huisnummertoevoeging: '',
             woonplaats: '',
-            landcode: ''
+            landcode: 'NL'
         }
     },
     validations: {
@@ -576,8 +572,8 @@ Vue.component('step3', {
         },
 
         fetchAddress: function() {
-            var zipcodeInput = document.getElementById('postcode');
-            var houseNoInput = document.getElementById('huisnummer');
+            var zipcodeInput = document.getElementById('postal-code');
+            var houseNoInput = document.getElementById('housenumber');
             var zipcodeValue = zipcodeInput.value;
             var houseNoValue = houseNoInput.value;
 
@@ -599,8 +595,8 @@ Vue.component('step3', {
         },
 
         populateFields: function(street, city) {
-            var streetInput = document.getElementById('straatnaam');
-            var cityInput = document.getElementById('woonplaats');
+            var streetInput = document.getElementById('street');
+            var cityInput = document.getElementById('city');
 
             streetInput.setAttribute('disabled', 'disabled');
             cityInput.setAttribute('disabled', 'disabled');
@@ -616,7 +612,7 @@ donationformVue = new Vue({
     el: '#app',
     data: {
         finalModel: {
-            marketingcode: formconfig.marketingcode,
+            marketingcode: (formconfig.suggested_frequency[0] === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff ,
             literatuurcode: formconfig.literatuurcode,
             guid: '',
             betaling: (formconfig.suggested_frequency[0] === "M") ? 'EM' : 'ID'
@@ -649,7 +645,7 @@ donationformVue = new Vue({
             returnUrlCancel: "https://www.greenpeace.nl",
             returnUrlError: "https://www.greenpeace.nl",
             returnUrlReject: "https://www.greenpeace.nl",
-            marketingCode: '"' + formconfig.marketingcode + '"',
+            marketingCode: formconfig.marketingcode_oneoff,
             literatureCode: formconfig.literatuurcode,
             guid: null,
             countryId: null,
@@ -663,8 +659,11 @@ donationformVue = new Vue({
         onComplete: function() {
             inputs = $('#app input');
             buttons = $('#app button');
-            // this.disableFormElements(inputs);
-            // this.disableFormElements(buttons);
+            $('.wizard-footer-right .wizard-btn').text('');
+            $('.wizard-footer-right .wizard-btn').addClass('loader');
+            this.disableFormElements(inputs);
+            this.disableFormElements(buttons);
+			$('.wizard-nav > li > a').addClass('disabled');
             if (this.finalModel.betaling === "ID"){
                 this.submitiDeal();
             }
@@ -673,22 +672,18 @@ donationformVue = new Vue({
             }
         },
 
-        onSucces: function(result) {
-            // console.log(result.msg);
-            console.log(this.finalModel);
+        onSucces: function() {
+            // console.log(this.finalModel);
             var formBody = $("#Adres4");
             formBody.addClass('card');
             formBody.empty();
             formBody.append('<div class="card-body donation-card"></div>')
-            var cardBody = $('.donation-card');
-            cardBody.append('<h2 class="card-title">{{ formconfig.thanktitle }}</h2>');
-            cardBody.append('<p class="card-text">{{ formconfig.thankdescription}}</p>');
-            buttons = $('#app button');
-            // buttons.each(function() {
-            //     button = $(this);
-            //     button.hide();
-            // });
-            // Push step to tag manager
+			var cardBody = $('.donation-card');
+			cardBody.append('<h2 class="card-title">'+formconfig.thanktitle+'</h2>');
+			cardBody.append('<p class="card-text">'+formconfig.thankdescription+'</p>');
+			$('.wizard-footer-right .wizard-btn').removeClass('loader');
+			$('.wizard-footer-right .wizard-btn').text('Afgerond');
+			// Push step to tag manager
             dataLayer.push({
                 'event': 'virtualPageViewDonatie',
                 'virtualPageviewStep': 'Bedankt', //Vul hier de stap in. E.g. Stap 1, Stap 2, Stap 3, Bedankt
@@ -727,25 +722,43 @@ donationformVue = new Vue({
             /** End Google Tag Manager E-commerce */
         },
 
-        onFailure: function(result) {
-            alert('Helaas gaat er iets mis met de donatieverwerking. Er wordt geen geld afgeschreven, probeer het later nog eens. '+result.msg);
+        onFailure: function() {
+			var formBody = $("#Adres4");
+			formBody.addClass('card');
+			formBody.empty();
+			formBody.append('<div class="card-body donation-card"></div>')
+			var cardBody = $('.donation-card');
+			cardBody.append('<h2 class="card-title">Sorry..</h2>');
+			cardBody.append('<p class="card-text">Helaas gaat er iets mis met de donatieverwerking. Er wordt geen geld afgeschreven, probeer het later nog eens.</p>');
+			$('.wizard-footer-right .wizard-btn').removeClass('loader');
+			$('.wizard-footer-right .wizard-btn').text('Afgerond');
         },
 
-        submit: function () {
+		submit: function () {
 
-            this.result.msg = '';
-            this.result.hasError = false;
-            this.$http.post("https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/machtiging/register", this.finalModel)
-            .then(function (response) {
-                this.result.msg = response.bodyText;
-                this.result.hasError = false;
-                this.onSucces(this.result);
-            }, function (error) {
-                this.result.msg = error.bodyText;
-                this.result.hasError = true;
-                this.onFailure(this.result);
-            });
-        },
+			this.result.msg = '';
+			this.result.hasError = false;
+			this.finalModel.marketingcode = (this.finalModel.machtigingType === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff;
+			$.ajax({
+				method: "POST",
+				url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi/machtiging/register",
+				data: JSON.stringify(this.finalModel),
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function(result) {
+					donationformVue.onSucces();
+				},
+				error: function(jqxhr, status, exception) {
+
+					console.log("Data:");
+					console.log(this.data);
+					console.log('AjaxCall:');
+					console.log(this);
+				    donationformVue.onFailure();
+				}
+			});
+		},
+
         submitiDeal: function () {
             this.result.msg = '';
             this.result.hasError = false;
@@ -756,29 +769,27 @@ donationformVue = new Vue({
             this.idealData.gender = this.finalModel.geslacht;
             this.idealData.email = this.finalModel.email;
             this.idealData.phonenumber = this.finalModel.telefoonnummer;
-            this.idealData.description = "Eenmalige donatie Greenpeace tnv " + this.finalModel.voornaam + " " + this.finalModel.voornaam;
+            this.idealData.description = "Eenmalige donatie Greenpeace tnv " + this.finalModel.voornaam + " " + this.finalModel.achternaam;
             this.idealData.amount = this.finalModel.bedrag;
-            this.idealData.returnUrlSuccess = "https://www.greenpeace.nl";
-            this.idealData.returnUrlCancel = "https://www.greenpeace.nl";
-            this.idealData.returnUrlError = "https://www.greenpeace.nl";
-            this.idealData.returnUrlReject = "https://www.greenpeace.nl";
-            tmp = $.ajax({
+            this.idealData.returnUrlSuccess = "https://www.greenpeace.org/nl";
+            this.idealData.returnUrlCancel = "https://www.greenpeace.org/nl";
+            this.idealData.returnUrlError = "https://www.greenpeace.org/nl";
+            this.idealData.returnUrlReject = "https://www.greenpeace.org/nl";
+            $.ajax({
                 method: "POST",
-                url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/payment/ideal",
+                url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi/payment/ideal",
                 data: JSON.stringify(this.idealData),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function(result) {
-                    alert('Successfully called');
-                    // window.open(result.transaction.redirectUrl);
+                    window.location.href = result.transaction.redirectUrl;
                 },
                 error: function(jqxhr, status, exception) {
-
-                    // alert('Exception:', exception);
-                    console.log("Data:");
-                    console.log(this.data);
-                    console.log('AjaxCall:');
-                    console.log(this);
+                    donationformVue.onFailure();
+                    // console.log("Data:");
+                    // console.log(this.data);
+                    // console.log('AjaxCall:');
+                    // console.log(this);
                 }
             });
         },
