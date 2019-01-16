@@ -641,10 +641,10 @@ donationformVue = new Vue({
             issuersBank: "",
             clientIp: "",
             clientUserAgent: "",
-            returnUrlSuccess: "https://www.greenpeace.nl",
-            returnUrlCancel: "https://www.greenpeace.nl",
-            returnUrlError: "https://www.greenpeace.nl",
-            returnUrlReject: "https://www.greenpeace.nl",
+            returnUrlSuccess: formconfig.returnpage,
+            returnUrlCancel: formconfig.errorpage,
+            returnUrlError: formconfig.errorpage,
+            returnUrlReject: formconfig.errorpage,
             marketingCode: formconfig.marketingcode_oneoff,
             literatureCode: formconfig.literatuurcode,
             guid: null,
@@ -771,10 +771,6 @@ donationformVue = new Vue({
             this.idealData.phonenumber = this.finalModel.telefoonnummer;
             this.idealData.description = "Eenmalige donatie Greenpeace tnv " + this.finalModel.voornaam + " " + this.finalModel.achternaam;
             this.idealData.amount = this.finalModel.bedrag;
-            this.idealData.returnUrlSuccess = "https://www.greenpeace.org/nl";
-            this.idealData.returnUrlCancel = "https://www.greenpeace.org/nl";
-            this.idealData.returnUrlError = "https://www.greenpeace.org/nl";
-            this.idealData.returnUrlReject = "https://www.greenpeace.org/nl";
             $.ajax({
                 method: "POST",
                 url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi/payment/ideal",

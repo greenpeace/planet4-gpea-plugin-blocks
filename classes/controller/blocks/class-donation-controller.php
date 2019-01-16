@@ -148,6 +148,18 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'type'  => 'text',
 					'value' => '04888',
 				),
+				array(
+					'label' => __( 'iDeal bedanktpagina', 'planet4-gpnl-blocks' ),
+					'attr'  => 'returnpage',
+					'type'  => 'text',
+					'value' => 'https://www.greenpeace.org/nl/',
+				),
+				array(
+					'label' => __( 'iDeal errorpagina', 'planet4-gpnl-blocks' ),
+					'attr'  => 'errorpage',
+					'type'  => 'text',
+					'value' => 'https://www.greenpeace.org/nl/',
+				),
 			);
 
 			// Define the Shortcode UI arguments.
@@ -174,24 +186,26 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
 			$fields = shortcode_atts( array(
-				'title'       => '',
-				'description' => '',
-				'min_amount' => '',
-				'oneoff_amount1' => '',
-				'oneoff_amount2' => '',
-				'oneoff_amount3' => '',
-				'oneoff_suggested_amount' => '',
-				'recurring_amount1' => '',
-				'recurring_amount2' => '',
-				'recurring_amount3' => '',
+				'title'                      => '',
+				'description'                => '',
+				'min_amount'                 => '',
+				'oneoff_amount1'             => '',
+				'oneoff_amount2'             => '',
+				'oneoff_amount3'             => '',
+				'oneoff_suggested_amount'    => '',
+				'recurring_amount1'          => '',
+				'recurring_amount2'          => '',
+				'recurring_amount3'          => '',
 				'recurring_suggested_amount' => '',
-				'suggested_frequency' => '',
-				'allow_frequency_override' => '',
-				'thanktitle'       => '',
-				'thankdescription' => '',
-				'literatuurcode' => '',
-				'marketingcode_recurring' => '',
-				'marketingcode_oneoff' => '',
+				'suggested_frequency'        => '',
+				'allow_frequency_override'   => '',
+				'thanktitle'                 => '',
+				'thankdescription'           => '',
+				'literatuurcode'             => '',
+				'marketingcode_recurring'    => '',
+				'marketingcode_oneoff'       => '',
+				'returnpage'                 => '',
+				'errorpage'                  => '',
 			), $fields, $shortcode_tag );
 
 			$frequencies = [
@@ -232,6 +246,8 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'marketingcode_oneoff'       => $fields['marketingcode_oneoff'],
 					'thanktitle'                 => $fields['thanktitle'],
 					'thankdescription'           => $fields['thankdescription'],
+					'returnpage'                 => $fields['returnpage'],
+					'errorpage'                  => $fields['errorpage'],
 				)
 			);
 
