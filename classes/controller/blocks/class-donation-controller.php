@@ -148,6 +148,12 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'type'  => 'text',
 					'value' => '04888',
 				),
+				array(
+					'label' => __( 'iDeal bedanktpagina', 'planet4-gpnl-blocks' ),
+					'attr'  => 'returnpage',
+					'type'  => 'text',
+					'value' => 'https://www.greenpeace.org/nl/',
+				),
 			);
 
 			// Define the Shortcode UI arguments.
@@ -192,6 +198,7 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'literatuurcode' => '',
 				'marketingcode_recurring' => '',
 				'marketingcode_oneoff' => '',
+				'returnpage' => '',
 			), $fields, $shortcode_tag );
 
 			$frequencies = [
@@ -232,6 +239,7 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'marketingcode_oneoff'       => $fields['marketingcode_oneoff'],
 					'thanktitle'                 => $fields['thanktitle'],
 					'thankdescription'           => $fields['thankdescription'],
+					'returnpage'                 => $fields['returnpage'],
 				)
 			);
 
