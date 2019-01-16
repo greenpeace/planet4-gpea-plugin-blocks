@@ -29,8 +29,8 @@ $(document).ready(function() {
   }
 
   var tellerCode = petition_form_object.analytics_campaign;
-  var counter_min = petition_form_object.countermin;
-  var counter_max = petition_form_object.countermax;
+  var counter_min = Number(petition_form_object.countermin);
+  var counter_max = Number(petition_form_object.countermax);
   var counter_text = petition_form_object.countertext;
   var url_cg = getUrlVars()["cg"];
   var isfacebook = document.referrer.indexOf('facebook') !== -1;
@@ -78,7 +78,7 @@ $(document).ready(function() {
 					var email = res[1];
 					$('#mail').val(email);
 				} else if (type === 'teller'){
-					toonTeller(res[0]);
+					showCounter(Number(res[0]));
 				}
 			}
 		}
@@ -90,38 +90,25 @@ $(document).ready(function() {
     // send request
   }
 
-  // teller tonen
-  function toonTeller(aantal_tekeningen){
-    if (Number(aantal_tekeningen) >= counter_min){
-      $('.counter').show();
-      var perc_slider = Math.round(100 *(aantal_tekeningen / counter_max));
+  // TODO add language preference detection for better formatting of numbers
+  function showCounter(num_responses){
+	  if (num_responses >= counter_min){
+		  $('.counter').show();
+		  var perc_slider = Math.round(100 *(num_responses / counter_max));
 
-      // check of het aantal tekeningen > dan counter_max, toon in dat geval een volle slider ...
-      if (Number(aantal_tekeningen) >= Number(counter_max)) {
+      if (num_responses >= counter_max) {
         perc_slider = 100;
       }
 
       $('.counter__slider').animate({width: perc_slider+'%', opacity: 1}, 2000, 'easeInOutCubic');
-      $('.counter__gettext').html(beautifulThousands(aantal_tekeningen)+' '+counter_text);
+      $('.counter__gettext').html(num_responses.toLocaleString('nl-NL') +' '+counter_text);
       $('.counter__text').fadeIn(2000);
     }
   }
 
-  // makes a number more legible, 1000 becomes 1.000, 12564783 becomes 12.564.783
-  function beautifulThousands(mynumber){
-    mynumber  += '';
-    x = mynumber.split('.');
-    x1 = x[0];
-    x2 = x.length > 1 ? '.' + x[1] : '';
-    var rgx = /(\d+)(\d{3})/;
-    while (rgx.test(x1)) {
-      x1 = x1.replace(rgx, '$1' + '.' + '$2');
-    }
-    return x1 + x2;
-  }
-
 //  try to get an response from whatsapp, else hide the whatsappbutton
 //  ATM not working because ajax doesn't support custom schemes...
+// TODO Find different way of determining whatsapp support
   $.ajax({
     type: 'HEAD',
     url: 'whatsapp://send?text=text=Hello%20World!',
