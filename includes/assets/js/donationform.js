@@ -641,7 +641,7 @@ donationformVue = new Vue({
             issuersBank: "",
             clientIp: "",
             clientUserAgent: "",
-            returnUrlSuccess: "https://www.greenpeace.nl",
+            returnUrlSuccess: formconfig.returnpage,
             returnUrlCancel: "https://www.greenpeace.nl",
             returnUrlError: "https://www.greenpeace.nl",
             returnUrlReject: "https://www.greenpeace.nl",
