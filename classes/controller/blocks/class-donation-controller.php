@@ -206,6 +206,9 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'marketingcode_oneoff'       => '',
 				'returnpage'                 => '',
 				'errorpage'                  => '',
+				'drplus_amount1'             => '',
+				'drplus_amount2'             => '',
+				'drplus_amount3'             => ''
 			), $fields, $shortcode_tag );
 
 			$frequencies = [
@@ -248,6 +251,10 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'thankdescription'           => $fields['thankdescription'],
 					'returnpage'                 => $fields['returnpage'],
 					'errorpage'                  => $fields['errorpage'],
+					'drplus_amount1'             => $fields['drplus_amount1'],
+					'drplus_amount2'             => $fields['drplus_amount2'],
+					'drplus_amount3'             => $fields['drplus_amount3']
+
 				)
 			);
 

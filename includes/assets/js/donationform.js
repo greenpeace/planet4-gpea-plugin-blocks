@@ -1,21 +1,105 @@
-Vue.use(window.vuelidate.default)
-const {
-    required,
-    between,
-    minLength,
-    maxLength,
-    email,
-    numeric,
-    alphaNum,
-	requiredUnless
-} = window.validators
-Vue.use(VueFormWizard)
+$(document).ready(function() {
 
-Vue.config.devtools = true;
+	// REFACTOR IE11 doesn't support UrlSearchParams, so custom UrlParam function.
+	// 	Consider polyfilling it now? or wait until we drop IE11 support and switch then?
+	function getUrlVars(){
+		var vars = [], hash;
+		var uri = window.location.href.split("#")[0];
+		var hashes = uri.slice(window.location.href.indexOf('?') + 1).split('&');
+		for(var i = 0; i < hashes.length; i++){
+			hash = hashes[i].split('=');
+			vars.push(hash[0]);
+			vars[hash[0]] = hash[1];
+		}
+		return vars;
+	}
+
+	var url_vars = {
+					'marketingcode'       : getUrlVars()['mcode'],
+					'literatuurcode'      : getUrlVars()['lcode'],
+					'suggested_frequency' : getUrlVars()['per'],
+					'drplus'              : getUrlVars()['drplus'],
+					'min_amount'          : getUrlVars()['min']
+	               };
+
+	$.each(url_vars, function(key, value){
+		if (value !== undefined){
+			switch (key) {
+				case 'suggested_frequency':
+					formconfig.allow_frequency_override = 'false';
+					switch (value) {
+						case 'E':
+							formconfig.suggested_frequency = ["E", "Eenmalig"];
+							break;
+						case 'M':
+							formconfig.suggested_frequency = ["M", "Maandelijks"];
+							break;
+
+						// UNCOMMENT This is prepared for using recurring payments
+						// case 'K':
+						// 	formconfig.suggested_frequency = ["K", "Per kwartaal"];
+						// 	break;
+						// case 'H':
+						// 	formconfig.suggested_frequency = ["H", "Per halfjaar"];
+						// 	break;
+						// case 'J':
+						// 	formconfig.suggested_frequency = ["J", "Jaarlijks"];
+						// 	break;
+					}
+					break;
+				case 'marketingcode':
+					if (formconfig.suggested_frequency[0] === "E") {
+						let url_tmp = "marketingcode_oneoff";
+						formconfig[url_tmp] = value;
+					} else {
+						let url_tmp = "marketingcode_recurring";
+						formconfig[url_tmp] = value;
+					}
+					break;
+				case 'drplus':
+					if (value === "true") {
+						if (formconfig.suggested_frequency[0] === "E") {
+							formconfig.oneoff_amount1    = formconfig.drplus_amount1;
+							formconfig.oneoff_amount2    = formconfig.drplus_amount2;
+							formconfig.oneoff_amount3    = formconfig.drplus_amount3;
+						} else {
+							formconfig.recurring_amount1 = formconfig.drplus_amount1;
+							formconfig.recurring_amount2 = formconfig.drplus_amount2;
+							formconfig.recurring_amount3 = formconfig.drplus_amount3;
+						}
+					}
+					break;
+				case 'min_amount':
+					formconfig.min_amount = value;
+					break;
+				case 'literatuurcode':
+					formconfig.literatuurcode = value;
+					break;
+
+			}
+
+		}
+	});
+	console.table(formconfig);
+
+	Vue.use(window.vuelidate.default);
+	const {
+		required,
+		between,
+		minLength,
+		maxLength,
+		email,
+		numeric,
+		alphaNum,
+		requiredUnless
+	} = window.validators;
+	Vue.use(VueFormWizard);
+
+	Vue.config.devtools = true;
 
 
-Vue.component('step1', {
-    template: `
+	Vue.component('step1', {
+		template: `
         <div>
           <div class="form-group" v-bind:class="{ 'has-error': $v.machtigingType }">
             <label for="machtigingType" v-if="formconfig.allow_frequency_override == 'true'">Ja ik steun Greenpeace:</label>
@@ -80,60 +164,60 @@ Vue.component('step1', {
 	  </fieldset>
           
            </div>`,
-    data() {
-        return {
-            machtigingType: formconfig.suggested_frequency[0],
-			amount1:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount1          : formconfig.oneoff_amount1,
-			amount2:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount2          : formconfig.oneoff_amount2,
-			amount3:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount3          : formconfig.oneoff_amount3,
-            bedrag:        (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_suggested_amount : formconfig.oneoff_suggested_amount,
-            betaling:      (formconfig.suggested_frequency[0] === "M") ? 'EM' : 'ID',
-        }
-    },
-    validations: {
-        machtigingType: {
-            required
-        },
-        bedrag: {
-            required,
-            numeric,
-            between: between(formconfig.min_amount, 999)
-        },
-        betaling: {
-            required
-        },
-        form: ['machtigingType', 'bedrag', 'betaling' ]
-    },
-    methods: {
-        validate() {
-            this.$v.form.$reset();
-            this.$v.form.$touch();
-            var isValid = !this.$v.form.$invalid;
-            this.$emit('on-validate', this.$data, isValid);
-            if(isValid){
-                // Push step to tag manager
-                dataLayer.push({
-                    'event': 'virtualPageViewDonatie',
-                    'virtualPageviewStep': 'Stap 1', //Vul hier de stap in. E.g. Stap 1, Stap 2, Stap 3, Bedankt
-                    'virtuelPageviewName': 'Donatie' // Vul hier de stapnaam in. E.g. Donatie, gegevens, adres, Bedankt
-                });
-            }
-            return isValid
-        },
-        changePeriodic() {
-			this.$data.amount1    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount1          : formconfig.oneoff_amount1 ;
-			this.$data.amount2    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount2          : formconfig.oneoff_amount2 ;
-			this.$data.amount3    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount3          : formconfig.oneoff_amount3 ;
-			this.$data.bedrag     = (this.$data.machtigingType === "M") ? formconfig.recurring_suggested_amount : formconfig.oneoff_suggested_amount ;
-			this.$data.min_amount = (this.$data.machtigingType === "M") ? formconfig.recurring_min_amount       : formconfig.oneoff_min_amount ;
-			this.$data.betaling   = (this.$data.machtigingType === "M") ? "EM" : "ID";
-            this.validate();
-        }
-	}
-})
+		data() {
+			return {
+				machtigingType: formconfig.suggested_frequency[0],
+				amount1:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount1          : formconfig.oneoff_amount1,
+				amount2:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount2          : formconfig.oneoff_amount2,
+				amount3:       (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_amount3          : formconfig.oneoff_amount3,
+				bedrag:        (formconfig.suggested_frequency[0] === "M") ? formconfig.recurring_suggested_amount : formconfig.oneoff_suggested_amount,
+				betaling:      (formconfig.suggested_frequency[0] === "M") ? 'EM' : 'ID',
+			}
+		},
+		validations: {
+			machtigingType: {
+				required
+			},
+			bedrag: {
+				required,
+				numeric,
+				between: between(formconfig.min_amount, 999)
+			},
+			betaling: {
+				required
+			},
+			form: ['machtigingType', 'bedrag', 'betaling' ]
+		},
+		methods: {
+			validate() {
+				this.$v.form.$reset();
+				this.$v.form.$touch();
+				var isValid = !this.$v.form.$invalid;
+				this.$emit('on-validate', this.$data, isValid);
+				if(isValid){
+					// Push step to tag manager
+					dataLayer.push({
+						'event': 'virtualPageViewDonatie',
+						'virtualPageviewStep': 'Stap 1', //Vul hier de stap in. E.g. Stap 1, Stap 2, Stap 3, Bedankt
+						'virtuelPageviewName': 'Donatie' // Vul hier de stapnaam in. E.g. Donatie, gegevens, adres, Bedankt
+					});
+				}
+				return isValid
+			},
+			changePeriodic() {
+				this.$data.amount1    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount1          : formconfig.oneoff_amount1 ;
+				this.$data.amount2    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount2          : formconfig.oneoff_amount2 ;
+				this.$data.amount3    = (this.$data.machtigingType === "M") ? formconfig.recurring_amount3          : formconfig.oneoff_amount3 ;
+				this.$data.bedrag     = (this.$data.machtigingType === "M") ? formconfig.recurring_suggested_amount : formconfig.oneoff_suggested_amount ;
+				this.$data.min_amount = (this.$data.machtigingType === "M") ? formconfig.recurring_min_amount       : formconfig.oneoff_min_amount ;
+				this.$data.betaling   = (this.$data.machtigingType === "M") ? "EM" : "ID";
+				this.validate();
+			}
+		}
+	})
 
-Vue.component('step2', {
-    template: `
+	Vue.component('step2', {
+		template: `
         <div>
           <div class="form-group">
             <div class="input-group" v-bind:class="{ 'has-error': $v.geslacht.$error }">
@@ -211,66 +295,66 @@ Vue.component('step2', {
             </div>
           </div>
         </div>`,
-    data() {
-        return {
-            initialen: '',
-            voornaam: '',
-            tussenvoegsel: '',
-            achternaam: '',
-            geslacht: '',
-            email: '',
-            telefoonnummer: '',
-            rekeningnummer: '',
-        }
-    },
-    validations: {
-        initialen: {},
-        voornaam: {
-            required
-        },
-        tussenvoegsel: {},
-        achternaam: {
-            required
-        },
-        geslacht: {},
-        email: {
-            required,
-            email
-        },
-        telefoonnummer: {
-            numeric,
-            minLength: minLength(10),
-            maxLength: maxLength(10)
-        },
-        rekeningnummer: {
-            required: requiredUnless(function() { return this.ideal }),
-            alphaNum
-        },
-        form: ['initialen', 'voornaam', 'tussenvoegsel', 'achternaam', 'geslacht', 'email', 'telefoonnummer', 'rekeningnummer']
-    },
-    methods: {
-        validate() {
-            this.$v.form.$reset();
-            this.$v.form.$touch();
-            var isValid = !this.$v.form.$invalid;
-            this.$emit('on-validate', this.$data, isValid);
-            if (isValid) {
-                // Push step to tag manager
-                dataLayer.push({
-                    'event': 'virtualPageViewDonatie',
-                    'virtualPageviewStep': 'Stap 2', //Vul hier de stap in. E.g. Stap 1, Stap 2, Stap 3, Bedankt
-                    'virtuelPageviewName': 'Gegevens' // Vul hier de stapnaam in. E.g. Donatie, gegevens, adres, Bedankt
-                });
-            }
-            return isValid
-        }
-    },
-    props: ['ideal']
+		data() {
+			return {
+				initialen: '',
+				voornaam: '',
+				tussenvoegsel: '',
+				achternaam: '',
+				geslacht: '',
+				email: '',
+				telefoonnummer: '',
+				rekeningnummer: '',
+			}
+		},
+		validations: {
+			initialen: {},
+			voornaam: {
+				required
+			},
+			tussenvoegsel: {},
+			achternaam: {
+				required
+			},
+			geslacht: {},
+			email: {
+				required,
+				email
+			},
+			telefoonnummer: {
+				numeric,
+				minLength: minLength(10),
+				maxLength: maxLength(10)
+			},
+			rekeningnummer: {
+				required: requiredUnless(function() { return this.ideal }),
+				alphaNum
+			},
+			form: ['initialen', 'voornaam', 'tussenvoegsel', 'achternaam', 'geslacht', 'email', 'telefoonnummer', 'rekeningnummer']
+		},
+		methods: {
+			validate() {
+				this.$v.form.$reset();
+				this.$v.form.$touch();
+				var isValid = !this.$v.form.$invalid;
+				this.$emit('on-validate', this.$data, isValid);
+				if (isValid) {
+					// Push step to tag manager
+					dataLayer.push({
+						'event': 'virtualPageViewDonatie',
+						'virtualPageviewStep': 'Stap 2', //Vul hier de stap in. E.g. Stap 1, Stap 2, Stap 3, Bedankt
+						'virtuelPageviewName': 'Gegevens' // Vul hier de stapnaam in. E.g. Donatie, gegevens, adres, Bedankt
+					});
+				}
+				return isValid
+			}
+		},
+		props: ['ideal']
 
-})
+	})
 
-Vue.component('step3', {
-    template: `
+	Vue.component('step3', {
+		template: `
         <div>
           <div class="form-row">
             <div class="form-group col-md-5" v-bind:class="{ 'has-error': $v.postcode.$error }">
@@ -519,304 +603,305 @@ Vue.component('step3', {
             Ik machtig hierbij Greenpeace tot wederopzegging (of éénmalig indien hierboven gekozen) bovengenoemd bedrag van mijn rekening af te schrijven.<br/><br/>
           </div>
         </div>`,
-    data() {
-        return {
-            straat: '',
-            postcode: '',
-            huisnummer: '',
-            huisnummertoevoeging: '',
-            woonplaats: '',
-            landcode: 'NL'
-        }
-    },
-    validations: {
-        straat: {
-            required
-        },
-        postcode: {
-            minLength: minLength(6),
-            maxLength: maxLength(6),
-            required,
-            alphaNum
-        },
-        huisnummer: {
-            required,
-            numeric
-        },
-        huisnummertoevoeging: {
-            maxLength: maxLength(8)
-        },
-        woonplaats: {
-            required
-        },
-        landcode: {
-            required
-        },
-        form: ['straat', 'postcode', 'huisnummer', 'huisnummertoevoeging', 'woonplaats', 'landcode']
-    },
-    methods: {
-        validate() {
-            this.$v.form.$reset();
-            this.$v.form.$touch();
-            var isValid = !this.$v.form.$invalid;
-            this.$emit('on-validate', this.$data, isValid);
-            if(isValid){
-                // Push step to tag manager
-                dataLayer.push({
-                    'event': 'virtualPageViewDonatie',
-                    'virtualPageviewStep': 'Stap 3', //Vul hier de stap in. E.g. Stap 1, Stap 2, Stap 3, Bedankt
-                    'virtuelPageviewName': 'Adres' // Vul hier de stapnaam in. E.g. Donatie, gegevens, adres, Bedankt
-                });
-            }
-            return isValid
-        },
-
-        fetchAddress: function() {
-            var zipcodeInput = document.getElementById('postal-code');
-            var houseNoInput = document.getElementById('housenumber');
-            var zipcodeValue = zipcodeInput.value;
-            var houseNoValue = houseNoInput.value;
-
-            Vue.http.interceptors.push((request, next) => {
-                request.headers.set('x-api-key', 'P7TdlkQG4k4ppvVyAXmdD4TR9v5fW4YT8qv4TzOY')
-                request.headers.set('Accept', 'application/hal+json')
-                next()
-            })
-
-            this.$http.get("https://api.postcodeapi.nu/v2/addresses/?postcode="+ zipcodeValue +"&number=" + houseNoValue +"")
-                .then(function (response) {
-                    let street = response.body._embedded.addresses[0].street;
-                    let city = response.body._embedded.addresses[0].city.label;
-
-                    this.populateFields(street, city);
-                }, function (error) {
-                    console.log(response.body);
-                });
-        },
-
-        populateFields: function(street, city) {
-            var streetInput = document.getElementById('street');
-            var cityInput = document.getElementById('city');
-
-            streetInput.setAttribute('disabled', 'disabled');
-            cityInput.setAttribute('disabled', 'disabled');
-
-            this.straat = street;
-            this.woonplaats = city;
-        }
-    },
-})
-
-
-donationformVue = new Vue({
-    el: '#app',
-    data: {
-        finalModel: {
-            marketingcode: (formconfig.suggested_frequency[0] === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff ,
-            literatuurcode: formconfig.literatuurcode,
-            guid: '',
-            betaling: (formconfig.suggested_frequency[0] === "M") ? 'EM' : 'ID'
-        },
-        result: {
-            msg: '',
-            hasError: false
-        },
-        idealData: {
-            initials: "",
-            firstname: "",
-            middlename: "",
-            lastname: "",
-            gender: "",
-            birthday: "",
-            street: "",
-            housenumber: "",
-            housenumberAddition: "",
-            postcode: "",
-            city: "",
-            email: "",
-            phonenumber: "",
-            description: "",
-            amount: 0,
-            comment: "",
-            issuersBank: "",
-            clientIp: "",
-            clientUserAgent: "",
-            returnUrlSuccess: formconfig.returnpage,
-            returnUrlCancel: formconfig.errorpage,
-            returnUrlError: formconfig.errorpage,
-            returnUrlReject: formconfig.errorpage,
-            marketingCode: formconfig.marketingcode_oneoff,
-            literatureCode: formconfig.literatuurcode,
-            guid: null,
-            countryId: null,
-            accountNumber: null,
-            subscriptionCode: null,
-            subscriptionEndDate: null,
-            subscriptionMonths: null
-        }
-},
-    methods: {
-        onComplete: function() {
-            inputs = $('#app input');
-            buttons = $('#app button');
-            $('.wizard-footer-right .wizard-btn').text('');
-            $('.wizard-footer-right .wizard-btn').addClass('loader');
-            this.disableFormElements(inputs);
-            this.disableFormElements(buttons);
-			$('.wizard-nav > li > a').addClass('disabled');
-            if (this.finalModel.betaling === "ID"){
-                this.submitiDeal();
-            }
-            else{
-                this.submit();
-            }
-        },
-
-        onSucces: function() {
-            // console.log(this.finalModel);
-            var formBody = $("#Adres4");
-            formBody.addClass('card');
-            formBody.empty();
-            formBody.append('<div class="card-body donation-card"></div>')
-			var cardBody = $('.donation-card');
-			cardBody.append('<h2 class="card-title">'+formconfig.thanktitle+'</h2>');
-			cardBody.append('<p class="card-text">'+formconfig.thankdescription+'</p>');
-			$('.wizard-footer-right .wizard-btn').removeClass('loader');
-			$('.wizard-footer-right .wizard-btn').text('Afgerond');
-			// Push step to tag manager
-            dataLayer.push({
-                'event': 'virtualPageViewDonatie',
-                'virtualPageviewStep': 'Bedankt', //Vul hier de stap in. E.g. Stap 1, Stap 2, Stap 3, Bedankt
-                'virtuelPageviewName': 'Bedankt' // Vul hier de stapnaam in. E.g. Donatie, gegevens, adres, Bedankt
-            });
-            /** Google Tag Manager E-commerce */
-
-            // Build product array
-            gtm_products = [];
-
-            gtm_products.push({
-                'name': 'machtiging',
-                'sku': this.finalModel.machtigingType,
-                'category': 'donatie',
-                'price': this.finalModel.bedrag,
-                'quantity': 1
-            });
-            // Optional repeat for each additional product to fill gtm_products array
-
-
-            /** Build an event send to the Datalayer, which needs to trigger the E-commerce transaction in the GTM backend
-             *  Additional datalayer items are send to the datalayer and processed by the GTM as an transaction
-             */
-            dataLayer.push({
-                'event': 'trackTrans',
-                'transactionId': '000111',
-                'transactionAffiliation': '',
-                'transactionTotal': this.finalModel.bedrag,
-                'transactionTax': '',
-                'transactionShipping': '',
-                'transactionPaymentType': 'machtiging',
-                'transactionCurrency': 'EUR',
-                'transactionPromoCode': '',
-                'transactionProducts': gtm_products
-            });
-            /** End Google Tag Manager E-commerce */
-        },
-
-        onFailure: function() {
-			var formBody = $("#Adres4");
-			formBody.addClass('card');
-			formBody.empty();
-			formBody.append('<div class="card-body donation-card"></div>')
-			var cardBody = $('.donation-card');
-			cardBody.append('<h2 class="card-title">Sorry..</h2>');
-			cardBody.append('<p class="card-text">Helaas gaat er iets mis met de donatieverwerking. Er wordt geen geld afgeschreven, probeer het later nog eens.</p>');
-			$('.wizard-footer-right .wizard-btn').removeClass('loader');
-			$('.wizard-footer-right .wizard-btn').text('Afgerond');
-        },
-
-		submit: function () {
-
-			this.result.msg = '';
-			this.result.hasError = false;
-			this.finalModel.marketingcode = (this.finalModel.machtigingType === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff;
-			$.ajax({
-				method: "POST",
-				url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi/machtiging/register",
-				data: JSON.stringify(this.finalModel),
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function(result) {
-					donationformVue.onSucces();
-				},
-				error: function(jqxhr, status, exception) {
-
-					console.log("Data:");
-					console.log(this.data);
-					console.log('AjaxCall:');
-					console.log(this);
-				    donationformVue.onFailure();
-				}
-			});
+		data() {
+			return {
+				straat: '',
+				postcode: '',
+				huisnummer: '',
+				huisnummertoevoeging: '',
+				woonplaats: '',
+				landcode: 'NL'
+			}
 		},
+		validations: {
+			straat: {
+				required
+			},
+			postcode: {
+				minLength: minLength(6),
+				maxLength: maxLength(6),
+				required,
+				alphaNum
+			},
+			huisnummer: {
+				required,
+				numeric
+			},
+			huisnummertoevoeging: {
+				maxLength: maxLength(8)
+			},
+			woonplaats: {
+				required
+			},
+			landcode: {
+				required
+			},
+			form: ['straat', 'postcode', 'huisnummer', 'huisnummertoevoeging', 'woonplaats', 'landcode']
+		},
+		methods: {
+			validate() {
+				this.$v.form.$reset();
+				this.$v.form.$touch();
+				var isValid = !this.$v.form.$invalid;
+				this.$emit('on-validate', this.$data, isValid);
+				if(isValid){
+					// Push step to tag manager
+					dataLayer.push({
+						'event': 'virtualPageViewDonatie',
+						'virtualPageviewStep': 'Stap 3', //Vul hier de stap in. E.g. Stap 1, Stap 2, Stap 3, Bedankt
+						'virtuelPageviewName': 'Adres' // Vul hier de stapnaam in. E.g. Donatie, gegevens, adres, Bedankt
+					});
+				}
+				return isValid
+			},
 
-        submitiDeal: function () {
-            this.result.msg = '';
-            this.result.hasError = false;
-            this.idealData.initials = this.finalModel.initialen;
-            this.idealData.firstname = this.finalModel.voornaam;
-            this.idealData.middlename = this.finalModel.tussenvoegsel;
-            this.idealData.lastname = this.finalModel.achternaam;
-            this.idealData.gender = this.finalModel.geslacht;
-            this.idealData.email = this.finalModel.email;
-            this.idealData.phonenumber = this.finalModel.telefoonnummer;
-            this.idealData.description = "Eenmalige donatie Greenpeace tnv " + this.finalModel.voornaam + " " + this.finalModel.achternaam;
-            this.idealData.amount = this.finalModel.bedrag;
-            $.ajax({
-                method: "POST",
-                url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi/payment/ideal",
-                data: JSON.stringify(this.idealData),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function(result) {
-                    window.location.href = result.transaction.redirectUrl;
-                },
-                error: function(jqxhr, status, exception) {
-                    donationformVue.onFailure();
-                    // console.log("Data:");
-                    // console.log(this.data);
-                    // console.log('AjaxCall:');
-                    // console.log(this);
-                }
-            });
-        },
+			fetchAddress: function() {
+				var zipcodeInput = document.getElementById('postal-code');
+				var houseNoInput = document.getElementById('housenumber');
+				var zipcodeValue = zipcodeInput.value;
+				var houseNoValue = houseNoInput.value;
 
-        disableFormElements: function (elements) {
-            elements.each( function() {
-                this.setAttribute('disabled', 'true');
-            })
-        },
+				Vue.http.interceptors.push((request, next) => {
+					request.headers.set('x-api-key', 'P7TdlkQG4k4ppvVyAXmdD4TR9v5fW4YT8qv4TzOY')
+					request.headers.set('Accept', 'application/hal+json')
+					next()
+				})
 
-        validateStep(name) {
-            var refToValidate = this.$refs[name];
-            return refToValidate.validate();
-        },
+				this.$http.get("https://api.postcodeapi.nu/v2/addresses/?postcode="+ zipcodeValue +"&number=" + houseNoValue +"")
+					.then(function (response) {
+						let street = response.body._embedded.addresses[0].street;
+						let city = response.body._embedded.addresses[0].city.label;
 
-        mergePartialModels(model, isValid) {
-            if (isValid) {
-                // merging each step model into the final model
-                this.finalModel = Object.assign({}, this.finalModel, model);
-                this.isiDeal();
-                this.$forceUpdate();
-            }
-        },
-        isiDeal() {
-            if (typeof this.$refs.step1 != 'undefined'){
-                return this.$refs.step1._data.betaling === "ID";
-            }
-            else{
-                return this.finalModel.betaling === "ID";
-            }
-        }
-    }
+						this.populateFields(street, city);
+					}, function (error) {
+						console.log(response.body);
+					});
+			},
+
+			populateFields: function(street, city) {
+				var streetInput = document.getElementById('street');
+				var cityInput = document.getElementById('city');
+
+				streetInput.setAttribute('disabled', 'disabled');
+				cityInput.setAttribute('disabled', 'disabled');
+
+				this.straat = street;
+				this.woonplaats = city;
+			}
+		},
+	})
+
+
+	donationformVue = new Vue({
+		el: '#app',
+		data: {
+			finalModel: {
+				marketingcode: (formconfig.suggested_frequency[0] === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff ,
+				literatuurcode: formconfig.literatuurcode,
+				guid: '',
+				betaling: (formconfig.suggested_frequency[0] === "M") ? 'EM' : 'ID'
+			},
+			result: {
+				msg: '',
+				hasError: false
+			},
+			idealData: {
+				initials: "",
+				firstname: "",
+				middlename: "",
+				lastname: "",
+				gender: "",
+				birthday: "",
+				street: "",
+				housenumber: "",
+				housenumberAddition: "",
+				postcode: "",
+				city: "",
+				email: "",
+				phonenumber: "",
+				description: "",
+				amount: 0,
+				comment: "",
+				issuersBank: "",
+				clientIp: "",
+				clientUserAgent: "",
+				returnUrlSuccess: formconfig.returnpage,
+				returnUrlCancel: formconfig.errorpage,
+				returnUrlError: formconfig.errorpage,
+				returnUrlReject: formconfig.errorpage,
+				marketingCode: formconfig.marketingcode_oneoff,
+				literatureCode: formconfig.literatuurcode,
+				guid: null,
+				countryId: null,
+				accountNumber: null,
+				subscriptionCode: null,
+				subscriptionEndDate: null,
+				subscriptionMonths: null
+			}
+		},
+		methods: {
+			onComplete: function() {
+				inputs = $('#app input');
+				buttons = $('#app button');
+				$('.wizard-footer-right .wizard-btn').text('');
+				$('.wizard-footer-right .wizard-btn').addClass('loader');
+				this.disableFormElements(inputs);
+				this.disableFormElements(buttons);
+				$('.wizard-nav > li > a').addClass('disabled');
+				if (this.finalModel.betaling === "ID"){
+					this.submitiDeal();
+				}
+				else{
+					this.submit();
+				}
+			},
+
+			onSucces: function() {
+				// console.log(this.finalModel);
+				var formBody = $("#Adres4");
+				formBody.addClass('card');
+				formBody.empty();
+				formBody.append('<div class="card-body donation-card"></div>')
+				var cardBody = $('.donation-card');
+				cardBody.append('<h2 class="card-title">'+formconfig.thanktitle+'</h2>');
+				cardBody.append('<p class="card-text">'+formconfig.thankdescription+'</p>');
+				$('.wizard-footer-right .wizard-btn').removeClass('loader');
+				$('.wizard-footer-right .wizard-btn').text('Afgerond');
+				// Push step to tag manager
+				dataLayer.push({
+					'event': 'virtualPageViewDonatie',
+					'virtualPageviewStep': 'Bedankt', //Vul hier de stap in. E.g. Stap 1, Stap 2, Stap 3, Bedankt
+					'virtuelPageviewName': 'Bedankt' // Vul hier de stapnaam in. E.g. Donatie, gegevens, adres, Bedankt
+				});
+				/** Google Tag Manager E-commerce */
+
+				// Build product array
+				gtm_products = [];
+
+				gtm_products.push({
+					'name': 'machtiging',
+					'sku': this.finalModel.machtigingType,
+					'category': 'donatie',
+					'price': this.finalModel.bedrag,
+					'quantity': 1
+				});
+				// Optional repeat for each additional product to fill gtm_products array
+
+
+				/** Build an event send to the Datalayer, which needs to trigger the E-commerce transaction in the GTM backend
+				 *  Additional datalayer items are send to the datalayer and processed by the GTM as an transaction
+				 */
+				dataLayer.push({
+					'event': 'trackTrans',
+					'transactionId': '000111',
+					'transactionAffiliation': '',
+					'transactionTotal': this.finalModel.bedrag,
+					'transactionTax': '',
+					'transactionShipping': '',
+					'transactionPaymentType': 'machtiging',
+					'transactionCurrency': 'EUR',
+					'transactionPromoCode': '',
+					'transactionProducts': gtm_products
+				});
+				/** End Google Tag Manager E-commerce */
+			},
+
+			onFailure: function() {
+				var formBody = $("#Adres4");
+				formBody.addClass('card');
+				formBody.empty();
+				formBody.append('<div class="card-body donation-card"></div>')
+				var cardBody = $('.donation-card');
+				cardBody.append('<h2 class="card-title">Sorry..</h2>');
+				cardBody.append('<p class="card-text">Helaas gaat er iets mis met de donatieverwerking. Er wordt geen geld afgeschreven, probeer het later nog eens.</p>');
+				$('.wizard-footer-right .wizard-btn').removeClass('loader');
+				$('.wizard-footer-right .wizard-btn').text('Afgerond');
+			},
+
+			submit: function () {
+
+				this.result.msg = '';
+				this.result.hasError = false;
+				this.finalModel.marketingcode = (this.finalModel.machtigingType === "M") ? formconfig.marketingcode_recurring : formconfig.marketingcode_oneoff;
+				$.ajax({
+					method: "POST",
+					url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi/machtiging/register",
+					data: JSON.stringify(this.finalModel),
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function(result) {
+						donationformVue.onSucces();
+					},
+					error: function(jqxhr, status, exception) {
+
+						console.log("Data:");
+						console.log(this.data);
+						console.log('AjaxCall:');
+						console.log(this);
+						donationformVue.onFailure();
+					}
+				});
+			},
+
+			submitiDeal: function () {
+				this.result.msg = '';
+				this.result.hasError = false;
+				this.idealData.initials = this.finalModel.initialen;
+				this.idealData.firstname = this.finalModel.voornaam;
+				this.idealData.middlename = this.finalModel.tussenvoegsel;
+				this.idealData.lastname = this.finalModel.achternaam;
+				this.idealData.gender = this.finalModel.geslacht;
+				this.idealData.email = this.finalModel.email;
+				this.idealData.phonenumber = this.finalModel.telefoonnummer;
+				this.idealData.description = "Eenmalige donatie Greenpeace tnv " + this.finalModel.voornaam + " " + this.finalModel.achternaam;
+				this.idealData.amount = this.finalModel.bedrag;
+				$.ajax({
+					method: "POST",
+					url: "https://www.mygreenpeace.nl/GPN.RegistrerenApi/payment/ideal",
+					data: JSON.stringify(this.idealData),
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function(result) {
+						window.location.href = result.transaction.redirectUrl;
+					},
+					error: function(jqxhr, status, exception) {
+						donationformVue.onFailure();
+						// console.log("Data:");
+						// console.log(this.data);
+						// console.log('AjaxCall:');
+						// console.log(this);
+					}
+				});
+			},
+
+			disableFormElements: function (elements) {
+				elements.each( function() {
+					this.setAttribute('disabled', 'true');
+				})
+			},
+
+			validateStep(name) {
+				var refToValidate = this.$refs[name];
+				return refToValidate.validate();
+			},
+
+			mergePartialModels(model, isValid) {
+				if (isValid) {
+					// merging each step model into the final model
+					this.finalModel = Object.assign({}, this.finalModel, model);
+					this.isiDeal();
+					this.$forceUpdate();
+				}
+			},
+			isiDeal() {
+				if (typeof this.$refs.step1 != 'undefined'){
+					return this.$refs.step1._data.betaling === "ID";
+				}
+				else{
+					return this.finalModel.betaling === "ID";
+				}
+			}
+		}
+	});
 });
 
