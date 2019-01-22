@@ -60,7 +60,7 @@ P4NLBKS\Loader::get_instance( [
 	// --- Add here your own Block Controller ---
 //	 'P4NLBKS\Controllers\Blocks\GPNL_quote_Controller',
 	 'P4NLBKS\Controllers\Blocks\No_Index_Controller',
-//	 'P4NLBKS\Controllers\Blocks\GPNL_hero_Controller',
+	 'P4NLBKS\Controllers\Blocks\GPNL_hero_Controller',
 	 'P4NLBKS\Controllers\Blocks\Donation_Controller',
 	'P4NLBKS\Controllers\Blocks\Petition_Controller',
 //	'P4NLBKS\Controllers\Blocks\GPNL_statistics_Controller',
