@@ -31,35 +31,62 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'type'  => 'textarea',
 				),
 				array(
-					'label' => __( 'Minmum bedrag', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Minimum bedrag', 'planet4-gpnl-blocks' ),
 					'attr'  => 'min_amount',
 					'type'  => 'number',
 					'value' => 5,
 
 				),
 				array(
-					'label' => __( 'Bedrag 1', 'planet4-gpnl-blocks' ),
-					'attr'  => 'amount1',
+					'label' => __( 'Eenmalig: Bedrag 1', 'planet4-gpnl-blocks' ),
+					'attr'  => 'oneoff_amount1',
 					'type'  => 'number',
 					'value' => 5,
 				),
 				array(
-					'label' => __( 'Bedrag 2', 'planet4-gpnl-blocks' ),
-					'attr'  => 'amount2',
+					'label' => __( 'Eenmalig: Bedrag 2', 'planet4-gpnl-blocks' ),
+					'attr'  => 'oneoff_amount2',
 					'type'  => 'number',
 					'value' => 10,
 
 				),
 				array(
-					'label' => __( 'Bedrag 3', 'planet4-gpnl-blocks' ),
-					'attr'  => 'amount3',
+					'label' => __( 'Eenmalig: Bedrag 3', 'planet4-gpnl-blocks' ),
+					'attr'  => 'oneoff_amount3',
 					'type'  => 'number',
 					'value' => 25,
 
 				),
 				array(
-					'label' => __( 'Voorgesteld bedrag', 'planet4-gpnl-blocks' ),
-					'attr'  => 'suggested_amount',
+					'label' => __( 'Eenmalig: Voorgesteld bedrag', 'planet4-gpnl-blocks' ),
+					'attr'  => 'oneoff_suggested_amount',
+					'type'  => 'number',
+					'value' => 10,
+
+				),
+				array(
+					'label' => __( 'Periodiek: Bedrag 1', 'planet4-gpnl-blocks' ),
+					'attr'  => 'recurring_amount1',
+					'type'  => 'number',
+					'value' => 5,
+				),
+				array(
+					'label' => __( 'Periodiek: Bedrag 2', 'planet4-gpnl-blocks' ),
+					'attr'  => 'recurring_amount2',
+					'type'  => 'number',
+					'value' => 10,
+
+				),
+				array(
+					'label' => __( 'Periodiek: Bedrag 3', 'planet4-gpnl-blocks' ),
+					'attr'  => 'recurring_amount3',
+					'type'  => 'number',
+					'value' => 25,
+
+				),
+				array(
+					'label' => __( 'Periodiek: Voorgesteld bedrag', 'planet4-gpnl-blocks' ),
+					'attr'  => 'recurring_suggested_amount',
 					'type'  => 'number',
 					'value' => 10,
 
@@ -121,6 +148,18 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'type'  => 'text',
 					'value' => '04888',
 				),
+				array(
+					'label' => __( 'iDeal bedanktpagina', 'planet4-gpnl-blocks' ),
+					'attr'  => 'returnpage',
+					'type'  => 'text',
+					'value' => 'https://www.greenpeace.org/nl/',
+				),
+				array(
+					'label' => __( 'iDeal errorpagina', 'planet4-gpnl-blocks' ),
+					'attr'  => 'errorpage',
+					'type'  => 'text',
+					'value' => 'https://www.greenpeace.org/nl/',
+				),
 			);
 
 			// Define the Shortcode UI arguments.
@@ -147,20 +186,26 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
 			$fields = shortcode_atts( array(
-				'title'       => '',
-				'description' => '',
-				'min_amount' => '',
-				'amount1' => '',
-				'amount2' => '',
-				'amount3' => '',
-				'suggested_amount' => '',
-				'suggested_frequency' => '',
-				'allow_frequency_override' => '',
-				'thanktitle'       => '',
-				'thankdescription' => '',
-				'literatuurcode' => '',
-				'marketingcode_recurring' => '',
-				'marketingcode_oneoff' => '',
+				'title'                      => '',
+				'description'                => '',
+				'min_amount'                 => '',
+				'oneoff_amount1'             => '',
+				'oneoff_amount2'             => '',
+				'oneoff_amount3'             => '',
+				'oneoff_suggested_amount'    => '',
+				'recurring_amount1'          => '',
+				'recurring_amount2'          => '',
+				'recurring_amount3'          => '',
+				'recurring_suggested_amount' => '',
+				'suggested_frequency'        => '',
+				'allow_frequency_override'   => '',
+				'thanktitle'                 => '',
+				'thankdescription'           => '',
+				'literatuurcode'             => '',
+				'marketingcode_recurring'    => '',
+				'marketingcode_oneoff'       => '',
+				'returnpage'                 => '',
+				'errorpage'                  => '',
 			), $fields, $shortcode_tag );
 
 			$frequencies = [
@@ -185,18 +230,24 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'donationform',
 				'formconfig',
 				array(
-					'min_amount'               => $fields['min_amount'],
-					'amount1'                  => $fields['amount1'],
-					'amount2'                  => $fields['amount2'],
-					'amount3'                  => $fields['amount3'],
-					'suggested_amount'         => $fields['suggested_amount'],
-					'suggested_frequency'      => $fields['suggested_frequency'],
-					'allow_frequency_override' => $fields['allow_frequency_override'],
-					'literatuurcode'           => $fields['literatuurcode'],
-					'marketingcode_recurring'  => $fields['marketingcode_recurring'],
-					'marketingcode_oneoff'     => $fields['marketingcode_oneoff'],
-					'thanktitle'               => $fields['thanktitle'],
-					'thankdescription'         => $fields['thankdescription'],
+					'min_amount'                 => $fields['min_amount'],
+					'oneoff_amount1'             => $fields['oneoff_amount1'],
+					'oneoff_amount2'             => $fields['oneoff_amount2'],
+					'oneoff_amount3'             => $fields['oneoff_amount3'],
+					'oneoff_suggested_amount'    => $fields['oneoff_suggested_amount'],
+					'recurring_amount1'          => $fields['recurring_amount1'],
+					'recurring_amount2'          => $fields['recurring_amount2'],
+					'recurring_amount3'          => $fields['recurring_amount3'],
+					'recurring_suggested_amount' => $fields['recurring_suggested_amount'],
+					'suggested_frequency'        => $fields['suggested_frequency'],
+					'allow_frequency_override'   => $fields['allow_frequency_override'],
+					'literatuurcode'             => $fields['literatuurcode'],
+					'marketingcode_recurring'    => $fields['marketingcode_recurring'],
+					'marketingcode_oneoff'       => $fields['marketingcode_oneoff'],
+					'thanktitle'                 => $fields['thanktitle'],
+					'thankdescription'           => $fields['thankdescription'],
+					'returnpage'                 => $fields['returnpage'],
+					'errorpage'                  => $fields['errorpage'],
 				)
 			);
 

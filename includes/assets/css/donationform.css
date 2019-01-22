@@ -1989,7 +1989,6 @@ fieldset[disabled] .vue-form-wizard .wizard-btn {
     box-shadow: none
 }
 
-.radio-list input[type=radio],
 .wizard-header,
 .wizard-progress-with-circle {
     display: none
