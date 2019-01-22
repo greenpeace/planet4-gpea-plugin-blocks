@@ -276,6 +276,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 			$social_menu               = wp_get_nav_menu_items( 'Footer Social' );
 			$fields['social_accounts'] = $this->get_social_accounts( $social_menu );
 			$fields['current_url']     = $this->current_url( $_SERVER );
+			$fields['twittertext']     = rawurlencode( $fields['twittertext'] );
 
 			$data = [
 				'fields' => $fields,
