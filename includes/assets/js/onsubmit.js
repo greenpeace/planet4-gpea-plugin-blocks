@@ -36,7 +36,7 @@ $('.gpnl-petitionform').on('submit', function () {
                     // if it is run by social blue, also deduplicate
                     socialBlueDeDuplicate(post_form_value['mail'], data['data']['phone'], petition_form_object.apref)
                 } else if (petition_form_object.ad_campaign === 'JA') {
-                    fbq('track', 'Lead');
+                    fbq('track', petition_form_object.jalt_track);
                 }
             }
 

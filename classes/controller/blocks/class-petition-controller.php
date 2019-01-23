@@ -154,7 +154,14 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'label'       => __( 'Social blue _apRef', 'planet4-gpnl-blocks' ),
 					'attr'        => 'apref',
 					'type'        => 'text',
-					'description' => 'Vul hier de _apRef uit de Social Blue pixel bedankpagina in',
+					'description' => 'LET OP! Vul dit alleen in als je weet wat dit doet. Vul hier de _apRef uit de Social Blue pixel bedankpagina in.',
+				),
+				array(
+					'label'       => __( 'Jalt tracking identifier', 'planet4-gpnl-blocks' ),
+					'attr'        => 'jalt_track',
+					'type'        => 'text',
+					'description' => 'LET OP! Vul dit alleen in als je weet wat dit doet. Vul hier de tracking identifier van Jalt in',
+					'value'       => 'Lead',
 				),
 			);
 
@@ -259,6 +266,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'alt_text'           => '',
 					'ad_campaign'        => '',
 					'apref'              => '',
+					'jalt_track'         => '',
 				),
 				$fields,
 				$shortcode_tag
@@ -315,6 +323,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 						'ga_action'          => $fields['ga_action'],
 						'ad_campaign'        => $fields['ad_campaign'],
 						'apref'              => $fields['apref'],
+						'jalt_track'         => $fields['jalt_track'],
 					)
 				);
 			// Shortcode callbacks must return content, hence, output buffering here.
