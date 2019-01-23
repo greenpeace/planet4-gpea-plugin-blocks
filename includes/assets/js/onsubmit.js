@@ -1,15 +1,13 @@
-$('#gpnl-petitionform').on('submit', function () {
-    // Get the parameter from the petition form and add the action and CSRF protection
-    var post_form_value = getFormObj('gpnl-petitionform');
+$('.gpnl-petitionform').on('submit', function () {
+	var petition_form_element = this;
+    // Get the  parameter from the petition form and add the action and CSRF protection
+    var post_form_value = getFormObj(petition_form_element);
     post_form_value.action = "petition_form_process";
     post_form_value.nonce  = petition_form_object.nonce;
     post_form_value.ad_campaign = petition_form_object.ad_campaign;
 
-
-
-
     // Disable the form so people can't resubmit
-    toggleDisable('#gpnl-petitionform *');
+    toggleDisable($(petition_form_element).find('*'));
 
     // Do a ajax call to the wp_admin admin_ajax.php,
     // which triggers processing function in the petition block
@@ -19,7 +17,6 @@ $('#gpnl-petitionform').on('submit', function () {
         data:    post_form_value,
         success: function(data, response) {
             console.log("^-^");
-            console.log(data);
 
             // Send conversion event to the GTM
             if (typeof dataLayer !== 'undefined') {
@@ -29,9 +26,6 @@ $('#gpnl-petitionform').on('submit', function () {
                     'conv_action'   :petition_form_object.ga_action,
                     'conv_label'    :'registreer'
                 });
-            }
-            else{
-                console.log("GTM not defined?")
             }
 
             // if the consent was ticked or consent was given by entering phonenumber
@@ -46,25 +40,28 @@ $('#gpnl-petitionform').on('submit', function () {
                 }
             }
 
-            // flip the card, positionattribute flips to make sure no problems arises with different lengths of the front and back of the card, finally hide the front
-            flip();
+            // cardflip the card, positionattribute flips to make sure no problems arises with different lengths of the front and back of the card, finally hide the front
+            cardflip(petition_form_element);
 		},
 		error: function(jqXHR, textStatus, errorThrown, data, url){
-            console.log("o_o");
-            console.log('ERRORS: ' + textStatus + ': ' + errorThrown);
-            // If the backend send an error, hide the thank element and show an error urging to try again
-            flip();
-            $('.gpnl-petition-thank *').hide('');
-            $('.gpnl-petition-thank').append("<p>Sorry, er gaat momenteel iets fout, probeer het nu of later opnieuw.</p>")
-            $('.gpnl-petition-thank').append("<button type=\"button\" class=\"btn btn-primary btn-block\" onclick=\"flip('.gpnl-petition');toggleDisable('#gpnl-petitionform *');$('.gpnl-petition-form').show();$('.signBtn').toggle();$('.policies').toggle();$('.gpnl-petition-thank').css( 'position', 'absolute');$('.gpnl-petition-form').css( 'position', 'relative');\">Probeer opnieuw</button>")
-        }
-    });
+			// If the backend sends an error, hide the thank element and show an error urging to try again
+			console.log("o_o");
+			console.log('ERRORS: ' + textStatus + ': ' + errorThrown);
+			cardback = $(petition_form_element.parentNode.nextElementSibling);
+			cardback.find('*').hide('');
+			cardback.append("<p>Sorry, er gaat momenteel iets fout, probeer het nu of later opnieuw.</p>")
+			cardback.append(
+			"<a href='"+window.location.href +"' class=\"btn btn-primary btn-block\"" +
+				"\">Probeer opnieuw</a>");
+			cardflip(petition_form_element);
+		}
+});
 });
 
 // Get the key+value from the input fields in the form
-function getFormObj(formId) {
+function getFormObj(el) {
 	var formObj = {};
-	var inputs = $('#'+formId).serializeArray();
+	var inputs = $(el).serializeArray();
 	$.each(inputs, function (i, input) {
 			formObj[input.name] = input.value;
 	});
@@ -72,27 +69,37 @@ function getFormObj(formId) {
 }
 
 // Toggle the disabled state on form elements
-function toggleDisable(id) {
-$(id).prop("disabled", !$(id).prop("disabled"));
+function toggleDisable(el) {
+	el.prop("disabled", !el.prop("disabled"));
 
 }
 
 // toggle the flipped class for the card parent
-function flip() {
-	cardfront = $('.gpnl-petition');
+function cardflip(el) {
+	let element = $(el);
+	let parent =  el.parentNode;
+	let card = $(el.parentNode.parentNode);
+
     // first hide the signing button
-    $('.signBtn').toggle();
-    $('.policies').toggle();
-    // then flip the position attribute on the front and back of the card to support different lengths front and back
-    $(".gpnl-petition-thank").css( "position", "relative");
-    $(".gpnl-petition-form").css( "position", "absolute");
-    // then flip the card
-    cardfront.toggleClass('flipped');
-    // after animation hide the front
-    cardfront.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
+    $(element.find('.signBtn')).toggle();
+    $(element.find('.policies')).toggle();
+    // then cardflip the position attribute on the front and back of the card to support different lengths front and back
+	$(parent.nextElementSibling).css( "position", flip_positionattribute(parent.nextElementSibling));
+    $(parent).css( "position", flip_positionattribute(parent));
+	// then cardflip the card
+	card.toggleClass('flipped');
+
+	// after animation hide the front
+    card.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
 		function(e) {
-			$('.gpnl-petition-form').hide();
+			$(parent).toggle();
+			card.off('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend');
 		});
+
+}
+
+function flip_positionattribute (el){
+	return $(el).css('position') === "absolute" ? 'relative' : 'absolute'
 }
 
 function fireShareEvent (platform){
