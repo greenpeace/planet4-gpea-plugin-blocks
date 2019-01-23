@@ -3,6 +3,7 @@
   {% if ( fields ) %}
 
 	  <div class="hero">
+		  <div class="hero__wrapper">
 			  <img
 					  class="hero__img"
 					  src="{{ fields.image }}"
@@ -10,11 +11,15 @@
 					  sizes="{{ fields.image_sizes }}"
 					  alt="{{ fields.alt_text }}"
 			  >
-			  <p class="hero__title">{{ fields.title }}</p>
-			  <p class="hero__description">{{ fields.description|e('wp_kses_post')|raw }}</p>
-		  <div class="col-xs-12 col-sm-8 col-md-4 action-button">
-			  <a href="{{ fields.link_url }}"
-				 class="btn btn-small btn-medium btn-primary btn-block">{{ fields.link_text }}</a>
+			  <div class="hero__text">
+				  <h2 class="hero__title">
+				  <span>
+					  {{ fields.title }}
+				  </span>
+				  </h2>
+				  <p class="hero__description">{{ fields.description|e('wp_kses_post')|raw }}</p>
+				  <a href="{{ fields.link_url }}" class="btn btn-small btn-medium btn-primary hero__button">{{ fields.link_text }}</a>
+			  </div>
 		  </div>
 	  </div>
 
