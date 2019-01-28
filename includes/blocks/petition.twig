@@ -35,11 +35,11 @@
 							<form class="gpnl-petitionform" onsubmit="return false;">
 								<div class="form-group">
 									<label hidden for="name">Naam</label>
-									<input name="name" id="name" required type="text" class="form-control" placeholder="Voornaam">
+									<input name="name" required type="text" class="form-control" placeholder="Voornaam">
 								</div>
 								<div class="form-group">
 									<label hidden for="mail">Email</label>
-									<input name="mail" id="mail" required type="email" class="form-control" placeholder="E-mail">
+									<input name="mail"  required type="email" class="form-control" placeholder="E-mail">
 								</div>
 
 								<div class="form-group">
@@ -53,6 +53,7 @@
 								<label for="phone"><small >Vul je je telefoonnummer in? Dan kan Greenpeace jou telefonisch benaderen voor giftverzoeken of updates rondom lopende campagnes.</small></label>
 								<input type="text" name="marketingcode" value="{{ fields.marketingcode }}" hidden readonly>
 								<input type="text" name="literaturecode" value="{{ fields.literaturecode }}" hidden readonly>
+								<input type="text" name="form_id" value="{{ fields.form_id }}" hidden readonly>
 								<input type="submit" class="btn btn-primary btn-block signBtn" value="{{ fields.sign }}">
 								<div class="small policies">
 									<div class="row">

@@ -2,9 +2,11 @@ $('.gpnl-petitionform').on('submit', function () {
 	var petition_form_element = this;
     // Get the  parameter from the petition form and add the action and CSRF protection
     var post_form_value = getFormObj(petition_form_element);
+    form_config = "petition_form_object_" + post_form_value['form_id'];
+    
     post_form_value.action = "petition_form_process";
-    post_form_value.nonce  = petition_form_object.nonce;
-    post_form_value.ad_campaign = petition_form_object.ad_campaign;
+    post_form_value.nonce  = window[form_config].nonce;
+    post_form_value.ad_campaign = window[form_config].ad_campaign;
 
     // Disable the form so people can't resubmit
     toggleDisable($(petition_form_element).find('*'));
@@ -13,7 +15,7 @@ $('.gpnl-petitionform').on('submit', function () {
     // which triggers processing function in the petition block
     $.ajax({
         type:    "POST",
-        url:     petition_form_object.ajaxUrl,
+        url:     window[form_config].ajaxUrl,
         data:    post_form_value,
         success: function(data, response) {
             console.log("^-^");
@@ -22,8 +24,8 @@ $('.gpnl-petitionform').on('submit', function () {
             if (typeof dataLayer !== 'undefined') {
                 dataLayer.push({
                     'event'         :'petitiebutton',
-                    'conv_campaign' :petition_form_object.analytics_campaign,
-                    'conv_action'   :petition_form_object.ga_action,
+                    'conv_campaign' : window[form_config].analytics_campaign,
+                    'conv_action'   : window[form_config].ga_action,
                     'conv_label'    :'registreer'
                 });
             }
@@ -31,12 +33,12 @@ $('.gpnl-petitionform').on('submit', function () {
             // if the consent was ticked or consent was given by entering phonenumber
             if (post_form_value.consent === "on" || post_form_value.phone !== "") {
                 // If an ad campaign is run by an external company fire the conversiontracking
-                if (petition_form_object.ad_campaign === 'SB') {
+                if (window[form_config].ad_campaign === 'SB') {
                     fbq('track', 'Lead');
                     // if it is run by social blue, also deduplicate
-                    socialBlueDeDuplicate(post_form_value['mail'], data['data']['phone'], petition_form_object.apref)
-                } else if (petition_form_object.ad_campaign === 'JA') {
-                    fbq('track', petition_form_object.jalt_track);
+                    socialBlueDeDuplicate(post_form_value['mail'], data['data']['phone'], window[form_config].apref)
+                } else if (window[form_config].ad_campaign === 'JA') {
+                    fbq('track', window[form_config].jalt_track);
                 }
             }
 
@@ -106,8 +108,8 @@ function fireShareEvent (platform){
     if (typeof dataLayer !== 'undefined') {
         dataLayer.push({
             'event'         :'petitiebutton',
-            'conv_campaign' :petition_form_object.analytics_campaign,
-            'conv_action'   :petition_form_object.ga_action,
+            'conv_campaign' :window[form_config].analytics_campaign,
+            'conv_action'   :window[form_config].ga_action,
             'conv_label'    :'share_' + platform});
     }
     else{
