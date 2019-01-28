@@ -47,6 +47,51 @@ if ( ! class_exists( 'GPNL_hero_Controller' ) ) {
 					'frameTitle'  => __( 'Selecteer afbeelding', 'planet4-blocks-backend' ),
 				],
 				[
+					'label'   => __( 'Select focus point for image', 'planet4-blocks-backend' ) .
+						'<img src="' . esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_9.png' ) ) . '" />',
+
+					'attr'    => 'focus_image',
+					'type'    => 'select',
+					'options' => [
+						[
+							'value' => 'left top',
+							'label' => __( '1 - Top Left', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'center top',
+							'label' => __( '2 - Top Center', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'right top',
+							'label' => __( '3 - Top Right', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'left center',
+							'label' => __( '4 - Middle Left', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'center center',
+							'label' => __( '5 - Middle Center', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'right center',
+							'label' => __( '6 - Middle Right', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'left bottom',
+							'label' => __( '7 - Bottom Left', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'center bottom',
+							'label' => __( '8 - Bottom Center', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'right bottom',
+							'label' => __( '9 - Bottom Right', 'planet4-blocks-backend' ),
+						],
+					],
+				],
+				[
 					'label' => __( 'Text for link', 'planet4-blocks-backend' ),
 					'attr'  => 'link_text',
 					'type'  => 'url',
@@ -97,6 +142,7 @@ if ( ! class_exists( 'GPNL_hero_Controller' ) ) {
 					'title'       => '',
 					'description' => '',
 					'image'       => '',
+					'focus_image' => '',
 					'link_text'   => '',
 					'link_url'    => '',
 				),

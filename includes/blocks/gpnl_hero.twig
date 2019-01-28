@@ -2,15 +2,15 @@
 
   {% if ( fields ) %}
 
-	  <div class="hero">
+	  <div class="hero"  style="background-image: url('{{ fields.image }}'); background-position: {{ fields.focus_image }}; ">
 		  <div class="hero__wrapper">
-			  <img
-					  class="hero__img"
-					  src="{{ fields.image }}"
-					  srcset="{{ fields.image_srcset }}"
-					  sizes="{{ fields.image_sizes }}"
-					  alt="{{ fields.alt_text }}"
-			  >
+			  {#<img#}
+					  {#class="hero__img"#}
+					  {#src="{{ fields.image }}"#}
+					  {#srcset="{{ fields.image_srcset }}"#}
+					  {#sizes="{{ fields.image_sizes }}"#}
+					  {#alt="{{ fields.alt_text }}"#}
+			  {#>#}
 			  <div class="hero__text">
 				  <h2 class="hero__title">
 				  <span>
