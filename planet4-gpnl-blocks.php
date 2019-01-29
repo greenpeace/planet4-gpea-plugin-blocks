@@ -19,17 +19,17 @@ defined( 'ABSPATH' ) or die( 'Direct access is forbidden !' );
 
 
 /* ========================
-      C O N S T A N T S
+	C O N S T A N T S
    ======================== */
 if ( ! defined( 'P4NLBKS_REQUIRED_PHP' ) )        define( 'P4NLBKS_REQUIRED_PHP',        '7.0' );
 if ( ! defined( 'P4NLBKS_REQUIRED_PLUGINS' ) )    define( 'P4NLBKS_REQUIRED_PLUGINS',    [
-	'timber' => [
+	'timber'    => [
 		'min_version' => '1.3.0',
-		'rel_path' => 'timber-library/timber.php',
+		'rel_path'    => 'timber-library/timber.php',
 	],
 	'shortcake' => [
 		'min_version' => '0.7.0',
-		'rel_path' => 'shortcode-ui/shortcode-ui.php',
+		'rel_path'    => 'shortcode-ui/shortcode-ui.php',
 	],
 ] );
 if ( ! defined( 'P4NLBKS_PLUGIN_BASENAME' ) )     define( 'P4NLBKS_PLUGIN_BASENAME',    plugin_basename( __FILE__ ) );
@@ -58,10 +58,10 @@ require_once ABSPATH . 'wp-admin/includes/plugin.php';
    ========================== */
 P4NLBKS\Loader::get_instance( [
 	// --- Add here your own Block Controller ---
-//	 'P4NLBKS\Controllers\Blocks\GPNL_quote_Controller',
+	 'P4NLBKS\Controllers\Blocks\GPNL_quote_Controller',
 	 'P4NLBKS\Controllers\Blocks\No_Index_Controller',
 	 'P4NLBKS\Controllers\Blocks\GPNL_hero_Controller',
 	 'P4NLBKS\Controllers\Blocks\Donation_Controller',
 	'P4NLBKS\Controllers\Blocks\Petition_Controller',
-//	'P4NLBKS\Controllers\Blocks\GPNL_statistics_Controller',
+	'P4NLBKS\Controllers\Blocks\GPNL_statistics_Controller',
 ], 'P4NLBKS\Views\View' );
