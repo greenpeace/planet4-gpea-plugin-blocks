@@ -4,21 +4,23 @@
 
 	  <div class="hero block-wide"  style="background-image: url('{{ fields.image }}'); background-position: {{ fields.focus_image }}; ">
 		  <div class="hero__wrapper">
-			  {#<img#}
-					  {#class="hero__img"#}
-					  {#src="{{ fields.image }}"#}
-					  {#srcset="{{ fields.image_srcset }}"#}
-					  {#sizes="{{ fields.image_sizes }}"#}
-					  {#alt="{{ fields.alt_text }}"#}
-			  {#>#}
 			  <div class="hero__text">
-				  <h2 class="hero__title">
-				  <span>
-					  {{ fields.title }}
-				  </span>
-				  </h2>
-				  <p class="hero__description">{{ fields.description|e('wp_kses_post')|raw }}</p>
-				  <a href="{{ fields.link_url }}" class="btn btn-small btn-medium btn-primary hero__button">{{ fields.link_text }}</a>
+					{% if ( fields.title ) %}
+					  <h2 class="hero__title">
+					  <span>
+						  {{ fields.title }}
+					  </span>
+					  </h2>
+					{% endif %}
+
+					{% if ( fields.description ) %}
+						<p class="hero__description">{{ fields.description|e('wp_kses_post')|raw }}</p>
+					{% endif %}
+
+				  	{% if (fields.link_text) %}
+						<a href="{{ fields.link_url }}" class="btn btn-small btn-medium btn-primary hero__button">{{ fields.link_text }}</a>
+					{% endif %}
+
 			  </div>
 		  </div>
 	  </div>
