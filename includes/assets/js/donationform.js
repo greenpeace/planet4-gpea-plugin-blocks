@@ -15,9 +15,9 @@ $(document).ready(function() {
 	}
 
 	var url_vars = {
+					'suggested_frequency' : getUrlVars()['per'],
 					'marketingcode'       : getUrlVars()['mcode'],
 					'literatuurcode'      : getUrlVars()['lcode'],
-					'suggested_frequency' : getUrlVars()['per'],
 					'drplus'              : getUrlVars()['drplus'],
 					'min_amount'          : getUrlVars()['min']
 	               };
@@ -26,25 +26,32 @@ $(document).ready(function() {
 		if (value !== undefined){
 			switch (key) {
 				case 'suggested_frequency':
-					formconfig.allow_frequency_override = 'false';
 					switch (value) {
 						case 'E':
+							formconfig.allow_frequency_override = 'false';
 							formconfig.suggested_frequency = ["E", "Eenmalig"];
 							break;
 						case 'M':
+							formconfig.allow_frequency_override = 'false';
 							formconfig.suggested_frequency = ["M", "Maandelijks"];
 							break;
 
 						// UNCOMMENT This is prepared for using recurring payments
 						// case 'K':
+						// 	formconfig.allow_frequency_override = 'false';
 						// 	formconfig.suggested_frequency = ["K", "Per kwartaal"];
 						// 	break;
 						// case 'H':
+						// 	formconfig.allow_frequency_override = 'false';
 						// 	formconfig.suggested_frequency = ["H", "Per halfjaar"];
 						// 	break;
 						// case 'J':
+						// 	formconfig.allow_frequency_override = 'false';
 						// 	formconfig.suggested_frequency = ["J", "Jaarlijks"];
 						// 	break;
+						default:
+							formconfig.suggested_frequency = ["M", "Maandelijks"];
+							break;
 					}
 					break;
 				case 'marketingcode':
@@ -70,6 +77,7 @@ $(document).ready(function() {
 					}
 					break;
 				case 'min_amount':
+					// if min_amount < lowest_amount => lowest_amount == min_amount
 					formconfig.min_amount = value;
 					break;
 				case 'literatuurcode':
@@ -791,6 +799,7 @@ $(document).ready(function() {
 				/** Build an event send to the Datalayer, which needs to trigger the E-commerce transaction in the GTM backend
 				 *  Additional datalayer items are send to the datalayer and processed by the GTM as an transaction
 				 */
+				// TODO make transactionId configurable
 				dataLayer.push({
 					'event': 'trackTrans',
 					'transactionId': '000111',
