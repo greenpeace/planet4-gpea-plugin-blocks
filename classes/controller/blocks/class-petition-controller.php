@@ -108,12 +108,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'attr'  => 'campaigncode',
 					'type'  => 'text',
 				),
-				array(
-					'label' => __( 'Google Analytics action', 'planet4-gpnl-blocks' ),
-					'attr'  => 'ga_action',
-					'type'  => 'text',
-					'value' => 'Petitie',
-				),
+
 				array(
 					'label' => __( 'Teller minimum', 'planet4-gpnl-blocks' ),
 					'attr'  => 'countermin',
@@ -130,6 +125,14 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'attr'  => 'countertext',
 					'type'  => 'text',
 					'value' => 'handtekeningen',
+				),
+				array(
+					'label' =>'<hr class="hr-dashed"><br><div class="message error">' .
+						__('LET OP! De instellingen hieronder alleen gebruiken als je weet wat ze doen en waar ze voor zijn ') . '</div>' .
+						'<p>' . __( 'Google Analytics action', 'planet4-gpnl-blocks' ) . '</p>',
+					'attr'  => 'ga_action',
+					'type'  => 'text',
+					'value' => 'Petitie',
 				),
 				array(
 					'label'   => __( 'Advertentiecampagne?', 'planet4-gpnl-blocks' ),
@@ -154,7 +157,22 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'label'       => __( 'Social blue _apRef', 'planet4-gpnl-blocks' ),
 					'attr'        => 'apref',
 					'type'        => 'text',
-					'description' => 'Vul hier de _apRef uit de Social Blue pixel bedankpagina in',
+					'description' => 'Vul hier de _apRef uit de Social Blue pixel bedankpagina in.',
+				),
+				array(
+					'label'       => __( 'Jalt tracking identifier', 'planet4-gpnl-blocks' ),
+					'attr'        => 'jalt_track',
+					'type'        => 'text',
+					'description' => 'Vul hier de tracking identifier van Jalt in',
+					'value'       => 'Lead',
+				),
+				array(
+					'label'       => __( 'Formulier ID', 'planet4-gpnl-blocks' ),
+
+					'attr'        => 'form_id',
+					'type'        => 'number',
+					'description' => 'Gebruik dit als er meerdere petitieformulieren op 1 pagina staan. Elk formulier moet een uniek numeriek id hebben.',
+					'value'       => '1',
 				),
 			);
 
@@ -259,6 +277,8 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 					'alt_text'           => '',
 					'ad_campaign'        => '',
 					'apref'              => '',
+					'jalt_track'         => '',
+					'form_id'            => '',
 				),
 				$fields,
 				$shortcode_tag
@@ -276,6 +296,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 			$social_menu               = wp_get_nav_menu_items( 'Footer Social' );
 			$fields['social_accounts'] = $this->get_social_accounts( $social_menu );
 			$fields['current_url']     = $this->current_url( $_SERVER );
+			$fields['twittertext']     = rawurlencode( $fields['twittertext'] );
 
 			$data = [
 				'fields' => $fields,
@@ -302,7 +323,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				// Pass options to frontend code
 				wp_localize_script(
 					'jquery-docready-script',
-					'petition_form_object',
+					'petition_form_object_' . $fields['form_id'],
 					array(
 						'ajaxUrl'            => admin_url( 'admin-ajax.php' ),
 						//url for php file that process ajax request to WP
@@ -314,6 +335,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 						'ga_action'          => $fields['ga_action'],
 						'ad_campaign'        => $fields['ad_campaign'],
 						'apref'              => $fields['apref'],
+						'jalt_track'         => $fields['jalt_track'],
 					)
 				);
 			// Shortcode callbacks must return content, hence, output buffering here.

@@ -47,6 +47,51 @@ if ( ! class_exists( 'GPNL_hero_Controller' ) ) {
 					'frameTitle'  => __( 'Selecteer afbeelding', 'planet4-blocks-backend' ),
 				],
 				[
+					'label'   => __( 'Select focus point for image', 'planet4-blocks-backend' ) .
+						'<img src="' . esc_url( plugins_url( '/planet4-plugin-blocks/admin/images/grid_9.png' ) ) . '" />',
+
+					'attr'    => 'focus_image',
+					'type'    => 'select',
+					'options' => [
+						[
+							'value' => 'left top',
+							'label' => __( '1 - Top Left', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'center top',
+							'label' => __( '2 - Top Center', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'right top',
+							'label' => __( '3 - Top Right', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'left center',
+							'label' => __( '4 - Middle Left', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'center center',
+							'label' => __( '5 - Middle Center', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'right center',
+							'label' => __( '6 - Middle Right', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'left bottom',
+							'label' => __( '7 - Bottom Left', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'center bottom',
+							'label' => __( '8 - Bottom Center', 'planet4-blocks-backend' ),
+						],
+						[
+							'value' => 'right bottom',
+							'label' => __( '9 - Bottom Right', 'planet4-blocks-backend' ),
+						],
+					],
+				],
+				[
 					'label' => __( 'Text for link', 'planet4-blocks-backend' ),
 					'attr'  => 'link_text',
 					'type'  => 'url',
@@ -92,11 +137,14 @@ if ( ! class_exists( 'GPNL_hero_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
+			wp_enqueue_script( 'herowidejs', P4NLBKS_ASSETS_DIR . 'js/gpnl-herowide.js', array( 'jquery' ), '2.2.29', true );
+
 			$fields = shortcode_atts(
 				array(
 					'title'       => '',
 					'description' => '',
 					'image'       => '',
+					'focus_image' => '',
 					'link_text'   => '',
 					'link_url'    => '',
 				),
@@ -109,8 +157,8 @@ if ( ! class_exists( 'GPNL_hero_Controller' ) ) {
 				// load the image from the library
 				$fields['image']        = $image[0];
 				$fields['alt_text']     = get_post_meta( $fields['image'], '_wp_attachment_image_alt', true );
-				$fields['image_srcset'] = wp_get_attachment_image_srcset( $fields['image'], 'full', wp_get_attachment_metadata( $fields['image'] ) );
-				$fields['image_sizes']  = wp_calculate_image_sizes( 'full', null, null, $fields['image'] );
+				$fields['image_srcset'] = wp_get_attachment_image_srcset( $fields['image'], 'retina-large', wp_get_attachment_metadata( $fields['image'] ) );
+				$fields['image_sizes']  = wp_calculate_image_sizes( 'retina-large', null, null, $fields['image'] );
 			}
 
 			$data = [
