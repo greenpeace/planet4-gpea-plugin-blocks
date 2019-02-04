@@ -42,6 +42,28 @@ $('.gpnl-petitionform').on('submit', function () {
                 }
             }
 
+            if (post_form_value.phone !== ""){
+				// Send conversion event to the GTM
+				if (typeof dataLayer !== 'undefined') {
+					dataLayer.push({
+						'event'         :'petitiebutton',
+						'conv_campaign' : window[form_config].analytics_campaign,
+						'conv_action'   :'telnr',
+						'conv_label'    :'Ja'
+					});
+				}
+			}
+            else{
+				if (typeof dataLayer !== 'undefined') {
+					dataLayer.push({
+						'event'         :'petitiebutton',
+						'conv_campaign' : window[form_config].analytics_campaign,
+						'conv_action'   :'telnr',
+						'conv_label'    :'Nee'
+					});
+				}
+			}
+
             // cardflip the card, positionattribute flips to make sure no problems arises with different lengths of the front and back of the card, finally hide the front
             cardflip(petition_form_element);
 		},
