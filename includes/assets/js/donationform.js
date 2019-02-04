@@ -802,7 +802,7 @@ $(document).ready(function() {
 				// TODO make transactionId configurable
 				dataLayer.push({
 					'event': 'trackTrans',
-					'transactionId': '000111',
+					'transactionId': donationformVue.getGTMTransactionId(),
 					'transactionAffiliation': '',
 					'transactionTotal': this.finalModel.bedrag,
 					'transactionTax': '',
@@ -909,6 +909,13 @@ $(document).ready(function() {
 				else{
 					return this.finalModel.betaling === "ID";
 				}
+			},
+			
+			getGTMTransactionId() {
+			  // Math.random should be unique because of its seeding algorithm.
+			  // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+			  // after the decimal.
+			  return '_' + [this.finalModel.marketingcode] + '_' + Math.random().toString(36).substr(2, 9);
 			}
 		}
 	});
