@@ -304,21 +304,21 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 
 			// Include de approptiate scripts for ad campaign tracking
 			if ( 'SB' === $fields['ad_campaign'] ) {
-				wp_enqueue_script( 'social-blue-landing-script', P4NLBKS_ASSETS_DIR . 'js/social-blue-landing.js', [], '2.2.29', true );
+				wp_enqueue_script( 'social-blue-landing-script', P4NLBKS_ASSETS_DIR . 'js/social-blue-landing.js', [], '2.3.3', true );
 			} elseif ( 'JA' === $fields['ad_campaign'] ) {
-				wp_enqueue_script( 'jalt-landing-script', P4NLBKS_ASSETS_DIR . 'js/jalt-landing.js', [], '2.2.29', true );
+				wp_enqueue_script( 'jalt-landing-script', P4NLBKS_ASSETS_DIR . 'js/jalt-landing.js', [], '2.3.3', true );
 			}
 
 			//  Include the script and styling for the counter
-			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/onload.js', array( 'jquery' ), '2.2.29', true );
-			wp_enqueue_script( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js', array( 'jquery' ), '2.2.29', true );
-			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.min.css', [], '2.2.29' );
+			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/onload.js', array( 'jquery' ), '2.3.3', true );
+			wp_enqueue_script( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js', array( 'jquery' ), '2.3.3', true );
+			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.min.css', [], '2.3.3' );
 
 			/* ========================
 				C S S / JS
 			   ======================== */
 				// Enqueue the script:
-				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/onsubmit.js', array( 'jquery' ), '2.2.29', true );
+				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/onsubmit.js', array( 'jquery' ), '2.3.3', true );
 
 				// Pass options to frontend code
 				wp_localize_script(
