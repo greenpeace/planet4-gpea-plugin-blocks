@@ -3,7 +3,7 @@
  * Plugin Name: Planet4 - GPNL Blocks
  * Description: Creates all the blocks that will be available for usage by Shortcake.
  * Plugin URI: https://github.com/greenpeace/planet4-gpnl-plugin-blocks
- * Version: 2.3.1
+ * Version: 2.3.2
  * Php Version: 7.0
  *
  * Author: Greenpeace Netherlands
@@ -19,17 +19,17 @@ defined( 'ABSPATH' ) or die( 'Direct access is forbidden !' );
 
 
 /* ========================
-      C O N S T A N T S
+	C O N S T A N T S
    ======================== */
 if ( ! defined( 'P4NLBKS_REQUIRED_PHP' ) )        define( 'P4NLBKS_REQUIRED_PHP',        '7.0' );
 if ( ! defined( 'P4NLBKS_REQUIRED_PLUGINS' ) )    define( 'P4NLBKS_REQUIRED_PLUGINS',    [
-	'timber' => [
+	'timber'    => [
 		'min_version' => '1.3.0',
-		'rel_path' => 'timber-library/timber.php',
+		'rel_path'    => 'timber-library/timber.php',
 	],
 	'shortcake' => [
 		'min_version' => '0.7.0',
-		'rel_path' => 'shortcode-ui/shortcode-ui.php',
+		'rel_path'    => 'shortcode-ui/shortcode-ui.php',
 	],
 ] );
 if ( ! defined( 'P4NLBKS_PLUGIN_BASENAME' ) )     define( 'P4NLBKS_PLUGIN_BASENAME',    plugin_basename( __FILE__ ) );

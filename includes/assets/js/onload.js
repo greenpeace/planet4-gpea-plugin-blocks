@@ -2,17 +2,21 @@ $(document).ready(function() {
 
   // Hide the consentbox if the opt=in url var is set. (this is for set for ie mailings)
   var opt=getUrlVars()['opt'];
+  var url_cg = getUrlVars()["cg"];
+  var isfacebook = document.referrer.indexOf('facebook') !== -1;
+  var istwitter = document.referrer.indexOf('twitter') !== -1;
+
   if(opt!= undefined && $('.optin').length != 0 && opt=='in'){
     $('.optin').hide();
     $('.gpnl-petition-checkbox').prop( "checked", true );
 
     // Here we check if we know the mail being entered if the opt=in var is set.
     // If we don't know the entered mail we should display the consentbox
-    $('#mail').keyup(function(event) {
+	  $( "input[name='mail']" ).keyup(function(event) {
       // First loosely check if the value in the mailinput is indeed a mailadress, if it indeed is, we pass it onto the database checker
       var mailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
       if (mailRegex.test(this.value)) {
-        mail = encodeURIComponent(this.value),
+        mail = encodeURIComponent(this.value);
         $.ajax({
           type: 'GET',
           url: "https://secure.greenpeacephp.nl/kenikdeze.php?mail=" + mail,
@@ -20,7 +24,7 @@ $(document).ready(function() {
             // If we do not know the email, we display the consentbox again
             if (data.responseText.includes('false')) {
               $('.optin').show();
-              $('.gpnl-petition-checkbox').prop( "checked", false ); 
+              $('.gpnl-petition-checkbox').prop( "checked", false );
             }
           }
         });
@@ -28,21 +32,21 @@ $(document).ready(function() {
     });
   }
 
-  var tellerCode = petition_form_object.analytics_campaign;
-  var counter_min = Number(petition_form_object.countermin);
-  var counter_max = Number(petition_form_object.countermax);
-  var counter_text = petition_form_object.countertext;
-  var url_cg = getUrlVars()["cg"];
-  var isfacebook = document.referrer.indexOf('facebook') !== -1;
-  var istwitter = document.referrer.indexOf('twitter') !== -1;
+	$('.gpnl-petitionform').each(function(){
+		var post_form_value = getFormObj(this);
+		var form_config = "petition_form_object_" + post_form_value['form_id'];
+		this.tellerCode = window[form_config].analytics_campaign;
+  		this.counter_min = Number(window[form_config].countermin);
+  		this.counter_max = Number(window[form_config].countermax);
+  		this.counter_text = window[form_config].countertext;
+  		prefillByGuid('teller', this);
+	});
 
 	if ( !(istwitter || isfacebook)   ){
-		prefillByGuid('prefill');
+		prefillByGuid('prefill', this);
 	}
 
-  prefillByGuid('teller');
-
-  function prefillByGuid(type){
+  function prefillByGuid(type, form){
     var xmlhttp = new XMLHttpRequest();
     var query_id = '';
     var requestValue = '';
@@ -52,7 +56,7 @@ $(document).ready(function() {
 		  requestValue = url_cg;
 	  } else if (type === 'teller'){
       query_id = 'CAMP_TTL_PETITIONS';
-      requestValue = tellerCode;//'CABO1-2016';
+      requestValue = form.tellerCode;
     }
     xmlhttp.open("POST", "https://www.mygreenpeace.nl/GPN.WebServices/WIDSService.asmx", true);
     // build SOAP request
@@ -74,11 +78,11 @@ $(document).ready(function() {
 				// waar gaat het om? Een teller of een prefill
 				if (type === 'prefill'){
 					var naam = res[0];
-					$('#name').val(naam);
+					$(form).find("input[name='name']").val(naam);
 					var email = res[1];
-					$('#mail').val(email);
+					$(form).find("input[name='mail']").val(email);
 				} else if (type === 'teller'){
-					showCounter(Number(res[0]));
+					showCounter(Number(res[0]), form);
 				}
 			}
 		}
@@ -91,18 +95,19 @@ $(document).ready(function() {
   }
 
   // TODO add language preference detection for better formatting of numbers
-  function showCounter(num_responses){
-	  if (num_responses >= counter_min){
-		  $('.counter').show();
-		  var perc_slider = Math.round(100 *(num_responses / counter_max));
+  function showCounter(num_responses, form){
+  	  let formwrapper = form.parentNode;
+	  if (num_responses >= form.counter_min){
+		 $(formwrapper).find('.counter').show();
+		  var perc_slider = Math.round(100 *(num_responses / form.counter_max));
 
-      if (num_responses >= counter_max) {
+      if (num_responses >= form.counter_max) {
         perc_slider = 100;
       }
 
-      $('.counter__slider').animate({width: perc_slider+'%', opacity: 1}, 2000, 'easeInOutCubic');
-      $('.counter__gettext').html(num_responses.toLocaleString('nl-NL') +' '+counter_text);
-      $('.counter__text').fadeIn(2000);
+      $(formwrapper).find('.counter__slider').animate({width: perc_slider+'%', opacity: 1}, 2000, 'easeInOutCubic');
+      $(formwrapper).find('.counter__gettext').html(num_responses.toLocaleString('nl-NL') +' '+form.counter_text);
+      $(formwrapper).find('.counter__text').fadeIn(2000);
     }
   }
 
@@ -113,7 +118,7 @@ $(document).ready(function() {
     type: 'HEAD',
     url: 'whatsapp://send?text=text=Hello%20World!',
     success: function() {
-        window.location='whatsapp://send?text=text=Hello%20World!';   
+        window.location='whatsapp://send?text=text=Hello%20World!';
     },
     error: function() {
         $('.gpnl-share-whatsapp').toggle()
@@ -133,6 +138,12 @@ function getUrlVars(){
   return vars;
 }
 
-function checkKnownEmail(mail) {
-
+// Get the key+value from the input fields in the form
+function getFormObj(el) {
+	var formObj = {};
+	var inputs = $(el).serializeArray();
+	$.each(inputs, function (i, input) {
+		formObj[input.name] = input.value;
+	});
+	return formObj;
 }
