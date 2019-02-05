@@ -12,7 +12,7 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 	class Donation_Controller extends Controller {
 
 		/** @const string BLOCK_NAME */
-		const BLOCK_NAME = 'donation';
+		const BLOCK_NAME = 'gpnl_donation';
 
 		/**
 		 * Shortcode UI setup for the donationblock shortcode.
