@@ -88,14 +88,17 @@ function uglify() {
 }
 
 function watch() {
-	livereload.listen({'port': 35729});
+	livereload.listen({'port': 35730});
 	gulp.watch(path_scss, gulp.series(lint_css, sass));
-	gulp.watch(path_js, gulp.series(lint_js, uglify));
+	// gulp.watch(path_js, gulp.series(lint_js, uglify));
 }
 
 exports.fix =  gulp.parallel(fix_css, fix_js);
 exports.sass = sass;
 exports.uglify = uglify;
 exports.watch = watch;
-exports.test = gulp.parallel(lint_css, lint_js);
-exports.default = gulp.series(lint_css, lint_js, sass, uglify);
+exports.test = gulp.parallel(lint_css);
+// exports.test = gulp.parallel(lint_css, lint_js);
+// exports.default = gulp.series(lint_css, lint_js, sass, uglify);
+exports.default = gulp.series(lint_css, sass);
+
