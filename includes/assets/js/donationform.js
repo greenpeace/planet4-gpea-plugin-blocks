@@ -35,6 +35,10 @@ $(document).ready(function() {
 							formconfig.allow_frequency_override = 'false';
 							formconfig.suggested_frequency = ["M", "Maandelijks"];
 							break;
+            case 'F':
+							formconfig.allow_frequency_override = 'false';
+							formconfig.suggested_frequency = ["M", "maandelijks voor 12 maanden"];
+							break;
 
 						// UNCOMMENT This is prepared for using recurring payments
 						// case 'K':
