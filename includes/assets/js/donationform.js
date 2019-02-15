@@ -4,7 +4,7 @@ $(document).ready(function() {
 	// 	Consider polyfilling it now? or wait until we drop IE11 support and switch then?
 	function getUrlVars(){
 		var vars = [], hash;
-		var uri = window.location.href.split("#")[0];
+		var uri = decodeURIComponent(window.location.href.split("#")[0]);
 		var hashes = uri.slice(window.location.href.indexOf('?') + 1).split('&');
 		for(var i = 0; i < hashes.length; i++){
 			hash = hashes[i].split('=');
@@ -92,7 +92,6 @@ $(document).ready(function() {
 
 		}
 	});
-	console.table(formconfig);
 
 	Vue.use(window.vuelidate.default);
 	const {

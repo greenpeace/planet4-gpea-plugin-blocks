@@ -128,7 +128,7 @@ $(document).ready(function() {
 
 function getUrlVars(){
   var vars = [], hash;
-  var uri = window.location.href.split("#")[0];
+  var uri = decodeURIComponent(window.location.href.split("#")[0]);
   var hashes = uri.slice(window.location.href.indexOf('?') + 1).split('&');
   for(var i = 0; i < hashes.length; i++){
     hash = hashes[i].split('=');
