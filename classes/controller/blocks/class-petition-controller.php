@@ -310,15 +310,15 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 			}
 
 			//  Include the script and styling for the counter
-			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/onload.js', array( 'jquery' ), '2.3.6', true );
-			wp_enqueue_script( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js', array( 'jquery' ), '2.3.6', true );
-			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.min.css', [], '2.3.6' );
+			wp_enqueue_script( 'petitioncounterjs', P4NLBKS_ASSETS_DIR . 'js/onload.js', [ 'jquery' ], '2.3.3', true );
+			wp_enqueue_script( 'jquery-ui', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js', [  'jquery'  ], '2.3.3', true );
+			wp_enqueue_style( 'petitioncountercss', P4NLBKS_ASSETS_DIR . 'css/gpnl-petition.min.css', [], '2.3.3' );
 
 			/* ========================
 				C S S / JS
 			   ======================== */
 				// Enqueue the script:
-				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/onsubmit.js', array( 'jquery' ), '2.3.6', true );
+				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/onsubmit.js', [  'jquery'  ], '2.3.3', true );
 
 				// Pass options to frontend code
 				wp_localize_script(

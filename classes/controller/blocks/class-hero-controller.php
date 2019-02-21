@@ -137,7 +137,7 @@ if ( ! class_exists( 'GPNL_hero_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
-			wp_enqueue_script( 'herowidejs', P4NLBKS_ASSETS_DIR . 'js/gpnl-herowide.js', array( 'jquery' ), '2.2.29', true );
+			wp_enqueue_script( 'herowidejs', P4NLBKS_ASSETS_DIR . 'js/gpnl-herowide.js', [ 'jquery' ], '2.2.29', true );
 
 			$fields = shortcode_atts(
 				array(
