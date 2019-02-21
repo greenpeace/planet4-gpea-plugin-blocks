@@ -41,6 +41,7 @@
 		"VueFormWizard": "writable",
 		"dataLayer": "writable",
 		"gtm_products": "writable",
-		"donationformVue": "writable"
+		"donationformVue": "writable",
+		"clang" : "writable"
 	}
 }

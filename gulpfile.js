@@ -12,6 +12,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
 const livereload = require('gulp-livereload');
+const terser = require('gulp-terser');
 
 const path_js = 'includes/assets/js/src/*.js';
 const path_scss = 'includes/assets/css/scss/*.scss';
@@ -20,19 +21,19 @@ const path_dest_js = 'includes/assets/js';
 
 
 let error_handler = {
-	errorHandler: notify.onError({
-		title: 'Gulp',
-		message: 'Error: <%= error.message %>'
-	})
+  errorHandler: notify.onError({
+    title: 'Gulp',
+    message: 'Error: <%= error.message %>'
+  })
 };
 
 function lint_css() {
-	return gulp.src(path_scss)
-		.pipe(plumber(error_handler))
-		.pipe(stylelint({
-			reporters: [{ formatter: 'string', console: true}]
-		}))
-		.pipe(livereload());
+  return gulp.src(path_scss)
+    .pipe(plumber(error_handler))
+    .pipe(stylelint({
+      reporters: [{ formatter: 'string', console: true}]
+    }))
+    .pipe(livereload());
 }
 
 function lint_js() {
@@ -51,7 +52,7 @@ function fix_css() {
       reporters: [{ formatter: 'string', console: true}],
       fix: true
     }))
-    .pipe(gulp.dest('includes/assets/scss/'))
+    .pipe(gulp.dest('includes/assets/scss/'));
 //  This outputs to 'assets/scss/**/*.scss', manual copy to right directory for now..
 }
 
@@ -65,32 +66,31 @@ function fix_js() {
 
 // TODO configure gulp-sass-glob to auto include all .scss files
 function sass() {
-	return gulp.src(path_scss)
-		.pipe(plumber(error_handler))
-		.pipe(sourcemaps.init())
-		.pipe(scss().on('error', scss.logError))
+  return gulp.src(path_scss)
+    .pipe(plumber(error_handler))
+    .pipe(sourcemaps.init())
+    .pipe(scss().on('error', scss.logError))
     .pipe(autoprefixer())
-		.pipe(cleancss({rebase: false, level :2}))
-		.pipe(sourcemaps.write('/maps/'))
-		.pipe(gulp.dest(path_dest_css))
-		.pipe(livereload());
+    .pipe(cleancss({rebase: false, level :2}))
+    .pipe(sourcemaps.write('/maps/'))
+    .pipe(gulp.dest(path_dest_css))
+    .pipe(livereload());
 }
 
 function uglify() {
-	return gulp.src(path_js)
-		.pipe(plumber(error_handler))
-		.pipe(sourcemaps.init())
-		// .pipe(concat('main.js'))
-		.pipe(js())
-		.pipe(sourcemaps.write('/maps/'))
-		.pipe(gulp.dest(path_dest_js))
-		.pipe(livereload());
+  return gulp.src(path_js)
+    .pipe(plumber(error_handler))
+    .pipe(sourcemaps.init())
+    .pipe(terser())
+    .pipe(sourcemaps.write('maps/'))
+    .pipe(gulp.dest(path_dest_js))
+    .pipe(livereload());
 }
 
 function watch() {
-	livereload.listen({'port': 35730});
-	gulp.watch(path_scss, gulp.series(lint_css, sass));
-	// gulp.watch(path_js, gulp.series(lint_js, uglify));
+  livereload.listen({'port': 35730});
+  gulp.watch(path_scss, gulp.series(lint_css, sass));
+  gulp.watch(path_js, gulp.series(lint_js, uglify));
 }
 
 exports.fix =  gulp.parallel(fix_css, fix_js);

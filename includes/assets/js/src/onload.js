@@ -6,6 +6,15 @@ $(document).ready(function() {
   var isfacebook = document.referrer.indexOf('facebook') !== -1;
   var istwitter = document.referrer.indexOf('twitter') !== -1;
 
+  let clangct=getUrlVars()['clangct'];
+
+  if(clangct != undefined){
+    $.ajax({
+      url: '/wp-content/plugins/planet4-gpnl-plugin-blocks/includes/assets/js/clang-landing.js?clangct='+clangct,
+      dataType: 'script',
+    });
+  }
+
   if(opt!= undefined && $('.optin').length != 0 && opt=='in'){
     $('.optin').hide();
     $('.gpnl-petition-checkbox').prop( 'checked', true );
@@ -31,6 +40,10 @@ $(document).ready(function() {
         });
       }
     });
+
+    if ( !(istwitter || isfacebook)   ){
+      prefillByGuid('prefill', this);
+    }
   }
 
   $('.gpnl-petitionform').each(function(){
@@ -40,12 +53,9 @@ $(document).ready(function() {
     this.counter_min = Number(window[form_config].countermin);
     this.counter_max = Number(window[form_config].countermax);
     this.counter_text = window[form_config].countertext;
+
     prefillByGuid('teller', this);
   });
-
-  if ( !(istwitter || isfacebook)   ){
-    prefillByGuid('prefill', this);
-  }
 
   function prefillByGuid(type, form){
     var xmlhttp = new XMLHttpRequest();
@@ -115,16 +125,16 @@ $(document).ready(function() {
   //  try to get an response from whatsapp, else hide the whatsappbutton
   //  ATM not working because ajax doesn't support custom schemes...
   // TODO Find different way of determining whatsapp support
-  $.ajax({
-    type: 'HEAD',
-    url: 'whatsapp://send?text=text=Hello%20World!',
-    success: function() {
-      window.location='whatsapp://send?text=text=Hello%20World!';
-    },
-    error: function() {
-      $('.gpnl-share-whatsapp').toggle();
-    }
-  });
+  // $.ajax({
+  //   type: 'HEAD',
+  //   url: 'whatsapp://send?text=text=Hello%20World!',
+  //   success: function() {
+  //     window.location='whatsapp://send?text=text=Hello%20World!';
+  //   },
+  //   error: function() {
+  //     $('.gpnl-share-whatsapp').toggle();
+  //   }
+  // });
 });
 
 function getUrlVars(){

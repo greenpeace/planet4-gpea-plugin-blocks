@@ -15,6 +15,16 @@ $(document).ready(function() {
     return vars;
   }
 
+  let clangct=getUrlVars()['clangct'];
+
+  if(clangct != undefined){
+    $.ajax({
+      url: '/wp-content/plugins/planet4-gpnl-plugin-blocks/includes/assets/js/clang-landing.js?clangct='+clangct,
+      dataType: 'script',
+    });
+  }
+
+
   var url_vars = {
     'suggested_frequency' : getUrlVars()['per'],
     'marketingcode'       : getUrlVars()['mcode'],
@@ -840,6 +850,13 @@ $(document).ready(function() {
           contentType: 'application/json; charset=utf-8',
           dataType: 'json',
           success: function() {
+            let clangct=getUrlVars()['clangct'];
+            if(clangct != undefined){
+              $.ajax({
+                url: '/wp-content/plugins/planet4-gpnl-plugin-blocks/includes/assets/js/clang-conversion.js?clangct='+clangct,
+                dataType: 'script',
+              });
+            }
             donationformVue.onSucces();
           },
           // error: function(jqxhr, status, exception) {
@@ -847,7 +864,13 @@ $(document).ready(function() {
 
             // console.log('Data:');
             // console.log(this.data);
-            // console.log('AjaxCall:');
+            // console.log('AjaxCall:');let clangct=getUrlVars()['clangct'];
+            if(clangct != undefined){
+              $.ajax({
+                url: '/clang-conversion.js',
+                dataType: 'script',
+              });
+            }
             // console.log(this);
             donationformVue.onFailure();
           }
@@ -873,6 +896,13 @@ $(document).ready(function() {
           contentType: 'application/json; charset=utf-8',
           dataType: 'json',
           success: function(result) {
+            let clangct=getUrlVars()['clangct'];
+            if(clangct != undefined){
+              $.ajax({
+                url: '/wp-content/plugins/planet4-gpnl-plugin-blocks/includes/assets/js/clang-conversion.js?clangct='+clangct,
+                dataType: 'script',
+              });
+            }
             window.location.href = result.transaction.redirectUrl;
           },
           error: function() {
