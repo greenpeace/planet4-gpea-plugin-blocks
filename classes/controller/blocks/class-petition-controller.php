@@ -12,7 +12,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 	class Petition_Controller extends Controller {
 
 		/** @const string BLOCK_NAME */
-		const BLOCK_NAME = 'gpnl_petition';
+		const BLOCK_NAME = 'petition';
 
 		/**
 		 * Shortcode UI setup for the petitionblock shortcode.
