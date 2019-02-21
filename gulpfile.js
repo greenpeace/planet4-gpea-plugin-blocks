@@ -3,8 +3,6 @@
 const gulp = require('gulp');
 const stylelint = require('gulp-stylelint');
 const eslint = require('gulp-eslint');
-const js = require('gulp-uglify-es').default;
-const concat = require('gulp-concat');
 const scss = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const cleancss = require('gulp-clean-css');
@@ -13,6 +11,7 @@ const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
 const livereload = require('gulp-livereload');
 const terser = require('gulp-terser');
+const del = require('del');
 
 const path_js = 'includes/assets/js/src/*.js';
 const path_scss = 'includes/assets/css/scss/*.scss';
@@ -66,6 +65,7 @@ function fix_js() {
 
 // TODO configure gulp-sass-glob to auto include all .scss files
 function sass() {
+  clean_css_maps;
   return gulp.src(path_scss)
     .pipe(plumber(error_handler))
     .pipe(sourcemaps.init())
@@ -78,6 +78,7 @@ function sass() {
 }
 
 function uglify() {
+  gulp.parallel(clean_js, clean_js_maps);
   return gulp.src(path_js)
     .pipe(plumber(error_handler))
     .pipe(sourcemaps.init())
@@ -85,6 +86,18 @@ function uglify() {
     .pipe(sourcemaps.write('maps/'))
     .pipe(gulp.dest(path_dest_js))
     .pipe(livereload());
+}
+
+function clean_css_maps () {
+  return del(path_dest_css+'/maps/*');
+}
+
+function clean_js_maps () {
+  return del(path_dest_js+'/maps/*');
+}
+
+function clean_js () {
+  return del([path_dest_js+'/*.js', '!'+path_dest_js+'/vue*', !path_dest_js+'/src' ]);
 }
 
 function watch() {
@@ -95,6 +108,9 @@ function watch() {
 
 exports.fix =  gulp.parallel(fix_css, fix_js);
 exports.sass = sass;
+exports.clean_all= gulp.parallel(clean_js, clean_css_maps, clean_js_maps);
+exports.clean_css= clean_css_maps
+exports.clean_js= gulp.parallel(clean_js, clean_js_maps);
 exports.uglify = uglify;
 exports.watch = watch;
 exports.test = gulp.parallel(lint_css);
