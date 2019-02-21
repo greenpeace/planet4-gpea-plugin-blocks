@@ -10,8 +10,9 @@ const sourcemaps = require('gulp-sourcemaps');
 const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
 const livereload = require('gulp-livereload');
-const terser = require('gulp-terser');
 const del = require('del');
+const babel = require('gulp-babel');
+const minify = require('gulp-uglify');
 
 const path_js = 'includes/assets/js/src/*.js';
 const path_scss = 'includes/assets/css/scss/*.scss';
@@ -82,8 +83,11 @@ function uglify() {
   return gulp.src(path_js)
     .pipe(plumber(error_handler))
     .pipe(sourcemaps.init())
-    .pipe(terser())
-    .pipe(sourcemaps.write('maps/'))
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
+    .pipe(minify())
+    .pipe(sourcemaps.write('/maps/'))
     .pipe(gulp.dest(path_dest_js))
     .pipe(livereload());
 }
