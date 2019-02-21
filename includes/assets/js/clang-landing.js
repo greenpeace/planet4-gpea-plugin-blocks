@@ -1,0 +1,2 @@
+let clangct=getUrlVars().clangct;function getUrlVars(){for(var c,n=[],t=window.location.href.split("#")[0].slice(window.location.href.indexOf("?")+1).split("&"),l=0;l<t.length;l++)c=t[l].split("="),n.push(c[0]),n[c[0]]=c[1];return n}null!=clangct&&$.ajax({url:"https://secure.myclang.com/pub/resources/extern/js/clang.js",dataType:"script"}).success(function(){clang.conversion.init(clangct)});
+//# sourceMappingURL=maps/clang-landing.js.map

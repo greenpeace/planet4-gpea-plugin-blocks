@@ -1,0 +1,1 @@
+{"version":3,"sources":["clang-conversion.js"],"names":["undefined","clang","conversion","track"],"mappings":"AAAoBA,aAATC,OAETA,MAAMC,WAAWC","file":"../clang-conversion.js","sourcesContent":["if (typeof clang != undefined) {\n// on conversion call conversion.track\n  clang.conversion.track();\n}\n"]}
