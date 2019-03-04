@@ -1,0 +1,146 @@
+.counter {
+  width: 100%;
+  background-color: #5c6978;
+  display: none;
+  margin: 15px 0 10px;
+  position: relative;
+}
+
+.counter__slider {
+  width: 0;
+  height: 100%;
+  background-color: #ee562d;
+  position: absolute;
+}
+
+.counter__text {
+  width: 100%;
+  padding: 5px 5px 5px 7px;
+  color: #fff;
+  font-size: .9em;
+  text-align: left;
+  display: none;
+  position: relative;
+  font-weight: bold;
+}
+
+/* card container */
+.gpnl-petition-wrapper {
+  perspective: 800px;
+}
+
+/* card */
+.gpnl-petition {
+  width: 100%;
+  /*height: 500px;*/
+  transform-style: preserve-3d;
+
+  -webkit-transition: transform 1s;
+  transition: transform 1s;
+}
+
+/* front side of the card */
+.front {
+  /*position: absolute;*/
+  height: 100%;
+  width: 100%;
+
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* back side of the card */
+.back {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  -ms-transform: rotateY(-180deg);
+  /* IE 9 */
+  -webkit-transform: rotateY(-180deg);
+  /* Safari */
+  transform: rotateY(-180deg);
+
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* flipping the card on hover */
+.flipped {
+  -ms-transform: rotateY(-180deg);
+  /* IE 9 */
+  -webkit-transform: rotateY(-180deg);
+  /* Safari */
+  transform: rotateY(-180deg);
+}
+
+input[type=checkbox].gpnl-petition-checkbox {
+  opacity: 1;
+  margin-left: 0;
+}
+
+.gpnl-petition-checkbox-label {
+  margin-bottom: 0;
+}
+
+.gpnl-petition-checkbox-label small {
+  margin-left: 1.5rem;
+}
+
+.gpnl-petitionshare {
+  margin-top: 1rem;
+}
+
+.gpnl-share-facebook {
+  background-color: #4267b2;
+}
+
+.gpnl-share-twitter {
+  background-color: #5cb8ff;
+}
+
+.gpnl-share-whatsapp {
+  background-color: #48c251;
+}
+
+.page-header-title,
+.page-header-subtitle,
+.page-header-content {
+  display: none;
+}
+
+.skewed-overlay {
+  display: none;
+}
+
+.card {
+  background-color: #323842;
+  color: white;
+  font-family: roboto;
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+  opacity: 1;
+  font-weight: bold;
+}
+
+.card-title {
+  font-weight: normal;
+}
+
+.form-group {
+  margin-bottom: .5rem;
+}
+
+.optin {
+  margin-bottom: 0;
+}
+
+h2.card-title {
+  line-height: 1;
+}
+
+.signBtn {
+  margin-bottom: 1rem;
+}
