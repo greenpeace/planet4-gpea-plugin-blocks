@@ -52,7 +52,7 @@ function fix_css() {
       reporters: [{ formatter: 'string', console: true}],
       fix: true
     }))
-    .pipe(gulp.dest('includes/assets/scss/'));
+    .pipe(gulp.dest('includes/assets/css/scss/'));
 //  This outputs to 'assets/scss/**/*.scss', manual copy to right directory for now..
 }
 
