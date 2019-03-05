@@ -1,15 +1,2 @@
-.page-header, .page-header-title, .page-header-subtitle, .page-header-content {
-
-	/*display: none;*/
-	visibility: hidden;
-	height: 0;
-	padding: 0;
-}
-
-.hero{
-	margin-top: 0;
-}
-
-.hero{
-	background-size: cover;
-}
+.page-header,.page-header-content,.page-header-subtitle,.page-header-title{visibility:hidden;height:0;padding:0}.hero{height:500px;margin-top:55px;overflow:hidden;width:100vw;background-size:cover}@media (min-width:768px){.hero{margin-top:60px}.hero .hero__wrapper .hero__text{left:30px}}.hero .hero__wrapper .hero__text{top:0;margin-left:15px;max-width:100%;padding:30px 0}@media (min-width:1200px){.hero{margin-top:65px}.hero .hero__wrapper .hero__text{left:100px}}.hero .hero__wrapper .hero__text .hero__title{margin:0 0 10px;max-width:60%}.hero .hero__wrapper .hero__text .hero__title span{padding:15px;background-color:#fff;line-height:2.5;max-width:60%;color:#000}.hero .hero__wrapper .hero__text .hero__description{background:#030;color:#fff;padding:20px}@media (min-width:576px){.hero .hero__wrapper .hero__text{padding:60px 0}.hero .hero__wrapper .hero__text .hero__description{max-width:80%}}@media (min-width:768px){.hero .hero__wrapper .hero__text .hero__description{max-width:60%}}.hero .hero__wrapper .hero__text .hero__button{margin:10px 0 0;box-shadow:none}
+/*# sourceMappingURL=maps/gpnl-hero.css.map */
