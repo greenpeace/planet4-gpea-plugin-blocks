@@ -117,8 +117,6 @@ exports.clean_css= clean_css_maps
 exports.clean_js= gulp.parallel(clean_js, clean_js_maps);
 exports.uglify = uglify;
 exports.watch = watch;
-exports.test = gulp.parallel(lint_css);
-// exports.test = gulp.parallel(lint_css, lint_js);
-// exports.default = gulp.series(lint_css, lint_js, sass, uglify);
-exports.default = gulp.series(lint_css, sass);
+exports.test = gulp.parallel(lint_css, lint_js);
+exports.default = gulp.series(lint_css, lint_js, sass, uglify);
 

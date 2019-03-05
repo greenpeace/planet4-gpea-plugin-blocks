@@ -2,7 +2,7 @@ $('.gpnl-petitionform').on('submit', function () {
   var petition_form_element = this;
   // Get the  parameter from the petition form and add the action and CSRF protection
   var post_form_value = getFormObj(petition_form_element);
-  form_config = 'petition_form_object_' + post_form_value['form_id'];
+  var form_config = 'petition_form_object_' + post_form_value['form_id'];
     
   post_form_value.action = 'petition_form_process';
   post_form_value.nonce  = window[form_config].nonce;
