@@ -1,0 +1,11 @@
+{% block gpnl_liveblogitem %}
+    {% if ( fields ) %}
+		{% if (not(fields.itemend)) %}
+			<article>
+				<h3>{{  fields.title }}</h3>
+				<small>{{ fields.date }} {{  fields.hour }}:{{  fields.minute }}</small>
+		{% else %}
+			</article>
+		{% endif %}
+    {% endif %}
+{% endblock %}
