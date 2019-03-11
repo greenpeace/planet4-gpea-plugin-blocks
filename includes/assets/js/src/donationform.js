@@ -85,6 +85,9 @@ $(document).ready(function() {
       case 'min_amount':
         // if min_amount < lowest_amount => lowest_amount == min_amount
         formconfig.min_amount = value;
+        if (value > Math.min(formconfig.oneoff_amount1, formconfig.recurring_amount1)){
+          formconfig.min_amount = Math.min(formconfig.oneoff_amount1, formconfig.recurring_amount1);
+        }
         break;
       case 'literatuurcode':
         formconfig.literatuurcode = value;
