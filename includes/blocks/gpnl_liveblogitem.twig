@@ -3,9 +3,9 @@
 		{% if (not(fields.itemend)) %}
 			<article>
 				<h3>{{  fields.title }}</h3>
-				<small>{{ fields.date }} {{  fields.hour }}:{{  fields.minute }}</small>
+				<small class="moment--date">{{ fields.date }} {{  fields.hour }}:{{  fields.minute }}</small>
 		{% else %}
-			</article>
+			{#</article>#}
 		{% endif %}
     {% endif %}
 {% endblock %}

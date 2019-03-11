@@ -35,12 +35,6 @@ if ( ! class_exists( 'GPNL_Liveblogitem_Controller' ) ) {
 			date_default_timezone_set( 'Europe/Amsterdam' );
 			$fields = [
 				[
-					'label' =>'<strong>' .__('Vink de checkbox aan als dit het einde van een item is ') . '</strong>',
-					'attr'  => 'itemend',
-					'type'  => 'checkbox',
-					'value' => '',
-				],
-				[
 					'label' => __( 'Titel', 'planet4-gpnl-blocks' ),
 					'attr'  => 'title',
 					'type'  => 'text',
