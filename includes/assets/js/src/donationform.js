@@ -20,7 +20,8 @@ $(document).ready(function() {
     'marketingcode'       : getUrlVars()['mcode'],
     'literatuurcode'      : getUrlVars()['lcode'],
     'drplus'              : getUrlVars()['drplus'],
-    'min_amount'          : getUrlVars()['min']
+    'min_amount'          : getUrlVars()['min'],
+    'suggested_amount'    : getUrlVars()['pref']
   };
 
   $.each(url_vars, function(key, value){
@@ -88,7 +89,12 @@ $(document).ready(function() {
       case 'literatuurcode':
         formconfig.literatuurcode = value;
         break;
-
+      case 'suggested_amount':
+        var oneoff = 'oneoff_amount' + value;
+        var recurring = 'recurring_amount' + value;
+        formconfig.recurring_suggested_amount = formconfig[recurring];
+        formconfig.oneoff_suggested_amount = formconfig[oneoff];
+        break;
       }
 
     }
