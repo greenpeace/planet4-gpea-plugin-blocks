@@ -31,6 +31,32 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'type'  => 'textarea',
 				),
 				array(
+					'label'   => __( 'Voorgestelde periodiek', 'planet4-gpnl-blocks' ),
+					'attr'    => 'suggested_frequency',
+					'type'    => 'select',
+					'meta'    => ['onchange' => 'hideNonForcesOptions()'],
+					'options' => [
+						[
+							'value' => 'E',
+							'label' => __( 'Eenmalig' ),
+						],
+						[
+							'value' => 'M',
+							'label' => __( 'Maandelijks' ),
+						],
+						[
+							'value' => 'F',
+							'label' => __( 'Maandelijks voor 12 maanden (Forces)' ),
+						],
+					],
+				),
+				array(
+					'label'   => __( 'Donateur kan periodiek wijzigen', 'planet4-gpnl-blocks' ),
+					'attr'    => 'allow_frequency_override',
+					'type'    => 'checkbox',
+					'checked' => 'checked',
+				),
+				array(
 					'label' => __( 'Minimum bedrag', 'planet4-gpnl-blocks' ),
 					'attr'  => 'min_amount',
 					'type'  => 'number',
@@ -90,35 +116,6 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 					'type'  => 'number',
 					'value' => 10,
 
-				),
-				array(
-					'label'   => __( 'Voorgestelde periodiek', 'planet4-gpnl-blocks' ),
-					'attr'    => 'suggested_frequency',
-					'type'    => 'select',
-					'options' => [
-						[
-							'value' => 'E',
-							'label' => __( 'Eenmalig' ),
-						],
-						[
-							'value' => 'M',
-							'label' => __( 'Maandelijks' ),
-						],
-//						[
-//							'value' => 'H',
-//							'label' => __( 'Halfjaarlijks' ),
-//						],
-//						[
-//							'value' => 'J',
-//							'label' => __( 'Jaarlijks' ),
-//						],
-					],
-				),
-				array(
-					'label'     => __( 'Donateur kan periodiek wijzigen', 'planet4-gpnl-blocks' ),
-					'attr'      => 'allow_frequency_override',
-					'type'      => 'checkbox',
-					'checked'   => 'checked',
 				),
 				array(
 					'label' => __( 'Bedankt Titel', 'planet4-gpnl-blocks' ),
@@ -185,7 +182,7 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
-			$fields = shortcode_atts( array(
+			$fields = shortcode_atts( [
 				'title'                      => '',
 				'description'                => '',
 				'min_amount'                 => '',
@@ -208,8 +205,8 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'errorpage'                  => '',
 				'drplus_amount1'             => '',
 				'drplus_amount2'             => '',
-				'drplus_amount3'             => ''
-			), $fields, $shortcode_tag );
+				'drplus_amount3'             => '',
+			], $fields, $shortcode_tag );
 
 			$frequencies = [
 				'E' => 'Eenmalig',
@@ -217,7 +214,12 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				'K' => 'Kwartaal',
 				'H' => 'Halfjaarlijks',
 				'J' => 'Jaarlijks',
+				'F' => 'Maandelijks voor 12 maanden',
 			];
+
+			if ( $fields['suggested_frequency'] === 'F' ) {
+				$fields['suggested_frequency'] = 'M';
+			}
 
 			$fields['suggested_frequency'] = [$fields['suggested_frequency'], strtolower($frequencies[ $fields['suggested_frequency'] ] ) ];
 
