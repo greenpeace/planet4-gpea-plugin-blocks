@@ -75,10 +75,12 @@ $(document).ready(function() {
             formconfig.oneoff_amount1    = formconfig.drplus_amount1;
             formconfig.oneoff_amount2    = formconfig.drplus_amount2;
             formconfig.oneoff_amount3    = formconfig.drplus_amount3;
+            formconfig.oneoff_suggested_amount = formconfig.drplus_amount2;
           } else {
             formconfig.recurring_amount1 = formconfig.drplus_amount1;
             formconfig.recurring_amount2 = formconfig.drplus_amount2;
             formconfig.recurring_amount3 = formconfig.drplus_amount3;
+            formconfig.recurring_suggested_amount = formconfig.drplus_amount2;
           }
         }
         break;
