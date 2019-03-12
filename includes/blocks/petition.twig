@@ -80,14 +80,14 @@
 									{% if not fields.hidesharingbuttons %}
 										<div class="gpnl-petitionshare">
 											<a class="btn btn-primary btn-block gpnl-share-facebook" 
-											href="https://www.facebook.com/sharer/sharer.php?u={{ fields.current_url|url_encode }}" role="button" onclick="fireShareEvent('facebook');">
+											href="https://www.facebook.com/sharer/sharer.php?u={{ fields.current_url|url_encode }}" target="_blank" role="button" onclick="fireShareEvent('facebook');">
 												FACEBOOK
 											</a>
 											<a class="btn btn-primary btn-block gpnl-share-twitter" 
-												href="https://twitter.com/share?url={{ fields.current_url }}&text={{ fields.twittertext }}&via={{ fields.social_accounts.twitter }}&related={{ fields.social_accounts.twitter }}" role="button" onclick="fireShareEvent('twitter');">
+												href="https://twitter.com/share?url={{ fields.current_url }}&text={{ fields.twittertext }}&via={{ fields.social_accounts.twitter }}&related={{ fields.social_accounts.twitter }}" target="_blank" role="button" onclick="fireShareEvent('twitter');">
 												TWITTER
 											</a>
-											<a class="btn btn-primary btn-block gpnl-share-whatsapp" href="whatsapp://send?text={{ fields.whatsapptext }} via {{ fields.current_url }}" role="button" onclick="fireShareEvent('whatsapp');">WHATSAPP</a>							
+											{#<a class="btn btn-primary btn-block gpnl-share-whatsapp" target="_blank" href="whatsapp://send?text={{ fields.whatsapptext }} via {{ fields.current_url }}" role="button" onclick="fireShareEvent('whatsapp');">WHATSAPP</a>#}
 										</div>
 									{% endif %}
 								</div>

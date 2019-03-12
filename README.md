@@ -7,6 +7,7 @@ Currently this plugin adds the following new shortcodes:
 1. Donation form
 2. Petition form
 3. No-index (to discourage search engines from indexing)
+4. Liveblog
 
 Coming in the near-future (available on dev-branch)
 1. Quote block with image
@@ -15,7 +16,6 @@ Coming in the near-future (available on dev-branch)
 
 In the backlog are among others:
 * Information request form
-* Liveblog
 * interactive maps
 
 ## How to develop a new block you ask?
