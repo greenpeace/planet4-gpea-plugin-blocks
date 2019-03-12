@@ -64,4 +64,6 @@ P4NLBKS\Loader::get_instance( [
 	 'P4NLBKS\Controllers\Blocks\Donation_Controller',
 	'P4NLBKS\Controllers\Blocks\Petition_Controller',
 	'P4NLBKS\Controllers\Blocks\GPNL_statistics_Controller',
+	'P4NLBKS\Controllers\Blocks\GPNL_Liveblog_Controller',
+	'P4NLBKS\Controllers\Blocks\GPNL_Liveblogitem_Controller',
 ], 'P4NLBKS\Views\View' );
