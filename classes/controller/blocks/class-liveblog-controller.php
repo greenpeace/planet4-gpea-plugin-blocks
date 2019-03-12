@@ -77,27 +77,27 @@ if ( ! class_exists( 'GPNL_Liveblog_Controller' ) ) {
 				'gpnl_liveblog_css',
 				P4NLBKS_ASSETS_DIR . 'css/gpnl-liveblog.css',
 				[],
-				'2.4.0'
+				'2.5.0'
 			);
 			wp_enqueue_script(
 				'gpnl_liveblog_moment_js',
 				'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js',
 				[ 'jquery' ],
-				'2.4.0',
+				'2.5.0',
 				true
 			);
 			wp_enqueue_script(
 				'gpnl_liveblog_moment_locale_js',
 				'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/nl.js',
 				[ 'jquery', 'gpnl_liveblog_moment_js' ],
-				'2.4.0',
+				'2.5.0',
 				true
 			);
 			wp_enqueue_script(
 				'gpnl_liveblog_js',
 				P4NLBKS_ASSETS_DIR . 'js/gpnl-liveblog.js',
 				[ 'jquery', 'gpnl_liveblog_moment_locale_js' ],
-				'',
+				'2.5.0',
 				true
 			);
 
