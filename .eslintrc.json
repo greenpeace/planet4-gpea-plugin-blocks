@@ -42,6 +42,7 @@
 		"dataLayer": "writable",
 		"gtm_products": "writable",
 		"donationformVue": "writable",
-		"clang" : "writable"
+		"clang" : "writable",
+		"moment" : "writeable"
 	}
 }
