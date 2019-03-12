@@ -47,12 +47,11 @@
                 </tab-content>
 
                 <tab-content title="Gegevens" icon="icon-user" :before-change="()=>validateStep('step2')">
-                  <step2 ref="step2" @on-validate="mergePartialModels"
-                  v-bind:ideal="isiDeal()"></step2>
+                  <step2 ref="step2" @on-validate="mergePartialModels" v-bind:ideal="isiDeal()"></step2>
                 </tab-content>
 
                 <tab-content v-if="!isiDeal()" title="Adres" icon="icon-home" :before-change="()=>validateStep('step3')">
-                  <step3 ref="step3" @on-validate="mergePartialModels"></step3>
+                  <step3 ref="step3" @on-validate="mergePartialModels" v-bind:frequency="getFrequency()"></step3>
                 </tab-content>
 
 

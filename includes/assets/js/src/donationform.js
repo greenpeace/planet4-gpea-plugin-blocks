@@ -5,7 +5,7 @@ $(document).ready(function() {
   function getUrlVars(){
     var vars = [], 
       hash;
-    var uri = window.location.href.split('#')[0];
+    var uri = decodeURIComponent(window.location.href.split('#')[0]);
     var hashes = uri.slice(window.location.href.indexOf('?') + 1).split('&');
     for(var i = 0; i < hashes.length; i++){
       hash = hashes[i].split('=');
@@ -15,22 +15,13 @@ $(document).ready(function() {
     return vars;
   }
 
-  let clangct=getUrlVars()['clangct'];
-
-  if(clangct != undefined){
-    $.ajax({
-      url: '/wp-content/plugins/planet4-gpnl-plugin-blocks/includes/assets/js/clang-landing.js?clangct='+clangct,
-      dataType: 'script',
-    });
-  }
-
-
   var url_vars = {
     'suggested_frequency' : getUrlVars()['per'],
     'marketingcode'       : getUrlVars()['mcode'],
     'literatuurcode'      : getUrlVars()['lcode'],
     'drplus'              : getUrlVars()['drplus'],
-    'min_amount'          : getUrlVars()['min']
+    'min_amount'          : getUrlVars()['min'],
+    'suggested_amount'    : getUrlVars()['pref']
   };
 
   $.each(url_vars, function(key, value){
@@ -45,6 +36,10 @@ $(document).ready(function() {
         case 'M':
           formconfig.allow_frequency_override = 'false';
           formconfig.suggested_frequency = ['M', 'Maandelijks'];
+          break;
+        case 'F':
+          formconfig.allow_frequency_override = 'false';
+          formconfig.suggested_frequency = ['M', 'maandelijks voor 12 maanden'];
           break;
 
           // UNCOMMENT This is prepared for using recurring payments
@@ -80,21 +75,31 @@ $(document).ready(function() {
             formconfig.oneoff_amount1    = formconfig.drplus_amount1;
             formconfig.oneoff_amount2    = formconfig.drplus_amount2;
             formconfig.oneoff_amount3    = formconfig.drplus_amount3;
+            formconfig.oneoff_suggested_amount = formconfig.drplus_amount2;
           } else {
             formconfig.recurring_amount1 = formconfig.drplus_amount1;
             formconfig.recurring_amount2 = formconfig.drplus_amount2;
             formconfig.recurring_amount3 = formconfig.drplus_amount3;
+            formconfig.recurring_suggested_amount = formconfig.drplus_amount2;
           }
         }
         break;
       case 'min_amount':
         // if min_amount < lowest_amount => lowest_amount == min_amount
         formconfig.min_amount = value;
+        if (value > Math.min(formconfig.oneoff_amount1, formconfig.recurring_amount1)){
+          formconfig.min_amount = Math.min(formconfig.oneoff_amount1, formconfig.recurring_amount1);
+        }
         break;
       case 'literatuurcode':
         formconfig.literatuurcode = value;
         break;
-
+      case 'suggested_amount':
+        var oneoff = 'oneoff_amount' + value;
+        var recurring = 'recurring_amount' + value;
+        formconfig.recurring_suggested_amount = formconfig[recurring];
+        formconfig.oneoff_suggested_amount = formconfig[oneoff];
+        break;
       }
 
     }
@@ -122,7 +127,7 @@ $(document).ready(function() {
           <div class="form-group" v-bind:class="{ 'has-error': $v.machtigingType }">
             <label for="machtigingType" v-if="formconfig.allow_frequency_override == 'true'">Ja ik steun Greenpeace:</label>
             <label for="machtigingType" v-else>
-              Ja ik steun Greenpeace <strong>{{ formconfig.suggested_frequency[1] }}</strong>:
+            	Ja ik steun Greenpeace <strong>{{ formconfig.suggested_frequency[1] }}</strong>:
             </label>
             
             <select id="machtigingType" class="form-control" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()" v-show="formconfig.allow_frequency_override == 'true'" v-on:change="changePeriodic">
@@ -132,11 +137,11 @@ $(document).ready(function() {
             <span class="help-block" v-if="$v.machtigingType.$error && !$v.machtigingType.required">Periodiek is verplicht</span>
           </div>
           
-    <fieldset>
-    <legend class="sr-only">Bedrag</legend>
-     <div class="form-row">
+		<fieldset>
+		<legend class="sr-only">Bedrag</legend>
+		 <div class="form-row">
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.bedrag.$error }">
-              <label for="amountList">Met een bedrag van:</label>
+              <label for="amountList">Ik geef:</label>
               <div id="amountList" class="radio-list" role="radiogroup">
                 <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag1" role="radio" v-bind:value="amount1">
                 <label class="form-check-label form-control left" for="bedrag1">&euro;{{ amount1 }}</label>
@@ -162,24 +167,24 @@ $(document).ready(function() {
               </div>
             </div>
           </div>
-    </fieldset>
+		</fieldset>
          
-    
-    <fieldset v-if="machtigingType ==='E'">
-    <legend class="sr-only">Betalingsmethode</legend>
-       <div class="form-row">
-      <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.betaling.$error }">
-        <label for="paymentMethods">Betalingswijze:</label>
-        <div id="paymentMethods" class="radio-list" role="radiogroup">
-        <input class="form-check-input" v-model.trim="betaling" type="radio" name="ideal" id="ideal" value="ID" checked="checked" tabindex="0" role="radio"
-        v-on:click="donationformVue.validateStep('step1');">
-        <label class="form-check-label form-control left" for="ideal">iDeal</label>
-        <input class="form-check-input" v-model.trim="betaling" type="radio" name="machtiging" id="machtiging" value="EM" role="radio" v-on:click="donationformVue.validateStep('step1');">
-        <label class="form-check-label form-control" for="machtiging">Eenmalige machtiging</label>
-        </div>
-      </div> 
-      </div>
-    </fieldset>
+	  
+	  <fieldset v-if="machtigingType ==='E'">
+	  <legend class="sr-only">Betalingsmethode</legend>
+		   <div class="form-row">
+			<div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.betaling.$error }">
+			  <label for="paymentMethods">Betalingswijze:</label>
+			  <div id="paymentMethods" class="radio-list" role="radiogroup">
+				<input class="form-check-input" v-model.trim="betaling" type="radio" name="ideal" id="ideal" value="ID" checked="checked" tabindex="0" role="radio"
+				v-on:click="donationformVue.validateStep('step1');">
+				<label class="form-check-label form-control left" for="ideal">iDeal</label>
+				<input class="form-check-input" v-model.trim="betaling" type="radio" name="machtiging" id="machtiging" value="EM" role="radio" v-on:click="donationformVue.validateStep('step1');">
+				<label class="form-check-label form-control" for="machtiging">Eenmalige machtiging</label>
+			  </div>
+			</div> 
+		  </div>
+	  </fieldset>
           
            </div>`,
     data() {
@@ -248,7 +253,7 @@ $(document).ready(function() {
               <select id="prefix" class="form-control" v-model.trim="geslacht" @input="$v.geslacht.$touch()" name="honorific-prefix" tabindex="0">
                 <option value="V">Mevrouw</option>
                 <option value="M">Meneer</option>
-                <option value="O">Beste</option>
+                <option value="O">Anders</option>
               </select>
 
               <span class="help-block" v-if="$v.geslacht.$error && !$v.geslacht.required">Geslacht is verplicht</span>
@@ -272,7 +277,7 @@ $(document).ready(function() {
           <div class="form-row">
             <div class="form-group col-md-4">
                <label class="sr-only" for="middle-name">Tussenvoegsel</label>
-              <input class="form-control" v-model.trim="tussenvoegsel" @input="$v.tussenvoegsel.$touch()" placeholder="Tussenv." id="middle-name">
+              <input class="form-control" v-model.trim="tussenvoegsel" @input="$v.tussenvoegsel.$touch()" placeholder="Tussenvoegsel" id="middle-name">
             </div>
 
             <div class="form-group col-md-8" v-bind:class="{ 'has-error': $v.achternaam.$error }">
@@ -285,8 +290,8 @@ $(document).ready(function() {
           <div class="form-row">
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.email.$error }">
                <label class="sr-only" for="email">Email</label>
-              <input class="form-control" v-model.trim="email" @input="$v.email.$touch()" placeholder="E-mail*" name="email" id="email">
-              <span class="help-block" v-if="$v.email.$error && !$v.email.required">E-mail is verplicht</span>
+              <input class="form-control" v-model.trim="email" @input="$v.email.$touch()" placeholder="Email*" name="email" id="email">
+              <span class="help-block" v-if="$v.email.$error && !$v.email.required">Email is verplicht</span>
               <span class="help-block" v-if="$v.email.$error && !$v.email.email">Dit is geen valide e-mail adres</span>
             </div>
           </div>
@@ -294,17 +299,17 @@ $(document).ready(function() {
           <div class="form-row">
             <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.telefoonnummer.$error }">
                <label class="sr-only" for="tel">Telefoonnummer</label>
-              <input class="form-control" v-model.trim="telefoonnummer" @input="$v.telefoonnummer.$touch()" placeholder="Tel. nr." name="tel" id="tel">
-               <span class="help-block" v-if="$v.telefoonnummer.$error && !$v.telefoonnummer.required">Telefoonnummer is verplicht</span>
-               <span class="help-block" v-if="$v.telefoonnummer.$error && $v.telefoonnummer.required && !$v.telefoonnummer.numeric">Telefoonnummer moet een nummer zijn</span>
-               <span class="help-block" v-if="$v.telefoonnummer.$error && $v.telefoonnummer.required && $v.telefoonnummer.numeric && !$v.telefoonnummer.between">Telefoonnummer moet uit 10 cijfers bestaan</span>
+              <input class="form-control" v-model.trim="telefoonnummer" @input="$v.telefoonnummer.$touch()" placeholder="Telefoonnummer" name="tel" id="tel">
+               <!--<span class="help-block" v-if="$v.telefoonnummer.$error && !$v.telefoonnummer.required">Telefoonnummer is verplicht</span>-->
+               <span class="help-block" v-if="$v.telefoonnummer.$error && !$v.telefoonnummer.numeric">Telefoonnummer moet een nummer zijn</span>
+               <span class="help-block" v-if="$v.telefoonnummer.$error && $v.telefoonnummer.numeric && !$v.telefoonnummer.between">Telefoonnummer moet uit 10 cijfers bestaan</span>
             </div>
           </div>
 
           <div class="form-group" v-bind:class="{ 'has-error': $v.rekeningnummer.$error }" v-if="!ideal">
             <div class="input-group">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupPrepend">IBAN:</span>
+                <span class="input-group-text" id="inputGroupPrepend">IBAN</span>
               </div>
               <label class="sr-only" for="bankaccount">IBAN:</label>
               <input class="form-control" v-model.trim="rekeningnummer" @input="$v.rekeningnummer.$touch()" placeholder="*" id="bankaccount">
@@ -385,14 +390,14 @@ $(document).ready(function() {
 
             <div class="form-group col-md-4" v-bind:class="{ 'has-error': $v.huisnummer.$error }">
               <label class="sr-only" for="housenumber">Huisnummer</label>
-              <input class="form-control" v-on:blur="fetchAddress()" v-model.trim="huisnummer" @input="$v.huisnummer.$touch()" placeholder="Huisnr.*" id="housenumber">
+              <input class="form-control" v-on:blur="fetchAddress()" v-model.trim="huisnummer" @input="$v.huisnummer.$touch()" placeholder="Huisnummer*" id="housenumber">
                <span class="help-block" v-if="$v.huisnummer.$error && !$v.huisnummer.required">Huisnummer is verplicht</span>
                <span class="help-block" v-if="$v.huisnummer.$error && $v.huisnummer.required && !$v.huisnummer.numeric">Huisnummer moet een nummer zijn</span>
             </div>
 
             <div class="form-group col-md-3" v-bind:class="{ 'has-error': $v.huisnummertoevoeging.$error }">
               <label class="sr-only" for="housenumberaddition">Toevoeging</label>
-              <input class="form-control" v-model.trim="huisnummertoevoeging" @input="$v.huisnummertoevoeging.$touch()" placeholder="Toev." id="housenumberaddition">
+              <input class="form-control" v-model.trim="huisnummertoevoeging" @input="$v.huisnummertoevoeging.$touch()" placeholder="Toevoeging" id="housenumberaddition">
             </div>
           </div>
 
@@ -409,216 +414,220 @@ $(document).ready(function() {
           <div class="form-group" v-bind:class="{ 'has-error': $v.landcode.$error }">
              <label class="sr-only" for="country-name">Land</label>
             <select class="form-control" v-model.trim="landcode" @input="$v.landcode.$touch()" id="country-name" name="country-name">
-              <option value="  "> Selecteer een land</option>
-              <option value="AF">AFGHANISTAN</option>
-              <option value="AL">ALBANIE</option>
-              <option value="DZ">ALGERIJE</option>
-              <option value="AD">ANDORRA</option>
-              <option value="AO">ANGOLA</option>
-              <option value="AG">ANTIGUA EN BARBUDA</option>
-              <option value="AR">ARGENTINIE</option>
-              <option value="AM">ARMENIE</option>
-              <option value="AB">ARUBA</option>
-              <option value="SH">ASCENSION</option>
-              <option value="AU">AUSTRALIE</option>
-              <option value="AZ">AZERBEIDZJAN</option>
-              <option value="BH">BAHREIN</option>
-              <option value="BD">BANGLADESH</option>
-              <option value="BB">BARBADOS</option>
-              <option value="BY">BELARUS</option>
-              <option value="BE">BELGIE</option>
-              <option value="BZ">BELIZE</option>
-              <option value="BJ">BENIN</option>
-              <option value="BM">BERMUDA</option>
-              <option value="BT">BHUTAN</option>
-              <option value="BO">BOLIVIA</option>
-              <option value="BA">BOSNIE-HERZEGOWINA</option>
-              <option value="BW">BOTSWANA</option>
-              <option value="BR">BRAZILIE</option>
-              <option value="VG">BRITSE MAAGDENEILANDEN</option>
-              <option value="BN">BRUNEI</option>
-              <option value="BG">BULGARIJE</option>
-              <option value="BF">BURKINA FASO</option>
-              <option value="BI">BURUNDI</option>
-              <option value="KH">CAMBODJA</option>
-              <option value="CA">CANADA</option>
-              <option value="KY">CAYMANEILANDEN</option>
-              <option value="CF">CENTRAALAFRIKAANSE REP.</option>
-              <option value="CL">CHILI</option>
-              <option value="CX">CHRISTMASEILAND</option>
-              <option value="CO">COLOMBIA</option>
-              <option value="CG">CONGO</option>
-              <option value="CR">COSTA RICA</option>
-              <option value="CU">CUBA</option>
-              <option value="CY">CYPRUS</option>
-              <option value="BS">DE BAHAMA'S</option>
-              <option value="KM">DE COMOREN</option>
-              <option value="PH">DE FILIPIJNEN</option>
-              <option value="MV">DE MALADIVEN</option>
-              <option value="DK">DENEMARKEN</option>
-              <option value="ZZ">DIVERSEN</option>
-              <option value="DJ">DJIBOUTI</option>
-              <option value="DM">DOMINICA</option>
-              <option value="DO">DOMINICAANSE REPUBLIEK</option>
-              <option value="DE">DUITSLAND</option>
-              <option value="EC">ECUADOR</option>
-              <option value="EG">EGYPTE</option>
-              <option value="SV">EL SALVADOR</option>
-              <option value="CQ">EQUATORIAAL GUINEA</option>
-              <option value="ER">ERITREA</option>
-              <option value="EE">ESTLAND</option>
-              <option value="ET">ETHIOPIE</option>
-              <option value="FK">FALKLANDEILANDEN</option>
-              <option value="FO">FAROE EILANDEN</option>
-              <option value="FJ">FIDJI-EILANDEN</option>
-              <option value="FL">FILIPIJNEN</option>
-              <option value="FI">FINLAND</option>
-              <option value="FR">FRANKRIJK</option>
-              <option value="GF">FRANS-GUYANA</option>
-              <option value="PF">FRANS-POLUNESIE</option>
-              <option value="TF">FRANSE ZUIDELIJKE EN Z-POOLGEB</option>
-              <option value="GA">GABON</option>
-              <option value="GM">GAMBIA</option>
-              <option value="GE">GEORGIE</option>
-              <option value="GH">GHANA</option>
-              <option value="GI">GIBRALTAR</option>
-              <option value="GD">GRENADA</option>
-              <option value="GR">GRIEKENLAND</option>
-              <option value="GL">GROENLAND</option>
-              <option value="GB">GROOT-BRITTANNIE</option>
-              <option value="GP">GUADELOUPE</option>
-              <option value="GT">GUATEMALA</option>
-              <option value="GN">GUINEE</option>
-              <option value="GW">GUINEE BISSAU</option>
-              <option value="GY">GUYANA</option>
-              <option value="HT">HAITI</option>
-              <option value="HN">HONDURAS</option>
-              <option value="HU">HONGARIJE</option>
-              <option value="HK">HONGKONG</option>
-              <option value="IE">IERLAND</option>
-              <option value="IS">IJSLAND</option>
-              <option value="IN">INDIA</option>
-              <option value="ID">INDONESIE</option>
-              <option value="IQ">IRAK</option>
-              <option value="IR">IRAN</option>
-              <option value="IL">ISRAEL</option>
-              <option value="IT">ITALIE</option>
-              <option value="CI">IVOORKUST</option>
-              <option value="JM">JAMAICA</option>
-              <option value="JP">JAPAN</option>
-              <option value="YE">JEMEN</option>
-              <option value="YU">JOEGOSLAVIE (KLEIN)</option>
-              <option value="JO">JORDANIE</option>
-              <option value="CV">KAAP VERDIE</option>
-              <option value="CM">KAMEROEN</option>
-              <option value="KZ">KAZACHSTAN</option>
-              <option value="KE">KENYA</option>
-              <option value="KI">KIRIBATI</option>
-              <option value="KW">KOEWEIT</option>
-              <option value="KR">KOREA</option>
-              <option value="HR">KROATIE</option>
-              <option value="KG">KYRGYZSTAN</option>
-              <option value="LA">LAOS</option>
-              <option value="LV">LETLAND</option>
-              <option value="LB">LIBANON</option>
-              <option value="LR">LIBERIA</option>
-              <option value="LY">LIBIE</option>
-              <option value="LI">LIECHTENSTEIN</option>
-              <option value="LT">LITOUWEN</option>
-              <option value="LU">LUXEMBURG</option>
-              <option value="MA">Macedonië</option>
-              <option value="MG">MADAGASKAR</option>
-              <option value="MW">MALAWI</option>
-              <option value="MY">MALEISIE</option>
-              <option value="ML">MALI</option>
-              <option value="MT">MALTA</option>
-              <option value="MN">MAROKKO</option>
-              <option value="MH">MARSHALLEILANDEN</option>
-              <option value="MQ">MARTINIQUE</option>
-              <option value="MR">MAURITANIE</option>
-              <option value="MU">MAURITIUS</option>
-              <option value="MX">MEXICO</option>
-              <option value="FM">MICRONESIA</option>
-              <option value="MD">MOLDAVIA</option>
-              <option value="MC">MONACO</option>
-              <option value="MO">MOZAMBIQUE</option>
-              <option value="MM">MYANMAR</option>
-              <option value="NA">NAMIBIE</option>
-              <option value="NR">NAURU</option>
-              <option value="NL">NEDERLAND</option>
-              <option value="AN">NEDERLANDSE ANTILLEN</option>
-              <option value="NP">NEPAL</option>
-              <option value="NI">NICARAGUA</option>
-              <option value="NZ">NIEUW-ZEELAND</option>
-              <option value="NG">NIGER</option>
-              <option value="NE">NIGERIA</option>
-              <option value="NO">NOORWEGEN</option>
-              <option value="UA">OEKRAINE</option>
-              <option value="UZ">OEZBEKISTAN</option>
-              <option value="OM">OMAN</option>
-              <option value="AT">OOSTENRIJK</option>
-              <option value="PK">PAKISTAN</option>
-              <option value="PA">PANAMA</option>
-              <option value="PG">PAPOEA-NIEUW-GUINEA</option>
-              <option value="PY">PARAGUAY</option>
-              <option value="PE">PERU</option>
-              <option value="PL">POLEN</option>
-              <option value="PT">PORTUGAL</option>
-              <option value="QA">QUATAR</option>
-              <option value="RO">ROEMENIE</option>
-              <option value="RW">RUANDA</option>
-              <option value="RU">RUSSISCHE FEDERATIE</option>
-              <option value="LC">SAINT LUCIA</option>
-              <option value="SM">SAN MARINO</option>
-              <option value="SA">SAUDI-ARABIE</option>
-              <option value="SN">SENEGAL</option>
-              <option value="SC">SEYCHELLEN</option>
-              <option value="SL">SIERRA LEONE</option>
-              <option value="SG">SINGAPORE</option>
-              <option value="VC">SINT VINCENT EN DE GRENADINEN</option>
-              <option value="SK">SLOWAKIJE</option>
-              <option value="SD">SOEDAN</option>
-              <option value="SB">SOLOMONEILANDEN</option>
-              <option value="ES">SPANJE</option>
-              <option value="LK">SRI LANKA</option>
-              <option value="SR">SURINAME</option>
-              <option value="SZ">SWAZILAND</option>
-              <option value="SY">SYRIE</option>
-              <option value="TJ">TADZJIKISTAN</option>
-              <option value="TA">TAIWAN</option>
-              <option value="TZ">TANZANIA</option>
-              <option value="TH">THAILAND</option>
-              <option value="TG">TOGO</option>
-              <option value="TO">TONGA</option>
-              <option value="TT">TRINIDAD EN TOBAGO</option>
-              <option value="TD">TSJAAD</option>
-              <option value="CZ">TSJECHIE</option>
-              <option value="TN">TUNESIE</option>
-              <option value="TR">TURKIJE</option>
-              <option value="TM">TURKMENISTAN</option>
-              <option value="TV">TUVALU</option>
-              <option value="UG">UGANDA</option>
-              <option value="UY">URUGUAY</option>
-              <option value="VA">VATICAANSE STAAT</option>
-              <option value="VE">VENEZUELA</option>
-              <option value="AE">VERENIGDE ARABISCHE EMIRATEN</option>
-              <option value="US">VERENIGDE STATEN VAN AMERIKA</option>
-              <option value="VN">VIETNAM</option>
-              <option value="CN">VOLKSREPUBLIEK CHINA</option>
-              <option value="KP">VOLKSREPUBLIEK KOREA</option>
-              <option value="WS">WEST-SOMOA</option>
-              <option value="ZR">ZAIRE</option>
-              <option value="ZM">ZAMBIA</option>
-              <option value="ZW">ZIMBABWE</option>
-              <option value="ZA">ZUID AFRIKA</option>
-              <option value="ZJ">ZUID JEMEN</option>
-              <option value="SE">ZWEDEN</option>
-              <option value="CH">ZWITSERLAND</option>
+        			<option value="  "> Selecteer een land</option>
+        			<option value="AF">AFGHANISTAN</option>
+        			<option value="AL">ALBANIE</option>
+        			<option value="DZ">ALGERIJE</option>
+        			<option value="AD">ANDORRA</option>
+        			<option value="AO">ANGOLA</option>
+        			<option value="AG">ANTIGUA EN BARBUDA</option>
+        			<option value="AR">ARGENTINIE</option>
+        			<option value="AM">ARMENIE</option>
+        			<option value="AB">ARUBA</option>
+        			<option value="SH">ASCENSION</option>
+        			<option value="AU">AUSTRALIE</option>
+        			<option value="AZ">AZERBEIDZJAN</option>
+        			<option value="BH">BAHREIN</option>
+        			<option value="BD">BANGLADESH</option>
+        			<option value="BB">BARBADOS</option>
+        			<option value="BY">BELARUS</option>
+        			<option value="BE">BELGIE</option>
+        			<option value="BZ">BELIZE</option>
+        			<option value="BJ">BENIN</option>
+        			<option value="BM">BERMUDA</option>
+        			<option value="BT">BHUTAN</option>
+        			<option value="BO">BOLIVIA</option>
+        			<option value="BA">BOSNIE-HERZEGOWINA</option>
+        			<option value="BW">BOTSWANA</option>
+        			<option value="BR">BRAZILIE</option>
+        			<option value="VG">BRITSE MAAGDENEILANDEN</option>
+        			<option value="BN">BRUNEI</option>
+        			<option value="BG">BULGARIJE</option>
+        			<option value="BF">BURKINA FASO</option>
+        			<option value="BI">BURUNDI</option>
+        			<option value="KH">CAMBODJA</option>
+        			<option value="CA">CANADA</option>
+        			<option value="KY">CAYMANEILANDEN</option>
+        			<option value="CF">CENTRAALAFRIKAANSE REP.</option>
+        			<option value="CL">CHILI</option>
+        			<option value="CX">CHRISTMASEILAND</option>
+        			<option value="CO">COLOMBIA</option>
+        			<option value="CG">CONGO</option>
+        			<option value="CR">COSTA RICA</option>
+        			<option value="CU">CUBA</option>
+        			<option value="CY">CYPRUS</option>
+        			<option value="BS">DE BAHAMA'S</option>
+        			<option value="KM">DE COMOREN</option>
+        			<option value="PH">DE FILIPIJNEN</option>
+        			<option value="MV">DE MALADIVEN</option>
+        			<option value="DK">DENEMARKEN</option>
+        			<option value="ZZ">DIVERSEN</option>
+        			<option value="DJ">DJIBOUTI</option>
+        			<option value="DM">DOMINICA</option>
+        			<option value="DO">DOMINICAANSE REPUBLIEK</option>
+        			<option value="DE">DUITSLAND</option>
+        			<option value="EC">ECUADOR</option>
+        			<option value="EG">EGYPTE</option>
+        			<option value="SV">EL SALVADOR</option>
+        			<option value="CQ">EQUATORIAAL GUINEA</option>
+        			<option value="ER">ERITREA</option>
+        			<option value="EE">ESTLAND</option>
+        			<option value="ET">ETHIOPIE</option>
+        			<option value="FK">FALKLANDEILANDEN</option>
+        			<option value="FO">FAROE EILANDEN</option>
+        			<option value="FJ">FIDJI-EILANDEN</option>
+        			<option value="FL">FILIPIJNEN</option>
+        			<option value="FI">FINLAND</option>
+        			<option value="FR">FRANKRIJK</option>
+        			<option value="GF">FRANS-GUYANA</option>
+        			<option value="PF">FRANS-POLUNESIE</option>
+        			<option value="TF">FRANSE ZUIDELIJKE EN Z-POOLGEB</option>
+        			<option value="GA">GABON</option>
+        			<option value="GM">GAMBIA</option>
+        			<option value="GE">GEORGIE</option>
+        			<option value="GH">GHANA</option>
+        			<option value="GI">GIBRALTAR</option>
+        			<option value="GD">GRENADA</option>
+        			<option value="GR">GRIEKENLAND</option>
+        			<option value="GL">GROENLAND</option>
+        			<option value="GB">GROOT-BRITTANNIE</option>
+        			<option value="GP">GUADELOUPE</option>
+        			<option value="GT">GUATEMALA</option>
+        			<option value="GN">GUINEE</option>
+        			<option value="GW">GUINEE BISSAU</option>
+        			<option value="GY">GUYANA</option>
+        			<option value="HT">HAITI</option>
+        			<option value="HN">HONDURAS</option>
+        			<option value="HU">HONGARIJE</option>
+        			<option value="HK">HONGKONG</option>
+        			<option value="IE">IERLAND</option>
+        			<option value="IS">IJSLAND</option>
+        			<option value="IN">INDIA</option>
+        			<option value="ID">INDONESIE</option>
+        			<option value="IQ">IRAK</option>
+        			<option value="IR">IRAN</option>
+        			<option value="IL">ISRAEL</option>
+        			<option value="IT">ITALIE</option>
+        			<option value="CI">IVOORKUST</option>
+        			<option value="JM">JAMAICA</option>
+        			<option value="JP">JAPAN</option>
+        			<option value="YE">JEMEN</option>
+        			<option value="YU">JOEGOSLAVIE (KLEIN)</option>
+        			<option value="JO">JORDANIE</option>
+        			<option value="CV">KAAP VERDIE</option>
+        			<option value="CM">KAMEROEN</option>
+        			<option value="KZ">KAZACHSTAN</option>
+        			<option value="KE">KENYA</option>
+        			<option value="KI">KIRIBATI</option>
+        			<option value="KW">KOEWEIT</option>
+        			<option value="KR">KOREA</option>
+        			<option value="HR">KROATIE</option>
+        			<option value="KG">KYRGYZSTAN</option>
+        			<option value="LA">LAOS</option>
+        			<option value="LV">LETLAND</option>
+        			<option value="LB">LIBANON</option>
+        			<option value="LR">LIBERIA</option>
+        			<option value="LY">LIBIE</option>
+        			<option value="LI">LIECHTENSTEIN</option>
+        			<option value="LT">LITOUWEN</option>
+        			<option value="LU">LUXEMBURG</option>
+        			<option value="MA">Macedonië</option>
+        			<option value="MG">MADAGASKAR</option>
+        			<option value="MW">MALAWI</option>
+        			<option value="MY">MALEISIE</option>
+        			<option value="ML">MALI</option>
+        			<option value="MT">MALTA</option>
+        			<option value="MN">MAROKKO</option>
+        			<option value="MH">MARSHALLEILANDEN</option>
+        			<option value="MQ">MARTINIQUE</option>
+        			<option value="MR">MAURITANIE</option>
+        			<option value="MU">MAURITIUS</option>
+        			<option value="MX">MEXICO</option>
+        			<option value="FM">MICRONESIA</option>
+        			<option value="MD">MOLDAVIA</option>
+        			<option value="MC">MONACO</option>
+        			<option value="MO">MOZAMBIQUE</option>
+        			<option value="MM">MYANMAR</option>
+        			<option value="NA">NAMIBIE</option>
+        			<option value="NR">NAURU</option>
+        			<option value="NL">NEDERLAND</option>
+        			<option value="AN">NEDERLANDSE ANTILLEN</option>
+        			<option value="NP">NEPAL</option>
+        			<option value="NI">NICARAGUA</option>
+        			<option value="NZ">NIEUW-ZEELAND</option>
+        			<option value="NG">NIGER</option>
+        			<option value="NE">NIGERIA</option>
+        			<option value="NO">NOORWEGEN</option>
+        			<option value="UA">OEKRAINE</option>
+        			<option value="UZ">OEZBEKISTAN</option>
+        			<option value="OM">OMAN</option>
+        			<option value="AT">OOSTENRIJK</option>
+        			<option value="PK">PAKISTAN</option>
+        			<option value="PA">PANAMA</option>
+        			<option value="PG">PAPOEA-NIEUW-GUINEA</option>
+        			<option value="PY">PARAGUAY</option>
+        			<option value="PE">PERU</option>
+        			<option value="PL">POLEN</option>
+        			<option value="PT">PORTUGAL</option>
+        			<option value="QA">QUATAR</option>
+        			<option value="RO">ROEMENIE</option>
+        			<option value="RW">RUANDA</option>
+        			<option value="RU">RUSSISCHE FEDERATIE</option>
+        			<option value="LC">SAINT LUCIA</option>
+        			<option value="SM">SAN MARINO</option>
+        			<option value="SA">SAUDI-ARABIE</option>
+        			<option value="SN">SENEGAL</option>
+        			<option value="SC">SEYCHELLEN</option>
+        			<option value="SL">SIERRA LEONE</option>
+        			<option value="SG">SINGAPORE</option>
+        			<option value="VC">SINT VINCENT EN DE GRENADINEN</option>
+        			<option value="SK">SLOWAKIJE</option>
+        			<option value="SD">SOEDAN</option>
+        			<option value="SB">SOLOMONEILANDEN</option>
+        			<option value="ES">SPANJE</option>
+        			<option value="LK">SRI LANKA</option>
+        			<option value="SR">SURINAME</option>
+        			<option value="SZ">SWAZILAND</option>
+        			<option value="SY">SYRIE</option>
+        			<option value="TJ">TADZJIKISTAN</option>
+        			<option value="TA">TAIWAN</option>
+        			<option value="TZ">TANZANIA</option>
+        			<option value="TH">THAILAND</option>
+        			<option value="TG">TOGO</option>
+        			<option value="TO">TONGA</option>
+        			<option value="TT">TRINIDAD EN TOBAGO</option>
+        			<option value="TD">TSJAAD</option>
+        			<option value="CZ">TSJECHIE</option>
+        			<option value="TN">TUNESIE</option>
+        			<option value="TR">TURKIJE</option>
+        			<option value="TM">TURKMENISTAN</option>
+        			<option value="TV">TUVALU</option>
+        			<option value="UG">UGANDA</option>
+        			<option value="UY">URUGUAY</option>
+        			<option value="VA">VATICAANSE STAAT</option>
+        			<option value="VE">VENEZUELA</option>
+        			<option value="AE">VERENIGDE ARABISCHE EMIRATEN</option>
+        			<option value="US">VERENIGDE STATEN VAN AMERIKA</option>
+        			<option value="VN">VIETNAM</option>
+        			<option value="CN">VOLKSREPUBLIEK CHINA</option>
+        			<option value="KP">VOLKSREPUBLIEK KOREA</option>
+        			<option value="WS">WEST-SOMOA</option>
+        			<option value="ZR">ZAIRE</option>
+        			<option value="ZM">ZAMBIA</option>
+        			<option value="ZW">ZIMBABWE</option>
+        			<option value="ZA">ZUID AFRIKA</option>
+        			<option value="ZJ">ZUID JEMEN</option>
+        			<option value="SE">ZWEDEN</option>
+        			<option value="CH">ZWITSERLAND</option>
             </select>
              <span class="help-block" v-if="$v.landcode.$error && !$v.landcode.required">Land is verplicht</span>
           </div>
           <div class="machtiging_info">
-            Ik machtig hierbij Greenpeace tot wederopzegging (of éénmalig indien hierboven gekozen) bovengenoemd bedrag van mijn rekening af te schrijven.<br/><br/>
+            Ik machtig hierbij Greenpeace 
+            <template v-if="frequency === 'M'">tot wederopzegging</template> 
+            <template v-if="frequency === 'E'">éénmalig</template> 
+            <template v-if="frequency === 'F'">12 maanden</template> 
+            bovengenoemd bedrag van mijn rekening af te schrijven. <br/><br/>
           </div>
         </div>`,
     data() {
@@ -691,9 +700,8 @@ $(document).ready(function() {
             let city = response.body._embedded.addresses[0].city.label;
 
             this.populateFields(street, city);
-          // }, function (response) {
           }, function () {
-            // console.log(response.body);
+
           });
       },
 
@@ -708,10 +716,11 @@ $(document).ready(function() {
         this.woonplaats = city;
       }
     },
+    props: ['frequency'],
   });
 
 
-  donationformVue = new Vue({
+  var donationformVue = new Vue({
     el: '#app',
     data: {
       finalModel: {
@@ -850,28 +859,9 @@ $(document).ready(function() {
           contentType: 'application/json; charset=utf-8',
           dataType: 'json',
           success: function() {
-            let clangct=getUrlVars()['clangct'];
-            if(clangct != undefined){
-              $.ajax({
-                url: '/wp-content/plugins/planet4-gpnl-plugin-blocks/includes/assets/js/clang-conversion.js?clangct='+clangct,
-                dataType: 'script',
-              });
-            }
             donationformVue.onSucces();
           },
-          // error: function(jqxhr, status, exception) {
           error: function() {
-
-            // console.log('Data:');
-            // console.log(this.data);
-            // console.log('AjaxCall:');let clangct=getUrlVars()['clangct'];
-            if(clangct != undefined){
-              $.ajax({
-                url: '/clang-conversion.js',
-                dataType: 'script',
-              });
-            }
-            // console.log(this);
             donationformVue.onFailure();
           }
         });
@@ -896,22 +886,10 @@ $(document).ready(function() {
           contentType: 'application/json; charset=utf-8',
           dataType: 'json',
           success: function(result) {
-            let clangct=getUrlVars()['clangct'];
-            if(clangct != undefined){
-              $.ajax({
-                url: '/wp-content/plugins/planet4-gpnl-plugin-blocks/includes/assets/js/clang-conversion.js?clangct='+clangct,
-                dataType: 'script',
-              });
-            }
             window.location.href = result.transaction.redirectUrl;
           },
           error: function() {
-          // error: function(jqxhr, status, exception) {
             donationformVue.onFailure();
-            // console.log("Data:");
-            // console.log(this.data);
-            // console.log('AjaxCall:');
-            // console.log(this);
           }
         });
       },
@@ -941,6 +919,18 @@ $(document).ready(function() {
         }
         else{
           return this.finalModel.betaling === 'ID';
+        }
+      },
+
+      getFrequency() {
+        if (url_vars.suggested_frequency === 'F') {
+          return 'F';
+        }
+        if (typeof this.$refs.step1 !== 'undefined'){
+          return this.$refs.step1._data.machtigingType;
+        }
+        else{
+          return '';
         }
       },
 
