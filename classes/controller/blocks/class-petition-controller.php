@@ -319,7 +319,7 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 				C S S / JS
 			   ======================== */
 				// Enqueue the script:
-				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/onsubmit.js', [  'jquery'  ], '2.3.6', true );
+				wp_enqueue_script( 'jquery-docready-script', P4NLBKS_ASSETS_DIR . 'js/onsubmit.js', [  'jquery'  ], '2.5.2', true );
 
 				// Pass options to frontend code
 				wp_localize_script(
