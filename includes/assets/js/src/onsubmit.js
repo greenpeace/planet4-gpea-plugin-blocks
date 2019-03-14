@@ -30,19 +30,8 @@ $('.gpnl-petitionform').on('submit', function () {
         });
       }
 
-      // if the consent was ticked or consent was given by entering phonenumber
-      if (post_form_value.consent === 'on' || post_form_value.phone !== '') {
-        // If an ad campaign is run by an external company fire the conversiontracking
-        if (window[form_config].ad_campaign === 'SB') {
-          fbq('track', 'Lead');
-          // if it is run by social blue, also deduplicate
-          socialBlueDeDuplicate(post_form_value['mail'], data['data']['phone'], window[form_config].apref);
-        } else if (window[form_config].ad_campaign === 'JA') {
-          fbq('track', window[form_config].jalt_track);
-        }
-      }
-
-      if (post_form_value.phone !== ''){
+      // if consent was given by entering phonenumber
+      if (post_form_value.phone !== '') {
         // Send conversion event to the GTM
         if (typeof dataLayer !== 'undefined') {
           dataLayer.push({
@@ -51,6 +40,14 @@ $('.gpnl-petitionform').on('submit', function () {
             'conv_action'   :'telnr',
             'conv_label'    :'Ja'
           });
+        }
+        // If an ad campaign is run by an external company fire the conversiontracking
+        if (window[form_config].ad_campaign === 'SB') {
+          fbq('track', 'Lead');
+          // if it is run by social blue, also deduplicate
+          socialBlueDeDuplicate(post_form_value['mail'], data['data']['phone'], window[form_config].apref);
+        } else if (window[form_config].ad_campaign === 'JA') {
+          fbq('track', window[form_config].jalt_track);
         }
       }
       else{
