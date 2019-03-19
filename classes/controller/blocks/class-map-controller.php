@@ -31,6 +31,12 @@ if ( ! class_exists( 'GPNL_Map_Controller' ) ) {
 		 */
 		public function prepare_fields() {
 			$fields = [
+				[
+					'label' => __('Hoogte kaart', 'planet4-gpnl-blocks'),
+					'attr'  => 'mapheight',
+					'type'  => 'number',
+					'value' => '200',
+				],
 			];
 
 			// Define the Shortcode UI arguments.
@@ -63,6 +69,9 @@ if ( ! class_exists( 'GPNL_Map_Controller' ) ) {
 			wp_enqueue_script( 'gpnl_map_js', P4NLBKS_ASSETS_DIR . 'js/gpnl-map.js', [ 'leaflet_js', 'leaflet_providers_js', 'jquery' ], '2.6.0', true );
 
 			$fields = shortcode_atts(
+				[
+					'mapheight' => '',
+				],
 				$fields,
 				$shortcode_tag
 			);
