@@ -10,6 +10,7 @@ return array(
     'P4NLBKS\\Controllers\\Blocks\\Donation_Controller' => $baseDir . '/classes/controller/blocks/class-donation-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\GPNL_Liveblog_Controller' => $baseDir . '/classes/controller/blocks/class-liveblog-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\GPNL_Liveblogitem_Controller' => $baseDir . '/classes/controller/blocks/class-liveblogitem-controller.php',
+    'P4NLBKS\\Controllers\\Blocks\\GPNL_Map_Controller' => $baseDir . '/classes/controller/blocks/class-map-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\GPNL_hero_Controller' => $baseDir . '/classes/controller/blocks/class-hero-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\GPNL_quote_Controller' => $baseDir . '/classes/controller/blocks/class-quote-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\GPNL_statistics_Controller' => $baseDir . '/classes/controller/blocks/class-statistics-controller.php',

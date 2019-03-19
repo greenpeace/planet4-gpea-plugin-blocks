@@ -43,6 +43,7 @@
 		"gtm_products": "writable",
 		"donationformVue": "writable",
 		"clang" : "writable",
-		"moment" : "writeable"
+		"moment" : "writeable",
+		"L": "writeable"
 	}
 }
