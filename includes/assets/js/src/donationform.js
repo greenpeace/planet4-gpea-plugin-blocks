@@ -21,7 +21,8 @@ $(document).ready(function() {
     'literatuurcode'      : getUrlVars()['lcode'],
     'drplus'              : getUrlVars()['drplus'],
     'min_amount'          : getUrlVars()['min'],
-    'suggested_amount'    : getUrlVars()['pref']
+    'suggested_amount'    : getUrlVars()['pref'],
+    'override_amount'     : getUrlVars()['over']
   };
 
   $.each(url_vars, function(key, value){
@@ -99,6 +100,15 @@ $(document).ready(function() {
         var recurring = 'recurring_amount' + value;
         formconfig.recurring_suggested_amount = formconfig[recurring];
         formconfig.oneoff_suggested_amount = formconfig[oneoff];
+        break;
+      case 'override_amount':
+        if (formconfig.suggested_frequency[0] === 'E') {
+          formconfig.oneoff_amount1    = value;
+          formconfig.oneoff_suggested_amount = value;
+        } else {
+          formconfig.recurring_amount1 = value;
+          formconfig.recurring_suggested_amount = value;
+        }
         break;
       }
 
