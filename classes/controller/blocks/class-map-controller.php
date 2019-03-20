@@ -31,12 +31,18 @@ if ( ! class_exists( 'GPNL_Map_Controller' ) ) {
 		 */
 		public function prepare_fields() {
 			$fields = [
+				[
+					'label' => __('Hoogte kaart', 'planet4-gpnl-blocks'),
+					'attr'  => 'mapheight',
+					'type'  => 'number',
+					'value' => '200',
+				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
 				'label'         => __( 'GPNL | Map', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/images/icon_noindex.png' ) . '" />',
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/images/icon_map.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4NLBKS_ALLOWED_PAGETYPE,
 			];
@@ -56,13 +62,16 @@ if ( ! class_exists( 'GPNL_Map_Controller' ) ) {
 		 * @return string The complete html of the block
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
-			wp_enqueue_style( 'leaflet_css', P4NLBKS_ASSETS_DIR . 'css/leaflet.css', [], '2.6.0' );
+			wp_enqueue_style( 'leaflet_css', P4NLBKS_ASSETS_DIR . 'css/leaflet.css', [], '2.6.2' );
 			wp_enqueue_style( 'leaflet-draw_css', P4NLBKS_ASSETS_DIR . 'css/leaflet.draw.css', [], '2.6.0' );
 			wp_enqueue_script( 'leaflet_js', P4NLBKS_ASSETS_DIR . 'js/leaflet.js', [], '2.6.0', true );
 			wp_enqueue_script( 'leaflet_providers_js', P4NLBKS_ASSETS_DIR . 'js/leaflet-providers.js', [ 'leaflet_js' ], '2.6.0', true );
-			wp_enqueue_script( 'gpnl_map_js', P4NLBKS_ASSETS_DIR . 'js/gpnl-map.js', [ 'leaflet_js', 'leaflet_providers_js', 'jquery' ], '2.6.0', true );
+			wp_enqueue_script( 'gpnl_map_js', P4NLBKS_ASSETS_DIR . 'js/gpnl-map.js', [ 'leaflet_js', 'leaflet_providers_js', 'jquery' ], '2.6.2', true );
 
 			$fields = shortcode_atts(
+				[
+					'mapheight' => '',
+				],
 				$fields,
 				$shortcode_tag
 			);
