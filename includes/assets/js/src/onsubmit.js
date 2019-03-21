@@ -63,14 +63,10 @@ $('.gpnl-petitionform').on('submit', function () {
 
       // cardflip the card, positionattribute flips to make sure no problems arises with different lengths of the front and back of the card, finally hide the front
       cardflip(petition_form_element);
-
+      console.log('Almost clang conversion');
       let clangct=getUrlVars()['clangct'];
-      if(clangct != undefined){
-        $.ajax({
-          url: '/wp-content/plugins/planet4-gpnl-plugin-blocks/includes/assets/js/clang-conversion.js?clangct='+clangct,
-          dataType: 'script',
-        });
-      }
+      if(clangct != undefined){clang.conversion.track();}
+      console.log('Past clang conversion');
     },
     error: function(jqXHR, textStatus, errorThrown){
       // If the backend sends an error, hide the thank element and show an error urging to try again
