@@ -1,3 +1,4 @@
+var config = window.config;
 var center = [config.centerlat, config.centerlng];
 var zoom = config.zoom;
 var all_markers = (typeof config.marker === 'string') ? JSON.parse(config.marker) : [];
@@ -44,13 +45,13 @@ $.each(all_markers, function(index, value) {
     var marker = L.marker(value, {icon: new EventMarker()}).addTo(map);
     delete all_markers[index];
     all_markers[L.stamp(marker)] = value;
-    marker.bindPopup('<a href="https://www.greenpeace.org/nl/acties/plasticmonster/plastival/">Doe mee met de Plastic Monster Rave!</a>', {'className': 'popupCustom'}).openPopup();
+    marker.bindPopup('<a href="https://www.greenpeace.org/nl/acties/plasticmonster/rave/">Doe mee met de Plastic Monster Rave!</a>', {'className': 'popupCustom'}).openPopup();
   }
   if (index === 1) {
     var marker = L.marker(value, {icon: new EventMarker()}).addTo(map);
     delete all_markers[index];
     all_markers[L.stamp(marker)] = value;
-    marker.bindPopup('<a href="https://www.greenpeace.org/nl/acties/plasticmonster/rave/">Kom ook naar het Plastival!</a>', {'className': 'popupCustom'});
+    marker.bindPopup('<a href="https://www.greenpeace.org/nl/acties/plasticmonster/plastival/">Kom ook naar het Plastival!</a>', {'className': 'popupCustom'});
   }
   if (index === 2) {
     var marker = L.marker(value, {icon: new ShipMarker()}).addTo(map);
