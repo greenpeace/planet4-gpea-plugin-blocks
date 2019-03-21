@@ -4,7 +4,7 @@ if(clangct != undefined){
   $.ajax({
     url: 'https://secure.myclang.com/pub/resources/extern/js/clang.js',
     dataType: 'script' })
-    .success(function(){ clang.conversion.init(clangct);});
+    .success(function(){ clang.conversion.init('fde9cd04331b4c3227');});
 }
 
 // REFACTOR IE11 doesn't support UrlSearchParams, so custom UrlParam function.
