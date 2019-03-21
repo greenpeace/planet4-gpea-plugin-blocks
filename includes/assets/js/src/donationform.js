@@ -15,6 +15,15 @@ $(document).ready(function() {
     return vars;
   }
 
+  let clangct=getUrlVars()['clangct'];
+
+  if(clangct != undefined){
+    $.ajax({
+      url: '/wp-content/plugins/planet4-gpnl-plugin-blocks/includes/assets/js/clang-landing.js?clangct='+clangct,
+      dataType: 'script',
+    });
+  }
+
   var url_vars = {
     'suggested_frequency' : getUrlVars()['per'],
     'marketingcode'       : getUrlVars()['mcode'],
@@ -843,6 +852,13 @@ $(document).ready(function() {
           'transactionProducts': gtm_products
         });
         /** End Google Tag Manager E-commerce */
+        let clangct=getUrlVars()['clangct'];
+        if(clangct != undefined){
+          $.ajax({
+            url: '/wp-content/plugins/planet4-gpnl-plugin-blocks/includes/assets/js/clang-conversion.js?clangct='+clangct,
+            dataType: 'script',
+          });
+        }
       },
 
       onFailure: function() {
@@ -878,6 +894,13 @@ $(document).ready(function() {
       },
 
       submitiDeal: function () {
+        let clangct=getUrlVars()['clangct'];
+        if(clangct != undefined){
+          $.ajax({
+            url: '/wp-content/plugins/planet4-gpnl-plugin-blocks/includes/assets/js/clang-conversion.js?clangct='+clangct,
+            dataType: 'script',
+          });
+        }
         this.result.msg = '';
         this.result.hasError = false;
         this.idealData.initials = this.finalModel.initialen;
