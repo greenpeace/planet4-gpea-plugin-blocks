@@ -99,12 +99,8 @@ if ( ! class_exists( 'GPNL_Liveblogitem_Controller' ) ) {
 				$shortcode_tag
 			);
 
-			if ( $fields['minute'] < 10 ) {
-				$fields['minute'] = '0' . $fields['minute'];
-			}
-			if ( $fields['hour'] < 10 ) {
-				$fields['hour'] = '0' . $fields['hour'];
-			}
+			$fields['minute'] = str_pad( $fields['minute'], 2, '0', STR_PAD_LEFT );
+			$fields['hour']   = str_pad( $fields['hour'], 2, '0', STR_PAD_LEFT );
 
 			$data = [
 				'fields' => $fields,
