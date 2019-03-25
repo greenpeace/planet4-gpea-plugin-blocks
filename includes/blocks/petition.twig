@@ -1,8 +1,26 @@
 {% block petition %}
 	{% if ( fields ) %}
 	<section class="petition-block">
+
 		<div class="row">
 			<div class="col-lg-6 order-last order-lg-first petition-img">
+				{% if fields.isloggedin and fields.ad_campaign != 'GP' %}
+					<h3>Let op: Dit is een pagina met een externe advertentiecampagne!</h3>
+				<table class="table table-dark">
+					<tr>
+						<td>Laatste edit door:</td>
+						<td>{{ fields.lastedit }}</td>
+					</tr>
+					<tr>
+						<td>Origineel aangemaakt door:</td>
+						<td>{{ fields.author }}</td>
+					</tr>
+					<tr>
+						<td>Adverentiebureau:</td>
+						<td>{{  fields.ad_campaign }}</td>
+					</tr>
+				</table>
+				{% endif %}
 				<img
 					class="img-fluid"
 					src="{{ fields.image }}"
@@ -13,6 +31,7 @@
 			</div>
 			<div class="col-lg-6 order-first order-lg-last gpnl-petition-wrapper card">
 				<div class="card-body">
+
 					{% if ( fields.title ) %}
 						<div class="petition-title">
 							<h2 class="card-title">{{ fields.title }}</h2>
