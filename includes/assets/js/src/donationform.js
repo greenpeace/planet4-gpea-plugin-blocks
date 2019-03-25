@@ -124,6 +124,11 @@ $(document).ready(function() {
     }
   });
 
+  if (formconfig.suggested_frequency[0] === 'F'){
+    formconfig.allow_frequency_override = 'false';
+    formconfig.suggested_frequency = ['M', 'maandelijks voor 12 maanden'];
+  }
+
   Vue.use(window.vuelidate.default);
   const {
     required,
