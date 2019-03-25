@@ -9,7 +9,6 @@ $(document).ready(function() {
   let clangct=getUrlVars()['clangct'];
 
   if(clangct != undefined){
-    console.log('joe');
     $.ajax({
       url: '/wp-content/plugins/planet4-gpnl-plugin-blocks/includes/assets/js/clang-landing.js?clangct='+clangct,
       dataType: 'script',

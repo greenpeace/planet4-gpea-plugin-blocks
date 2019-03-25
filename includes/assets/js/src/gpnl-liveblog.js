@@ -10,7 +10,7 @@ if (numelements > treshold) {
   hiddenelements.hide();
   liveblog.after(showmorebutton);
 }
-
+// eslint-disable-next-line no-unused-vars
 function showMore() {
   var newelements = hiddenelements.slice(0, treshold);
   hiddenelements = hiddenelements.slice(treshold, hiddenelements.length);
