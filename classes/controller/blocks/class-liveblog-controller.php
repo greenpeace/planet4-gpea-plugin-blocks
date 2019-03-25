@@ -97,7 +97,7 @@ if ( ! class_exists( 'GPNL_Liveblog_Controller' ) ) {
 				'gpnl_liveblog_js',
 				P4NLBKS_ASSETS_DIR . 'js/gpnl-liveblog.js',
 				[ 'jquery', 'gpnl_liveblog_moment_locale_js' ],
-				'2.5.0',
+				'2.6.9',
 				true
 			);
 
