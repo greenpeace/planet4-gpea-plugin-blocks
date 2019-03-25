@@ -66,7 +66,7 @@ if ( ! class_exists( 'GPNL_Map_Controller' ) ) {
 			wp_enqueue_style( 'leaflet-draw_css', P4NLBKS_ASSETS_DIR . 'css/leaflet.draw.css', [], '2.6.0' );
 			wp_enqueue_script( 'leaflet_js', P4NLBKS_ASSETS_DIR . 'js/leaflet.js', [], '2.6.0', true );
 			wp_enqueue_script( 'leaflet_providers_js', P4NLBKS_ASSETS_DIR . 'js/leaflet-providers.js', [ 'leaflet_js' ], '2.6.0', true );
-			wp_enqueue_script( 'gpnl_map_js', P4NLBKS_ASSETS_DIR . 'js/gpnl-map.js', [ 'leaflet_js', 'leaflet_providers_js', 'jquery' ], '2.6.5', true );
+			wp_enqueue_script( 'gpnl_map_js', P4NLBKS_ASSETS_DIR . 'js/gpnl-map.js', [ 'leaflet_js', 'leaflet_providers_js', 'jquery' ], '2.6.7', true );
 
 			$fields = shortcode_atts(
 				[

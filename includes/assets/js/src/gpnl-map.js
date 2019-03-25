@@ -51,12 +51,12 @@ $.each(all_markers, function(index, value) {
     var marker = L.marker(value, {icon: new EventMarker()}).addTo(map);
     delete all_markers[index];
     all_markers[L.stamp(marker)] = value;
-    marker.bindPopup('<a href="https://www.greenpeace.org/nl/acties/plasticmonster/plastival/">Kom ook naar het Plastival!</a>', {'className': 'popupCustom'}).openPopup();
+    marker.bindPopup('<a href="https://www.greenpeace.org/nl/acties/plasticmonster/plastival/">Kom ook naar het Plastival!</a>', {'className': 'popupCustom'});
   }
   if (index === 2) {
     var marker = L.marker(value, {icon: new ShipMarker()}).addTo(map);
     delete all_markers[index];
     all_markers[L.stamp(marker)] = value;
-    marker.bindPopup('Hier is de Beluga nu!', {'className': 'popupCustom'});
+    marker.bindPopup('Hier is de Beluga nu!', {'className': 'popupCustom'}).openPopup();
   }
 });
