@@ -298,6 +298,10 @@ if ( ! class_exists( 'Petition_Controller' ) ) {
 			$fields['current_url']     = $this->current_url( $_SERVER );
 			$fields['twittertext']     = rawurlencode( $fields['twittertext'] );
 
+			$fields['isloggedin'] = is_user_logged_in();
+			$fields['lastedit']   = get_the_modified_author();
+			$fields['author']     = get_the_author();
+
 			$data = [
 				'fields' => $fields,
 			];
