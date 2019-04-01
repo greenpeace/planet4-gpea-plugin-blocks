@@ -828,7 +828,7 @@ $(document).ready(function() {
         /** Google Tag Manager E-commerce */
 
         // Build product array
-        gtm_products = [];
+        let gtm_products = [];
 
         gtm_products.push({
           'name': 'machtiging',

@@ -25,3 +25,5 @@ gitflow/
 .editorconfig
 
 node_modules/
+
+includes/assets/js/onsubmit\.js
