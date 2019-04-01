@@ -744,7 +744,7 @@ $(document).ready(function() {
   });
 
 
-  var donationformVue = new Vue({
+  donationformVue = new Vue({
     el: '#app',
     data: {
       finalModel: {
