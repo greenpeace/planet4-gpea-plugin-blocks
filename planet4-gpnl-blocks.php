@@ -67,4 +67,11 @@ P4NLBKS\Loader::get_instance( [
 //	'P4NLBKS\Controllers\Blocks\GPNL_statistics_Controller',
 	'P4NLBKS\Controllers\Blocks\GPNL_Liveblog_Controller',
 	'P4NLBKS\Controllers\Blocks\GPNL_Liveblogitem_Controller',
+
+     // BEGIN Latte custom controllers
+     'P4NLBKS\Controllers\Blocks\Repeater_Controller',
+     'P4NLBKS\Controllers\Blocks\Test_Controller',
+     'P4NLBKS\Controllers\Blocks\Custom_Query_Controller',
+     // END Latte custom controllers
+
 ], 'P4NLBKS\Views\View' );

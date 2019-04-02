@@ -27,3 +27,8 @@ gitflow/
 node_modules/
 
 includes/assets/js/onsubmit\.js
+
+# Latte Creative private repo #
+###############################
+.ac-php-conf.json
+.tern-port

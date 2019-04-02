@@ -1,0 +1,50 @@
+{% block repeater %}
+		{% if ( fields ) %}
+				<div class="container latte-repeater-container">
+						<div class="row">
+								<div class="col-md-12 col">
+										{% if ( fields.repeater_title ) %}
+												<h2 class="latte-repeater-title">{{ fields.repeater_title|e('wp_kses_post')|raw }}</h2>
+										{% endif %}
+										{% if ( fields.repeater_description ) %}
+												<h4>{{ fields.repeater_description|e('wp_kses_post')|raw }}</h4>
+										{% endif %}
+								</div>
+						</div>
+						<hr />
+						<div class="row">
+								{% for i in 1..25 %}
+										{% if fields['title_'~i] %}
+												{% set title = fields['title_'~i] %}
+												{% set attachment = fields['attachment_'~i] %}
+												{% set description = fields['description_'~i] %}
+												{% set link = fields['link_'~i] %}
+												{% set cta_text = fields['cta_text_'~i] %}
+												<div class="col-md-12 col latte-repeater-item">
+														{% if attachment %}
+																<div class="attachment-container">
+																		{% if link %}<a href="{{ link|e('esc_url') }}">{% endif %}
+																				<img src="{{ attachment }}" alt="{{ title }}">
+																				{% if link %}</a>{% endif %}
+																</div>
+														{% endif %}
+														<h3>
+																{% if link %}<a href="{{ link|e('esc_url') }}">{% endif %}
+																		{{ title|e('wp_kses_post')|raw }}
+																		{% if link %}</a>{% endif %}
+														</h3>
+														{% if description %}
+																<p>{{ description|e('wp_kses_post')|raw }}</p>
+														{% endif %}
+														{% if cta_text and link %}
+																<a href="{{ link|e('esc_url') }}" class="btn btn-secondary">
+																		{{ cta_text|e('wp_kses_post')|raw }}
+																</a>
+														{% endif %}
+												</div>
+										{% endif %}
+								{% endfor %}
+						</div>
+				</div>
+		{% endif %}
+{% endblock %}
