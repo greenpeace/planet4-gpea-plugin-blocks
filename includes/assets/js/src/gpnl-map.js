@@ -41,20 +41,21 @@ $.each(all_lines, function (index, value) {
   all_lines[L.stamp(polyline)] = value;
 });
 $.each(all_markers, function(index, value) {
+  var marker;
   if (index === 0) {
-    var marker = L.marker(value, {icon: new EventMarker()}).addTo(map);
+    marker = L.marker(value, {icon: new EventMarker()}).addTo(map);
     delete all_markers[index];
     all_markers[L.stamp(marker)] = value;
     marker.bindPopup('<a href="https://www.greenpeace.org/nl/acties/plasticmonster/rave/">Doe mee met de Plastic Monster Rave!</a>', {'className': 'popupCustom'});
   }
   if (index === 1) {
-    var marker = L.marker(value, {icon: new EventMarker()}).addTo(map);
+    marker = L.marker(value, {icon: new EventMarker()}).addTo(map);
     delete all_markers[index];
     all_markers[L.stamp(marker)] = value;
     marker.bindPopup('<a href="https://www.greenpeace.org/nl/acties/plasticmonster/plastival/">Kom ook naar het Plastival!</a>', {'className': 'popupCustom'});
   }
   if (index === 2) {
-    var marker = L.marker(value, {icon: new ShipMarker()}).addTo(map);
+    marker = L.marker(value, {icon: new ShipMarker()}).addTo(map);
     delete all_markers[index];
     all_markers[L.stamp(marker)] = value;
     marker.bindPopup('Hier is de Beluga nu!', {'className': 'popupCustom'}).openPopup();

@@ -172,6 +172,7 @@ if ( ! class_exists( 'Loader' ) ) {
 			wp_enqueue_script( 'p4nlbks_admin_jquery', '//code.jquery.com/jquery-3.2.1.min.js', array(), '3.2.1', true );
 			wp_enqueue_style( 'p4nlbks_admin_style', P4NLBKS_ADMIN_DIR . 'css/admin.css', array(), '0.1' );
 			wp_enqueue_script( 'p4nlbks_admin_script', P4NLBKS_ADMIN_DIR . 'js/admin.js', array(), '0.1', true );
+			wp_enqueue_script( 'p4nlbks_admin_blocks_script', P4NLBKS_ADMIN_DIR . 'js/admin-blocks.js', array(), '0.1', true );
 		}
 
 		/**
