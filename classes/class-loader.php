@@ -169,7 +169,7 @@ if ( ! class_exists( 'Loader' ) ) {
 			add_action(
 				'enqueue_shortcode_ui',
 				function () {
-                    wp_enqueue_script( 'p4nlbks_admin_blocks_script', P4NLBKS_ADMIN_DIR . 'js/admin-blocks.js', [ 'shortcode-ui' ], '0.1', true );
+                    wp_enqueue_script( 'p4nlbks_admin_blocks_script', P4NLBKS_ADMIN_DIR . 'js/blocks/admin-blocks.min.js', [ 'shortcode-ui' ], '0.1', true );
 				}
 			);
 
