@@ -151,7 +151,7 @@ if ( ! class_exists( 'Loader' ) ) {
 						array_push( $plugins['not_updated'], array_merge( $plugin_data, $required_plugin ) );
 					}
 				}
-				if ( count( $plugins ) > 0 ) {
+				if ( count( $plugins['not_updated'] ) > 0 || count( $plugins['not_found'] ) > 0 ) {
 					return false;
 				}
 			}
@@ -164,7 +164,16 @@ if ( ! class_exists( 'Loader' ) ) {
 		 * @param string $hook The slug name of the current admin page.
 		 */
 		public function load_admin_assets( $hook ) {
-			// Load the assets only on the plugin's pages.
+
+            // Load these assets on page edit only
+			add_action(
+				'enqueue_shortcode_ui',
+				function () {
+                    wp_enqueue_script( 'p4nlbks_admin_blocks_script', P4NLBKS_ADMIN_DIR . 'js/admin-blocks.js', [ 'shortcode-ui' ], '0.1', true );
+				}
+			);
+
+            // Load the assets only on the plugin's pages.
 			if ( strpos( $hook, P4NLBKS_PLUGIN_SLUG_NAME ) === false ) {
 				return;
 			}
@@ -172,7 +181,6 @@ if ( ! class_exists( 'Loader' ) ) {
 			wp_enqueue_script( 'p4nlbks_admin_jquery', '//code.jquery.com/jquery-3.2.1.min.js', array(), '3.2.1', true );
 			wp_enqueue_style( 'p4nlbks_admin_style', P4NLBKS_ADMIN_DIR . 'css/admin.css', array(), '0.1' );
 			wp_enqueue_script( 'p4nlbks_admin_script', P4NLBKS_ADMIN_DIR . 'js/admin.js', array(), '0.1', true );
-			wp_enqueue_script( 'p4nlbks_admin_blocks_script', P4NLBKS_ADMIN_DIR . 'js/admin-blocks.js', array(), '0.1', true );
 		}
 
 		/**
