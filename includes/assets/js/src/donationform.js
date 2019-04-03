@@ -154,10 +154,17 @@ $(document).ready(function() {
             	Ja ik steun Greenpeace <strong>{{ formconfig.suggested_frequency[1] }}</strong>:
             </label>
             
-            <select id="machtigingType" class="form-control" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()" v-show="formconfig.allow_frequency_override == 'true'" v-on:change="changePeriodic">
-              <option value="E">Eenmalig</option>
-              <option value="M">Maandelijks</option>
-            </select>
+<!--            <select id="machtigingType" class="form-control" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()" v-show="formconfig.allow_frequency_override == 'true'" v-on:change="changePeriodic">-->
+<!--              <option value="E">Eenmalig</option>-->
+<!--              <option value="M">Maandelijks</option>-->
+<!--            </select>-->
+            <div id="frequency__list" class="" role="radiogroup">
+              <input class="form-check-input input__frequency" v-model.trim="machtigingType" type="radio" name="machtigingType" id="eenmalig" role="radio" value="E">
+              <label class="label__frequency" for="eenmalig">Eenmalig</label>
+              
+              <input class="form-check-input input__frequency" v-model.trim="machtigingType" type="radio" name="machtigingType" id="maandelijks" role="radio" value="M">
+              <label class="label__frequency" for="maandelijks">Maandelijks</label>
+            </div>
             <span class="help-block" v-if="$v.machtigingType.$error && !$v.machtigingType.required">Periodiek is verplicht</span>
           </div>
           
@@ -168,13 +175,13 @@ $(document).ready(function() {
               <label for="amountList">Ik geef:</label>
               <div id="amountList" class="radio-list" role="radiogroup">
                 <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag1" role="radio" v-bind:value="amount1">
-                <label class="form-check-label form-control left" for="bedrag1">&euro;{{ amount1 }}</label>
+                <label class="form-check-label form-control left" for="bedrag1">EUR {{ amount1 }}</label>
 
                 <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag2" role="radio" v-bind:value="amount2" checked="checked" tabindex="0">
-                <label class="form-check-label form-control" for="bedrag2">&euro;{{ amount2 }}</label>
+                <label class="form-check-label form-control" for="bedrag2">EUR {{ amount2 }}</label>
 
                 <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag3" role="radio" v-bind:value="amount3">
-                <label class="form-check-label form-control" for="bedrag3">&euro;{{ amount3 }}</label>
+                <label class="form-check-label form-control" for="bedrag3">EUR {{ amount3 }}</label>
               </div>
             </div>
 
@@ -228,7 +235,7 @@ $(document).ready(function() {
       bedrag: {
         required,
         numeric,
-        between: between(formconfig.min_amount, 999)
+        between: between(formconfig.min_amount, 100000)
       },
       betaling: {
         required

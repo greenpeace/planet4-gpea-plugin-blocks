@@ -256,9 +256,10 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 				)
 			);
 
-			wp_enqueue_style( 'style', P4NLBKS_ASSETS_DIR . 'css/donationform.css' );
+            wp_enqueue_style( 'vueform_style', 'https://unpkg.com/vue-form-wizard/dist/vue-form-wizard.min.css', [], '2.7.3' );
+            wp_enqueue_style( 'gpnl_donationform_style', P4NLBKS_ASSETS_DIR . 'css/donationform.css', 'vueform_style', '2.7.3' );
 
-			// Shortcode callbacks must return content, hence, output buffering here.
+            // Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
 			$this->view->block( self::BLOCK_NAME, $data );
 
