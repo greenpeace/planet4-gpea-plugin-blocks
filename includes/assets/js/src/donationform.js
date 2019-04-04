@@ -148,30 +148,30 @@ $(document).ready(function() {
   Vue.component('step1', {
     template: `
         <div>
-          <div class="form-group" v-bind:class="{ 'has-error': $v.machtigingType }">
-            <label for="machtigingType" v-if="formconfig.allow_frequency_override == 'true'">Ja ik steun Greenpeace:</label>
-            <label for="machtigingType" v-else>
-            	Ja ik steun Greenpeace <strong>{{ formconfig.suggested_frequency[1] }}</strong>:
-            </label>
-            
-<!--            <select id="machtigingType" class="form-control" v-model.trim="machtigingType" @input="$v.machtigingType.$touch()" v-show="formconfig.allow_frequency_override == 'true'" v-on:change="changePeriodic">-->
-<!--              <option value="E">Eenmalig</option>-->
-<!--              <option value="M">Maandelijks</option>-->
-<!--            </select>-->
-            <div id="frequency__list" class="" role="radiogroup">
-              <input class="form-check-input input__frequency" v-model.trim="machtigingType" type="radio" name="machtigingType" id="eenmalig" role="radio" value="E">
-              <label class="label__frequency" for="eenmalig">Eenmalig</label>
-              
-              <input class="form-check-input input__frequency" v-model.trim="machtigingType" type="radio" name="machtigingType" id="maandelijks" role="radio" value="M">
-              <label class="label__frequency" for="maandelijks">Maandelijks</label>
-            </div>
-            <span class="help-block" v-if="$v.machtigingType.$error && !$v.machtigingType.required">Periodiek is verplicht</span>
-          </div>
+          <fieldset >
+            <legend class="sr-only">Periodiek van de donatie</legend>
+                <div class="form-group" v-bind:class="{ 'has-error': $v.machtigingType }">
+                    <label for="machtigingType" v-if="formconfig.allow_frequency_override == 'true'">Ja ik steun Greenpeace:</label>
+                    <label for="machtigingType" v-else>
+                        Ja ik steun Greenpeace <strong>{{ formconfig.suggested_frequency[1] }}</strong>:
+                    </label>
+        
+                    <div id="machtigingType" class="radio-list" role="radiogroup">
+        
+                        <input class="form-check-input" v-model.trim="machtigingType" type="radio" name="eenmalig" id="eenmalig" value="E" role="radio"       v-on:change="changePeriodic">
+                        <label class="form-check-label form-control left" for="eenmalig">Eenmalig</label>
+        
+                        <input class="form-check-input" v-model.trim="machtigingType" type="radio" name="maandelijks" id="maandelijks" value="M" role="radio" v-on:change="changePeriodic">
+                        <label class="form-check-label form-control" for="maandelijks">Maandelijks</label>
+                    </div>
+        
+        
+                </div>
+        </fieldset>
           
 		<fieldset>
 		<legend class="sr-only">Bedrag</legend>
-		 <div class="form-row">
-            <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.bedrag.$error }">
+            <div class="form-group" v-bind:class="{ 'has-error': $v.bedrag.$error }">
               <label for="amountList">Ik geef:</label>
               <div id="amountList" class="radio-list" role="radiogroup">
                 <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag1" role="radio" v-bind:value="amount1">
@@ -183,13 +183,14 @@ $(document).ready(function() {
                 <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag3" role="radio" v-bind:value="amount3">
                 <label class="form-check-label form-control" for="bedrag3">EUR {{ amount3 }}</label>
               </div>
+              <div class="amount__popular">Meest gekozen</div>
             </div>
 
-            <div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.bedrag.$error }">
+            <div class="form-group" v-bind:class="{ 'has-error': $v.bedrag.$error }">
               <label for="customAmount">Ander bedrag:</label>
               <div class="input-group">
                 <div class="input-group-prepend">
-                  <div class="input-group-text">&euro;</div>
+                  <div class="input-group-text">EUR</div>
                 </div>
                 <input id="customAmount" class="form-control" v-model.trim="bedrag" @input="$v.bedrag.$touch()" name="transaction-amount">
                 <span class="help-block" v-if="$v.bedrag.$error && !$v.bedrag.required">Bedrag is verplicht</span>
@@ -197,7 +198,6 @@ $(document).ready(function() {
                 <span class="help-block" v-if="$v.bedrag.$error && $v.bedrag.required && $v.bedrag.numeric && !$v.bedrag.between">Het minimale donatiebedrag is {{ formconfig.min_amount }} euro</span>
               </div>
             </div>
-          </div>
 		</fieldset>
          
 	  
@@ -653,13 +653,13 @@ $(document).ready(function() {
             </select>
              <span class="help-block" v-if="$v.landcode.$error && !$v.landcode.required">Land is verplicht</span>
           </div>
-          <div class="machtiging_info">
+          <small>
             Ik machtig hierbij Greenpeace 
             <template v-if="frequency === 'M'">tot wederopzegging</template> 
             <template v-if="frequency === 'E'">éénmalig</template> 
             <template v-if="frequency === 'F'">12 maanden</template> 
             bovengenoemd bedrag van mijn rekening af te schrijven. <br/><br/>
-          </div>
+          </small>
         </div>`,
     data() {
       return {

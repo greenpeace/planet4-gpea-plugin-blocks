@@ -1,6 +1,3 @@
-
-//############################################################################################################3
-// START CUSTOMS
 .card {
   background-color: #323842;
   color: white;
@@ -40,10 +37,24 @@
   display: none;
 }
 
+.page-header .container .page-header-title {
+  max-width: 100%;
+}
+
+.page-header {
+  padding: 0;
+  margin-top: 60px;
+}
+
+@media (min-width: 992px) {
+  .page-header {
+    margin-top: 90px;
+  }
+}
+
 .radio-list input[type=radio]:checked + label {
   color: #fff;
   background-color: #f36d3a;
-  font-weight: bolder;
   border-color: #f36d3a;
 }
 
@@ -100,7 +111,7 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 15px;
   font-size: 1rem;
   font-weight: 400;
@@ -114,23 +125,22 @@ body {
   display: flex;
 }
 
-.vue-form-wizard .wizard-nav-pills>li>a {
+.vue-form-wizard .wizard-nav-pills > li > a {
   color: grey;
 }
 
 .radio-list .form-check-label {
   position: relative;
   color: #333;
-  font-family: Arial, sans-serif;
   font-size: 16px;
   font-weight: 700;
-  padding: 8px;
   cursor: pointer;
   float: left;
   text-align: center;
   margin-left: 3%;
   flex-grow: 1;
 }
+
 a {
   color: #6c0;
   text-decoration: none;
@@ -150,7 +160,7 @@ fieldset {
 }
 
 .radio-list .left {
-  margin-left: 0
+  margin-left: 0;
 }
 
 .vue-form-wizard .secure-icons {
@@ -162,5 +172,67 @@ fieldset {
   background-color: #fff;
   border-color: #a6ff4d;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(102,204,0,.25);
+  box-shadow: 0 0 0 0.2rem rgba(102, 204, 0, .25);
+}
+
+.gp-donation-form {
+  margin: 0 auto;
+}
+
+.wizard-header,
+.wizard-progress-with-circle {
+  display: none;
+}
+
+.vue-form-wizard .wizard-icon-circle .wizard-icon-container.square_shape,
+.vue-form-wizard .wizard-icon-circle .wizard-icon-container.tab_shape {
+  border-radius: .5rem;
+}
+
+.vue-form-wizard.md .wizard-icon-circle.tab_shape {
+  height: 40px;
+  background: white;
+  border-radius: .5rem;
+}
+
+.form-group.has-error input {
+  border-color: red;
+}
+
+.errors,
+.help-block {
+  position: absolute;
+  bottom: -16px;
+  font-size: 10px;
+  color: red;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+.amount__popular {
+  text-align: center;
+  flex-grow: 0.3;
+}
+
+.form-group {
+  margin-bottom: .5rem;
+}
+
+#app > div > div > div.wizard-card-footer.clearfix > div.wizard-footer-left > span > button {
+  // !important is needed because of inline styling by vue form wizard
+  background-color: #698e9c !important;
+  border-color: #698e9c !important;
+}
+
+.input-group-text {
+  background-color: #dadbdc;
+  border-color: #dadbdc;
+}
+
+.vue-form-wizard .wizard-tab-content {
+  padding: 30px 0 10px;
 }
