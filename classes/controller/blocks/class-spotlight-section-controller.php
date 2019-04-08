@@ -2,7 +2,7 @@
 
 namespace P4NLBKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Project_Section_Controller' ) ) {
+if ( ! class_exists( 'Spotlight_Section_Controller' ) ) {
 	/**
 	 * @noinspection AutoloadingIssuesInspection
 	 */
@@ -12,10 +12,10 @@ if ( ! class_exists( 'Project_Section_Controller' ) ) {
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */
-	class Project_Section_Controller extends Controller {
+	class Spotlight_Section_Controller extends Controller {
 
 		/** @const string BLOCK_NAME */
-		const BLOCK_NAME = 'project_section';
+		const BLOCK_NAME = 'spotlight_section';
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -25,7 +25,7 @@ if ( ! class_exists( 'Project_Section_Controller' ) ) {
 
 			$fields = [
 				[
-					'label'		  => __( 'Projects', 'planet4-gpnl-blocks' ),
+					'label'		  => __( 'Spotlights', 'planet4-gpnl-blocks' ),
 					'attr'     => 'posts',
 					'type'     => 'post_select',
 					'multiple' => 'multiple',
@@ -57,7 +57,7 @@ if ( ! class_exists( 'Project_Section_Controller' ) ) {
 					'meta'     => [
 						'select2_options' => [
 							'allowClear'             => true,
-							'placeholder'            => __( 'Search for projects', 'planet4-blocks-backend' ),
+							'placeholder'            => __( 'Search for spotlights', 'planet4-blocks-backend' ),
 							'closeOnSelect'          => false,
 							'minimumInputLength'     => 0,
 							'multiple'               => true,
@@ -67,7 +67,7 @@ if ( ! class_exists( 'Project_Section_Controller' ) ) {
 					],
 				],
 				// [
-				// 	'label'		  => __( 'Projects', 'planet4-gpnl-blocks' ),
+				// 	'label'		  => __( 'Spotlights', 'planet4-gpnl-blocks' ),
 				// 	'attr'		  => 'special_attributes',
 				// 	// 'type'		  => 'post_select',
 				// 	'taxonomy'	  => 'special_attribute',
@@ -139,7 +139,7 @@ if ( ! class_exists( 'Project_Section_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Project Section', 'planet4-blocks' ),
+				'label'			=> __( 'LATTE | Spotlight Section', 'planet4-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
 				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,

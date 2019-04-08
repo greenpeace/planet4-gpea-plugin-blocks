@@ -1,9 +1,9 @@
-{% block project_section %}
+{% block update_section %}
     {% if ( fields ) %}
 	<div class="container latte-simple-text-container">
 	    <div class="row">
 		<div class="col-md-12 col">
-		    <h3>Projects section</h3>
+		    <h3>Updates section</h3>
 		    <p>Title: {{ fields.title|e('wp_kses_post')|raw }}</p>
 		    <p>Subtitle: {{ fields.subtitle|e('wp_kses_post')|raw }}</p>
 		    <p>Description: {{ fields.description|e('wp_kses_post')|raw }}</p>
