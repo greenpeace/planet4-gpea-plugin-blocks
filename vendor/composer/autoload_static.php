@@ -52,6 +52,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4NLBKS\\Controllers\\Blocks\\GPNL_statistics_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-statistics-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\No_Index_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-noindex-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Petition_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-petition-controller.php',
+        'P4NLBKS\\Controllers\\Blocks\\Project_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-project-section-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Repeater_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-repeater-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Test_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-test-controller.php',
         'P4NLBKS\\Controllers\\Menu\\Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-controller.php',

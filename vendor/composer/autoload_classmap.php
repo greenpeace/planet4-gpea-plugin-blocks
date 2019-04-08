@@ -17,6 +17,7 @@ return array(
     'P4NLBKS\\Controllers\\Blocks\\GPNL_statistics_Controller' => $baseDir . '/classes/controller/blocks/class-statistics-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\No_Index_Controller' => $baseDir . '/classes/controller/blocks/class-noindex-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Petition_Controller' => $baseDir . '/classes/controller/blocks/class-petition-controller.php',
+    'P4NLBKS\\Controllers\\Blocks\\Project_Section_Controller' => $baseDir . '/classes/controller/blocks/class-project-section-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Repeater_Controller' => $baseDir . '/classes/controller/blocks/class-repeater-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Test_Controller' => $baseDir . '/classes/controller/blocks/class-test-controller.php',
     'P4NLBKS\\Controllers\\Menu\\Controller' => $baseDir . '/classes/controller/menu/class-controller.php',
