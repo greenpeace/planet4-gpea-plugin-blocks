@@ -15,6 +15,7 @@ return array(
     'P4NLBKS\\Controllers\\Blocks\\GPNL_hero_Controller' => $baseDir . '/classes/controller/blocks/class-hero-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\GPNL_quote_Controller' => $baseDir . '/classes/controller/blocks/class-quote-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\GPNL_statistics_Controller' => $baseDir . '/classes/controller/blocks/class-statistics-controller.php',
+    'P4NLBKS\\Controllers\\Blocks\\Issue_Section_Controller' => $baseDir . '/classes/controller/blocks/class-issue-section-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\No_Index_Controller' => $baseDir . '/classes/controller/blocks/class-noindex-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Petition_Controller' => $baseDir . '/classes/controller/blocks/class-petition-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Project_Section_Controller' => $baseDir . '/classes/controller/blocks/class-project-section-controller.php',
