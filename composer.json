@@ -20,6 +20,7 @@
     "psr-4": {
       "P4NLBKS\\": "classes/",
       "P4NLBKS\\Controllers\\": "classes/controller/",
+      "P4NLBKS\\Taxonomies\\": "classes/taxonomy/",
       "P4NLBKS\\Controllers\\Blocks\\": "classes/controller/blocks",
       "P4NLBKS\\Controllers\\Menu\\": "classes/controller/menu"
     }

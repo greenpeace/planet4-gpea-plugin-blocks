@@ -9,6 +9,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
+            'P4NLBKS\\Taxonomies\\' => 19,
             'P4NLBKS\\Controllers\\Menu\\' => 25,
             'P4NLBKS\\Controllers\\Blocks\\' => 27,
             'P4NLBKS\\Controllers\\' => 20,
@@ -17,6 +18,10 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
     );
 
     public static $prefixDirsPsr4 = array (
+        'P4NLBKS\\Taxonomies\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/classes/taxonomy',
+        ),
         'P4NLBKS\\Controllers\\Menu\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes/controller/menu',
@@ -53,6 +58,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4NLBKS\\Controllers\\Menu\\Settings_Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-settings-controller.php',
         'P4NLBKS\\Controllers\\Uninstall_Controller' => __DIR__ . '/../..' . '/classes/controller/class-uninstall-controller.php',
         'P4NLBKS\\Loader' => __DIR__ . '/../..' . '/classes/class-loader.php',
+        'P4NLBKS\\Taxonomies\\Taxonomy' => __DIR__ . '/../..' . '/classes/taxonomy/class-taxonomy.php',
         'P4NLBKS\\Views\\View' => __DIR__ . '/../..' . '/classes/view/class-view.php',
     );
 

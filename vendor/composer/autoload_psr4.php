@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'P4NLBKS\\Taxonomies\\' => array($baseDir . '/classes/taxonomy'),
     'P4NLBKS\\Controllers\\Menu\\' => array($baseDir . '/classes/controller/menu'),
     'P4NLBKS\\Controllers\\Blocks\\' => array($baseDir . '/classes/controller/blocks'),
     'P4NLBKS\\Controllers\\' => array($baseDir . '/classes/controller'),
