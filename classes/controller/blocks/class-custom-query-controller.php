@@ -62,30 +62,30 @@ if ( ! class_exists( 'Custom_Query_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Title', 'planet4-blocks' ),
+					'label' => __( 'Title', 'planet4-gpnl-blocks' ),
 					'attr'	=> 'title',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Title', 'planet4-blocks' ),
-						'data-plugin' => 'planet4-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-blocks' ),
+					'label' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
 					'attr'	=> 'subtitle',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Subtitle', 'planet4-blocks' ),
-						'data-plugin' => 'planet4-blocks',
+						'placeholder' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-blocks' ),
+					'label' => __( 'Description', 'planet4-gpnl-blocks' ),
 					'attr'	=> 'description',
 					'type'	=> 'textarea',
 					'meta'	=> [
-						'placeholder' => __( 'Description', 'planet4-blocks' ),
-						'data-plugin' => 'planet4-blocks',
+						'placeholder' => __( 'Description', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
 					],
 				],
 				[
@@ -128,7 +128,7 @@ if ( ! class_exists( 'Custom_Query_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Custom Post Query', 'planet4-blocks' ),
+				'label'			=> __( 'LATTE | Custom Post Query', 'planet4-gpnl-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
 				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
