@@ -41,6 +41,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
     );
 
     public static $classMap = array (
+        'P4NLBKS\\Controllers\\Blocks\\Achievement_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-achievement-section.php',
         'P4NLBKS\\Controllers\\Blocks\\Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Custom_Query_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-custom-query-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Donation_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-donation-controller.php',
