@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'P4NLBKS\\Controllers\\Blocks\\Carousel_Section_Controller' => $baseDir . '/classes/controller/blocks/class-carousel-header-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Controller' => $baseDir . '/classes/controller/blocks/class-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Custom_Query_Controller' => $baseDir . '/classes/controller/blocks/class-custom-query-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Donation_Controller' => $baseDir . '/classes/controller/blocks/class-donation-controller.php',
@@ -23,7 +22,7 @@ return array(
     'P4NLBKS\\Controllers\\Blocks\\Repeater_Controller' => $baseDir . '/classes/controller/blocks/class-repeater-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Spotlight_Section_Controller' => $baseDir . '/classes/controller/blocks/class-spotlight-section-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Test_Controller' => $baseDir . '/classes/controller/blocks/class-test-controller.php',
-    'P4NLBKS\\Controllers\\Blocks\\Update_Section_Controller' => $baseDir . '/classes/controller/blocks/class-update-section-controller.php',
+    'P4NLBKS\\Controllers\\Blocks\\Update_Carousel_Controller' => $baseDir . '/classes/controller/blocks/class-update-carousel-controller.php',
     'P4NLBKS\\Controllers\\Menu\\Controller' => $baseDir . '/classes/controller/menu/class-controller.php',
     'P4NLBKS\\Controllers\\Menu\\Settings_Controller' => $baseDir . '/classes/controller/menu/class-settings-controller.php',
     'P4NLBKS\\Controllers\\Uninstall_Controller' => $baseDir . '/classes/controller/class-uninstall-controller.php',

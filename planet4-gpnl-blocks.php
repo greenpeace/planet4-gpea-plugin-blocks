@@ -73,9 +73,8 @@ P4NLBKS\Loader::get_instance( [
 	'P4NLBKS\Controllers\Blocks\Test_Controller',
 	'P4NLBKS\Controllers\Blocks\Custom_Query_Controller',
 	'P4NLBKS\Controllers\Blocks\Project_Section_Controller',
-	'P4NLBKS\Controllers\Blocks\Update_Section_Controller',
+	'P4NLBKS\Controllers\Blocks\Update_Carousel_Controller',
 	'P4NLBKS\Controllers\Blocks\Issue_Section_Controller',
-	'P4NLBKS\Controllers\Blocks\Carousel_Section_Controller',
 	// 'P4NLBKS\Controllers\Blocks\Spotlight_Section_Controller',
 	'P4NLBKS\Taxonomies\Taxonomy',
 	// END Latte custom controllers

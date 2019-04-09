@@ -2,7 +2,7 @@
 
 namespace P4NLBKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Carousel_Section_Controller' ) ) {
+if ( ! class_exists( 'Update_Carousel_Controller' ) ) {
 	/**
 	 * @noinspection AutoloadingIssuesInspection
 	 */
@@ -12,10 +12,10 @@ if ( ! class_exists( 'Carousel_Section_Controller' ) ) {
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */
-	class Carousel_Section_Controller extends Controller {
+	class Update_Carousel_Controller extends Controller {
 
 		/** @const string BLOCK_NAME */
-		const BLOCK_NAME = 'carousel_header_section';
+		const BLOCK_NAME = 'update_carousel';
 
 		/** @const string DEFAULT_LAYOUT */
 		const DEFAULT_LAYOUT = 'default';
@@ -54,36 +54,36 @@ if ( ! class_exists( 'Carousel_Section_Controller' ) ) {
 						'data-plugin' => 'planet4-gpnl-blocks',
 					],
 				],
-				// [
-				// 	'label'		  => __( 'Projects', 'planet4-gpnl-blocks' ),
-				// 	'attr'     => 'project_ids',
-				// 	'type'     => 'post_select',
-				// 	'multiple' => 'multiple',
-				// 	'query'    => [
-				// 		'post_type' => 'page',
-                //         'post_status' => 'publish',
-				// 		'orderby'   => 'post_title',
-				// 		'order'     => 'ASC',
-                //         // Filters by page template.
-                //         // 'meta_query' => array(
-                //         //     array(
-                //         //         'key' => '_wp_page_template',
-                //         //         'value' => 'template-city.php', // Insert template here. Not super clean though...
-                //         //     )
-                //         // )
-				// 	],
-				// 	'meta'     => [
-				// 		'select2_options' => [
-				// 			'allowClear'             => true,
-				// 			'placeholder'            => __( 'Select projects', 'planet4-gpnl-blocks' ),
-				// 			'closeOnSelect'          => false,
-				// 			'minimumInputLength'     => 0,
-				// 			'multiple'               => true,
-				// 			'maximumSelectionLength' => 20,
-				// 			'width'                  => '80%',
-				// 		],
-				// 	],
-				// ],
+				[
+					'label'		  => __( 'Updates', 'planet4-gpnl-blocks' ),
+					'attr'	   => 'update_ids',
+					'type'	   => 'post_select',
+					'multiple' => 'multiple',
+					'query'	   => [
+						'post_type'	  => 'post',
+						'post_status' => 'publish',
+						'orderby'	  => 'post_title',
+						'order'			  => 'ASC',
+						'tax_query'	  => array(
+							array(
+								'taxonomy' => 'p4-page-type',
+								'field'	   => 'slug',
+								'terms'	   => 'update',
+							),
+						),
+					],
+					'meta'	   => [
+						'select2_options' => [
+							'allowClear'			 => true,
+							'placeholder'			 => __( 'Select updates', 'planet4-gpnl-blocks' ),
+							'closeOnSelect'			 => false,
+							'minimumInputLength'	 => 0,
+							'multiple'				 => true,
+							'maximumSelectionLength' => 20,
+							'width'					 => '80%',
+						],
+					],
+				],
 				[
 					'label' => 'Select the layout',
 					'description' => 'Select the layout',
@@ -114,7 +114,7 @@ if ( ! class_exists( 'Carousel_Section_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Carousel Header', 'planet4-gpnl-blocks' ),
+				'label'			=> __( 'LATTE | Update Section', 'planet4-gpnl-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
 				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
@@ -134,21 +134,21 @@ if ( ! class_exists( 'Carousel_Section_Controller' ) ) {
 		 * @return array The data to be passed in the View.
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
-            
-			// $posts = get_pages( array(
-            //     'include' => explode(',', $attributes['project_ids']), 
-			// ) );
-            
-			// $attributes['posts'] = $posts;
-            $attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
-            return [
+			$posts = get_posts( array(
+                'include' => explode(',', $attributes['update_ids']), 
+			) );
+
+			$attributes['posts'] = $posts;
+			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
+
+			return [
 				'fields' => $attributes,
 			];
 
 		}
-        
-        /**
+
+		/**
 		 * Callback for the shortcake_noindex shortcode.
 		 * It renders the shortcode based on supplied attributes.
 		 *
@@ -160,17 +160,17 @@ if ( ! class_exists( 'Carousel_Section_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
-            $data = $this->prepare_data( $fields );
+			$data = $this->prepare_data( $fields );
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
 
 			$this->view->block( self::BLOCK_NAME, $data );
-            // echo '<pre>' . print_r($data, true) . '</pre>';
+			// echo '<pre>' . var_export($data, true) . '</pre>';
 
 			return ob_get_clean();
 		}
 
-        
+
 	}
 }
