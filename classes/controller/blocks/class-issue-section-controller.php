@@ -124,7 +124,7 @@ if ( ! class_exists( 'Issue_Section_Controller' ) ) {
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
             
 			$categories = get_categories( array(
-                'include' => preg_split("/\,/", $attributes['issue_ids']), 
+                'include' => explode(',', $attributes['issue_ids']), 
 			) );
 			$attributes['categories'] = $categories;
 

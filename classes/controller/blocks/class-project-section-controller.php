@@ -136,7 +136,7 @@ if ( ! class_exists( 'Project_Section_Controller' ) ) {
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
             
 			$posts = get_pages( array(
-                'include' => preg_split("/\,/", $attributes['project_ids']), 
+                'include' => explode(',', $attributes['project_ids']), 
 			) );
             
 			$attributes['posts'] = $posts;

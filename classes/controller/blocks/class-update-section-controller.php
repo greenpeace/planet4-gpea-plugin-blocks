@@ -136,7 +136,7 @@ if ( ! class_exists( 'Update_Section_Controller' ) ) {
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
 			$posts = get_posts( array(
-				'include' => preg_split("/\,/", $attributes['update_ids']), 
+                'include' => explode(',', $attributes['update_ids']), 
 			) );
 
 			$attributes['posts'] = $posts;
