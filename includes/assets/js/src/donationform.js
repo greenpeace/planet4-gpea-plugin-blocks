@@ -1,20 +1,22 @@
-$(document).ready(function() {
+var donationformVue = {};
+var url_vars = {};
 
-  // REFACTOR IE11 doesn't support UrlSearchParams, so custom UrlParam function.
-  // 	Consider polyfilling it now? or wait until we drop IE11 support and switch then?
-  function getUrlVars(){
-    var vars = [], 
-      hash;
-    var uri = decodeURIComponent(window.location.href.split('#')[0]);
-    var hashes = uri.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++){
-      hash = hashes[i].split('=');
-      vars.push(hash[0]);
-      vars[hash[0]] = hash[1];
-    }
-    return vars;
+// REFACTOR IE11 doesn't support UrlSearchParams, so custom UrlParam function.
+// 	Consider polyfilling it now? or wait until we drop IE11 support and switch then?
+function getUrlVars(){
+  var vars = [],
+    hash;
+  var uri = decodeURIComponent(window.location.href.split('#')[0]);
+  var hashes = uri.slice(window.location.href.indexOf('?') + 1).split('&');
+  for(var i = 0; i < hashes.length; i++){
+    hash = hashes[i].split('=');
+    vars.push(hash[0]);
+    vars[hash[0]] = hash[1];
   }
+  return vars;
+}
 
+$(document).ready(function() {
   let clangct=getUrlVars()['clangct'];
 
   if(clangct != undefined){
@@ -24,7 +26,7 @@ $(document).ready(function() {
     });
   }
 
-  var url_vars = {
+  url_vars = {
     'suggested_frequency' : getUrlVars()['per'],
     'marketingcode'       : getUrlVars()['mcode'],
     'literatuurcode'      : getUrlVars()['lcode'],
@@ -51,20 +53,6 @@ $(document).ready(function() {
           formconfig.allow_frequency_override = 'false';
           formconfig.suggested_frequency = ['M', 'maandelijks voor 12 maanden'];
           break;
-
-          // UNCOMMENT This is prepared for using recurring payments
-          // case 'K':
-          // 	formconfig.allow_frequency_override = 'false';
-          // 	formconfig.suggested_frequency = ["K", "Per kwartaal"];
-          // 	break;
-          // case 'H':
-          // 	formconfig.allow_frequency_override = 'false';
-          // 	formconfig.suggested_frequency = ["H", "Per halfjaar"];
-          // 	break;
-          // case 'J':
-          // 	formconfig.allow_frequency_override = 'false';
-          // 	formconfig.suggested_frequency = ["J", "Jaarlijks"];
-          // 	break;
         default:
           formconfig.suggested_frequency = ['M', 'Maandelijks'];
           break;
@@ -120,7 +108,6 @@ $(document).ready(function() {
         }
         break;
       }
-
     }
   });
 
@@ -199,12 +186,10 @@ $(document).ready(function() {
               </div>
             </div>
 		</fieldset>
-         
 	  
 	  <fieldset v-if="machtigingType ==='E'">
 	  <legend class="sr-only">Betalingsmethode</legend>
-		   <div class="form-row">
-			<div class="form-group col-md-12" v-bind:class="{ 'has-error': $v.betaling.$error }">
+			<div class="form-group" v-bind:class="{ 'has-error': $v.betaling.$error }">
 			  <label for="paymentMethods">Betalingswijze:</label>
 			  <div id="paymentMethods" class="radio-list" role="radiogroup">
 				<input class="form-check-input" v-model.trim="betaling" type="radio" name="ideal" id="ideal" value="ID" checked="checked" tabindex="0" role="radio"
@@ -214,18 +199,18 @@ $(document).ready(function() {
 				<label class="form-check-label form-control" for="machtiging">Eenmalige machtiging</label>
 			  </div>
 			</div> 
-		  </div>
 	  </fieldset>
           
            </div>`,
     data() {
       return {
-        machtigingType: formconfig.suggested_frequency[0],
-        amount1:       (formconfig.suggested_frequency[0] === 'M') ? formconfig.recurring_amount1          : formconfig.oneoff_amount1,
-        amount2:       (formconfig.suggested_frequency[0] === 'M') ? formconfig.recurring_amount2          : formconfig.oneoff_amount2,
-        amount3:       (formconfig.suggested_frequency[0] === 'M') ? formconfig.recurring_amount3          : formconfig.oneoff_amount3,
-        bedrag:        (formconfig.suggested_frequency[0] === 'M') ? formconfig.recurring_suggested_amount : formconfig.oneoff_suggested_amount,
-        betaling:      (formconfig.suggested_frequency[0] === 'M') ? 'EM' : 'ID',
+        machtigingType:  formconfig.suggested_frequency[0],
+        amount1:        (formconfig.suggested_frequency[0] === 'M') ? formconfig.recurring_amount1          : formconfig.oneoff_amount1,
+        amount2:        (formconfig.suggested_frequency[0] === 'M') ? formconfig.recurring_amount2          : formconfig.oneoff_amount2,
+        amount3:        (formconfig.suggested_frequency[0] === 'M') ? formconfig.recurring_amount3          : formconfig.oneoff_amount3,
+        bedrag:         (formconfig.suggested_frequency[0] === 'M') ? formconfig.recurring_suggested_amount : formconfig.oneoff_suggested_amount,
+        betaling:       (formconfig.suggested_frequency[0] === 'M') ? 'EM' : 'ID',
+        formconfig:      formconfig,
       };
     },
     validations: {
@@ -751,7 +736,7 @@ $(document).ready(function() {
   });
 
 
-  var donationformVue = new Vue({
+  donationformVue = new Vue({
     el: '#app',
     data: {
       finalModel: {
@@ -796,7 +781,8 @@ $(document).ready(function() {
         subscriptionCode: null,
         subscriptionEndDate: null,
         subscriptionMonths: null
-      }
+      },
+      console: console,
     },
     methods: {
       onComplete: function() {
