@@ -66,9 +66,9 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 						'order'			  => 'ASC',
 						'tax_query'	  => array(
 							array(
-                                'taxonomy' => 'special_attribute',
-                                'field' => 'slug',
-                                'terms' => 'achievement',
+								'taxonomy' => 'special_attribute',
+								'field' => 'slug',
+								'terms' => 'achievement',
 							),
 						),
 					],
@@ -136,7 +136,7 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
 			$posts = get_posts( array(
-                'include' => explode(',', $attributes['achievement_ids']), 
+				'include' => explode(',', $attributes['achievement_ids']), 
 			) );
 
 			$attributes['posts'] = $posts;
