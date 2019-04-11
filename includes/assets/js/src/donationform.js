@@ -146,7 +146,7 @@ $(document).ready(function() {
                     <div id="machtigingType" class="radio-list" role="radiogroup">
         
                         <input class="form-check-input" v-model.trim="machtigingType" type="radio" name="eenmalig" id="eenmalig" value="E" role="radio"       v-on:change="changePeriodic">
-                        <label class="form-check-label form-control left" for="eenmalig">Eenmalig</label>
+                        <label class="form-check-label form-control ml-0" for="eenmalig">Eenmalig</label>
         
                         <input class="form-check-input" v-model.trim="machtigingType" type="radio" name="maandelijks" id="maandelijks" value="M" role="radio" v-on:change="changePeriodic">
                         <label class="form-check-label form-control" for="maandelijks">Maandelijks</label>
@@ -162,7 +162,7 @@ $(document).ready(function() {
               <label for="amountList">Ik geef:</label>
               <div id="amountList" class="radio-list" role="radiogroup">
                 <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag1" role="radio" v-bind:value="amount1">
-                <label class="form-check-label form-control left" for="bedrag1">EUR {{ amount1 }}</label>
+                <label class="form-check-label form-control ml-0" for="bedrag1">EUR {{ amount1 }}</label>
 
                 <input class="form-check-input" v-model.trim="bedrag" type="radio" name="transaction-amount" id="bedrag2" role="radio" v-bind:value="amount2" checked="checked" tabindex="0">
                 <label class="form-check-label form-control" for="bedrag2">EUR {{ amount2 }}</label>
@@ -174,12 +174,13 @@ $(document).ready(function() {
             </div>
 
             <div class="form-group" v-bind:class="{ 'has-error': $v.bedrag.$error }">
-              <label for="customAmount">Ander bedrag:</label>
-              <div class="input-group">
+              <label for="customAmount" class="form-control form-check-label ml-0" v-on:click="toggleCustomamount">Ander bedrag:</label>
+              <div class="input-group" id="input__customAmount">
                 <div class="input-group-prepend">
                   <div class="input-group-text">EUR</div>
                 </div>
-                <input id="customAmount" class="form-control" v-model.trim="bedrag" @input="$v.bedrag.$touch()" name="transaction-amount">
+                
+                <input type="number" id="customAmount" class="form-control" v-model.trim="bedrag" @input="$v.bedrag.$touch()" name="transaction-amount">
                 <span class="help-block" v-if="$v.bedrag.$error && !$v.bedrag.required">Bedrag is verplicht</span>
                 <span class="help-block" v-if="$v.bedrag.$error && $v.bedrag.required && !$v.bedrag.numeric">Bedrag moet een nummer zijn</span>
                 <span class="help-block" v-if="$v.bedrag.$error && $v.bedrag.required && $v.bedrag.numeric && !$v.bedrag.between">Het minimale donatiebedrag is {{ formconfig.min_amount }} euro</span>
@@ -227,6 +228,9 @@ $(document).ready(function() {
       },
       form: ['machtigingType', 'bedrag', 'betaling' ]
     },
+    mounted:function(){
+      this.toggleCustomamount();
+    },
     methods: {
       validate() {
         this.$v.form.$reset();
@@ -251,6 +255,9 @@ $(document).ready(function() {
         this.$data.min_amount = (this.$data.machtigingType === 'M') ? formconfig.recurring_min_amount       : formconfig.oneoff_min_amount ;
         this.$data.betaling   = (this.$data.machtigingType === 'M') ? 'EM' : 'ID';
         this.validate();
+      },
+      toggleCustomamount() {
+        $('#input__customAmount').toggle();
       }
     }
   });

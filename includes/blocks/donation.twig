@@ -47,10 +47,7 @@
                         title="Donatie"
                         icon="icon-euro"
                         :before-change="()=>validateStep('step1')"
-                        :on-loading="console.log('bla')"
-                        next-button-text="Test"
-
-                >
+               >
                         <step1
                                 ref="step1"
                                 @on-validate="mergePartialModels"

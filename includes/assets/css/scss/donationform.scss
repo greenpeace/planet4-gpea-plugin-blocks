@@ -54,7 +54,7 @@
   }
 }
 
-.radio-list input[type=radio]:checked + label {
+.donation input[type=radio]:checked + label {
   color: #fff;
   background-color: #f36d3a;
   border-color: #f36d3a;
@@ -125,7 +125,7 @@ body {
   color: grey;
 }
 
-.radio-list .form-check-label {
+.donation .form-check-label {
   position: relative;
   color: #333;
   font-size: 16px;
@@ -153,10 +153,6 @@ fieldset {
   padding: 0;
   margin: 0;
   border: 0;
-}
-
-.radio-list .left {
-  margin-left: 0;
 }
 
 .secure-icons {
@@ -266,3 +262,7 @@ fieldset {
 .vue-form-wizard .wizard-card-footer .clearfix {
   padding: 0;
 }
+
+//#input__customAmount {
+//  display: none;
+//}
