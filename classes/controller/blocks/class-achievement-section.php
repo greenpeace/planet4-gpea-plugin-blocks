@@ -8,7 +8,7 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 	 */
 
 	/**
-	 * Class test_Controller
+	 * Class Achievement_Section_Controller
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 					],
 				],
 				[
-					'label'		  => __( 'Achievements', 'planet4-gpnl-blocks' ),
+					'label'	   => __( 'Achievements', 'planet4-gpnl-blocks' ),
 					'attr'	   => 'achievement_ids',
 					'type'	   => 'post_select',
 					'multiple' => 'multiple',
@@ -63,12 +63,12 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 						'post_type'	  => 'post',
 						'post_status' => 'publish',
 						'orderby'	  => 'post_title',
-						'order'			  => 'ASC',
+						'order'		  => 'ASC',
 						'tax_query'	  => array(
 							array(
 								'taxonomy' => 'special_attribute',
-								'field' => 'slug',
-								'terms' => 'achievement',
+								'field'    => 'slug',
+								'terms'    => 'achievement',
 							),
 						),
 					],
@@ -85,11 +85,11 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 					],
 				],
 				[
-					'label' => 'Select the layout',
+					'label'       => 'Select the layout',
 					'description' => 'Select the layout',
-					'attr' => 'layout',
-					'type' => 'p4_radio',
-					'options' => [
+					'attr'        => 'layout',
+					'type'        => 'p4_radio',
+					'options'     => [
 						[
 							'value' => 1,
 							'label' => __( 'Layout A', 'planet4-gpnl-blocks' ),

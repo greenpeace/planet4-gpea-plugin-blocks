@@ -8,7 +8,7 @@ if ( ! class_exists( 'Update_Carousel_Controller' ) ) {
 	 */
 
 	/**
-	 * Class test_Controller
+	 * Class Update_Carousel_Controller
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */

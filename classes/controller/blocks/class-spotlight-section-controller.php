@@ -8,7 +8,7 @@ if ( ! class_exists( 'Spotlight_Section_Controller' ) ) {
 	 */
 
 	/**
-	 * Class test_Controller
+	 * Class Spotlight_Section_Controller
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */

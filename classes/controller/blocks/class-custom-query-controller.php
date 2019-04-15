@@ -8,7 +8,7 @@ if ( ! class_exists( 'Custom_Query_Controller' ) ) {
 	 */
 
 	/**
-	 * Class test_Controller
+	 * Class Custom_Query_Controller
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */
