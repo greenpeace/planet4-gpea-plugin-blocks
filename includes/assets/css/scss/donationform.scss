@@ -1,0 +1,268 @@
+@import "base";
+
+.card {
+  background-color: #323842;
+  color: white;
+}
+
+.secure-icons .privacywaarborg {
+  height: 50px;
+  width: auto;
+}
+
+.loader {
+  display: inline-block;
+}
+
+.loader:after {
+  content: " ";
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: 5px auto;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: loader 1.2s linear infinite;
+}
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.page-header .container .share-buttons {
+  display: none;
+}
+
+.page-header .container .page-header-title {
+  max-width: 100%;
+}
+
+.page-header {
+  padding: 0;
+  margin-top: 60px;
+}
+
+@media (min-width: 992px) {
+  .page-header {
+    margin-top: 90px;
+  }
+}
+
+.donation input[type=radio]:checked + label {
+  color: #fff;
+  background-color: #f36d3a;
+  border-color: #f36d3a;
+}
+
+.wizard-icon:after {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  color: #fff;
+  content: "";
+  background-size: cover;
+}
+
+.icon-euro:after {
+  background-image: url("https://secure.greenpeacephp.nl/frm/icon-euro.svg");
+}
+
+.icon-user:after {
+  background-image: url("https://secure.greenpeacephp.nl/frm/icon-user.svg");
+}
+
+.icon-home:after {
+  background-image: url("https://secure.greenpeacephp.nl/frm/icon-home.svg");
+}
+
+.active .icon-euro:after {
+  background-image: url("https://secure.greenpeacephp.nl/frm/icon-euro-active.svg");
+}
+
+.active .icon-user:after {
+  background-image: url("https://secure.greenpeacephp.nl/frm/icon-user-active.svg");
+}
+
+.active .icon-home:after {
+  background-image: url("https://secure.greenpeacephp.nl/frm/icon-home-active.svg");
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  padding: .375rem .75rem;
+  font-size: 15px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  -webkit-transition: border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+}
+
+body {
+  // TODO remove when new styleguide is implemented (will be redundant)
+  font-family: $roboto;
+}
+
+.radio-list {
+  display: flex;
+}
+
+.vue-form-wizard .wizard-nav-pills > li > a {
+  color: grey;
+}
+
+.donation .form-check-label {
+  position: relative;
+  color: #333;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  float: left;
+  text-align: center;
+  margin-left: 3%;
+  flex-grow: 1;
+}
+
+a {
+  color: #6c0;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover {
+  color: #408000;
+  text-decoration: underline;
+}
+
+fieldset {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.secure-icons {
+  text-align: right;
+}
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #a6ff4d;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(102, 204, 0, .25);
+}
+
+.gp-donation-form {
+  margin: 0 auto;
+}
+
+.wizard-header,
+.wizard-progress-with-circle {
+  display: none;
+}
+
+.vue-form-wizard .wizard-icon-circle .wizard-icon-container.square_shape,
+.vue-form-wizard .wizard-icon-circle .wizard-icon-container.tab_shape {
+  border-radius: .5rem;
+}
+
+.vue-form-wizard.md .wizard-icon-circle.tab_shape {
+  height: 40px;
+  background: white;
+  border-radius: .5rem;
+}
+
+.form-group.has-error input {
+  border-color: red;
+}
+
+.form-group.has-error {
+  margin-bottom: 1rem;
+}
+
+.errors,
+.help-block {
+  position: absolute;
+  bottom: -16px;
+  font-size: 10px;
+  color: red;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+.amount__popular {
+  text-align: center;
+  flex-grow: 0.3;
+}
+
+.form-group {
+  margin-bottom: .5rem;
+}
+
+#app > div > div > div.wizard-card-footer.clearfix > div.wizard-footer-left > span > button {
+  // !important is needed because of inline styling by vue form wizard
+  background-color: #698e9c !important;
+  border-color: #698e9c !important;
+}
+
+.input-group-text {
+  background-color: #dadbdc;
+  border-color: #dadbdc;
+}
+
+.vue-form-wizard .wizard-tab-content {
+  padding: 30px 0 10px;
+}
+
+@media screen and (max-width: $small-width) {
+  .vue-form-wizard .wizard-card-footer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .vue-form-wizard .wizard-card-footer .wizard-footer-left {
+    float: none;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .vue-form-wizard .wizard-card-footer .wizard-footer-right {
+    float: none;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .vue-form-wizard .wizard-card-footer .wizard-footer-right button {
+    margin-top: 10px;
+  }
+}
+
+.vue-form-wizard .wizard-card-footer .clearfix {
+  padding: 0;
+}
+
+//#input__customAmount {
+//  display: none;
+//}
