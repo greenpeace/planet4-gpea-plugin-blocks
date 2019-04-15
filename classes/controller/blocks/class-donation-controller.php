@@ -224,7 +224,7 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
 			];
 
 
-			wp_enqueue_script( 'vue', 'https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js', null, '2.5.15', true );
+			wp_enqueue_script( 'vue', 'https://cdn.jsdelivr.net/npm/vue@2.5.15/dist/vue.js', [], '2.5.15', true );
             wp_enqueue_script( 'vueform', 'https://cdn.jsdelivr.net/npm/vue-form-wizard@0.8.4/dist/vue-form-wizard.min.js', [ 'vue' ], '0.8.4', true );
             wp_enqueue_script( 'vueresource', 'https://cdn.jsdelivr.net/npm/vue-resource@1.5.0/dist/vue-resource.min.js', [ 'vue', 'vueform' ], '1.5.0', true );
             wp_enqueue_script( 'vuelidate', 'https://cdn.jsdelivr.net/npm/vuelidate@0.7.4/dist/vuelidate.min.js', [ 'vue', 'vueform' ], '0.7.4', true );

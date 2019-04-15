@@ -174,8 +174,8 @@ $(document).ready(function() {
             </div>
 
             <div class="form-group" v-bind:class="{ 'has-error': $v.bedrag.$error }">
-              <label for="customAmount" class="form-control form-check-label ml-0" v-on:click="toggleCustomamount">Ander bedrag:</label>
-              <div class="input-group" id="input__customAmount">
+              <label for="customAmount" class="form-control form-check-label col-4 ml-0" v-on:click="toggleCustomamount">Ander bedrag:</label>
+              <div class="input-group col-8" id="input__customAmount">
                 <div class="input-group-prepend">
                   <div class="input-group-text">EUR</div>
                 </div>
@@ -195,7 +195,7 @@ $(document).ready(function() {
 			  <div id="paymentMethods" class="radio-list" role="radiogroup">
 				<input class="form-check-input" v-model.trim="betaling" type="radio" name="ideal" id="ideal" value="ID" checked="checked" tabindex="0" role="radio"
 				v-on:click="donationformVue.validateStep('step1');">
-				<label class="form-check-label form-control left" for="ideal">iDeal</label>
+				<label class="form-check-label form-control ml-0" for="ideal">iDeal</label>
 				<input class="form-check-input" v-model.trim="betaling" type="radio" name="machtiging" id="machtiging" value="EM" role="radio" v-on:click="donationformVue.validateStep('step1');">
 				<label class="form-check-label form-control" for="machtiging">Eenmalige machtiging</label>
 			  </div>
