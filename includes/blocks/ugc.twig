@@ -1,0 +1,29 @@
+{% block ugc %}
+    {% if ( fields ) %}
+	<div class="container">
+	    <div class="row">
+		<div class="col-md-12 col">
+		    <h3>UGC Post</h3>
+		    {% if ( fields.submit_msg ) %}
+			<p>{{ fields.submit_msg }}</p>
+		    {% endif %}
+		    <div id="ugc_postbox">
+			<form id="new_post" name="new_post" method="post">
+			    <p><label for="ugc_title">{{ fields.title_label }}</label><br />
+				<input type="text" id="ugc_title" value="" tabindex="1" size="20" name="ugc_title" />
+			    </p>
+			    <p>
+				<label for="ugc_content">{{ fields.content_label }}</label><br />
+				<textarea id="ugc_content" tabindex="3" name="ugc_content" cols="50" rows="6"></textarea>
+			    </p>
+			    {{ fields.wp_nonce|raw }}
+			    <p align="right"><input type="submit" value="Publish" tabindex="6" id="submit" name="submit" /></p>
+			</form>
+		    </div>
+		</div>
+	    </div>
+	</div>
+	<hr />
+    {% endif %}
+{% endblock %}
+
