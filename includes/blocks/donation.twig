@@ -44,7 +44,7 @@
                 finish-button-text="Donatie voltooien"
               >
                 <tab-content
-                        title="Donatie"
+                        title="1 Donatie"
                         icon="icon-euro"
                         :before-change="()=>validateStep('step1')"
                >
@@ -56,7 +56,7 @@
                 </tab-content>
 
                 <tab-content
-                        title="Gegevens"
+                        title="2 Gegevens"
                         icon="icon-user"
                         :before-change="()=>validateStep('step2')"
                 >
@@ -68,7 +68,7 @@
                 </tab-content>
 
                 <tab-content
-                        title="Adres"
+                        title="3 Adres"
                         icon="icon-home"
                         :before-change="()=>validateStep('step3')"
                         v-if="!isiDeal()"
