@@ -264,7 +264,7 @@ function newsletter_form_process () {
 	curl_close( $request );
 
 	// Give the appropriate response to the frontend
-	if ( false === $result ) {
+	if ( false === $result || 200 !== $httpcode ) {
 		wp_send_json_error(
 			[
 				'statuscode' => $httpcode,

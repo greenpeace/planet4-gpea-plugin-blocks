@@ -1,7 +1,7 @@
+var newsletter_form_element = {};
 $('.gpnl-newsletter__form').on('submit', function () {
 
-  var newsletter_form_element = this;
-  console.log(this);
+  newsletter_form_element = this;
   // Get the  parameter from the newsletter form and add the action and CSRF protection
   var post_form_value = getFormObj(newsletter_form_element);
   var form_config = 'newsletter_form_object_' + post_form_value['form_id'];
@@ -12,7 +12,6 @@ $('.gpnl-newsletter__form').on('submit', function () {
   post_form_value.literaturecode  = window[form_config].literaturecode;
   post_form_value.screenid  = window[form_config].screenid;
 
-  console.log(post_form_value);
 
   toggleDisable($(newsletter_form_element).find('*'));
 
@@ -20,16 +19,24 @@ $('.gpnl-newsletter__form').on('submit', function () {
     type:    'POST',
     url:     window[form_config].ajaxUrl,
     data:    post_form_value,
-    success: function(data) {
+    success: function() {
       // eslint-disable-next-line no-console
       console.log('^-^');
-      console.log(data);
+      $(newsletter_form_element).find('*').hide();
+      $('.gpnl-newsletter__title').html('Welkom!');
+      $('.gpnl-newsletter__description').html('<h4>Dank u voor uw aanmelding! U krijgt spoedig een bericht waarmee u uw aanmelding kunt bevestigen om deze definitief te maken.</h4>');
+
     },
-    error: function(data){
+    error: function(){
       // If the backend sends an error, hide the thank element and show an error urging to try again
       // eslint-disable-next-line no-console
       console.log('o_o');
-      console.log(data);
+      $(newsletter_form_element).find('*').hide();
+      $('.gpnl-newsletter__title').html('Oeps..!');
+      $('.gpnl-newsletter__description').html('<p>Sorry, er gaat momenteel iets fout, probeer het nu of later opnieuw.</p>');
+      $(newsletter_form_element).append(
+        '<a href=\''+window.location.href +'\' class="btn btn-primary btn-block"' +
+        '">Herlaad de pagina</a>');
     }
   });
 
