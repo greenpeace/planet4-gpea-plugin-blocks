@@ -41,6 +41,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4NLBKS\\Controllers\\Blocks\\GPNL_Liveblog_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-liveblog-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\GPNL_Liveblogitem_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-liveblogitem-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\GPNL_Map_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-map-controller.php',
+        'P4NLBKS\\Controllers\\Blocks\\GPNL_Newsletter_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-newsletter-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\GPNL_hero_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-hero-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\GPNL_quote_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-quote-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\GPNL_statistics_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-statistics-controller.php',
