@@ -244,7 +244,7 @@ function newsletter_form_process () {
 
 	$data = wp_json_encode( $data_array );
 
-	$url = 'https://www.mygreenpeace.nl/GPN.RegistrerenApi.Test/register/email';
+	$url = 'https://www.mygreenpeace.nl/GPN.RegistrerenApi/register/email';
 
 	// initiate a cUrl request to the database
 	$request = curl_init( $url );
