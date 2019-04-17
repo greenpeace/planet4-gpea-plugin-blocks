@@ -229,7 +229,7 @@ if ( ! class_exists( 'Donation_Controller' ) ) {
             wp_enqueue_script( 'vueresource', 'https://cdn.jsdelivr.net/npm/vue-resource@1.5.0/dist/vue-resource.min.js', [ 'vue', 'vueform' ], '1.5.0', true );
             wp_enqueue_script( 'vuelidate', 'https://cdn.jsdelivr.net/npm/vuelidate@0.7.4/dist/vuelidate.min.js', [ 'vue', 'vueform' ], '0.7.4', true );
             wp_enqueue_script( 'vuelidators', 'https://cdn.jsdelivr.net/npm/vuelidate@0.7.4/dist/validators.min.js', [ 'vue', 'vueform' ], '0.7.4', true );
-            wp_enqueue_script( 'donationform', P4NLBKS_ASSETS_DIR . 'js/donationform.js', ['vue', 'vueresource', 'vueform', 'vuelidate', 'vuelidators'], '2.7.3', true );
+            wp_enqueue_script( 'donationform', P4NLBKS_ASSETS_DIR . 'js/donationform.js', ['vue', 'vueresource', 'vueform', 'vuelidate', 'vuelidators'], '2.8.0', true );
 			// Pass options to frontend code
 			wp_localize_script(
 				'donationform',
