@@ -23,8 +23,8 @@ $('.gpnl-newsletter__form').on('submit', function () {
       // eslint-disable-next-line no-console
       console.log('^-^');
       $(newsletter_form_element).find('*').hide();
-      $('.gpnl-newsletter__title').html('Welkom!');
-      $('.gpnl-newsletter__description').html('<h4>Dank u voor uw aanmelding! U krijgt spoedig een bericht waarmee u uw aanmelding kunt bevestigen om deze definitief te maken.</h4>');
+      $('.gpnl-newsletter__title').html('Hoera, je bent er bijna! ');
+      $('.gpnl-newsletter__description').html('<h4>Bevestig je aanmelding via de mail die je van ons ontvangt. Bedankt!  </h4>');
 
     },
     error: function(){
@@ -32,11 +32,11 @@ $('.gpnl-newsletter__form').on('submit', function () {
       // eslint-disable-next-line no-console
       console.log('o_o');
       $(newsletter_form_element).find('*').hide();
-      $('.gpnl-newsletter__title').html('Oeps..!');
-      $('.gpnl-newsletter__description').html('<p>Sorry, er gaat momenteel iets fout, probeer het nu of later opnieuw.</p>');
+      $('.gpnl-newsletter__title').html('Oh nee!');
+      $('.gpnl-newsletter__description').html('<p>Hier gaat helaas iets mis, sorry. </p>');
       $(newsletter_form_element).append(
         '<a href=\''+window.location.href +'\' class="btn btn-primary btn-block"' +
-        '">Herlaad de pagina</a>');
+        '">Probeer je het nog eens? </a>');
     }
   });
 
