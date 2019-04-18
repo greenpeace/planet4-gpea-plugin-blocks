@@ -79,7 +79,8 @@ P4NLBKS\Loader::get_instance( [
 	'P4NLBKS\Controllers\Blocks\Achievement_Section_Controller',
 	'P4NLBKS\Controllers\Blocks\UGC_Controller',
 	// 'P4NLBKS\Controllers\Blocks\Spotlight_Section_Controller',
-	'P4NLBKS\Taxonomies\Taxonomy',
+	'P4NLBKS\Models\Taxonomy',
+	// 'P4NLBKS\Models\Tags_Meta',
 	// END Latte custom controllers
 
 ], 'P4NLBKS\Views\View' );

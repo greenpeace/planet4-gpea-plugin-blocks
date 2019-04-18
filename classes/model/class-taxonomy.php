@@ -1,13 +1,13 @@
 <?php
 
-namespace P4NLBKS\Taxonomies;
+namespace P4NLBKS\Models;
 
 if ( ! class_exists( 'Taxonomy' ) ) {
 
 	/**
 	 * Class Taxonomy
 	 *
-	 * @package P4NLBKS\Taxonomies
+	 * @package P4NLBKS\Models
 	 */
 	class Taxonomy {
 
