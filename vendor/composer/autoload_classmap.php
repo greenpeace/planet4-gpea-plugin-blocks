@@ -30,6 +30,7 @@ return array(
     'P4NLBKS\\Controllers\\Menu\\Settings_Controller' => $baseDir . '/classes/controller/menu/class-settings-controller.php',
     'P4NLBKS\\Controllers\\Uninstall_Controller' => $baseDir . '/classes/controller/class-uninstall-controller.php',
     'P4NLBKS\\Loader' => $baseDir . '/classes/class-loader.php',
+    'P4NLBKS\\Models\\Tags_Meta' => $baseDir . '/classes/model/class-tags-meta.php',
     'P4NLBKS\\Models\\Taxonomy' => $baseDir . '/classes/model/class-taxonomy.php',
     'P4NLBKS\\Views\\View' => $baseDir . '/classes/view/class-view.php',
 );

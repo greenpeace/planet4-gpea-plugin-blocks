@@ -65,6 +65,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4NLBKS\\Controllers\\Menu\\Settings_Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-settings-controller.php',
         'P4NLBKS\\Controllers\\Uninstall_Controller' => __DIR__ . '/../..' . '/classes/controller/class-uninstall-controller.php',
         'P4NLBKS\\Loader' => __DIR__ . '/../..' . '/classes/class-loader.php',
+        'P4NLBKS\\Models\\Tags_Meta' => __DIR__ . '/../..' . '/classes/model/class-tags-meta.php',
         'P4NLBKS\\Models\\Taxonomy' => __DIR__ . '/../..' . '/classes/model/class-taxonomy.php',
         'P4NLBKS\\Views\\View' => __DIR__ . '/../..' . '/classes/view/class-view.php',
     );
