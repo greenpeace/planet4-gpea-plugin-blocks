@@ -1,0 +1,34 @@
+{% block campaign_section %}
+    {% if ( fields ) %}
+	<div class="container">
+	    <style>
+	     /* TODO remove this style override on deploy */
+	     button.engaging-campaign-following {
+		 background-color: blue;
+		 color: yellow;
+	     }
+	    </style>
+	    <div class="row">
+		<div class="col-md-12 col">
+		    <h3>Campaigns section</h3>
+		    <p>Title: {{ fields.title|e('wp_kses_post')|raw }}</p>
+		    <p>Subtitle: {{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+		    <p>Description: {{ fields.description|e('wp_kses_post')|raw }}</p>
+		    <p>Layout: {{ fields.layout|e('wp_kses_post')|raw }}</p>
+                    <div id="engaging-campaign-buttons">
+			{% for campaign in fields.campaigns %}
+			    {% if ( campaign.engaging_ID ) %}
+				<div>
+				    <button id="engaging-campaign-buttons-{{ campaign.engaging_ID }}">
+					{{ campaign.name }}
+				    </button>
+				</div>
+			    {% endif %}
+			{% endfor %}
+		    </div>
+		</div>
+	    </div>
+	</div>
+	<hr />
+    {% endif %}
+{% endblock %}

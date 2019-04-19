@@ -2,23 +2,26 @@
 
 namespace P4NLBKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Topic_Section_Controller' ) ) {
+if ( ! class_exists( 'Campaign_Section_Controller' ) ) {
 	/**
 	 * @noinspection AutoloadingIssuesInspection
 	 */
 
 	/**
-	 * Class Topic_Section_Controller
+	 * Class Campaign_Section_Controller
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */
-	class Topic_Section_Controller extends Controller {
+	class Campaign_Section_Controller extends Controller {
 
 		/** @const string BLOCK_NAME */
-		const BLOCK_NAME = 'topic_section';
+		const BLOCK_NAME = 'campaign_section';
 
 		/** @const string DEFAULT_LAYOUT */
 		const DEFAULT_LAYOUT = 'default';
+
+		/** @const string ENGAGING_CAMPAIGN_ID_META_KEY */
+		const ENGAGING_CAMPAIGN_ID_META_KEY = 'engaging_campaign_ID';
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -55,20 +58,20 @@ if ( ! class_exists( 'Topic_Section_Controller' ) ) {
 					],
 				],
 				[
-					'label'		  => __( 'Topics', 'planet4-gpnl-blocks' ),
-					'attr'     => 'topic_ids',
-					'type'     => 'term_select',
-					'taxonomy' => 'category',
+					'label'		  => __( 'Campaigns', 'planet4-gpnl-blocks' ),
+					'attr'	   => 'campaign_ids',
+					'type'	   => 'term_select',
+					'taxonomy' => 'post_tag',
 					'multiple' => 'multiple',
-					'meta'     => [
+					'meta'	   => [
 						'select2_options' => [
-							'allowClear'             => true,
-							'placeholder'            => __( 'Select topics', 'planet4-gpnl-blocks' ),
-							'closeOnSelect'          => false,
-							'minimumInputLength'     => 0,
-							'multiple'               => true,
+							'allowClear'			 => true,
+							'placeholder'			 => __( 'Select campaigns', 'planet4-gpnl-blocks' ),
+							'closeOnSelect'			 => false,
+							'minimumInputLength'	 => 0,
+							'multiple'				 => true,
 							'maximumSelectionLength' => 20,
-							'width'                  => '80%',
+							'width'					 => '80%',
 						],
 					],
 				],
@@ -102,7 +105,7 @@ if ( ! class_exists( 'Topic_Section_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Topic Section', 'planet4-gpnl-blocks' ),
+				'label'			=> __( 'LATTE | Campaign Section', 'planet4-gpnl-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
 				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
@@ -122,26 +125,30 @@ if ( ! class_exists( 'Topic_Section_Controller' ) ) {
 		 * @return array The data to be passed in the View.
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
-            
-			$categories = get_categories( array(
-                'include' => explode(',', $attributes['topic_ids']), 
-			) );
-			$attributes['categories'] = $categories;
 
-            // TODO remove this magic constant 'issues'
-            $topics_obj = get_category_by_slug( 'issues' );
-            $topics_url = get_category_link( $topics_obj->term_id );
-			$attributes['topics_url'] = $topics_url;
+			if( array_key_exists( 'campaign_ids', $attributes ) ) {
+				$campaigns = get_terms( array(
+					'taxonomy' => 'post_tag',
+					'include'  => explode(',', $attributes['campaign_ids']),
+				) );
+			} else {
+				$campaigns = [];
+			}
 
-            $attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
-            
-            return [
+			foreach( $campaigns as $campaign ) {
+				$campaign->engaging_ID = get_term_meta( $campaign->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true );
+			}
+			$attributes['campaigns'] = $campaigns;
+
+			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
+
+			return [
 				'fields' => $attributes,
 			];
 
 		}
-        
-        /**
+
+		/**
 		 * Callback for the shortcake_noindex shortcode.
 		 * It renders the shortcode based on supplied attributes.
 		 *
@@ -153,17 +160,23 @@ if ( ! class_exists( 'Topic_Section_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
-            $data = $this->prepare_data( $fields );
+			wp_enqueue_script(
+				'campaign_section_engaging_js',
+				P4NLBKS_ASSETS_DIR . 'js/campaign-section-engaging.js',
+				[ 'jquery' ],
+				'0.1',
+				true
+			);
+
+			$data = $this->prepare_data( $fields );
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
 
 			$this->view->block( self::BLOCK_NAME, $data );
-            // echo '<pre>' . var_export($data, true) . '</pre>';
+			// echo '<pre>' . var_export($data, true) . '</pre>';
 
 			return ob_get_clean();
 		}
-
-        
 	}
 }

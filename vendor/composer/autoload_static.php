@@ -42,6 +42,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
 
     public static $classMap = array (
         'P4NLBKS\\Controllers\\Blocks\\Achievement_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-achievement-section.php',
+        'P4NLBKS\\Controllers\\Blocks\\Campaign_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-campaign-section-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Custom_Query_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-custom-query-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Donation_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-donation-controller.php',
@@ -58,7 +59,6 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4NLBKS\\Controllers\\Blocks\\Repeater_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-repeater-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Spotlight_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-spotlight-section-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Test_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-test-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Topic_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-topic-section-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\UGC_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/ugc-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Update_Carousel_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-update-carousel-controller.php',
         'P4NLBKS\\Controllers\\Menu\\Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-controller.php',
