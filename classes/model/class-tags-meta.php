@@ -35,15 +35,25 @@ if ( ! class_exists( 'Tags_Meta' ) ) {
 		 * @param WP_Term $wp_tag The object passed to the callback when on Edit Tag page.
 		 */
 		public function add_taxonomy_form_fields( $wp_tag ) {
-			if ( isset( $wp_tag ) && $wp_tag instanceof WP_Term ) {
+
+			wp_enqueue_script(
+				'p4nlbks_admin_questions_script',
+				P4NLBKS_ADMIN_DIR . 'js/blocks/admin-questions.js',
+				[ 'jquery' ],
+				'0.1',
+				true
+			);
+
+			// if ( isset( $wp_tag ) && $wp_tag instanceof WP_Term ) { // TODO verify instanceof check: WP_Term doesn't work
+			if ( isset( $wp_tag ) ) {
 				$engaging_campaign_ID = get_term_meta( $wp_tag->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true );
-				?>				
+				?>
 				<tr class="form-field edit-wrap">
 					<th>
-						<label>Engaging campaign ID</label>
+						<label>Engaging campaign</label>
 					</th>
 					<td>
-						<input type="number" name="<?php echo self::ENGAGING_CAMPAIGN_ID_META_KEY; ?>" id="<?php echo self::ENGAGING_CAMPAIGN_ID_META_KEY; ?>" value="<?php echo esc_attr( $engaging_campaign_ID ); ?>"/>
+                        <div id="<?php echo self::ENGAGING_CAMPAIGN_ID_META_KEY; ?>_container" data-activecampaign="<?php echo $engaging_campaign_ID ?>">Fetching questions...</div>
 					</td>
 				</tr>
 				<?php
