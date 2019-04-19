@@ -44,8 +44,7 @@ if ( ! class_exists( 'Tags_Meta' ) ) {
 				true
 			);
 
-			// if ( isset( $wp_tag ) && $wp_tag instanceof WP_Term ) { // TODO verify instanceof check: WP_Term doesn't work
-			if ( isset( $wp_tag ) ) {
+			if ( isset( $wp_tag ) && $wp_tag instanceof \WP_term ) {
 				$engaging_campaign_ID = get_term_meta( $wp_tag->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true );
 				?>
 				<tr class="form-field edit-wrap">
