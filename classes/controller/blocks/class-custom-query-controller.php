@@ -173,7 +173,7 @@ if ( ! class_exists( 'Custom_Query_Controller' ) ) {
 
 			if ( $posts ) {
 				foreach ( $posts as $post ) {
-					$post = (array) $post;
+					$post = (array) $post; // TODO fix forcing to array by using object indirection, -> instead of []
 					$post['alt_text'] = '';
 					// TODO - Update this method to use P4_Post functionality to get P4_User.
 					$author_override		   = get_post_meta( $post['ID'], 'p4_author_override', true );
