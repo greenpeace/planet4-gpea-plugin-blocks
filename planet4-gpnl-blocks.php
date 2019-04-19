@@ -31,6 +31,10 @@ if ( ! defined( 'P4NLBKS_REQUIRED_PLUGINS' ) )    define( 'P4NLBKS_REQUIRED_PLUG
 		'min_version' => '0.7.0',
 		'rel_path'    => 'shortcode-ui/shortcode-ui.php',
 	],
+	'p4_engaging'    => [
+		'min_version' => '1.6',
+		'rel_path'    => 'planet4-plugin-engagingnetworks/planet4-engagingnetworks.php',
+	],
 ] );
 if ( ! defined( 'P4NLBKS_PLUGIN_BASENAME' ) )     define( 'P4NLBKS_PLUGIN_BASENAME',    plugin_basename( __FILE__ ) );
 if ( ! defined( 'P4NLBKS_PLUGIN_DIRNAME' ) )      define( 'P4NLBKS_PLUGIN_DIRNAME',     dirname( P4NLBKS_PLUGIN_BASENAME ) );
