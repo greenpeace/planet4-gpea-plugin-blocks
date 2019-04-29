@@ -138,20 +138,20 @@ $(document).ready(function() {
           <fieldset >
             <legend class="sr-only">Periodiek van de donatie</legend>
                 <div class="form-group" v-bind:class="{ 'has-error': $v.machtigingType }">
-                    <label for="machtigingType" v-if="formconfig.allow_frequency_override == 'true'">Ja ik steun Greenpeace:</label>
+                  <template v-if="formconfig.allow_frequency_override == 'true'">
+                      <label for="machtigingType">Ja ik steun Greenpeace:</label>
+                      <div id="machtigingType" class="radio-list" role="radiogroup">
+          
+                          <input class="form-check-input" v-model.trim="machtigingType" type="radio" name="eenmalig" id="eenmalig" value="E" role="radio"       v-on:change="changePeriodic">
+                          <label class="form-check-label form-control ml-0" for="eenmalig">Eenmalig</label>
+          
+                          <input class="form-check-input" v-model.trim="machtigingType" type="radio" name="maandelijks" id="maandelijks" value="M" role="radio" v-on:change="changePeriodic">
+                          <label class="form-check-label form-control" for="maandelijks">Maandelijks</label>
+                      </div>
+                    </template>
                     <label for="machtigingType" v-else>
                         Ja ik steun Greenpeace <strong>{{ formconfig.suggested_frequency[1] }}</strong>:
-                    </label>
-        
-                    <div id="machtigingType" class="radio-list" role="radiogroup">
-        
-                        <input class="form-check-input" v-model.trim="machtigingType" type="radio" name="eenmalig" id="eenmalig" value="E" role="radio"       v-on:change="changePeriodic">
-                        <label class="form-check-label form-control ml-0" for="eenmalig">Eenmalig</label>
-        
-                        <input class="form-check-input" v-model.trim="machtigingType" type="radio" name="maandelijks" id="maandelijks" value="M" role="radio" v-on:change="changePeriodic">
-                        <label class="form-check-label form-control" for="maandelijks">Maandelijks</label>
-                    </div>
-        
+                    </label> 
         
                 </div>
         </fieldset>
