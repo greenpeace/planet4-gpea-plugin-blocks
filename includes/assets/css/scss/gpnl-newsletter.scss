@@ -1,21 +1,29 @@
+@import "base";
+
 .happy-point-block-wrap {
   height: unset;
 
   .gpnl-newsletter__text {
-    margin: 20px;
-  }
+    margin-top: 20px;
 
-  p {
-    line-height: unset;
-    font-size: unset;
-    color: unset;
+    h2 {
+      margin-bottom: 15px;
+      padding: 15px;
+      background-color: white;
+      width: max-content;
+    }
+
+    p {
+      line-height: unset;
+      font-size: unset;
+      color: white;
+      width: max-content;
+      padding: 15px;
+      background-color: $dark-green;
+    }
   }
 
   .gpnl-newsletter__form {
-    margin: 20px;
-  }
-
-  h2 {
-    margin-bottom: unset;
+    margin: 15px 15px 15px 0;
   }
 }
