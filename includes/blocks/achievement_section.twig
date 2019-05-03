@@ -1,26 +1,67 @@
 {% block achievement_section %}
     {% if ( fields ) %}
-	<div class="container">
-	    <div class="row">
-		<div class="col-md-12 col">
-		    <h3>Achievements section</h3>
-		    <p>Title: {{ fields.title|e('wp_kses_post')|raw }}</p>
-		    <p>Subtitle: {{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-		    <p>Description: {{ fields.description|e('wp_kses_post')|raw }}</p>
-		    <p>Layout: {{ fields.layout|e('wp_kses_post')|raw }}</p>
-		    <ul>
-			{% for post in fields.posts %}
-			    <li>
-				{{ post.post_title }},
-				{% for tag in post.tags %}
-				    {{ tag.name }},
-				{% endfor %}
-			    </li>
-			{% endfor %}
-		    </ul>
+	<section class="section-updates">
+	    <div class="ct-container">
+		<div class="content">
+		    <div class="first">
+			<p class="title text very-big light">{{ fields.title|e('wp_kses_post')|raw }}</p>
+			<img class="lady lazy" data-src="https://image.flaticon.com/icons/png/512/219/219969.png" alt="">
+		    </div>
+		    {% if fields.posts %}
+			{% set post = fields.posts[0] %}
+			<a href="" class="second">
+			    <div class="left">
+				<div class="top-box">
+				    {% for tag in post.tags %}
+					<div class="tag">{{ tag.name }}</div>
+					<p class="type">TODO 新闻</p>
+				    {% endfor %}
+				</div>
+				<div class="thumbnail lazy" data-bg="url(https://picsum.photos/id/81/200/300)"></div>
+				<div class="info-box">
+				    <div class="number">00.00.0000</div>
+				    <div class="time">
+					<span class="icon-clock"></span>
+					<p>TODO 4 min 閱讀</p>
+				    </div>
+				</div>
+				<div class="name text large bold">TODO 三大年宵每日派膠超過30萬件 大多不能回收</div>
+				<p class="ps text bold">TODO 了解綠色和平的歷史</p>
+			    </div>
+			    <div class="right">
+				<div class="thumbnail lazy" data-bg="url(https://picsum.photos/id/81/200/300)"></div>
+			    </div>
+			</a>
+			<div class="posts">
+			    {% for post in fields.posts|slice(1) %}
+				<a class="post" href="">
+				    <div class="info-box">
+					<div class="top">
+					    {% for tag in post.tags %}
+						<div class="tag">{{ tag.name }}</div>
+						<p class="type">TODO 新闻</p>
+					    {% endfor %}
+					</div>
+					<div class="name">TODO 在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。</div>
+					<div class="bottom">
+					    <div class="time">
+						<span class="icon-clock"></span>
+						<p>TODO 4 min 閱讀</p>
+					    </div>
+					    <div class="number">00.00.0000</div>
+					</div>
+				    </div>
+				    <div class="thumbnail lazy" data-bg="url(https://picsum.photos/id/82/200/300)"></div>
+				</a>
+			    {% endfor %}
+			</div>
+		    {% endif %}
+		</div>
+		<div class="mobile-bottom-box">
+		    <img class="lady" src="https://image.flaticon.com/icons/png/512/219/219969.png" alt="">
+		    <p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
 		</div>
 	    </div>
-	</div>
-	<hr />
+	</section>
     {% endif %}
 {% endblock %}

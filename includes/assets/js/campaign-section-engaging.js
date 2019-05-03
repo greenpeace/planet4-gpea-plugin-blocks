@@ -1,19 +1,17 @@
 jQuery(document).ready(function() {
   var $ = jQuery;
-  var containerID = 'engaging-campaign-buttons';
-  var campaignButtonContainer = $('#' + containerID);
-  var followingClass = 'engaging-campaign-following';
-  var cookieExpireMs = 365 * 24 * 60 * 60 * 1000;
+  var containerID = 'section-choose-topics';
+  var campaignButtonContainer = $('.' + containerID);
+  var followingClass = 'active';
+  var cookieExpireMs = 365 * 24 * 60 * 60 * 1000; // TODO decide cookie expiration date
 
   campaignButtonContainer.on('pointerup', function(ev) {
     var followingIDs = [];
-
     $(ev.target).toggleClass(followingClass);
-
     campaignButtonContainer
       .find('.' + followingClass)
       .each(function() {
-        followingIDs.push($(this).attr('id').replace(/^\D+/, ''));
+        followingIDs.push($(this).attr('data'));
       });
 
     if(followingIDs.length) {
