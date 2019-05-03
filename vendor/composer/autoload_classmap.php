@@ -27,6 +27,7 @@ return array(
     'P4NLBKS\\Controllers\\Blocks\\Test_Controller' => $baseDir . '/classes/controller/blocks/class-test-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\UGC_Controller' => $baseDir . '/classes/controller/blocks/ugc-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Update_Carousel_Controller' => $baseDir . '/classes/controller/blocks/class-update-carousel-controller.php',
+    'P4NLBKS\\Controllers\\Blocks\\Values_Section_Controller' => $baseDir . '/classes/controller/blocks/class-values-section-controller.php',
     'P4NLBKS\\Controllers\\Menu\\Controller' => $baseDir . '/classes/controller/menu/class-controller.php',
     'P4NLBKS\\Controllers\\Menu\\Settings_Controller' => $baseDir . '/classes/controller/menu/class-settings-controller.php',
     'P4NLBKS\\Controllers\\Uninstall_Controller' => $baseDir . '/classes/controller/class-uninstall-controller.php',
