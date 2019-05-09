@@ -54,6 +54,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4NLBKS\\Controllers\\Blocks\\GPNL_quote_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-quote-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\GPNL_statistics_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-statistics-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Issue_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-issue-section-controller.php',
+        'P4NLBKS\\Controllers\\Blocks\\Metablock_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-metablock-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\No_Index_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-noindex-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Petition_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-petition-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Project_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-project-section-controller.php',
