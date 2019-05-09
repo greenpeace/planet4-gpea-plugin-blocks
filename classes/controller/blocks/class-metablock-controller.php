@@ -60,94 +60,51 @@ if ( ! class_exists( 'Metablock_Controller' ) ) {
 				],
 			];
 
-
-
-			// This block will have at most MAX_REPEATER different items
-			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
-
-				// Field naming convention:
-				// __ separates ID from meta-contextual info
-				// anyname__itemtype_itemnumber
-
-				$fields[] =
+			$field_groups = [
+				'Static content' => [
 					[
-						'label' => sprintf( __('<i>A Title %s</i>', 'planet4-gpnl-blocks'), $i ),
-						'attr'	=> 'mytitle__a_' . $i,
+						'label' => __('<i>Static item %s title</i>', 'planet4-gpnl-blocks'),
+						'attr'	=> 'title',
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpnl-blocks' ), $i ),
+							'placeholder' => __( 'Enter title', 'planet4-gpnl-blocks' ),
 							'data-plugin' => 'planet4-gpnl-blocks',
-							'data-element-type' => 'a',
-							'data-element-number' => $i,
 						],
-					];
-
-				$fields[] =
+					],
 					[
-						'label' => sprintf( __('<i>A Description %s</i>', 'planet4-gpnl-blocks'), $i ),
-						'attr'	=> 'mydescription__a_' . $i,
+						'label' => __('<i>Static item %s description</i>', 'planet4-gpnl-blocks'),
+						'attr'	=> 'description',
 						'type'	=> 'textarea',
 						'meta'	=> [
-							'placeholder' => sprintf( __( 'Enter description %s', 'planet4-gpnl-blocks' ), $i ),
+							'placeholder' => __( 'Enter description', 'planet4-gpnl-blocks' ),
 							'data-plugin' => 'planet4-gpnl-blocks',
-							'data-element-type' => 'a',
-							'data-element-number' => $i,
 						],
-					];
-
-				$fields[] =
+					],
+				],
+				'Dynamic content' => [
 					[
-						'label' => sprintf( __('<i>B Title %s</i>', 'planet4-gpnl-blocks'), $i ),
-						'attr'	=> 'mytitle__b_' . $i,
+						'label' => __('<i>Dynamic item %s title</i>', 'planet4-gpnl-blocks'),
+						'attr'	=> 'title',
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpnl-blocks' ), $i ),
+							'placeholder' => __( 'Enter title', 'planet4-gpnl-blocks' ),
 							'data-plugin' => 'planet4-gpnl-blocks',
-							'data-element-type' => 'b',
-							'data-element-number' => $i,
 						],
-					];
-
-				$fields[] =
+					],
 					[
-						'label' => sprintf( __('<i>B Description %s</i>', 'planet4-gpnl-blocks'), $i ),
-						'attr'	=> 'mydescription__b_' . $i,
-						'type'	=> 'textarea',
+						'label' => __('<i>Dynamic item %s post</i>', 'planet4-gpnl-blocks'),
+						'attr'	=> 'post',
+						'type'	=> 'post_select',
+						'query' => array( 'post_type' => 'post' ),
 						'meta'	=> [
-							'placeholder' => sprintf( __( 'Enter description %s', 'planet4-gpnl-blocks' ), $i ),
+							'placeholder' => __( 'Select dynamic content', 'planet4-gpnl-blocks' ),
 							'data-plugin' => 'planet4-gpnl-blocks',
-							'data-element-type' => 'b',
-							'data-element-number' => $i,
 						],
-					];
+					],
+				],
+			];
 
-				// $fields[] =
-				//		[
-				//			'label' => sprintf( __('<i>B Title %s</i>', 'planet4-gpnl-blocks'), $i ),
-				//			'attr'	=> 'mytitle_B_' . $i,
-				//			'type'	=> 'text',
-				//			'meta'	=> [
-				//				'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpnl-blocks' ), $i ),
-				//				'data-plugin' => 'planet4-gpnl-blocks',
-				//				'data-element-type' => 'B',
-				//				'data-element-number' => $i,
-				//			],
-				//		];
-
-				// $fields[] =
-				//		[
-				//			'label' => sprintf( __('<i>B Description %s</i>', 'planet4-gpnl-blocks'), $i ),
-				//			'attr'	=> 'mydescription_B_' . $i,
-				//			'type'	=> 'textarea',
-				//			'meta'	=> [
-				//				'placeholder' => sprintf( __( 'Enter description %s', 'planet4-gpnl-blocks' ), $i ),
-				//				'data-plugin' => 'planet4-gpnl-blocks',
-				//				'data-element-type' => 'B',
-				//				'data-element-number' => $i,
-				//			],
-				//		];
-
-			}
+			$fields = $this->format_meta_fields( $fields, $field_groups );
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
@@ -164,6 +121,52 @@ if ( ! class_exists( 'Metablock_Controller' ) ) {
 		/**
 		 * Get all the data that will be needed to render the block correctly.
 		 *
+		 * @param array	$fields This will contain the fields to be rendered
+		 * @param array $field_groups This contains the field templates to be repeated
+		 *
+		 * @return array The fields to be rendered
+		 */
+		private function format_meta_fields( $fields, $field_groups ) : array {
+
+			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
+				foreach( $field_groups as $group_name=>$group_fields ) {
+					foreach( $group_fields as $field ) {
+
+						$safe_name = preg_replace( '/\s/', '', strtolower( $group_name ) );
+						$attr_extension = '_' . $safe_name . '_' . $i;
+
+						if( array_key_exists( 'attr' , $field ) ) {
+							$field['attr'] .= $attr_extension;
+						} else {
+							$field['attr'] = $i . $attr_extension;
+						}
+
+						if( array_key_exists( 'label' , $field ) ) {
+							$field['label'] = sprintf( $field['label'], $i );
+						} else {
+							$field['label'] = $field['attr'];
+						}
+
+						$new_meta = [
+							'data-element-type' => $safe_name,
+							'data-element-name' => $group_name,
+							'data-element-number' => $i,
+						];
+						if( !array_key_exists( 'meta' , $field ) ) {
+							$field['meta'] = [];
+						}
+						$field['meta'] += $new_meta;
+
+						$fields[] = $field;
+					}
+				}
+			}
+			return $fields;
+		}
+
+		/**
+		 * Get all the data that will be needed to render the block correctly.
+		 *
 		 * @param array	 $attributes This is the array of fields of this block.
 		 * @param string $content This is the post content.
 		 * @param string $shortcode_tag The shortcode tag of this block.
@@ -171,18 +174,6 @@ if ( ! class_exists( 'Metablock_Controller' ) ) {
 		 * @return array The data to be passed in the View.
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
-
-			// $categories = get_categories( array(
-			//		'include' => explode(',', $attributes['issue_ids']),
-			// ) );
-			// $attributes['categories'] = $categories;
-
-			// // TODO remove this magic constant 'issues'
-			// $issues_obj = get_category_by_slug( 'issues' );
-			// $issues_url = get_category_link( $issues_obj->term_id );
-			// $attributes['issues_url'] = $issues_url;
-
-			// $attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
 			return [
 				'fields' => $attributes,
@@ -207,8 +198,8 @@ if ( ! class_exists( 'Metablock_Controller' ) ) {
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
 
-			$this->view->block( self::BLOCK_NAME, $data );
-			// echo '<pre>' . var_export($data, true) . '</pre>';
+			// $this->view->block( self::BLOCK_NAME, $data );
+			echo '<pre>' . print_r($data, true) . '</pre>';
 
 			return ob_get_clean();
 		}

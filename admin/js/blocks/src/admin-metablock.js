@@ -14,7 +14,7 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
    */
   me.render_new = function () {
     var element_map = me.get_element_map();
-    var buttons = me.make_buttons(element_map.element_types);
+    var buttons = me.make_buttons(element_map);
     var $shortcode_div = $('.shortcode-ui-edit-' + me.shortcode_tag);
     $shortcode_div.append(buttons);
     var element_count = element_map.element_count;
@@ -32,7 +32,7 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
     var element_types = element_map.element_types;
     var element_count = element_map.element_count;
 
-    var buttons = me.make_buttons(element_types);
+    var buttons = me.make_buttons(element_map);
     var $shortcode_div = $('.shortcode-ui-edit-' + me.shortcode_tag);
     $shortcode_div.append(buttons);
 
@@ -192,6 +192,14 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
       return element_types.indexOf(item) == pos;
     });
 
+    var element_names = $('[data-element-name]')
+      .map( function() {
+        return $(this).data('element-name');
+      }).toArray();
+    element_names = element_names.filter(function(item, pos) {
+      return element_names.indexOf(item) == pos;
+    });
+
     var element_count = $('[data-element-number]')
       .map( function() {
         return $(this).data('element-number');
@@ -200,6 +208,7 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
 
     return {
       element_types: element_types,
+      element_names: element_names,
       element_count: element_count
     };
 
@@ -226,11 +235,14 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
    * Called when a new metablock is rendered in the backend.
    * @param shortcode Shortcake backbone model.
    */
-  me.make_buttons = function(element_types) {
+  me.make_buttons = function(element_map) {
     var btn_HTML = '<div data-row="0">';
-    element_types.map( function(type) {
+    var types = element_map.element_types;
+    var names = element_map.element_names;
+    if( names.length !== types.length ) { names = types; }
+    types.map( function(type, idx) {
       btn_HTML += (
-        '<button class="button button-small ' + me.add_btn_class + '" data-element-type="' + type + '">Add ' + type + '</button>'
+        '<button class="button button-small ' + me.add_btn_class + '" data-element-type="' + type + '">Add ' + names[idx] + '</button>'
       );
     });
     btn_HTML += '<button class="button button-small ' + me.remove_btn_class + '" disabled="disabled">Remove Element</button></div>';
