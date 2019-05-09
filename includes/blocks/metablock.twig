@@ -1,0 +1,26 @@
+{% block metablock %}
+    <h3>Metablock test</h3>
+    {% if ( static_fields ) %}
+        <p>Title: {{ static_fields.title }}</p>
+        <p>Subtitle: {{ static_fields.subtitle }}</p>
+        <p>Description: {{ static_fields.description }}</p>
+    {% endif %}
+    {% if ( field_groups ) %}
+	<style>
+	 .static-content-test {
+	     color: red;
+	 }
+	 .dynamic-content-test {
+	     color: green;
+	 }
+	</style>
+	{% for group in field_groups %}
+	    {% if group.__group_type__ == 'staticcontent' %}
+		<p class="static-content-test">Title: {{ group.title }}</p>
+	    {% endif %}
+	    {% if group.__group_type__ == 'dynamiccontent' %}
+		<p class="dynamic-content-test">Title: {{ group.title }}</p>
+	    {% endif %}
+	{% endfor %}
+    {% endif %}
+{% endblock %}

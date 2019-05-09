@@ -21,7 +21,7 @@ if ( ! class_exists( 'Metablock_Controller' ) ) {
 		const DEFAULT_LAYOUT = 'default';
 
 		/** @const int MAX_REPEATER */
-		const MAX_REPEATER = 3;
+		const MAX_REPEATER = 5;
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -173,10 +173,45 @@ if ( ! class_exists( 'Metablock_Controller' ) ) {
 		 *
 		 * @return array The data to be passed in the View.
 		 */
-		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
+		public function prepare_data( $fields, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
+
+			$field_groups = [];
+
+			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
+
+				// Group fields based on index number
+				$group = [];
+				$group_type = false;
+				foreach( $fields as $field_name => $field_content ) {
+					if( preg_match( '/_' . $i . '$/', $field_name ) ) {
+						$field_name_data = explode( '_', $field_name );
+						$group[ $field_name_data[0] ] = $field_content;
+						$group_type = $field_name_data[1]; // TODO assigning multiple times here, can be more elegant?
+					}
+				}
+
+				// Extract group field type
+				if( $group_type ) {
+					$group[ '__group_type__' ] = $group_type;
+				}
+
+				$field_groups[] = $group;
+			}
+
+			// Extract static fields only
+			$static_fields = [];
+			foreach( $fields as $field_name => $field_content ) {
+				if( ! preg_match( '/_\d+$/', $field_name ) ) {
+					$static_fields[ $field_name ] = $field_content;
+				}
+			}
+
+			// TODO fetch dynamic data based on '__group_type__' label
 
 			return [
-				'fields' => $attributes,
+				// 'fields' => $fields,
+				'field_groups' => $field_groups,
+				'static_fields' => $static_fields,
 			];
 
 		}
@@ -198,8 +233,8 @@ if ( ! class_exists( 'Metablock_Controller' ) ) {
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
 
-			// $this->view->block( self::BLOCK_NAME, $data );
-			echo '<pre>' . print_r($data, true) . '</pre>';
+			$this->view->block( self::BLOCK_NAME, $data );
+			// echo '<pre>' . print_r($data, true) . '</pre>';
 
 			return ob_get_clean();
 		}
