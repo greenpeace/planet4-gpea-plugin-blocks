@@ -102,7 +102,7 @@ if ( ! class_exists( 'Custom_Query_Controller' ) ) {
 					'label' => 'Select the layout',
 					'description' => 'Select the layout',
 					'attr' => 'layout',
-					'type' => 'p4_radio',
+					'type' => 'radio',
 					'options' => [
 						[
 							'value' => 1,

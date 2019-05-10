@@ -88,7 +88,7 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 					'label'       => 'Select the layout',
 					'description' => 'Select the layout',
 					'attr'        => 'layout',
-					'type'        => 'p4_radio',
+					'type'        => 'radio',
 					'options'     => [
 						[
 							'value' => 1,
