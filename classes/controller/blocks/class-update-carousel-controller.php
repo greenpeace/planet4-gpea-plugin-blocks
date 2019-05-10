@@ -136,10 +136,24 @@ if ( ! class_exists( 'Update_Carousel_Controller' ) ) {
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
 			$posts = get_posts( array(
-                'include' => explode(',', $attributes['update_ids']), 
+				'include' => explode(',', $attributes['update_ids']),
 			) );
 
-			$attributes['posts'] = $posts;
+			$formatted_posts = [];
+
+			if( $posts ) {
+				foreach( $posts as $post ) {
+					$post = (array) $post;
+					if ( has_post_thumbnail( $post['ID'] ) ) {
+						$img_id = get_post_thumbnail_id( $post['ID'] );
+						$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
+						$post['img_url'] = $img_data[0];
+					}
+					$formatted_posts[] = $post;
+				}
+			}
+
+			$attributes['posts'] = $formatted_posts;
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
 			return [

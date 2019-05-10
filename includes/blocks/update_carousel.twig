@@ -14,37 +14,40 @@
 			<p class="subtitle text huge light">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
 			<p class="content text semi-bold">{{ fields.description|e('wp_kses_post')|raw }}</p>
 		    </div>
-		    <div class="swiper-slide second lazy" data-bg="url(https://images.oyster.com/articles/18489-5220534077-8d417f3bac-b.jpg)">
-			<div class="box">
-			    <div class="progress-bar">
-				<div class="percent" style="width: 90%"></div>
-			    </div>
-			    <p class="stats">TODO - 已有2,347 名簽署者</p>
-			    <div class="content">
-				<p>TODO - 推動全球最大保護區成真：南極海洋保護區</p>
-				<a href="" class="button small light">TODO - 我要支持</a>
-			    </div>
-			</div>
-		    </div>
-		    {% for post in fields.posts %}
-			<a href="#"  class="swiper-slide post">
-			    <div class="top-box">
-				{% for tag in post.tags %}
-				    <div class="tag">{{ tag.name }}</div>
-				{% endfor %}
-				<p class="type">新闻</p>
-			    </div>
-			    <div class="thumbnail lazy" data-bg="url(https://picsum.photos/id/12/200/300)"></div>
-			    <div class="info-box">
-				<div class="number">00.00.0000</div>
-				<div class="time">
-				    <span class="icon-clock"></span>
-				    <p>4 min 閱讀</p>
+		    {% if fields.posts %}
+			{% set post = fields.posts[0] %}
+			<div class="swiper-slide second lazy" data-bg="url({{ post.img_url }})">
+			    <div class="box">
+				<div class="progress-bar">
+				    <div class="percent" style="width: 90%"></div>
+				</div>
+				<p class="stats">TODO - 已有2,347 名簽署者</p>
+				<div class="content">
+				    <p>{{ post.post_title }}</p>
+				    <a href="" class="button small light">TODO I want to support</a>
 				</div>
 			    </div>
-			    <div class="name text large bold">{{ post.post_title }}</div>
-			</a>
-		    {% endfor %}
+			</div>
+			{% for post in fields.posts|slice(1) %}
+			    <a href="#"  class="swiper-slide post">
+				<div class="top-box">
+				    {% for tag in post.tags %}
+					<div class="tag">{{ tag.name }}</div>
+				    {% endfor %}
+				    <p class="type">TODO 新闻</p>
+				</div>
+				<div class="thumbnail lazy" data-bg="url({{ post.img_url }})"></div>
+				<div class="info-box">
+				    <div class="number">00.00.0000</div>
+				    <div class="time">
+					<span class="icon-clock"></span>
+					<p>TODO 4 min 閱讀</p>
+				    </div>
+				</div>
+				<div class="name text large bold">{{ post.post_title }}</div>
+			    </a>
+			{% endfor %}
+		    {% endif %}
 		</div>
 		<div class="swiper-pagination"></div>
 		<div class="swiper-button-next">
