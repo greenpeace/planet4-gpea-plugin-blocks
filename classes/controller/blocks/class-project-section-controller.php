@@ -56,31 +56,31 @@ if ( ! class_exists( 'Project_Section_Controller' ) ) {
 				],
 				[
 					'label'		  => __( 'Projects', 'planet4-gpnl-blocks' ),
-					'attr'     => 'project_ids',
-					'type'     => 'post_select',
+					'attr'	   => 'project_ids',
+					'type'	   => 'post_select',
 					'multiple' => 'multiple',
-					'query'    => [
+					'query'	   => [
 						'post_type' => 'page',
-                        'post_status' => 'publish',
-						'orderby'   => 'post_title',
-						'order'     => 'ASC',
-                        // Filters by page template.
-                        // 'meta_query' => array(
-                        //     array(
-                        //         'key' => '_wp_page_template',
-                        //         'value' => 'template-city.php', // Insert template here. Not super clean though...
-                        //     )
-                        // )
+						'post_status' => 'publish',
+						'orderby'	=> 'post_title',
+						'order'		=> 'ASC',
+						// Filters by page template.
+						// 'meta_query' => array(
+						//	   array(
+						//		   'key' => '_wp_page_template',
+						//		   'value' => 'template-city.php', // Insert template here. Not super clean though...
+						//	   )
+						// )
 					],
-					'meta'     => [
+					'meta'	   => [
 						'select2_options' => [
-							'allowClear'             => true,
-							'placeholder'            => __( 'Select projects', 'planet4-gpnl-blocks' ),
-							'closeOnSelect'          => false,
-							'minimumInputLength'     => 0,
-							'multiple'               => true,
+							'allowClear'			 => true,
+							'placeholder'			 => __( 'Select projects', 'planet4-gpnl-blocks' ),
+							'closeOnSelect'			 => false,
+							'minimumInputLength'	 => 0,
+							'multiple'				 => true,
 							'maximumSelectionLength' => 20,
-							'width'                  => '80%',
+							'width'					 => '80%',
 						],
 					],
 				],
@@ -134,21 +134,35 @@ if ( ! class_exists( 'Project_Section_Controller' ) ) {
 		 * @return array The data to be passed in the View.
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
-            
-			$posts = get_pages( array(
-                'include' => explode(',', $attributes['project_ids']), 
-			) );
-            
-			$attributes['posts'] = $posts;
-            $attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
-            return [
+			$posts = get_pages( array(
+				'include' => explode(',', $attributes['project_ids']), 
+			) );
+
+			$formatted_posts = [];
+
+			if( $posts ) {
+				foreach( $posts as $post ) {
+					$post = (array) $post;
+					if ( has_post_thumbnail( $post['ID'] ) ) {
+						$img_id = get_post_thumbnail_id( $post['ID'] );
+						$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
+						$post['img_url'] = $img_data[0];
+					}
+					$formatted_posts[] = $post;
+				}
+			}
+
+			$attributes['posts'] = $formatted_posts;
+			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
+
+			return [
 				'fields' => $attributes,
 			];
 
 		}
-        
-        /**
+
+		/**
 		 * Callback for the shortcake_noindex shortcode.
 		 * It renders the shortcode based on supplied attributes.
 		 *
@@ -160,17 +174,17 @@ if ( ! class_exists( 'Project_Section_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
-            $data = $this->prepare_data( $fields );
+			$data = $this->prepare_data( $fields );
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
 
 			$this->view->block( self::BLOCK_NAME, $data );
-            // echo '<pre>' . var_export($data, true) . '</pre>';
+			// echo '<pre>' . var_export($data, true) . '</pre>';
 
 			return ob_get_clean();
 		}
 
-        
+
 	}
 }

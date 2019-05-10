@@ -15,11 +15,8 @@
 			<p class="ps text bold">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
 		    </div>
 		    {% for post in fields.posts %}
-			<li>
-			    ,
-			</li>
 			<a href="" class="swiper-slide post">
-			    <div class="thumbnail lazy" data-bg="url(https://picsum.photos/id/52/200/300)">
+			    <div class="thumbnail lazy" data-bg="url({{ post.img_url }})">
 				<div class="circle-progress-bar"></div>
 			    </div>
 			    <div class="info-box">
