@@ -75,32 +75,6 @@ if ( ! class_exists( 'Issue_List_Controller' ) ) {
 						],
 					],
 				],
-				[
-					'label' => 'Select the layout',
-					'description' => 'Select the layout',
-					'attr' => 'layout',
-					'type' => 'radio',
-					'options' => [
-						[
-							'value' => 1,
-							'label' => __( 'Layout A', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 2,
-							'label' => __( 'Layout B', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 3,
-							'label' => __( 'Layout C', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-					],
-				],
 			];
 
 			// Define the Shortcode UI arguments.

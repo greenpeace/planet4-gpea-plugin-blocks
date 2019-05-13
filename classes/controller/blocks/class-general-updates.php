@@ -87,32 +87,6 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 						],
 					],
 				],
-				// [
-				// 	'label' => 'Select the layout',
-				// 	'description' => 'Select the layout',
-				// 	'attr' => 'layout',
-				// 	'type' => 'radio',
-				// 	'options' => [
-				// 		[
-				// 			'value' => 1,
-				// 			'label' => __( 'Layout A', 'planet4-gpnl-blocks' ),
-				// 			'desc'	=> 'Sample layout description',
-				// 			'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-				// 		],
-				// 		[
-				// 			'value' => 2,
-				// 			'label' => __( 'Layout B', 'planet4-gpnl-blocks' ),
-				// 			'desc'	=> 'Sample layout description',
-				// 			'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-				// 		],
-				// 		[
-				// 			'value' => 3,
-				// 			'label' => __( 'Layout C', 'planet4-gpnl-blocks' ),
-				// 			'desc'	=> 'Sample layout description',
-				// 			'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-				// 		],
-				// 	],
-				// ],
 			];
 
 			// Define the Shortcode UI arguments.
@@ -144,7 +118,7 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 
 				$posts = get_posts( array(
 					'include' => explode( ',' , $attributes['update_ids'] ),
-                    'orderby' => 'post__in',
+					'orderby' => 'post__in',
 				) );
 
 				if( $posts ) {

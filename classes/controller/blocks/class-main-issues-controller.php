@@ -56,45 +56,19 @@ if ( ! class_exists( 'Main_Issues_Controller' ) ) {
 				],
 				[
 					'label'		  => __( 'Issues', 'planet4-gpnl-blocks' ),
-					'attr'     => 'issue_ids',
-					'type'     => 'term_select',
+					'attr'	   => 'issue_ids',
+					'type'	   => 'term_select',
 					'taxonomy' => 'category',
 					'multiple' => 'multiple',
-					'meta'     => [
+					'meta'	   => [
 						'select2_options' => [
-							'allowClear'             => true,
-							'placeholder'            => __( 'Select issues', 'planet4-gpnl-blocks' ),
-							'closeOnSelect'          => false,
-							'minimumInputLength'     => 0,
-							'multiple'               => true,
+							'allowClear'			 => true,
+							'placeholder'			 => __( 'Select issues', 'planet4-gpnl-blocks' ),
+							'closeOnSelect'			 => false,
+							'minimumInputLength'	 => 0,
+							'multiple'				 => true,
 							'maximumSelectionLength' => 20,
-							'width'                  => '80%',
-						],
-					],
-				],
-				[
-					'label' => 'Select the layout',
-					'description' => 'Select the layout',
-					'attr' => 'layout',
-					'type' => 'radio',
-					'options' => [
-						[
-							'value' => 1,
-							'label' => __( 'Layout A', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 2,
-							'label' => __( 'Layout B', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 3,
-							'label' => __( 'Layout C', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+							'width'					 => '80%',
 						],
 					],
 				],
@@ -127,6 +101,7 @@ if ( ! class_exists( 'Main_Issues_Controller' ) ) {
 
 				$categories = get_categories( array(
 					'include' => explode(',', $attributes['issue_ids']),
+                    'orderby' => 'include',
 				) );
 				$attributes['categories'] = $categories;
 
@@ -156,17 +131,17 @@ if ( ! class_exists( 'Main_Issues_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
-            $data = $this->prepare_data( $fields );
+			$data = $this->prepare_data( $fields );
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
 
 			$this->view->block( self::BLOCK_NAME, $data );
-            // echo '<pre>' . var_export($data, true) . '</pre>';
+			// echo '<pre>' . var_export($data, true) . '</pre>';
 
 			return ob_get_clean();
 		}
 
-        
+		
 	}
 }
