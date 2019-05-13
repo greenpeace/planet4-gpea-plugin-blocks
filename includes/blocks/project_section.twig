@@ -12,7 +12,7 @@
 		    <div class="swiper-slide first">
 			<p class="title text very-big light">{{ fields.title|e('wp_kses_post')|raw }}</p>
 			<p class="content text huge">{{ fields.description|e('wp_kses_post')|raw }}</p>
-			<p class="ps text bold">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+			<p class="ps text bold">{{ fields.see_more|e('wp_kses_post')|raw }}</p>
 		    </div>
 		    {% for post in fields.posts %}
 			<a href="" class="swiper-slide post">
@@ -39,11 +39,14 @@
 		    <span class="icon-chevron-right"></span>
 		</div>
 	    </div>
-	    <div class="mobile-bottom-box">
-		<div class="ct-container">
-		    <p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+	    {% if fields.see_more_label and fields.see_more_link %}
+		<!-- TODO "see more" link styling -->
+		<div class="mobile-bottom-box">
+		    <div class="ct-container">
+			<p><a href={{ fields.see_more_link|e('wp_kses_post')|raw }}>{{ fields.see_more_label|e('wp_kses_post')|raw }}</a></p>
+		    </div>
 		</div>
-	    </div>
+	    {% endif %}
 	</section>
     {% endif %}
 {% endblock %}

@@ -37,11 +37,20 @@ if ( ! class_exists( 'Project_Section_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
-					'attr'	=> 'subtitle',
+					'label' => __( 'Label "See more"', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'see_more_label',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
+						'placeholder' => __( 'Label "See more"', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
+					],
+				],
+				[
+					'label' => __( 'Link "See more"', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'see_more_link',
+					'type'	=> 'text',
+					'meta'	=> [
+						'placeholder' => __( 'Link "See more"', 'planet4-gpnl-blocks' ),
 						'data-plugin' => 'planet4-gpnl-blocks',
 					],
 				],
@@ -84,32 +93,32 @@ if ( ! class_exists( 'Project_Section_Controller' ) ) {
 						],
 					],
 				],
-				[
-					'label' => 'Select the layout',
-					'description' => 'Select the layout',
-					'attr' => 'layout',
-					'type' => 'radio',
-					'options' => [
-						[
-							'value' => 1,
-							'label' => __( 'Layout A', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 2,
-							'label' => __( 'Layout B', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 3,
-							'label' => __( 'Layout C', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-					],
-				],
+				// [
+				// 	'label' => 'Select the layout',
+				// 	'description' => 'Select the layout',
+				// 	'attr' => 'layout',
+				// 	'type' => 'radio',
+				// 	'options' => [
+				// 		[
+				// 			'value' => 1,
+				// 			'label' => __( 'Layout A', 'planet4-gpnl-blocks' ),
+				// 			'desc'	=> 'Sample layout description',
+				// 			'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+				// 		],
+				// 		[
+				// 			'value' => 2,
+				// 			'label' => __( 'Layout B', 'planet4-gpnl-blocks' ),
+				// 			'desc'	=> 'Sample layout description',
+				// 			'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+				// 		],
+				// 		[
+				// 			'value' => 3,
+				// 			'label' => __( 'Layout C', 'planet4-gpnl-blocks' ),
+				// 			'desc'	=> 'Sample layout description',
+				// 			'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+				// 		],
+				// 	],
+				// ],
 			];
 
 			// Define the Shortcode UI arguments.
