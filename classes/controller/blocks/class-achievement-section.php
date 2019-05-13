@@ -62,62 +62,6 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 					'addButton'	  => __( 'Select image', 'planet4-gpnl-blocks' ),
 					'frameTitle'  => __( 'Select image', 'planet4-gpnl-blocks' ),
 				],
-				[
-					'label'	   => __( 'Achievements', 'planet4-gpnl-blocks' ),
-					'attr'	   => 'achievement_ids',
-					'type'	   => 'post_select',
-					'multiple' => 'multiple',
-					'query'	   => [
-						'post_type'	  => 'post',
-						'post_status' => 'publish',
-						'orderby'	  => 'post_title',
-						'order'		  => 'ASC',
-						'tax_query'	  => array(
-							array(
-								'taxonomy' => 'special_attribute',
-								'field'	   => 'slug',
-								'terms'	   => 'achievement',
-							),
-						),
-					],
-					'meta'	   => [
-						'select2_options' => [
-							'allowClear'			 => true,
-							'placeholder'			 => __( 'Select achievements', 'planet4-gpnl-blocks' ),
-							'closeOnSelect'			 => false,
-							'minimumInputLength'	 => 0,
-							'multiple'				 => true,
-							'maximumSelectionLength' => 20,
-							'width'					 => '80%',
-						],
-					],
-				],
-				[
-					'label'		  => 'Select the layout',
-					'description' => 'Select the layout',
-					'attr'		  => 'layout',
-					'type'		  => 'radio',
-					'options'	  => [
-						[
-							'value' => 1,
-							'label' => __( 'Layout A', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 2,
-							'label' => __( 'Layout B', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 3,
-							'label' => __( 'Layout C', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-					],
-				],
 			];
 
 			// Define the Shortcode UI arguments.
@@ -149,23 +93,29 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 				$attributes[ 'bg_img' ] = wp_get_attachment_url( $attributes[ 'bg_img' ] );
 			}
 
-			if( isset( $attributes[ 'achievement_ids' ] ) ) {
+			$posts = get_posts( array(
+				'order'		  => 'desc',
+				'orderby'	  => 'date',
+				'post_type'	  => 'post',
+				'numberposts' => 4,
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'special_attribute',
+						'field' => 'slug',
+						'terms' => 'achievement',
+					)
+				)
+			) );
 
-				$posts = get_posts( array(
-					'include' => explode(',', $attributes['achievement_ids']),
-				) );
-
-
-				if( $posts ) {
-					foreach( $posts as $post ) {
-						$post = (array) $post;
-						if ( has_post_thumbnail( $post['ID'] ) ) {
-							$img_id = get_post_thumbnail_id( $post['ID'] );
-							$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
-							$post['img_url'] = $img_data[0];
-						}
-						$formatted_posts[] = $post;
+			if( $posts ) {
+				foreach( $posts as $post ) {
+					$post = (array) $post;
+					if ( has_post_thumbnail( $post['ID'] ) ) {
+						$img_id = get_post_thumbnail_id( $post['ID'] );
+						$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
+						$post['img_url'] = $img_data[0];
 					}
+					$formatted_posts[] = $post;
 				}
 			}
 

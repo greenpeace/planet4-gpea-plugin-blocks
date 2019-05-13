@@ -25,8 +25,8 @@
 					<p>TODO 4 min 閱讀</p>
 				    </div>
 				</div>
-				<div class="name text large bold">TODO 三大年宵每日派膠超過30萬件 大多不能回收</div>
-				<p class="ps text bold">TODO 了解綠色和平的歷史</p>
+				<div class="name text large bold">{{ post.post_title|e('wp_kses_post')|raw }}</div>
+				<p class="ps text bold">{{ post.post_excerpt|e('wp_kses_post')|raw }}</p>
 			    </div>
 			    <div class="right">
 				<div class="thumbnail lazy" data-bg="url({{ post.img_url }})"></div>
@@ -42,7 +42,7 @@
 						<p class="type">TODO 新闻</p>
 					    {% endfor %}
 					</div>
-					<div class="name">TODO 在我們揭露日本政府官員收受捕鯨業公司賄賂後，日本政府繼而嚴厲打擊捕鯨業的貪腐情況。</div>
+					<div class="name">{{ post.post_excerpt|e('wp_kses_post')|raw }}</div>
 					<div class="bottom">
 					    <div class="time">
 						<span class="icon-clock"></span>
