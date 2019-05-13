@@ -138,8 +138,11 @@ if ( ! class_exists( 'Project_Section_Controller' ) ) {
 			$formatted_posts = [];
 
 			if( isset( $attributes[ 'project_ids' ] ) ) {
-				$posts = get_pages( array(
+                // Using get_posts for the 'order_by' option
+				$posts = get_posts( array(
 					'include' => explode(',', $attributes['project_ids']),
+                    'orderby' => 'post__in',
+                    'post_type' => 'page',
 				) );
 
 				if( $posts ) {
