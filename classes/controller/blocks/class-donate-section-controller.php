@@ -73,6 +73,22 @@ if ( ! class_exists( 'Donate_Section_Controller' ) ) {
 					],
 				],
 				[
+					'label' => __( 'Background image desktop', 'planet4-gpnl-blocks' ),
+					'attr'		  => 'bg_img_desktop',
+					'type'		  => 'attachment',
+					'libraryType' => array( 'image' ),
+					'addButton'	  => __( 'Select image', 'planet4-gpnl-blocks' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpnl-blocks' ),
+				],
+				[
+					'label' => __( 'Background image mobile', 'planet4-gpnl-blocks' ),
+					'attr'		  => 'bg_img_mobile',
+					'type'		  => 'attachment',
+					'libraryType' => array( 'image' ),
+					'addButton'	  => __( 'Select image', 'planet4-gpnl-blocks' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpnl-blocks' ),
+				],
+				[
 					'label' => 'Select the layout',
 					'description' => 'Select the layout',
 					'attr' => 'layout',
@@ -111,6 +127,31 @@ if ( ! class_exists( 'Donate_Section_Controller' ) ) {
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
 
 		}
+		/**
+		 * Get all the data that will be needed to render the block correctly.
+		 *
+		 * @param array	 $attributes This is the array of fields of this block.
+		 * @param string $content This is the post content.
+		 * @param string $shortcode_tag The shortcode tag of this block.
+		 *
+		 * @return array The data to be passed in the View.
+		 */
+		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
+
+			if( isset( $attributes[ 'bg_img_desktop' ] ) ) {
+				$attributes[ 'bg_img_desktop' ] = wp_get_attachment_url( $attributes[ 'bg_img_desktop' ] );
+			}
+
+			if( isset( $attributes[ 'bg_img_mobile' ] ) ) {
+				$attributes[ 'bg_img_mobile' ] = wp_get_attachment_url( $attributes[ 'bg_img_mobile' ] );
+			}
+
+			return [
+				'fields' => $attributes,
+			];
+
+		}
+
 
 		/**
 		 * Callback for the shortcake_noindex shortcode.
@@ -124,9 +165,7 @@ if ( ! class_exists( 'Donate_Section_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
-			$data = [
-				'fields' => $fields,
-			];
+			$data = $this->prepare_data( $fields );
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
