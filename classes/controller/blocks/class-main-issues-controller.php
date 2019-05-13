@@ -101,7 +101,7 @@ if ( ! class_exists( 'Main_Issues_Controller' ) ) {
 
 				$categories = get_categories( array(
 					'include' => explode(',', $attributes['issue_ids']),
-                    'orderby' => 'include',
+					'orderby' => 'include',
 				) );
 				$attributes['categories'] = $categories;
 
@@ -142,6 +142,5 @@ if ( ! class_exists( 'Main_Issues_Controller' ) ) {
 			return ob_get_clean();
 		}
 
-		
 	}
 }

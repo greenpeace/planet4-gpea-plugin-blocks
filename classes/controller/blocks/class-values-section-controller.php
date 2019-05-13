@@ -133,25 +133,13 @@ if ( ! class_exists( 'Values_Section_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			$attributes_temp = [
-				'repeater_title'	   => $attributes['repeater_title'] ?? '',
-				'repeater_description' => $attributes['repeater_description'] ?? '',
-			];
+			$key = 'gpea_values_section_bg_image';
+			$options = get_option( 'gpea_options' );
+			$attributes[ 'bg_img' ] = isset( $options[ $key ] ) ? $options[ $key ] : '';
 
-			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
-				$item_atts	   = [
-					"title_$i"		 => $attributes[ "title_$i" ] ?? '',
-					"description_$i" => $attributes[ "description_$i" ] ?? '',
-				];
-				$attributes_temp = array_merge( $attributes_temp, $item_atts );
-			}
-			$attributes = shortcode_atts( $attributes_temp, $attributes, $shortcode_tag );
-
-			$block_data = [
-				'fields'			  => $attributes,
-				'available_languages' => P4NLBKS_LANGUAGES,
+			return [
+				'fields' => $attributes,
 			];
-			return $block_data;
 		}
 
 		/**
@@ -166,9 +154,7 @@ if ( ! class_exists( 'Values_Section_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
-			$data = [
-				'fields' => $fields,
-			];
+			$data = $this->prepare_data( $fields );
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
