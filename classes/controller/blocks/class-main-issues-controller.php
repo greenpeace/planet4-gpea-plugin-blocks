@@ -2,20 +2,20 @@
 
 namespace P4NLBKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Issue_Section_Controller' ) ) {
+if ( ! class_exists( 'Main_Issues_Controller' ) ) {
 	/**
 	 * @noinspection AutoloadingIssuesInspection
 	 */
 
 	/**
-	 * Class Issue_Section_Controller
+	 * Class Main_Issues_Controller
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */
-	class Issue_Section_Controller extends Controller {
+	class Main_Issues_Controller extends Controller {
 
 		/** @const string BLOCK_NAME */
-		const BLOCK_NAME = 'issue_section';
+		const BLOCK_NAME = 'main_issues';
 
 		/** @const string DEFAULT_LAYOUT */
 		const DEFAULT_LAYOUT = 'default';
@@ -102,7 +102,7 @@ if ( ! class_exists( 'Issue_Section_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Issue Section', 'planet4-gpnl-blocks' ),
+				'label'			=> __( 'LATTE | Main Issues', 'planet4-gpnl-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
 				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,

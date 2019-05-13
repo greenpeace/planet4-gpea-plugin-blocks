@@ -19,7 +19,7 @@ return array(
     'P4NLBKS\\Controllers\\Blocks\\GPNL_statistics_Controller' => $baseDir . '/classes/controller/blocks/class-statistics-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\General_Updates_Controller' => $baseDir . '/classes/controller/blocks/class-general-updates.php',
     'P4NLBKS\\Controllers\\Blocks\\Issue_List_Controller' => $baseDir . '/classes/controller/blocks/class-issue-list-controller.php',
-    'P4NLBKS\\Controllers\\Blocks\\Issue_Section_Controller' => $baseDir . '/classes/controller/blocks/class-issue-section-controller.php',
+    'P4NLBKS\\Controllers\\Blocks\\Main_Issues_Controller' => $baseDir . '/classes/controller/blocks/class-main-issues-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Metablock_Controller' => $baseDir . '/classes/controller/blocks/class-metablock-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\No_Index_Controller' => $baseDir . '/classes/controller/blocks/class-noindex-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Petition_Controller' => $baseDir . '/classes/controller/blocks/class-petition-controller.php',
