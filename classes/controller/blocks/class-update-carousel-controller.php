@@ -17,6 +17,9 @@ if ( ! class_exists( 'Update_Carousel_Controller' ) ) {
 		/** @const string BLOCK_NAME */
 		const BLOCK_NAME = 'update_carousel';
 
+		/** @const string ENGAGING_CAMPAIGN_META_KEY */
+		const ENGAGING_CAMPAIGN_META_KEY = 'engaging_campaign_ID';
+
 		/** @const string DEFAULT_LAYOUT */
 		const DEFAULT_LAYOUT = 'default';
 
@@ -144,11 +147,25 @@ if ( ! class_exists( 'Update_Carousel_Controller' ) ) {
 			if( $posts ) {
 				foreach( $posts as $post ) {
 					$post = (array) $post;
+
 					if ( has_post_thumbnail( $post['ID'] ) ) {
 						$img_id = get_post_thumbnail_id( $post['ID'] );
 						$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
 						$post['img_url'] = $img_data[0];
 					}
+
+					$post[ self::ENGAGING_CAMPAIGN_META_KEY ] = [];
+					$posttags = get_the_tags( $post['ID'] );
+					if ($posttags) {
+						foreach( $posttags as $tag ) {
+							$tagmeta = get_term_meta( $tag->term_id );
+							if(array_key_exists( self::ENGAGING_CAMPAIGN_META_KEY , $tagmeta ) ) {
+								$post[ self::ENGAGING_CAMPAIGN_META_KEY ][] = $tagmeta[ self::ENGAGING_CAMPAIGN_META_KEY ];
+							}
+						}
+					}
+					$post['is_campaign'] = sizeof( $post[ self::ENGAGING_CAMPAIGN_META_KEY ] ) > 0;
+
 					$formatted_posts[] = $post;
 				}
 			}
