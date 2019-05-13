@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'P4NLBKS\\Controllers\\Blocks\\Achievement_Section_Controller' => $baseDir . '/classes/controller/blocks/class-achievement-section.php',
-    'P4NLBKS\\Controllers\\Blocks\\Campaign_Section_Controller' => $baseDir . '/classes/controller/blocks/class-campaign-section-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Controller' => $baseDir . '/classes/controller/blocks/class-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Custom_Query_Controller' => $baseDir . '/classes/controller/blocks/class-custom-query-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Donate_Section_Controller' => $baseDir . '/classes/controller/blocks/class-donate-section-controller.php',
@@ -19,6 +18,7 @@ return array(
     'P4NLBKS\\Controllers\\Blocks\\GPNL_quote_Controller' => $baseDir . '/classes/controller/blocks/class-quote-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\GPNL_statistics_Controller' => $baseDir . '/classes/controller/blocks/class-statistics-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\General_Updates_Controller' => $baseDir . '/classes/controller/blocks/class-general-updates.php',
+    'P4NLBKS\\Controllers\\Blocks\\Issue_List_Controller' => $baseDir . '/classes/controller/blocks/class-issue-list-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Issue_Section_Controller' => $baseDir . '/classes/controller/blocks/class-issue-section-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Metablock_Controller' => $baseDir . '/classes/controller/blocks/class-metablock-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\No_Index_Controller' => $baseDir . '/classes/controller/blocks/class-noindex-controller.php',

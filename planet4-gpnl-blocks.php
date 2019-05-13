@@ -80,7 +80,7 @@ P4NLBKS\Loader::get_instance( [
 	'P4NLBKS\Controllers\Blocks\Project_Section_Controller',
 	'P4NLBKS\Controllers\Blocks\General_Updates_Controller',
 	'P4NLBKS\Controllers\Blocks\Issue_Section_Controller',
-	'P4NLBKS\Controllers\Blocks\Campaign_Section_Controller',
+	'P4NLBKS\Controllers\Blocks\Issue_List_Controller',
 	'P4NLBKS\Controllers\Blocks\Achievement_Section_Controller',
 	'P4NLBKS\Controllers\Blocks\UGC_Controller',
 	'P4NLBKS\Controllers\Blocks\Values_Section_Controller',

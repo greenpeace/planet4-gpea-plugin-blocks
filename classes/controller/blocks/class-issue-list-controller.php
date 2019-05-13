@@ -2,20 +2,20 @@
 
 namespace P4NLBKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Campaign_Section_Controller' ) ) {
+if ( ! class_exists( 'Issue_List_Controller' ) ) {
 	/**
 	 * @noinspection AutoloadingIssuesInspection
 	 */
 
 	/**
-	 * Class Campaign_Section_Controller
+	 * Class Issue_List_Controller
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */
-	class Campaign_Section_Controller extends Controller {
+	class Issue_List_Controller extends Controller {
 
 		/** @const string BLOCK_NAME */
-		const BLOCK_NAME = 'campaign_section';
+		const BLOCK_NAME = 'issue_list';
 
 		/** @const string DEFAULT_LAYOUT */
 		const DEFAULT_LAYOUT = 'default';
@@ -161,8 +161,8 @@ if ( ! class_exists( 'Campaign_Section_Controller' ) ) {
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
 			wp_enqueue_script(
-				'campaign_section_engaging_js',
-				P4NLBKS_ASSETS_DIR . 'js/campaign-section-engaging.js',
+				'issue_list_engaging_js',
+				P4NLBKS_ASSETS_DIR . 'js/issue-list-engaging.js',
 				[ 'jquery' ],
 				'0.1',
 				true
