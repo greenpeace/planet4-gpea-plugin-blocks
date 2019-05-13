@@ -122,26 +122,29 @@ if ( ! class_exists( 'Issue_Section_Controller' ) ) {
 		 * @return array The data to be passed in the View.
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
-            
-			$categories = get_categories( array(
-                'include' => explode(',', $attributes['issue_ids']), 
-			) );
-			$attributes['categories'] = $categories;
 
-            // TODO remove this magic constant 'issues'
-            $issues_obj = get_category_by_slug( 'issues' );
-            $issues_url = get_category_link( $issues_obj->term_id );
-			$attributes['issues_url'] = $issues_url;
+			if( isset( $attributes[ 'issue_ids' ] ) ) {
 
-            $attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
-            
-            return [
+				$categories = get_categories( array(
+					'include' => explode(',', $attributes['issue_ids']),
+				) );
+				$attributes['categories'] = $categories;
+
+				// TODO remove this magic constant 'issues'
+				$issues_obj = get_category_by_slug( 'issues' );
+				$issues_url = get_category_link( $issues_obj->term_id );
+				$attributes['issues_url'] = $issues_url;
+			}
+
+			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
+
+			return [
 				'fields' => $attributes,
 			];
 
 		}
-        
-        /**
+
+		/**
 		 * Callback for the shortcake_noindex shortcode.
 		 * It renders the shortcode based on supplied attributes.
 		 *

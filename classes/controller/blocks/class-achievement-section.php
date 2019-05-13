@@ -67,8 +67,8 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 						'tax_query'	  => array(
 							array(
 								'taxonomy' => 'special_attribute',
-								'field'    => 'slug',
-								'terms'    => 'achievement',
+								'field'	   => 'slug',
+								'terms'	   => 'achievement',
 							),
 						),
 					],
@@ -85,11 +85,11 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 					],
 				],
 				[
-					'label'       => 'Select the layout',
+					'label'		  => 'Select the layout',
 					'description' => 'Select the layout',
-					'attr'        => 'layout',
-					'type'        => 'radio',
-					'options'     => [
+					'attr'		  => 'layout',
+					'type'		  => 'radio',
+					'options'	  => [
 						[
 							'value' => 1,
 							'label' => __( 'Layout A', 'planet4-gpnl-blocks' ),
@@ -135,11 +135,30 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			$posts = get_posts( array(
-				'include' => explode(',', $attributes['achievement_ids']), 
-			) );
+			$formatted_posts = [];
 
-			$attributes['posts'] = $posts;
+			if( isset( $attributes[ 'achievement_ids' ] ) ) {
+
+				$posts = get_posts( array(
+					'include' => explode(',', $attributes['achievement_ids']),
+				) );
+
+
+				if( $posts ) {
+					foreach( $posts as $post ) {
+						$post = (array) $post;
+						if ( has_post_thumbnail( $post['ID'] ) ) {
+							$img_id = get_post_thumbnail_id( $post['ID'] );
+							$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
+							$post['img_url'] = $img_data[0];
+						}
+						$formatted_posts[] = $post;
+					}
+				}
+			}
+
+			$attributes['posts'] = $formatted_posts;
+
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
 			return [

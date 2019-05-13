@@ -135,21 +135,23 @@ if ( ! class_exists( 'Project_Section_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			$posts = get_pages( array(
-				'include' => explode(',', $attributes['project_ids']), 
-			) );
-
 			$formatted_posts = [];
 
-			if( $posts ) {
-				foreach( $posts as $post ) {
-					$post = (array) $post;
-					if ( has_post_thumbnail( $post['ID'] ) ) {
-						$img_id = get_post_thumbnail_id( $post['ID'] );
-						$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
-						$post['img_url'] = $img_data[0];
+			if( isset( $attributes[ 'project_ids' ] ) ) {
+				$posts = get_pages( array(
+					'include' => explode(',', $attributes['project_ids']),
+				) );
+
+				if( $posts ) {
+					foreach( $posts as $post ) {
+						$post = (array) $post;
+						if ( has_post_thumbnail( $post['ID'] ) ) {
+							$img_id = get_post_thumbnail_id( $post['ID'] );
+							$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
+							$post['img_url'] = $img_data[0];
+						}
+						$formatted_posts[] = $post;
 					}
-					$formatted_posts[] = $post;
 				}
 			}
 

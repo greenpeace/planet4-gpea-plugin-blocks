@@ -138,35 +138,38 @@ if ( ! class_exists( 'Update_Carousel_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			$posts = get_posts( array(
-				'include' => explode(',', $attributes['update_ids']),
-			) );
-
 			$formatted_posts = [];
 
-			if( $posts ) {
-				foreach( $posts as $post ) {
-					$post = (array) $post;
+			if( isset( $attributes[ 'update_ids' ] ) ) {
 
-					if ( has_post_thumbnail( $post['ID'] ) ) {
-						$img_id = get_post_thumbnail_id( $post['ID'] );
-						$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
-						$post['img_url'] = $img_data[0];
-					}
+				$posts = get_posts( array(
+					'include' => explode( ',' , $attributes['update_ids'] ),
+				) );
 
-					$post[ self::ENGAGING_CAMPAIGN_META_KEY ] = [];
-					$posttags = get_the_tags( $post['ID'] );
-					if ($posttags) {
-						foreach( $posttags as $tag ) {
-							$tagmeta = get_term_meta( $tag->term_id );
-							if(array_key_exists( self::ENGAGING_CAMPAIGN_META_KEY , $tagmeta ) ) {
-								$post[ self::ENGAGING_CAMPAIGN_META_KEY ][] = $tagmeta[ self::ENGAGING_CAMPAIGN_META_KEY ];
+				if( $posts ) {
+					foreach( $posts as $post ) {
+						$post = (array) $post; // TODO clean up this typecasting
+
+						if ( has_post_thumbnail( $post['ID'] ) ) {
+							$img_id = get_post_thumbnail_id( $post['ID'] );
+							$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
+							$post['img_url'] = $img_data[0];
+						}
+
+						$post[ self::ENGAGING_CAMPAIGN_META_KEY ] = [];
+						$posttags = get_the_tags( $post['ID'] );
+						if ($posttags) {
+							foreach( $posttags as $tag ) {
+								$tagmeta = get_term_meta( $tag->term_id );
+								if(array_key_exists( self::ENGAGING_CAMPAIGN_META_KEY , $tagmeta ) ) {
+									$post[ self::ENGAGING_CAMPAIGN_META_KEY ][] = $tagmeta[ self::ENGAGING_CAMPAIGN_META_KEY ];
+								}
 							}
 						}
-					}
-					$post['is_campaign'] = sizeof( $post[ self::ENGAGING_CAMPAIGN_META_KEY ] ) > 0;
+						$post['is_campaign'] = sizeof( $post[ self::ENGAGING_CAMPAIGN_META_KEY ] ) > 0;
 
-					$formatted_posts[] = $post;
+						$formatted_posts[] = $post;
+					}
 				}
 			}
 

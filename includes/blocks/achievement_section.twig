@@ -5,7 +5,7 @@
 		<div class="content">
 		    <div class="first">
 			<p class="title text very-big light">{{ fields.title|e('wp_kses_post')|raw }}</p>
-			<img class="lady lazy" data-src="https://image.flaticon.com/icons/png/512/219/219969.png" alt="">
+			<img class="lady lazy" data-src="{{ fields.img_url }}" alt="">
 		    </div>
 		    {% if fields.posts %}
 			{% set post = fields.posts[0] %}
@@ -17,7 +17,7 @@
 					<p class="type">TODO 新闻</p>
 				    {% endfor %}
 				</div>
-				<div class="thumbnail lazy" data-bg="url(https://picsum.photos/id/81/200/300)"></div>
+				<div class="thumbnail lazy" data-bg="url({{ post.img_url }})"></div>
 				<div class="info-box">
 				    <div class="number">00.00.0000</div>
 				    <div class="time">
@@ -29,7 +29,7 @@
 				<p class="ps text bold">TODO 了解綠色和平的歷史</p>
 			    </div>
 			    <div class="right">
-				<div class="thumbnail lazy" data-bg="url(https://picsum.photos/id/81/200/300)"></div>
+				<div class="thumbnail lazy" data-bg="url({{ post.img_url }})"></div>
 			    </div>
 			</a>
 			<div class="posts">
@@ -51,14 +51,14 @@
 					    <div class="number">00.00.0000</div>
 					</div>
 				    </div>
-				    <div class="thumbnail lazy" data-bg="url(https://picsum.photos/id/82/200/300)"></div>
+				    <div class="thumbnail lazy" data-bg="url({{ post.img_url }})"></div>
 				</a>
 			    {% endfor %}
 			</div>
 		    {% endif %}
 		</div>
 		<div class="mobile-bottom-box">
-		    <img class="lady" src="https://image.flaticon.com/icons/png/512/219/219969.png" alt="">
+		    <img class="lady" src="{{ fields.img_url }}" alt="">
 		    <p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
 		</div>
 	    </div>
