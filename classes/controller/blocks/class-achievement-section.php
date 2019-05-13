@@ -55,6 +55,14 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 					],
 				],
 				[
+					'label' => __( 'Background image', 'planet4-gpnl-blocks' ),
+					'attr'		  => 'bg_img',
+					'type'		  => 'attachment',
+					'libraryType' => array( 'image' ),
+					'addButton'	  => __( 'Select image', 'planet4-gpnl-blocks' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpnl-blocks' ),
+				],
+				[
 					'label'	   => __( 'Achievements', 'planet4-gpnl-blocks' ),
 					'attr'	   => 'achievement_ids',
 					'type'	   => 'post_select',
@@ -136,6 +144,10 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
 			$formatted_posts = [];
+
+			if( isset( $attributes[ 'bg_img' ] ) ) {
+				$attributes[ 'bg_img' ] = wp_get_attachment_url( $attributes[ 'bg_img' ] );
+			}
 
 			if( isset( $attributes[ 'achievement_ids' ] ) ) {
 
