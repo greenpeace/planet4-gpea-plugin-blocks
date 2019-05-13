@@ -1,26 +1,40 @@
-{% block metablock %}
-    <h3>Metablock test</h3>
-    {% if ( static_fields ) %}
-        <p>Title: {{ static_fields.title }}</p>
-        <p>Subtitle: {{ static_fields.subtitle }}</p>
-        <p>Description: {{ static_fields.description }}</p>
-    {% endif %}
-    {% if ( field_groups ) %}
-	<style>
-	 .static-content-test {
-	     color: red;
-	 }
-	 .dynamic-content-test {
-	     color: green;
-	 }
-	</style>
-	{% for group in field_groups %}
-	    {% if group.__group_type__ == 'staticcontent' %}
-		<p class="static-content-test">Title: {{ group.title }}</p>
-	    {% endif %}
-	    {% if group.__group_type__ == 'dynamiccontent' %}
-		<p class="dynamic-content-test">Title: {{ group.title }}</p>
-	    {% endif %}
-	{% endfor %}
-    {% endif %}
+1{% block metablock %}
+    <style>
+     .dynamic-content-test {
+	 color: orange !important;
+     }
+    </style>
+    <section class="section-values lazy" data-bg="url(https://picsum.photos/id/139/1280/720)">
+	<div class="ct-container">
+	    <div class="content">
+		<div class="top-box">
+		    <p class="title text very-big light">Compound block example</p>
+		    {% if ( static_fields ) %}
+			<p class="subtitle text bold">{{ static_fields.title|e('wp_kses_post')|raw }}</p>
+			<p class="subtitle text bold">{{ static_fields.subtitle|e('wp_kses_post')|raw }}</p>
+			<p class="subtitle text bold">{{ static_fields.description|e('wp_kses_post')|raw }}</p>
+		    {% endif %}
+		    <p class="subtitle text bold">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+		</div>
+	    </div>
+	</div>
+	<div class="swiper-container section-values-swiper">
+	    <div class="swiper-wrapper">
+		{% for group in field_groups %}
+		    {% if group.__group_type__ == 'staticcontent' %}
+			<div class="swiper-slide">
+			    <p class="static-content-test">{{ group.title|e('wp_kses_post')|raw }}</p>
+			    <p>{{ group.description|e('wp_kses_post')|raw }}</p>
+			</div>
+		    {% endif %}
+		    {% if group.__group_type__ == 'dynamiccontent' %}
+			<div class="swiper-slide">
+			    <p class="dynamic-content-test">{{ group.post.post_title|e('wp_kses_post')|raw }}</p>
+			    <p>{{ group.post.post_excerpt|e('wp_kses_post')|raw }}</p>
+			</div>
+		    {% endif %}
+		{% endfor %}
+	    </div>
+	</div>
+    </section>
 {% endblock %}

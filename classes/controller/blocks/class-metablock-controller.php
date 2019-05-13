@@ -195,6 +195,13 @@ if ( ! class_exists( 'Metablock_Controller' ) ) {
 					$group[ '__group_type__' ] = $group_type;
 				}
 
+				if( $group_type == 'dynamiccontent' ) {
+					$post = get_posts([
+						'include' => $group['post'],
+					]);
+					$group['post'] = (array) $post[0];
+				}
+
 				$field_groups[] = $group;
 			}
 
@@ -205,8 +212,6 @@ if ( ! class_exists( 'Metablock_Controller' ) ) {
 					$static_fields[ $field_name ] = $field_content;
 				}
 			}
-
-			// TODO fetch dynamic data based on '__group_type__' label
 
 			return [
 				// 'fields' => $fields,
