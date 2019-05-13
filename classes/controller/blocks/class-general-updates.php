@@ -2,20 +2,20 @@
 
 namespace P4NLBKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Update_Carousel_Controller' ) ) {
+if ( ! class_exists( 'General_Updates_Controller' ) ) {
 	/**
 	 * @noinspection AutoloadingIssuesInspection
 	 */
 
 	/**
-	 * Class Update_Carousel_Controller
+	 * Class General_Updates_Controller
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */
-	class Update_Carousel_Controller extends Controller {
+	class General_Updates_Controller extends Controller {
 
 		/** @const string BLOCK_NAME */
-		const BLOCK_NAME = 'update_carousel';
+		const BLOCK_NAME = 'general_updates';
 
 		/** @const string ENGAGING_CAMPAIGN_META_KEY */
 		const ENGAGING_CAMPAIGN_META_KEY = 'engaging_campaign_ID';
@@ -117,7 +117,7 @@ if ( ! class_exists( 'Update_Carousel_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Update Section', 'planet4-gpnl-blocks' ),
+				'label'			=> __( 'LATTE | General Updates - manual selection', 'planet4-gpnl-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
 				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,

@@ -78,7 +78,7 @@ P4NLBKS\Loader::get_instance( [
 	// 'P4NLBKS\Controllers\Blocks\Custom_Query_Controller', // Test controller
 	'P4NLBKS\Controllers\Blocks\Metablock_Controller',
 	'P4NLBKS\Controllers\Blocks\Project_Section_Controller',
-	'P4NLBKS\Controllers\Blocks\Update_Carousel_Controller',
+	'P4NLBKS\Controllers\Blocks\General_Updates_Controller',
 	'P4NLBKS\Controllers\Blocks\Issue_Section_Controller',
 	'P4NLBKS\Controllers\Blocks\Campaign_Section_Controller',
 	'P4NLBKS\Controllers\Blocks\Achievement_Section_Controller',
