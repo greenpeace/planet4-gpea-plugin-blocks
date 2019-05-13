@@ -57,30 +57,30 @@ if ( ! class_exists( 'Issue_List_Controller' ) ) {
 						'data-plugin' => 'planet4-gpnl-blocks',
 					],
 				],
-				[
-					'label'		  => __( 'Campaigns', 'planet4-gpnl-blocks' ),
-					'attr'	   => 'campaign_ids',
-					'type'	   => 'term_select',
-					'taxonomy' => 'post_tag',
-					'multiple' => 'multiple',
-					'meta'	   => [
-						'select2_options' => [
-							'allowClear'			 => true,
-							'placeholder'			 => __( 'Select campaigns', 'planet4-gpnl-blocks' ),
-							'closeOnSelect'			 => false,
-							'minimumInputLength'	 => 0,
-							'multiple'				 => true,
-							'maximumSelectionLength' => 20,
-							'width'					 => '80%',
-						],
-					],
-				],
+				// [
+				// 	'label'		  => __( 'Campaigns', 'planet4-gpnl-blocks' ),
+				// 	'attr'	   => 'campaign_ids',
+				// 	'type'	   => 'term_select',
+				// 	'taxonomy' => 'post_tag',
+				// 	'multiple' => 'multiple',
+				// 	'meta'	   => [
+				// 		'select2_options' => [
+				// 			'allowClear'			 => true,
+				// 			'placeholder'			 => __( 'Select campaigns', 'planet4-gpnl-blocks' ),
+				// 			'closeOnSelect'			 => false,
+				// 			'minimumInputLength'	 => 0,
+				// 			'multiple'				 => true,
+				// 			'maximumSelectionLength' => 20,
+				// 			'width'					 => '80%',
+				// 		],
+				// 	],
+				// ],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
 				'label'			=> __( 'LATTE | Issue List', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/issues_list.png' ) . '" />',
 				'attrs'			=> $fields,
 				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
 			];
@@ -100,14 +100,18 @@ if ( ! class_exists( 'Issue_List_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			if( array_key_exists( 'campaign_ids', $attributes ) ) {
-				$campaigns = get_terms( array(
-					'taxonomy' => 'post_tag',
-					'include'  => explode(',', $attributes['campaign_ids']),
-				) );
-			} else {
-				$campaigns = [];
-			}
+			// if( array_key_exists( 'campaign_ids', $attributes ) ) {
+			// 	$campaigns = get_terms( array(
+			// 		'taxonomy' => 'post_tag',
+			// 		'include'  => explode(',', $attributes['campaign_ids']),
+			// 	) );
+			// } else {
+			// 	$campaigns = [];
+			// }
+
+			$campaigns = get_terms( array(
+				'taxonomy' => 'post_tag',
+			) );
 
 			foreach( $campaigns as $campaign ) {
 				$campaign->engaging_ID = get_term_meta( $campaign->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true );

@@ -11,10 +11,10 @@
 		<div class="swiper-wrapper">
 		    {% if fields.categories %}
 			{% for cat in fields.categories %}
-			    <a href="{{ fields.issues_url }}" class="swiper-slide">
-				<div class="image lazy" data-bg="url(https://picsum.photos/id/111/200/300)">
-				    <div class="name">{{ cat.name }}</div>
-				    <div class="tag color-1">{{ cat.slug }}</div>
+			    <a href="" class="swiper-slide">
+				<div class="image lazy" data-bg="url({{ cat.img_url }})">
+				    <div class="name">{{ cat.post_title }}</div>
+				    <div class="tag color-{{ loop.index }}">{{ cat.slug }}</div>
 				</div>
 				<p class="descrition">TODO - 更孕育眾多物種，可說是人類的糧食庫</p>
 				<div class="status">

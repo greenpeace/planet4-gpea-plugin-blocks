@@ -54,30 +54,30 @@ if ( ! class_exists( 'Main_Issues_Controller' ) ) {
 						'data-plugin' => 'planet4-gpnl-blocks',
 					],
 				],
-				[
-					'label'		  => __( 'Issues', 'planet4-gpnl-blocks' ),
-					'attr'	   => 'issue_ids',
-					'type'	   => 'term_select',
-					'taxonomy' => 'category',
-					'multiple' => 'multiple',
-					'meta'	   => [
-						'select2_options' => [
-							'allowClear'			 => true,
-							'placeholder'			 => __( 'Select issues', 'planet4-gpnl-blocks' ),
-							'closeOnSelect'			 => false,
-							'minimumInputLength'	 => 0,
-							'multiple'				 => true,
-							'maximumSelectionLength' => 20,
-							'width'					 => '80%',
-						],
-					],
-				],
+				// [
+				// 	'label'		  => __( 'Issues', 'planet4-gpnl-blocks' ),
+				// 	'attr'	   => 'issue_ids',
+				// 	'type'	   => 'term_select',
+				// 	'taxonomy' => 'category',
+				// 	'multiple' => 'multiple',
+				// 	'meta'	   => [
+				// 		'select2_options' => [
+				// 			'allowClear'			 => true,
+				// 			'placeholder'			 => __( 'Select issues', 'planet4-gpnl-blocks' ),
+				// 			'closeOnSelect'			 => false,
+				// 			'minimumInputLength'	 => 0,
+				// 			'multiple'				 => true,
+				// 			'maximumSelectionLength' => 20,
+				// 			'width'					 => '80%',
+				// 		],
+				// 	],
+				// ],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
 				'label'			=> __( 'LATTE | Main Issues', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/main_issues.png' ) . '" />',
 				'attrs'			=> $fields,
 				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
 			];
@@ -97,20 +97,48 @@ if ( ! class_exists( 'Main_Issues_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			if( isset( $attributes[ 'issue_ids' ] ) ) {
+			// if( isset( $attributes[ 'issue_ids' ] ) ) {
 
-				$categories = get_categories( array(
-					'include' => explode(',', $attributes['issue_ids']),
-					'orderby' => 'include',
-				) );
-				$attributes['categories'] = $categories;
+			// 	$categories = get_categories( array(
+			// 		'include' => explode(',', $attributes['issue_ids']),
+			// 		'orderby' => 'include',
+			// 	) );
+			// 	$attributes['categories'] = $categories;
 
-				// TODO remove this magic constant 'issues'
-				$issues_obj = get_category_by_slug( 'issues' );
-				$issues_url = get_category_link( $issues_obj->term_id );
-				$attributes['issues_url'] = $issues_url;
+			// 	// TODO remove this magic constant 'issues'
+			// 	$issues_obj = get_category_by_slug( 'issues' );
+			// 	$issues_url = get_category_link( $issues_obj->term_id );
+			// 	$attributes['issues_url'] = $issues_url;
+			// }
+
+			$formatted_posts = [];
+
+			$posts = get_posts( array(
+				'order'		  => 'desc',
+				'orderby'	  => 'date',
+				'post_type'	  => 'page',
+				'numberposts' => 20,
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'p4_post_attribute',
+						'field' => 'slug',
+						'terms' => 'main-issue',
+					)
+				)
+			) );
+
+			if( $posts ) {
+				foreach( $posts as $post ) {
+					$post = (array) $post;
+					if ( has_post_thumbnail( $post['ID'] ) ) {
+						$img_id = get_post_thumbnail_id( $post['ID'] );
+						$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
+						$post['img_url'] = $img_data[0];
+					}
+					$formatted_posts[] = $post;
+				}
 			}
-
+			$attributes['categories'] = $formatted_posts;
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
 			return [

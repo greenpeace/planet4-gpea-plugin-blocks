@@ -63,17 +63,17 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 					'type'	   => 'post_select',
 					'multiple' => 'multiple',
 					'query'	   => [
-						'post_type'	  => 'post',
+						'post_type'	  => array('post','page'),
 						'post_status' => 'publish',
 						'orderby'	  => 'post_title',
 						'order'			  => 'ASC',
-						'tax_query'	  => array(
-							array(
-								'taxonomy' => 'p4-page-type',
-								'field'	   => 'slug',
-								'terms'	   => 'update',
-							),
-						),
+						// 'tax_query'	  => array(
+						// 	array(
+						// 		'taxonomy' => 'p4-page-type',
+						// 		'field'	   => 'slug',
+						// 		'terms'	   => 'update',
+						// 	),
+						// ),
 					],
 					'meta'	   => [
 						'select2_options' => [
@@ -92,7 +92,7 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
 				'label'			=> __( 'LATTE | General Updates - manual selection', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/general_updates.png' ) . '" />',
 				'attrs'			=> $fields,
 				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
 			];
@@ -117,6 +117,8 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 			if( isset( $attributes[ 'update_ids' ] ) ) {
 
 				$posts = get_posts( array(
+					'post_type'	  => array('post','page'),
+					'post_status' => 'publish',
 					'include' => explode( ',' , $attributes['update_ids'] ),
 					'orderby' => 'post__in',
 				) );
@@ -131,17 +133,21 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 							$post['img_url'] = $img_data[0];
 						}
 
-						$post[ self::ENGAGING_CAMPAIGN_META_KEY ] = [];
-						$posttags = get_the_tags( $post['ID'] );
-						if ($posttags) {
-							foreach( $posttags as $tag ) {
-								$tagmeta = get_term_meta( $tag->term_id );
-								if(array_key_exists( self::ENGAGING_CAMPAIGN_META_KEY , $tagmeta ) ) {
-									$post[ self::ENGAGING_CAMPAIGN_META_KEY ][] = $tagmeta[ self::ENGAGING_CAMPAIGN_META_KEY ];
-								}
-							}
+						// $post[ self::ENGAGING_CAMPAIGN_META_KEY ] = [];
+						// $posttags = get_the_tags( $post['ID'] );
+						// if ($posttags) {
+						// 	foreach( $posttags as $tag ) {
+						// 		$tagmeta = get_term_meta( $tag->term_id );
+						// 		if(array_key_exists( self::ENGAGING_CAMPAIGN_META_KEY , $tagmeta ) ) {
+						// 			$post[ self::ENGAGING_CAMPAIGN_META_KEY ][] = $tagmeta[ self::ENGAGING_CAMPAIGN_META_KEY ];
+						// 		}
+						// 	}
+						// }
+						// $post['is_campaign'] = sizeof( $post[ self::ENGAGING_CAMPAIGN_META_KEY ] ) > 0;
+
+						if( has_term( 'petition', 'p4_post_attribute', $post['ID'] ) ) {
+							$post['is_campaign'] = 1;
 						}
-						$post['is_campaign'] = sizeof( $post[ self::ENGAGING_CAMPAIGN_META_KEY ] ) > 0;
 
 						$formatted_posts[] = $post;
 					}
