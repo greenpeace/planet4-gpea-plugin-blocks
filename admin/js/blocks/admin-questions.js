@@ -3,8 +3,8 @@ jQuery(document).ready(function() {
   var $ = jQuery;
   var selectId = 'engaging_campaign_ID';
   var containerId = '#' + selectId + '_container';
-  var apiUrl = 'http://www.planet4.test/wp-json/planet4-engaging-networks/v1/questions_available';
-  var itemId = 417462;
+  var apiUrl = document.location.origin + '/wp-json/planet4-engaging-networks/v1/questions_available';
+  // var itemId = 417462;
 
   var questionsContainer = $(containerId);
   var select = $('<select></select>').attr('id', selectId).attr('name', selectId);
@@ -15,17 +15,17 @@ jQuery(document).ready(function() {
   $.ajax(apiUrl).then(
     function(res) {
 
-      res = res.filter( (r) => r.id === itemId );
+      // res = res.filter( (r) => r.id === itemId );
       activeValid = res.find( (r) => r.questionId === activeCampaign );
 
       if(res.length) {
-        select.append($('<option disabled selected value> -- select a campaign -- </option>'));
+        select.append($('<option disabled selected value> -- select an issue related -- </option>'));
         $.each(res, function(_, option) {
           select.append($('<option></option>').attr('value', option.questionId).text(option.name));
         });
         questionsContainer.html(select);
       } else {
-        questionsContainer.html('No campaigns found');
+        questionsContainer.html('No question available found');
       }
 
       if(activeValid) {
