@@ -48,7 +48,7 @@ if ( ! class_exists( 'Project_Section_Controller' ) ) {
 				[
 					'label' => __( 'Link "See more"', 'planet4-gpnl-blocks' ),
 					'attr'	=> 'see_more_link',
-					'type'	=> 'text',
+					'type'	=> 'url',
 					'meta'	=> [
 						'placeholder' => __( 'Link "See more"', 'planet4-gpnl-blocks' ),
 						'data-plugin' => 'planet4-gpnl-blocks',
