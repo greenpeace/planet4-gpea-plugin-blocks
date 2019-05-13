@@ -2,20 +2,20 @@
 
 namespace P4NLBKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Project_Section_Controller' ) ) {
+if ( ! class_exists( 'Projects_Overview_Controller' ) ) {
 	/**
 	 * @noinspection AutoloadingIssuesInspection
 	 */
 
 	/**
-	 * Class Project_Section_Controller
+	 * Class Projects_Overview_Controller
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */
-	class Project_Section_Controller extends Controller {
+	class Projects_Overview_Controller extends Controller {
 
 		/** @const string BLOCK_NAME */
-		const BLOCK_NAME = 'project_section';
+		const BLOCK_NAME = 'projects_overview';
 
 		/** @const string DEFAULT_LAYOUT */
 		const DEFAULT_LAYOUT = 'default';
