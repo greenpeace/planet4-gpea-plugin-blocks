@@ -63,62 +63,6 @@ if ( ! class_exists( 'Projects_Overview_Controller' ) ) {
 						'data-plugin' => 'planet4-gpnl-blocks',
 					],
 				],
-				[
-					'label'		  => __( 'Projects', 'planet4-gpnl-blocks' ),
-					'attr'	   => 'project_ids',
-					'type'	   => 'post_select',
-					'multiple' => 'multiple',
-					'query'	   => [
-						'post_type' => 'page',
-						'post_status' => 'publish',
-						'orderby'	=> 'post_title',
-						'order'		=> 'ASC',
-						// Filters by page template.
-						// 'meta_query' => array(
-						//	   array(
-						//		   'key' => '_wp_page_template',
-						//		   'value' => 'template-city.php', // Insert template here. Not super clean though...
-						//	   )
-						// )
-					],
-					'meta'	   => [
-						'select2_options' => [
-							'allowClear'			 => true,
-							'placeholder'			 => __( 'Select projects', 'planet4-gpnl-blocks' ),
-							'closeOnSelect'			 => false,
-							'minimumInputLength'	 => 0,
-							'multiple'				 => true,
-							'maximumSelectionLength' => 20,
-							'width'					 => '80%',
-						],
-					],
-				],
-				// [
-				// 	'label' => 'Select the layout',
-				// 	'description' => 'Select the layout',
-				// 	'attr' => 'layout',
-				// 	'type' => 'radio',
-				// 	'options' => [
-				// 		[
-				// 			'value' => 1,
-				// 			'label' => __( 'Layout A', 'planet4-gpnl-blocks' ),
-				// 			'desc'	=> 'Sample layout description',
-				// 			'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-				// 		],
-				// 		[
-				// 			'value' => 2,
-				// 			'label' => __( 'Layout B', 'planet4-gpnl-blocks' ),
-				// 			'desc'	=> 'Sample layout description',
-				// 			'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-				// 		],
-				// 		[
-				// 			'value' => 3,
-				// 			'label' => __( 'Layout C', 'planet4-gpnl-blocks' ),
-				// 			'desc'	=> 'Sample layout description',
-				// 			'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-				// 		],
-				// 	],
-				// ],
 			];
 
 			// Define the Shortcode UI arguments.
@@ -146,24 +90,29 @@ if ( ! class_exists( 'Projects_Overview_Controller' ) ) {
 
 			$formatted_posts = [];
 
-			if( isset( $attributes[ 'project_ids' ] ) ) {
-                // Using get_posts for the 'order_by' option
-				$posts = get_posts( array(
-					'include' => explode(',', $attributes['project_ids']),
-                    'orderby' => 'post__in',
-                    'post_type' => 'page',
-				) );
+			$posts = get_posts( array(
+				'order'		  => 'desc',
+				'orderby'	  => 'date',
+				'post_type'	  => 'page',
+				'numberposts' => 20,
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'p4_post_attribute',
+						'field' => 'slug',
+						'terms' => 'project',
+					)
+				)
+			) );
 
-				if( $posts ) {
-					foreach( $posts as $post ) {
-						$post = (array) $post;
-						if ( has_post_thumbnail( $post['ID'] ) ) {
-							$img_id = get_post_thumbnail_id( $post['ID'] );
-							$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
-							$post['img_url'] = $img_data[0];
-						}
-						$formatted_posts[] = $post;
+			if( $posts ) {
+				foreach( $posts as $post ) {
+					$post = (array) $post;
+					if ( has_post_thumbnail( $post['ID'] ) ) {
+						$img_id = get_post_thumbnail_id( $post['ID'] );
+						$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
+						$post['img_url'] = $img_data[0];
 					}
+					$formatted_posts[] = $post;
 				}
 			}
 
