@@ -40,24 +40,6 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 						'data-testdataasd' => 'planet4-gpnl-blocks',
 					],
 				],
-				[
-					'label' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
-					'attr'	=> 'subtitle',
-					'type'	=> 'text',
-					'meta'	=> [
-						'placeholder' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
-					],
-				],
-				[
-					'label' => __( 'Description', 'planet4-gpnl-blocks' ),
-					'attr'	=> 'description',
-					'type'	=> 'textarea',
-					'meta'	=> [
-						'placeholder' => __( 'Description', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
-					],
-				],
 			];
 
 			$posts = get_posts([

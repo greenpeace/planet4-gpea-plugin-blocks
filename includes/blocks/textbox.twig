@@ -1,10 +1,20 @@
 {% block textbox %}
     {% if ( fields ) %}
+	{% set box_color = fields.layout == 'dark' ? 'bg-blue' : '' %}
 	<section class="section-stats">
-	    <div class="box">
-		<p>{{ fields.text }}</p>
+	    <div class="boxes">
+		<div class="box {{ box_color }}">
+		    <p>{{ fields.text }}</p>
+		</div>
 		{% if ( fields.img ) %}
-		    <div class="box-3 lazy" data-bg="url({{ fields.img }})"></div>
+		    <div class="box fit">
+			<div class="swiper-container section-stats-swiper">
+			    <div class="swiper-wrapper">
+				<div class="swiper-slide image lazy" data-bg="url({{ fields.img }})"></div>
+			    </div>
+			    <div class="swiper-pagination"></div>
+			</div>
+		    </div>
 		{% endif %}
 	    </div>
 	</section>
