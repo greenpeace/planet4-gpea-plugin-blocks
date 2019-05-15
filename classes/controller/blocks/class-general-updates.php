@@ -21,7 +21,7 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 		const ENGAGING_CAMPAIGN_META_KEY = 'engaging_campaign_ID';
 
 		/** @const string DEFAULT_LAYOUT */
-		const DEFAULT_LAYOUT = 'default';
+		const DEFAULT_LAYOUT = 'light';
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -53,7 +53,7 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 					'attr'	=> 'description',
 					'type'	=> 'textarea',
 					'meta'	=> [
-						'placeholder' => __( 'Description', 'planet4-gpnl-blocks' ),
+						'placeholder' => __( 'Description (light layout only)', 'planet4-gpnl-blocks' ),
 						'data-plugin' => 'planet4-gpnl-blocks',
 					],
 				],
@@ -68,11 +68,11 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 						'orderby'	  => 'post_title',
 						'order'			  => 'ASC',
 						// 'tax_query'	  => array(
-						// 	array(
-						// 		'taxonomy' => 'p4-page-type',
-						// 		'field'	   => 'slug',
-						// 		'terms'	   => 'update',
-						// 	),
+						//		array(
+						//			'taxonomy' => 'p4-page-type',
+						//			'field'	   => 'slug',
+						//			'terms'	   => 'update',
+						//		),
 						// ),
 					],
 					'meta'	   => [
@@ -86,6 +86,26 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 							'width'					 => '80%',
 						],
 					],
+				[
+					'label' => 'Select the layout',
+					'description' => 'Select the layout',
+					'attr' => 'layout',
+					'type' => 'radio',
+					'options' => [
+						[
+							'value' => 'light',
+							'label' => __( 'Light background, dark text', 'planet4-gpnl-blocks' ),
+							'desc'	=> 'Light background, dark text',
+							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+						],
+						[
+							'value' => 'dark',
+							'label' => __( 'Dark background, light text', 'planet4-gpnl-blocks' ),
+							'desc'	=> 'Dark background, light text',
+							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+						],
+					],
+				],
 				],
 			];
 
@@ -132,18 +152,6 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 							$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
 							$post['img_url'] = $img_data[0];
 						}
-
-						// $post[ self::ENGAGING_CAMPAIGN_META_KEY ] = [];
-						// $posttags = get_the_tags( $post['ID'] );
-						// if ($posttags) {
-						// 	foreach( $posttags as $tag ) {
-						// 		$tagmeta = get_term_meta( $tag->term_id );
-						// 		if(array_key_exists( self::ENGAGING_CAMPAIGN_META_KEY , $tagmeta ) ) {
-						// 			$post[ self::ENGAGING_CAMPAIGN_META_KEY ][] = $tagmeta[ self::ENGAGING_CAMPAIGN_META_KEY ];
-						// 		}
-						// 	}
-						// }
-						// $post['is_campaign'] = sizeof( $post[ self::ENGAGING_CAMPAIGN_META_KEY ] ) > 0;
 
 						if( has_term( 'petition', 'p4_post_attribute', $post['ID'] ) ) {
 							$post['is_campaign'] = 1;

@@ -1,64 +1,93 @@
 {% block general_updates %}
     {% if ( fields ) %}
-	<section class="section-featured">
-	    <div class="ct-container">
-		<div class="mobile-top-box">
-		    <p class="title text big bold">{{ fields.title|e('wp_kses_post')|raw }}</p>
-		    <p class="subtitle text huge light">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-		</div>
-	    </div>
-	    <div class="swiper-container section-featured-swiper">
-		<div class="swiper-wrapper">
-		    <div class="swiper-slide first">
+	{% if ( fields.layout == 'light' ) %}
+	    <section class="section-featured">
+		<div class="ct-container">
+		    <div class="mobile-top-box">
 			<p class="title text big bold">{{ fields.title|e('wp_kses_post')|raw }}</p>
 			<p class="subtitle text huge light">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-			<p class="content text semi-bold">{{ fields.description|e('wp_kses_post')|raw }}</p>
 		    </div>
-		    {% if fields.posts %}
+		</div>
+		<div class="swiper-container section-featured-swiper">
+		    <div class="swiper-wrapper">
+			<div class="swiper-slide first">
+			    <p class="title text big bold">{{ fields.title|e('wp_kses_post')|raw }}</p>
+			    <p class="subtitle text huge light">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+			    <p class="content text semi-bold">{{ fields.description|e('wp_kses_post')|raw }}</p>
+			</div>
+			{% if fields.posts %}
+			    {% for post in fields.posts %}
+				{% if post.is_campaign %}
+				    <div class="swiper-slide second lazy" data-bg="url({{ post.img_url }})">
+					<div class="box">
+					    <div class="progress-bar">
+						<div class="percent" style="width: 90%"></div>
+					    </div>
+					    <p class="stats">TODO - 已有2,347 名簽署者</p>
+					    <div class="content">
+						<p>{{ post.post_title }}</p>
+						<a href="" class="button small light">TODO 我要支持</a>
+					    </div>
+					</div>
+				    </div>
+				{% else %}
+				    <a href="#"  class="swiper-slide post">
+					<div class="top-box">
+					    {% for tag in post.tags %}
+						<div class="tag">{{ tag.name }}</div>
+					    {% endfor %}
+					    <p class="type">TODO 新闻</p>
+					</div>
+					<div class="thumbnail lazy" data-bg="url({{ post.img_url }})"></div>
+					<div class="info-box">
+					    <div class="number">00.00.0000</div>
+					    <div class="time">
+						<span class="icon-clock"></span>
+						<p>TODO 4 min 閱讀</p>
+					    </div>
+					</div>
+					<div class="name text large bold">{{ post.post_title }}</div>
+				    </a>
+				{% endif %}
+			    {% endfor %}
+			{% endif %}
+		    </div>
+		    <div class="swiper-pagination"></div>
+		    <div class="swiper-button-next">
+			<span class="icon-chevron-right"></span>
+		    </div>
+		    <div class="swiper-button-prev">
+			<span class="icon-chevron-right"></span>
+		    </div>
+		</div>
+	    </section>
+	{% elseif ( fields.layout == 'dark' ) %}
+	    <section class="section-latest-active">
+		<div class="ct-container">
+		    <div class="content">
+			<!-- <p class="content text semi-bold">{{ fields.description|e('wp_kses_post')|raw }}</p> -->
+			<div class="swiper-slide first">
+			    <p class="title">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+			    <p class="subtitle text big">{{ fields.title|e('wp_kses_post')|raw }}</p>
+			</div>
 			{% for post in fields.posts %}
-			    {% if post.is_campaign %}
-				<div class="swiper-slide second lazy" data-bg="url({{ post.img_url }})">
-				    <div class="box">
-					<div class="progress-bar">
-					    <div class="percent" style="width: 90%"></div>
-					</div>
-					<p class="stats">TODO - 已有2,347 名簽署者</p>
-					<div class="content">
-					    <p>{{ post.post_title }}</p>
-					    <a href="" class="button small light">TODO I want to support</a>
-					</div>
+			    <div class="swiper-slide second" style="background-image: url({{ post.img_url }})">
+				<div class="box">
+				    <div class="progress-bar">
+					<div class="percent" style="width: 90%"></div>
+				    </div>
+				    <p class="stats">TODO - 已有2,347 名簽署者</p>
+				    <div class="content">
+					<p>{{ post.post_title }}</p>
+					<a href="" class="button light">TODO 我要支持</a>
 				    </div>
 				</div>
-			    {% else %}
-				<a href="#"  class="swiper-slide post">
-				    <div class="top-box">
-					{% for tag in post.tags %}
-					    <div class="tag">{{ tag.name }}</div>
-					{% endfor %}
-					<p class="type">TODO 新闻</p>
-				    </div>
-				    <div class="thumbnail lazy" data-bg="url({{ post.img_url }})"></div>
-				    <div class="info-box">
-					<div class="number">00.00.0000</div>
-					<div class="time">
-					    <span class="icon-clock"></span>
-					    <p>TODO 4 min 閱讀</p>
-					</div>
-				    </div>
-				    <div class="name text large bold">{{ post.post_title }}</div>
-				</a>
-			    {% endif %}
+			    </div>
 			{% endfor %}
-		    {% endif %}
+		    </div>
 		</div>
-		<div class="swiper-pagination"></div>
-		<div class="swiper-button-next">
-		    <span class="icon-chevron-right"></span>
-		</div>
-		<div class="swiper-button-prev">
-		    <span class="icon-chevron-right"></span>
-		</div>
-	    </div>
-	</section>
+	    </section>
+
+	{% endif %}
     {% endif %}
 {% endblock %}
