@@ -18,7 +18,7 @@ if ( ! class_exists( 'Projects_Overview_Controller' ) ) {
 		const BLOCK_NAME = 'projects_overview';
 
 		/** @const string DEFAULT_LAYOUT */
-		const DEFAULT_LAYOUT = 'default';
+		const DEFAULT_LAYOUT = '';
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -61,6 +61,26 @@ if ( ! class_exists( 'Projects_Overview_Controller' ) ) {
 					'meta'	=> [
 						'placeholder' => __( 'Description', 'planet4-gpnl-blocks' ),
 						'data-plugin' => 'planet4-gpnl-blocks',
+					],
+				],
+				[
+					'label' => 'Select the layout',
+					'description' => 'Select the layout',
+					'attr' => 'layout',
+					'type' => 'radio',
+					'options' => [
+						[
+							'value' => 'light',
+							'label' => __( 'Light background, dark text', 'planet4-gpnl-blocks' ),
+							'desc'	=> 'Light background, dark text',
+							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+						],
+						[
+							'value' => 'dark',
+							'label' => __( 'Dark background, light text', 'planet4-gpnl-blocks' ),
+							'desc'	=> 'Dark background, light text',
+							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+						],
 					],
 				],
 			];
