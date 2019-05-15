@@ -254,18 +254,29 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
 
 jQuery(document).ready(function() {
 
+  var allowed_shortcodes = [
+    'shortcake_metablock',
+    'shortcake_mixed_content_row',
+    'shortcake_repeater',
+    'shortcake_milestones',
+  ];
+
   // Attach hooks when rendering a new metablock.
   wp.shortcake.hooks.addAction('shortcode-ui.render_new', function (shortcode) {
     var shortcode_tag = shortcode.get('shortcode_tag');
-    var mb = new MetaBlock(shortcode_tag);
-    mb.render_new();
+    if(allowed_shortcodes.includes(shortcode_tag)) {
+      var mb = new MetaBlock(shortcode_tag);
+      mb.render_new();
+    }
   });
 
   // Trigger hooks when shortcode renders an existing metablock.
   wp.shortcake.hooks.addAction('shortcode-ui.render_edit', function (shortcode) {
     var shortcode_tag = shortcode.get('shortcode_tag');
-    var mb = new MetaBlock(shortcode_tag);
-    mb.render_edit();
+    if(allowed_shortcodes.includes(shortcode_tag)) {
+      var mb = new MetaBlock(shortcode_tag);
+      mb.render_edit();
+    }
   });
 
 });
