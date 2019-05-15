@@ -21,7 +21,7 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 		const DEFAULT_LAYOUT = 'default';
 
 		/** @const int MAX_REPEATER */
-		const MAX_REPEATER = 5;
+		const MAX_REPEATER = 10;
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
