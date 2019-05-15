@@ -40,6 +40,16 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 						'data-testdataasd' => 'planet4-gpnl-blocks',
 					],
 				],
+				[
+					'label' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'subtitle',
+					'type'	=> 'text',
+					'meta'	=> [
+						'placeholder' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
+						'data-testdataasd' => 'planet4-gpnl-blocks',
+					],
+				],
 			];
 
 			$posts = get_posts([
@@ -58,6 +68,7 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 			]);
 
 			$field_groups = [
+
 				'Title and text' => [
 					[
 						'label' => __('<i>Block %s title</i>', 'planet4-gpnl-blocks'),
@@ -78,6 +89,37 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 						],
 					],
 				],
+
+				'Two line title and text' => [
+					[
+						'label' => __('<i>Block %s title line 1</i>', 'planet4-gpnl-blocks'),
+						'attr'	=> 'titlea',
+						'type'	=> 'text',
+						'meta'	=> [
+							'placeholder' => __( 'Enter line 1', 'planet4-gpnl-blocks' ),
+							'data-plugin' => 'planet4-gpnl-blocks',
+						],
+					],
+					[
+						'label' => __('<i>Block %s title</i>', 'planet4-gpnl-blocks'),
+						'attr'	=> 'titleb',
+						'type'	=> 'text',
+						'meta'	=> [
+							'placeholder' => __( 'Enter title', 'planet4-gpnl-blocks' ),
+							'data-plugin' => 'planet4-gpnl-blocks',
+						],
+					],
+					[
+						'label' => __('<i>Block %s text</i>', 'planet4-gpnl-blocks'),
+						'attr'	=> 'textblock',
+						'type'	=> 'textarea',
+						'meta'	=> [
+							'placeholder' => __( 'Enter text', 'planet4-gpnl-blocks' ),
+							'data-plugin' => 'planet4-gpnl-blocks',
+						],
+					],
+				],
+
 				'Text only' => [
 					[
 						'label' => __('<i>Block %s text</i>', 'planet4-gpnl-blocks'),
@@ -89,6 +131,33 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 						],
 					],
 				],
+
+				'Tip' => [
+					[
+						'label' => __('<i>Block %s tip text</i>', 'planet4-gpnl-blocks'),
+						'attr'	=> 'textblock',
+						'type'	=> 'textarea',
+						'meta'	=> [
+							'placeholder' => __( 'Enter text', 'planet4-gpnl-blocks' ),
+							'data-plugin' => 'planet4-gpnl-blocks',
+						],
+					],
+					[
+						'label' => __('<i>Block %s tip icon</i>', 'planet4-gpnl-blocks'),
+						'attr'	=> 'icon',
+						'type'	=> 'select',
+						'options' => [
+							[ 'value' => '', 'label' => __( 'Select tip icon') ],
+							[ 'value' => '💦', 'label' => '💦' ],
+							[ 'value' => '🌧', 'label' => '🌧' ],
+						],
+						'meta'	=> [
+							'placeholder' => __( 'Select tip icon', 'planet4-gpnl-blocks' ),
+							'data-plugin' => 'planet4-gpnl-blocks',
+						],
+					],
+				],
+
 				'Post' => [
 					[
 						'label' => __('<i>Block %s post</i>', 'planet4-gpnl-blocks'),
@@ -101,6 +170,7 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 						],
 					],
 				],
+
 			];
 
 			$fields = $this->format_meta_fields( $fields, $field_groups );
