@@ -1,0 +1,12 @@
+{% block textbox %}
+    {% if ( fields ) %}
+	<section class="section-stats">
+	    <div class="box">
+		<p>{{ fields.text }}</p>
+		{% if ( fields.img ) %}
+		    <div class="box-3 lazy" data-bg="url({{ fields.img }})"></div>
+		{% endif %}
+	    </div>
+	</section>
+    {% endif %}
+{% endblock %}

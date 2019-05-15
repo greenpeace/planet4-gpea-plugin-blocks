@@ -85,6 +85,7 @@ P4NLBKS\Loader::get_instance( [
 	'P4NLBKS\Controllers\Blocks\UGC_Controller',
 	'P4NLBKS\Controllers\Blocks\Values_Section_Controller',
 	'P4NLBKS\Controllers\Blocks\Donate_Section_Controller',
+	'P4NLBKS\Controllers\Blocks\Textbox_Controller',
 	// 'P4NLBKS\Controllers\Blocks\Spotlight_Section_Controller',
 	'P4NLBKS\Models\Taxonomy',
 	'P4NLBKS\Models\Tags_Meta',
