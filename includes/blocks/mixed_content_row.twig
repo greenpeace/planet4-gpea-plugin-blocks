@@ -1,0 +1,41 @@
+{% block mixed_content_row %}
+    {% if ( static_fields ) %}
+	<section class="section-time-line">
+	    <div class="time-point">
+		<div class="ct-container">
+		    <p class="title">{{ static_fields.title }}</p>
+		</div>
+		{% if ( field_groups ) %}
+		    <div class="swiper-container section-time-line-swiper">
+			<div class="swiper-wrapper">
+			    {% for group in field_groups %}
+				{% if group.__group_type__ == 'post' %}
+				    <a href="" class="swiper-slide">
+					<div class="thumbnail lazy" data-bg="url(https://picsum.photos/id/140/1280/720)"></div>
+					<div class="tags">
+					    {% for tag in group.post.tags %}
+						<p>{{ tag.name }}</p>
+					    {% endfor %}
+					</div>
+					<p class="name">{{ group.post.title }}</p>
+				    </a>
+				{% elseif group.__group_type__ == 'textonly' %}
+				    <a href="" class="swiper-slide">
+					<p class="text">{{ group.textblock }}</p>
+				    </a>
+				{% elseif group.__group_type__ == 'titleandtext' %}
+				    <a href="" class="swiper-slide">
+					<p class="big-title">{{ group.title }}</p>
+					<p class="text">{{ group.textblock }}</p>
+				    </a>
+				{% else %}
+				    <!-- do nothing -->
+				{% endif %}
+			    {% endfor %}
+			</div>
+		    </div>
+		{% endif %}
+	    </div>
+	</section>
+    {% endif %}
+{% endblock %}
