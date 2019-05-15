@@ -259,6 +259,7 @@ jQuery(document).ready(function() {
     'shortcake_mixed_content_row',
     'shortcake_repeater',
     'shortcake_milestones',
+    'shortcake_tips',
   ];
 
   // Attach hooks when rendering a new metablock.

@@ -30,6 +30,7 @@ return array(
     'P4NLBKS\\Controllers\\Blocks\\Spotlight_Section_Controller' => $baseDir . '/classes/controller/blocks/class-spotlight-section-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Test_Controller' => $baseDir . '/classes/controller/blocks/class-test-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Textbox_Controller' => $baseDir . '/classes/controller/blocks/class-textbox-controller.php',
+    'P4NLBKS\\Controllers\\Blocks\\Tips_Controller' => $baseDir . '/classes/controller/blocks/class-tips-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\UGC_Controller' => $baseDir . '/classes/controller/blocks/ugc-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Values_Section_Controller' => $baseDir . '/classes/controller/blocks/class-values-section-controller.php',
     'P4NLBKS\\Controllers\\Menu\\Controller' => $baseDir . '/classes/controller/menu/class-controller.php',
