@@ -60,29 +60,35 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 				$fields[] =
 					[
 						'label' => sprintf( __('<i>Title %s</i>', 'planet4-gpnl-blocks'), $i ),
-						'attr'  => 'title_' . $i,
+						'attr'  => 'title_repeater_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpnl-blocks' ), $i ),
 							'data-plugin' => 'planet4-gpnl-blocks',
+							'data-element-type' => 'repeater',
+							'data-element-name' => 'repeater',
+							'data-element-number' => $i,
 						],
 					];
 
 				$fields[] =
 					[
 						'label' => sprintf( __('<i>Description %s</i>', 'planet4-gpnl-blocks'), $i ),
-						'attr'  => 'description_' . $i,
+						'attr'  => 'description_repeater_' . $i,
 						'type'  => 'textarea',
 						'meta'  => [
 							'placeholder' => sprintf( __( 'Enter description %s', 'planet4-gpnl-blocks' ), $i ),
 							'data-plugin' => 'planet4-gpnl-blocks',
+							'data-element-type' => 'repeater',
+							'data-element-name' => 'repeater',
+							'data-element-number' => $i,
 						],
 					];
 
 				$fields[] =
 					[
 						'label'       => sprintf( __('<i>Image %s.</i>', 'planet4-gpnl-blocks'), $i ),
-						'attr'        => 'attachment_' . $i,
+						'attr'        => 'attachment_repeater_' . $i,
 						'type'        => 'attachment',
 						'libraryType' => [ 'image' ],
 						'addButton'   => __( 'Select Image', 'planet4-gpnl-blocks' ),
@@ -92,18 +98,21 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 				$fields[] =
 					[
 						'label' => sprintf( __('<i>Button link %s</i>', 'planet4-gpnl-blocks'), $i ),
-						'attr'  => 'link_' . $i,
+						'attr'  => 'link_repeater_' . $i,
 						'type'  => 'url',
 						'meta'  => [
 							'placeholder' => sprintf( __( 'Enter button %s link', 'planet4-gpnl-blocks' ), $i ),
 							'data-plugin' => 'planet4-gpnl-blocks',
+							'data-element-type' => 'repeater',
+							'data-element-name' => 'repeater',
+							'data-element-number' => $i,
 						],
 					];
 
 				$fields[] =
 					[
 						'label' => sprintf( __('<i>Button text %s</i>', 'planet4-gpnl-blocks'), $i ),
-						'attr'  => 'cta_text_' . $i,
+						'attr'  => 'cta_text_repeater_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							'placeholder' => sprintf( __( 'Enter button %s text', 'planet4-gpnl-blocks' ), $i ),
