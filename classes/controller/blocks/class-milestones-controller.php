@@ -51,14 +51,6 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 						'data-plugin' => 'planet4-gpnl-blocks',
 					],
 				],
-				[
-					'label' => __( 'Map image', 'planet4-gpnl-blocks' ),
-					'attr'		  => 'map_img',
-					'type'		  => 'attachment',
-					'libraryType' => array( 'image' ),
-					'addButton'	  => __( 'Map image', 'planet4-gpnl-blocks' ),
-					'frameTitle'  => __( 'Map image', 'planet4-gpnl-blocks' ),
-				],
 			];
 
 			// This block will have at most MAX_REPEATER different items
@@ -130,10 +122,6 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 		 * @return array The data to be passed in the View.
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
-
-			if( isset( $attributes[ 'map_img' ] ) ) {
-				$attributes[ 'map_img' ] = wp_get_attachment_url( $attributes[ 'map_img' ] );
-			}
 
 			return [
 				'fields' => $attributes,
