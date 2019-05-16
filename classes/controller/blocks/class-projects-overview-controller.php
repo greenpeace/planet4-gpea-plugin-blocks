@@ -64,6 +64,21 @@ if ( ! class_exists( 'Projects_Overview_Controller' ) ) {
 					],
 				],
 				[
+					'label'    => __( 'Filter by Main Issue', 'planet4-gpnl-blocks' ),
+					'attr'     => 'main_issue',
+					'type'     => 'term_select',
+					'taxonomy' => 'category',
+					'multiple' => false,					
+					'meta'     => [
+						'select2_options' => [
+							'allowClear'         => true,
+							'placeholder'        => __( 'Select Tags', 'planet4-blocks-backend' ),
+							'closeOnSelect'      => true,
+							'minimumInputLength' => 0,
+						],
+					],
+				],
+				[
 					'label' => 'Select the layout',
 					'description' => 'Select the layout',
 					'attr' => 'layout',
@@ -110,19 +125,34 @@ if ( ! class_exists( 'Projects_Overview_Controller' ) ) {
 
 			$formatted_posts = [];
 
-			$posts = get_posts( array(
+			// Check if result needs to be filtered by category
+			$cat_id = $attributes['main_issue'] ?? '';
+
+			// Project block default text setting.
+			$options = array(
 				'order'		  => 'desc',
 				'orderby'	  => 'date',
 				'post_type'	  => 'page',
 				'numberposts' => 20,
 				'tax_query' => array(
+					'relation' => 'AND',
 					array(
 						'taxonomy' => 'p4_post_attribute',
 						'field' => 'slug',
 						'terms' => 'project',
-					)
+					),					
 				)
-			) );
+			);
+
+			if ('' !== $cat_id) {
+				$options['tax_query'][] = array(
+					'taxonomy' => 'category',
+					'field' => 'term_id',
+					'terms' => $cat_id,
+				);
+			}
+
+			$posts = get_posts( $options );
 
 			if( $posts ) {
 				foreach( $posts as $post ) {
