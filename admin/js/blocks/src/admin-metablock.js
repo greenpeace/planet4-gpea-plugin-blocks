@@ -42,7 +42,7 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
         var input_values = $('.field-block')
             .filter($('div[class$=\'_' + element_id + '\']'))
             .children()
-            .filter($('input, textarea'))
+            .filter($('input, textarea, select'))
             .map(function (idx, elem) {
               return $(elem).val();
             }).get().join('');
