@@ -63,8 +63,8 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 				];
 			}, $posts);
 			array_unshift($posts, [
-					'value' => '',
-					'label' => __( 'Please select a post', 'planet4-gpnl-blocks' ),
+				'value' => '',
+				'label' => __( 'Please select a post', 'planet4-gpnl-blocks' ),
 			]);
 
 			$field_groups = [
@@ -264,11 +264,22 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 					$group[ '__group_type__' ] = $group_type;
 				}
 
-				if( $group_type == 'post' ) {
+				if( $group_type == 'post' and preg_match( '/^\d+$/', $group['post'] ) ) {
 					$post = get_posts([
 						'include' => $group['post'],
 					]);
-					$group['post'] = (array) $post[0];
+					if( is_array( $post ) and sizeof( $post ) ) {
+						$post = (array) $post[0];
+						if ( has_post_thumbnail( $post['ID'] ) ) {
+							$img_id = get_post_thumbnail_id( $post['ID'] );
+							$img_data = wp_get_attachment_image_src( $img_id , 'medium' );
+							$post['img_url'] = $img_data[0];
+							$post['tags'] = get_the_tags( $post['ID'] );
+						}
+						$group['post'] = $post;
+					} else {
+						$group['post'] = false;
+					}
 				}
 
 				$field_groups[] = $group;

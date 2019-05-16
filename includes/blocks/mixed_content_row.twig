@@ -10,15 +10,15 @@
 		    <div class="swiper-container section-time-line-swiper">
 			<div class="swiper-wrapper">
 			    {% for group in field_groups %}
-				{% if group.__group_type__ == 'post' %}
+				{% if group.__group_type__ == 'post' and group.post %}
 				    <a href="" class="swiper-slide">
-					<div class="thumbnail lazy" data-bg="url(https://picsum.photos/id/140/1280/720)"></div>
+					<div class="thumbnail lazy" data-bg="url({{ group.post.img_url }})"></div>
 					<div class="tags">
 					    {% for tag in group.post.tags %}
 						<p>{{ tag.name }}</p>
 					    {% endfor %}
 					</div>
-					<p class="name">{{ group.post.title }}</p>
+					<p class="name">{{ group.post.post_title }}</p>
 				    </a>
 				{% elseif group.__group_type__ == 'textonly' %}
 				    <a href="" class="swiper-slide">
