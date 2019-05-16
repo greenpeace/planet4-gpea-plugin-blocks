@@ -13,15 +13,19 @@
 			<p class="content text">{{ fields.description }}</p>
 			<p class="ps text bold">{{ fields.see_more_label }} (TODO link)</p>
 		    </div>
-		    {% for i in 1..25 %}
-			{% if fields['description_tip_'~i] %}
+		    {#% for i in 1..25 %#}
+			{#% if fields['description_tip_'~i] %#}
+			
+			{% if fields.posts %}
+				{% for post in fields.posts %}
 			    <div class="swiper-slide post card">
 				<div class="top-box">
-				    <p>每日提示 (TODO dynamic)</p>
-				    <p>{{ fields['tag_tip_'~i] }}</p>
+					<p>{{ post.frequency }}</p>
+					<!-- TODO passare anche categoria main issue  -->
+				    <p>海洋</p>
 				</div>
-				<img class="lazy" src="" data-src="https://png.pngtree.com/element_origin_min_pic/17/03/26/53cf24d5354c414ef31930046490b023.jpg" alt="">
-				<h2>{{ fields['description_tip_'~i] }}</h2>
+				<img class="lazy" src="" data-src="{{ post.img_url }}" alt="">
+				<h2>{{ post.post_title }}</h2>
 				<!-- TODO migrate to icon: {{ fields['icon_tip_'~i] }}  -->
 				<div class="social-box">
 				    <a href="">
@@ -31,9 +35,12 @@
 					<span class="icon-whatsapp"></span>
 				    </a>
 				</div>
-			    </div>
+				</div>
+				{% endfor %}
 			{% endif %}
-		    {% endfor %}
+			
+			{#% endif %#}
+		    {#% endfor %#}
 		</div>
 		<div class="swiper-pagination"></div>
 		<div class="swiper-button-next">
