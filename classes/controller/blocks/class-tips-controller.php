@@ -90,59 +90,6 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 				],
 			];
 
-			// This block will have at most MAX_REPEATER different items
-
-			// for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
-
-			// 	$fields[] =
-			// 		[
-			// 			'label' => sprintf( __('<i>Tip %s tag</i>', 'planet4-gpnl-blocks'), $i ),
-			// 			'attr'	=> 'tag_tip_' . $i,
-			// 			'type'	=> 'text',
-			// 			'meta'	=> [
-			// 				'placeholder' => sprintf( __( 'Enter tag %s', 'planet4-gpnl-blocks' ), $i ),
-			// 				'data-plugin' => 'planet4-gpnl-blocks',
-			// 				'data-element-type' => 'tip',
-			// 				'data-element-name' => 'tip',
-			// 				'data-element-number' => $i,
-			// 			],
-			// 		];
-
-			// 	$fields[] =
-			// 		  [
-			// 			  'label' => sprintf( __('<i>Tip %s description</i>', 'planet4-gpnl-blocks'), $i ),
-			// 			  'attr'	=> 'description_tip_' . $i,
-			// 			  'type'	=> 'textarea',
-			// 			  'meta'	=> [
-			// 				  'placeholder' => sprintf( __( 'Enter description %s', 'planet4-gpnl-blocks' ), $i ),
-			// 				  'data-plugin' => 'planet4-gpnl-blocks',
-			// 				  'data-element-type' => 'tip',
-			// 				  'data-element-name' => 'tip',
-			// 				  'data-element-number' => $i,
-			// 			  ],
-			// 		  ];
-
-			// 	$fields[] =
-			// 		  [
-			// 			  'label' => sprintf( __('<i>Tip %s icon</i>', 'planet4-gpnl-blocks'), $i ),
-			// 			  'attr'	=> 'icon_tip_' . $i,
-			// 			  'type'	=> 'select',
-			// 			  'options' => [
-			// 				  [ 'value' => '', 'label' => __( 'Select tip icon') ],
-			// 				  [ 'value' => '💦', 'label' => '💦' ],
-			// 				  [ 'value' => '🌧', 'label' => '🌧' ],
-			// 			  ],
-			// 			  'meta'	=> [
-			// 				  'placeholder' => sprintf( __( 'Select tip %s icon', 'planet4-gpnl-blocks' ), $i ),
-			// 				  'data-plugin' => 'planet4-gpnl-blocks',
-			// 				  'data-element-type' => 'tip',
-			// 				  'data-element-name' => 'tip',
-			// 				  'data-element-number' => $i,
-			// 			  ],
-			// 		  ];
-
-			// }
-
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
 				'label'			=> __( 'LATTE | Tips', 'planet4-gpnl-blocks' ),
@@ -186,7 +133,7 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 							$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
 							$post['img_url'] = $img_data[0];
 						}
-						
+
 						// check extra meta information
 						$frequency = get_post_meta( $post['ID'], 'p4-gpea_tip_frequency', true );
 						$post['frequency'] = $frequency ?? '';
@@ -197,7 +144,6 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 			}
 
 			$attributes['posts'] = $formatted_posts;
-			// $attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
 			return [
 				'fields' => $attributes,
@@ -217,9 +163,6 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
-			// $data = [
-			// 	'fields' => $fields,
-			// ];
 			$data = $this->prepare_data( $fields );
 
 			// Shortcode callbacks must return content, hence, output buffering here.

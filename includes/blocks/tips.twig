@@ -13,20 +13,16 @@
 			<p class="content text">{{ fields.description }}</p>
 			<p class="ps text bold">{{ fields.see_more_label }} (TODO link)</p>
 		    </div>
-		    {#% for i in 1..25 %#}
-			{#% if fields['description_tip_'~i] %#}
-			
-			{% if fields.posts %}
-				{% for post in fields.posts %}
+		    {% if fields.posts %}
+			{% for post in fields.posts %}
 			    <div class="swiper-slide post card">
 				<div class="top-box">
-					<p>{{ post.frequency }}</p>
-					<!-- TODO passare anche categoria main issue  -->
+				    <p>{{ post.frequency }}</p>
+				    <!-- TODO passare anche categoria main issue  -->
 				    <p>海洋</p>
 				</div>
 				<img class="lazy" src="" data-src="{{ post.img_url }}" alt="">
 				<h2>{{ post.post_title }}</h2>
-				<!-- TODO migrate to icon: {{ fields['icon_tip_'~i] }}  -->
 				<div class="social-box">
 				    <a href="">
 					<span class="icon-facebook"></span>
@@ -35,12 +31,9 @@
 					<span class="icon-whatsapp"></span>
 				    </a>
 				</div>
-				</div>
-				{% endfor %}
-			{% endif %}
-			
-			{#% endif %#}
-		    {#% endfor %#}
+			    </div>
+			{% endfor %}
+		    {% endif %}
 		</div>
 		<div class="swiper-pagination"></div>
 		<div class="swiper-button-next">
