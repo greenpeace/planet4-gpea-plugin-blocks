@@ -4,9 +4,9 @@
 	<section class="section-stats">
 	    <div class="boxes">
 		<div class="box {{ box_color }}">
-			{#% if ( fields.title ) %}
+		    {% if ( fields.title ) %}
 			<h2>{{ fields.title }}</h2>
-			{% endif %#}
+		    {% endif %}
 		    <p>{{ fields.text }}</p>
 		</div>
 		{% if ( fields.img ) %}

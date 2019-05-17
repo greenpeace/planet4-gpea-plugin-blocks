@@ -28,7 +28,7 @@ if ( ! class_exists( 'Textbox_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title (not yet active)', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Title', 'planet4-gpnl-blocks' ),
 					'attr'	=> 'title',
 					'type'	=> 'text',
 					'meta'	=> [
