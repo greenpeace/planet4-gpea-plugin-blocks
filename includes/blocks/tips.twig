@@ -19,7 +19,9 @@
 				<div class="top-box">
 				    <p>{{ post.frequency }}</p>
 				    <!-- TODO passare anche categoria main issue  -->
-				    <p>海洋</p>
+				    {% if post.categories %}
+					<p>{{ post.categories }}</p>
+				    {% endif %}
 				</div>
 				{% if post.img_url %}
 				    <img class="lazy" src="" data-src="{{ post.img_url }}" alt="">

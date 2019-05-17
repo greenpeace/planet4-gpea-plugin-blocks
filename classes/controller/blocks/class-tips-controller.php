@@ -131,7 +131,20 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 						$post['img_url'] = $tip_icon ?? '';
 						$frequency = get_post_meta( $post['ID'], 'p4-gpea_tip_frequency', true );
 						$post['frequency'] = $frequency ?? '';
-
+						// TODO:
+						// - abstract this one to parent
+						// - also avoid magic constant 'issues'
+						$issues = get_category_by_slug( 'issues' );
+						$issues = $issues->term_id;
+						$categories = get_the_category( $post['ID'] );
+						$categories = array_filter( $categories , function( $cat ) use ( $issues ) {
+							return $cat->category_parent === $issues;
+						});
+						$categories = array_map( function( $cat ) {
+							return $cat->slug;
+						}, $categories );
+						$categories = join( ', ', $categories );
+						$post['categories'] = $categories ?? '';
 						$formatted_posts[] = $post;
 					}
 				}
