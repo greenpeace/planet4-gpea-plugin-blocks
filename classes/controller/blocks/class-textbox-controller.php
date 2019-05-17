@@ -28,6 +28,15 @@ if ( ! class_exists( 'Textbox_Controller' ) ) {
 
 			$fields = [
 				[
+					'label' => __( 'Title (not yet active)', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'title',
+					'type'	=> 'text',
+					'meta'	=> [
+						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
+					],
+				],
+				[
 					'label' => __( 'Text', 'planet4-gpnl-blocks' ),
 					'attr'	=> 'text',
 					'type'	=> 'textarea',
