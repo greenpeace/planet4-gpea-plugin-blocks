@@ -2,20 +2,20 @@
 
 namespace P4NLBKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Textbox_Controller' ) ) {
+if ( ! class_exists( 'Text_And_Image_Controller' ) ) {
 	/**
 	 * @noinspection AutoloadingIssuesInspection
 	 */
 
 	/**
-	 * Class Textbox_Controller
+	 * Class Text_And_Image_Controller
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */
-	class Textbox_Controller extends Controller {
+	class Text_And_Image_Controller extends Controller {
 
 		/** @const string BLOCK_NAME */
-		const BLOCK_NAME = 'textbox';
+		const BLOCK_NAME = 'text_and_image';
 
 		/** @const string DEFAULT_LAYOUT */
 		const DEFAULT_LAYOUT = 'light';
@@ -77,7 +77,7 @@ if ( ! class_exists( 'Textbox_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Text block', 'planet4-gpnl-blocks' ),
+				'label'			=> __( 'LATTE | Text and image block', 'planet4-gpnl-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
 				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
