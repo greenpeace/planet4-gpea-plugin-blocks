@@ -33,7 +33,7 @@
         "new-cap": "error"
     },
 	"globals": {
-		"$": "writeable",
+		"$": "writable",
 		"formconfig": "writable",
 		"form_config": "writable",
 		"Vue": "writable",
@@ -43,7 +43,7 @@
 		"gtm_products": "writable",
 		"donationformVue": "writable",
 		"clang" : "writable",
-		"moment" : "writeable",
-		"L": "writeable"
+		"moment" : "writable",
+		"L": "writable"
 	}
 }
