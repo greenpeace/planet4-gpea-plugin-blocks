@@ -127,14 +127,8 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 				if( $posts ) {
 					foreach( $posts as $post ) {
 						$post = (array) $post; // TODO clean up this typecasting
-
-						if ( has_post_thumbnail( $post['ID'] ) ) {
-							$img_id = get_post_thumbnail_id( $post['ID'] );
-							$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
-							$post['img_url'] = $img_data[0];
-						}
-
-						// check extra meta information
+						$tip_icon = get_post_meta( $post['ID'], 'p4-gpea_tip_icon', true );
+						$post['img_url'] = $tip_icon ?? '';
 						$frequency = get_post_meta( $post['ID'], 'p4-gpea_tip_frequency', true );
 						$post['frequency'] = $frequency ?? '';
 

@@ -21,7 +21,9 @@
 				    <!-- TODO passare anche categoria main issue  -->
 				    <p>海洋</p>
 				</div>
-				<img class="lazy" src="" data-src="{{ post.img_url }}" alt="">
+				{% if post.img_url %}
+				    <img class="lazy" src="" data-src="{{ post.img_url }}" alt="">
+				{% endif %}
 				<h2>{{ post.post_title }}</h2>
 				<div class="social-box">
 				    <a href="">
