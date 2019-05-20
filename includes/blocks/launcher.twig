@@ -1,0 +1,20 @@
+{% block launcher %}
+    {% if ( fields ) %}
+	<section class="section-willing">
+	    <div class="ct-container">
+		<div class="content">
+		    {% if ( fields.title ) %}
+			<h2>{{ fields.title }}</h2>
+		    {% endif %}
+		    <p>{{ fields.text }}</p>
+		    {% if ( fields.img ) %}
+			<img class="lady lazy" data-src="{{ fields.img }}" alt="">
+		    {% endif %}
+		    {% if ( fields.cta_text and fields.cta_url ) %}
+			<a href="{{ fields.cta_url }}" class="button light">{{ fields.cta_text }}</a>
+		    {% endif %}
+		</div>
+	    </div>
+	</section>
+    {% endif %}
+{% endblock %}
