@@ -1,20 +1,47 @@
 {% block launcher %}
     {% if ( fields ) %}
-	<section class="section-willing">
-	    <div class="ct-container">
-		<div class="content">
-		    {% if ( fields.title ) %}
-			<h2>{{ fields.title }}</h2>
-		    {% endif %}
-		    <p>{{ fields.text }}</p>
-		    {% if ( fields.img ) %}
-			<img class="lady lazy" data-src="{{ fields.img }}" alt="">
-		    {% endif %}
-		    {% if ( fields.cta_text and fields.cta_url ) %}
-			<a href="{{ fields.cta_url }}" class="button light">{{ fields.cta_text }}</a>
-		    {% endif %}
+	{% if ( fields.layout == 'centered' ) %}
+	    <section class="section-willing">
+		<div class="ct-container">
+		    <div class="content">
+			<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+			<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+			{% if ( fields.img ) %}
+			    <img class="lady lazy" data-src="{{ fields.img }}" alt="">
+			{% endif %}
+			{% if ( fields.cta_text and fields.cta_url ) %}
+			    <a href="{{ fields.cta_url }}" class="button light">{{ fields.cta_text|e('wp_kses_post')|raw }}</a>
+			{% endif %}
+		    </div>
 		</div>
-	    </div>
-	</section>
+	    </section>
+	{% endif %}
+	{% if ( fields.layout == 'dark_left' ) %}
+	    <section class="dark">
+		<div class="generic-content ct-container">
+		    <div class="top-bar mb">
+			<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+			<span class="icon-chevron-right"></span>
+		    </div>
+		    <p class="mb">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+		</div>
+		<div class="swiper-container mini-swiper">
+		    <div class="swiper-wrapper">
+			<div class="swiper-slide">
+			    <div class="poster lazy" data-bg="url({{ fields.img }})"></div>
+			</div>
+			<div class="swiper-slide">
+			    <p class="light large center">{{ fields.description|e('wp_kses_post')|raw }}</p>
+			    {% if ( fields.cta_text and fields.cta_url ) %}
+				<a href="{{ fields.cta_url }}" class="button">{{ fields.cta_text|e('wp_kses_post')|raw }}</a>
+			    {% endif %}
+			    {% if ( fields.cta_2_text and fields.cta_2_url ) %}
+				<a href="{{ fields.cta_2_url }}" class="more">{{ fields.cta_2_text|e('wp_kses_post')|raw }}</a>
+			    {% endif %}
+			</div>
+		    </div>
+		</div>
+	    </section>
+	{% endif %}
     {% endif %}
 {% endblock %}

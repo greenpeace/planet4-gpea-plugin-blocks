@@ -37,11 +37,20 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Text', 'planet4-gpnl-blocks' ),
-					'attr'	=> 'text',
-					'type'	=> 'textarea',
+					'label' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'subtitle',
+					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Text', 'planet4-gpnl-blocks' ),
+						'placeholder' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
+					],
+				],
+				[
+					'label' => __( 'Description', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'description',
+					'type'	=> 'text',
+					'meta'	=> [
+						'placeholder' => __( 'Description', 'planet4-gpnl-blocks' ),
 						'data-plugin' => 'planet4-gpnl-blocks',
 					],
 				],
@@ -72,6 +81,24 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 					],
 				],
 				[
+					'label' => __( 'CTA 2 text', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'cta_2_text',
+					'type'	=> 'text',
+					'meta'	=> [
+						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
+					],
+				],
+				[
+					'label' => __( 'CTA 2 link', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'cta_2_url',
+					'type'	=> 'url',
+					'meta'	=> [
+						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
+					],
+				],
+				[
 					'label' => 'Select the layout',
 					'description' => 'Select the layout',
 					'attr' => 'layout',
@@ -81,6 +108,12 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 							'value' => 'centered',
 							'label' => __( 'Centered', 'planet4-gpnl-blocks' ),
 							'desc'	=> 'Centered layout',
+							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+						],
+						[
+							'value' => 'dark_left',
+							'label' => __( 'Dark, left layout', 'planet4-gpnl-blocks' ),
+							'desc'	=> 'Dark, left layout',
 							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
