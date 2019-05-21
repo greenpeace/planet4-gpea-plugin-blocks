@@ -3,15 +3,15 @@
 	<section class="section-projects light pink">
 	    <div class="mobile-top-box">
 		<div class="ct-container">
-		    <p class="title text very-big light center">{{ fields.title }}</p>
+		    <p class="title text very-big light center">{{ fields.title|e('wp_kses_post')|raw }}</p>
 		</div>
 	    </div>
 	    <div class="swiper-container section-projects-swiper">
 		<div class="swiper-wrapper">
 		    <div class="swiper-slide first">
-			<p class="title text very-big light">{{ fields.title }}</p>
-			<p class="content text">{{ fields.description }}</p>
-			<p class="ps text bold">{{ fields.see_more_label }} (TODO link)</p>
+			<p class="title text very-big light">{{ fields.title|e('wp_kses_post')|raw }}</p>
+			<p class="content text">{{ fields.description|e('wp_kses_post')|raw }}</p>
+			<p class="ps text bold">{{ fields.see_more_label|e('wp_kses_post')|raw }} (TODO link)</p>
 		    </div>
 		    {% if fields.posts %}
 			{% for post in fields.posts %}
@@ -26,7 +26,7 @@
 				{% if post.img_url %}
 				    <img class="lazy" src="" data-src="{{ post.img_url }}" alt="">
 				{% endif %}
-				<h2>{{ post.post_title }}</h2>
+				<h2>{{ post.post_title|e('wp_kses_post')|raw }}</h2>
 				<div class="social-box">
 				    <a href="">
 					<span class="icon-facebook"></span>
@@ -50,7 +50,7 @@
 	    <div class="mobile-bottom-box">
 		<div class="ct-container">
 		    <center>
-			<p>{{ fields.see_more_label }} (TODO link)</p>
+			<p>{{ fields.see_more_label|e('wp_kses_post')|raw }} (TODO link)</p>
 		    </center>
 		</div>
 	    </div>
