@@ -71,6 +71,12 @@ if ( ! class_exists( 'Text_And_Image_Controller' ) ) {
 							'desc'	=> 'Dark background, light text',
 							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
 						],
+						[
+							'value' => 'plain_light',
+							'label' => __( 'Plain text, light', 'planet4-gpnl-blocks' ),
+							'desc'	=> 'Dark background, light text',
+							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+						],
 					],
 				],
 			];

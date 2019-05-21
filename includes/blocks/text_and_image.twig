@@ -1,25 +1,39 @@
 {% block text_and_image %}
     {% if ( fields ) %}
-	{% set box_color = fields.layout == 'dark' ? 'bg-blue' : '' %}
-	<section class="section-stats">
-	    <div class="boxes">
-		<div class="box {{ box_color }}">
+	{% if ( fields.layout == 'plain_light') %}
+	    <section>
+		<div class="ct-container generic-content">
 		    {% if ( fields.title ) %}
 			<h2>{{ fields.title }}</h2>
 		    {% endif %}
-		    <p>{{ fields.text }}</p>
+		    {% if ( fields.text ) %}
+			<p>{{ fields.text }}</p>
+		    {% endif %}
 		</div>
-		{% if ( fields.img ) %}
-		    <div class="box fit">
-			<div class="swiper-container section-stats-swiper">
-			    <div class="swiper-wrapper">
-				<div class="swiper-slide image lazy" data-bg="url({{ fields.img }})"></div>
-			    </div>
-			    <div class="swiper-pagination"></div>
-			</div>
+	    </section>
+	{% endif %}
+	{% if ( fields.layout == 'light' or fields.layout == 'dark' ) %}
+	    {% set box_color = fields.layout == 'dark' ? 'bg-blue' : '' %}
+	    <section class="section-stats">
+		<div class="boxes">
+		    <div class="box {{ box_color }}">
+			{% if ( fields.title ) %}
+			    <h2>{{ fields.title }}</h2>
+			{% endif %}
+			<p>{{ fields.text }}</p>
 		    </div>
-		{% endif %}
-	    </div>
-	</section>
+		    {% if ( fields.img ) %}
+			<div class="box fit">
+			    <div class="swiper-container section-stats-swiper">
+				<div class="swiper-wrapper">
+				    <div class="swiper-slide image lazy" data-bg="url({{ fields.img }})"></div>
+				</div>
+				<div class="swiper-pagination"></div>
+			    </div>
+			</div>
+		    {% endif %}
+		</div>
+	    </section>
+	{% endif %}
     {% endif %}
 {% endblock %}
