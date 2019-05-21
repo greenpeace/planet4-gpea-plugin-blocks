@@ -26,6 +26,7 @@ return array(
     'P4NLBKS\\Controllers\\Blocks\\Metablock_Controller' => $baseDir . '/classes/controller/blocks/class-metablock-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Milestones_Controller' => $baseDir . '/classes/controller/blocks/class-milestones-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Mixed_Content_Row_Controller' => $baseDir . '/classes/controller/blocks/class-mixed-content-row.php',
+    'P4NLBKS\\Controllers\\Blocks\\Mixed_Content_Slideshow_Controller' => $baseDir . '/classes/controller/blocks/class-mixed-content-slideshow.php',
     'P4NLBKS\\Controllers\\Blocks\\No_Index_Controller' => $baseDir . '/classes/controller/blocks/class-noindex-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Petition_Controller' => $baseDir . '/classes/controller/blocks/class-petition-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Projects_Overview_Controller' => $baseDir . '/classes/controller/blocks/class-projects-overview-controller.php',

@@ -1,0 +1,94 @@
+{% block mixed_content_row %}
+    <section class="section-maxi-swiper-MODULE">
+	<div class="swiper-container maxi-swiper">
+            <div class="swiper-wrapper">
+		{% if ( static_fields ) %}
+		    {{ static_fields.title }}
+		    {{ static_fields.subtitle }}
+		{% endif %}
+		{% if ( field_groups ) %}
+		    {% for group in field_groups %}
+			{% if group.__group_type__ == 'post' and group.post %}
+			    <a href="#" class="swiper-slide card-update">
+				<div
+				    class="thumbnail"
+					   style="background-image: url(https://picsum.photos/id/12/300/300)"
+				></div>
+				<div class="info">
+				    <div class="info-box">
+					<div class="meta">
+					    <span class="tag oceans">TODO dynamic posts 海洋</span>
+					    <span class="type">TODO dynamic posts 新闻</span>
+					</div>
+					<div class="time">
+					    <span class="reading-time">
+						<span class="icon-clock"></span>
+						4 min 閱讀
+					    </span>
+					    <span class="date">2018-12-07</span>
+					</div>
+				    </div>
+				    <p>
+					TODO dynamic posts 三大年宵每日派膠超過30萬件 大多不能回收
+				    </p>
+				</div>
+			    </a>
+			{% elseif group.__group_type__ == 'petition' and group.post %}
+			    <div class="swiper-slide card-petition">
+				<div class="thumbnail" style="background-image: url({{ group.img }})"></div>
+				<div class="box">
+				    <div class="progress-bar">
+					<div class="percent" style="width: 90%"></div>
+				    </div>
+				    <p class="stats">已有2,347 名簽署者</p>
+				    <div class="content">
+					<p>TODO 推動全球最大保護區成真：南極海洋保護區</p>
+					<a href="" class="button small light">TODO 我要支持</a>
+				    </div>
+				</div>
+			    </div>
+			{% elseif group.__group_type__ == 'splittextandimage' %}
+			    <div class="swiper-slide card-explainer wide-text">
+				<div class="description">
+				    <h4>{{ group.title }}</h4>
+				    <p class="subtitle">{{ group.subtitle }}</p>
+				    <p>{{ group.textblock }}</p>
+				</div>
+				<div class="thumbnail" style="background-image: url({{ group.img }})"></div>
+			    </div>
+			{% elseif group.__group_type__ == 'bigimageandtext' %}
+			    <div class="swiper-slide card-explainer">
+				<div class="description">
+				    <h4>{{ group.title }}</h4>
+				    <p class="subtitle">{{ group.subtitle }}</p>
+				    <p>{{ group.textblock }}</p>
+				</div>
+				<div class="thumbnail" style="background-image: url({{ group.img }})"></div>
+			    </div>
+			{% elseif group.__group_type__ == 'testimonial' %}
+			    <div class="swiper-slide card-testimonial">
+				<p>{{ group.textblock }}</p>
+				<div class="profile">
+				    <img src="{{ group.img }}" alt="" />
+				    <div class="name">{{ group.name }}</div>
+				    <div class="position">{{ group.position }}</div>
+				</div>
+			    </div>
+			{% else %}
+			    <!-- do nothing -->
+			{% endif %}
+		    {% endfor %}
+		{% endif %}
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next">
+		<span class="icon-chevron-right"></span>
+            </div>
+            <div class="swiper-button-prev">
+		<span class="icon-chevron-right"></span>
+            </div>
+	</div>
+    </section>
+{% endblock %}
+
+
