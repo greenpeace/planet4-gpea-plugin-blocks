@@ -116,6 +116,12 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 							'desc'	=> 'Dark, left layout',
 							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
 						],
+						[
+							'value' => 'centered_box',
+							'label' => __( 'Centered box', 'planet4-gpnl-blocks' ),
+							'desc'	=> 'Centered box',
+							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+						],
 					],
 				],
 			];

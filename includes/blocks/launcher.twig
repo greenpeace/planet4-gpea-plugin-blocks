@@ -16,6 +16,27 @@
 		</div>
 	    </section>
 	{% endif %}
+	{% if ( fields.layout == 'centered_box' ) %}
+	    <section class="section-latest-active pink">
+		<div class="ct-container">
+		    <div class="content">
+			<div class="swiper-slide first">
+			    <h1>{{ fields.title|e('wp_kses_post')|raw }}</h1>
+			</div>
+			<div class="swiper-slide second" style="background-image: url({{ fields.img }})">
+			    <div class="box">
+				<div class="content">
+				    <p>{{ fields.description|e('wp_kses_post')|raw }}</p>
+				    {% if ( fields.cta_text and fields.cta_url ) %}
+					<a href="{{ fields.cta_url }}" class="button light">{{ fields.cta_text|e('wp_kses_post')|raw }}</a>
+				    {% endif %}
+				</div>
+			    </div>
+			</div>
+		    </div>
+		</div>
+	    </section>
+	{% endif %}
 	{% if ( fields.layout == 'dark_left' ) %}
 	    <section class="dark">
 		<div class="generic-content ct-container">
