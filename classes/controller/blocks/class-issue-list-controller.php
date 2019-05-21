@@ -48,15 +48,15 @@ if ( ! class_exists( 'Issue_List_Controller' ) ) {
 						'data-plugin' => 'planet4-gpnl-blocks',
 					],
 				],
-				[
-					'label' => __( 'Description', 'planet4-gpnl-blocks' ),
-					'attr'	=> 'description',
-					'type'	=> 'textarea',
-					'meta'	=> [
-						'placeholder' => __( 'Description', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
-					],
-				],
+				// [
+				// 	'label' => __( 'Description', 'planet4-gpnl-blocks' ),
+				// 	'attr'	=> 'description',
+				// 	'type'	=> 'textarea',
+				// 	'meta'	=> [
+				// 		'placeholder' => __( 'Description', 'planet4-gpnl-blocks' ),
+				// 		'data-plugin' => 'planet4-gpnl-blocks',
+				// 	],
+				// ],
 				// [
 				// 	'label'		  => __( 'Campaigns', 'planet4-gpnl-blocks' ),
 				// 	'attr'	   => 'campaign_ids',
