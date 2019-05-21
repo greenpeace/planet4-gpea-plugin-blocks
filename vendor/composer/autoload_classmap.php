@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'P4NLBKS\\Controllers\\Blocks\\Achievement_Section_Controller' => $baseDir . '/classes/controller/blocks/class-achievement-section.php',
+    'P4NLBKS\\Controllers\\Blocks\\Article_Row_Controller' => $baseDir . '/classes/controller/blocks/class-article-row-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Controller' => $baseDir . '/classes/controller/blocks/class-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Custom_Query_Controller' => $baseDir . '/classes/controller/blocks/class-custom-query-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Donate_Section_Controller' => $baseDir . '/classes/controller/blocks/class-donate-section-controller.php',

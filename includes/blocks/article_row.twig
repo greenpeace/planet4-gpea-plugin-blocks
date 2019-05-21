@@ -1,0 +1,35 @@
+{% block article_row %}
+    {% if ( fields ) %}
+	<section class="section-you-help gray">
+	    <div class="generic-content ct-container">
+		<div class="top-bar">
+		    <div class="left">
+			<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+			<!-- TODO questa in realtà segnalade da cookie se seguo il tag... -->
+			{% if ( fields.layout == 'show_tag' and fields.tag_name ) %}
+			    <p class="status">{{ fields.tag_name }}</p>
+			{% endif %}
+		    </div>
+		    <div class="right">
+			<span class="icon-chevron-right"></span>
+		    </div>
+		</div>
+	    </div>
+	    <div class="swiper-container mini-swiper">
+		<div class="swiper-wrapper">
+		    {% for post in fields.posts %}
+			<div class="swiper-slide">
+			    <div class="data-bar">
+				<p>{{ post.post_date }}</p>
+				{% for tag in post.tags %}
+				    <p>{{ tag.name }}</p>
+				{% endfor %}
+			    </div>
+			    <p><b>{{ post.post_title }}</b></p>
+			</div>
+		    {% endfor %}
+		</div>
+	    </div>
+	</section>
+    {% endif %}
+{% endblock %}

@@ -79,6 +79,7 @@ P4NLBKS\Loader::get_instance( [
 	'P4NLBKS\Controllers\Blocks\Metablock_Controller',
 	'P4NLBKS\Controllers\Blocks\Mixed_Content_Row_Controller',
 	'P4NLBKS\Controllers\Blocks\Projects_Overview_Controller',
+	'P4NLBKS\Controllers\Blocks\Article_Row_Controller',
 	'P4NLBKS\Controllers\Blocks\General_Updates_Controller',
 	'P4NLBKS\Controllers\Blocks\Main_Issues_Controller',
 	'P4NLBKS\Controllers\Blocks\Issue_List_Controller',
