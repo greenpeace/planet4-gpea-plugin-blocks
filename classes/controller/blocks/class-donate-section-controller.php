@@ -88,6 +88,15 @@ if ( ! class_exists( 'Donate_Section_Controller' ) ) {
 					'addButton'	  => __( 'Select image', 'planet4-gpnl-blocks' ),
 					'frameTitle'  => __( 'Select image', 'planet4-gpnl-blocks' ),
 				],
+				[
+					'label' => __( 'Fade upper border?', 'planet4-gpnl-blocks' ),
+					'attr'		  => 'upper_fade',
+					'type'		  => 'checkbox',
+					'meta'	=> [
+						'placeholder' => __( 'Fade upper border?', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
+					],
+				],
 			];
 
 			// Define the Shortcode UI arguments.
