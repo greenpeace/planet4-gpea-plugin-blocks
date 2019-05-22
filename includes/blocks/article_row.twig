@@ -6,9 +6,9 @@
 		    <div class="left">
 			<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
 			<!-- TODO questa in realtà segnalade da cookie se seguo il tag... -->
-			{% if ( fields.layout == 'show_tag' and fields.tag_name ) %}
+			{#% if ( fields.layout == 'show_tag' and fields.tag_name ) %}
 			    <p class="status">{{ fields.tag_name }}</p>
-			{% endif %}
+			{% endif %#}
 		    </div>
 		    <div class="right">
 			<span class="icon-chevron-right"></span>
