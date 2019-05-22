@@ -18,7 +18,7 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 		const BLOCK_NAME = 'launcher';
 
 		/** @const string DEFAULT_LAYOUT */
-		const DEFAULT_LAYOUT = 'centered';
+		const DEFAULT_LAYOUT = 'light_image';
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -105,9 +105,9 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 					'type' => 'radio',
 					'options' => [
 						[
-							'value' => 'centered',
-							'label' => __( 'Centered', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Centered layout',
+							'value' => 'light_image',
+							'label' => __( 'Light, with image', 'planet4-gpnl-blocks' ),
+							'desc'	=> 'Light, with image',
 							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
@@ -120,12 +120,6 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 							'value' => 'centered_box',
 							'label' => __( 'Centered box', 'planet4-gpnl-blocks' ),
 							'desc'	=> 'Centered box',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 'light_image_right',
-							'label' => __( 'Light, right image', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Light, right image',
 							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
 						],
 					],

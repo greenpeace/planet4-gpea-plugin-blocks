@@ -1,18 +1,14 @@
 {% block launcher %}
     {% if ( fields ) %}
-	{% if ( fields.layout == 'centered' ) %}
-	    <section class="section-willing">
-		<div class="ct-container">
-		    <div class="content">
-			<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-			<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-			{% if ( fields.img ) %}
-			    <img class="lady lazy" data-src="{{ fields.img }}" alt="">
-			{% endif %}
-			{% if ( fields.cta_text and fields.cta_url ) %}
-			    <a href="{{ fields.cta_url }}" class="button light">{{ fields.cta_text|e('wp_kses_post')|raw }}</a>
-			{% endif %}
-		    </div>
+	{% if ( fields.layout == 'light_image' ) %}
+	    <section class="section-image-cta">
+		<div class="generic-content ct-container">
+		    <h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+		    <p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+		    <img src="{{ fields.img }}" />
+		    {% if ( fields.cta_text and fields.cta_url ) %}
+			<a href="{{ fields.cta_url }}" class="button green">{{ fields.cta_text|e('wp_kses_post')|raw }}</a>
+		    {% endif %}
 		</div>
 	    </section>
 	{% endif %}
@@ -61,18 +57,6 @@
 			    {% endif %}
 			</div>
 		    </div>
-		</div>
-	    </section>
-	{% endif %}
-	{% if ( fields.layout == 'light_image_right' ) %}
-	    <section class="section-image-cta">
-		<div class="generic-content ct-container">
-		    <h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-		    <p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-		    <img src="{{ fields.img }}" />
-		    {% if ( fields.cta_text and fields.cta_url ) %}
-			<a href="{{ fields.cta_url }}" class="button green">{{ fields.cta_text|e('wp_kses_post')|raw }}</a>
-		    {% endif %}
 		</div>
 	    </section>
 	{% endif %}
