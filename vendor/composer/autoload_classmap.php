@@ -38,6 +38,7 @@ return array(
     'P4NLBKS\\Controllers\\Blocks\\Tips_Controller' => $baseDir . '/classes/controller/blocks/class-tips-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\UGC_Controller' => $baseDir . '/classes/controller/blocks/ugc-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Values_Section_Controller' => $baseDir . '/classes/controller/blocks/class-values-section-controller.php',
+    'P4NLBKS\\Controllers\\Blocks\\World_Slideshow_Controller' => $baseDir . '/classes/controller/blocks/class-world-slideshow-controller.php',
     'P4NLBKS\\Controllers\\Menu\\Controller' => $baseDir . '/classes/controller/menu/class-controller.php',
     'P4NLBKS\\Controllers\\Menu\\Settings_Controller' => $baseDir . '/classes/controller/menu/class-settings-controller.php',
     'P4NLBKS\\Controllers\\Uninstall_Controller' => $baseDir . '/classes/controller/class-uninstall-controller.php',
