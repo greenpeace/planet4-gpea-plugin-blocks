@@ -132,7 +132,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 
 				'Split text and image' => [
 					[
-						'label' => __('<i>Block %s title</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>title</i>', 'planet4-gpnl-blocks'),
 						'attr'	=> 'title',
 						'type'	=> 'text',
 						'meta'	=> [
@@ -141,7 +141,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 						],
 					],
 					[
-						'label' => __('<i>Block %s subtitle</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>subtitle</i>', 'planet4-gpnl-blocks'),
 						'attr'	=> 'subtitle',
 						'type'	=> 'text',
 						'meta'	=> [
@@ -150,7 +150,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 						],
 					],
 					[
-						'label' => __('<i>Block %s text</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>text</i>', 'planet4-gpnl-blocks'),
 						'attr'	=> 'textblock',
 						'type'	=> 'textarea',
 						'meta'	=> [
@@ -159,7 +159,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 						],
 					],
 					[
-						'label'		  => __( 'Background image', 'planet4-gpnl-blocks' ),
+						'label'		  => __( '<strong>%s</strong> <i>background image</i>', 'planet4-gpnl-blocks' ),
 						'attr'		  => 'img',
 						'type'		  => 'attachment',
 						'libraryType' => array( 'image' ),
@@ -170,7 +170,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 
 				'Big image and text' => [
 					[
-						'label' => __('<i>Block %s title</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>title</i>', 'planet4-gpnl-blocks'),
 						'attr'	=> 'title',
 						'type'	=> 'text',
 						'meta'	=> [
@@ -179,7 +179,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 						],
 					],
 					[
-						'label' => __('<i>Block %s subtitle</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>subtitle</i>', 'planet4-gpnl-blocks'),
 						'attr'	=> 'subtitle',
 						'type'	=> 'text',
 						'meta'	=> [
@@ -188,7 +188,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 						],
 					],
 					[
-						'label' => __('<i>Block %s text</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>text</i>', 'planet4-gpnl-blocks'),
 						'attr'	=> 'textblock',
 						'type'	=> 'textarea',
 						'meta'	=> [
@@ -197,7 +197,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 						],
 					],
 					[
-						'label'		  => __( 'Background image', 'planet4-gpnl-blocks' ),
+						'label'		  => __( '<strong>%s</strong> <i>background image</i>', 'planet4-gpnl-blocks' ),
 						'attr'		  => 'img',
 						'type'		  => 'attachment',
 						'libraryType' => array( 'image' ),
@@ -208,7 +208,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 
 				'Testimonial' => [
 					[
-						'label' => __('<i>Block %s text</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>text</i>', 'planet4-gpnl-blocks'),
 						'attr'	=> 'textblock',
 						'type'	=> 'textarea',
 						'meta'	=> [
@@ -217,7 +217,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 						],
 					],
 					[
-						'label' => __('<i>Block %s name</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>name</i>', 'planet4-gpnl-blocks'),
 						'attr'	=> 'name',
 						'type'	=> 'text',
 						'meta'	=> [
@@ -226,7 +226,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 						],
 					],
 					[
-						'label' => __('<i>Block %s position</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>position</i>', 'planet4-gpnl-blocks'),
 						'attr'	=> 'position',
 						'type'	=> 'text',
 						'meta'	=> [
@@ -235,7 +235,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 						],
 					],
 					[
-						'label'		  => __( 'Icon', 'planet4-gpnl-blocks' ),
+						'label'		  => __( '<strong>%s</strong> <i>icon</i>', 'planet4-gpnl-blocks' ),
 						'attr'		  => 'img',
 						'type'		  => 'attachment',
 						'libraryType' => array( 'image' ),
@@ -246,7 +246,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 
 				'Post' => [
 					[
-						'label' => __('<i>Block %s post</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>post</i>', 'planet4-gpnl-blocks'),
 						'attr'	=> 'post',
 						'type'	=> 'select',
 						'options' => $posts,
@@ -260,7 +260,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 				'Petition' => [
 					// TODO
 					[
-						'label' => __('<i>Block %s post</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>post</i>', 'planet4-gpnl-blocks'),
 						'attr'	=> 'post',
 						'type'	=> 'select',
 						'options' => $posts,
