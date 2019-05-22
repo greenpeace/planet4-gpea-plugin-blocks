@@ -122,6 +122,12 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 							'desc'	=> 'Centered box',
 							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
 						],
+						[
+							'value' => 'light_image_right',
+							'label' => __( 'Light, right image', 'planet4-gpnl-blocks' ),
+							'desc'	=> 'Light, right image',
+							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+						],
 					],
 				],
 			];
