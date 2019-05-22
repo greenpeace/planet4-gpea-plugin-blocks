@@ -1,0 +1,37 @@
+{% block launcher %}
+    {% if ( fields ) %}
+	<section class="dark">
+	    <div class="generic-content ct-container">
+		<div class="top-bar mb">
+		    {% if ( fields.title ) %}
+			<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+		    {% endif %}
+		    <span class="icon-chevron-right"></span>
+		</div>
+		{% if ( fields.subtitle ) %}
+		    <p class="mb">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+		{% endif %}
+	    </div>
+	    <div class="swiper-container mini-swiper">
+		<div class="swiper-wrapper">
+		    {% if ( fields.img ) %}
+			<div class="swiper-slide">
+			    <div class="poster lazy" data-bg="url({{ fields.img }})"></div>
+			</div>
+		    {% endif %}
+		    <div class="swiper-slide">
+			{% if ( fields.description ) %}
+			    <p class="light large center">{{ fields.description|e('wp_kses_post')|raw }}</p>
+			{% endif %}
+			{% if ( fields.cta_text and fields.cta_url ) %}
+			    <a href="{{ fields.cta_url }}" class="button">{{ fields.cta_text|e('wp_kses_post')|raw }}</a>
+			{% endif %}
+			{% if ( fields.cta_2_text and fields.cta_2_url ) %}
+			    <a href="{{ fields.cta_2_url }}" class="more">{{ fields.cta_2_text|e('wp_kses_post')|raw }}</a>
+			{% endif %}
+		    </div>
+		</div>
+	    </div>
+	</section>
+    {% endif %}
+{% endblock %}

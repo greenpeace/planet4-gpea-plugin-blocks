@@ -90,6 +90,7 @@ P4NLBKS\Loader::get_instance( [
 	'P4NLBKS\Controllers\Blocks\Donate_Section_Controller',
 	'P4NLBKS\Controllers\Blocks\Text_And_Image_Controller',
 	'P4NLBKS\Controllers\Blocks\Launcher_Controller',
+	'P4NLBKS\Controllers\Blocks\Report_Controller',
 	'P4NLBKS\Controllers\Blocks\Milestones_Controller',
 	'P4NLBKS\Controllers\Blocks\Tips_Controller',
 	// 'P4NLBKS\Controllers\Blocks\Spotlight_Section_Controller',

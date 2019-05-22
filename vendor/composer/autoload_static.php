@@ -66,6 +66,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4NLBKS\\Controllers\\Blocks\\Petition_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-petition-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Projects_Overview_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-projects-overview-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Repeater_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-repeater-controller.php',
+        'P4NLBKS\\Controllers\\Blocks\\Report_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-report-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Spotlight_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-spotlight-section-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Test_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-test-controller.php',
         'P4NLBKS\\Controllers\\Blocks\\Text_And_Image_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-text-and-image-controller.php',

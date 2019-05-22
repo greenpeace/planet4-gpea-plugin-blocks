@@ -2,23 +2,20 @@
 
 namespace P4NLBKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Launcher_Controller' ) ) {
+if ( ! class_exists( 'Report_Controller' ) ) {
 	/**
 	 * @noinspection AutoloadingIssuesInspection
 	 */
 
 	/**
-	 * Class Launcher_Controller
+	 * Class Report_Controller
 	 *
 	 * @package P4NLBKS\Controllers\Blocks
 	 */
-	class Launcher_Controller extends Controller {
+	class Report_Controller extends Controller {
 
 		/** @const string BLOCK_NAME */
-		const BLOCK_NAME = 'launcher';
-
-		/** @const string DEFAULT_LAYOUT */
-		const DEFAULT_LAYOUT = 'default';
+		const BLOCK_NAME = 'report';
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -55,7 +52,7 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Optional image', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Image', 'planet4-gpnl-blocks' ),
 					'attr'		  => 'img',
 					'type'		  => 'attachment',
 					'libraryType' => array( 'image' ),
@@ -81,30 +78,28 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 					],
 				],
 				[
-					'label' => 'Select the layout',
-					'description' => 'Select the layout',
-					'attr' => 'layout',
-					'type' => 'radio',
-					'options' => [
-						[
-							'value' => 'default',
-							'label' => __( 'Default', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Default',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 'box',
-							'label' => __( 'Box', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Box',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
+					'label' => __( 'CTA 2 text', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'cta_2_text',
+					'type'	=> 'text',
+					'meta'	=> [
+						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
+					],
+				],
+				[
+					'label' => __( 'CTA 2 link', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'cta_2_url',
+					'type'	=> 'url',
+					'meta'	=> [
+						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
 					],
 				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Launcher', 'planet4-gpnl-blocks' ),
+				'label'			=> __( 'LATTE | Report', 'planet4-gpnl-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
 				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
@@ -128,8 +123,6 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 			if( isset( $attributes[ 'img' ] ) ) {
 				$attributes[ 'img' ] = wp_get_attachment_url( $attributes[ 'img' ] );
 			}
-
-			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
 			return [
 				'fields' => $attributes,
