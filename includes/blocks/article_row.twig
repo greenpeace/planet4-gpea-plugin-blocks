@@ -17,7 +17,16 @@
 	    </div>
 	    <div class="swiper-container mini-swiper">
 		<div class="swiper-wrapper">
-		    {% for post in fields.posts %}
+			{% for post in fields.posts %}
+			{% if ( fields.ugc_stories == 1 and loop.index == 3 ) %}
+				<div class="swiper-slide">
+					<div class="data-bar">
+					<p>Want to add your story?</p>					
+					</div>
+					<p><b><button>Click here</button></b></p>
+				</div>
+			{% endif %}
+
 			<div class="swiper-slide">
 			    <div class="data-bar">
 				<p>{{ post.post_date }}</p>
