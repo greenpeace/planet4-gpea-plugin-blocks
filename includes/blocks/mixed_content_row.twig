@@ -1,54 +1,62 @@
 {% block mixed_content_row %}
-    {% if ( static_fields ) %}
-	<section class="section-time-line">
-	    <div class="time-point">
-		<div class="ct-container">
-		    <p class="title">{{ static_fields.title }}</p>
-		    <p class="small">{{ static_fields.subtitle }}</p>
+    <section class="section-time-line section-overview-introduction">
+	<div class="time-point">
+	    {% if ( static_fields ) %}
+		<div class="ct-container generic-content">
+		    <h2 class="green">{{ static_fields.title }}</h2>
+		    <p>{{ static_fields.subtitle }}</p>
 		</div>
-		{% if ( field_groups ) %}
-		    <div class="swiper-container section-time-line-swiper">
-			<div class="swiper-wrapper">
-			    {% for group in field_groups %}
-				{% if group.__group_type__ == 'post' and group.post %}
-				    <a href="" class="swiper-slide">
-					<div class="thumbnail lazy" data-bg="url({{ group.post.img_url }})"></div>
-					<div class="tags">
-					    {% for tag in group.post.tags %}
-						<p>{{ tag.name }}</p>
-					    {% endfor %}
-					</div>
-					<p class="name">{{ group.post.post_title }}</p>
-				    </a>
-				{% elseif group.__group_type__ == 'textonly' %}
-				    <a href="" class="swiper-slide">
-					<p class="text">{{ group.textblock }}</p>
-				    </a>
-				{% elseif group.__group_type__ == 'titleandtext' %}
-				    <a href="" class="swiper-slide">
-					<p class="big-title">{{ group.title }}</p>
-					<p class="text">{{ group.textblock }}</p>
-				    </a>
-				{% elseif group.__group_type__ == 'twolinetitleandtext' %}
-				    <div class="swiper-slide">
-					<h4 class="data"><i>{{ group.titlea }}</i>{{ group.titleb }}</h4>
+	    {% endif %}
+	    {% if ( field_groups ) %}
+		<div class="swiper-container section-time-line-swiper  mini-swiper">
+		    <div class="swiper-wrapper">
+			{% for group in field_groups %}
+			    {% if group.__group_type__ == 'post' and group.post %}
+				<div class="swiper-slide">
+				    <div
+					class="thumbnail lazy"
+					       data-bg="url({{ group.post.img_url }})"
+				    ></div>
+				    <div class="tags">
+					{% for tag in group.post.tags %}
+					    <span>{{ tag.name }}</span>
+					{% endfor %}
+				    </div>
+				    <p class="caption">{{ group.post.post_title }}</p>
+				</div>
+			    {% elseif group.__group_type__ == 'textonly' %}
+				<div class="swiper-slide">
+				    <p>{{ group.textblock }}</p>
+				</div>
+			    {% elseif group.__group_type__ == 'titleandtext' %}
+				<div class="swiper-slide">
+				    <h4>{{ group.title }}</h4>
+				    <p>{{ group.textblock }}</p>
+				</div>
+			    {% elseif group.__group_type__ == 'twolinetitleandtext' %}
+				<div class="swiper-slide">
+				    <h4 class="data"><i>{{ group.titlea }}</i>{{ group.titleb }}</h4>
+				    <p>{{ group.textblock }}</p>
+				</div>
+			    {% elseif group.__group_type__ == 'tip' %}
+				<div class="swiper-slide">
+				    <div class="tip" style="transform: rotate({{ random(-5, 5) }}deg)">
+					<div class="tip-icon">{{ group.icon }}</div>
 					<p>{{ group.textblock }}</p>
 				    </div>
-				{% elseif group.__group_type__ == 'tip' %}
-				    <div class="swiper-slide">
-					<div class="tip" style="transform: rotate({{ random(-5, 5) }}deg)">
-					    <div class="tip-icon">{{ group.icon }}</div>
-					    <p>{{ group.textblock }}</p>
-					</div>
-				    </div>
-				{% else %}
-				    <!-- do nothing -->
-				{% endif %}
-			    {% endfor %}
-			</div>
+				</div>
+			    {% else %}
+				<!-- do nothing -->
+			    {% endif %}
+			{% endfor %}
 		    </div>
-		{% endif %}
-	    </div>
-	</section>
-    {% endif %}
+		</div>
+	    {% endif %}
+	    {% if ( static_fields.text_under ) %}
+		<div class="ct-container generic-content">
+		    <p class="faint">{{ static_fields.text_under }}</p>
+		</div>
+	    {% endif %}
+	</div>
+    </section>
 {% endblock %}

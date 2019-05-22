@@ -50,6 +50,16 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 						'data-testdataasd' => 'planet4-gpnl-blocks',
 					],
 				],
+				[
+					'label' => __( 'Text under row', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'text_under',
+					'type'	=> 'text',
+					'meta'	=> [
+						'placeholder' => __( 'Text under row', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
+						'data-testdataasd' => 'planet4-gpnl-blocks',
+					],
+				],
 			];
 
 			$posts = get_posts([
