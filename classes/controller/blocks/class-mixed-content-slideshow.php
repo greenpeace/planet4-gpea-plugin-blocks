@@ -41,13 +41,48 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
-					'attr'	=> 'subtitle',
+					'label' => __( 'CTA text', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'cta_text',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
 						'data-plugin' => 'planet4-gpnl-blocks',
-						'data-testdataasd' => 'planet4-gpnl-blocks',
+					],
+				],
+				[
+					'label' => __( 'CTA link', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'cta_url',
+					'type'	=> 'url',
+					'meta'	=> [
+						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
+					],
+				],
+				[
+					'label' => __( 'CTA 2 description', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'cta_2_desc',
+					'type'	=> 'text',
+					'meta'	=> [
+						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
+					],
+				],
+				[
+					'label' => __( 'CTA 2 text', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'cta_2_text',
+					'type'	=> 'text',
+					'meta'	=> [
+						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
+					],
+				],
+				[
+					'label' => __( 'CTA 2 link', 'planet4-gpnl-blocks' ),
+					'attr'	=> 'cta_2_url',
+					'type'	=> 'url',
+					'meta'	=> [
+						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
+						'data-plugin' => 'planet4-gpnl-blocks',
 					],
 				],
 				[
@@ -64,7 +99,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 						],
 						[
 							'value' => 'dark',
-							'label' => __( 'Dark, left layout', 'planet4-gpnl-blocks' ),
+							'label' => __( 'Dark', 'planet4-gpnl-blocks' ),
 							'desc'	=> 'Dark',
 							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
 						],

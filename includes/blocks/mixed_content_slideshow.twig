@@ -1,11 +1,29 @@
 {% block mixed_content_row %}
-    <section class="section-maxi-swiper-MODULE">
+    {% if ( static_fields.layout == 'light' ) %}
+	{% set section_class = 'section-maxi-swiper-MODULE' %}
+    {% elseif ( static_fields.layout == 'dark' ) %}
+	{% set section_class = 'section-testimonials' %}
+    {% elseif ( static_fields.layout == 'planet' ) %}
+	{% set section_class = 'section-history' %}
+    {% else %}
+	{% set section_class = '' %}
+    {% endif %}
+    <section class="{{ section_class }}">
+	{% if ( section_class == 'section-history' ) %}
+	    <div class="generic-content ct-container">
+		<h2>{{ static_fields.title }}</h2>
+	    </div>
+	    <div id="history-globe"></div>
+	    <div class="swiper-container history-year-swiper">
+		<div class="swiper-wrapper">
+		    <div class="swiper-slide history-year">1971</div>
+		    <div class="swiper-slide history-year">1974</div>
+		    <div class="swiper-slide history-year">1999</div>
+		</div>
+	    </div>
+	{% endif %}
 	<div class="swiper-container maxi-swiper">
             <div class="swiper-wrapper">
-		{% if ( static_fields ) %}
-		    {{ static_fields.title }}
-		    {{ static_fields.subtitle }}
-		{% endif %}
 		{% if ( field_groups ) %}
 		    {% for group in field_groups %}
 			{% if group.__group_type__ == 'post' and group.post %}
@@ -88,6 +106,31 @@
 		<span class="icon-chevron-right"></span>
             </div>
 	</div>
+	{% if ( section_class == 'section-testimonials' ) %}
+	    <div class="generic-content ct-container">
+		{% if ( static_fields.cta_url and static_fields.cta_text ) %}
+		    <p>
+			<a href="{{ static_fields.cta_url }}">{{ static_fields.cta_text }}</a>
+		    </p>
+		{% endif %}
+		{% if ( static_fields.cta_2_url and static_fields.cta_2_text ) %}
+		    <p>
+			{{ static_fields.cta_2_desc }} <a href="{{ static_fields.cta_2_url }}">{{ static_fields.cta_2_text }}</a>
+		    </p>
+		{% endif %}
+	    </div>
+	{% endif %}
+	{% if ( section_class == 'section-history' ) %}
+	    <div class="history-link-more">
+		<div class="generic-content ct-container">
+		    {% if ( static_fields.cta_url and static_fields.cta_text ) %}
+			<p>
+			    <a href="{{ static_fields.cta_url }}">{{ static_fields.cta_text }}</a>
+			</p>
+		    {% endif %}
+		</div>
+	    </div>
+	{% endif %}
     </section>
 {% endblock %}
 
