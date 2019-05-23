@@ -28,6 +28,26 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 
 			$fields = [
 				[
+					'label' => 'Select the layout',
+					'description' => 'Select the layout',
+					'attr' => 'layout',
+					'type' => 'radio',
+					'options' => [
+						[
+							'value' => 'default',
+							'label' => __( 'Default', 'planet4-gpnl-blocks' ),
+							'desc'	=> 'Default',
+							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+						],
+						[
+							'value' => 'box',
+							'label' => __( 'Card', 'planet4-gpnl-blocks' ),
+							'desc'	=> 'Box',
+							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+						],
+					],
+				],
+				[
 					'label' => __( 'Title', 'planet4-gpnl-blocks' ),
 					'attr'	=> 'title',
 					'type'	=> 'text',
@@ -48,7 +68,7 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 				[
 					'label' => __( 'Description', 'planet4-gpnl-blocks' ),
 					'attr'	=> 'description',
-					'type'	=> 'text',
+					'type'	=> 'textarea',
 					'meta'	=> [
 						'placeholder' => __( 'Description', 'planet4-gpnl-blocks' ),
 						'data-plugin' => 'planet4-gpnl-blocks',
@@ -79,27 +99,7 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
 						'data-plugin' => 'planet4-gpnl-blocks',
 					],
-				],
-				[
-					'label' => 'Select the layout',
-					'description' => 'Select the layout',
-					'attr' => 'layout',
-					'type' => 'radio',
-					'options' => [
-						[
-							'value' => 'default',
-							'label' => __( 'Default', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Default',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 'box',
-							'label' => __( 'Box', 'planet4-gpnl-blocks' ),
-							'desc'	=> 'Box',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
-						],
-					],
-				],
+				],				
 			];
 
 			// Define the Shortcode UI arguments.

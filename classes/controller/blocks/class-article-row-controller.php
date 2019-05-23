@@ -97,13 +97,14 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
 			$article_tag  = $attributes['article_tag'] ?? 0;
-			$tag_name = get_tag( $article_tag );
-			$tag_name = $tag_name->name ?? '';
+			$tag_details = get_tag( $article_tag );
+			$tag_name = $tag_details->name ?? '';
+			$tag_slug = $tag_details->slug ?? '';
 			
 			$options = array(
 				'order'		  => 'desc',
 				'orderby'	  => 'date',
-				'post_type'	  => 'page',
+				'post_type'	  => array('page','post'),
 				'numberposts' => 20,
 				'tax_query' => array(
 					array(
@@ -124,6 +125,9 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 
 			$attributes['posts'] = $posts;
 			$attributes['tag_name'] = $tag_name;
+			if ($tag_slug == 'stories') $attributes['ugc_stories'] = 1;
+			else $attributes['ugc_stories'] = 0;
+
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
 			return [

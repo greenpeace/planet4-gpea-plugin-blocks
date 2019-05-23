@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'P4NLBKS\\Controllers\\Blocks\\Achievement_About_Controller' => $baseDir . '/classes/controller/blocks/class-achievement-about-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Achievement_Section_Controller' => $baseDir . '/classes/controller/blocks/class-achievement-section.php',
     'P4NLBKS\\Controllers\\Blocks\\Article_Row_Controller' => $baseDir . '/classes/controller/blocks/class-article-row-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Controller' => $baseDir . '/classes/controller/blocks/class-controller.php',
@@ -23,6 +24,7 @@ return array(
     'P4NLBKS\\Controllers\\Blocks\\Repeater_Controller' => $baseDir . '/classes/controller/blocks/class-repeater-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Report_Controller' => $baseDir . '/classes/controller/blocks/class-report-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Test_Controller' => $baseDir . '/classes/controller/blocks/class-test-controller.php',
+    'P4NLBKS\\Controllers\\Blocks\\Testimonials_Controller' => $baseDir . '/classes/controller/blocks/class-testimonials-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Text_And_Image_Controller' => $baseDir . '/classes/controller/blocks/class-text-and-image-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\Tips_Controller' => $baseDir . '/classes/controller/blocks/class-tips-controller.php',
     'P4NLBKS\\Controllers\\Blocks\\UGC_Controller' => $baseDir . '/classes/controller/blocks/class-ugc-controller.php',

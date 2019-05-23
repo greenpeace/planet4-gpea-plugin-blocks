@@ -82,7 +82,9 @@ P4NLBKS\Loader::get_instance( [
 	'P4NLBKS\Controllers\Blocks\Launcher_Controller',
 	'P4NLBKS\Controllers\Blocks\Report_Controller',
 	'P4NLBKS\Controllers\Blocks\Milestones_Controller',
+	'P4NLBKS\Controllers\Blocks\Testimonials_Controller',
 	'P4NLBKS\Controllers\Blocks\Tips_Controller',
+	'P4NLBKS\Controllers\Blocks\Achievement_About_Controller',
 	'P4NLBKS\Models\Taxonomy',
 	'P4NLBKS\Models\Tags_Meta',
 ], 'P4NLBKS\Views\View' );
