@@ -1,5 +1,5 @@
 {
-  "name": "greenpeace/planet4-gpnl-plugin-blocks",
+  "name": "greenpeace/planet4-gpea-plugin-blocks",
   "description": "This repository contains the WordPress plugin that provides the blocks to be used with Shortcake UI plugin.",
   "type": "wordpress-plugin",
   "version": "2.8.5",
@@ -18,11 +18,11 @@
   "require": {},
   "autoload": {
     "psr-4": {
-      "P4NLBKS\\": "classes/",
-      "P4NLBKS\\Controllers\\": "classes/controller/",
-      "P4NLBKS\\Taxonomies\\": "classes/taxonomy/",
-      "P4NLBKS\\Controllers\\Blocks\\": "classes/controller/blocks",
-      "P4NLBKS\\Controllers\\Menu\\": "classes/controller/menu"
+      "P4EABKS\\": "classes/",
+      "P4EABKS\\Controllers\\": "classes/controller/",
+      "P4EABKS\\Taxonomies\\": "classes/taxonomy/",
+      "P4EABKS\\Controllers\\Blocks\\": "classes/controller/blocks",
+      "P4EABKS\\Controllers\\Menu\\": "classes/controller/menu"
     }
   }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace P4NLBKS\Controllers\Blocks;
+namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'Tips_Controller' ) ) {
 	/**
@@ -10,7 +10,7 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 	/**
 	 * Class Tips_Controller
 	 *
-	 * @package P4NLBKS\Controllers\Blocks
+	 * @package P4EABKS\Controllers\Blocks
 	 * @since 0.1.3
 	 */
 	class Tips_Controller extends Controller {
@@ -34,43 +34,43 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks' ),
 					'attr'	=> 'title',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Description', 'planet4-gpea-blocks' ),
 					'attr'	=> 'description',
 					'type'	=> 'textarea',
 					'meta'	=> [
-						'placeholder' => __( 'Description', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Description', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Label "See more"', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Label "See more"', 'planet4-gpea-blocks' ),
 					'attr'	=> 'see_more_label',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Label "See more"', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Label "See more"', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link "See more"', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Link "See more"', 'planet4-gpea-blocks' ),
 					'attr'	=> 'see_more_link',
 					'type'	=> 'url',
 					'meta'	=> [
-						'placeholder' => __( 'Link "See more"', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Link "See more"', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label'		  => __( 'Tips', 'planet4-gpnl-blocks' ),
+					'label'		  => __( 'Tips', 'planet4-gpea-blocks' ),
 					'attr'	   => 'tip_ids',
 					'type'	   => 'post_select',
 					'multiple' => 'multiple',
@@ -92,10 +92,10 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Tips', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
+				'label'			=> __( 'LATTE | Tips', 'planet4-gpea-blocks' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
-				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
+				'post_type'		=> P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );

@@ -1,6 +1,6 @@
 <?php
 
-namespace P4NLBKS\Controllers\Blocks;
+namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 	/**
@@ -10,7 +10,7 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 	/**
 	 * Class Mixed_Content_Row_Controller
 	 *
-	 * @package P4NLBKS\Controllers\Blocks
+	 * @package P4EABKS\Controllers\Blocks
 	 */
 	class Mixed_Content_Row_Controller extends Controller {
 
@@ -31,33 +31,33 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks' ),
 					'attr'	=> 'title',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
-						'data-testdataasd' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+						'data-testdataasd' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Subtitle', 'planet4-gpea-blocks' ),
 					'attr'	=> 'subtitle',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
-						'data-testdataasd' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+						'data-testdataasd' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Text under row', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Text under row', 'planet4-gpea-blocks' ),
 					'attr'	=> 'text_under',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Text under row', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
-						'data-testdataasd' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Text under row', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+						'data-testdataasd' => 'planet4-gpea-blocks',
 					],
 				],
 			];
@@ -74,86 +74,86 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 			}, $posts);
 			array_unshift($posts, [
 				'value' => '',
-				'label' => __( 'Please select a post', 'planet4-gpnl-blocks' ),
+				'label' => __( 'Please select a post', 'planet4-gpea-blocks' ),
 			]);
 
 			$field_groups = [
 
 				'Title and text' => [
 					[
-						'label' => __('<i>Block %s title</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<i>Block %s title</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'title',
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => __( 'Enter title', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter title', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label' => __('<i>Block %s text</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<i>Block %s text</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'textblock',
 						'type'	=> 'textarea',
 						'meta'	=> [
-							'placeholder' => __( 'Enter text', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter text', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 				],
 
 				'Two line title and text' => [
 					[
-						'label' => __('<i>Block %s title line 1</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<i>Block %s title line 1</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'titlea',
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => __( 'Enter line 1', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter line 1', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label' => __('<i>Block %s title</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<i>Block %s title</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'titleb',
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => __( 'Enter title', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter title', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label' => __('<i>Block %s text</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<i>Block %s text</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'textblock',
 						'type'	=> 'textarea',
 						'meta'	=> [
-							'placeholder' => __( 'Enter text', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter text', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 				],
 
 				'Text only' => [
 					[
-						'label' => __('<i>Block %s text</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<i>Block %s text</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'textblock',
 						'type'	=> 'textarea',
 						'meta'	=> [
-							'placeholder' => __( 'Enter text', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter text', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 				],
 
 				'Tip' => [
 					[
-						'label' => __('<i>Block %s tip text</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<i>Block %s tip text</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'textblock',
 						'type'	=> 'textarea',
 						'meta'	=> [
-							'placeholder' => __( 'Enter text', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter text', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label' => __('<i>Block %s tip icon</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<i>Block %s tip icon</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'icon',
 						'type'	=> 'select',
 						'options' => [
@@ -162,21 +162,21 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 							[ 'value' => '🌧', 'label' => '🌧' ],
 						],
 						'meta'	=> [
-							'placeholder' => __( 'Select tip icon', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Select tip icon', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 				],
 
 				'Post' => [
 					[
-						'label' => __('<i>Block %s post</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<i>Block %s post</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'post',
 						'type'	=> 'select',
 						'options' => $posts,
 						'meta'	=> [
-							'placeholder' => __( 'Select post', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Select post', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 				],
@@ -187,10 +187,10 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Mixed Content Row', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
+				'label'			=> __( 'LATTE | Mixed Content Row', 'planet4-gpea-blocks' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
-				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
+				'post_type'		=> P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );

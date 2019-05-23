@@ -1,6 +1,6 @@
 <?php
 
-namespace P4NLBKS\Controllers\Menu;
+namespace P4EABKS\Controllers\Menu;
 
 if ( ! class_exists( 'Settings_Controller' ) ) {
 
@@ -18,10 +18,10 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 
 			if ( in_array( 'administrator', $current_user->roles, true ) && current_user_can( 'manage_options' ) ) {
 				add_menu_page(
-					__( 'Blocks', 'planet4-gpnl-blocks' ),
-					__( 'Blocks', 'planet4-gpnl-blocks' ),
+					__( 'Blocks', 'planet4-gpea-blocks' ),
+					__( 'Blocks', 'planet4-gpea-blocks' ),
 					'manage_options',
-					P4NLBKS_PLUGIN_SLUG_NAME,
+					P4EABKS_PLUGIN_SLUG_NAME,
 					array( $this, 'prepare_settings' ),
 					'dashicons-layout'
 				);
@@ -35,8 +35,8 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 		public function prepare_settings() {
 			$this->view->settings( [
 				'settings' => get_option( 'p4nlbks_main_settings' ),
-				'available_languages' => P4NLBKS_LANGUAGES,
-				'domain' => 'planet4-gpnl-blocks',
+				'available_languages' => P4EABKS_LANGUAGES,
+				'domain' => 'planet4-gpea-blocks',
 			] );
 		}
 

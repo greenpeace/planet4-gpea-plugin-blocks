@@ -1,8 +1,8 @@
 <?php
 
-namespace P4NLBKS\Controllers\Menu;
+namespace P4EABKS\Controllers\Menu;
 
-use P4NLBKS\Views\View;
+use P4EABKS\Views\View;
 
 if ( ! class_exists( 'Controller' ) ) {
 

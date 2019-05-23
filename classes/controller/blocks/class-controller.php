@@ -1,15 +1,15 @@
 <?php
 
-namespace P4NLBKS\Controllers\Blocks;
+namespace P4EABKS\Controllers\Blocks;
 
-use P4NLBKS\Views\View;
+use P4EABKS\Views\View;
 
 if ( ! class_exists( 'Controller' ) ) {
 
 	/**
 	 * Class Controller
 	 *
-	 * @package P4NLBKS\Controllers\Blocks
+	 * @package P4EABKS\Controllers\Blocks
 	 */
 	abstract class Controller {
 
@@ -71,7 +71,7 @@ if ( ! class_exists( 'Controller' ) ) {
 			if ( current_user_can( 'activate_plugins' ) ) {
 				?>
 				<div class="error message">
-					<p><?php esc_html_e( 'Shortcode UI plugin must be active for Planet4 - NL - Blocks plugin to work.', 'planet4-gpnl-blocks' ); ?></p>
+					<p><?php esc_html_e( 'Shortcode UI plugin must be active for Planet4 - NL - Blocks plugin to work.', 'planet4-gpea-blocks' ); ?></p>
 				</div>
 				<?php
 			}

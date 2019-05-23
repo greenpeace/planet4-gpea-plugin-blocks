@@ -1,12 +1,12 @@
 <?php
 
-namespace P4NLBKS\Controllers;
+namespace P4EABKS\Controllers;
 
 if ( ! class_exists( 'Uninstall_Controller' ) ) {
 	/**
 	 * Class Uninstall_Controller
 	 *
-	 * @package P4NLBKS\Controllers
+	 * @package P4EABKS\Controllers
 	 */
 	class Uninstall_Controller {
 

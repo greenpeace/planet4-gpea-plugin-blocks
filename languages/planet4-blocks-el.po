@@ -12,7 +12,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: planet4-gpnl-blocks.php\n"
+"X-Poedit-WPHeader: planet4-gpea-blocks.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
@@ -59,7 +59,7 @@ msgid "Conflict Error"
 msgstr ""
 
 #: classes/class-loader.php:199
-msgid "Class P4NLBKS_Loader already exists."
+msgid "Class P4EABKS_Loader already exists."
 msgstr ""
 
 #: classes/controller/blocks/class-petitionblock-controller.php:24

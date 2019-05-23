@@ -1,6 +1,6 @@
 <?php
 
-namespace P4NLBKS;
+namespace P4EABKS;
 
 if ( ! class_exists( 'Loader' ) ) {
 
@@ -16,9 +16,9 @@ if ( ! class_exists( 'Loader' ) ) {
 		/** @var array $services */
 		private $services;
 		/** @var string $required_php */
-		private $required_php = P4NLBKS_REQUIRED_PHP;
+		private $required_php = P4EABKS_REQUIRED_PHP;
 		/** @var array $required_plugins */
-		private $required_plugins = P4NLBKS_REQUIRED_PLUGINS;
+		private $required_plugins = P4EABKS_REQUIRED_PLUGINS;
 
 
 		/**
@@ -84,18 +84,18 @@ if ( ! class_exists( 'Loader' ) ) {
 						$this->hook_plugin();
 					} elseif ( $plugins['not_found'] || $plugins['not_updated'] ) {
 
-						deactivate_plugins( P4NLBKS_PLUGIN_BASENAME );
+						deactivate_plugins( P4EABKS_PLUGIN_BASENAME );
 						$count = 0;
 						$message = '<div class="error fade">' .
-									'<u>' . esc_html( P4NLBKS_PLUGIN_NAME ) . ' > ' . esc_html__( 'Requirements Error(s)', 'planet4-gpnl-blocks' ) . '</u><br /><br />';
+									'<u>' . esc_html( P4EABKS_PLUGIN_NAME ) . ' > ' . esc_html__( 'Requirements Error(s)', 'planet4-gpea-blocks' ) . '</u><br /><br />';
 
 						foreach ( $plugins['not_found'] as $plugin ) {
-							$message .= '<br/><strong>' . (++$count) . '. ' . esc_html( $plugin['Name'] ) . '</strong> ' . esc_html__( 'plugin needs to be installed and activated.', 'planet4-gpnl-blocks' ) . '<br />';
+							$message .= '<br/><strong>' . (++$count) . '. ' . esc_html( $plugin['Name'] ) . '</strong> ' . esc_html__( 'plugin needs to be installed and activated.', 'planet4-gpea-blocks' ) . '<br />';
 						}
 						foreach ( $plugins['not_updated'] as $plugin ) {
 							$message .= '<br/><strong>' . (++$count) . '. ' . esc_html( $plugin['Name'] ) . '</strong><br />' .
-										esc_html__( 'Minimum version ', 'planet4-gpnl-blocks' ) . '<strong>' . esc_html( $plugin['min_version'] ) . '</strong>' .
-										'<br/>' . esc_html__( 'Current version ', 'planet4-gpnl-blocks' ) . '<strong>' . esc_html( $plugin['Version'] ) . '</strong><br />';
+										esc_html__( 'Minimum version ', 'planet4-gpea-blocks' ) . '<strong>' . esc_html( $plugin['min_version'] ) . '</strong>' .
+										'<br/>' . esc_html__( 'Current version ', 'planet4-gpea-blocks' ) . '<strong>' . esc_html( $plugin['Version'] ) . '</strong><br />';
 						}
 
 						$message .= '</div><br />';
@@ -107,12 +107,12 @@ if ( ! class_exists( 'Loader' ) ) {
 						);
 					}
 				} else {
-					deactivate_plugins( P4NLBKS_PLUGIN_BASENAME );
+					deactivate_plugins( P4EABKS_PLUGIN_BASENAME );
 					wp_die(
 						'<div class="error fade">' .
-						'<strong>' . esc_html__( 'PHP Requirements Error', 'planet4-gpnl-blocks' ) . '</strong><br /><br />' . esc_html( P4NLBKS_PLUGIN_NAME . __( ' requires a newer version of PHP.', 'planet4-gpnl-blocks' ) ) . '<br />' .
-						'<br/>' . esc_html__( 'Minimum required version of PHP: ', 'planet4-gpnl-blocks' ) . '<strong>' . esc_html( $this->required_php ) . '</strong>' .
-						'<br/>' . esc_html__( 'Running version of PHP: ', 'planet4-gpnl-blocks' ) . '<strong>' . esc_html( phpversion() ) . '</strong>' .
+						'<strong>' . esc_html__( 'PHP Requirements Error', 'planet4-gpea-blocks' ) . '</strong><br /><br />' . esc_html( P4EABKS_PLUGIN_NAME . __( ' requires a newer version of PHP.', 'planet4-gpea-blocks' ) ) . '<br />' .
+						'<br/>' . esc_html__( 'Minimum required version of PHP: ', 'planet4-gpea-blocks' ) . '<strong>' . esc_html( $this->required_php ) . '</strong>' .
+						'<br/>' . esc_html__( 'Running version of PHP: ', 'planet4-gpea-blocks' ) . '<strong>' . esc_html( phpversion() ) . '</strong>' .
 						'</div>', 'Plugin Requirements Error', array(
 							'response' => \WP_Http::OK,
 							'back_link' => true,
@@ -169,18 +169,18 @@ if ( ! class_exists( 'Loader' ) ) {
 			add_action(
 				'enqueue_shortcode_ui',
 				function () {
-                    wp_enqueue_script( 'p4nlbks_admin_blocks_script', P4NLBKS_ADMIN_DIR . 'js/blocks/admin-blocks.min.js', [ 'shortcode-ui' ], '0.1', true );
+                    wp_enqueue_script( 'p4nlbks_admin_blocks_script', P4EABKS_ADMIN_DIR . 'js/blocks/admin-blocks.min.js', [ 'shortcode-ui' ], '0.1', true );
 				}
 			);
 
             // Load the assets only on the plugin's pages.
-			if ( strpos( $hook, P4NLBKS_PLUGIN_SLUG_NAME ) === false ) {
+			if ( strpos( $hook, P4EABKS_PLUGIN_SLUG_NAME ) === false ) {
 				return;
 			}
 
 			wp_enqueue_script( 'p4nlbks_admin_jquery', '//code.jquery.com/jquery-3.2.1.min.js', array(), '3.2.1', true );
-			wp_enqueue_style( 'p4nlbks_admin_style', P4NLBKS_ADMIN_DIR . 'css/admin.css', array(), '0.1' );
-			wp_enqueue_script( 'p4nlbks_admin_script', P4NLBKS_ADMIN_DIR . 'js/admin.js', array(), '0.1', true );
+			wp_enqueue_style( 'p4nlbks_admin_style', P4EABKS_ADMIN_DIR . 'css/admin.css', array(), '0.1' );
+			wp_enqueue_script( 'p4nlbks_admin_script', P4EABKS_ADMIN_DIR . 'js/admin.js', array(), '0.1', true );
 		}
 
 		/**
@@ -188,7 +188,7 @@ if ( ! class_exists( 'Loader' ) ) {
 		 * References: http://codex.wordpress.org/I18n_for_WordPress_Developers
 		 */
 		public function load_i18n() {
-			load_plugin_textdomain( 'planet4-gpnl-blocks', false, P4NLBKS_PLUGIN_DIRNAME . '/languages/' );
+			load_plugin_textdomain( 'planet4-gpea-blocks', false, P4EABKS_PLUGIN_DIRNAME . '/languages/' );
 		}
 
 		/**
@@ -203,10 +203,10 @@ if ( ! class_exists( 'Loader' ) ) {
 	}
 
 } else {
-	deactivate_plugins( P4NLBKS_PLUGIN_BASENAME );
+	deactivate_plugins( P4EABKS_PLUGIN_BASENAME );
 	wp_die(
 		'<div class="error fade">' .
-		'<u>' . esc_html( P4NLBKS_PLUGIN_NAME ) . esc_html__( 'Conflict Error', 'planet4-gpnl-blocks' ) . '</u><br /><br />' . esc_html__( 'Class P4NLBKS_Loader already exists.', 'planet4-gpnl-blocks' ) . '<br />' .
+		'<u>' . esc_html( P4EABKS_PLUGIN_NAME ) . esc_html__( 'Conflict Error', 'planet4-gpea-blocks' ) . '</u><br /><br />' . esc_html__( 'Class P4EABKS_Loader already exists.', 'planet4-gpea-blocks' ) . '<br />' .
 		'</div>', 'Plugin Conflict Error', array(
 			'response' => \WP_Http::OK,
 			'back_link' => true,

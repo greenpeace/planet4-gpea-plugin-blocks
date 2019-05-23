@@ -20,16 +20,16 @@ In the backlog are among others:
 
 ## How to develop a new block you ask?
 
-1. Create a new controller class that extends Controller inside directory _classes/controller/blocks_. The class name should follow naming convention: GPNL_**Blockname**_Controller and its file name should be class-**blockname**-controller.php. 
+1. Create a new controller class that extends Controller inside directory _classes/controller/blocks_. The class name should follow naming convention: GPEA_**Blockname**_Controller and its file name should be class-**blockname**-controller.php. 
 
 2. Implement its parent's class two abstract methods:
 * In method **prepare_fields()** you need to define the blocks fields 
 * In method **prepare_template()** you need to prepare them for rendering.
 
-3. Create the template file that will be used to render your block inside directory _includes/blocks_. If the name of the file is gpnl_**blockname**.twig then
-you need to set the BLOCK_NAME constant as gpnl_**'blockname'**
+3. Create the template file that will be used to render your block inside directory _includes/blocks_. If the name of the file is gpea_**blockname**.twig then
+you need to set the BLOCK_NAME constant as gpea_**'blockname'**
 
-4. Add your new class name to the array that the `P4BLBKS\Loader` function takes as an argument in `planet4-gpnl-blocks.php`.
+4. Add your new class name to the array that the `P4BLBKS\Loader` function takes as an argument in `planet4-gpea-blocks.php`.
 
 5. Finally, before committing do `composer update --no-dev && composer dump-autoload --optimize` in order to add your new class to composer's autoload.
 

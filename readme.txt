@@ -1,4 +1,4 @@
-=== Planet4 - GPNL - Blocks ===
+=== Planet4 - GPEA - Blocks ===
 Contributors: Greenpeace Netherlands
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html

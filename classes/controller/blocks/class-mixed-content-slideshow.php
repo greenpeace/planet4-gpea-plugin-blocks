@@ -1,6 +1,6 @@
 <?php
 
-namespace P4NLBKS\Controllers\Blocks;
+namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 	/**
@@ -10,7 +10,7 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 	/**
 	 * Class Mixed_Content_Slideshow_Controller
 	 *
-	 * @package P4NLBKS\Controllers\Blocks
+	 * @package P4EABKS\Controllers\Blocks
 	 */
 	class Mixed_Content_Slideshow_Controller extends Controller {
 
@@ -31,58 +31,58 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks' ),
 					'attr'	=> 'title',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
-						'data-testdataasd' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+						'data-testdataasd' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'CTA text', 'planet4-gpnl-blocks' ),
+					'label' => __( 'CTA text', 'planet4-gpea-blocks' ),
 					'attr'	=> 'cta_text',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'CTA link', 'planet4-gpnl-blocks' ),
+					'label' => __( 'CTA link', 'planet4-gpea-blocks' ),
 					'attr'	=> 'cta_url',
 					'type'	=> 'url',
 					'meta'	=> [
-						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'CTA 2 description', 'planet4-gpnl-blocks' ),
+					'label' => __( 'CTA 2 description', 'planet4-gpea-blocks' ),
 					'attr'	=> 'cta_2_desc',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'CTA 2 text', 'planet4-gpnl-blocks' ),
+					'label' => __( 'CTA 2 text', 'planet4-gpea-blocks' ),
 					'attr'	=> 'cta_2_text',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'CTA 2 link', 'planet4-gpnl-blocks' ),
+					'label' => __( 'CTA 2 link', 'planet4-gpea-blocks' ),
 					'attr'	=> 'cta_2_url',
 					'type'	=> 'url',
 					'meta'	=> [
-						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
@@ -93,21 +93,21 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'light',
-							'label' => __( 'Light', 'planet4-gpnl-blocks' ),
+							'label' => __( 'Light', 'planet4-gpea-blocks' ),
 							'desc'	=> 'Light',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'dark',
-							'label' => __( 'Dark', 'planet4-gpnl-blocks' ),
+							'label' => __( 'Dark', 'planet4-gpea-blocks' ),
 							'desc'	=> 'Dark',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'planet',
-							'label' => __( 'Planet', 'planet4-gpnl-blocks' ),
+							'label' => __( 'Planet', 'planet4-gpea-blocks' ),
 							'desc'	=> 'Planet',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
@@ -125,134 +125,134 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 			}, $posts);
 			array_unshift($posts, [
 				'value' => '',
-				'label' => __( 'Please select a post', 'planet4-gpnl-blocks' ),
+				'label' => __( 'Please select a post', 'planet4-gpea-blocks' ),
 			]);
 
 			$field_groups = [
 
 				'Split text and image' => [
 					[
-						'label' => __('<strong>%s</strong> <i>title</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>title</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'title',
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => __( 'Enter title', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter title', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label' => __('<strong>%s</strong> <i>subtitle</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>subtitle</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'subtitle',
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => __( 'Enter subtitle', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter subtitle', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label' => __('<strong>%s</strong> <i>text</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>text</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'textblock',
 						'type'	=> 'textarea',
 						'meta'	=> [
-							'placeholder' => __( 'Enter text', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter text', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label'		  => __( '<strong>%s</strong> <i>background image</i>', 'planet4-gpnl-blocks' ),
+						'label'		  => __( '<strong>%s</strong> <i>background image</i>', 'planet4-gpea-blocks' ),
 						'attr'		  => 'img',
 						'type'		  => 'attachment',
 						'libraryType' => array( 'image' ),
-						'addButton'	  => __( 'Select image', 'planet4-gpnl-blocks' ),
-						'frameTitle'  => __( 'Select image', 'planet4-gpnl-blocks' ),
+						'addButton'	  => __( 'Select image', 'planet4-gpea-blocks' ),
+						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
 					],
 				],
 
 				'Big image and text' => [
 					[
-						'label' => __('<strong>%s</strong> <i>title</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>title</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'title',
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => __( 'Enter title', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter title', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label' => __('<strong>%s</strong> <i>subtitle</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>subtitle</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'subtitle',
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => __( 'Enter subtitle', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter subtitle', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label' => __('<strong>%s</strong> <i>text</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>text</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'textblock',
 						'type'	=> 'textarea',
 						'meta'	=> [
-							'placeholder' => __( 'Enter text', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter text', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label'		  => __( '<strong>%s</strong> <i>background image</i>', 'planet4-gpnl-blocks' ),
+						'label'		  => __( '<strong>%s</strong> <i>background image</i>', 'planet4-gpea-blocks' ),
 						'attr'		  => 'img',
 						'type'		  => 'attachment',
 						'libraryType' => array( 'image' ),
-						'addButton'	  => __( 'Select image', 'planet4-gpnl-blocks' ),
-						'frameTitle'  => __( 'Select image', 'planet4-gpnl-blocks' ),
+						'addButton'	  => __( 'Select image', 'planet4-gpea-blocks' ),
+						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
 					],
 				],
 
 				'Testimonial' => [
 					[
-						'label' => __('<strong>%s</strong> <i>text</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>text</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'textblock',
 						'type'	=> 'textarea',
 						'meta'	=> [
-							'placeholder' => __( 'Enter text', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter text', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label' => __('<strong>%s</strong> <i>name</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>name</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'name',
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => __( 'Enter name', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter name', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label' => __('<strong>%s</strong> <i>position</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>position</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'position',
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => __( 'Enter position', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter position', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label'		  => __( '<strong>%s</strong> <i>icon</i>', 'planet4-gpnl-blocks' ),
+						'label'		  => __( '<strong>%s</strong> <i>icon</i>', 'planet4-gpea-blocks' ),
 						'attr'		  => 'img',
 						'type'		  => 'attachment',
 						'libraryType' => array( 'image' ),
-						'addButton'	  => __( 'Select image', 'planet4-gpnl-blocks' ),
-						'frameTitle'  => __( 'Select image', 'planet4-gpnl-blocks' ),
+						'addButton'	  => __( 'Select image', 'planet4-gpea-blocks' ),
+						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
 					],
 				],
 
 				'Post' => [
 					[
-						'label' => __('<strong>%s</strong> <i>post</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>post</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'post',
 						'type'	=> 'select',
 						'options' => $posts,
 						'meta'	=> [
-							'placeholder' => __( 'Select post', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Select post', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 				],
@@ -260,13 +260,13 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 				'Petition' => [
 					// TODO
 					[
-						'label' => __('<strong>%s</strong> <i>post</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<strong>%s</strong> <i>post</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'post',
 						'type'	=> 'select',
 						'options' => $posts,
 						'meta'	=> [
-							'placeholder' => __( 'Select post', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Select post', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 				],
@@ -277,10 +277,10 @@ if ( ! class_exists( 'Mixed_Content_Slideshow_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Mixed Content Slideshow', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
+				'label'			=> __( 'LATTE | Mixed Content Slideshow', 'planet4-gpea-blocks' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
-				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
+				'post_type'		=> P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );

@@ -1,6 +1,6 @@
 <?php
 
-namespace P4NLBKS\Controllers\Blocks;
+namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'Projects_Overview_Controller' ) ) {
 	/**
@@ -10,7 +10,7 @@ if ( ! class_exists( 'Projects_Overview_Controller' ) ) {
 	/**
 	 * Class Projects_Overview_Controller
 	 *
-	 * @package P4NLBKS\Controllers\Blocks
+	 * @package P4EABKS\Controllers\Blocks
 	 */
 	class Projects_Overview_Controller extends Controller {
 
@@ -28,43 +28,43 @@ if ( ! class_exists( 'Projects_Overview_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks' ),
 					'attr'	=> 'title',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Label "See more"', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Label "See more"', 'planet4-gpea-blocks' ),
 					'attr'	=> 'see_more_label',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Label "See more"', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Label "See more"', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link "See more"', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Link "See more"', 'planet4-gpea-blocks' ),
 					'attr'	=> 'see_more_link',
 					'type'	=> 'url',
 					'meta'	=> [
-						'placeholder' => __( 'Link "See more"', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Link "See more"', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Description', 'planet4-gpea-blocks' ),
 					'attr'	=> 'description',
 					'type'	=> 'textarea',
 					'meta'	=> [
-						'placeholder' => __( 'Description', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Description', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label'    => __( 'Filter by Main Issue', 'planet4-gpnl-blocks' ),
+					'label'    => __( 'Filter by Main Issue', 'planet4-gpea-blocks' ),
 					'attr'     => 'main_issue',
 					'type'     => 'term_select',
 					'taxonomy' => 'category',
@@ -86,15 +86,15 @@ if ( ! class_exists( 'Projects_Overview_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'light',
-							'label' => __( 'Light background, dark text', 'planet4-gpnl-blocks' ),
+							'label' => __( 'Light background, dark text', 'planet4-gpea-blocks' ),
 							'desc'	=> 'Light background, dark text',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'dark',
-							'label' => __( 'Dark background, light text', 'planet4-gpnl-blocks' ),
+							'label' => __( 'Dark background, light text', 'planet4-gpea-blocks' ),
 							'desc'	=> 'Dark background, light text',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
@@ -102,10 +102,10 @@ if ( ! class_exists( 'Projects_Overview_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Project Section', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/projects_block.png' ) . '" />',
+				'label'			=> __( 'LATTE | Project Section', 'planet4-gpea-blocks' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/projects_block.png' ) . '" />',
 				'attrs'			=> $fields,
-				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
+				'post_type'		=> P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );

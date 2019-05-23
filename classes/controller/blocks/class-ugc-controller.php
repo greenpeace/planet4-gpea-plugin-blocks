@@ -1,6 +1,6 @@
 <?php
 
-namespace P4NLBKS\Controllers\Blocks;
+namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'UGC_Controller' ) ) {
 	/**
@@ -10,7 +10,7 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 	/**
 	 * Class UGC_Controller
 	 *
-	 * @package P4NLBKS\Controllers\Blocks
+	 * @package P4EABKS\Controllers\Blocks
 	 */
 	class UGC_Controller extends Controller {
 
@@ -30,21 +30,21 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title label', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Title label', 'planet4-gpea-blocks' ),
 					'attr'	=> 'title_label',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Title label', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Title label', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Content label', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Content label', 'planet4-gpea-blocks' ),
 					'attr'	=> 'content_label',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Content label', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Content label', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
@@ -55,21 +55,21 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 					'options'	  => [
 						[
 							'value' => 1,
-							'label' => __( 'Layout A', 'planet4-gpnl-blocks' ),
+							'label' => __( 'Layout A', 'planet4-gpea-blocks' ),
 							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 2,
-							'label' => __( 'Layout B', 'planet4-gpnl-blocks' ),
+							'label' => __( 'Layout B', 'planet4-gpea-blocks' ),
 							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 3,
-							'label' => __( 'Layout C', 'planet4-gpnl-blocks' ),
+							'label' => __( 'Layout C', 'planet4-gpea-blocks' ),
 							'desc'	=> 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
@@ -77,10 +77,10 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | UGC Form', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
+				'label'			=> __( 'LATTE | UGC Form', 'planet4-gpea-blocks' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
-				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
+				'post_type'		=> P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );

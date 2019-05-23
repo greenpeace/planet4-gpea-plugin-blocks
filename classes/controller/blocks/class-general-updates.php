@@ -1,6 +1,6 @@
 <?php
 
-namespace P4NLBKS\Controllers\Blocks;
+namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'General_Updates_Controller' ) ) {
 	/**
@@ -10,7 +10,7 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 	/**
 	 * Class General_Updates_Controller
 	 *
-	 * @package P4NLBKS\Controllers\Blocks
+	 * @package P4EABKS\Controllers\Blocks
 	 */
 	class General_Updates_Controller extends Controller {
 
@@ -31,34 +31,34 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks' ),
 					'attr'	=> 'title',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Subtitle', 'planet4-gpea-blocks' ),
 					'attr'	=> 'subtitle',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Description', 'planet4-gpea-blocks' ),
 					'attr'	=> 'description',
 					'type'	=> 'textarea',
 					'meta'	=> [
-						'placeholder' => __( 'Description (light layout only)', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Description (light layout only)', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label'		  => __( 'Updates', 'planet4-gpnl-blocks' ),
+					'label'		  => __( 'Updates', 'planet4-gpea-blocks' ),
 					'attr'	   => 'update_ids',
 					'type'	   => 'post_select',
 					'multiple' => 'multiple',
@@ -78,7 +78,7 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 					'meta'	   => [
 						'select2_options' => [
 							'allowClear'			 => true,
-							'placeholder'			 => __( 'Select updates', 'planet4-gpnl-blocks' ),
+							'placeholder'			 => __( 'Select updates', 'planet4-gpea-blocks' ),
 							'closeOnSelect'			 => false,
 							'minimumInputLength'	 => 0,
 							'multiple'				 => true,
@@ -94,15 +94,15 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'light',
-							'label' => __( 'Light background, dark text', 'planet4-gpnl-blocks' ),
+							'label' => __( 'Light background, dark text', 'planet4-gpea-blocks' ),
 							'desc'	=> 'Light background, dark text',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'dark',
-							'label' => __( 'Dark background, light text', 'planet4-gpnl-blocks' ),
+							'label' => __( 'Dark background, light text', 'planet4-gpea-blocks' ),
 							'desc'	=> 'Dark background, light text',
-							'image' => esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ),
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
@@ -111,10 +111,10 @@ if ( ! class_exists( 'General_Updates_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | General Updates - manual selection', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/general_updates.png' ) . '" />',
+				'label'			=> __( 'LATTE | General Updates - manual selection', 'planet4-gpea-blocks' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/general_updates.png' ) . '" />',
 				'attrs'			=> $fields,
-				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
+				'post_type'		=> P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );

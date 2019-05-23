@@ -9,69 +9,69 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
-            'P4NLBKS\\Taxonomies\\' => 19,
-            'P4NLBKS\\Controllers\\Menu\\' => 25,
-            'P4NLBKS\\Controllers\\Blocks\\' => 27,
-            'P4NLBKS\\Controllers\\' => 20,
-            'P4NLBKS\\' => 8,
+            'P4EABKS\\Taxonomies\\' => 19,
+            'P4EABKS\\Controllers\\Menu\\' => 25,
+            'P4EABKS\\Controllers\\Blocks\\' => 27,
+            'P4EABKS\\Controllers\\' => 20,
+            'P4EABKS\\' => 8,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'P4NLBKS\\Taxonomies\\' => 
+        'P4EABKS\\Taxonomies\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes/taxonomy',
         ),
-        'P4NLBKS\\Controllers\\Menu\\' => 
+        'P4EABKS\\Controllers\\Menu\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes/controller/menu',
         ),
-        'P4NLBKS\\Controllers\\Blocks\\' => 
+        'P4EABKS\\Controllers\\Blocks\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes/controller/blocks',
         ),
-        'P4NLBKS\\Controllers\\' => 
+        'P4EABKS\\Controllers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes/controller',
         ),
-        'P4NLBKS\\' => 
+        'P4EABKS\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes',
         ),
     );
 
     public static $classMap = array (
-        'P4NLBKS\\Controllers\\Blocks\\Achievement_About_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-achievement-about-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Achievement_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-achievement-section.php',
-        'P4NLBKS\\Controllers\\Blocks\\Article_Row_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-article-row-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Custom_Query_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-custom-query-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Donate_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-donate-section-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\General_Updates_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-general-updates.php',
-        'P4NLBKS\\Controllers\\Blocks\\Issue_List_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-issue-list-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Launcher_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-launcher-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Main_Issues_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-main-issues-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Metablock_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-metablock-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Milestones_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-milestones-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Mixed_Content_Row_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-mixed-content-row.php',
-        'P4NLBKS\\Controllers\\Blocks\\Mixed_Content_Slideshow_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-mixed-content-slideshow.php',
-        'P4NLBKS\\Controllers\\Blocks\\Projects_Overview_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-projects-overview-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Repeater_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-repeater-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Report_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-report-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Test_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-test-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Testimonials_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-testimonials-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Text_And_Image_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-text-and-image-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Tips_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-tips-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\UGC_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-ugc-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\Values_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-values-section-controller.php',
-        'P4NLBKS\\Controllers\\Blocks\\World_Slideshow_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-world-slideshow-controller.php',
-        'P4NLBKS\\Controllers\\Menu\\Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-controller.php',
-        'P4NLBKS\\Controllers\\Menu\\Settings_Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-settings-controller.php',
-        'P4NLBKS\\Controllers\\Uninstall_Controller' => __DIR__ . '/../..' . '/classes/controller/class-uninstall-controller.php',
-        'P4NLBKS\\Loader' => __DIR__ . '/../..' . '/classes/class-loader.php',
-        'P4NLBKS\\Models\\Tags_Meta' => __DIR__ . '/../..' . '/classes/model/class-tags-meta.php',
-        'P4NLBKS\\Models\\Taxonomy' => __DIR__ . '/../..' . '/classes/model/class-taxonomy.php',
-        'P4NLBKS\\Views\\View' => __DIR__ . '/../..' . '/classes/view/class-view.php',
+        'P4EABKS\\Controllers\\Blocks\\Achievement_About_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-achievement-about-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Achievement_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-achievement-section.php',
+        'P4EABKS\\Controllers\\Blocks\\Article_Row_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-article-row-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Custom_Query_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-custom-query-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Donate_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-donate-section-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\General_Updates_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-general-updates.php',
+        'P4EABKS\\Controllers\\Blocks\\Issue_List_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-issue-list-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Launcher_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-launcher-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Main_Issues_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-main-issues-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Metablock_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-metablock-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Milestones_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-milestones-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Mixed_Content_Row_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-mixed-content-row.php',
+        'P4EABKS\\Controllers\\Blocks\\Mixed_Content_Slideshow_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-mixed-content-slideshow.php',
+        'P4EABKS\\Controllers\\Blocks\\Projects_Overview_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-projects-overview-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Repeater_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-repeater-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Report_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-report-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Test_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-test-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Testimonials_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-testimonials-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Text_And_Image_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-text-and-image-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Tips_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-tips-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\UGC_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-ugc-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Values_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-values-section-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\World_Slideshow_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-world-slideshow-controller.php',
+        'P4EABKS\\Controllers\\Menu\\Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-controller.php',
+        'P4EABKS\\Controllers\\Menu\\Settings_Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-settings-controller.php',
+        'P4EABKS\\Controllers\\Uninstall_Controller' => __DIR__ . '/../..' . '/classes/controller/class-uninstall-controller.php',
+        'P4EABKS\\Loader' => __DIR__ . '/../..' . '/classes/class-loader.php',
+        'P4EABKS\\Models\\Tags_Meta' => __DIR__ . '/../..' . '/classes/model/class-tags-meta.php',
+        'P4EABKS\\Models\\Taxonomy' => __DIR__ . '/../..' . '/classes/model/class-taxonomy.php',
+        'P4EABKS\\Views\\View' => __DIR__ . '/../..' . '/classes/view/class-view.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -1,6 +1,6 @@
 <?php
 
-namespace P4NLBKS\Controllers\Blocks;
+namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 	/**
@@ -10,7 +10,7 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 	/**
 	 * Class Achievement_Section_Controller
 	 *
-	 * @package P4NLBKS\Controllers\Blocks
+	 * @package P4EABKS\Controllers\Blocks
 	 */
 	class Achievement_Section_Controller extends Controller {
 
@@ -28,48 +28,48 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks' ),
 					'attr'	=> 'title',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Subtitle', 'planet4-gpea-blocks' ),
 					'attr'	=> 'subtitle',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Description', 'planet4-gpea-blocks' ),
 					'attr'	=> 'description',
 					'type'	=> 'textarea',
 					'meta'	=> [
-						'placeholder' => __( 'Description', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Description', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Background image', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Background image', 'planet4-gpea-blocks' ),
 					'attr'		  => 'bg_img',
 					'type'		  => 'attachment',
 					'libraryType' => array( 'image' ),
-					'addButton'	  => __( 'Select image', 'planet4-gpnl-blocks' ),
-					'frameTitle'  => __( 'Select image', 'planet4-gpnl-blocks' ),
+					'addButton'	  => __( 'Select image', 'planet4-gpea-blocks' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
 				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Achievement Section', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/achivements_block.png' ) . '" />',
+				'label'			=> __( 'LATTE | Achievement Section', 'planet4-gpea-blocks' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/achivements_block.png' ) . '" />',
 				'attrs'			=> $fields,
-				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
+				'post_type'		=> P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );

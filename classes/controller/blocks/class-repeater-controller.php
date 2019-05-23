@@ -1,6 +1,6 @@
 <?php
 
-namespace P4NLBKS\Controllers\Blocks;
+namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'Repeater_Controller' ) ) {
 	/**
@@ -10,7 +10,7 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 	/**
 	 * Class Repeater_Controller
 	 *
-	 * @package P4NLBKS\Controllers\Blocks
+	 * @package P4EABKS\Controllers\Blocks
 	 * @since 0.1.3
 	 */
 	class Repeater_Controller extends Controller {
@@ -34,21 +34,21 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Repeater block title', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Repeater block title', 'planet4-gpea-blocks' ),
 					'attr'  => 'repeater_title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Enter block title', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Enter block title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Repeater block description', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Repeater block description', 'planet4-gpea-blocks' ),
 					'attr'  => 'repeater_description',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Enter block description', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Enter block description', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 			];
@@ -59,12 +59,12 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label' => sprintf( __('<i>Title %s</i>', 'planet4-gpnl-blocks'), $i ),
+						'label' => sprintf( __('<i>Title %s</i>', 'planet4-gpea-blocks'), $i ),
 						'attr'  => 'title_repeater_' . $i,
 						'type'  => 'text',
 						'meta'  => [
-							'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpnl-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpea-blocks' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'repeater',
 							'data-element-name' => 'repeater',
 							'data-element-number' => $i,
@@ -73,12 +73,12 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label' => sprintf( __('<i>Description %s</i>', 'planet4-gpnl-blocks'), $i ),
+						'label' => sprintf( __('<i>Description %s</i>', 'planet4-gpea-blocks'), $i ),
 						'attr'  => 'description_repeater_' . $i,
 						'type'  => 'textarea',
 						'meta'  => [
-							'placeholder' => sprintf( __( 'Enter description %s', 'planet4-gpnl-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => sprintf( __( 'Enter description %s', 'planet4-gpea-blocks' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'repeater',
 							'data-element-name' => 'repeater',
 							'data-element-number' => $i,
@@ -87,22 +87,22 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label'       => sprintf( __('<i>Image %s.</i>', 'planet4-gpnl-blocks'), $i ),
+						'label'       => sprintf( __('<i>Image %s.</i>', 'planet4-gpea-blocks'), $i ),
 						'attr'        => 'attachment_repeater_' . $i,
 						'type'        => 'attachment',
 						'libraryType' => [ 'image' ],
-						'addButton'   => __( 'Select Image', 'planet4-gpnl-blocks' ),
-						'frameTitle'  => __( 'Select Image', 'planet4-gpnl-blocks' ),
+						'addButton'   => __( 'Select Image', 'planet4-gpea-blocks' ),
+						'frameTitle'  => __( 'Select Image', 'planet4-gpea-blocks' ),
 					];
 
 				$fields[] =
 					[
-						'label' => sprintf( __('<i>Button link %s</i>', 'planet4-gpnl-blocks'), $i ),
+						'label' => sprintf( __('<i>Button link %s</i>', 'planet4-gpea-blocks'), $i ),
 						'attr'  => 'link_repeater_' . $i,
 						'type'  => 'url',
 						'meta'  => [
-							'placeholder' => sprintf( __( 'Enter button %s link', 'planet4-gpnl-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => sprintf( __( 'Enter button %s link', 'planet4-gpea-blocks' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'repeater',
 							'data-element-name' => 'repeater',
 							'data-element-number' => $i,
@@ -111,22 +111,22 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label' => sprintf( __('<i>Button text %s</i>', 'planet4-gpnl-blocks'), $i ),
+						'label' => sprintf( __('<i>Button text %s</i>', 'planet4-gpea-blocks'), $i ),
 						'attr'  => 'cta_text_repeater_' . $i,
 						'type'  => 'text',
 						'meta'  => [
-							'placeholder' => sprintf( __( 'Enter button %s text', 'planet4-gpnl-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => sprintf( __( 'Enter button %s text', 'planet4-gpea-blocks' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					];
 			}
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'LATTE | Repeater', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
+				'label'         => __( 'LATTE | Repeater', 'planet4-gpea-blocks' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
-				'post_type'     => P4NLBKS_ALLOWED_PAGETYPE,
+				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
@@ -163,7 +163,7 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 
 			$block_data = [
 				'fields'              => $attributes,
-				'available_languages' => P4NLBKS_LANGUAGES,
+				'available_languages' => P4EABKS_LANGUAGES,
 			];
 			return $block_data;
 		}

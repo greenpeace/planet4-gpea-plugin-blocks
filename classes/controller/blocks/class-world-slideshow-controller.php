@@ -1,6 +1,6 @@
 <?php
 
-namespace P4NLBKS\Controllers\Blocks;
+namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 	/**
@@ -10,7 +10,7 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 	/**
 	 * Class World_Slideshow_Controller
 	 *
-	 * @package P4NLBKS\Controllers\Blocks
+	 * @package P4EABKS\Controllers\Blocks
 	 * @since 0.1.3
 	 */
 	class World_Slideshow_Controller extends Controller {
@@ -34,12 +34,12 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks' ),
 					'attr'	=> 'title',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 			];
@@ -50,12 +50,12 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label' => sprintf( __('<strong>%s</strong> <i>title</i>', 'planet4-gpnl-blocks'), $i ),
+						'label' => sprintf( __('<strong>%s</strong> <i>title</i>', 'planet4-gpea-blocks'), $i ),
 						'attr'	=> 'title_' . $i,
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpnl-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpea-blocks' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
 							'data-element-number' => $i,
@@ -64,12 +64,12 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label' => sprintf( __('<strong>%s</strong> <i>subtitle</i>', 'planet4-gpnl-blocks'), $i ),
+						'label' => sprintf( __('<strong>%s</strong> <i>subtitle</i>', 'planet4-gpea-blocks'), $i ),
 						'attr'	=> 'subtitle_' . $i,
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => sprintf( __( 'Enter subtitle %s', 'planet4-gpnl-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => sprintf( __( 'Enter subtitle %s', 'planet4-gpea-blocks' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
 							'data-element-number' => $i,
@@ -78,12 +78,12 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label' => sprintf( __('<strong>%s</strong> <i>text block</i>', 'planet4-gpnl-blocks'), $i ),
+						'label' => sprintf( __('<strong>%s</strong> <i>text block</i>', 'planet4-gpea-blocks'), $i ),
 						'attr'	=> 'textblock_' . $i,
 						'type'	=> 'textarea',
 						'meta'	=> [
-							'placeholder' => sprintf( __( 'Enter text block %s', 'planet4-gpnl-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => sprintf( __( 'Enter text block %s', 'planet4-gpea-blocks' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
 							'data-element-number' => $i,
@@ -92,15 +92,15 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label'		  => sprintf( __('<strong>%s</strong> <i>image</i>', 'planet4-gpnl-blocks'), $i ),
+						'label'		  => sprintf( __('<strong>%s</strong> <i>image</i>', 'planet4-gpea-blocks'), $i ),
 						'attr'		  => 'img_' . $i,
 						'type'		  => 'attachment',
 						'libraryType' => array( 'image' ),
-						'addButton'	  => __( 'Select image', 'planet4-gpnl-blocks' ),
-						'frameTitle'  => __( 'Select image', 'planet4-gpnl-blocks' ),
+						'addButton'	  => __( 'Select image', 'planet4-gpea-blocks' ),
+						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
 						'meta'		  => [
-							'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpnl-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpea-blocks' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
 							'data-element-number' => $i,
@@ -110,10 +110,10 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | World Slideshow', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
+				'label'			=> __( 'LATTE | World Slideshow', 'planet4-gpea-blocks' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
-				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
+				'post_type'		=> P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );

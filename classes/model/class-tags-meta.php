@@ -1,13 +1,13 @@
 <?php
 
-namespace P4NLBKS\Models;
+namespace P4EABKS\Models;
 
 if ( ! class_exists( 'Tags_Meta' ) ) {
 
 	/**
 	 * Class Tags_Meta
 	 *
-	 * @package P4NLBKS\Models
+	 * @package P4EABKS\Models
 	 */
 	class Tags_Meta {
 
@@ -38,7 +38,7 @@ if ( ! class_exists( 'Tags_Meta' ) ) {
 
 			wp_enqueue_script(
 				'p4nlbks_admin_questions_script',
-				P4NLBKS_ADMIN_DIR . 'js/blocks/admin-questions.js',
+				P4EABKS_ADMIN_DIR . 'js/blocks/admin-questions.js',
 				[ 'jquery' ],
 				'0.1',
 				true

@@ -1,6 +1,6 @@
 <?php
 
-namespace P4NLBKS\Controllers\Blocks;
+namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'Metablock_Controller' ) ) {
 	/**
@@ -10,7 +10,7 @@ if ( ! class_exists( 'Metablock_Controller' ) ) {
 	/**
 	 * Class Metablock_Controller
 	 *
-	 * @package P4NLBKS\Controllers\Blocks
+	 * @package P4EABKS\Controllers\Blocks
 	 */
 	class Metablock_Controller extends Controller {
 
@@ -31,31 +31,31 @@ if ( ! class_exists( 'Metablock_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks' ),
 					'attr'	=> 'title',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Title', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
-						'data-testdataasd' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+						'data-testdataasd' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Subtitle', 'planet4-gpea-blocks' ),
 					'attr'	=> 'subtitle',
 					'type'	=> 'text',
 					'meta'	=> [
-						'placeholder' => __( 'Subtitle', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-gpnl-blocks' ),
+					'label' => __( 'Description', 'planet4-gpea-blocks' ),
 					'attr'	=> 'description',
 					'type'	=> 'textarea',
 					'meta'	=> [
-						'placeholder' => __( 'Description', 'planet4-gpnl-blocks' ),
-						'data-plugin' => 'planet4-gpnl-blocks',
+						'placeholder' => __( 'Description', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 			];
@@ -63,42 +63,42 @@ if ( ! class_exists( 'Metablock_Controller' ) ) {
 			$field_groups = [
 				'Static content' => [
 					[
-						'label' => __('<i>Static item %s title</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<i>Static item %s title</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'title',
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => __( 'Enter title', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter title', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label' => __('<i>Static item %s description</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<i>Static item %s description</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'description',
 						'type'	=> 'textarea',
 						'meta'	=> [
-							'placeholder' => __( 'Enter description', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter description', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 				],
 				'Dynamic content' => [
 					[
-						'label' => __('<i>Dynamic item %s title</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<i>Dynamic item %s title</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'title',
 						'type'	=> 'text',
 						'meta'	=> [
-							'placeholder' => __( 'Enter title', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Enter title', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
-						'label' => __('<i>Dynamic item %s post</i>', 'planet4-gpnl-blocks'),
+						'label' => __('<i>Dynamic item %s post</i>', 'planet4-gpea-blocks'),
 						'attr'	=> 'post',
 						'type'	=> 'post_select',
 						'query' => array( 'post_type' => 'post' ),
 						'meta'	=> [
-							'placeholder' => __( 'Select dynamic content', 'planet4-gpnl-blocks' ),
-							'data-plugin' => 'planet4-gpnl-blocks',
+							'placeholder' => __( 'Select dynamic content', 'planet4-gpea-blocks' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 				],
@@ -108,10 +108,10 @@ if ( ! class_exists( 'Metablock_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Metablock', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
+				'label'			=> __( 'LATTE | Metablock', 'planet4-gpea-blocks' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
-				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
+				'post_type'		=> P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );

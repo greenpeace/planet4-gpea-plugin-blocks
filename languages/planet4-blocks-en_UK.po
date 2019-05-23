@@ -53,7 +53,7 @@ msgid "Conflict Error"
 msgstr ""
 
 #: classes/class-loader.php:199
-msgid "Class P4NLBKS_Loader already exists."
+msgid "Class P4EABKS_Loader already exists."
 msgstr ""
 
 #: classes/controller/blocks/class-petitionblock-controller.php:24

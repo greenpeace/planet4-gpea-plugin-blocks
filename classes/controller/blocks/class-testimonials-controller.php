@@ -1,6 +1,6 @@
 <?php
 
-namespace P4NLBKS\Controllers\Blocks;
+namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'Testimonials_Controller' ) ) {
 	/**
@@ -10,7 +10,7 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 	/**
 	 * Class Testimonials_Controller
 	 *
-	 * @package P4NLBKS\Controllers\Blocks
+	 * @package P4EABKS\Controllers\Blocks
 	 * @since 0.1.3
 	 */
 	class Testimonials_Controller extends Controller {
@@ -34,7 +34,7 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 
 			$fields = [				
 				[
-					'label'		  => __( 'Select the team people for testimonials', 'planet4-gpnl-blocks' ),
+					'label'		  => __( 'Select the team people for testimonials', 'planet4-gpea-blocks' ),
 					'attr'	   => 'testimonial_ids',
 					'type'	   => 'post_select',
 					'multiple' => 'multiple',
@@ -56,10 +56,10 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Testimonials', 'planet4-gpnl-blocks' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpnl-plugin-blocks/admin/img/latte.png' ) . '" />',
+				'label'			=> __( 'LATTE | Testimonials', 'planet4-gpea-blocks' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'			=> $fields,
-				'post_type'		=> P4NLBKS_ALLOWED_PAGETYPE,
+				'post_type'		=> P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );

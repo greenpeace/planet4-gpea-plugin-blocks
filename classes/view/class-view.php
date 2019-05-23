@@ -1,6 +1,6 @@
 <?php
 
-namespace P4NLBKS\Views;
+namespace P4EABKS\Views;
 
 use Timber\Timber;
 
@@ -9,12 +9,12 @@ if ( ! class_exists( 'View' ) ) {
 	/**
 	 * Class View
 	 *
-	 * @package P4NLBKS\Views
+	 * @package P4EABKS\Views
 	 */
 	class View {
 
 		/** @var string $template_dir The path to the template files. */
-		private $template_dir = P4NLBKS_INCLUDES_DIR;
+		private $template_dir = P4EABKS_INCLUDES_DIR;
 
 
 		/**
