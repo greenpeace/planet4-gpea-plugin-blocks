@@ -1,2 +1,0 @@
-"use strict";$(document).ready(function(){var t=$(".hero"),i=$("div.page-template").eq(0);function r(){var r=i.width();t.each(function(){var t=$(this).innerWidth(),i=(r-t)/2;"rtl"===$("html").attr("dir")?($(this).css("margin-left","auto"),$(this).css("margin-right",i+"px")):$(this).css("margin-left",i+"px")})}0<t.length&&0<i.length?(r(),$(window).on("resize",r)):($(".block-wide").attr("style","margin: 0px !important;padding-left: 0px !important;padding-right: 0px !important"),$("iframe").attr("style","left: 0"))});
-//# sourceMappingURL=maps/gpnl-herowide.js.map
