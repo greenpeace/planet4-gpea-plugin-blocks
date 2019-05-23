@@ -11,4 +11,5 @@ return array(
     'P4EABKS\\Controllers\\Blocks\\' => array($baseDir . '/classes/controller/blocks'),
     'P4EABKS\\Controllers\\' => array($baseDir . '/classes/controller'),
     'P4EABKS\\' => array($baseDir . '/classes'),
+    'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\' => array($vendorDir . '/dealerdirect/phpcodesniffer-composer-installer/src'),
 );
