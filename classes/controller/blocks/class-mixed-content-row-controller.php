@@ -245,8 +245,9 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 						'type'  => 'select',
 						'options' => $posts,
 						'meta'  => [
-							'placeholder' => __( 'Select post', 'planet4-gpea-blocks' ),
-							'data-plugin' => 'planet4-gpea-blocks',
+							'placeholder'          => __( 'Select post', 'planet4-gpea-blocks' ),
+							'data-plugin'          => 'planet4-gpea-blocks',
+							'data-input-transform' => 'js-select2-enable',
 						],
 					],
 				],

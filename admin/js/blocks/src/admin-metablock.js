@@ -89,6 +89,16 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
       var row = $element.parent().data('row');
       var element_type = $element.data('element-type');
 
+      // Special control, if block type added is post, and if input element has special data attribute data-input-transform == js-select2-enable then dynamically transform into select2
+      if (element_type == 'post') {        
+        var selectName = 'select[name="post_post_'+ (row+1) +'"]';
+        if ( $(selectName).data('input-transform') === 'js-select2-enable' ) {
+          $(selectName).select2({
+            placeholder: 'Select post',
+          });
+        }        
+      }
+
       if (row <= element_count) {
         // elements.show_element_type_selector();
         elements.show_element(++row, element_type, element_count);
