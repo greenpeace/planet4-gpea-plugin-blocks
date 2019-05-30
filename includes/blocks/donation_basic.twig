@@ -1,0 +1,28 @@
+{% block donate_section %}
+    {% if ( fields ) %}
+	<!-- TODO frontend implement bg_img_mobile -->
+        <img src="{{ fields.bg_img_mobile }}" />
+	<!-- TODO frontend implement paragraph -->
+        <p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
+	<section class="section-donate lazy {{ fields.upper_blur ? 'upper-fade' : '' }}" data-bg="url({{ fields.bg_img }})">
+	    <div class="ct-container">
+		<div class="content">
+		    <p class="title text enormos bold">{{ fields.title|e('wp_kses_post')|raw }}</p>
+		    <div class="form">
+			<div class="tab-bar">
+			    <div class="tab-item active">{{ fields.label_donate_once|e('wp_kses_post')|raw }}</div>
+			    <div class="tab-item">{{ fields.label_donate_monthly|e('wp_kses_post')|raw }}</div>
+			</div>
+			<div class="form-body">
+			    <div class="field">
+				<p class="label">{{ fields.currency_code|e('wp_kses_post')|raw }}</p>
+				<input type="text" aria-label="{{ fields.currency_code|e('wp_kses_post')|raw }}">
+			    </div>
+			    <a href="{{ fields.button_landing_link }}" class="button">{{ fields.button_label|e('wp_kses_post')|raw }}</a>
+			</div>
+		    </div>
+		</div>
+	    </div>
+	</section>
+    {% endif %}
+{% endblock %}

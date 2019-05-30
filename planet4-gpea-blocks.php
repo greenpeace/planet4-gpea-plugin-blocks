@@ -120,7 +120,7 @@ P4EABKS\Loader::get_instance(
 		'P4EABKS\Controllers\Blocks\Achievement_Section_Controller',
 		'P4EABKS\Controllers\Blocks\UGC_Controller',
 		'P4EABKS\Controllers\Blocks\Values_Section_Controller',
-		'P4EABKS\Controllers\Blocks\Donate_Section_Controller',
+		'P4EABKS\Controllers\Blocks\Donation_Basic_Controller',
 		'P4EABKS\Controllers\Blocks\Text_And_Image_Controller',
 		'P4EABKS\Controllers\Blocks\Launcher_Controller',
 		'P4EABKS\Controllers\Blocks\Report_Controller',
