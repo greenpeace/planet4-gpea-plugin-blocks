@@ -90,7 +90,6 @@ return array(
     'P4EABKS\\Controllers\\Blocks\\Article_Row_Controller' => $baseDir . '/classes/controller/blocks/class-article-row-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Big_Carousel_Manual_Selection_Controller' => $baseDir . '/classes/controller/blocks/class-big-carousel-manual-selection-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Controller' => $baseDir . '/classes/controller/blocks/class-controller.php',
-    'P4EABKS\\Controllers\\Blocks\\Custom_Query_Controller' => $baseDir . '/classes/controller/blocks/class-custom-query-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Donation_Basic_Controller' => $baseDir . '/classes/controller/blocks/class-donation-basic-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Issue_List_Controller' => $baseDir . '/classes/controller/blocks/class-issue-list-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Launcher_Controller' => $baseDir . '/classes/controller/blocks/class-launcher-controller.php',
