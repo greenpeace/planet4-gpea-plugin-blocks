@@ -40,7 +40,7 @@ if ( ! class_exists( 'P4EABKS_Uninstall_Controller' ) ) {
 		/**
 		 * Cleanup options
 		 *
-		 * Deletes Planet4 - NL - Blocks options and transients.
+		 * Deletes Planet4 - EA - Blocks options and transients.
 		 *
 		 * @return void
 		 */

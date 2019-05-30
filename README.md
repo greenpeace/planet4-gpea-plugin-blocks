@@ -1,4 +1,4 @@
-# GreenpeaceNL Planet 4 - Shortcodes
+# GreenpeaceEA Planet 4 - Shortcodes
 
 This WordPress plugin provides blocks to be used with Shortcake UI plugin.
 This plugin is developed by Greenpeace Netherlands to be used in the Planet4 engagement platform.

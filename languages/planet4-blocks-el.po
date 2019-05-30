@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"Project-Id-Version: Planet4 - NL - Blocks\n"
+"Project-Id-Version: Planet4 - EA - Blocks\n"
 "POT-Creation-Date: 2018-03-03 18:41+0000\n"
 "PO-Revision-Date: 2018-03-03 18:54+0000\n"
 "Last-Translator: konstantinos kokkorogiannis <koyandianthos@gmail.com>\n"
@@ -97,7 +97,7 @@ msgid "Save Changes"
 msgstr "Αποθήκευσε αλλαγές"
 
 #. Plugin Name of the plugin/theme
-msgid "Planet4 - NL - Blocks"
+msgid "Planet4 - EA - Blocks"
 msgstr ""
 
 #. Plugin URI of the plugin/theme

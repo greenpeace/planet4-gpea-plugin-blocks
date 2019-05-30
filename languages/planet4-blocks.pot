@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"Project-Id-Version: Planet4 - NL - Blocks\n"
+"Project-Id-Version: Planet4 - EA - Blocks\n"
 "POT-Creation-Date: 2018-05-02 14:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
@@ -90,7 +90,7 @@ msgid "Select Language"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "Planet4 - NL - Blocks"
+msgid "Planet4 - EA - Blocks"
 msgstr ""
 
 #. Description of the plugin/theme

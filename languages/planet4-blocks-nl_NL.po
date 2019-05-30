@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1\n"
-"Project-Id-Version: Planet4 - NL - Blocks\n"
+"Project-Id-Version: Planet4 - EA - Blocks\n"
 "POT-Creation-Date: 2018-03-03 18:41+0000\n"
 "PO-Revision-Date: 2018-03-23 10:14+0000\n"
 "Last-Translator: Konstantinos Kokkorogiannis <kkokkoro@greenpeace.org>\n"
@@ -63,7 +63,7 @@ msgid "Class P4EABKS_Loader already exists."
 msgstr ""
 
 #: classes/controller/blocks/class-controller.php:74
-msgid "Shortcode UI plugin must be active for Planet4 - NL - Blocks plugin to work."
+msgid "Shortcode UI plugin must be active for Planet4 - EA - Blocks plugin to work."
 msgstr ""
 
 #: classes/controller/blocks/class-mediavideo-controller.php:46
@@ -101,7 +101,7 @@ msgid "Load More"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "Planet4 - NL - Blocks"
+msgid "Planet4 - EA - Blocks"
 msgstr ""
 
 #. Description of the plugin/theme
