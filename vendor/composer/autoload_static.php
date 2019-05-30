@@ -140,7 +140,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4EABKS\\Controllers\\Blocks\\Main_Issues_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-main-issues-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Metablock_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-metablock-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Milestones_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-milestones-controller.php',
-        'P4EABKS\\Controllers\\Blocks\\Mixed_Content_Row_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-mixed-content-row.php',
+        'P4EABKS\\Controllers\\Blocks\\Mixed_Content_Row_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-mixed-content-row-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Mixed_Content_Slideshow_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-mixed-content-slideshow.php',
         'P4EABKS\\Controllers\\Blocks\\Projects_Overview_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-projects-overview-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Repeater_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-repeater-controller.php',

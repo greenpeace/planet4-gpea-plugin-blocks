@@ -1,5 +1,25 @@
 {% block mixed_content_row %}
-    <section class="section-time-line section-overview-introduction">
+
+    <!-- TODO frontend - here are the layout variants. Insert HTML accordingly, or set classes as below: -->
+    {% if ( static_fields.layout == 'green_grey' ) %}
+        <!-- Green title, grey text -->
+        {% set classname = 'green-grey' %}
+    {% elseif ( static_fields.layout == 'green_white' ) %}
+        <!-- Green title, white text -->
+        {% set classname = 'green-white' %}
+    {% elseif ( static_fields.layout == 'grey_grey' ) %}
+        <!-- Grey title, grey text -->
+        {% set classname = 'grey-grey' %}
+    {% else %}
+        <!-- Does nothing (or insert default here) -->
+    {% endif %}
+
+    <!-- TODO frontend - this will print the background image URL, if present -->
+    {% if ( static_fields.image ) %}
+        {{ static_fields.image }}
+    {% endif %}
+
+    <section class="section-time-line section-overview-introduction layout-{{ classname }}"> <!-- e.g. layout-green-grey -->
 	<div class="time-point">
 	    {% if ( static_fields ) %}
 		<div class="ct-container generic-content">
@@ -52,9 +72,9 @@
 		    </div>
 		</div>
 	    {% endif %}
-	    {% if ( static_fields.text_under ) %}
+	    {% if ( static_fields.paragraph ) %}
 		<div class="ct-container generic-content">
-		    <p class="faint">{{ static_fields.text_under }}</p>
+		    <p class="faint">{{ static_fields.paragraph }}</p>
 		</div>
 	    {% endif %}
 	</div>

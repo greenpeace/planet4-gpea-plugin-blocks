@@ -97,7 +97,7 @@ return array(
     'P4EABKS\\Controllers\\Blocks\\Main_Issues_Controller' => $baseDir . '/classes/controller/blocks/class-main-issues-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Metablock_Controller' => $baseDir . '/classes/controller/blocks/class-metablock-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Milestones_Controller' => $baseDir . '/classes/controller/blocks/class-milestones-controller.php',
-    'P4EABKS\\Controllers\\Blocks\\Mixed_Content_Row_Controller' => $baseDir . '/classes/controller/blocks/class-mixed-content-row.php',
+    'P4EABKS\\Controllers\\Blocks\\Mixed_Content_Row_Controller' => $baseDir . '/classes/controller/blocks/class-mixed-content-row-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Mixed_Content_Slideshow_Controller' => $baseDir . '/classes/controller/blocks/class-mixed-content-slideshow.php',
     'P4EABKS\\Controllers\\Blocks\\Projects_Overview_Controller' => $baseDir . '/classes/controller/blocks/class-projects-overview-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Repeater_Controller' => $baseDir . '/classes/controller/blocks/class-repeater-controller.php',
