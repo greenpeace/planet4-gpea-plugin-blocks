@@ -99,7 +99,7 @@ return array(
     'P4EABKS\\Controllers\\Blocks\\Milestones_Controller' => $baseDir . '/classes/controller/blocks/class-milestones-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Mixed_Content_Row_Controller' => $baseDir . '/classes/controller/blocks/class-mixed-content-row-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Mixed_Content_Slideshow_Controller' => $baseDir . '/classes/controller/blocks/class-mixed-content-slideshow.php',
-    'P4EABKS\\Controllers\\Blocks\\Projects_Overview_Controller' => $baseDir . '/classes/controller/blocks/class-projects-overview-controller.php',
+    'P4EABKS\\Controllers\\Blocks\\Projects_Carousel_Controller' => $baseDir . '/classes/controller/blocks/class-projects-carousel-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Repeater_Controller' => $baseDir . '/classes/controller/blocks/class-repeater-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Report_Controller' => $baseDir . '/classes/controller/blocks/class-report-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Test_Controller' => $baseDir . '/classes/controller/blocks/class-test-controller.php',

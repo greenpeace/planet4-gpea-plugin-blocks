@@ -1,19 +1,19 @@
-{% block projects_overview %}
+{% block projects_carousel %}
     {% if ( fields ) %}
 	{% set section_class = fields.layout == 'light' ? 'light' : '' %}
 	{% set container_class = fields.layout == 'light' ? '' : 'light' %}
-	<section class="section-projects {{ section_class }}">
+	<section class="section-projects {{ section_class }} {{ fields.show_vertical ? 'show-vertical' : '' }}">
 	    <div class="mobile-top-box">
 		<div class="ct-container">
 		    <p class="title text very-big light">{{ fields.title|e('wp_kses_post')|raw }}</p>
-		    <p class="content text huge">{{ fields.description|e('wp_kses_post')|raw }}</p>
+		    <p class="content text huge">{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 		</div>
 	    </div>
 	    <div class="swiper-container section-projects-swiper {{ container_class }}">
 		<div class="swiper-wrapper">
 		    <div class="swiper-slide first">
 			<p class="title text very-big light">{{ fields.title|e('wp_kses_post')|raw }}</p>
-			<p class="content text huge">{{ fields.description|e('wp_kses_post')|raw }}</p>
+			<p class="content text huge">{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 			<p class="ps text bold">{{ fields.see_more|e('wp_kses_post')|raw }}</p>
 		    </div>
 		    {% for post in fields.posts %}
