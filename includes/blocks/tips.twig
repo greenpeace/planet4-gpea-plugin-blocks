@@ -10,7 +10,9 @@
 		<div class="swiper-wrapper">
 		    <div class="swiper-slide first">
 			<p class="title text very-big light">{{ fields.title|e('wp_kses_post')|raw }}</p>
-			<p class="content text">{{ fields.description|e('wp_kses_post')|raw }}</p>
+                        <!-- TODO frontend: add HTML for subtitle field -->
+			<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+			<p class="content text">{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 			<p class="ps text bold">{{ fields.see_more_label|e('wp_kses_post')|raw }} (TODO link)</p>
 		    </div>
 		    {% if fields.posts %}
