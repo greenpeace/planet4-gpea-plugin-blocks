@@ -26,14 +26,14 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 		/**
 		 * The block default layout.
 		 *
-		 * @const string BLOCK_NAME
+		 * @const string DEFAULT_LAYOUT
 		 */
 		const DEFAULT_LAYOUT = 'default';
 
 		/**
 		 * The maximum number of sum-elements.
 		 *
-		 * @const string BLOCK_NAME
+		 * @const string MAX_REPEATER
 		 */
 		const MAX_REPEATER = 6;
 
