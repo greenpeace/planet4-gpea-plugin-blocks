@@ -3,14 +3,14 @@
 	<section class="section-project-phases generic-content">
 	    <div class="project-phase text-box">
 		<h2>{{ fields.title }}</h2>
-		<p>{{ fields.description }}</p>
+		<p>{{ fields.paragraph }}</p>
 		<!-- one or more milestones, each can be achieved or not achieved -->
 		<div class="project-phase-milestones">
 		    {% for i in 1..25 %}
-			{% if fields['description_milestone_'~i] %}
+			{% if fields['paragraph_milestone_'~i] %}
 			    <div class="project-phase-milestone {{ fields['achieved_milestone_'~i] ? 'achieved' : '' }}">
 				<div class="project-phase-milestone-date">{{ fields['date_milestone_'~i] }}</div>
-				<p>{{ fields['description_milestone_'~i] }}</p>
+				<p>{{ fields['paragraph_milestone_'~i] }}</p>
 			    </div>
 			{% endif %}
 		    {% endfor %}

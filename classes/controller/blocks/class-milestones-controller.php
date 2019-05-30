@@ -1,24 +1,34 @@
 <?php
+/**
+ * Milestones block class
+ *
+ * @package P4EABKS
+ * @since 0.1
+ */
 
 namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'Milestones_Controller' ) ) {
 	/**
-	 * @noinspection AutoloadingIssuesInspection
-	 */
-
-	/**
 	 * Class Milestones_Controller
 	 *
 	 * @package P4EABKS\Controllers\Blocks
-	 * @since 0.1.3
+	 * @since 0.1
 	 */
 	class Milestones_Controller extends Controller {
 
-		/** @const string BLOCK_NAME */
-		const BLOCK_NAME   = 'milestones';
+		/**
+		 * The block name constant.
+		 *
+		 * @const string BLOCK_NAME
+		 */
+		const BLOCK_NAME = 'milestones';
 
-		/** @const int MAX_REPEATER */
+		/**
+		 * The maximum number of sum-elements.
+		 *
+		 * @const string MAX_REPEATER
+		 */
 		const MAX_REPEATER = 20;
 
 		/**
@@ -35,34 +45,35 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 			$fields = [
 				[
 					'label' => __( 'Title', 'planet4-gpea-blocks' ),
-					'attr'	=> 'title',
-					'type'	=> 'text',
-					'meta'	=> [
+					'attr'  => 'title',
+					'type'  => 'text',
+					'meta'  => [
 						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-gpea-blocks' ),
-					'attr'	=> 'description',
-					'type'	=> 'textarea',
-					'meta'	=> [
-						'placeholder' => __( 'Description', 'planet4-gpea-blocks' ),
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+					'attr'  => 'paragraph',
+					'type'  => 'textarea',
+					'meta'  => [
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 			];
 
-			// This block will have at most MAX_REPEATER different items
-
+			// This block will have at most MAX_REPEATER different items.
 			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
 
 				$fields[] =
 					[
-						'label' => sprintf( __('<i>Milestone %s date</i>', 'planet4-gpea-blocks'), $i ),
-						'attr'	=> 'date_milestone_' . $i,
-						'type'	=> 'text',
-						'meta'	=> [
+						// translators: placeholder represents the ordinal of the field.
+						'label' => sprintf( __( '<i>Milestone %s date</i>', 'planet4-gpea-blocks' ), $i ),
+						'attr'  => 'date_milestone_' . $i,
+						'type'  => 'text',
+						'meta'  => [
+							// translators: placeholder represents the ordinal of the field.
 							'placeholder' => sprintf( __( 'Enter date %s', 'planet4-gpea-blocks' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
@@ -73,11 +84,13 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label' => sprintf( __('<i>Milestone %s description</i>', 'planet4-gpea-blocks'), $i ),
-						'attr'	=> 'description_milestone_' . $i,
-						'type'	=> 'textarea',
-						'meta'	=> [
-							'placeholder' => sprintf( __( 'Enter description %s', 'planet4-gpea-blocks' ), $i ),
+						// translators: placeholder represents the ordinal of the field.
+						'label' => sprintf( __( '<i>Milestone %s paragraph</i>', 'planet4-gpea-blocks' ), $i ),
+						'attr'  => 'paragraph_milestone_' . $i,
+						'type'  => 'textarea',
+						'meta'  => [
+							// translators: placeholder represents the ordinal of the field.
+							'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
@@ -87,11 +100,11 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label' => sprintf( __('<i>Tick if milestone %s was achieved</i>', 'planet4-gpea-blocks'), $i ),
-						'attr'	=> 'achieved_milestone_' . $i,
-						'type'	=> 'checkbox',
-						'meta'	=> [
-							'placeholder' => sprintf( __( 'Enter description %s', 'planet4-gpea-blocks' ), $i ),
+						// translators: placeholder represents the ordinal of the field.
+						'label' => sprintf( __( '<i>Tick if milestone %s was achieved</i>', 'planet4-gpea-blocks' ), $i ),
+						'attr'  => 'achieved_milestone_' . $i,
+						'type'  => 'checkbox',
+						'meta'  => [
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
@@ -102,10 +115,10 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Milestones', 'planet4-gpea-blocks' ),
+				'label'         => __( 'Milestones', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
-				'attrs'			=> $fields,
-				'post_type'		=> P4EABKS_ALLOWED_PAGETYPE,
+				'attrs'         => $fields,
+				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
@@ -115,7 +128,7 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 		/**
 		 * Get all the data that will be needed to render the block correctly.
 		 *
-		 * @param array	 $attributes This is the array of fields of this block.
+		 * @param array  $attributes This is the array of fields of this block.
 		 * @param string $content This is the post content.
 		 * @param string $shortcode_tag The shortcode tag of this block.
 		 *
@@ -133,8 +146,8 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 		 * Callback for the shortcake_noindex shortcode.
 		 * It renders the shortcode based on supplied attributes.
 		 *
-		 * @param array	 $fields		Array of fields that are to be used in the template.
-		 * @param string $content		The content of the post.
+		 * @param array  $fields        Array of fields that are to be used in the template.
+		 * @param string $content       The content of the post.
 		 * @param string $shortcode_tag The shortcode tag (shortcake_blockname).
 		 *
 		 * @return string The complete html of the block
@@ -145,12 +158,8 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
-
 			$this->view->block( self::BLOCK_NAME, $data );
-			// echo '<pre>' . var_export($fields, true) . '</pre>';
-
 			return ob_get_clean();
 		}
-
 	}
 }
