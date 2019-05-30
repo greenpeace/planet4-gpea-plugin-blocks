@@ -32,3 +32,4 @@ includes/assets/js/onsubmit\.js
 ###############################
 .ac-php-conf.json
 .tern-port
+.dir-locals.el
