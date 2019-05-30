@@ -141,29 +141,28 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 
 			if ( isset( $attributes['tip_ids'] ) ) {
 
-				$posts = get_posts(
+				$query = new \WP_Query(
 					array(
 						'post_type'   => array( 'post' ),
 						'post_status' => 'publish',
-						'include' => explode( ',' , $attributes['tip_ids'] ),
+						'post__in' => explode( ',' , $attributes['tip_ids'] ),
 						'orderby' => 'post__in',
 						'numberposts' => 10,
 					)
 				);
 
-				if ( $posts ) {
-					foreach ( $posts as $post ) {
-						$post = (array) $post; // TODO clean up this typecasting.
-						$tip_icon = get_post_meta( $post['ID'], 'p4-gpea_tip_icon', true );
-						$post['img_url'] = $tip_icon ?? '';
-						$frequency = get_post_meta( $post['ID'], 'p4-gpea_tip_frequency', true );
-						$post['frequency'] = $frequency ?? '';
+				if ( $query->posts ) {
+					foreach ( $query->posts as $post ) {
+						$tip_icon = get_post_meta( $post->ID, 'p4-gpea_tip_icon', true );
+						$post->img_url = $tip_icon ?? '';
+						$frequency = get_post_meta( $post->ID, 'p4-gpea_tip_frequency', true );
+						$post->frequency = $frequency ?? '';
 						// TODO:
 						// - abstract this one to parent.
 						// - also avoid magic constant 'issues'.
 						$issues = get_category_by_slug( 'issues' );
 						$issues = $issues->term_id;
-						$categories = get_the_category( $post['ID'] );
+						$categories = get_the_category( $post->ID );
 						$categories = array_filter(
 							$categories , function( $cat ) use ( $issues ) {
 								return $cat->category_parent === $issues;
@@ -175,7 +174,7 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 							}, $categories
 						);
 						$categories = join( ', ', $categories );
-						$post['categories'] = $categories ?? '';
+						$post->categories = $categories ?? '';
 						$formatted_posts[] = $post;
 					}
 				}
@@ -208,6 +207,5 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 			$this->view->block( self::BLOCK_NAME, $data );
 			return ob_get_clean();
 		}
-
 	}
 }

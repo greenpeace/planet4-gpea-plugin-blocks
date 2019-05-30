@@ -116,28 +116,26 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 
 			if ( isset( $attributes['carousel_item_ids'] ) ) {
 
-				$posts = get_posts(
+				$query = new \WP_Query(
 					array(
 						'post_type'   => array( 'post', 'page' ),
 						'post_status' => 'publish',
-						'include'     => explode( ',' , $attributes['carousel_item_ids'] ),
+						'post__in'    => explode( ',' , $attributes['carousel_item_ids'] ),
 						'orderby'     => 'post__in',
 						'numberposts' => 8,
 					)
 				);
 
-				if ( $posts ) {
-					foreach ( $posts as $post ) {
-						$post = (array) $post; // TODO clean up this typecasting.
-
-						if ( has_post_thumbnail( $post['ID'] ) ) {
-							$img_id = get_post_thumbnail_id( $post['ID'] );
+				if ( $query->posts ) {
+					foreach ( $query->posts as $post ) {
+						if ( has_post_thumbnail( $post->ID ) ) {
+							$img_id = get_post_thumbnail_id( $post->ID );
 							$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
-							$post['img_url'] = $img_data[0];
+							$post->img_url = $img_data[0];
 						}
 
-						if ( has_term( 'petition', 'p4_post_attribute', $post['ID'] ) ) {
-							$post['is_campaign'] = 1;
+						if ( has_term( 'petition', 'p4_post_attribute', $post->ID ) ) {
+							$post->is_campaign = 1;
 						}
 
 						$formatted_posts[] = $post;
@@ -146,7 +144,6 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 			}
 
 			$attributes['posts'] = $formatted_posts;
-			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
 			return [
 				'fields' => $attributes,
@@ -172,10 +169,7 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 			ob_start();
 
 			$this->view->block( self::BLOCK_NAME, $data );
-			// echo '<pre>' . var_export($data, true) . '</pre>';
 			return ob_get_clean();
 		}
-
-
 	}
 }

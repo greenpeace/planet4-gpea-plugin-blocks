@@ -107,9 +107,9 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 				],
 			];
 
-			$posts = get_posts(
+			$query = new \WP_Query(
 				[
-					'post_type' => 'post',
+					'post_type' => array( 'post' ),
 					'orderby' => 'title',
 					'order' => 'asc',
 				]
@@ -120,7 +120,7 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 							'value' => strval( $post->ID ),
 							'label' => esc_html( $post->post_title ),
 						];
-				}, $posts
+				}, $query->posts
 			);
 			array_unshift(
 				$posts, [
@@ -346,18 +346,18 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 				}
 
 				if ( 'post' === $group_type && preg_match( '/^\d+$/', $group['post'] ) ) {
-					$post = get_posts(
+					$query = new \WP_Query(
 						[
-							'include' => $group['post'],
+							'post__in' => explode( ',' , $group['post'] ),
 						]
 					);
-					if ( is_array( $post ) && count( $post ) ) {
-						$post = (array) $post[0];
-						if ( has_post_thumbnail( $post['ID'] ) ) {
-							$img_id = get_post_thumbnail_id( $post['ID'] );
+					if ( $query->posts ) {
+						$post = $query->posts[0];
+						if ( has_post_thumbnail( $post->ID ) ) {
+							$img_id = get_post_thumbnail_id( $post->ID );
 							$img_data = wp_get_attachment_image_src( $img_id , 'medium' );
-							$post['img_url'] = $img_data[0];
-							$post['tags'] = get_the_tags( $post['ID'] );
+							$post->img_url = $img_data[0];
+							$post->tags = get_the_tags( $post->ID );
 						}
 						$group['post'] = $post;
 					} else {
@@ -406,6 +406,5 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 			$this->view->block( self::BLOCK_NAME, $data );
 			return ob_get_clean();
 		}
-
 	}
 }

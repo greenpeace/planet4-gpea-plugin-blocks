@@ -109,11 +109,11 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Show vertical list?', 'planet4-gpea-blocks' ),
+					'label' => __( 'Show vertical list', 'planet4-gpea-blocks' ),
 					'attr'  => 'show_vertical',
 					'type'  => 'checkbox',
 					'meta'  => [
-						'placeholder' => __( 'Show vertical list?', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Show vertical list', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -171,15 +171,14 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 				);
 			}
 
-			$posts = get_posts( $options );
+			$query = new \WP_Query( $options );
 
-			if ( $posts ) {
-				foreach ( $posts as $post ) {
-					$post = (array) $post;
-					if ( has_post_thumbnail( $post['ID'] ) ) {
-						$img_id = get_post_thumbnail_id( $post['ID'] );
+			if ( $query->posts ) {
+				foreach ( $query->posts as $post ) {
+					if ( has_post_thumbnail( $post->ID ) ) {
+						$img_id = get_post_thumbnail_id( $post->ID );
 						$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
-						$post['img_url'] = $img_data[0];
+						$post->img_url = $img_data[0];
 					}
 					$formatted_posts[] = $post;
 				}
@@ -213,7 +212,5 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 			$this->view->block( self::BLOCK_NAME, $data );
 			return ob_get_clean();
 		}
-
-
 	}
 }

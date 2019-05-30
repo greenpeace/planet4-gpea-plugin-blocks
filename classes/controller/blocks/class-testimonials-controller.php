@@ -91,37 +91,35 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 
 			if ( isset( $attributes['testimonial_ids'] ) ) {
 
-				$posts = get_posts(
+				$query = new \WP_Query(
 					array(
 						'post_type'   => array( 'post' ),
 						'post_status' => 'publish',
-						'include' => explode( ',' , $attributes['testimonial_ids'] ),
+						'post__in' => explode( ',' , $attributes['testimonial_ids'] ),
 						'orderby' => 'post__in',
 					)
 				);
 
-				if ( $posts ) {
-					foreach ( $posts as $post ) {
-						$post = (array) $post; // TODO clean up this typecasting.
-
-						if ( has_post_thumbnail( $post['ID'] ) ) {
-							$img_id = get_post_thumbnail_id( $post['ID'] );
+				if ( $query->posts ) {
+					foreach ( $query->posts as $post ) {
+						if ( has_post_thumbnail( $post->ID ) ) {
+							$img_id = get_post_thumbnail_id( $post->ID );
 							$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
-							$post['img_url'] = $img_data[0];
+							$post->img_url = $img_data[0];
 						}
 
-						$team_role = get_post_meta( $post['ID'], 'p4-gpea_team_role', true );
-						$post['team_role'] = $team_role ?? '';
+						$team_role = get_post_meta( $post->ID, 'p4-gpea_team_role', true );
+						$post->team_role = $team_role ?? '';
 
-						$team_citation = get_post_meta( $post['ID'], 'p4-gpea_team_citation', true );
-						$post['team_citation'] = $team_citation ?? '';
+						$team_citation = get_post_meta( $post->ID, 'p4-gpea_team_citation', true );
+						$post->team_citation = $team_citation ?? '';
 
 						// TODO:
 						// - abstract this one to parent.
 						// - also avoid magic constant 'issues'.
 						$issues = get_category_by_slug( 'issues' );
 						$issues = $issues->term_id;
-						$categories = get_the_category( $post['ID'] );
+						$categories = get_the_category( $post->ID );
 						$categories = array_filter(
 							$categories , function( $cat ) use ( $issues ) {
 								return $cat->category_parent === $issues;
@@ -133,7 +131,7 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 							}, $categories
 						);
 						$categories = join( ', ', $categories );
-						$post['categories'] = $categories ?? '';
+						$post->categories = $categories ?? '';
 						$formatted_posts[] = $post;
 					}
 				}
@@ -166,6 +164,5 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 			$this->view->block( self::BLOCK_NAME, $data );
 			return ob_get_clean();
 		}
-
 	}
 }

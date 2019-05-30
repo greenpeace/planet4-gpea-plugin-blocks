@@ -91,7 +91,7 @@ if ( ! class_exists( 'Main_Issues_Controller' ) ) {
 
 			$formatted_posts = [];
 
-			$posts = get_posts(
+			$query = new \WP_Query(
 				array(
 					'order'       => 'desc',
 					'orderby'     => 'date',
@@ -107,13 +107,12 @@ if ( ! class_exists( 'Main_Issues_Controller' ) ) {
 				)
 			);
 
-			if ( $posts ) {
-				foreach ( $posts as $post ) {
-					$post = (array) $post; // TODO avoid this typecasting here.
-					if ( has_post_thumbnail( $post['ID'] ) ) {
-						$img_id = get_post_thumbnail_id( $post['ID'] );
+			if ( $query->posts ) {
+				foreach ( $query->posts as $post ) {
+					if ( has_post_thumbnail( $post->ID ) ) {
+						$img_id = get_post_thumbnail_id( $post->ID );
 						$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
-						$post['img_url'] = $img_data[0];
+						$post->img_url = $img_data[0];
 					}
 					$formatted_posts[] = $post;
 				}

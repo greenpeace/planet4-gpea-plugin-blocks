@@ -111,21 +111,23 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 			$tag_name = $tag_details->name ?? '';
 			$tag_slug = $tag_details->slug ?? '';
 
-			$options = array(
-				'order'       => 'desc',
-				'orderby'     => 'date',
-				'post_type'   => array( 'page', 'post' ),
-				'numberposts' => 20,
-				'tax_query' => array(
-					array(
-						'taxonomy' => 'post_tag',
-						'field' => 'id',
-						'terms' => $article_tag,
+			$query = new \WP_Query(
+				array(
+					'order'       => 'desc',
+					'orderby'     => 'date',
+					'post_type'   => array( 'page', 'post' ),
+					'numberposts' => 20,
+					'tax_query' => array(
+						array(
+							'taxonomy' => 'post_tag',
+							'field' => 'id',
+							'terms' => $article_tag,
+						),
 					),
-				),
+				)
 			);
 
-			$posts = get_posts( $options );
+			$posts = $query->posts;
 
 			if ( $posts ) {
 				foreach ( $posts as $post ) {

@@ -101,30 +101,28 @@ if ( ! class_exists( 'Achievement_About_Controller' ) ) {
 
 			if ( isset( $attributes['update_ids'] ) ) {
 
-				$posts = get_posts(
+				$query = new \WP_Query(
 					array(
 						'post_type'   => array( 'post', 'page' ),
 						'post_status' => 'publish',
-						'include' => explode( ',' , $attributes['update_ids'] ),
+						'post__in' => explode( ',' , $attributes['update_ids'] ),
 						'orderby' => 'post__in',
 					)
 				);
 
-				if ( $posts ) {
-					foreach ( $posts as $post ) {
-						$post = (array) $post; // TODO clean up this typecasting.
-
-						if ( has_post_thumbnail( $post['ID'] ) ) {
-							$img_id = get_post_thumbnail_id( $post['ID'] );
+				if ( $query->posts ) {
+					foreach ( $query->posts as $post ) {
+						if ( has_post_thumbnail( $post->ID ) ) {
+							$img_id = get_post_thumbnail_id( $post->ID );
 							$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
-							$post['img_url'] = $img_data[0];
+							$post->img_url = $img_data[0];
 						}
-
-						$post['post_date'] = date( 'Y-m-d' , strtotime( $post['post_date'] ) );
-
+						$post->post_date = date( 'Y-m-d' , strtotime( $post->post_date ) );
 						$formatted_posts[] = $post;
 					}
 				}
+
+				wp_reset_postdata();
 			}
 
 			$attributes['posts'] = $formatted_posts;
