@@ -7,7 +7,7 @@
 		    <p class="subtitle text small semi-bold">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
 		    <div class="tags">
 			{% for campaign in fields.campaigns %}
-			    <div data='{{ campaign.engaging_ID }}' class="topic-button tag">{{ campaign.name }}</div>
+			    <div data='{{ campaign.engaging_id }}' class="topic-button tag">{{ campaign.name }}</div>
 			{% endfor %}
 		    </div>
 		    <a id="topic-submit-button" class="button light">TODO 立即關注</a>

@@ -25,7 +25,7 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 		const BLOCK_NAME = 'milestones';
 
 		/**
-		 * The maximum number of sum-elements.
+		 * The maximum number of sub-elements.
 		 *
 		 * @const string MAX_REPEATER
 		 */

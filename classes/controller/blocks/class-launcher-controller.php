@@ -1,12 +1,14 @@
 <?php
+/**
+ * Mixed content row block class
+ *
+ * @package P4EABKS
+ * @since 0.1
+ */
 
 namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'Launcher_Controller' ) ) {
-	/**
-	 * @noinspection AutoloadingIssuesInspection
-	 */
-
 	/**
 	 * Class Launcher_Controller
 	 *
@@ -14,10 +16,18 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 	 */
 	class Launcher_Controller extends Controller {
 
-		/** @const string BLOCK_NAME */
+		/**
+		 * The block name constant.
+		 *
+		 * @const string BLOCK_NAME
+		 */
 		const BLOCK_NAME = 'launcher';
 
-		/** @const string DEFAULT_LAYOUT */
+		/**
+		 * The block default layout.
+		 *
+		 * @const string DEFAULT_LAYOUT
+		 */
 		const DEFAULT_LAYOUT = 'default';
 
 		/**
@@ -36,78 +46,78 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 						[
 							'value' => 'default',
 							'label' => __( 'Default', 'planet4-gpea-blocks' ),
-							'desc'	=> 'Default',
+							'desc'  => 'Default',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'box',
 							'label' => __( 'Card', 'planet4-gpea-blocks' ),
-							'desc'	=> 'Box',
+							'desc'  => 'Box',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
 				[
 					'label' => __( 'Title', 'planet4-gpea-blocks' ),
-					'attr'	=> 'title',
-					'type'	=> 'text',
-					'meta'	=> [
+					'attr'  => 'title',
+					'type'  => 'text',
+					'meta'  => [
 						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
 					'label' => __( 'Subtitle', 'planet4-gpea-blocks' ),
-					'attr'	=> 'subtitle',
-					'type'	=> 'text',
-					'meta'	=> [
+					'attr'  => 'subtitle',
+					'type'  => 'text',
+					'meta'  => [
 						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
 					'label' => __( 'Description', 'planet4-gpea-blocks' ),
-					'attr'	=> 'description',
-					'type'	=> 'textarea',
-					'meta'	=> [
+					'attr'  => 'description',
+					'type'  => 'textarea',
+					'meta'  => [
 						'placeholder' => __( 'Description', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
 					'label' => __( 'Optional image', 'planet4-gpea-blocks' ),
-					'attr'		  => 'img',
-					'type'		  => 'attachment',
+					'attr'        => 'img',
+					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
-					'addButton'	  => __( 'Select image', 'planet4-gpea-blocks' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
 					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
 				],
 				[
 					'label' => __( 'CTA text', 'planet4-gpea-blocks' ),
-					'attr'	=> 'cta_text',
-					'type'	=> 'text',
-					'meta'	=> [
+					'attr'  => 'cta_text',
+					'type'  => 'text',
+					'meta'  => [
 						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
 					'label' => __( 'CTA link', 'planet4-gpea-blocks' ),
-					'attr'	=> 'cta_url',
-					'type'	=> 'url',
-					'meta'	=> [
+					'attr'  => 'cta_url',
+					'type'  => 'url',
+					'meta'  => [
 						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
-				],				
+				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Launcher', 'planet4-gpea-blocks' ),
+				'label'         => __( 'Launcher', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
-				'attrs'			=> $fields,
-				'post_type'		=> P4EABKS_ALLOWED_PAGETYPE,
+				'attrs'         => $fields,
+				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
@@ -117,7 +127,7 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 		/**
 		 * Get all the data that will be needed to render the block correctly.
 		 *
-		 * @param array	 $attributes This is the array of fields of this block.
+		 * @param array  $attributes This is the array of fields of this block.
 		 * @param string $content This is the post content.
 		 * @param string $shortcode_tag The shortcode tag of this block.
 		 *
@@ -125,8 +135,8 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			if( isset( $attributes[ 'img' ] ) ) {
-				$attributes[ 'img' ] = wp_get_attachment_url( $attributes[ 'img' ] );
+			if ( isset( $attributes['img'] ) ) {
+				$attributes['img'] = wp_get_attachment_url( $attributes['img'] );
 			}
 
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
@@ -141,8 +151,8 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 		 * Callback for the shortcake_noindex shortcode.
 		 * It renders the shortcode based on supplied attributes.
 		 *
-		 * @param array	 $fields		Array of fields that are to be used in the template.
-		 * @param string $content		The content of the post.
+		 * @param array  $fields        Array of fields that are to be used in the template.
+		 * @param string $content       The content of the post.
 		 * @param string $shortcode_tag The shortcode tag (shortcake_blockname).
 		 *
 		 * @return string The complete html of the block
@@ -153,13 +163,8 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
-
 			$this->view->block( self::BLOCK_NAME, $data );
-			// echo '<pre>' . var_export($data, true) . '</pre>';
-
 			return ob_get_clean();
 		}
-
-
 	}
 }

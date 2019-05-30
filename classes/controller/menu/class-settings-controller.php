@@ -1,4 +1,10 @@
 <?php
+/**
+ * Class Settings_Controller
+ *
+ * @package P4EABKS
+ * @since 0.1
+ */
 
 namespace P4EABKS\Controllers\Menu;
 
@@ -33,11 +39,13 @@ if ( ! class_exists( 'Settings_Controller' ) ) {
 		 * Render the settings page of the plugin.
 		 */
 		public function prepare_settings() {
-			$this->view->settings( [
-				'settings' => get_option( 'p4nlbks_main_settings' ),
-				'available_languages' => P4EABKS_LANGUAGES,
-				'domain' => 'planet4-gpea-blocks',
-			] );
+			$this->view->settings(
+				[
+					'settings' => get_option( 'p4nlbks_main_settings' ),
+					'available_languages' => P4EABKS_LANGUAGES,
+					'domain' => 'planet4-gpea-blocks',
+				]
+			);
 		}
 
 		/**

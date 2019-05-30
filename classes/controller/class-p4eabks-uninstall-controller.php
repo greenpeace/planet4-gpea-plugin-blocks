@@ -1,14 +1,20 @@
 <?php
+/**
+ * Class Uninstall_Controller
+ *
+ * @package P4EABKS\Controllers
+ * @since 0.1
+ */
 
 namespace P4EABKS\Controllers;
 
-if ( ! class_exists( 'Uninstall_Controller' ) ) {
+if ( ! class_exists( 'P4EABKS_Uninstall_Controller' ) ) {
 	/**
 	 * Class Uninstall_Controller
 	 *
 	 * @package P4EABKS\Controllers
 	 */
-	class Uninstall_Controller {
+	class P4EABKS_Uninstall_Controller {
 
 		/**
 		 * Initialize uninstaller

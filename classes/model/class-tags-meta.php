@@ -1,9 +1,14 @@
 <?php
+/**
+ * Tags meta
+ *
+ * @package P4EABKS
+ * @since 0.1
+ */
 
 namespace P4EABKS\Models;
 
 if ( ! class_exists( 'Tags_Meta' ) ) {
-
 	/**
 	 * Class Tags_Meta
 	 *
@@ -11,7 +16,11 @@ if ( ! class_exists( 'Tags_Meta' ) ) {
 	 */
 	class Tags_Meta {
 
-		/** @const string ENGAGING_CAMPAIGN_ID_META_KEY */
+		/**
+		 * Engaging campaign ID meta key.
+		 *
+		 * @const string ENGAGING_CAMPAIGN_ID_META_KEY
+		 */
 		const ENGAGING_CAMPAIGN_ID_META_KEY = 'engaging_campaign_ID';
 
 		/**
@@ -45,15 +54,15 @@ if ( ! class_exists( 'Tags_Meta' ) ) {
 			);
 
 			if ( isset( $wp_tag ) && $wp_tag instanceof \WP_term ) {
-				$engaging_campaign_ID = get_term_meta( $wp_tag->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true );
+				$engaging_campaign_id = get_term_meta( $wp_tag->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true );
 				?>
 				<tr class="form-field edit-wrap">
-					<th>
-						<label>Engaging campaign</label>
-					</th>
-					<td>
-                        <div id="<?php echo self::ENGAGING_CAMPAIGN_ID_META_KEY; ?>_container" data-activecampaign="<?php echo $engaging_campaign_ID ?>">Fetching questions...</div>
-					</td>
+				<th>
+				<label>Engaging campaign</label>
+				</th>
+				<td>
+				<div id="<?php echo self::ENGAGING_CAMPAIGN_ID_META_KEY; ?>_container" data-activecampaign="<?php echo $engaging_campaign_id; ?>">Fetching questions...</div>
+				</td>
 				</tr>
 				<?php
 			}
@@ -65,8 +74,8 @@ if ( ! class_exists( 'Tags_Meta' ) ) {
 		 * @param int $term_id The ID of the WP_Term object that is added or edited.
 		 */
 		public function save_taxonomy_meta( $term_id ) {
-			$engaging_campaign_ID  = filter_input( INPUT_POST, self::ENGAGING_CAMPAIGN_ID_META_KEY, FILTER_VALIDATE_INT );
-			update_term_meta( $term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, $engaging_campaign_ID );
+			$engaging_campaign_id  = filter_input( INPUT_POST, self::ENGAGING_CAMPAIGN_ID_META_KEY, FILTER_VALIDATE_INT );
+			update_term_meta( $term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, $engaging_campaign_id );
 		}
 	}
 }

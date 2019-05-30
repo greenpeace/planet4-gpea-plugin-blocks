@@ -1,12 +1,14 @@
 <?php
+/**
+ * Mixed content row block class
+ *
+ * @package P4EABKS
+ * @since 0.1
+ */
 
 namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'Repeater_Controller' ) ) {
-	/**
-	 * @noinspection AutoloadingIssuesInspection
-	 */
-
 	/**
 	 * Class Repeater_Controller
 	 *
@@ -15,11 +17,19 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 	 */
 	class Repeater_Controller extends Controller {
 
-		/** @const string BLOCK_NAME */
-		const BLOCK_NAME   = 'repeater';
+		/**
+		 * The block name constant.
+		 *
+		 * @const string BLOCK_NAME
+		 */
+		const BLOCK_NAME = 'repeater';
 
-		/** @const int MAX_REPEATER */
-        const MAX_REPEATER = 25;
+		/**
+		 * The maximum number of sub-elements.
+		 *
+		 * @const string MAX_REPEATER
+		 */
+		const MAX_REPEATER = 25;
 
 		/**
 		 * Shortcode UI setup for the tasks shortcode.
@@ -53,16 +63,17 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 				],
 			];
 
-			// This block will have at most MAX_REPEATER different items
-
-            for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
+			// This block will have at most MAX_REPEATER different items.
+			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
 
 				$fields[] =
 					[
-						'label' => sprintf( __('<i>Title %s</i>', 'planet4-gpea-blocks'), $i ),
+						// translators: placeholder represents the ordinal of the field.
+						'label' => sprintf( __( '<i>Title %s</i>', 'planet4-gpea-blocks' ), $i ),
 						'attr'  => 'title_repeater_' . $i,
 						'type'  => 'text',
 						'meta'  => [
+							// translators: placeholder represents the ordinal of the field.
 							'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpea-blocks' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'repeater',
@@ -73,10 +84,12 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label' => sprintf( __('<i>Description %s</i>', 'planet4-gpea-blocks'), $i ),
+						// translators: placeholder represents the ordinal of the field.
+						'label' => sprintf( __( '<i>Description %s</i>', 'planet4-gpea-blocks' ), $i ),
 						'attr'  => 'description_repeater_' . $i,
 						'type'  => 'textarea',
 						'meta'  => [
+							// translators: placeholder represents the ordinal of the field.
 							'placeholder' => sprintf( __( 'Enter description %s', 'planet4-gpea-blocks' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'repeater',
@@ -87,7 +100,8 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label'       => sprintf( __('<i>Image %s.</i>', 'planet4-gpea-blocks'), $i ),
+						// translators: placeholder represents the ordinal of the field.
+						'label'       => sprintf( __( '<i>Image %s.</i>', 'planet4-gpea-blocks' ), $i ),
 						'attr'        => 'attachment_repeater_' . $i,
 						'type'        => 'attachment',
 						'libraryType' => [ 'image' ],
@@ -97,10 +111,12 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label' => sprintf( __('<i>Button link %s</i>', 'planet4-gpea-blocks'), $i ),
+						// translators: placeholder represents the ordinal of the field.
+						'label' => sprintf( __( '<i>Button link %s</i>', 'planet4-gpea-blocks' ), $i ),
 						'attr'  => 'link_repeater_' . $i,
 						'type'  => 'url',
 						'meta'  => [
+							// translators: placeholder represents the ordinal of the field.
 							'placeholder' => sprintf( __( 'Enter button %s link', 'planet4-gpea-blocks' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'repeater',
@@ -111,10 +127,12 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 
 				$fields[] =
 					[
-						'label' => sprintf( __('<i>Button text %s</i>', 'planet4-gpea-blocks'), $i ),
+						// translators: placeholder represents the ordinal of the field.
+						'label' => sprintf( __( '<i>Button text %s</i>', 'planet4-gpea-blocks' ), $i ),
 						'attr'  => 'cta_text_repeater_' . $i,
 						'type'  => 'text',
 						'meta'  => [
+							// translators: placeholder represents the ordinal of the field.
 							'placeholder' => sprintf( __( 'Enter button %s text', 'planet4-gpea-blocks' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 						],
@@ -123,7 +141,7 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'LATTE | Repeater', 'planet4-gpea-blocks' ),
+				'label'         => __( 'Repeater', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
@@ -172,23 +190,13 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 		 * Callback for the shortcake_noindex shortcode.
 		 * It renders the shortcode based on supplied attributes.
 		 *
-		 * @param array	 $fields		Array of fields that are to be used in the template.
-		 * @param string $content		The content of the post.
+		 * @param array  $fields        Array of fields that are to be used in the template.
+		 * @param string $content       The content of the post.
 		 * @param string $shortcode_tag The shortcode tag (shortcake_blockname).
 		 *
 		 * @return string The complete html of the block
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
-
-            // TODO should really be calling something like this here...
-			// $fields = shortcode_atts(
-			// 	array(
-			// 		'repeater_title'  => '',
-			// 		'repeater_description' => '',
-			// 	),
-			// 	$fields,
-			// 	$shortcode_tag
-			// );
 
 			$data = [
 				'fields' => $fields,
@@ -196,12 +204,8 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
-
 			$this->view->block( self::BLOCK_NAME, $data );
-            // echo '<pre>' . var_export($fields, true) . '</pre>';
-
 			return ob_get_clean();
 		}
-
 	}
 }

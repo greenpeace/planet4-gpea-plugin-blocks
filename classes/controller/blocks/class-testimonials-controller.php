@@ -1,12 +1,14 @@
 <?php
+/**
+ * Mixed content row block class
+ *
+ * @package P4EABKS
+ * @since 0.1
+ */
 
 namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'Testimonials_Controller' ) ) {
-	/**
-	 * @noinspection AutoloadingIssuesInspection
-	 */
-
 	/**
 	 * Class Testimonials_Controller
 	 *
@@ -15,10 +17,18 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 	 */
 	class Testimonials_Controller extends Controller {
 
-		/** @const string BLOCK_NAME */
+		/**
+		 * The block name constant.
+		 *
+		 * @const string BLOCK_NAME
+		 */
 		const BLOCK_NAME   = 'testimonials';
 
-		/** @const int MAX_REPEATER */
+		/**
+		 * The maximum number of sub-elements.
+		 *
+		 * @const string MAX_REPEATER
+		 */
 		const MAX_REPEATER = 20;
 
 		/**
@@ -32,23 +42,23 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 		 */
 		public function prepare_fields() {
 
-			$fields = [				
+			$fields = [
 				[
-					'label'		  => __( 'Select the team people for testimonials', 'planet4-gpea-blocks' ),
-					'attr'	   => 'testimonial_ids',
-					'type'	   => 'post_select',
+					'label'       => __( 'Select the team people for testimonials', 'planet4-gpea-blocks' ),
+					'attr'     => 'testimonial_ids',
+					'type'     => 'post_select',
 					'multiple' => 'multiple',
-					'query'	   => [
-						'post_type'	  => array('post',),
+					'query'    => [
+						'post_type'   => array( 'post' ),
 						'post_status' => 'publish',
-						'orderby'	  => 'post_title',
-						'order'			  => 'ASC',
-						'tax_query'	  => array(
-								array(
-									'taxonomy' => 'p4-page-type',
-									'field'	   => 'slug',
-									'terms'	   => 'team',
-								),
+						'orderby'     => 'post_title',
+						'order'           => 'ASC',
+						'tax_query'   => array(
+							array(
+								'taxonomy' => 'p4-page-type',
+								'field'    => 'slug',
+								'terms'    => 'team',
+							),
 						),
 					],
 				],
@@ -56,10 +66,10 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'			=> __( 'LATTE | Testimonials', 'planet4-gpea-blocks' ),
+				'label'         => __( 'Testimonials', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
-				'attrs'			=> $fields,
-				'post_type'		=> P4EABKS_ALLOWED_PAGETYPE,
+				'attrs'         => $fields,
+				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
@@ -69,7 +79,7 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 		/**
 		 * Get all the data that will be needed to render the block correctly.
 		 *
-		 * @param array	 $attributes This is the array of fields of this block.
+		 * @param array  $attributes This is the array of fields of this block.
 		 * @param string $content This is the post content.
 		 * @param string $shortcode_tag The shortcode tag of this block.
 		 *
@@ -79,18 +89,20 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 
 			$formatted_posts = [];
 
-			if( isset( $attributes[ 'testimonial_ids' ] ) ) {
+			if ( isset( $attributes['testimonial_ids'] ) ) {
 
-				$posts = get_posts( array(
-					'post_type'	  => array('post'),
-					'post_status' => 'publish',
-					'include' => explode( ',' , $attributes['testimonial_ids'] ),
-					'orderby' => 'post__in',
-				) );
+				$posts = get_posts(
+					array(
+						'post_type'   => array( 'post' ),
+						'post_status' => 'publish',
+						'include' => explode( ',' , $attributes['testimonial_ids'] ),
+						'orderby' => 'post__in',
+					)
+				);
 
-				if( $posts ) {
-					foreach( $posts as $post ) {
-						$post = (array) $post; // TODO clean up this typecasting
+				if ( $posts ) {
+					foreach ( $posts as $post ) {
+						$post = (array) $post; // TODO clean up this typecasting.
 
 						if ( has_post_thumbnail( $post['ID'] ) ) {
 							$img_id = get_post_thumbnail_id( $post['ID'] );
@@ -105,17 +117,21 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 						$post['team_citation'] = $team_citation ?? '';
 
 						// TODO:
-						// - abstract this one to parent
-						// - also avoid magic constant 'issues'
+						// - abstract this one to parent.
+						// - also avoid magic constant 'issues'.
 						$issues = get_category_by_slug( 'issues' );
 						$issues = $issues->term_id;
 						$categories = get_the_category( $post['ID'] );
-						$categories = array_filter( $categories , function( $cat ) use ( $issues ) {
-							return $cat->category_parent === $issues;
-						});
-						$categories = array_map( function( $cat ) {
-							return $cat->slug;
-						}, $categories );
+						$categories = array_filter(
+							$categories , function( $cat ) use ( $issues ) {
+								return $cat->category_parent === $issues;
+							}
+						);
+						$categories = array_map(
+							function( $cat ) {
+									return $cat->slug;
+							}, $categories
+						);
 						$categories = join( ', ', $categories );
 						$post['categories'] = $categories ?? '';
 						$formatted_posts[] = $post;
@@ -135,8 +151,8 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 		 * Callback for the shortcake_noindex shortcode.
 		 * It renders the shortcode based on supplied attributes.
 		 *
-		 * @param array	 $fields		Array of fields that are to be used in the template.
-		 * @param string $content		The content of the post.
+		 * @param array  $fields        Array of fields that are to be used in the template.
+		 * @param string $content       The content of the post.
 		 * @param string $shortcode_tag The shortcode tag (shortcake_blockname).
 		 *
 		 * @return string The complete html of the block
@@ -147,10 +163,7 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
-
 			$this->view->block( self::BLOCK_NAME, $data );
-			// echo '<pre>' . var_export($fields, true) . '</pre>';
-
 			return ob_get_clean();
 		}
 

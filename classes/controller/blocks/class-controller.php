@@ -1,4 +1,10 @@
 <?php
+/**
+ * Mixed content row block class
+ *
+ * @package P4EABKS
+ * @since 0.1
+ */
 
 namespace P4EABKS\Controllers\Blocks;
 
@@ -13,12 +19,18 @@ if ( ! class_exists( 'Controller' ) ) {
 	 */
 	abstract class Controller {
 
-		/** @const string BLOCK_NAME
-		 * The block's name.
+		/**
+		 * The block name constant.
+		 *
+		 * @const string BLOCK_NAME
 		 */
 		const BLOCK_NAME = 'default';
 
-		/** @var View $view */
+		/**
+		 * The view object.
+		 *
+		 * @var View $view
+		 */
 		protected $view;
 
 		/**
@@ -96,7 +108,7 @@ if ( ! class_exists( 'Controller' ) ) {
 				&& is_user_logged_in()
 				&& wp_get_current_user()->has_cap( 'edit_posts' )
 				&& isset( $_REQUEST['action'] )
-				&& $_REQUEST['action'] === 'bulk_do_shortcode'
+				&& 'bulk_do_shortcode' === $_REQUEST['action']
 			) {
 				// Render a preview iframe using a wrapper method.
 				add_shortcode( 'shortcake_' . static::BLOCK_NAME, array( $this, 'prepare_template_preview_iframe' ) );
@@ -128,7 +140,8 @@ if ( ! class_exists( 'Controller' ) ) {
 		public function prepare_template_preview_iframe( $fields, $content, $shortcode_tag ) {
 
 			$request = add_query_arg(
-				array_merge( $fields,
+				array_merge(
+					$fields,
 					[
 						'_tag'     => $shortcode_tag,
 						'_content' => $content,
