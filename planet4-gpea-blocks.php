@@ -3,7 +3,7 @@
  * Plugin Name: Planet4 - GPEA Blocks
  * Description: Creates all the blocks that will be available for usage by Shortcake.
  * Plugin URI: https://github.com/greenpeace/planet4-gpea-plugin-blocks
- * Version: 2.8.5
+ * Version: 0.1
  * Php Version: 7.0
  *
  * Author: Greenpeace Netherlands
