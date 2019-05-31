@@ -1,6 +1,6 @@
 <?php
 /**
- * Achievement section block class
+ * Achievements list block class
  *
  * @package P4EABKS
  * @since 0.1
@@ -8,20 +8,20 @@
 
 namespace P4EABKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
+if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 	/**
-	 * Class Achievement_Section_Controller
+	 * Class Achievements_List_Controller
 	 *
 	 * @package P4EABKS\Controllers\Blocks
 	 */
-	class Achievement_Section_Controller extends Controller {
+	class Achievements_List_Controller extends Controller {
 
 		/**
 		 * The block name constant.
 		 *
 		 * @const string BLOCK_NAME
 		 */
-		const BLOCK_NAME = 'achievement_section';
+		const BLOCK_NAME = 'achievements_list';
 
 		/**
 		 * The block default layout.
@@ -56,27 +56,74 @@ if ( ! class_exists( 'Achievement_Section_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-gpea-blocks' ),
-					'attr'  => 'description',
-					'type'  => 'textarea',
-					'meta'  => [
-						'placeholder' => __( 'Description', 'planet4-gpea-blocks' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label' => __( 'Background image', 'planet4-gpea-blocks' ),
+					'label' => __( 'Module image', 'planet4-gpea-blocks' ),
 					'attr'        => 'bg_img',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
 					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
 					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
 				],
+				[
+					'label' => __( 'Module image (mobile)', 'planet4-gpea-blocks' ),
+					'attr'        => 'bg_img_mobile',
+					'type'        => 'attachment',
+					'libraryType' => array( 'image' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+				],
+				[
+					'label'    => __( 'Achievements (manual selection)', 'planet4-gpea-blocks' ),
+					'attr'     => 'achievements_item_ids',
+					'type'     => 'post_select',
+					'multiple' => 'multiple',
+					'query'    => [
+						'post_type'   => array( 'post' ),
+						'post_status' => 'publish',
+						'orderby'     => 'post_title',
+						'order'           => 'ASC',
+						'tax_query'   => array(
+							array(
+								'taxonomy' => 'p4_post_attribute',
+								'field'    => 'term',
+								'terms'    => 'achievement',
+							),
+						),
+					],
+					'meta'     => [
+						'select2_options' => [
+							'allowClear'             => true,
+							'placeholder'            => __( 'Select achievements (max 4)', 'planet4-gpea-blocks' ),
+							'closeOnSelect'          => false,
+							'minimumInputLength'     => 0,
+							'multiple'               => true,
+							'maximumSelectionLength' => 8,
+							'width'                  => '80%',
+						],
+					],
+				],
+				[
+					'label' => __( 'Label "See more"', 'planet4-gpea-blocks' ),
+					'attr'  => 'see_more_label',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Label "See more"', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Link "See more"', 'planet4-gpea-blocks' ),
+					'attr'  => 'see_more_link',
+					'type'  => 'url',
+					'meta'  => [
+						'placeholder' => __( 'Link "See more"', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Achievement Section', 'planet4-gpea-blocks' ),
+				'label'         => __( 'Achievements List', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/achivements_block.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

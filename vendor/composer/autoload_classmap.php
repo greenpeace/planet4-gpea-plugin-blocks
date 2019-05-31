@@ -86,7 +86,7 @@ return array(
     'MySource_Sniffs_PHP_ReturnFunctionValueSniff' => $vendorDir . '/squizlabs/php_codesniffer/CodeSniffer/Standards/MySource/Sniffs/PHP/ReturnFunctionValueSniff.php',
     'MySource_Sniffs_Strings_JoinStringsSniff' => $vendorDir . '/squizlabs/php_codesniffer/CodeSniffer/Standards/MySource/Sniffs/Strings/JoinStringsSniff.php',
     'P4EABKS\\Controllers\\Blocks\\Achievement_About_Controller' => $baseDir . '/classes/controller/blocks/class-achievement-about-controller.php',
-    'P4EABKS\\Controllers\\Blocks\\Achievement_Section_Controller' => $baseDir . '/classes/controller/blocks/class-achievement-section-controller.php',
+    'P4EABKS\\Controllers\\Blocks\\Achievements_List_Controller' => $baseDir . '/classes/controller/blocks/class-achievements-list-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Article_Row_Controller' => $baseDir . '/classes/controller/blocks/class-article-row-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Big_Carousel_Manual_Selection_Controller' => $baseDir . '/classes/controller/blocks/class-big-carousel-manual-selection-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Controller' => $baseDir . '/classes/controller/blocks/class-controller.php',
