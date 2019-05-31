@@ -8,20 +8,20 @@
 
 namespace P4EABKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Main_Issues_Controller' ) ) {
+if ( ! class_exists( 'Main_Issues_Carousel_Controller' ) ) {
 	/**
-	 * Class Main_Issues_Controller
+	 * Class Main_Issues_Carousel_Controller
 	 *
 	 * @package P4EABKS\Controllers\Blocks
 	 */
-	class Main_Issues_Controller extends Controller {
+	class Main_Issues_Carousel_Controller extends Controller {
 
 		/**
 		 * The block name constant.
 		 *
 		 * @const string BLOCK_NAME
 		 */
-		const BLOCK_NAME = 'main_issues';
+		const BLOCK_NAME = 'main_issues_carousel';
 
 		/**
 		 * The block default layout.
@@ -29,6 +29,13 @@ if ( ! class_exists( 'Main_Issues_Controller' ) ) {
 		 * @const string DEFAULT_LAYOUT
 		 */
 		const DEFAULT_LAYOUT = 'default';
+
+		/**
+		 * The number of main issues to display.
+		 *
+		 * @const string MAIN_ISSUE_COUNT
+		 */
+		const MAIN_ISSUE_COUNT = 6;
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -52,15 +59,6 @@ if ( ! class_exists( 'Main_Issues_Controller' ) ) {
 					'type'  => 'text',
 					'meta'  => [
 						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label' => __( 'Description', 'planet4-gpea-blocks' ),
-					'attr'  => 'description',
-					'type'  => 'textarea',
-					'meta'  => [
-						'placeholder' => __( 'Description', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -96,7 +94,7 @@ if ( ! class_exists( 'Main_Issues_Controller' ) ) {
 					'order'       => 'desc',
 					'orderby'     => 'date',
 					'post_type'   => 'page',
-					'numberposts' => 20,
+					'numberposts' => self::MAIN_ISSUE_COUNT,
 					'tax_query' => array(
 						array(
 							'taxonomy' => 'p4_post_attribute',
