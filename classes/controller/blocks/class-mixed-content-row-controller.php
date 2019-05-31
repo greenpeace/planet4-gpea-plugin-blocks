@@ -131,6 +131,32 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 
 			wp_reset_postdata();
 
+			// query to retrieve tips
+
+			$query = new \WP_Query(
+				[
+					'post_type' => array( 'tips' ),
+					'orderby'   => 'post_title',
+					'order'     => 'asc',
+				]
+			);
+			$tips = array_map(
+				function( $tip ) {
+						return [
+							'value' => strval( $tip->ID ),
+							'label' => esc_html( $tip->post_title ),
+						];
+				}, $query->posts
+			);
+			array_unshift(
+				$tips, [
+					'value' => '',
+					'label' => __( 'Please select a post', 'planet4-gpea-blocks' ),
+				]
+			);
+
+			wp_reset_postdata();
+
 			$field_groups = [
 
 				'Title and text' => [
@@ -204,37 +230,14 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 
 				'Tip' => [
 					[
-						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Block %s tip text</i>', 'planet4-gpea-blocks' ),
-						'attr'  => 'textblock',
-						'type'  => 'textarea',
-						'meta'  => [
-							'placeholder' => __( 'Enter text', 'planet4-gpea-blocks' ),
+						'attr'     => 'tip',
+						'type'     => 'select',
+						'options'  => $tips,
+						'meta'     => [
+							'placeholder' => __( 'Select tip', 'planet4-gpea-blocks' ),
 							'data-plugin' => 'planet4-gpea-blocks',
-						],
-					],
-					[
-						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Block %s tip icon</i>', 'planet4-gpea-blocks' ),
-						'attr'  => 'icon',
-						'type'  => 'select',
-						'options' => [
-							[
-								'value' => '',
-								'label' => __( 'Select tip icon' ),
-							],
-							[
-								'value' => '💦',
-								'label' => '💦',
-							],
-							[
-								'value' => '🌧',
-								'label' => '🌧',
-							],
-						],
-						'meta'  => [
-							'placeholder' => __( 'Select tip icon', 'planet4-gpea-blocks' ),
-							'data-plugin' => 'planet4-gpea-blocks',
+							'data-input-transform' => 'js-select2-enable',
 						],
 					],
 				],
@@ -361,6 +364,47 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 							$post->img_url = $img_data[0];
 							$post->tags = get_the_tags( $post->ID );
 						}
+						$group['post'] = $post;
+					} else {
+						$group['post'] = false;
+					}
+
+					wp_reset_postdata();
+				}
+
+				if ( 'tip' === $group_type && preg_match( '/^\d+$/', $group['tip'] ) ) {
+					$query = new \WP_Query(
+						[
+							'post_type' => array( 'tips' ),
+							'post__in' => explode( ',' , $group['tip'] ),
+						]
+					);
+					if ( $query->posts ) {
+						$post = $query->posts[0];
+
+						$tip_icon = get_post_meta( $post->ID, 'p4-gpea_tip_icon', true );
+						$post->img_url = $tip_icon ?? '';
+						$frequency = get_post_meta( $post->ID, 'p4-gpea_tip_frequency', true );
+						$post->frequency = $frequency ?? '';
+						// TODO:
+						// - abstract this one to parent.
+						// - also avoid magic constant 'issues'.
+						// $issues = get_category_by_slug( 'issues' );
+						// $issues = $issues->term_id;
+						// $categories = get_the_category( $post->ID );
+						// $categories = array_filter(
+						// 	$categories , function( $cat ) use ( $issues ) {
+						// 		return $cat->category_parent === $issues;
+						// 	}
+						// );
+						// $categories = array_map(
+						// 	function( $cat ) {
+						// 			return $cat->slug;
+						// 	}, $categories
+						// );
+						// $categories = join( ', ', $categories );
+						// $post->categories = $categories ?? '';
+						$formatted_posts[] = $post;						
 						$group['post'] = $post;
 					} else {
 						$group['post'] = false;
