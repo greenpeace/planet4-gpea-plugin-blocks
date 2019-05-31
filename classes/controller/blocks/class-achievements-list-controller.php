@@ -83,8 +83,8 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 						'order'           => 'ASC',
 						'tax_query'   => array(
 							array(
-								'taxonomy' => 'p4_post_attribute',
-								'field'    => 'term',
+								'taxonomy' => 'post_tag',
+								'field'    => 'slug',
 								'terms'    => 'achievement',
 							),
 						),

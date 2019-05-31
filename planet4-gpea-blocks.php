@@ -112,7 +112,7 @@ P4EABKS\Loader::get_instance(
 		'P4EABKS\Controllers\Blocks\Article_Row_Controller',
 		'P4EABKS\Controllers\Blocks\Big_Carousel_Manual_Selection_Controller',
 		'P4EABKS\Controllers\Blocks\Main_Issues_Controller',
-		'P4EABKS\Controllers\Blocks\Issue_List_Controller',
+		'P4EABKS\Controllers\Blocks\Tag_Cloud_Controller',
 		'P4EABKS\Controllers\Blocks\Achievements_List_Controller',
 		'P4EABKS\Controllers\Blocks\UGC_Controller',
 		'P4EABKS\Controllers\Blocks\Values_Section_Controller',

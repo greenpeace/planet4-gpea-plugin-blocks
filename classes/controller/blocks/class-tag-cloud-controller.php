@@ -1,6 +1,6 @@
 <?php
 /**
- * Mixed content row block class
+ * Tag cloud class
  *
  * @package P4EABKS
  * @since 0.1
@@ -8,20 +8,20 @@
 
 namespace P4EABKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Issue_List_Controller' ) ) {
+if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 	/**
-	 * Class Issue_List_Controller
+	 * Class Tag_Cloud_Controller
 	 *
 	 * @package P4EABKS\Controllers\Blocks
 	 */
-	class Issue_List_Controller extends Controller {
+	class Tag_Cloud_Controller extends Controller {
 
 		/**
 		 * The block name constant.
 		 *
 		 * @const string BLOCK_NAME
 		 */
-		const BLOCK_NAME = 'issue_list';
+		const BLOCK_NAME = 'tag_cloud';
 
 		/**
 		 * The block default layout.
@@ -66,7 +66,7 @@ if ( ! class_exists( 'Issue_List_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Issue List', 'planet4-gpea-blocks' ),
+				'label'         => __( 'Tag Cloud', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/issues_list.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
@@ -89,7 +89,7 @@ if ( ! class_exists( 'Issue_List_Controller' ) ) {
 
 			$campaigns = get_terms(
 				array(
-					'taxonomy' => 'post_tag',
+					'taxonomy' => array( 'post_tag', 'category' ),
 				)
 			);
 
