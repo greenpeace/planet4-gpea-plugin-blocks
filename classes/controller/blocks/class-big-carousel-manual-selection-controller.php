@@ -141,6 +141,8 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 						$formatted_posts[] = $post;
 					}
 				}
+
+				wp_reset_postdata();
 			}
 
 			$attributes['posts'] = $formatted_posts;

@@ -178,6 +178,8 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 						$formatted_posts[] = $post;
 					}
 				}
+
+				wp_reset_postdata();
 			}
 
 			$attributes['posts'] = $formatted_posts;

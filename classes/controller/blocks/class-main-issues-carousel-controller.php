@@ -118,6 +118,8 @@ if ( ! class_exists( 'Main_Issues_Carousel_Controller' ) ) {
 			$attributes['categories'] = $formatted_posts;
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
+			wp_reset_postdata();
+
 			return [
 				'fields' => $attributes,
 			];

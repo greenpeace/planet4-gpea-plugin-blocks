@@ -200,6 +200,8 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 				}
 			}
 
+			wp_reset_postdata();
+
 			$attributes['posts'] = $formatted_posts;
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 

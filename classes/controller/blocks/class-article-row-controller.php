@@ -145,6 +145,8 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
+			wp_reset_postdata();
+
 			return [
 				'fields' => $attributes,
 			];

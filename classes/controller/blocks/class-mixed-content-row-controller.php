@@ -129,6 +129,8 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 				]
 			);
 
+			wp_reset_postdata();
+
 			$field_groups = [
 
 				'Title and text' => [
@@ -363,6 +365,8 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 					} else {
 						$group['post'] = false;
 					}
+
+					wp_reset_postdata();
 				}
 
 				$field_groups[] = $group;

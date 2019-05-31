@@ -181,6 +181,8 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
+			wp_reset_postdata();
+
 			return [
 				'fields' => $attributes,
 			];
