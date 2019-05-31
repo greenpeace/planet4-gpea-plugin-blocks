@@ -69,17 +69,10 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 					'type'     => 'post_select',
 					'multiple' => 'multiple',
 					'query'    => [
-						'post_type'   => array( 'post' ),
+						'post_type'   => array( 'tips' ),
 						'post_status' => 'publish',
 						'orderby'     => 'post_title',
 						'order'       => 'ASC',
-						'tax_query'   => array(
-							array(
-								'taxonomy' => 'p4_post_attribute',
-								'field'    => 'term',
-								'terms'    => 'tip',
-							),
-						),
 					],
 					'meta'     => [
 						'select2_options' => [
@@ -143,7 +136,7 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 
 				$query = new \WP_Query(
 					array(
-						'post_type'   => array( 'post' ),
+						'post_type'   => array( 'tips' ),
 						'post_status' => 'publish',
 						'post__in' => explode( ',' , $attributes['tip_ids'] ),
 						'orderby' => 'post__in',
