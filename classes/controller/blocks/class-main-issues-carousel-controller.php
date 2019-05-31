@@ -66,7 +66,7 @@ if ( ! class_exists( 'Main_Issues_Carousel_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Main Issues', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Main issues carousel', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/main_issues.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
