@@ -137,7 +137,7 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Projects Carousel', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Projects Carousel', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/projects_block.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
