@@ -1,4 +1,4 @@
-{% block report %}
+{% block report_launcher %}
     {% if ( fields ) %}
 	<section class="dark">
 	    <div class="generic-content ct-container">
@@ -20,14 +20,14 @@
 			</div>
 		    {% endif %}
 		    <div class="swiper-slide">
-			{% if ( fields.description ) %}
-			    <p class="light large center">{{ fields.description|e('wp_kses_post')|raw }}</p>
+			{% if ( fields.caption ) %}
+			    <p class="light large center">{{ fields.caption|e('wp_kses_post')|raw }}</p>
 			{% endif %}
-			{% if ( fields.cta_text and fields.cta_url ) %}
-			    <a href="{{ fields.cta_url }}" class="button">{{ fields.cta_text|e('wp_kses_post')|raw }}</a>
+			{% if ( fields.btn_label and fields.btn_link ) %}
+			    <a href="{{ fields.btn_link }}" class="button">{{ fields.btn_label|e('wp_kses_post')|raw }}</a>
 			{% endif %}
-			{% if ( fields.cta_2_text and fields.cta_2_url ) %}
-			    <a href="{{ fields.cta_2_url }}" class="more">{{ fields.cta_2_text|e('wp_kses_post')|raw }}</a>
+			{% if ( fields.see_all_label and fields.see_all_link ) %}
+			    <a href="{{ fields.see_all_link }}" class="more">{{ fields.see_all_label|e('wp_kses_post')|raw }}</a>
 			{% endif %}
 		    </div>
 		</div>

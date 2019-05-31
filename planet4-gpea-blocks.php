@@ -119,7 +119,7 @@ P4EABKS\Loader::get_instance(
 		'P4EABKS\Controllers\Blocks\Donation_Basic_Controller',
 		'P4EABKS\Controllers\Blocks\Text_And_Image_Controller',
 		'P4EABKS\Controllers\Blocks\Launcher_Controller',
-		'P4EABKS\Controllers\Blocks\Report_Controller',
+		'P4EABKS\Controllers\Blocks\Report_Launcher_Controller',
 		'P4EABKS\Controllers\Blocks\Milestones_Controller',
 		'P4EABKS\Controllers\Blocks\Testimonials_Controller',
 		'P4EABKS\Controllers\Blocks\Tips_Controller',

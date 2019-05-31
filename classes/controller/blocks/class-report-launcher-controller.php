@@ -8,20 +8,20 @@
 
 namespace P4EABKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Report_Controller' ) ) {
+if ( ! class_exists( 'Report_Launcher_Controller' ) ) {
 	/**
-	 * Class Report_Controller
+	 * Class Report_Launcher_Controller
 	 *
 	 * @package P4EABKS\Controllers\Blocks
 	 */
-	class Report_Controller extends Controller {
+	class Report_Launcher_Controller extends Controller {
 
 		/**
 		 * The block name constant.
 		 *
 		 * @const string BLOCK_NAME
 		 */
-		const BLOCK_NAME = 'report';
+		const BLOCK_NAME = 'report_launcher';
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -49,11 +49,11 @@ if ( ! class_exists( 'Report_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-gpea-blocks' ),
-					'attr'  => 'description',
+					'label' => __( 'Caption', 'planet4-gpea-blocks' ),
+					'attr'  => 'caption',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Description', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Caption', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -66,38 +66,38 @@ if ( ! class_exists( 'Report_Controller' ) ) {
 					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
 				],
 				[
-					'label' => __( 'CTA text', 'planet4-gpea-blocks' ),
-					'attr'  => 'cta_text',
+					'label' => __( 'Button label', 'planet4-gpea-blocks' ),
+					'attr'  => 'btn_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Button label', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'CTA link', 'planet4-gpea-blocks' ),
-					'attr'  => 'cta_url',
+					'label' => __( 'Button link', 'planet4-gpea-blocks' ),
+					'attr'  => 'btn_link',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Button link', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'CTA 2 text', 'planet4-gpea-blocks' ),
-					'attr'  => 'cta_2_text',
+					'label' => __( 'Label "See All"', 'planet4-gpea-blocks' ),
+					'attr'  => 'see_all_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Label "See All"', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'CTA 2 link', 'planet4-gpea-blocks' ),
-					'attr'  => 'cta_2_url',
+					'label' => __( 'Link "See All"', 'planet4-gpea-blocks' ),
+					'attr'  => 'see_all_link',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link "See All"', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Report_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Report', 'planet4-gpea-blocks' ),
+				'label'         => __( 'Report Launcher', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
