@@ -1,6 +1,6 @@
 {% block launcher %}
     {% if ( fields ) %}
-	{% if ( fields.layout == 'default' ) %}
+	{% if ( fields.layout == 'standard' ) %}
 	    <section class="section-image-cta">
 		<div class="generic-content ct-container">
 		    {% if ( fields.title ) %}
@@ -12,12 +12,12 @@
 		    {% if ( fields.img ) %}
 			<img src="{{ fields.img }}" />
 		    {% endif %}
-		    {% if ( fields.cta_text and fields.cta_url ) %}
-			<a href="{{ fields.cta_url }}" class="button green">{{ fields.cta_text|e('wp_kses_post')|raw }}</a>
+		    {% if ( fields.btn_label and fields.btn_link ) %}
+			<a href="{{ fields.btn_link }}" class="button green">{{ fields.btn_label|e('wp_kses_post')|raw }}</a>
 		    {% endif %}
 		</div>
 	    </section>
-	{% elseif ( fields.layout == 'box' ) %}
+	{% elseif ( fields.layout == 'card' ) %}
 	    <section class="section-latest-active pink">
 		<div class="ct-container">
 		    <div class="content">
@@ -35,8 +35,8 @@
 				    {% if ( fields.description ) %}
 					<p>{{ fields.description|e('wp_kses_post')|raw }}</p>
 				    {% endif %}
-				    {% if ( fields.cta_text and fields.cta_url ) %}
-					<a href="{{ fields.cta_url }}" class="button light">{{ fields.cta_text|e('wp_kses_post')|raw }}</a>
+				    {% if ( fields.btn_label and fields.btn_link ) %}
+					<a href="{{ fields.btn_link }}" class="button light">{{ fields.btn_label|e('wp_kses_post')|raw }}</a>
 				    {% endif %}
 				</div>
 			    </div>

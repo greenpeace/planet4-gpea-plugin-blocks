@@ -28,7 +28,7 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 		 *
 		 * @const string DEFAULT_LAYOUT
 		 */
-		const DEFAULT_LAYOUT = 'default';
+		const DEFAULT_LAYOUT = 'standard';
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -38,21 +38,20 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => 'Select the layout',
-					'description' => 'Select the layout',
+					'label' => __( 'Select the layout', 'planet4-gpea-blocks' ),
 					'attr' => 'layout',
 					'type' => 'radio',
 					'options' => [
 						[
-							'value' => 'default',
-							'label' => __( 'Default', 'planet4-gpea-blocks' ),
-							'desc'  => 'Default',
+							'value' => 'standard',
+							'label' => __( 'Standard', 'planet4-gpea-blocks' ),
+							'desc'  => 'Standard',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
-							'value' => 'box',
+							'value' => 'card',
 							'label' => __( 'Card', 'planet4-gpea-blocks' ),
-							'desc'  => 'Box',
+							'desc'  => 'Card',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
@@ -76,11 +75,11 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-gpea-blocks' ),
-					'attr'  => 'description',
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+					'attr'  => 'paragraph',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Description', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -93,20 +92,20 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
 				],
 				[
-					'label' => __( 'CTA text', 'planet4-gpea-blocks' ),
-					'attr'  => 'cta_text',
+					'label' => __( 'Button label', 'planet4-gpea-blocks' ),
+					'attr'  => 'btn_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Button label', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'CTA link', 'planet4-gpea-blocks' ),
-					'attr'  => 'cta_url',
+					'label' => __( 'Button link', 'planet4-gpea-blocks' ),
+					'attr'  => 'btn_link',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Button link', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
