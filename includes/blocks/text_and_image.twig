@@ -18,13 +18,23 @@
 		{% endif %}
 		{% if ( fields.layout == 'light' or fields.layout == 'dark' ) %}
 			{% set box_color = fields.layout == 'dark' ? 'dark' : '' %}
+			{% set is_contained = fields.images ? '' : 'ct_container' %}
 			<section class="section-text-images">
 				<div class="boxes">
 					<div class="box {{ box_color }}">
-						{% if ( fields.title ) %}
-							<h2>{{ fields.title }}</h2>
+						{% if not ( fields.images ) %}
+						<div class="ct-container">
+							{% if ( fields.title ) %}
+								<h2>{{ fields.title }}</h2>
+							{% endif %}
+							<p>{{ fields.paragraph }}</p>
+						</div>
+						{% else %}
+							{% if ( fields.title ) %}
+								<h2>{{ fields.title }}</h2>
+							{% endif %}
+							<p>{{ fields.paragraph }}</p>
 						{% endif %}
-						<p>{{ fields.paragraph }}</p>
 					</div>
 					{% if ( fields.images ) %}
 						<!-- TODO verificare HTML sezione -->
