@@ -17,7 +17,7 @@
 			</section>
 		{% endif %}
 		{% if ( fields.layout == 'light' or fields.layout == 'dark' ) %}
-			{% set box_color = fields.layout == 'dark' ? 'dark' : '' %}
+			{% set box_color = (fields.layout == 'dark' or fields.images) ? 'dark' : '' %}
 			{% set is_contained = fields.images ? '' : 'ct_container' %}
 			<section class="section-text-images">
 				<div class="boxes">
