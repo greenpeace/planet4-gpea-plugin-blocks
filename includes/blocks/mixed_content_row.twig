@@ -9,9 +9,10 @@
         {% set classname = 'green-white' %}
     {% elseif ( static_fields.layout == 'grey_grey' ) %}
         <!-- Grey title, grey text -->
-        {% set classname = 'grey-grey' %}
+        {% set classname = 'default' %}
     {% else %}
         <!-- Does nothing (or insert default here) -->
+		{% set classname = 'default' %}
     {% endif %}
 
     <!-- TODO frontend - this will print the background image URL, if present -->
