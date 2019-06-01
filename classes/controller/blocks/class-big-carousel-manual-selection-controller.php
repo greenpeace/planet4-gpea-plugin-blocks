@@ -134,7 +134,7 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 							$post->img_url = $img_data[0];
 						}
 
-						if ( has_term( 'petition', 'p4_post_attribute', $post->ID ) ) {
+						if ( has_term( 'petition', 'post_tag', $post->ID ) ) {
 							$post->is_campaign = 1;
 						}
 

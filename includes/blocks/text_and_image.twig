@@ -37,16 +37,18 @@
 						{% endif %}
 					</div>
 					{% if ( fields.images ) %}
-						<!-- TODO verificare HTML sezione -->
-						<div class="swiper-container section-text-images-swiper">
-							<div class="swiper-wrapper">
-								{% if fields.images|length > 0 %}
-									{% for img in fields.images %}
-										<div class="swiper-slide image lazy" data-bg="url({{ img }})"></div>
-									{% endfor %}
-								{% endif %}
+						<div class="box fit">
+							<!-- TODO verificare HTML sezione -->
+							<div class="swiper-container section-text-images-swiper">
+								<div class="swiper-wrapper">
+									{% if fields.images|length > 0 %}
+										{% for img in fields.images %}
+											<div class="swiper-slide image lazy" data-bg="url({{ img }})"></div>
+										{% endfor %}
+									{% endif %}
+								</div>
+								<div class="swiper-pagination"></div>
 							</div>
-							<div class="swiper-pagination"></div>
 						</div>
 					{% endif %}
 				</div>
