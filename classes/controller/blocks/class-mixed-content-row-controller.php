@@ -64,7 +64,7 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 						],
 						[
 							'value' => 'grey_grey',
-							'label' => __( 'Grey title, grey text', 'planet4-gpea-blocks' ),
+							'label' => __( 'Default, takes color from section or if not available shows grey title and grey text', 'planet4-gpea-blocks' ),
 							'desc'  => 'Grey title, grey text.',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],

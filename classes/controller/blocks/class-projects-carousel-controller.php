@@ -78,8 +78,17 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 				[
 					'label'    => __( 'Filter by Main Issue', 'planet4-gpea-blocks' ),
 					'attr'     => 'main_issue',
-					'type'     => 'select',
+					'type'     => 'term_select',
 					'taxonomy' => 'category',
+					'multiple' => false,
+					'meta'     => [
+						'select2_options' => [
+							'allowClear'         => true,
+							'placeholder'        => __( 'Select Main Issue', 'planet4-gpea-blocks' ),
+							'closeOnSelect'      => true,
+							'minimumInputLength' => 0,
+						],
+					],
 				],
 				[
 					'label'       => __( 'Carousel Items (max 8)', 'planet4-gpea-blocks' ),
@@ -163,28 +172,33 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 			// Check if result needs to be filtered by category.
 			$cat_id = $attributes['main_issue'] ?? '';
 
-			// Project block default text setting.
-			$options = array(
-				'order'       => 'desc',
-				'orderby'     => 'date',
-				'post_type'   => 'page',
-				'numberposts' => 10,
-				'tax_query' => array(
-					'relation' => 'AND',
-					array(
-						'taxonomy' => 'p4_post_attribute',
-						'field' => 'slug',
-						'terms' => 'project',
-					),
-				),
-			);
+			if ( isset( $attributes['carousel_item_ids'] ) ) {
 
-			if ( '' !== $cat_id ) {
-				$options['tax_query'][] = array(
-					'taxonomy' => 'category',
-					'field' => 'term_id',
-					'terms' => $cat_id,
+				$options = array(
+					'post_type'   => array( 'post', 'page' ),
+					'post_status' => 'publish',
+					'post__in'    => explode( ',', $attributes['carousel_item_ids'] ),
+					'orderby'     => 'post__in',
+					'numberposts' => 8,
 				);
+			} else {
+				// Project block default text setting.
+				$options = array(
+					'order'       => 'desc',
+					'orderby'     => 'date',
+					'post_type'   => 'page',
+					'numberposts' => 10,
+					'meta_key'    => '_wp_page_template',
+					'meta_value'  => 'page-templates/project.php',
+				);
+
+				if ( '' !== $cat_id ) {
+					$options['tax_query'][] = array(
+						'taxonomy' => 'category',
+						'field' => 'term_id',
+						'terms' => $cat_id,
+					);
+				}
 			}
 
 			$query = new \WP_Query( $options );
@@ -193,7 +207,7 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 				foreach ( $query->posts as $post ) {
 					if ( has_post_thumbnail( $post->ID ) ) {
 						$img_id = get_post_thumbnail_id( $post->ID );
-						$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
+						$img_data = wp_get_attachment_image_src( $img_id, 'medium_large' );
 						$post->img_url = $img_data[0];
 					}
 					$formatted_posts[] = $post;

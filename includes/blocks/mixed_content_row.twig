@@ -17,10 +17,10 @@
 
     <!-- TODO frontend - this will print the background image URL, if present -->
     {% if ( static_fields.image ) %}
-        {{ static_fields.image }}
-    {% endif %}
+		{% set container_classname = 'section-values lazy' %}
+	{% endif %}
 
-    <section class="section-mixed-content-row layout-{{ classname }}"> <!-- e.g. layout-green-grey -->
+    <section class="section-mixed-content-row layout-{{ classname }} {{ container_classname }}"  data-bg="url({{ static_fields.image }})"> <!-- e.g. layout-green-grey -->
 
 	    {% if ( static_fields ) %}
 		<div class="ct-container generic-content">
