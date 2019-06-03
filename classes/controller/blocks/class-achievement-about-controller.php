@@ -76,7 +76,7 @@ if ( ! class_exists( 'Achievement_About_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'About section: Achievements', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | About section: Achievements', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/general_updates.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

@@ -123,7 +123,7 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Achievements List', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Achievements List', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/achivements_block.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
@@ -150,21 +150,33 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 				$attributes['bg_img'] = wp_get_attachment_url( $attributes['bg_img'] );
 			}
 
-			$query = new \WP_Query(
-				array(
+			if ( isset( $attributes['achievements_item_ids'] ) ) {
+
+				$options = array(
+					'post_type'   => array( 'post', 'page' ),
+					'post_status' => 'publish',
+					'post__in'    => explode( ',', $attributes['achievements_item_ids'] ),
+					'orderby'     => 'post__in',
+					'numberposts' => 8,
+				);
+			} else {
+				// Project block default text setting.
+				$options = array(
 					'order'       => 'desc',
 					'orderby'     => 'date',
 					'post_type'   => array( 'post', 'page' ),
 					'numberposts' => 4,
 					'tax_query' => array(
 						array(
-							'taxonomy' => 'p4_post_attribute',
+							'taxonomy' => 'post_tag',
 							'field' => 'slug',
 							'terms' => 'achievement',
 						),
 					),
-				)
-			);
+				);
+			}
+
+			$query = new \WP_Query( $options );
 
 			if ( $query->posts ) {
 				foreach ( $query->posts as $post ) {

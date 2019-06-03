@@ -1,46 +1,58 @@
 {% block text_and_image %}
     {% if ( fields ) %}
         <!-- TODO impostare frontend per link -->
-	{% if ( fields.link_label and fields.link_url ) %}
-	    <a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
-	{% endif %}
-	{% if ( fields.layout == 'plain_light') %}
-	    <section>
-		<div class="ct-container generic-content">
-		    {% if ( fields.title ) %}
-			<h2>{{ fields.title }}</h2>
-		    {% endif %}
-		    {% if ( fields.paragraph ) %}
-			<p>{{ fields.paragraph }}</p>
-		    {% endif %}
-		</div>
-	    </section>
-	{% endif %}
-	{% if ( fields.layout == 'light' or fields.layout == 'dark' ) %}
-	    {% set box_color = fields.layout == 'dark' ? 'bg-blue' : '' %}
-	    <section class="section-stats">
-		<div class="boxes">
-		    <div class="box {{ box_color }}">
-			{% if ( fields.title ) %}
-			    <h2>{{ fields.title }}</h2>
-			{% endif %}
-			<p>{{ fields.paragraph }}</p>
-		    </div>
-		    {% if ( fields.images ) %}
-                        <!-- TODO verificare HTML sezione -->
-                        <div class="swiper-container section-stats-swiper">
-			    <div class="swiper-wrapper">
-			        {% if fields.images|length > 0 %}
-				    {% for img in fields.images %}
-				        <div class="swiper-slide image lazy" data-bg="url({{ img }})"></div>
-				    {% endfor %}
-			        {% endif %}
-			    </div>
-			    <div class="swiper-pagination"></div>
-		        </div>
-		    {% endif %}
-		</div>
-	    </section>
-	{% endif %}
+		{% if ( fields.link_label and fields.link_url ) %}
+			<a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
+		{% endif %}
+		{% if ( fields.layout == 'plain_light') %}
+			<section class="section-text-images">
+				<div class="ct-container generic-content">
+					{% if ( fields.title ) %}
+						<h2>{{ fields.title }}</h2>
+					{% endif %}
+					{% if ( fields.paragraph ) %}
+						<p>{{ fields.paragraph }}</p>
+					{% endif %}
+				</div>
+			</section>
+		{% endif %}
+		{% if ( fields.layout == 'light' or fields.layout == 'dark' ) %}
+			{% set box_color = (fields.layout == 'dark' or fields.images) ? 'dark' : '' %}
+			{% set is_contained = fields.images ? '' : 'ct_container' %}
+			<section class="section-text-images">
+				<div class="boxes">
+					<div class="box {{ box_color }}">
+						{% if not ( fields.images ) %}
+						<div class="ct-container">
+							{% if ( fields.title ) %}
+								<h2>{{ fields.title }}</h2>
+							{% endif %}
+							<p>{{ fields.paragraph }}</p>
+						</div>
+						{% else %}
+							{% if ( fields.title ) %}
+								<h2>{{ fields.title }}</h2>
+							{% endif %}
+							<p>{{ fields.paragraph }}</p>
+						{% endif %}
+					</div>
+					{% if ( fields.images ) %}
+						<div class="box fit">
+							<!-- TODO verificare HTML sezione -->
+							<div class="swiper-container section-text-images-swiper">
+								<div class="swiper-wrapper">
+									{% if fields.images|length > 0 %}
+										{% for img in fields.images %}
+											<div class="swiper-slide image lazy" data-bg="url({{ img }})"></div>
+										{% endfor %}
+									{% endif %}
+								</div>
+								<div class="swiper-pagination"></div>
+							</div>
+						</div>
+					{% endif %}
+				</div>
+			</section>
+		{% endif %}
     {% endif %}
 {% endblock %}

@@ -105,7 +105,7 @@ if ( ! class_exists( 'Report_Launcher_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Report Launcher', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Report Launcher', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

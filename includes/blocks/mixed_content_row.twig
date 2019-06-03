@@ -9,26 +9,27 @@
         {% set classname = 'green-white' %}
     {% elseif ( static_fields.layout == 'grey_grey' ) %}
         <!-- Grey title, grey text -->
-        {% set classname = 'grey-grey' %}
+        {% set classname = 'default' %}
     {% else %}
         <!-- Does nothing (or insert default here) -->
+		{% set classname = 'default' %}
     {% endif %}
 
     <!-- TODO frontend - this will print the background image URL, if present -->
     {% if ( static_fields.image ) %}
-        {{ static_fields.image }}
-    {% endif %}
+		{% set container_classname = 'section-values lazy' %}
+	{% endif %}
 
-    <section class="section-time-line section-overview-introduction layout-{{ classname }}"> <!-- e.g. layout-green-grey -->
-	<div class="time-point">
+    <section class="section-mixed-content-row layout-{{ classname }} {{ container_classname }}"  data-bg="url({{ static_fields.image }})"> <!-- e.g. layout-green-grey -->
+
 	    {% if ( static_fields ) %}
 		<div class="ct-container generic-content">
-		    <h2 class="green">{{ static_fields.title }}</h2>
+		    <h2>{{ static_fields.title }}</h2>
 		    <p>{{ static_fields.subtitle }}</p>
 		</div>
 	    {% endif %}
 	    {% if ( field_groups ) %}
-		<div class="swiper-container section-time-line-swiper  mini-swiper">
+		<div class="swiper-container mini-swiper">
 		    <div class="swiper-wrapper">
 			{% for group in field_groups %}
 			    {% if group.__group_type__ == 'post' and group.post %}
@@ -37,11 +38,19 @@
 					class="thumbnail lazy"
 					       data-bg="url({{ group.post.img_url }})"
 				    ></div>
+					<div class="meta">
+						<span class="date">2018-12-07</span>
+						<!-- TODO: get right issue -->
+						<span class="issue oceans">海洋</span>
+						<!-- TODO: -->
+					</div>
+					{#
 				    <div class="tags">
 					{% for tag in group.post.tags %}
 					    <span>{{ tag.name }}</span>
 					{% endfor %}
 				    </div>
+					#}
 				    <p class="caption">{{ group.post.post_title }}</p>
 				</div>
 			    {% elseif group.__group_type__ == 'textonly' %}
@@ -59,10 +68,10 @@
 				    <p>{{ group.textblock }}</p>
 				</div>
 			    {% elseif group.__group_type__ == 'tip' %}
-				<div class="swiper-slide">
+				<div class="swiper-slide slide-tip">
 				    <div class="tip" style="transform: rotate({{ random(-5, 5) }}deg)">
-					<div class="tip-icon">{{ group.icon }}</div>
-					<p>{{ group.textblock }}</p>
+					<div class="tip-icon"><img src="{{ group.post.img_url }}" /></div>
+					<p>{{ group.post.post_title|e('wp_kses_post')|raw }}</p>
 				    </div>
 				</div>
 			    {% else %}
@@ -77,6 +86,5 @@
 		    <p class="faint">{{ static_fields.paragraph }}</p>
 		</div>
 	    {% endif %}
-	</div>
     </section>
 {% endblock %}

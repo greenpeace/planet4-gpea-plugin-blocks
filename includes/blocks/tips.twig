@@ -1,42 +1,44 @@
 {% block tips %}
     {% if ( fields ) %}
-	<section class="section-projects light pink">
-	    <div class="mobile-top-box">
-		<div class="ct-container">
-		    <p class="title text very-big light center">{{ fields.title|e('wp_kses_post')|raw }}</p>
-		</div>
+	<section class="section-featured section-featured-tips" id="anchor_tips">
+	    <div class="ct-container generic-content">
+			<div class="mobile-top-box">
+				<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+				<h3>{{ fields.subtitle|e('wp_kses_post')|raw }}</h3>
+				<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
+			</div>
 	    </div>
-	    <div class="swiper-container section-projects-swiper">
+	    <div class="swiper-container maxi-swiper maxi-swiper-tips">
 		<div class="swiper-wrapper">
 		    <div class="swiper-slide first">
-			<p class="title text very-big light">{{ fields.title|e('wp_kses_post')|raw }}</p>
-                        <!-- TODO frontend: add HTML for subtitle field -->
-			<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-			<p class="content text">{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
-			<p class="ps text bold">{{ fields.see_more_label|e('wp_kses_post')|raw }} (TODO link)</p>
+				<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+				<h3>{{ fields.subtitle|e('wp_kses_post')|raw }}</h3>
+				<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 		    </div>
 		    {% if fields.posts %}
 			{% for post in fields.posts %}
-			    <div class="swiper-slide post card">
-				<div class="top-box">
-				    <p>{{ post.frequency }}</p>
-				    <!-- TODO passare anche categoria main issue  -->
-				    {% if post.categories %}
-					<p>{{ post.categories }}</p>
-				    {% endif %}
-				</div>
-				{% if post.img_url %}
-				    <img class="lazy" src="" data-src="{{ post.img_url }}" alt="">
-				{% endif %}
-				<h2>{{ post.post_title|e('wp_kses_post')|raw }}</h2>
-				<div class="social-box">
-				    <a href="">
-					<span class="icon-facebook"></span>
-				    </a>
-				    <a href="">
-					<span class="icon-whatsapp"></span>
-				    </a>
-				</div>
+			    <div class="swiper-slide">
+				    <div class="tip" style="transform: rotate({{ random(-5, 5) }}deg)">
+						<div class="meta">
+							<span class="frequency">{{ post.frequency }}</span>
+							<span class="issue oceans">海洋</span>
+							<!-- [Manu]: non dovrebbe stare l'issue qui? cosa sono le categories?  -->
+							<!-- TODO passare anche categoria main issue  -->
+							{#% if post.categories %}
+							<p>{{ post.categories }}</p>
+							{% endif %#}
+						</div>
+						<div class="tip-icon"><img src="{{ post.img_url }}" /></div>
+						<p>{{ post.post_title|e('wp_kses_post')|raw }}</p>
+						<div class="social-box">
+							<a href="">
+							<span class="icon-facebook"></span>
+							</a>
+							<a href="">
+							<span class="icon-whatsapp"></span>
+							</a>
+						</div>
+					</div>
 			    </div>
 			{% endfor %}
 		    {% endif %}
@@ -49,13 +51,11 @@
 		    <span class="icon-chevron-right"></span>
 		</div>
 	    </div>
-	    <div class="mobile-bottom-box">
-		<div class="ct-container">
-		    <center>
-			<p>{{ fields.see_more_label|e('wp_kses_post')|raw }} (TODO link)</p>
-		    </center>
-		</div>
-	    </div>
+	    {% if fields.see_more_label and fields.see_more_link %}
+			<div class="ct-container generic-content">
+				<p class="see-more"><a href={{ fields.see_more_link|e('wp_kses_post')|raw }}>{{ fields.see_more_label|e('wp_kses_post')|raw }}</a></p>
+			</div>
+	    {% endif %}
 	</section>
     {% endif %}
 {% endblock %}

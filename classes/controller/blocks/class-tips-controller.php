@@ -69,17 +69,10 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 					'type'     => 'post_select',
 					'multiple' => 'multiple',
 					'query'    => [
-						'post_type'   => array( 'post' ),
+						'post_type'   => array( 'tips' ),
 						'post_status' => 'publish',
 						'orderby'     => 'post_title',
 						'order'       => 'ASC',
-						'tax_query'   => array(
-							array(
-								'taxonomy' => 'p4_post_attribute',
-								'field'    => 'term',
-								'terms'    => 'tip',
-							),
-						),
 					],
 					'meta'     => [
 						'select2_options' => [
@@ -116,7 +109,7 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Tips', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Tips', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
@@ -143,7 +136,7 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 
 				$query = new \WP_Query(
 					array(
-						'post_type'   => array( 'post' ),
+						'post_type'   => array( 'tips' ),
 						'post_status' => 'publish',
 						'post__in' => explode( ',' , $attributes['tip_ids'] ),
 						'orderby' => 'post__in',
