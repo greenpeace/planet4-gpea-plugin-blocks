@@ -131,8 +131,6 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 
 			wp_reset_postdata();
 
-			// query to retrieve tips
-
 			$query = new \WP_Query(
 				[
 					'post_type' => array( 'tips' ),
@@ -151,7 +149,7 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 			array_unshift(
 				$tips, [
 					'value' => '',
-					'label' => __( 'Please select a post', 'planet4-gpea-blocks' ),
+					'label' => __( 'Please select a tip', 'planet4-gpea-blocks' ),
 				]
 			);
 
@@ -230,6 +228,7 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 
 				'Tip' => [
 					[
+						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Block %s tip text</i>', 'planet4-gpea-blocks' ),
 						'attr'     => 'tip',
 						'type'     => 'select',
@@ -381,30 +380,11 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 					);
 					if ( $query->posts ) {
 						$post = $query->posts[0];
-
 						$tip_icon = get_post_meta( $post->ID, 'p4-gpea_tip_icon', true );
 						$post->img_url = $tip_icon ?? '';
 						$frequency = get_post_meta( $post->ID, 'p4-gpea_tip_frequency', true );
 						$post->frequency = $frequency ?? '';
-						// TODO:
-						// - abstract this one to parent.
-						// - also avoid magic constant 'issues'.
-						// $issues = get_category_by_slug( 'issues' );
-						// $issues = $issues->term_id;
-						// $categories = get_the_category( $post->ID );
-						// $categories = array_filter(
-						// 	$categories , function( $cat ) use ( $issues ) {
-						// 		return $cat->category_parent === $issues;
-						// 	}
-						// );
-						// $categories = array_map(
-						// 	function( $cat ) {
-						// 			return $cat->slug;
-						// 	}, $categories
-						// );
-						// $categories = join( ', ', $categories );
-						// $post->categories = $categories ?? '';
-						$formatted_posts[] = $post;						
+						$formatted_posts[] = $post;
 						$group['post'] = $post;
 					} else {
 						$group['post'] = false;

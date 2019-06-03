@@ -72,6 +72,8 @@
 				    <div class="tip" style="transform: rotate({{ random(-5, 5) }}deg)">
 					<div class="tip-icon"><img src="{{ group.post.img_url }}" /></div>
 					<p>{{ group.post.post_title|e('wp_kses_post')|raw }}</p>
+                                        <!-- TODO frontend style tip frequency -->
+                                        <span class="tip-frequency">{{ group.post.frequency }}</span>
 				    </div>
 				</div>
 			    {% else %}
