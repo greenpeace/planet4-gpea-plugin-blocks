@@ -44,22 +44,80 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 
 			$fields = [
 				[
+					'label' => 'Select the layout',
+					'description' => 'Select the layout',
+					'attr' => 'layout',
+					'type' => 'radio',
+					'options' => [
+						[
+							'value' => 'carousel',
+							'label' => __( 'Carousel', 'planet4-gpea-blocks' ),
+							'desc'  => 'Carousel',
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+						],
+						[
+							'value' => 'list',
+							'label' => __( 'List', 'planet4-gpea-blocks' ),
+							'desc'  => 'List',
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+						],
+					],
+				],
+				[
+					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'attr'  => 'title',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
 					'label'       => __( 'Select the team people for testimonials', 'planet4-gpea-blocks' ),
 					'attr'     => 'testimonial_ids',
 					'type'     => 'post_select',
 					'multiple' => 'multiple',
 					'query'    => [
-						'post_type'   => array( 'post' ),
+						'post_type'   => array( 'team' ),
 						'post_status' => 'publish',
 						'orderby'     => 'post_title',
 						'order'           => 'ASC',
-						'tax_query'   => array(
-							array(
-								'taxonomy' => 'p4-page-type',
-								'field'    => 'slug',
-								'terms'    => 'team',
-							),
-						),
+					],
+				],
+				[
+					'label' => __( 'Link label 1', 'planet4-gpea-blocks' ),
+					'attr'  => 'link_label_1',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Link label 1', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Link URL 1', 'planet4-gpea-blocks' ),
+					'attr'  => 'link_url_1',
+					'type'  => 'url',
+					'meta'  => [
+						'placeholder' => __( 'Link URL 1', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Link label 2', 'planet4-gpea-blocks' ),
+					'attr'  => 'link_label_2',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Link label 2', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Link URL 2', 'planet4-gpea-blocks' ),
+					'attr'  => 'link_url_2',
+					'type'  => 'url',
+					'meta'  => [
+						'placeholder' => __( 'Link URL 2', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 			];
@@ -93,7 +151,7 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 
 				$query = new \WP_Query(
 					array(
-						'post_type'   => array( 'post' ),
+						'post_type'   => array( 'team' ),
 						'post_status' => 'publish',
 						'post__in' => explode( ',' , $attributes['testimonial_ids'] ),
 						'orderby' => 'post__in',
@@ -111,27 +169,6 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 						$team_role = get_post_meta( $post->ID, 'p4-gpea_team_role', true );
 						$post->team_role = $team_role ?? '';
 
-						$team_citation = get_post_meta( $post->ID, 'p4-gpea_team_citation', true );
-						$post->team_citation = $team_citation ?? '';
-
-						// TODO:
-						// - abstract this one to parent.
-						// - also avoid magic constant 'issues'.
-						$issues = get_category_by_slug( 'issues' );
-						$issues = $issues->term_id;
-						$categories = get_the_category( $post->ID );
-						$categories = array_filter(
-							$categories , function( $cat ) use ( $issues ) {
-								return $cat->category_parent === $issues;
-							}
-						);
-						$categories = array_map(
-							function( $cat ) {
-									return $cat->slug;
-							}, $categories
-						);
-						$categories = join( ', ', $categories );
-						$post->categories = $categories ?? '';
 						$formatted_posts[] = $post;
 					}
 				}
@@ -164,6 +201,7 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
 			$this->view->block( self::BLOCK_NAME, $data );
+			echo '<pre>' . print_r( $data, true ) . '</pre>';
 			return ob_get_clean();
 		}
 	}
