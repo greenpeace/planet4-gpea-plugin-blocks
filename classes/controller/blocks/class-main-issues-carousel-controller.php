@@ -95,13 +95,8 @@ if ( ! class_exists( 'Main_Issues_Carousel_Controller' ) ) {
 					'orderby'     => 'date',
 					'post_type'   => 'page',
 					'numberposts' => self::MAIN_ISSUE_COUNT,
-					'tax_query' => array(
-						array(
-							'taxonomy' => 'p4_post_attribute',
-							'field' => 'slug',
-							'terms' => 'main-issue',
-						),
-					),
+					'meta_key'    => '_wp_page_template',
+					'meta_value'  => 'page-templates/main-issue.php',
 				)
 			);
 
