@@ -201,7 +201,6 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
 			$this->view->block( self::BLOCK_NAME, $data );
-			echo '<pre>' . print_r( $data, true ) . '</pre>';
 			return ob_get_clean();
 		}
 	}
