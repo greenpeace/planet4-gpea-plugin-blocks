@@ -15,6 +15,9 @@
             {% if fields.title %}
 	        <h2>{{ fields.title }}</h2>
 	    {% endif %}
+            {% if fields.paragraph %}
+	        <h2>{{ fields.title }}</h2>
+	    {% endif %}
             {% if fields.link_label and fields.link_url %}
 	        <a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
 	    {% endif %}
