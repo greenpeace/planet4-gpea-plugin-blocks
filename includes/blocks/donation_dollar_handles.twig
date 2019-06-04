@@ -1,0 +1,47 @@
+{% block donation_dollar_handles %}
+    <!-- TODO Frontend all -->
+    {% if ( fields ) %}
+        <section>
+            {% if fields.title %}
+	        <h2>{{ fields.title }}</h2>
+	    {% endif %}
+            {% if fields.paragraph %}
+	        <p>{{ fields.paragraph }}</p>
+	    {% endif %}
+            {% if fields.label_donate_once %}
+	        <p>{{ fields.label_donate_once }}</p>
+	    {% endif %}
+            {% if fields.label_donate_monthly %}
+	        <p>{{ fields.label_donate_monthly }}</p>
+	    {% endif %}
+            {% if fields.currency_code %}
+	        <p>{{ fields.currency_code }}</p>
+	    {% endif %}
+            {% if fields.label_free_amount %}
+	        <p>{{ fields.label_free_amount }}</p>
+	    {% endif %}
+            {% if fields.button_label and fields.button_landing_url %}
+	        <a href="{{ fields.button_landing_url }}">{{ fields.button_label }}</a>
+	    {% endif %}
+            {% if fields.bg_img %}
+                <img src="{{ fields.bg_img }}" />
+	    {% endif %}
+            {% if fields.bg_img_mobile %}
+                <img src="{{ fields.bg_img_mobile }}" />
+	    {% endif %}
+	    {% for i in 1..25 %}
+	        {% if fields['amount_handle_'~i] %}
+                    {% if fields['amount_handle_'~i] %}
+                        <p>{{ fields['amount_handle_'~i] }}</p>
+	            {% endif %}
+                    {% if fields['img_handle_'~i] %}
+                        <img src="{{ fields['img_handle_'~i] }}" />
+	            {% endif %}
+                    {% if fields['paragraph_handle_'~i] %}
+                        <p>{{ fields['paragraph_handle_'~i] }}</p>
+	            {% endif %}
+                {% endif %}
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}

@@ -271,6 +271,7 @@ jQuery(document).ready(function() {
     'shortcake_milestones',
     'shortcake_slideshow',
     'shortcake_world_slideshow',
+    'shortcake_donation_dollar_handles',
   ];
 
   // Attach hooks when rendering a new metablock.

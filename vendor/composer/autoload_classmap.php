@@ -91,6 +91,7 @@ return array(
     'P4EABKS\\Controllers\\Blocks\\Big_Carousel_Manual_Selection_Controller' => $baseDir . '/classes/controller/blocks/class-big-carousel-manual-selection-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Controller' => $baseDir . '/classes/controller/blocks/class-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Donation_Basic_Controller' => $baseDir . '/classes/controller/blocks/class-donation-basic-controller.php',
+    'P4EABKS\\Controllers\\Blocks\\Donation_Dollar_Handles_Controller' => $baseDir . '/classes/controller/blocks/class-donation-dollar-handles-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Launcher_Controller' => $baseDir . '/classes/controller/blocks/class-launcher-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Main_Issues_Carousel_Controller' => $baseDir . '/classes/controller/blocks/class-main-issues-carousel-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Milestones_Controller' => $baseDir . '/classes/controller/blocks/class-milestones-controller.php',

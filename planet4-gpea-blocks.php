@@ -118,6 +118,7 @@ P4EABKS\Loader::get_instance(
 		'P4EABKS\Controllers\Blocks\UGC_Controller',
 		'P4EABKS\Controllers\Blocks\Values_Section_Controller',
 		'P4EABKS\Controllers\Blocks\Donation_Basic_Controller',
+		'P4EABKS\Controllers\Blocks\Donation_Dollar_Handles_Controller',
 		'P4EABKS\Controllers\Blocks\Text_And_Image_Controller',
 		'P4EABKS\Controllers\Blocks\Launcher_Controller',
 		'P4EABKS\Controllers\Blocks\Report_Launcher_Controller',
