@@ -126,6 +126,7 @@ P4EABKS\Loader::get_instance(
 		'P4EABKS\Controllers\Blocks\Launcher_Controller',
 		'P4EABKS\Controllers\Blocks\Report_Launcher_Controller',
 		'P4EABKS\Controllers\Blocks\Milestones_Controller',
+		'P4EABKS\Controllers\Blocks\Heart_Counter_Controller',
 		'P4EABKS\Controllers\Blocks\Testimonials_Controller',
 		'P4EABKS\Controllers\Blocks\Tips_Controller',
 		'P4EABKS\Controllers\Blocks\Achievement_About_Controller',

@@ -1,0 +1,22 @@
+{% block heart_counter %}
+    <!-- TODO Frontend all -->
+    {% if ( fields ) %}
+        <section>
+            {% if fields.text_above %}
+	        <p>{{ fields.text_above }}</p>
+	    {% endif %}
+            {% if fields.number %}
+	        <p>{{ fields.number }}</p>
+	    {% endif %}
+            {% if fields.text_below %}
+	        <p>{{ fields.text_below }}</p>
+	    {% endif %}
+            {% if fields.link_label and fields.link_url %}
+	        <a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
+	    {% endif %}
+            {% if fields.bg_img %}
+	        <img src="{{ fields.bg_img }}" />
+	    {% endif %}
+        </section>
+    {% endif %}
+{% endblock %}

@@ -136,6 +136,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4EABKS\\Controllers\\Blocks\\Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Donation_Basic_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-donation-basic-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Donation_Dollar_Handles_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-donation-dollar-handles-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Heart_Counter_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-heart-counter-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Launcher_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-launcher-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Link_List_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-link-list-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Main_Issues_Carousel_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-main-issues-carousel-controller.php',
