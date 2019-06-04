@@ -143,6 +143,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4EABKS\\Controllers\\Blocks\\Main_Issues_Carousel_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-main-issues-carousel-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Milestones_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-milestones-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Mixed_Content_Row_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-mixed-content-row-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\People_List_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-people-list-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Projects_Carousel_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-projects-carousel-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Repeater_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-repeater-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Report_Launcher_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-report-launcher-controller.php',

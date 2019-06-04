@@ -1,0 +1,24 @@
+{% block people_list %}
+    <!-- TODO Frontend all -->
+    {% if ( fields ) %}
+        <section>
+            {% if fields.title %}
+	        <h2{{ fields.title }}</h2>
+	    {% endif %}
+            {% if fields.subtitle %}
+	        <p>{{ fields.subtitle }}</p>
+	    {% endif %}
+	    {% for i in 1..20 %}
+	        {% if fields['name_person_'~i] %}
+                    <p>{{ fields['name_person_'~i] }}</p>
+                    {% if fields['img_person_'~i] %}
+                        <img src="{{ fields['img_person_'~i] }}" />
+	            {% endif %}
+                    {% if fields['code_person_'~i] %}
+                        <p>{{ fields['code_person_'~i] }}</p>
+	            {% endif %}
+                {% endif %}
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
