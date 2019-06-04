@@ -109,6 +109,7 @@ P4EABKS\Loader::get_instance(
 		'P4EABKS\Controllers\Blocks\Mixed_Content_Row_Controller',
 		'P4EABKS\Controllers\Blocks\Link_List_Controller',
 		'P4EABKS\Controllers\Blocks\Accordion_List_Controller',
+		'P4EABKS\Controllers\Blocks\Support_Launcher_Controller',
 		'P4EABKS\Controllers\Blocks\Slideshow_Controller',
 		'P4EABKS\Controllers\Blocks\World_Slideshow_Controller',
 		'P4EABKS\Controllers\Blocks\Projects_Carousel_Controller',

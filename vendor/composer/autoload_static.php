@@ -145,6 +145,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4EABKS\\Controllers\\Blocks\\Repeater_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-repeater-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Report_Launcher_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-report-launcher-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Slideshow_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-slideshow-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Support_Launcher_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-support-launcher-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Tag_Cloud_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-tag-cloud-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Testimonials_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-testimonials-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Text_And_Image_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-text-and-image-controller.php',

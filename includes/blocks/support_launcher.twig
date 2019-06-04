@@ -1,0 +1,36 @@
+{% block support_launcher %}
+    <!-- TODO Frontend all -->
+    {% if ( fields ) %}
+        {% if ( fields.layout == 'form' ) %}
+            {% set classname = 'form' %}
+        {% elseif ( fields.layout == 'button' ) %}
+            {% set classname = 'button' %}
+        {% else %}
+            <!-- set default or do nothing -->
+	    {% set classname = 'some_default' %}
+        {% endif %}
+        <section class="layout-{{ classname }}">
+            {% if fields.title %}
+	        <h2>{{ fields.title }}</h2>
+	    {% endif %}
+            {% if fields.subtitle %}
+	        <p>{{ fields.subtitle }}</p>
+	    {% endif %}
+            {% if fields.paragraph %}
+	        <p>{{ fields.paragraph }}</p>
+	    {% endif %}
+            {% if fields.img %}
+	        <img src="{{ fields.img }}" />
+	    {% endif %}
+            {% if fields.accordion_label %}
+	        <p>{{ fields.accordion_label }}</p>
+	    {% endif %}
+            {% if fields.recipient_email %}
+	        <p>{{ fields.recipient_email }}</p>
+	    {% endif %}
+            {% if fields.button_label and fields.button_url %}
+	        <a href="{{ fields.button_url }}">{{ fields.button_label }}</a>
+	    {% endif %}
+        </section>
+    {% endif %}
+{% endblock %}
