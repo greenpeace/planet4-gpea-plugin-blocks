@@ -71,7 +71,7 @@ if ( ! class_exists( 'Slideshow_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Title (must be present to display the slideshow)', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
@@ -130,7 +130,7 @@ if ( ! class_exists( 'Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>title</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>title</i> (must be present to display the slideshow item)', 'planet4-gpea-blocks' ), $i ),
 						'attr'  => 'title_slide_' . $i,
 						'type'  => 'text',
 						'meta'  => [
