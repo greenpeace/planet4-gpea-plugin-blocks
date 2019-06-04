@@ -269,8 +269,8 @@ jQuery(document).ready(function() {
     'shortcake_mixed_content_row',
     'shortcake_repeater',
     'shortcake_milestones',
+    'shortcake_slideshow',
     'shortcake_world_slideshow',
-    'shortcake_mixed_content_slideshow',
   ];
 
   // Attach hooks when rendering a new metablock.
