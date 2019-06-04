@@ -1,0 +1,13 @@
+{% block heart_counter %}
+    <!-- TODO Frontend all -->
+    {% if ( fields ) %}
+        <section>
+            {% if fields.menu_label %}
+	        <p>{{ fields.menu_label }}</p>
+	    {% endif %}
+            {% if fields.anchor_text_title %}
+	        <p>{{ fields.anchor_text_title }}</p>
+	    {% endif %}
+        </section>
+    {% endif %}
+{% endblock %}

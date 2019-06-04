@@ -131,6 +131,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4EABKS\\Controllers\\Blocks\\Accordion_List_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-accordion-list-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Achievement_About_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-achievement-about-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Achievements_List_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-achievements-list-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Anchor_Links_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-anchor-links-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Article_Row_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-article-row-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Big_Carousel_Manual_Selection_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-big-carousel-manual-selection-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-controller.php',
