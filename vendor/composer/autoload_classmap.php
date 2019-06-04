@@ -93,6 +93,7 @@ return array(
     'P4EABKS\\Controllers\\Blocks\\Donation_Basic_Controller' => $baseDir . '/classes/controller/blocks/class-donation-basic-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Donation_Dollar_Handles_Controller' => $baseDir . '/classes/controller/blocks/class-donation-dollar-handles-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Launcher_Controller' => $baseDir . '/classes/controller/blocks/class-launcher-controller.php',
+    'P4EABKS\\Controllers\\Blocks\\Link_List_Controller' => $baseDir . '/classes/controller/blocks/class-link-list-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Main_Issues_Carousel_Controller' => $baseDir . '/classes/controller/blocks/class-main-issues-carousel-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Milestones_Controller' => $baseDir . '/classes/controller/blocks/class-milestones-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Mixed_Content_Row_Controller' => $baseDir . '/classes/controller/blocks/class-mixed-content-row-controller.php',

@@ -107,6 +107,7 @@ P4EABKS\Loader::get_instance(
 		// --- Add here your own Block Controller ---
 		// 'P4EABKS\Controllers\Blocks\Repeater_Controller', // Test controller
 		'P4EABKS\Controllers\Blocks\Mixed_Content_Row_Controller',
+		'P4EABKS\Controllers\Blocks\Link_List_Controller',
 		'P4EABKS\Controllers\Blocks\Slideshow_Controller',
 		'P4EABKS\Controllers\Blocks\World_Slideshow_Controller',
 		'P4EABKS\Controllers\Blocks\Projects_Carousel_Controller',

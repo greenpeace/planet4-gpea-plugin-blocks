@@ -1,0 +1,34 @@
+{% block link_list %}
+    <!-- TODO Frontend all -->
+    {% if ( fields ) %}
+        {% if ( fields.layout == 'simple' ) %}
+            <!-- Simple list -->
+            {% set classname = 'simple' %}
+        {% elseif ( fields.layout == 'accordion' ) %}
+            <!-- With accordion -->
+            {% set classname = 'accordion' %}
+        {% else %}
+            <!-- set default or do nothing -->
+	    {% set classname = 'some_default' %}
+        {% endif %}
+        <section class="layout-{{ classname }}">
+            {% if fields.main_link_label and fields.main_link_url %}
+	        <a href="{{ fields.main_link_url }}">{{ fields.main_link_label }}</a>
+	    {% endif %}
+            {% if fields.link_description %}
+	        <p>{{ fields.link_description }}</p>
+	    {% endif %}
+            {% if fields.accordion_label %}
+	        <p>{{ fields.accordion_label }}</p>
+	    {% endif %}
+	    {% for i in 1..20 %}
+	        {% if ( fields['label_link_'~i] and fields['url_link_'~i] ) %}
+                    <a href="{{ fields['url_link_'~i] }}">{{ fields['label_link_'~i] }}</a>
+                    {% if fields['description_link_'~i] %}
+                        <p>{{ fields['description_link_'~i] }}</p>
+	            {% endif %}
+                {% endif %}
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}
