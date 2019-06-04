@@ -60,8 +60,56 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
+						'label' => sprintf( __( '<strong>%s</strong> <i>date</i>', 'planet4-gpea-blocks' ), $i ),
+						'attr'  => 'date_milestone_' . $i,
+						'type'  => 'text',
+						'meta'  => [
+							// translators: placeholder represents the ordinal of the field.
+							'placeholder' => sprintf( __( 'Enter date %s', 'planet4-gpea-blocks' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks',
+							'data-element-type' => 'milestone',
+							'data-element-name' => 'milestone',
+							'data-element-number' => $i,
+						],
+					];
+
+				$fields[] =
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => sprintf( __( '<strong>%s</strong> <i>latitude</i>', 'planet4-gpea-blocks' ), $i ),
+						'attr'  => 'lat_milestone_' . $i,
+						'type'  => 'number',
+						'meta'  => [
+							// translators: placeholder represents the ordinal of the field.
+							'placeholder' => sprintf( __( 'Enter latitude %s', 'planet4-gpea-blocks' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks',
+							'data-element-type' => 'milestone',
+							'data-element-name' => 'milestone',
+							'data-element-number' => $i,
+						],
+					];
+
+				$fields[] =
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => sprintf( __( '<strong>%s</strong> <i>longitude</i>', 'planet4-gpea-blocks' ), $i ),
+						'attr'  => 'lon_milestone_' . $i,
+						'type'  => 'number',
+						'meta'  => [
+							// translators: placeholder represents the ordinal of the field.
+							'placeholder' => sprintf( __( 'Enter longitude %s', 'planet4-gpea-blocks' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks',
+							'data-element-type' => 'milestone',
+							'data-element-name' => 'milestone',
+							'data-element-number' => $i,
+						],
+					];
+
+				$fields[] =
+					[
+						// translators: placeholder represents the ordinal of the field.
 						'label' => sprintf( __( '<strong>%s</strong> <i>title</i>', 'planet4-gpea-blocks' ), $i ),
-						'attr'  => 'title_' . $i,
+						'attr'  => 'title_milestone_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
@@ -77,7 +125,7 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 					[
 						// translators: placeholder represents the ordinal of the field.
 						'label' => sprintf( __( '<strong>%s</strong> <i>subtitle</i>', 'planet4-gpea-blocks' ), $i ),
-						'attr'  => 'subtitle_' . $i,
+						'attr'  => 'subtitle_milestone_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
@@ -92,12 +140,12 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>text block</i>', 'planet4-gpea-blocks' ), $i ),
-						'attr'  => 'textblock_' . $i,
+						'label' => sprintf( __( '<strong>%s</strong> <i>paragraph</i>', 'planet4-gpea-blocks' ), $i ),
+						'attr'  => 'paragraph_milestone_' . $i,
 						'type'  => 'textarea',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter text block %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
@@ -109,7 +157,7 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 					[
 						// translators: placeholder represents the ordinal of the field.
 						'label'       => sprintf( __( '<strong>%s</strong> <i>image</i>', 'planet4-gpea-blocks' ), $i ),
-						'attr'        => 'img_' . $i,
+						'attr'        => 'img_milestone_' . $i,
 						'type'        => 'attachment',
 						'libraryType' => array( 'image' ),
 						'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
