@@ -1,6 +1,6 @@
 <?php
 /**
- * Mixed content row block class
+ * Repeater block class
  *
  * @package P4EABKS
  * @since 0.1
@@ -141,7 +141,7 @@ if ( ! class_exists( 'Repeater_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Repeater', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Repeater', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

@@ -1,6 +1,6 @@
 <?php
 /**
- * Mixed content row block class
+ * Values block class
  *
  * @package P4EABKS
  * @since 0.1
@@ -128,7 +128,7 @@ if ( ! class_exists( 'Values_Section_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'Values section', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Values section', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/values_block.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

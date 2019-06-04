@@ -1,6 +1,6 @@
 <?php
 /**
- * Mixed content row block class
+ * Launcher block class
  *
  * @package P4EABKS
  * @since 0.1
