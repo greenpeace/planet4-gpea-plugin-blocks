@@ -219,8 +219,8 @@ if ( ! class_exists( 'Slideshow_Controller' ) ) {
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
 			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
-				if ( isset( $attributes[ 'img_' . $i ] ) ) {
-					$attributes[ 'img_' . $i ] = wp_get_attachment_url( $attributes[ 'img_' . $i ] );
+				if ( isset( $attributes[ 'img_slide_' . $i ] ) ) {
+					$attributes[ 'img_slide_' . $i ] = wp_get_attachment_url( $attributes[ 'img_slide_' . $i ] );
 				}
 			}
 
