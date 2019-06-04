@@ -1,0 +1,18 @@
+{% block link_list %}
+    <!-- TODO Frontend all -->
+    {% if ( fields ) %}
+        <section>
+            {% if fields.title %}
+	        <h2>{{ fields.title }}</h2>
+	    {% endif %}
+	    {% for i in 1..20 %}
+	        {% if fields['title_accordion_'~i] %}
+                    <h2>{{ fields['title_accordion_'~i] }}</h2>
+                    {% if fields['paragraph_accordion_'~i] %}
+                        <p>{{ fields['paragraph_accordion_'~i] }}</p>
+	            {% endif %}
+                {% endif %}
+            {% endfor %}
+        </section>
+    {% endif %}
+{% endblock %}

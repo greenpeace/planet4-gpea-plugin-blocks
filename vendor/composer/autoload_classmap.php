@@ -85,6 +85,7 @@ return array(
     'MySource_Sniffs_PHP_GetRequestDataSniff' => $vendorDir . '/squizlabs/php_codesniffer/CodeSniffer/Standards/MySource/Sniffs/PHP/GetRequestDataSniff.php',
     'MySource_Sniffs_PHP_ReturnFunctionValueSniff' => $vendorDir . '/squizlabs/php_codesniffer/CodeSniffer/Standards/MySource/Sniffs/PHP/ReturnFunctionValueSniff.php',
     'MySource_Sniffs_Strings_JoinStringsSniff' => $vendorDir . '/squizlabs/php_codesniffer/CodeSniffer/Standards/MySource/Sniffs/Strings/JoinStringsSniff.php',
+    'P4EABKS\\Controllers\\Blocks\\Accordion_List_Controller' => $baseDir . '/classes/controller/blocks/class-accordion-list-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Achievement_About_Controller' => $baseDir . '/classes/controller/blocks/class-achievement-about-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Achievements_List_Controller' => $baseDir . '/classes/controller/blocks/class-achievements-list-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Article_Row_Controller' => $baseDir . '/classes/controller/blocks/class-article-row-controller.php',
