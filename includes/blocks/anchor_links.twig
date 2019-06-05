@@ -1,13 +1,8 @@
-{% block heart_counter %}
+{% block anchor_links %}
     <!-- TODO Frontend all -->
     {% if ( fields ) %}
         <section>
-            {% if fields.menu_label %}
-	        <p>{{ fields.menu_label }}</p>
-	    {% endif %}
-            {% if fields.anchor_text_title %}
-	        <p>{{ fields.anchor_text_title }}</p>
-	    {% endif %}
+            <h2 id="{{ fields.anchor_id }}" data-labelmenu="{{ fields.menu_label }}">{{ fields.anchor_text }}</h2>
         </section>
     {% endif %}
 {% endblock %}

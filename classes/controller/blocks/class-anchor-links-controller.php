@@ -46,11 +46,11 @@ if ( ! class_exists( 'Anchor_Links_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Anchor text title', 'planet4-gpea-blocks' ),
-					'attr'  => 'anchor_text_title',
+					'label' => __( 'Anchor text', 'planet4-gpea-blocks' ),
+					'attr'  => 'anchor_text',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Anchor text title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Anchor text', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -78,6 +78,11 @@ if ( ! class_exists( 'Anchor_Links_Controller' ) ) {
 		 * @return array The data to be passed in the View.
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
+
+			$anchor_text  = $attributes['anchor_text'] ?? false;
+			if ( $anchor_text ) {
+				$attributes['anchor_id'] = sanitize_title( $anchor_text );
+			}
 
 			return [
 				'fields' => $attributes,
