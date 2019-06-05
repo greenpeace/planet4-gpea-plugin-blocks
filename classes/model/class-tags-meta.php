@@ -36,6 +36,11 @@ if ( ! class_exists( 'Tags_Meta' ) ) {
 			add_action( 'post_tag_edit_form_fields', [ $this, 'add_taxonomy_form_fields' ] );
 			add_action( 'create_post_tag', [ $this, 'save_taxonomy_meta' ] );
 			add_action( 'edit_post_tag', [ $this, 'save_taxonomy_meta' ] );
+
+			add_action( 'category_add_form_fields', [ $this, 'add_taxonomy_form_fields' ] );
+			add_action( 'category_edit_form_fields', [ $this, 'add_taxonomy_form_fields' ] );
+			add_action( 'create_category', [ $this, 'save_taxonomy_meta' ] );
+			add_action( 'edit_category', [ $this, 'save_taxonomy_meta' ] );
 		}
 
 		/**

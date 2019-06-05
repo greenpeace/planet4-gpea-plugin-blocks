@@ -16,12 +16,13 @@ jQuery(document).ready(function() {
     function(res) {
 
       // res = res.filter( (r) => r.id === itemId );
-      activeValid = res.find( (r) => r.questionId === activeCampaign );
+      // activeValid = res.find( (r) => r.questionId === activeCampaign );
+      activeValid = res.find( (r) => r.id === activeCampaign );
 
       if(res.length) {
         select.append($('<option disabled selected value> -- select an issue related -- </option>'));
         $.each(res, function(_, option) {
-          select.append($('<option></option>').attr('value', option.questionId).text(option.name));
+          select.append($('<option></option>').attr('value', option.id).text(option.name));
         });
         questionsContainer.html(select);
       } else {

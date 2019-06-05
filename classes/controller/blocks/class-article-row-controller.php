@@ -38,6 +38,26 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 
 			$fields = [
 				[
+					'label' => 'Select the layout',
+					'description' => 'Select the layout',
+					'attr' => 'layout',
+					'type' => 'radio',
+					'options' => [
+						[
+							'value' => 'show_tag',
+							'label' => __( 'Display the tag', 'planet4-gpea-blocks' ),
+							'desc'  => 'Display the tag',
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+						],
+						[
+							'value' => 'hide_tag',
+							'label' => __( 'Hide the tag', 'planet4-gpea-blocks' ),
+							'desc'  => 'Hide the tag',
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+						],
+					],
+				],
+				[
 					'label' => __( 'Title', 'planet4-gpea-blocks' ),
 					'attr'  => 'title',
 					'type'  => 'text',
@@ -58,26 +78,6 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 							'placeholder'        => __( 'Select Tags', 'planet4-blocks-backend' ),
 							'closeOnSelect'      => true,
 							'minimumInputLength' => 0,
-						],
-					],
-				],
-				[
-					'label' => 'Select the layout',
-					'description' => 'Select the layout',
-					'attr' => 'layout',
-					'type' => 'radio',
-					'options' => [
-						[
-							'value' => 'show_tag',
-							'label' => __( 'Display the tag', 'planet4-gpea-blocks' ),
-							'desc'  => 'Display the tag',
-							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 'hide_tag',
-							'label' => __( 'Hide the tag', 'planet4-gpea-blocks' ),
-							'desc'  => 'Hide the tag',
-							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
@@ -115,7 +115,7 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 				array(
 					'order'       => 'desc',
 					'orderby'     => 'date',
-					'post_type'   => array( 'page', 'post' ),
+					'post_type'   => 'any',
 					'numberposts' => 20,
 					'tax_query' => array(
 						array(
