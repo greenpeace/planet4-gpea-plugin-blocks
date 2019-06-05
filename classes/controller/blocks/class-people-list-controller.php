@@ -92,15 +92,12 @@ if ( ! class_exists( 'People_List_Controller' ) ) {
 				$fields[] =
 						  [
 							  // translators: placeholder represents the ordinal of the field.
-							  'label'       => sprintf( __( '<strong>%s</strong> <i>person picture</i>', 'planet4-gpea-blocks' ), $i ),
-							  'attr'        => 'img_person_' . $i,
-							  'type'        => 'attachment',
-							  'libraryType' => array( 'image' ),
-							  'addButton'   => __( 'Select picture', 'planet4-gpea-blocks' ),
-							  'frameTitle'  => __( 'Select picture', 'planet4-gpea-blocks' ),
-							  'meta'        => [
+							  'label' => sprintf( __( '<strong>%s</strong> <i>person code</i>', 'planet4-gpea-blocks' ), $i ),
+							  'attr'  => 'code_person_' . $i,
+							  'type'  => 'text',
+							  'meta'  => [
 								  // translators: placeholder represents the ordinal of the field.
-								  'placeholder' => sprintf( __( 'Enter person %s picture', 'planet4-gpea-blocks' ), $i ),
+								  'placeholder' => sprintf( __( 'Enter person %s code', 'planet4-gpea-blocks' ), $i ),
 								  'data-plugin' => 'planet4-gpea-blocks',
 								  'data-element-type' => 'person',
 								  'data-element-name' => 'person',
@@ -111,12 +108,15 @@ if ( ! class_exists( 'People_List_Controller' ) ) {
 				$fields[] =
 						  [
 							  // translators: placeholder represents the ordinal of the field.
-							  'label' => sprintf( __( '<strong>%s</strong> <i>person code</i>', 'planet4-gpea-blocks' ), $i ),
-							  'attr'  => 'code_person_' . $i,
-							  'type'  => 'text',
-							  'meta'  => [
+							  'label'       => sprintf( __( '<strong>%s</strong> <i>person picture</i>', 'planet4-gpea-blocks' ), $i ),
+							  'attr'        => 'img_person_' . $i,
+							  'type'        => 'attachment',
+							  'libraryType' => array( 'image' ),
+							  'addButton'   => __( 'Select picture', 'planet4-gpea-blocks' ),
+							  'frameTitle'  => __( 'Select picture', 'planet4-gpea-blocks' ),
+							  'meta'        => [
 								  // translators: placeholder represents the ordinal of the field.
-								  'placeholder' => sprintf( __( 'Enter person %s code', 'planet4-gpea-blocks' ), $i ),
+								  'placeholder' => sprintf( __( 'Enter person %s picture', 'planet4-gpea-blocks' ), $i ),
 								  'data-plugin' => 'planet4-gpea-blocks',
 								  'data-element-type' => 'person',
 								  'data-element-name' => 'person',
