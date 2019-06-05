@@ -21,16 +21,33 @@
 	    {% endif %}
             {% if fields.img %}
 	        <img src="{{ fields.img }}" />
-	    {% endif %}
+        {% endif %}
+        {% if ( fields.layout == 'form' ) %}
             {% if fields.accordion_label %}
-	        <p>{{ fields.accordion_label }}</p>
-	    {% endif %}
-            {% if fields.recipient_email %}
-	        <p>{{ fields.recipient_email }}</p>
-	    {% endif %}
+	            <p>{{ fields.accordion_label }}</p>
+            {% endif %}
+            <div class="hidden_accordion_form">
+                {% if fields.recipient_email %}
+                    <form action="" class="">
+                        <input type="hidden" name="recipient_email" value="{{ fields.recipient_email }}">
+                        <input type="hidden" name="subject" value="contact from {{ fields.title }}">
+                        <p>
+                            <input type="text" name="sender_name" value="" placeholder="your name"><br />
+                            <input type="text" name="sender_email" value="" placeholder="your email"><br />
+                            <textarea name="message" placeholder="your message"></textarea><br />
+                            <input type="submit" name="send" value="Send"><br />
+                        </p>
+                    </form>
+                {% else %}
+                    <p>Missing field in backend, please check this module configuration</p>
+                {% endif %}
+            </div>
+            
+        {% elseif ( fields.layout == 'button' ) %}
             {% if fields.button_label and fields.button_url %}
-	        <a href="{{ fields.button_url }}">{{ fields.button_label }}</a>
-	    {% endif %}
+                <a href="{{ fields.button_url }}">{{ fields.button_label }}</a>
+            {% endif %}
+        {% endif %}            
         </section>
     {% endif %}
 {% endblock %}

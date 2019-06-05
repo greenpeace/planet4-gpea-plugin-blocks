@@ -99,7 +99,7 @@ if ( ! class_exists( 'Support_Launcher_Controller' ) ) {
 					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
 				],
 				[
-					'label' => __( 'Accordion label', 'planet4-gpea-blocks' ),
+					'label' => __( 'Accordion label (used only with "Form" layout)', 'planet4-gpea-blocks' ),
 					'attr'  => 'accordion_label',
 					'type'  => 'text',
 					'meta'  => [
@@ -108,7 +108,7 @@ if ( ! class_exists( 'Support_Launcher_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Recipient e-mail', 'planet4-gpea-blocks' ),
+					'label' => __( 'Recipient e-mail (used only with "Form" layout)', 'planet4-gpea-blocks' ),
 					'attr'  => 'recipient_email',
 					'type'  => 'email',
 					'meta'  => [
@@ -117,7 +117,7 @@ if ( ! class_exists( 'Support_Launcher_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Button label', 'planet4-gpea-blocks' ),
+					'label' => __( 'Button label (used only with "Button" layout)', 'planet4-gpea-blocks' ),
 					'attr'  => 'button_label',
 					'type'  => 'text',
 					'meta'  => [
@@ -126,7 +126,7 @@ if ( ! class_exists( 'Support_Launcher_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Button URL', 'planet4-gpea-blocks' ),
+					'label' => __( 'Button URL (used only with "Button" layout)', 'planet4-gpea-blocks' ),
 					'attr'  => 'button_url',
 					'type'  => 'url',
 					'meta'  => [
