@@ -34,15 +34,22 @@
                 {% endif %}
                 <div class="hidden_accordion_form">
                     {% if fields.recipient_email %}
-                        <form action="" class="">
+                        <!-- Frontend note: jQuery hooks
+                             .form-support-launcher-message
+                             .form-support-launcher
+                        -->
+                        <p class="form-support-launcher-message"></p>
+                        <form class="form-support-launcher">
                             <input type="hidden" name="recipient_email" value="{{ fields.recipient_email }}">
                             <input type="hidden" name="subject" value="contact from {{ fields.title }}">
+                            <input type="hidden" name="send_to" value="{{ fields.admin_ajax }}">
                             <p>
-                                <input type="text" name="sender_name" value="" placeholder="your name"><br />
-                                <input type="text" name="sender_email" value="" placeholder="your email"><br />
-                                <textarea name="message" placeholder="your message"></textarea><br />
+                                <input type="text" name="sender_name" value="" placeholder="your name" required><br />
+                                <input type="email" name="sender_email" value="" placeholder="your email" required><br />
+                                <textarea name="message" placeholder="your message" required></textarea><br />
                                 <input type="submit" name="send" value="Send"><br />
                             </p>
+                            {{ fields.wp_nonce|raw }}
                         </form>
                     {% else %}
                         <p>Missing field in backend, please check this module configuration</p>
