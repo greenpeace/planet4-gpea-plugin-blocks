@@ -1,0 +1,31 @@
+{% block articles_list %}
+    <!-- TODO Frontend all -->
+    {% if ( fields ) %}
+	{% if ( fields.layout == 'tag_filters' ) %}
+	    {% set classname = 'tag-filters' %}
+	{% elseif ( fields.layout == 'dropdown_filters' ) %}
+	    {% set classname = 'dropdown-filters' %}
+	{% else %}
+	    <!-- set default or do nothing -->
+	    {% set classname = 'some_default' %}
+	{% endif %}
+	<section class="layout-{{ classname }}">
+	    {% if fields.title %}
+		<h2>{{ fields.title }}</h2>
+	    {% endif %}
+	    {% if fields.posts %}
+		{% for post in fields.posts %}
+	            {% if post.post_title %}
+		        <h2>{{ post.post_title }}</h2>
+	            {% endif %}
+	            {% if post.post_content %}
+		        <p>{{ post.post_content }}</p>
+	            {% endif %}
+	            {% if post.img_url %}
+		        <img src="{{ post.img_url }}"/>
+	            {% endif %}
+		{% endfor %}
+	    {% endif %}
+	</section>
+    {% endif %}
+{% endblock %}

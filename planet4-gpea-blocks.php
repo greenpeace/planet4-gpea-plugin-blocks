@@ -114,6 +114,7 @@ P4EABKS\Loader::get_instance(
 		'P4EABKS\Controllers\Blocks\Slideshow_Controller',
 		'P4EABKS\Controllers\Blocks\World_Slideshow_Controller',
 		'P4EABKS\Controllers\Blocks\Projects_Carousel_Controller',
+		'P4EABKS\Controllers\Blocks\Articles_List_Controller',
 		'P4EABKS\Controllers\Blocks\Article_Row_Controller',
 		'P4EABKS\Controllers\Blocks\Big_Carousel_Manual_Selection_Controller',
 		'P4EABKS\Controllers\Blocks\Tag_Cloud_Controller',

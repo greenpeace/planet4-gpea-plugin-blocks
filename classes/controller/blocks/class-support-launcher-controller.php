@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Support Launcher block class
  *
@@ -30,6 +31,13 @@ if ( ! class_exists( 'Support_Launcher_Controller' ) ) {
 		 * @const string BLOCK_NAME
 		 */
 		const DEFAULT_LAYOUT = 'form';
+
+		/**
+		 * The nonce string.
+		 *
+		 * @const string NONCE_STRING
+		 */
+		const NONCE_STRING = 'support_launcher';
 
 		/**
 		 * Shortcode UI setup for the tasks shortcode.
@@ -84,9 +92,18 @@ if ( ! class_exists( 'Support_Launcher_Controller' ) ) {
 				[
 					'label' => __( 'Paragraph', 'planet4-gpea-blocks' ),
 					'attr'  => 'paragraph',
-					'type'  => 'text',
+					'type'  => 'textarea',
 					'meta'  => [
 						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Thanks message', 'planet4-gpea-blocks' ),
+					'attr'  => 'thanks_message',
+					'type'  => 'textarea',
+					'meta'  => [
+						'placeholder' => __( 'Thanks message', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -165,6 +182,9 @@ if ( ! class_exists( 'Support_Launcher_Controller' ) ) {
 				$attributes['img'] = wp_get_attachment_url( $attributes['img'] );
 			}
 
+			$attributes['admin_ajax'] = admin_url( 'admin-ajax.php' );
+			$attributes['wp_nonce'] = wp_nonce_field( self::NONCE_STRING );
+
 			return [
 				'fields' => $attributes,
 			];
@@ -182,6 +202,15 @@ if ( ! class_exists( 'Support_Launcher_Controller' ) ) {
 		 * @return string The complete html of the block
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
+
+			// TODO move this JS to theme assets.
+			wp_enqueue_script(
+				'support_launcher_form_js',
+				P4EABKS_ASSETS_DIR . 'js/support-launcher-form.js',
+				[ 'jquery' ],
+				'0.1',
+				true
+			);
 
 			$data = $this->prepare_data( $fields );
 

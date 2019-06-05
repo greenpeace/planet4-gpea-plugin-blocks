@@ -90,6 +90,7 @@ return array(
     'P4EABKS\\Controllers\\Blocks\\Achievements_List_Controller' => $baseDir . '/classes/controller/blocks/class-achievements-list-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Anchor_Links_Controller' => $baseDir . '/classes/controller/blocks/class-anchor-links-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Article_Row_Controller' => $baseDir . '/classes/controller/blocks/class-article-row-controller.php',
+    'P4EABKS\\Controllers\\Blocks\\Articles_List_Controller' => $baseDir . '/classes/controller/blocks/class-articles-list-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Big_Carousel_Manual_Selection_Controller' => $baseDir . '/classes/controller/blocks/class-big-carousel-manual-selection-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Controller' => $baseDir . '/classes/controller/blocks/class-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Donation_Basic_Controller' => $baseDir . '/classes/controller/blocks/class-donation-basic-controller.php',
