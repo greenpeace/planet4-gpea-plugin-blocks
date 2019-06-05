@@ -84,9 +84,18 @@ if ( ! class_exists( 'Support_Launcher_Controller' ) ) {
 				[
 					'label' => __( 'Paragraph', 'planet4-gpea-blocks' ),
 					'attr'  => 'paragraph',
-					'type'  => 'text',
+					'type'  => 'textarea',
 					'meta'  => [
 						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Thanks message', 'planet4-gpea-blocks' ),
+					'attr'  => 'thanks_message',
+					'type'  => 'textarea',
+					'meta'  => [
+						'placeholder' => __( 'Thanks message', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
