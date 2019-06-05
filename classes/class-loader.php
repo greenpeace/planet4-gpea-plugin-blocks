@@ -54,7 +54,7 @@ if ( ! class_exists( 'Loader' ) ) {
 				}
 			}
 			$this->check_requirements();
-			add_action('plugins_loaded', array( $this, 'load_i18n' ) );
+			add_action( 'plugins_loaded', array( $this, 'load_i18n' ) );
 		}
 
 		/**
@@ -165,22 +165,26 @@ if ( ! class_exists( 'Loader' ) ) {
 		 */
 		public function load_admin_assets( $hook ) {
 
-            // Load these assets on page edit only
+			// Load these assets on page edit only.
 			add_action(
 				'enqueue_shortcode_ui',
 				function () {
-                    wp_enqueue_script( 'p4nlbks_admin_blocks_script', P4EABKS_ADMIN_DIR . 'js/blocks/admin-blocks.min.js', [ 'shortcode-ui' ], '0.1', true );
+					$js_admin_creation = filectime( P4EABKS_ADMIN_DIR . 'js/blocks/admin-blocks.min.js' );
+					wp_enqueue_script( 'p4nlbks_admin_blocks_script', P4EABKS_ADMIN_DIR . 'js/blocks/admin-blocks.min.js', [ 'shortcode-ui' ], $js_admin_creation, true );
 				}
 			);
 
-            // Load the assets only on the plugin's pages.
+			// Load the assets only on the plugin's pages.
 			if ( strpos( $hook, P4EABKS_PLUGIN_SLUG_NAME ) === false ) {
 				return;
 			}
 
+			$js_creation = filectime( P4EABKS_ADMIN_DIR . 'js/admin.js' );
+			$css_creation = filectime( P4EABKS_ADMIN_DIR . 'css/admin.css' );
+
 			wp_enqueue_script( 'p4nlbks_admin_jquery', '//code.jquery.com/jquery-3.2.1.min.js', array(), '3.2.1', true );
-			wp_enqueue_style( 'p4nlbks_admin_style', P4EABKS_ADMIN_DIR . 'css/admin.css', array(), '0.1' );
-			wp_enqueue_script( 'p4nlbks_admin_script', P4EABKS_ADMIN_DIR . 'js/admin.js', array(), '0.1', true );
+			wp_enqueue_style( 'p4nlbks_admin_style', P4EABKS_ADMIN_DIR . 'css/admin.css', array(), $css_creation );
+			wp_enqueue_script( 'p4nlbks_admin_script', P4EABKS_ADMIN_DIR . 'js/admin.js', array(), $js_creation, true );
 		}
 
 		/**
