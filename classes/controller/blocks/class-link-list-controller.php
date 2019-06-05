@@ -98,7 +98,7 @@ if ( ! class_exists( 'Link_List_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Accordion label', 'planet4-gpea-blocks' ),
+					'label' => __( 'Accordion label (used only if "Accordion" layout is selected)', 'planet4-gpea-blocks' ),
 					'attr'  => 'accordion_label',
 					'type'  => 'text',
 					'meta'  => [
