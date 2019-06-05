@@ -29,7 +29,7 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 		 *
 		 * @const string MAX_REPEATER
 		 */
-		const MAX_REPEATER = 20;
+		const MAX_REPEATER = 3;
 
 		/**
 		 * Shortcode UI setup for the tasks shortcode.
