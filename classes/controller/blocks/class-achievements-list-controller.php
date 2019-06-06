@@ -139,6 +139,11 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 				$attributes['bg_img'] = wp_get_attachment_url( $attributes['bg_img'] );
 			}
 
+			// get original name of achievemt tag!
+			$achievement_tag = get_term_by( 'slug', 'achievement', 'post_tag' );
+			if ( $achievement_tag ) {
+				$attributes['achievement_name'] = $achievement_tag->name;
+			}
 			// First query - get only post IDs.
 			$exclude = isset( $attributes['main_achievement_id'] ) ? array( $attributes['main_achievement_id'] ) : array();
 			$num_posts = $exclude ? 3 : 4;
@@ -146,7 +151,7 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 				'order'        => 'desc',
 				'orderby'      => 'date',
 				'post_type'    => array( 'post' ),
-				'numberposts'  => $num_posts,
+				'posts_per_page'  => $num_posts,
 				'fields'       => 'ids',
 				'tag'          => 'achievement',
 				'post__not_in' => $exclude,
@@ -166,6 +171,30 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 			$query = new \WP_Query( $options );
 			if ( $query->posts ) {
 				foreach ( $query->posts as $post ) {
+					if ( has_post_thumbnail( $post->ID ) ) {
+						$img_id = get_post_thumbnail_id( $post->ID );
+						$img_data = wp_get_attachment_image_src( $img_id, 'medium_large' );
+						$post->img_url = $img_data[0];
+					}
+					/* get main issue category */
+					$issues     = get_category_by_slug( 'issues' );
+					if ( $issues ) {
+						$issues     = $issues->term_id;
+						$categories = get_the_category( $post->ID );
+						$categories = array_filter(
+							$categories, function( $cat ) use ( $issues ) {
+								return $cat->category_parent === $issues;
+							}
+						);
+						if ( $categories ) {
+							$post->main_cat = $categories[0]->name;
+						}
+					}
+
+					/* get reading time */
+					$post->reading_time = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
+					$post->link = get_the_permalink( $post->ID );
+
 					if ( has_post_thumbnail( $post->ID ) ) {
 						$img_id = get_post_thumbnail_id( $post->ID );
 						$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
