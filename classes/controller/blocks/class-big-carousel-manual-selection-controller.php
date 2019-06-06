@@ -122,7 +122,7 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 						'post_status' => 'publish',
 						'post__in'    => explode( ',' , $attributes['carousel_item_ids'] ),
 						'orderby'     => 'post__in',
-						'numberposts' => 8,
+						'posts_per_page' => 8,
 					)
 				);
 

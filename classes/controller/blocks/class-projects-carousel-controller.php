@@ -179,7 +179,7 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 					'post_status' => 'publish',
 					'post__in'    => explode( ',', $attributes['carousel_item_ids'] ),
 					'orderby'     => 'post__in',
-					'numberposts' => 8,
+					'posts_per_page' => 8,
 				);
 			} else {
 				// Project block default text setting.
@@ -187,7 +187,7 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 					'order'       => 'desc',
 					'orderby'     => 'date',
 					'post_type'   => 'page',
-					'numberposts' => 10,
+					'posts_per_page' => 10,
 					'meta_key'    => '_wp_page_template',
 					'meta_value'  => 'page-templates/project.php',
 				);

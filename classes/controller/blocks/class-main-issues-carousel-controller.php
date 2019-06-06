@@ -94,7 +94,7 @@ if ( ! class_exists( 'Main_Issues_Carousel_Controller' ) ) {
 					'order'       => 'desc',
 					'orderby'     => 'date',
 					'post_type'   => 'page',
-					'numberposts' => self::MAIN_ISSUE_COUNT,
+					'posts_per_page' => self::MAIN_ISSUE_COUNT,
 					'meta_key'    => '_wp_page_template',
 					'meta_value'  => 'page-templates/main-issue.php',
 				)

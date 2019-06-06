@@ -140,7 +140,7 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 						'post_status' => 'publish',
 						'post__in' => explode( ',' , $attributes['tip_ids'] ),
 						'orderby' => 'post__in',
-						'numberposts' => 10,
+						'posts_per_page' => 10,
 					)
 				);
 
