@@ -72,32 +72,21 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
 				],
 				[
-					'label'    => __( 'Achievements (manual selection)', 'planet4-gpea-blocks' ),
-					'attr'     => 'achievements_item_ids',
+					'label'    => __( 'Prominent achievement', 'planet4-gpea-blocks' ),
+					'attr'     => 'main_achievement_id',
 					'type'     => 'post_select',
-					'multiple' => 'multiple',
 					'query'    => [
 						'post_type'   => array( 'post' ),
 						'post_status' => 'publish',
 						'orderby'     => 'post_title',
-						'order'           => 'ASC',
-						'tax_query'   => array(
-							array(
-								'taxonomy' => 'post_tag',
-								'field'    => 'slug',
-								'terms'    => 'achievement',
-							),
-						),
+						'order'       => 'ASC',
+						'tag'         => 'achievement',
 					],
 					'meta'     => [
 						'select2_options' => [
 							'allowClear'             => true,
-							'placeholder'            => __( 'Select achievements (max 4)', 'planet4-gpea-blocks' ),
-							'closeOnSelect'          => false,
-							'minimumInputLength'     => 0,
-							'multiple'               => true,
-							'maximumSelectionLength' => 8,
-							'width'                  => '80%',
+							'placeholder'            => __( 'Select prominent achievement', 'planet4-gpea-blocks' ),
+							'closeOnSelect'          => true,
 						],
 					],
 				],
@@ -150,34 +139,31 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 				$attributes['bg_img'] = wp_get_attachment_url( $attributes['bg_img'] );
 			}
 
-			if ( isset( $attributes['achievements_item_ids'] ) ) {
-
-				$options = array(
-					'post_type'   => array( 'post', 'page' ),
-					'post_status' => 'publish',
-					'post__in'    => explode( ',', $attributes['achievements_item_ids'] ),
-					'orderby'     => 'post__in',
-					'numberposts' => 8,
-				);
-			} else {
-				// Project block default text setting.
-				$options = array(
-					'order'       => 'desc',
-					'orderby'     => 'date',
-					'post_type'   => array( 'post', 'page' ),
-					'numberposts' => 4,
-					'tax_query' => array(
-						array(
-							'taxonomy' => 'post_tag',
-							'field' => 'slug',
-							'terms' => 'achievement',
-						),
-					),
-				);
+			// First query - get only post IDs.
+			$exclude = isset( $attributes['main_achievement_id'] ) ? array( $attributes['main_achievement_id'] ) : array();
+			$num_posts = $exclude ? 3 : 4;
+			$options = array(
+				'order'        => 'desc',
+				'orderby'      => 'date',
+				'post_type'    => array( 'post' ),
+				'numberposts'  => $num_posts,
+				'fields'       => 'ids',
+				'tag'          => 'achievement',
+				'post__not_in' => $exclude,
+			);
+			$query = new \WP_Query( $options );
+			$post_ids = $query->posts;
+			wp_reset_postdata();
+			if ( $exclude ) {
+				array_unshift( $post_ids, $exclude[0] );
 			}
 
+			// Second query - get all posts.
+			$options = array(
+				'post__in' => $post_ids,
+				'orderby' => 'post__in',
+			);
 			$query = new \WP_Query( $options );
-
 			if ( $query->posts ) {
 				foreach ( $query->posts as $post ) {
 					if ( has_post_thumbnail( $post->ID ) ) {
@@ -190,7 +176,6 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 			}
 
 			$attributes['posts'] = $formatted_posts;
-
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
 			wp_reset_postdata();
