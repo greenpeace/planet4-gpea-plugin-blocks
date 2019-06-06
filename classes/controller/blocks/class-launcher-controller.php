@@ -59,6 +59,7 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 				[
 					'label' => __( 'Title', 'planet4-gpea-blocks' ),
 					'attr'  => 'title',
+					'description'  => __( 'In case you have selected layout "card" this will appear over the card', 'planet4-gpea-blocks' ),
 					'type'  => 'text',
 					'meta'  => [
 						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
@@ -67,7 +68,7 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 				],
 				[
 					'label' => __( 'Subtitle', 'planet4-gpea-blocks' ),
-					'attr'  => 'subtitle',
+					'attr'  => 'subtitle',					
 					'type'  => 'text',
 					'meta'  => [
 						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
