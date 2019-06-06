@@ -116,7 +116,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					'tag__in'     => explode( ',', $attributes['tags'] ),
 					'post_status' => 'publish',
 					'orderby'     => 'date',
-					'numberposts' => 4,
+					'posts_per_page' => 4,
 				);
 				$query = new \WP_Query( $options );
 

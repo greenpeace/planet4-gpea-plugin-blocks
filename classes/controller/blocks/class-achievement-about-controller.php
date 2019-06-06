@@ -55,10 +55,10 @@ if ( ! class_exists( 'Achievement_About_Controller' ) ) {
 					'type'     => 'post_select',
 					'multiple' => 'multiple',
 					'query'    => [
-						'post_type'   => array( 'post', 'page' ),
+						'post_type'   => 'any',
 						'post_status' => 'publish',
-						'orderby'     => 'post_title',
-						'order'           => 'ASC',
+						'orderby'     => 'title',
+						'order'       => 'ASC',
 					],
 					'meta'     => [
 						'select2_options' => [
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Achievement_About_Controller' ) ) {
 					array(
 						'post_type'   => array( 'post', 'page' ),
 						'post_status' => 'publish',
-						'post__in' => explode( ',' , $attributes['update_ids'] ),
+						'post__in' => explode( ',', $attributes['update_ids'] ),
 						'orderby' => 'post__in',
 					)
 				);
@@ -117,7 +117,7 @@ if ( ! class_exists( 'Achievement_About_Controller' ) ) {
 							$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
 							$post->img_url = $img_data[0];
 						}
-						$post->post_date = date( 'Y-m-d' , strtotime( $post->post_date ) );
+						$post->post_date = date( 'Y-m-d', strtotime( $post->post_date ) );
 						$formatted_posts[] = $post;
 					}
 				}
