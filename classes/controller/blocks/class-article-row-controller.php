@@ -31,6 +31,20 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 		const DEFAULT_LAYOUT = 'show_tag';
 
 		/**
+		 * The maximum number of articles to display.
+		 *
+		 * @const string MAX_ARTICLES
+		 */
+		const MAX_ARTICLES = 4;
+
+		/**
+		 * The tag to display the user content submit form.
+		 *
+		 * @const string DISPLAY_FORM_FLAG_TAG
+		 */
+		const DISPLAY_FORM_FLAG_TAG = 'stories';
+
+		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
 		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
 		 */
@@ -67,17 +81,18 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 					],
 				],
 				[
-					'label'    => __( 'Article tag to display', 'planet4-gpea-blocks' ),
-					'attr'     => 'article_tag',
+					'label'    => __( 'Article tags to display', 'planet4-gpea-blocks' ),
+					'attr'     => 'tag_ids',
 					'type'     => 'term_select',
 					'taxonomy' => 'post_tag',
-					'multiple' => false,
+					'multiple' => true,
 					'meta'     => [
 						'select2_options' => [
 							'allowClear'         => true,
 							'placeholder'        => __( 'Select Tags', 'planet4-blocks-backend' ),
 							'closeOnSelect'      => true,
 							'minimumInputLength' => 0,
+							'maximumSelectionLength' => 3,
 						],
 					],
 				],
@@ -106,46 +121,64 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			$article_tag  = $attributes['article_tag'] ?? 0;
-			$tag_details = get_tag( $article_tag );
-			$tag_name = $tag_details->name ?? '';
-			$tag_slug = $tag_details->slug ?? '';
+			// Set defaults if no tags selected.
+			$posts = array();
+			$display_submit_form = false;
 
-			$query = new \WP_Query(
-				array(
-					'order'       => 'desc',
-					'orderby'     => 'date',
-					'post_type'   => 'any',
-					'numberposts' => 20,
-					'tax_query' => array(
-						array(
-							'taxonomy' => 'post_tag',
-							'field' => 'id',
-							'terms' => $article_tag,
-						),
+			if ( isset( $attributes['tag_ids'] ) ) {
+
+				$tag_ids = array_map( 'intval', explode( ',', $attributes['tag_ids'] ) );
+
+				$tags = get_terms(
+					'post_tag',
+					array(
+						'include' => $tag_ids,
+					)
+				);
+
+				$query = new \WP_Query(
+					array(
+						'tag__in'        => $tag_ids,
+						'order'          => 'desc',
+						'orderby'        => 'date',
+						'posts_per_page' => self::MAX_ARTICLES,
+					)
+				);
+
+				$posts = $query->posts;
+
+				if ( $posts ) {
+					foreach ( $posts as $post ) {
+						$post->post_date = date( 'Y - m - d' , strtotime( $post->post_date ) );
+						$post->tags = array_filter(
+							get_the_tags( $post->ID ), function( $tag ) use ( $tag_ids ) {
+								return in_array( $tag->term_id, $tag_ids, true );
+							}
+						);
+					}
+				}
+
+				wp_reset_postdata();
+
+				$display_submit_form = in_array(
+					self::DISPLAY_FORM_FLAG_TAG,
+					array_map(
+						function( $tag ) {
+							return $tag->slug;
+						}, $tags
 					),
-				)
-			);
+					true
+				);
 
-			$posts = $query->posts;
-
-			if ( $posts ) {
-				foreach ( $posts as $post ) {
-					$post->post_date = date( 'Y-m-d' , strtotime( $post->post_date ) );
+				// Pop last post if we're displaying submit form.
+				if ( $display_submit_form && count( $posts ) === 4 ) {
+					array_pop( $posts );
 				}
 			}
 
+			$attributes['display_submit_form'] = $display_submit_form;
 			$attributes['posts'] = $posts;
-			$attributes['tag_name'] = $tag_name;
-			if ( 'stories' === $tag_slug ) {
-				$attributes['ugc_stories'] = 1;
-			} else {
-				$attributes['ugc_stories'] = 0;
-			}
-
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
-
-			wp_reset_postdata();
 
 			return [
 				'fields' => $attributes,
