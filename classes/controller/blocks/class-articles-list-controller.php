@@ -150,7 +150,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 
 					$tag_names = array_map(
 						function( $tag ) {
-							return $tag->slug;
+							return $tag->name;
 						}, $tags
 					);
 
