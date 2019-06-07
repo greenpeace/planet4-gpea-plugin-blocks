@@ -141,18 +141,25 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				// Layout-specific queries.
 				if ( $attributes['layout'] === 'tag_filters' ) {
 
-					$tags = get_terms(
-						'post_tag',
-						array(
-							'include' => $tag_ids,
-						)
-					);
+					// $tags = get_terms(
+					// 	'post_tag',
+					// 	array(
+					// 		'include' => $tag_ids,
+					// 	)
+					// );
 
-					$tag_names = array_map(
-						function( $tag ) {
-							return $tag->name;
-						}, $tags
-					);
+					$tag_names = array();
+					foreach ($tag_ids as $tag_id) {
+						$tag = get_term($tag_id);						
+						if ($tag) $tag_names[] = $tag->name;
+						else $tag_names[] = '';
+					}
+
+					// $tag_names = array_map(
+					// 	function( $tag ) {
+					// 		return $tag->name;
+					// 	}, $tags
+					// );
 
 					$attributes['tags'] = array_combine( $tag_names, $tag_ids );
 
