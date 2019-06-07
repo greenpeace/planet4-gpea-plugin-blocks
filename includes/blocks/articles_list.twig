@@ -13,6 +13,25 @@
 	    {% if fields.title %}
 		<h2>{{ fields.title }}</h2>
 	    {% endif %}
+	    {% if ( fields.layout == 'tag_filters' and fields.tags ) %}
+                <!-- We use tags to filter -->
+                <select>
+		    {% for tag_name, tag_id in fields.tags %}
+                        <!-- Use any mechanism here to filter/search. -->
+                        <option value="{{ tag_id }}">{{ tag_name }}</option>
+		    {% endfor %}
+                </select>
+	    {% elseif ( fields.layout == 'dropdown_filters' and fields.year_oldest and fields.year_now ) %}
+                <!-- We use select/dropdown to filter -->
+                <select>
+		    {% for year in fields.year_oldest..fields.year_now %}
+                        <!-- Use any mechanism here to filter/search. -->
+                        <option value="{{ year }}">{{ year }}</option>
+		    {% endfor %}
+                </select>
+	    {% else %}
+	        <!-- set default or do nothing -->
+	    {% endif %}
 	    {% if fields.posts %}
 		{% for post in fields.posts %}
 	            {% if post.post_title %}
