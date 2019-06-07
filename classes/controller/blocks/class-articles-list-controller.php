@@ -173,6 +173,20 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					}
 					wp_reset_postdata();
 
+					$issues = get_category_by_slug( 'issues' );
+					if ( $issues ) {
+						$main_issues_array = array();
+						$main_issues = get_terms(
+							'category',
+							array(
+								'parent' => $issues->term_id,
+							)
+						);
+						foreach ( $main_issues as $main_issue ) {
+							$main_issues_array[ $main_issue->name ] = $main_issue->term_id;
+						}
+						$attributes['main_issues'] = $main_issues_array;
+					}
 				} else {
 					// Do nothing.
 				}
