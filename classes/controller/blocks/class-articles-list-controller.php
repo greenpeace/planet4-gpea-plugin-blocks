@@ -68,7 +68,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				],
 				[
 					'label'    => __( 'Select tags', 'planet4-gpea-blocks' ),
-					'attr'     => 'tags',
+					'attr'     => 'tag_ids',
 					'type'     => 'term_select',
 					'taxonomy' => 'post_tag',
 					'multiple' => true,
@@ -109,13 +109,15 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 
 			$formatted_posts = [];
 
-			if ( isset( $attributes['tags'] ) ) {
+			if ( isset( $attributes['tag_ids'] ) ) {
+
+				$tag_ids = array_map( 'intval', explode( ',', $attributes['tag_ids'] ) );
 
 				$options = array(
-					'post_type'   => array( 'post' ),
-					'tag__in'     => explode( ',', $attributes['tags'] ),
-					'post_status' => 'publish',
-					'orderby'     => 'date',
+					'post_type'      => array( 'post' ),
+					'tag__in'        => $tag_ids,
+					'post_status'    => 'publish',
+					'orderby'        => 'date',
 					'posts_per_page' => 4,
 				);
 				$query = new \WP_Query( $options );
@@ -133,10 +135,62 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 
 				wp_reset_postdata();
 
-			}
+				$attributes['posts'] = $formatted_posts;
+				$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
-			$attributes['posts'] = $formatted_posts;
-			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
+				// Layout-specific queries.
+				if ( $attributes['layout'] === 'tag_filters' ) {
+
+					$tags = get_terms(
+						'post_tag',
+						array(
+							'include' => $tag_ids,
+						)
+					);
+
+					$tag_names = array_map(
+						function( $tag ) {
+							return $tag->name;
+						}, $tags
+					);
+
+					$attributes['tags'] = array_combine( $tag_names, $tag_ids );
+
+				} elseif ( $attributes['layout'] === 'dropdown_filters' ) {
+
+					$options = array(
+						'post_type'      => array( 'post' ),
+						'tag__in'        => explode( ',', $attributes['tag_ids'] ),
+						'post_status'    => 'publish',
+						'orderby'        => 'date',
+						'posts_per_page' => 1,
+						'order'          => 'ASC',
+					);
+					$query = new \WP_Query( $options );
+					if ( $query->posts ) {
+						$attributes['year_oldest'] = date( 'Y' , strtotime( $query->posts[0]->post_date ) );
+						$attributes['year_now'] = date( 'Y' );
+					}
+					wp_reset_postdata();
+
+					$issues = get_category_by_slug( 'issues' );
+					if ( $issues ) {
+						$main_issues_array = array();
+						$main_issues = get_terms(
+							'category',
+							array(
+								'parent' => $issues->term_id,
+							)
+						);
+						foreach ( $main_issues as $main_issue ) {
+							$main_issues_array[ $main_issue->name ] = $main_issue->term_id;
+						}
+						$attributes['main_issues'] = $main_issues_array;
+					}
+				} else {
+					// Do nothing.
+				}
+			}
 
 			return [
 				'fields' => $attributes,
