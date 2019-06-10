@@ -1,18 +1,31 @@
 {% block issue_list %}
     {% if ( fields ) %}
 	<section class="section-choose-topics">
-	    <div class="ct-container">
-		<div class="content">
-		    <p class="title text large bold">{{ fields.title|e('wp_kses_post')|raw }}</p>
-		    <p class="subtitle text small semi-bold">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-		    <div class="tags">
-			{% for campaign in fields.campaigns %}
-			    <div data-engaging='{{ campaign.engaging_id }}' data-slug='{{ campaign.slug }}' class="topic-button tag">{{ campaign.name|raw }}</div>
-			{% endfor %}
-		    </div>
-		    <a id="topic-submit-button" class="button light">TODO 立即關注</a>
-		</div>
-	    </div>
+		<form id="p4en_form" name="p4en_form" method="post" novalidate>
+				
+			<input type="hidden" name="enblock_submit" value="">
+			<input type="hidden" name="en_page_id" value="{{ fields.gpea_default_en_subscription_page|raw }}">
+			<input type="hidden" name="thankyou_title" value="">
+			<input type="hidden" name="thankyou_subtitle" value="">
+			<input type="hidden" name="enform_goal" id="enform_goal" value="">
+			<div class="ct-container">
+			<div class="content">
+				<p class="title text large bold">{{ fields.title|e('wp_kses_post')|raw }}</p>
+				<p class="subtitle text small semi-bold">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+				<div class="tags">
+				{% for campaign in fields.campaigns %}
+					<div data-engaging='{{ campaign.engaging_id }}' data-slug='{{ campaign.slug }}' class="topic-button tag">{{ campaign.name|raw }}</div>
+				{% endfor %}
+				</div>
+				<a id="topic-submit-button" class="button light">TODO 立即關注</a>
+				
+				<div class="tag_cloud_form" style="display: none;">
+					{{ fields.form|shortcodes|raw }}
+				</div>
+
+			</div>
+			</div>
+		</form>
 	</section>
     {% endif %}
 {% endblock %}

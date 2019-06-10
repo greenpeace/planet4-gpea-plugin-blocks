@@ -35,7 +35,7 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 		 *
 		 * @const string ENGAGING_CAMPAIGN_ID_META_KEY
 		 */
-		const ENGAGING_CAMPAIGN_ID_META_KEY = 'engaging_campaign_ID';
+		const ENGAGING_CAMPAIGN_ID_META_KEY = 'engaging_campaign_ID';		
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -99,6 +99,16 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 			$attributes['campaigns'] = $campaigns;
 
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
+
+			/* engaging form needed info*/
+			$gpea_options = get_option( 'gpea_options' );
+			if ( isset( $gpea_options['gpea_tag_cloud_newsletter_form'] ) && isset( $gpea_options['gpea_default_en_subscription_page'] ) ) {
+				$attributes['form'] = '[p4en_form id="' . $gpea_options['gpea_tag_cloud_newsletter_form'] . '" en_form_style="" /]';
+				$attributes['gpea_default_en_subscription_page'] = $gpea_options['gpea_default_en_subscription_page'];
+			}
+			// else {
+			// 	return false;
+			// }
 
 			return [
 				'fields' => $attributes,
