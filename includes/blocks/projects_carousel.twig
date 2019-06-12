@@ -49,9 +49,9 @@
 								<h4>{{ post.post_title }}</h4>
 								<div class="meta-box">
 									<!-- TODO: collegare issue; contare numero updates -->
-									<div class="issue forests">海洋</div>
+									<div class="issue {{ post.main_issue_slug }}">{{ post.main_issue }}</div>
 									<!-- updates -->
-									<div>4次更新</div>
+									<div>{{ post.related_posts }} 次更新</div>
 								</div>
 							</div>
 						</a>

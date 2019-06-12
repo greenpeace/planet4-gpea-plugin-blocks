@@ -212,7 +212,37 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 						$post->link = get_permalink( $post->ID );
 						$post->img_url = $img_data[0];
 						$post->project_percentage = (int) $project_percent;
-						$post->stroke_dashoffset = $project_percent ? 697.433 * ((100 - $project_percent) / 100) : 0;
+						$post->stroke_dashoffset = $project_percent ? 697.433 * ( ( 100 - $project_percent ) / 100 ) : 0;
+						// get related main issues!
+
+						$planet4_options = get_option( 'planet4_options' );
+						$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+						if ( ! $main_issues_category_id ) {
+							$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+							if ( $main_issues_category ) $main_issues_category_id = $main_issues_category->term_id;
+						}
+
+						if ( $main_issues_category_id ) {
+							$categories = get_the_category( $post->ID );
+							if ( ! empty( $categories ) ) {
+								$categories = array_filter( $categories, function( $cat ) use ( $main_issues_category_id ) {
+									return $cat->category_parent === intval( $main_issues_category_id );
+								});
+								if ( ! empty( $categories ) ) {
+									$first_category = array_values( $categories )[0];
+									$post->main_issue = $first_category->name;
+									$post->main_issue_slug = $first_category->slug;
+								}
+							}
+						}
+						// count associated posts!
+						$count_args = array(
+							'post_type'   => 'post',							
+							'meta_key'    => 'p4_select_project_related',
+							'meta_value'  => $post->ID,
+						);
+						$count_query = new \WP_Query( $count_args );
+						$post->related_posts = $count_query->post_count;
 					}
 					$formatted_posts[] = $post;
 				}
