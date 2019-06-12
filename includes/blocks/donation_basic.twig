@@ -1,28 +1,37 @@
 {% block donate_section %}
-    {% if ( fields ) %}
+	{% if ( fields ) %}
 	<section class="section-donate {{ fields.upper_blur ? 'upper-fade' : '' }}">
 		<div class="bg-image-desktop" style="background-image: url({{ fields.bg_img }})"></div>
 		<div class="bg-image-mobile" style="background-image: url({{ fields.bg_img_mobile }})"></div>
-	    <div class="ct-container generic-content">
-		<div class="content">
-		    <h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-			<!-- TODO frontend implement paragraph -->
-        	<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
-		</div>
-		<div class="form">
-		<div class="tab-bar">
-			<div class="tab-item">{{ fields.label_donate_once|e('wp_kses_post')|raw }}</div>
-			<div class="tab-item active">{{ fields.label_donate_monthly|e('wp_kses_post')|raw }}</div>
-		</div>
-		<div class="form-body">
-			<div class="field">
-			<p class="label">{{ fields.currency_code|e('wp_kses_post')|raw }}</p>
-			<input type="text" aria-label="{{ fields.currency_code|e('wp_kses_post')|raw }}">
+		<div class="ct-container">
+			<div class="content">
+				<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+				<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 			</div>
-			<a href="{{ fields.button_landing_link }}" class="button">{{ fields.button_label|e('wp_kses_post')|raw }}</a>
+			<div class="donation-form">
+				<div class="tab-bar">
+					<div class="tab-item">{{ fields.label_donate_once|e('wp_kses_post')|raw }}</div>
+					<div class="tab-item active">{{ fields.label_donate_monthly|e('wp_kses_post')|raw }}</div>
+				</div>
+				<form action="{{ fields.button_landing_link }}" method="POST">
+					<!-- NOTE!!   This ↴ must be equal to the "active" default tab   -->
+					<input type="hidden" name="frequency" value="{{ fields.label_donate_monthly|e('wp_kses_post')|raw }}" />
+					<input type="hidden" name="currency" value="{{ fields.currency_code|e('wp_kses_post')|raw }}" />
+					<div class="form-group">
+						<span class="currency">{{ fields.currency_code|e('wp_kses_post')|raw }}</span>
+						<input
+							name="amount"
+							type="number"
+							aria-label="{{ fields.currency_code|e('wp_kses_post')|raw }}"
+							required
+							min="1"
+							step="1"
+						/>
+					</div>
+					<button type="submit" class="button primary fluid">{{ fields.button_label|e('wp_kses_post')|raw }}</button>
+				</form>
+			</div>
 		</div>
-		</div>
-	    </div>
 	</section>
-    {% endif %}
+	{% endif %}
 {% endblock %}
