@@ -139,6 +139,10 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 				$attributes['bg_img'] = wp_get_attachment_url( $attributes['bg_img'] );
 			}
 
+			if ( isset( $attributes['bg_img_mobile'] ) ) {
+				$attributes['bg_img_mobile'] = wp_get_attachment_url( $attributes['bg_img_mobile'] );
+			}
+
 			// get original name of achievemt tag!
 			$achievement_tag = get_term_by( 'slug', 'achievement', 'post_tag' );
 			if ( $achievement_tag ) {
