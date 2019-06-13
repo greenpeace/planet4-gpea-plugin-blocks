@@ -1,79 +1,74 @@
 {% block projects_carousel %}
-    {% if ( fields ) %}
-	{% set section_class = fields.layout == 'light' ? 'light' : '' %}
-	{% set container_class = fields.layout == 'light' ? '' : 'light' %}
+	{% if ( fields ) %}
+	{% set section_class = fields.layout == 'light' ? 'light' : 'dark' %}
+	{#% set container_class = fields.layout == 'light' ? 'dark' : 'light' %#}
 	<section class="section-projects {{ section_class }} {{ fields.show_vertical ? 'show-vertical' : '' }}">
-	    <div class="mobile-top-box">
-		<div class="ct-container generic-content">
-		    <h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-		    <p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
-		</div>
-	    </div>
-	    <div class="swiper-container section-projects-swiper {{ container_class }}">
-		<div class="swiper-wrapper">
-		    <div class="swiper-slide first">
+		<div class="ct-container">
+			<div class="mobile-top-box">
 				<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
 				<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
-		    </div>
-		    {% for post in fields.posts %}
-			<a href="" class="swiper-slide project-slide">
-			    <div class="thumbnail lazy" data-bg="url({{ post.img_url }})">
-					<div class="circle-progress-bar">
-						<span>{{ post.project_percentage }}%</span>
-						<svg width="232" height="232" viewBox="0 0 232 232">
-							<circle
-							cx="116"
-							cy="116"
-							r="112"
-							fill="none"
-							stroke="#ffffff"
-							stroke-opacity="0.3"
-							stroke-width="8"
-							/>
-							<!--    Assuming a percentage of 43%:                     -->
-							<!--    stroke-dasharray = 2 * π * r = 697.433             -->
-							<!--    stroke-dashoffset = stroke-dasharray * (1 - 0.43)    -->
-							<circle
-							cx="116"
-							cy="116"
-							r="112"
-							fill="none"
-							stroke="#ffffff"
-							stroke-width="8"
-							stroke-dasharray="697.433"
-							stroke-dashoffset="{{ post.stroke_dashoffset }}"
-							/>
-						</svg>
-					</div>
-			    </div>
-			    <div class="info-box">
-					<p class="name">{{ post.post_title }}</p>
-					<div>
-						<!-- TODO: collegare issue; contare numero updates -->
-						<div class="issue forests">海洋</div>
-						<div class="updates">4次更新</div>
-						{#% for tag in post.tags %}
-							<div class="tag">{{ tag.name }}</div>
-							<p class="status">TODO</p>
-						{% endfor %#}
-					</div>
-			    </div>
-			</a>
-		    {% endfor %}
-		</div>
-		<div class="swiper-pagination"></div>
-		<div class="swiper-button-next">
-		    <span class="icon-chevron-right"></span>
-		</div>
-		<div class="swiper-button-prev">
-		    <span class="icon-chevron-right"></span>
-		</div>
-	    </div>
-	    {% if fields.see_more_label and fields.see_more_link %}
-			<div class="ct-container generic-content">
-				<p class="see-more"><a href={{ fields.see_more_link|e('wp_kses_post')|raw }}>{{ fields.see_more_label|e('wp_kses_post')|raw }}</a></p>
 			</div>
-	    {% endif %}
+			<div class="{{ fields.show_vertical ? '' : 'swiper-container projects-swiper' }} {#{ container_class }#}">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide first">
+						<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+						<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
+					</div>
+					{% for post in fields.posts %}
+						<a href="{{ post.link }}" class="swiper-slide project-slide">
+							<div class="thumbnail lazy" data-bg="url({{ post.img_url }})">
+								<div class="circle-progress-bar">
+									<!-- {{ post.project_percentage }}% -->
+									<svg width="232" height="232" viewBox="0 0 232 232">
+										<circle
+										cx="116"
+										cy="116"
+										r="112"
+										fill="none"
+										stroke="#ffffff"
+										stroke-opacity="0.3"
+										stroke-width="8"
+										/>
+										<!--    Assuming a percentage of 43%:                     -->
+										<!--    stroke-dasharray = 2 * π * r = 697.433             -->
+										<!--    stroke-dashoffset = stroke-dasharray * (1 - 0.43)    -->
+										<circle
+										cx="116"
+										cy="116"
+										r="112"
+										fill="none"
+										stroke="#ffffff"
+										stroke-width="8"
+										stroke-dasharray="697.433"
+										stroke-dashoffset="{{ post.stroke_dashoffset }}"
+										/>
+									</svg>
+								</div>
+							</div>
+							<div class="description">
+								<h4>{{ post.post_title }}</h4>
+								<div class="meta-box">
+									<!-- TODO: collegare issue; contare numero updates -->
+									<div class="issue {{ post.main_issue_slug }}">{{ post.main_issue|raw }}</div>
+									<!-- updates -->
+									<div>{{ post.related_posts }} 次更新</div>
+								</div>
+							</div>
+						</a>
+					{% endfor %}
+				</div>
+				<div class="swiper-pagination"></div>
+				<div class="swiper-button-next">
+						<span class="icon-chevron-right"></span>
+				</div>
+				<div class="swiper-button-prev">
+						<span class="icon-chevron-right"></span>
+				</div>
+			</div>
+			{% if fields.see_more_label and fields.see_more_link %}
+				<p class="see-more"><a href={{ fields.see_more_link|e('wp_kses_post')|raw }}>{{ fields.see_more_label|e('wp_kses_post')|raw }}</a></p>
+			{% endif %}
+		</div>
 	</section>
-    {% endif %}
+	{% endif %}
 {% endblock %}

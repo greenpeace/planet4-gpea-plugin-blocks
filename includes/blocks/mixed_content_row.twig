@@ -1,92 +1,96 @@
 {% block mixed_content_row %}
 
-    <!-- TODO frontend - here are the layout variants. Insert HTML accordingly, or set classes as below: -->
-    {% if ( static_fields.layout == 'green_grey' ) %}
-        <!-- Green title, grey text -->
-        {% set classname = 'green-grey' %}
-    {% elseif ( static_fields.layout == 'green_white' ) %}
-        <!-- Green title, white text -->
-        {% set classname = 'green-white' %}
-    {% elseif ( static_fields.layout == 'grey_grey' ) %}
-        <!-- Grey title, grey text -->
-        {% set classname = 'default' %}
-    {% else %}
-        <!-- Does nothing (or insert default here) -->
+	<!-- TODO frontend - here are the layout variants. Insert HTML accordingly, or set classes as below: -->
+	{% if ( static_fields.layout == 'green_grey' ) %}
+		<!-- Green title, grey text -->
+		{% set classname = 'green-titles' %}
+	{% elseif ( static_fields.layout == 'green_white' ) %}
+		<!-- Green title, white text -->
+		{% set classname = 'dark' %}
+	{% elseif ( static_fields.layout == 'grey_grey' ) %}
+		<!-- Grey title, grey text -->
 		{% set classname = 'default' %}
-    {% endif %}
-
-    <!-- TODO frontend - this will print the background image URL, if present -->
-    {% if ( static_fields.image ) %}
-		{% set container_classname = 'section-values lazy' %}
+	{% else %}
+		<!-- Does nothing (or insert default here) -->
+		{% set classname = 'default' %}
 	{% endif %}
 
-    <section class="section-mixed-content-row layout-{{ classname }} {{ container_classname }}"  data-bg="url({{ static_fields.image }})"> <!-- e.g. layout-green-grey -->
+	<!-- TODO frontend - this will print the background image URL, if present -->
+	{% if ( static_fields.image ) %}
+		{% set container_classname = 'has-bg-image' %}
+	{% endif %}
 
-	    {% if ( static_fields ) %}
-		<div class="ct-container generic-content">
-		    <h2>{{ static_fields.title }}</h2>
-		    <p>{{ static_fields.subtitle }}</p>
+	<section class="section-mixed-content-row layout-{{ classname }} {{ container_classname }} lazy"  data-bg="url({{ static_fields.image }})"> <!-- e.g. layout-green-grey -->
+		<div class="ct-container">
+
+			{% if ( static_fields.title or static_fields.subtitle ) %}
+				<div class="content">
+					{% if ( static_fields.title ) %}
+						<h2>{{ static_fields.title }}</h2>
+					{% endif %}
+					{% if ( static_fields.subtitle ) %}
+						<p>{{ static_fields.subtitle }}</p>
+					{% endif %}
+				</div>
+			{% endif %}
+
+			{% if ( field_groups|length > 0 ) %}
+			<div class="swiper-container mini-swiper">
+				<div class="swiper-wrapper">
+				{% for group in field_groups %}
+					{% if group.__group_type__ == 'post' and group.post %}
+						<div class="swiper-slide card-mini">
+							<div
+								class="thumbnail lazy"
+								data-bg="url({{ group.post.img_url }})"
+							></div>
+							<div class="meta-box">
+								<div>
+									<!-- TODO: print date -->
+									<span>2018-11-15</span>
+								</div>
+								<div>
+									<!-- TODO: print issue -->
+									<span class="issue oceans">新聞</span>
+								</div>
+							</div>
+							<p class="caption">{{ group.post.post_title }}</p>
+						</div>
+					{% elseif group.__group_type__ == 'textonly' %}
+						<div class="swiper-slide card-mini">
+							<p>{{ group.textblock }}</p>
+						</div>
+					{% elseif group.__group_type__ == 'titleandtext' %}
+						<div class="swiper-slide card-mini">
+							<h4>{{ group.title }}</h4>
+							<p>{{ group.textblock }}</p>
+						</div>
+					{% elseif group.__group_type__ == 'twolinetitleandtext' %}
+						<div class="swiper-slide card-mini">
+							<h4 class="data"><i>{{ group.titlea }}</i> {{ group.titleb }}</h4>
+							<p>{{ group.textblock }}</p>
+						</div>
+					{% elseif group.__group_type__ == 'tip' %}
+						<div class="swiper-slide card-mini has-tip">
+							<div class="mini-tip" style="transform: rotate({{ random(-4, 4) }}deg)">
+								<div class="tip-icon"><img src="{{ group.post.img_url }}" /></div>
+								<p>{{ group.post.post_title|e('wp_kses_post')|raw }}</p>
+								<!-- TODO frontend style tip frequency -->
+								<!-- [manu]: siamo sicuri che c'è? per ora lo commento
+								<span class="tip-frequency">{{ group.post.frequency }}</span>
+									-->
+							</div>
+						</div>
+					{% else %}
+						<!-- do nothing -->
+					{% endif %}
+				{% endfor %}
+				</div>
+			</div>
+			{% endif %}
+			{% if ( static_fields.paragraph ) %}
+				<p>{{ static_fields.paragraph }}</p>
+			{% endif %}
 		</div>
-	    {% endif %}
-	    {% if ( field_groups ) %}
-		<div class="swiper-container mini-swiper">
-		    <div class="swiper-wrapper">
-			{% for group in field_groups %}
-			    {% if group.__group_type__ == 'post' and group.post %}
-				<div class="swiper-slide">
-				    <div
-					class="thumbnail lazy"
-					       data-bg="url({{ group.post.img_url }})"
-				    ></div>
-					<div class="meta">
-						<span class="date">2018-12-07</span>
-						<!-- TODO: get right issue -->
-						<span class="issue oceans">海洋</span>
-						<!-- TODO: -->
-					</div>
-					{#
-				    <div class="tags">
-					{% for tag in group.post.tags %}
-					    <span>{{ tag.name }}</span>
-					{% endfor %}
-				    </div>
-					#}
-				    <p class="caption">{{ group.post.post_title }}</p>
-				</div>
-			    {% elseif group.__group_type__ == 'textonly' %}
-				<div class="swiper-slide">
-				    <p>{{ group.textblock }}</p>
-				</div>
-			    {% elseif group.__group_type__ == 'titleandtext' %}
-				<div class="swiper-slide">
-				    <h4>{{ group.title }}</h4>
-				    <p>{{ group.textblock }}</p>
-				</div>
-			    {% elseif group.__group_type__ == 'twolinetitleandtext' %}
-				<div class="swiper-slide">
-				    <h4 class="data"><i>{{ group.titlea }}</i>{{ group.titleb }}</h4>
-				    <p>{{ group.textblock }}</p>
-				</div>
-			    {% elseif group.__group_type__ == 'tip' %}
-				<div class="swiper-slide slide-tip">
-				    <div class="tip" style="transform: rotate({{ random(-5, 5) }}deg)">
-					<div class="tip-icon"><img src="{{ group.post.img_url }}" /></div>
-					<p>{{ group.post.post_title|e('wp_kses_post')|raw }}</p>
-                                        <!-- TODO frontend style tip frequency -->
-                                        <span class="tip-frequency">{{ group.post.frequency }}</span>
-				    </div>
-				</div>
-			    {% else %}
-				<!-- do nothing -->
-			    {% endif %}
-			{% endfor %}
-		    </div>
-		</div>
-	    {% endif %}
-	    {% if ( static_fields.paragraph ) %}
-		<div class="ct-container generic-content">
-		    <p class="faint">{{ static_fields.paragraph }}</p>
-		</div>
-	    {% endif %}
-    </section>
+	</section>
 {% endblock %}

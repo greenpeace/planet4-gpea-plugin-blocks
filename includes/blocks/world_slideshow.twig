@@ -1,46 +1,45 @@
 {% block world_slideshow %}
-    {% if ( fields ) %}
+	{% if ( fields ) %}
 	<section class="section-history">
-	    <div class="generic-content ct-container">
-		<h2>{{ fields.title }}</h2>
-	    </div>
-	    <div id="history-globe"></div>
-	    <div class="swiper-container history-year-swiper">
-		<div class="swiper-wrapper">
-		    <div class="swiper-slide history-year">1971</div>
-		    <div class="swiper-slide history-year">1974</div>
-		    <div class="swiper-slide history-year">1999</div>
-		</div>
-	    </div>
-	    <div class="swiper-container maxi-swiperx">
-		<div class="swiper-wrapper">
-		    {% for i in 1..25 %}
-			{% if fields['title_milestone_'~i] %}
-                            <!-- TODO frontend: date -->
-                            {{ fields['date_milestone_'~i] }}
-                            <!-- TODO frontend: latitude -->
-                            {{ fields['lat_milestone_'~i] }}
-                            <!-- TODO frontend: longitude -->
-                            {{ fields['lon_milestone_'~i] }}
-			    <div class="swiper-slide card-explainer">
-				<div class="description">
-				    <h4>{{ fields['title_milestone_'~i] }}</h4>
-				    <p class="subtitle">{{ fields['subtitle_milestone_'~i] }}</p>
-				    <p>{{ fields['paragraph_milestone_'~i] }}</p>
+		<div class="ct-container">
+			<h2>{{ fields.title }}</h2>
+			<div id="history-globe"></div>
+			<div class="swiper-container label-swiper">
+				<div class="swiper-wrapper">
+					{% for i in 1..25 %}
+					{% if fields['title_milestone_'~i] %}
+						<div class="swiper-slide label-slide">{{ fields['date_milestone_'~i] }}</div>
+					{% endif %}
+					{% endfor %}
 				</div>
-				<div class="thumbnail" style="background-image: url({{ fields['img_milestone_'~i] }})"></div>
-			    </div>
-			{% endif %}
-		    {% endfor %}
+			</div>
+			<div class="swiper-container maxi-swiper maxi-swiper-centered">
+				<div class="swiper-wrapper">
+					{% for i in 1..25 %}
+					{% if fields['title_milestone_'~i] %}
+						<!-- TODO frontend: latitude
+						{{ fields['lat_milestone_'~i] }} -->
+						<!-- TODO frontend: longitude
+						{{ fields['lon_milestone_'~i] }} -->
+						<div class="swiper-slide card-explainer">
+							<div class="description">
+								<h4>{{ fields['title_milestone_'~i] }}</h4>
+								<p class="subtitle">{{ fields['subtitle_milestone_'~i] }}</p>
+								<p>{{ fields['paragraph_milestone_'~i] }}</p>
+							</div>
+							<div class="thumbnail lazy" data-bg="url({{ fields['img_milestone_'~i] }})"></div>
+						</div>
+					{% endif %}
+					{% endfor %}
+				</div>
+				<div class="swiper-button-next">
+					<span class="icon-chevron-right"></span>
+				</div>
+				<div class="swiper-button-prev">
+					<span class="icon-chevron-right"></span>
+				</div>
+			</div>
 		</div>
-		<div class="swiper-pagination"></div>
-		<div class="swiper-button-next">
-		    <span class="icon-chevron-right"></span>
-		</div>
-		<div class="swiper-button-prev">
-		    <span class="icon-chevron-right"></span>
-		</div>
-	    </div>
 	</section>
-    {% endif %}
+	{% endif %}
 {% endblock %}

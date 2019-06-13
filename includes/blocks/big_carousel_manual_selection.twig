@@ -1,82 +1,84 @@
 {% block big_carousel_manual_selection %}
-    {% if ( fields ) %}
+	{% if ( fields ) %}
 	<section class="section-featured">
-	    <div class="ct-container generic-content">
+		<div class="ct-container">
 			<div class="mobile-top-box">
 				<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-				<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+				<p class="subtitle">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
 			</div>
-	    </div>
-	    <div class="swiper-container maxi-swiper">
-		<div class="swiper-wrapper">
-			<div class="swiper-slide first">
-				<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-				<h3>{{ fields.subtitle|e('wp_kses_post')|raw }}</h3>
-				<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
-			</div>
-		    {% if fields.posts %}
-			{% for post in fields.posts %}
-			    {% if post.is_campaign %}
-				<div class="swiper-slide card-petition">
-					<div
-					class="thumbnail lazy"
-					data-bg="url({{ post.img_url }})"
-					></div>
-					<div class="box">
-					<div class="progress-bar">
-						<!-- TODO -->
-						<div class="percent" style="width: 90%"></div>
+			<div class="swiper-container maxi-swiper">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide first">
+						<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+						<p class="subtitle">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+						<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 					</div>
-					<!-- TODO -->
-					<p class="stats">已有2,347 名簽署者</p>
-					<div class="content">
-						<p>{{ post.post_title }}</p>
-						<!-- TODO: link to petition page -->
-						<a href="#" class="button small light">我要支持</a>
-					</div>
-					</div>
+					{% if fields.posts %}
+						{% for post in fields.posts %}
+							{% if post.is_campaign %}
+								<div class="swiper-slide card-petition">
+									<div
+									class="thumbnail"
+									style="background-image: url({{ post.img_url }})"
+									></div>
+									<div class="box">
+										<div class="progress-bar">
+										<!-- TODO -->
+										<div class="percent" style="width: 90%"></div>
+										</div>
+										<!-- TODO -->
+										<div class="stats">已有2,347 名簽署者</div>
+										<div class="content">
+											<p>{{ post.post_title }}</p>
+											<!-- TODO: link to petition page -->
+											<a href="{{ post.link }}" class="button">我要支持</a>
+										</div>
+									</div>
+								</div>
+							{% else %}
+								<!-- TODO: link to post -->
+								<a href="{{ post.link }}" class="swiper-slide card-update">
+									<div
+									class="thumbnail"
+									style="background-image: url({{ post.img_url }})"
+									></div>
+									<div class="box">
+										<div class="meta-box">
+											<div>
+												<!-- TODO: get right issue -->
+												<span class="issue {{ post.main_issue_slug }}">{{ post.main_issue|raw }}</span>
+												<!-- TODO: [post type] -->
+												<span>{{ post.news_type }}</span>
+											</div>
+											<div>
+												<span>
+													<!-- TODO: -->
+													{% if post.reading_time %}
+														<span class="icon-clock"></span> {{ post.reading_time }} 閱讀
+													{% endif %}
+												</span>
+												<!-- TODO: -->
+												<span>{{ post.date }}</span>
+											</div>
+										</div>
+										<p>
+											{{ post.post_title }}
+										</p>
+									</div>
+								</a>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
 				</div>
-			    {% else %}
-				<!-- TODO: link to post -->
-				<a href="#" class="swiper-slide card-update">
-					<div
-					class="thumbnail lazy"
-					data-bg="url({{ post.img_url }})"
-					></div>
-					<div class="info">
-					<div class="info-box">
-						<div class="meta">
-							<!-- TODO: get right issue -->
-							<span class="issue oceans">海洋</span>
-							<!-- TODO: -->
-							<span class="type">新闻</span>
-						</div>
-						<div class="time">
-							<span class="reading-time">
-								<!-- TODO: -->
-								<span class="icon-clock"></span> 4 min 閱讀
-							</span>
-							<!-- TODO: -->
-							<span class="date">2018-12-07</span>
-						</div>
-					</div>
-					<p>
-						{{ post.post_title }}
-					</p>
-					</div>
-				</a>
-			    {% endif %}
-			{% endfor %}
-		    {% endif %}
+				<div class="swiper-pagination"></div>
+				<div class="swiper-button-next">
+						<span class="icon-chevron-right"></span>
+				</div>
+				<div class="swiper-button-prev">
+						<span class="icon-chevron-right"></span>
+				</div>
+			</div>
 		</div>
-		<div class="swiper-pagination"></div>
-		<div class="swiper-button-next">
-		    <span class="icon-chevron-right"></span>
-		</div>
-		<div class="swiper-button-prev">
-		    <span class="icon-chevron-right"></span>
-		</div>
-	    </div>
 	</section>
-    {% endif %}
+	{% endif %}
 {% endblock %}

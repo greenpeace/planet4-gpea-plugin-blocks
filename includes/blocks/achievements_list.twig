@@ -1,67 +1,79 @@
 {% block achievement_section %}
-    {% if ( fields ) %}
+	{% if ( fields ) %}
 	<section class="section-updates">
-	    <div class="ct-container">
-		<div class="content">
-		    <div class="first">
-			<p class="title text very-big light">{{ fields.title|e('wp_kses_post')|raw }}</p>
-			<img class="lady lazy" data-src="{{ fields.bg_img }}" alt="">
-		    </div>
-		    {% if fields.posts %}
-			{% set post = fields.posts[0] %}
-			<a href="{{ post.link }}" class="second">
-			    <div class="left">
-				<div class="top-box">				    
-					<div class="tag">{{ post.main_cat }}</div>
-					<p class="type">{{ fields.achievement_name }}</p>				    
-				</div>
-				<div class="thumbnail lazy" data-bg="url({{ post.img_url }})"></div>
-				<div class="info-box">
-					<div class="number">{{ post.post_date|date }}</div>
-					{% if post.reading_time %}
-					<div class="time">
-						<span class="icon-clock"></span>
-						<p>{{ post.reading_time|e('wp_kses_post')|raw }}</p>
-					</div>
-					{% endif %}				    
-				</div>
-				<div class="name text large bold">{{ post.post_title|e('wp_kses_post')|raw }}</div>
-				<p class="ps text bold">{{ post.post_excerpt|e('wp_kses_post')|raw }}</p>
-			    </div>
-			    <div class="right">
-				<div class="thumbnail lazy" data-bg="url({{ post.img_url }})"></div>
-			    </div>
-			</a>
-			<div class="posts">
-			    {% for post in fields.posts|slice(1) %}
-				<a class="post" href="{{ post.link }}">
-				    <div class="info-box">
-					<div class="top">					    
-						<div class="tag">{{ post.main_cat }}</div>
-						<p class="type">{{ fields.achievement_name }}</p>					    
-					</div>
-					<div class="name">{{ post.post_title }}</div>
-					<div class="bottom">					    
-					{% if post.reading_time %}
-						<div class="time">
-							<span class="icon-clock"></span>
-							<p>{{ post.reading_time|e('wp_kses_post')|raw }}</p>
-						</div>
-					{% endif %}
-					    <div class="number">{{ post.post_date|date }}</div>
-					</div>
-				    </div>
-				    <div class="thumbnail lazy" data-bg="url({{ post.img_url }})"></div>
-				</a>
-			    {% endfor %}
+		<div class="ct-container">
+			<div class="first">
+				<!-- TODO: link to achievements page? -->
+				<h2 class="mobile-only"><a href="#">{{ fields.title|e('wp_kses_post')|raw }} <span class="icon-chevron-right"></span></a></h2>
+				<h2 class="desktop-only">{{ fields.title|e('wp_kses_post')|raw }}</h2>
+				<p class="caption">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+				<img src="{{ fields.bg_img  }}" alt="">
 			</div>
-		    {% endif %}
+			{% if fields.posts %}
+				{% set post = fields.posts[0] %}
+				<a href="{{ post.link }}" class="card-update force-mobile">
+					<div
+						class="thumbnail lazy"
+						data-bg="url({{ post.img_url }})"
+					></div>
+					<div class="box">
+						<div class="meta-box">
+							<div>
+								<!-- TODO: print real issue -->
+								<span class="issue oceans">海洋</span>
+								<!-- TODO: print post type -->
+								<span>新聞</span>
+							</div>
+							<div>
+								{% if post.reading_time %}
+									<span> <span class="icon-clock"></span> {{ post.reading_time|e('wp_kses_post')|raw }} </span>
+								{% endif %}
+								<span>{{ post.post_date|date }}</span>
+							</div>
+						</div>
+						<p>
+							{{ post.post_title|e('wp_kses_post')|raw }}
+						</p>
+					</div>
+				</a>
+
+				<div class="posts">
+					{% for post in fields.posts %}
+						<a href="{{ post.link }}" class="card-update compact">
+							<div
+								class="thumbnail lazy"
+								data-bg="url({{ post.img_url }})"
+							></div>
+							<div class="box">
+								<div class="meta-box">
+									<div>
+										<!-- TODO: print real issue -->
+										<span class="issue oceans">海洋</span>
+										<!-- TODO: print post type -->
+										<span>新聞</span>
+									</div>
+								</div>
+								<p>
+									{{ post.post_title|e('wp_kses_post')|raw }}
+								</p>
+								<div class="meta-box">
+									<div>
+										{% if post.reading_time %}
+											<span> <span class="icon-clock"></span> {{ post.reading_time|e('wp_kses_post')|raw }} </span>
+										{% endif %}
+										<span>{{ post.post_date|date }}</span>
+									</div>
+								</div>
+							</div>
+						</a>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="mobile-bottom-box">
+				<img src="{{ fields.bg_img_mobile }}" alt="">
+				<p class="caption">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+			</div>
 		</div>
-		<div class="mobile-bottom-box">
-		    <img class="lady" src="{{ fields.img_url }}" alt="">
-		    <p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-		</div>
-	    </div>
 	</section>
-    {% endif %}
+	{% endif %}
 {% endblock %}

@@ -1,55 +1,56 @@
 {% block testimonials %}
-    {% if ( fields ) %}
+	{% if ( fields ) %}
 	<!-- TODO frontend - here are the layout variants. Insert HTML accordingly, or set classes as below: -->
 	{% if ( fields.layout == 'carousel' ) %}
-	    {% set classname = 'carousel' %}
+		{% set classname = 'carousel' %}
 	{% elseif ( fields.layout == 'list' ) %}
-	    {% set classname = 'list' %}
+		{% set classname = 'list' %}
 	{% else %}
-	    <!-- Does nothing (or insert default here) -->
+		<!-- Does nothing (or insert default here) -->
 	{% endif %}
-
-	<!-- TODO frontend - title -->
-	{% if fields.title %}
-	    <h2>{{ fields.title }}</h2>
-	{% endif %}
-
-
-	<!-- TODO frontend - links -->
-	{% if fields.link_label_1 and fields.link_url_1 %}
-	    <a href="{{ fields.link_url_1 }}">{{ fields.link_label_1 }}</a>
-	{% endif %}
-	{% if fields.link_label_2 and fields.link_url_2 %}
-	    <a href="{{ fields.link_url_2 }}">{{ fields.link_label_2 }}</a>
-	{% endif %}
-
 
 	<section class="section-testimonials layout-{{ classname }}"> <!-- e.g. layout-carousel -->
-	    <div class="swiper-container maxi-swiper">
-		<div class="swiper-wrapper">
-		    {% if fields.posts %}
-			{% for post in fields.posts %}
-			    <div class="swiper-slide card-testimonial">
-				<p>{{ post.post_content }}</p>
-				<div class="profile">
-				    {% if post.img_url %}
-					<img src="{{ post.img_url }}" alt="" />
-				    {% endif %}
-				    <div class="name">{{ post.post_title|e('wp_kses_post')|raw }}</div>
-				    <div class="position">{{ post.team_role|e('wp_kses_post')|raw }}</div>
+		<div class="ct-container">
+			{% if fields.title %}
+				<h2>{{ fields.title }}</h2>
+			{% endif %}
+			<div class="swiper-container maxi-swiper maxi-swiper-centered">
+				<div class="swiper-wrapper">
+					{% if fields.posts %}
+					{% for post in fields.posts %}
+						<div class="swiper-slide card-testimonial">
+							<div class="profile">
+								{% if post.img_url %}
+									<img src="{{ post.img_url }}" alt="" />
+								{% endif %}
+								<div class="name">{{ post.post_title|e('wp_kses_post')|raw }}</div>
+								<div class="position">{{ post.team_role|e('wp_kses_post')|raw }}</div>
+							</div>
+							<p>{{ post.post_content }}</p>
+						</div>
+					{% endfor %}
+					{% endif %}
 				</div>
-			    </div>
-			{% endfor %}
-		    {% endif %}
+				<div class="swiper-pagination"></div>
+				<div class="swiper-button-next">
+					<span class="icon-chevron-right"></span>
+				</div>
+				<div class="swiper-button-prev">
+					<span class="icon-chevron-right"></span>
+				</div>
+			</div>
+			<p class="see-more">
+				{% if fields.link_label_1 and fields.link_url_1 %}
+					<a href="{{ fields.link_url_1 }}">{{ fields.link_label_1 }}</a>
+				{% endif %}
+				{% if fields.link_label_1 and fields.link_url_1 and fields.link_label_2 and fields.link_url_2 %}
+					<br />
+				{% endif %}
+				{% if fields.link_label_2 and fields.link_url_2 %}
+					<a href="{{ fields.link_url_2 }}">{{ fields.link_label_2 }}</a>
+				{% endif %}
+			</p>
 		</div>
-		<div class="swiper-pagination"></div>
-		<div class="swiper-button-next">
-		    <span class="icon-chevron-right"></span>
-		</div>
-		<div class="swiper-button-prev">
-		    <span class="icon-chevron-right"></span>
-		</div>
-	    </div>
 	</section>
-    {% endif %}
+	{% endif %}
 {% endblock %}
