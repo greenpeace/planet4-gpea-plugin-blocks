@@ -1,39 +1,49 @@
 {% block text_and_image %}
-    {% if ( fields ) %}
-        <!-- TODO impostare frontend per link -->
-		{% if ( fields.link_label and fields.link_url ) %}
-			<a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
-		{% endif %}
+	{% if ( fields ) %}
 		{% if ( fields.layout == 'plain_light') %}
 			<section class="section-text-images">
-				<div class="ct-container generic-content">
+				<div class="ct-container">
 					{% if ( fields.title ) %}
 						<h2>{{ fields.title }}</h2>
 					{% endif %}
 					{% if ( fields.paragraph ) %}
 						<p>{{ fields.paragraph }}</p>
 					{% endif %}
+					{% if ( fields.link_label and fields.link_url ) %}
+						<p class="see-more">
+							<a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
+						</p>
+					{% endif %}
 				</div>
 			</section>
 		{% endif %}
 		{% if ( fields.layout == 'light' or fields.layout == 'dark' ) %}
 			{% set box_color = (fields.layout == 'dark' or fields.images) ? 'dark' : '' %}
-			{% set is_contained = fields.images ? '' : 'ct_container' %}
 			<section class="section-text-images">
 				<div class="boxes">
 					<div class="box {{ box_color }}">
 						{% if not ( fields.images ) %}
-						<div class="ct-container">
-							{% if ( fields.title ) %}
-								<h2>{{ fields.title }}</h2>
-							{% endif %}
-							<p>{{ fields.paragraph }}</p>
-						</div>
+							<div class="ct-container">
+								{% if ( fields.title ) %}
+									<h2>{{ fields.title }}</h2>
+								{% endif %}
+								<p>{{ fields.paragraph }}</p>
+								{% if ( fields.link_label and fields.link_url ) %}
+									<p class="see-more">
+										<a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
+									</p>
+								{% endif %}
+							</div>
 						{% else %}
 							{% if ( fields.title ) %}
 								<h2>{{ fields.title }}</h2>
 							{% endif %}
 							<p>{{ fields.paragraph }}</p>
+							{% if ( fields.link_label and fields.link_url ) %}
+								<p class="see-more">
+									<a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
+								</p>
+							{% endif %}
 						{% endif %}
 					</div>
 					{% if ( fields.images ) %}
@@ -54,5 +64,5 @@
 				</div>
 			</section>
 		{% endif %}
-    {% endif %}
+	{% endif %}
 {% endblock %}
