@@ -138,6 +138,36 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 							$post->is_campaign = 1;
 						}
 
+						$post->link = get_permalink( $post->ID );
+
+						// get related main issues!
+						$planet4_options = get_option( 'planet4_options' );
+						$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+						if ( ! $main_issues_category_id ) {
+							$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+							if ( $main_issues_category ) $main_issues_category_id = $main_issues_category->term_id;
+						}
+
+						if ( $main_issues_category_id ) {
+							$categories = get_the_category( $post->ID );
+							if ( ! empty( $categories ) ) {
+								$categories = array_filter( $categories, function( $cat ) use ( $main_issues_category_id ) {
+									return $cat->category_parent === intval( $main_issues_category_id );
+								});
+								if ( ! empty( $categories ) ) {
+									$first_category = array_values( $categories )[0];
+									$post->main_issue = $first_category->name;
+									$post->main_issue_slug = $first_category->slug;
+								}
+							}
+						}
+
+						$post->reading_time = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
+						$news_type = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
+						if ( $news_type ) {
+							$post->news_type = __( $news_type, 'planet4-gpea-blocks' );
+						}
+
 						$formatted_posts[] = $post;
 					}
 				}

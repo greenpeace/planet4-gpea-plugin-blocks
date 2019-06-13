@@ -31,13 +31,13 @@
 										<div class="content">
 											<p>{{ post.post_title }}</p>
 											<!-- TODO: link to petition page -->
-											<a href="#" class="button">我要支持</a>
+											<a href="{{ post.link }}" class="button">我要支持</a>
 										</div>
 									</div>
 								</div>
 							{% else %}
 								<!-- TODO: link to post -->
-								<a href="#" class="swiper-slide card-update">
+								<a href="{{ post.link }}" class="swiper-slide card-update">
 									<div
 									class="thumbnail"
 									style="background-image: url({{ post.img_url }})"
@@ -46,17 +46,19 @@
 										<div class="meta-box">
 											<div>
 												<!-- TODO: get right issue -->
-												<span class="issue oceans">海洋</span>
+												<span class="issue {{ post.main_issue_slug }}">{{ post.main_issue|raw }}</span>
 												<!-- TODO: [post type] -->
-												<span>新闻</span>
+												<span>{{ post.news_type }}</span>
 											</div>
 											<div>
 												<span>
 													<!-- TODO: -->
-													<span class="icon-clock"></span> 4 min 閱讀
+													{% if post.reading_time %}
+														<span class="icon-clock"></span> {{ post.reading_time }} 閱讀
+													{% endif %}
 												</span>
 												<!-- TODO: -->
-												<span>2018-12-07</span>
+												<span>{{ post.date }}</span>
 											</div>
 										</div>
 										<p>
