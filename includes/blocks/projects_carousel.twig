@@ -49,7 +49,7 @@
 								<h4>{{ post.post_title }}</h4>
 								<div class="meta-box">
 									<!-- TODO: collegare issue; contare numero updates -->
-									<div class="issue {{ post.main_issue_slug }}">{{ post.main_issue }}</div>
+									<div class="issue {{ post.main_issue_slug }}">{{ post.main_issue|raw }}</div>
 									<!-- updates -->
 									<div>{{ post.related_posts }} 次更新</div>
 								</div>
