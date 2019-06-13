@@ -347,6 +347,8 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 				// Extract group field type.
 				if ( $group_type ) {
 					$group['__group_type__'] = $group_type;
+				} else {
+					continue;
 				}
 
 				if ( 'post' === $group_type && preg_match( '/^\d+$/', $group['post'] ) ) {

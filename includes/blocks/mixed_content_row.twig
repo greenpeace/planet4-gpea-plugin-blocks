@@ -23,14 +23,18 @@
 	<section class="section-mixed-content-row layout-{{ classname }} {{ container_classname }} lazy"  data-bg="url({{ static_fields.image }})"> <!-- e.g. layout-green-grey -->
 		<div class="ct-container">
 
-			{% if ( static_fields ) %}
+			{% if ( static_fields.title or static_fields.subtitle ) %}
 				<div class="content">
-					<h2>{{ static_fields.title }}</h2>
-					<p>{{ static_fields.subtitle }}</p>
+					{% if ( static_fields.title ) %}
+						<h2>{{ static_fields.title }}</h2>
+					{% endif %}
+					{% if ( static_fields.subtitle ) %}
+						<p>{{ static_fields.subtitle }}</p>
+					{% endif %}
 				</div>
 			{% endif %}
 
-			{% if ( field_groups ) %}
+			{% if ( field_groups|length > 0 ) %}
 			<div class="swiper-container mini-swiper">
 				<div class="swiper-wrapper">
 				{% for group in field_groups %}
