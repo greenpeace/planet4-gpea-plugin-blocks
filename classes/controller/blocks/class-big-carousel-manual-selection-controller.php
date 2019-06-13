@@ -163,7 +163,7 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 						}
 
 						$post->reading_time = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
-						$news_type = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
+						$news_type = get_post_meta( $post->ID, 'p4-page-type', true );
 						if ( $news_type ) {
 							$post->news_type = __( $news_type, 'planet4-gpea-blocks' );
 						}
