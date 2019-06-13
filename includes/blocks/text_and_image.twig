@@ -1,6 +1,6 @@
 {% block text_and_image %}
 	{% if ( fields ) %}
-		{% if ( fields.layout == 'plain_light') %}
+		{% if ( not fields.images and fields.layout == 'plain_light') %}
 			<section class="section-text-images">
 				<div class="ct-container">
 					{% if ( fields.title ) %}
@@ -16,9 +16,12 @@
 					{% endif %}
 				</div>
 			</section>
-		{% endif %}
-		{% if ( fields.layout == 'light' or fields.layout == 'dark' ) %}
-			{% set box_color = (fields.layout == 'dark' or fields.images) ? 'dark' : '' %}
+		{% else %}
+			{% if fields.layout == 'plain_light' %}
+				{% set box_color = 'plain' %}
+			{% else %}
+				{% set box_color = (fields.layout == 'dark' or fields.images) ? 'dark' : '' %}
+			{% endif %}
 			<section class="section-text-images">
 				<div class="boxes">
 					<div class="box {{ box_color }}">

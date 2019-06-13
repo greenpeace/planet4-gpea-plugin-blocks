@@ -4,16 +4,16 @@
 		<div class="ct-container">
 			<h2>{{ fields.title }}</h2>
 			<div id="history-globe"></div>
-			<div class="swiper-container history-year-swiper">
+			<div class="swiper-container label-swiper">
 				<div class="swiper-wrapper">
 					{% for i in 1..25 %}
 					{% if fields['title_milestone_'~i] %}
-						<div class="swiper-slide history-year">{{ fields['date_milestone_'~i] }}</div>
+						<div class="swiper-slide label-slide">{{ fields['date_milestone_'~i] }}</div>
 					{% endif %}
 					{% endfor %}
 				</div>
 			</div>
-			<div class="swiper-container maxi-swiper">
+			<div class="swiper-container maxi-swiper maxi-swiper-centered">
 				<div class="swiper-wrapper">
 					{% for i in 1..25 %}
 					{% if fields['title_milestone_'~i] %}
