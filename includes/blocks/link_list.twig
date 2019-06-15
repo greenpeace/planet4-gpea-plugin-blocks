@@ -1,34 +1,36 @@
 {% block link_list %}
-    <!-- TODO Frontend all -->
-    {% if ( fields ) %}
-        {% if ( fields.layout == 'simple' ) %}
-            <!-- Simple list -->
-            {% set classname = 'simple' %}
-        {% elseif ( fields.layout == 'accordion' ) %}
-            <!-- With accordion -->
-            {% set classname = 'accordion' %}
-        {% else %}
-            <!-- set default or do nothing -->
-	    {% set classname = 'some_default' %}
-        {% endif %}
-        <section class="layout-{{ classname }}">
-            {% if fields.main_link_label and fields.main_link_url %}
-	        <a href="{{ fields.main_link_url }}">{{ fields.main_link_label }}</a>
-	    {% endif %}
-            {% if fields.link_description %}
-	        <p>{{ fields.link_description }}</p>
-	    {% endif %}
-            {% if fields.accordion_label %}
-	        <p>{{ fields.accordion_label }}</p>
-	    {% endif %}
-	    {% for i in 1..20 %}
-	        {% if ( fields['label_link_'~i] and fields['url_link_'~i] ) %}
-                    <a href="{{ fields['url_link_'~i] }}">{{ fields['label_link_'~i] }}</a>
-                    {% if fields['description_link_'~i] %}
-                        <p>{{ fields['description_link_'~i] }}</p>
-	            {% endif %}
-                {% endif %}
-            {% endfor %}
-        </section>
-    {% endif %}
+	{% if ( fields ) %}
+		{% set toggleeId = 'togglee-' ~ random() %}
+		<section class="section-link-list">
+			<div class="ct-container">
+				{% if fields.main_link_label and fields.main_link_url %}
+					<h5>
+						<a href="{{ fields.main_link_url }}">{{ fields.main_link_label }}</a>
+					</h5>
+				{% endif %}
+				{% if fields.link_description %}
+					<p class="caption">{{ fields.link_description }}</p>
+				{% endif %}
+				{% if fields.layout == 'accordion' and fields.accordion_label %}
+					<p>
+						<a href="javascript:void(0)" class="toggle" data-togglee-selector=".{{ toggleeId }}">{{ fields.accordion_label }}</a>
+					</p>
+				{% endif %}
+				<div class="link-list {{ fields.layout == 'accordion' ? 'togglee ' ~ toggleeId : '' }}">
+					<div>
+						{% for i in 1..20 %}
+							{% if ( fields['label_link_'~i] and fields['url_link_'~i] ) %}
+								<p class="see-more">
+									<a href="{{ fields['url_link_'~i] }}">{{ fields['label_link_'~i] }}</a>
+									{% if fields['description_link_'~i] %}
+										<br /><small>{{ fields['description_link_'~i] }}</small>
+									{% endif %}
+								</p>
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</section>
+	{% endif %}
 {% endblock %}
