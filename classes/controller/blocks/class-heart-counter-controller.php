@@ -37,29 +37,55 @@ if ( ! class_exists( 'Heart_Counter_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Text above', 'planet4-gpea-blocks' ),
+					'label' => __( 'Left side title', 'planet4-gpea-blocks' ),
+					'attr'  => 'left_title',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Left side title', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Left side image', 'planet4-gpea-blocks' ),
+					'attr'        => 'left_img',
+					'type'        => 'attachment',
+					'libraryType' => array( 'image' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+				],
+				[
+					'label' => __( 'Left side image description (for accessibility, required)', 'planet4-gpea-blocks' ),
+					'attr'  => 'left_img_desc',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Left side image description', 'planet4-gpea-blocks' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Right side title', 'planet4-gpea-blocks' ),
 					'attr'  => 'text_above',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Text above', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Right side title', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Number', 'planet4-gpea-blocks' ),
+					'label' => __( 'Right side number', 'planet4-gpea-blocks' ),
 					'attr'  => 'number',
 					'type'  => 'number',
 					'meta'  => [
-						'placeholder' => __( 'Number', 'planet4-gpea-blocks' ),
+						'placeholder' => __( '1000', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Text below', 'planet4-gpea-blocks' ),
+					'label' => __( 'Right side paragraph', 'planet4-gpea-blocks' ),
 					'attr'  => 'text_below',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Text below', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Right side paragraph', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -82,7 +108,7 @@ if ( ! class_exists( 'Heart_Counter_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Image', 'planet4-gpea-blocks' ),
+					'label' => __( 'Right side image', 'planet4-gpea-blocks' ),
 					'attr'        => 'bg_img',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
@@ -116,6 +142,10 @@ if ( ! class_exists( 'Heart_Counter_Controller' ) ) {
 
 			if ( isset( $attributes['bg_img'] ) ) {
 				$attributes['bg_img'] = wp_get_attachment_url( $attributes['bg_img'] );
+			}
+
+			if ( isset( $attributes['left_img'] ) ) {
+				$attributes['left_img'] = wp_get_attachment_url( $attributes['left_img'] );
 			}
 
 			return [
