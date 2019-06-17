@@ -1,37 +1,34 @@
 {% block report_launcher %}
-    {% if ( fields ) %}
-	<section class="dark">
-	    <div class="generic-content ct-container">
-		<div class="top-bar mb">
-		    {% if ( fields.title ) %}
-			<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-		    {% endif %}
-		    <span class="icon-chevron-right"></span>
-		</div>
-		{% if ( fields.subtitle ) %}
-		    <p class="mb">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-		{% endif %}
-	    </div>
-	    <div class="swiper-container mini-swiper">
-		<div class="swiper-wrapper">
-		    {% if ( fields.img ) %}
-			<div class="swiper-slide">
-			    <div class="poster lazy" data-bg="url({{ fields.img }})"></div>
+	{% if ( fields ) %}
+	<section class="section-report-launcher">
+		<div class="ct-container">
+			<div class="content">
+				{% if ( fields.title ) %}
+					<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+				{% endif %}
+				{% if ( fields.subtitle ) %}
+					<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+				{% endif %}
 			</div>
-		    {% endif %}
-		    <div class="swiper-slide">
-			{% if ( fields.caption ) %}
-			    <p class="light large center">{{ fields.caption|e('wp_kses_post')|raw }}</p>
-			{% endif %}
-			{% if ( fields.btn_label and fields.btn_link ) %}
-			    <a href="{{ fields.btn_link }}" class="button">{{ fields.btn_label|e('wp_kses_post')|raw }}</a>
-			{% endif %}
-			{% if ( fields.see_all_label and fields.see_all_link ) %}
-			    <a href="{{ fields.see_all_link }}" class="more">{{ fields.see_all_label|e('wp_kses_post')|raw }}</a>
-			{% endif %}
-		    </div>
+			<div class="launcher">
+				{% if ( fields.img ) %}
+					<img class="lazy" data-src="{{ fields.img }}" />
+				{% endif %}
+				<div class="launcher-content">
+					{% if ( fields.caption ) %}
+						<p>{{ fields.caption|e('wp_kses_post')|raw }}</p>
+					{% endif %}
+					{% if ( fields.btn_label and fields.btn_link ) %}
+						<p><a href="{{ fields.btn_link }}" class="button primary">{{ fields.btn_label|e('wp_kses_post')|raw }}</a></p>
+					{% endif %}
+					{% if ( fields.see_all_label and fields.see_all_link ) %}
+						<p class="see-more">
+							<a href="{{ fields.see_all_link }}" class="more">{{ fields.see_all_label|e('wp_kses_post')|raw }}</a>
+						</p>
+					{% endif %}
+				</div>
+			</div>
 		</div>
-	    </div>
 	</section>
-    {% endif %}
+	{% endif %}
 {% endblock %}

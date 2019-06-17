@@ -1,60 +1,78 @@
 {% block articles_list %}
-    <!-- TODO Frontend all -->
-    {% if ( fields ) %}
-	{% if ( fields.layout == 'tag_filters' ) %}
-	    {% set classname = 'tag-filters' %}
-	{% elseif ( fields.layout == 'dropdown_filters' ) %}
-	    {% set classname = 'dropdown-filters' %}
-	{% else %}
-	    <!-- set default or do nothing -->
-	    {% set classname = 'some_default' %}
-	{% endif %}
-	<section class="layout-{{ classname }}">
-	    {% if fields.title %}
-		<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-	    {% endif %}
-	    {% if ( fields.layout == 'tag_filters' and fields.tags ) %}
-		<!-- We use tags to filter -->
-		<select>
-		    {% for tag_name, tag_id in fields.tags %}
-			<!-- Use any mechanism here to filter/search. -->
-			<option value="{{ tag_id }}">{{ tag_name|e('wp_kses_post')|raw }}</option>
-		    {% endfor %}
-		</select>
-	    {% elseif ( fields.layout == 'dropdown_filters' ) %}
-		<!-- We use select/dropdown to filter -->
-		{% if ( fields.year_oldest and fields.year_now ) %}
-		    <select>
-			{% for year in fields.year_oldest..fields.year_now %}
-			    <!-- Use any mechanism here to filter/search. -->
-			    <option value="{{ year }}">{{ year }}</option>
-			{% endfor %}
-		    </select>
-		{% endif %}
-		{% if ( fields.main_issues ) %}
-		    <select>
-			{% for issue_name, issue_id in fields.main_issues %}
-			    <!-- Use any mechanism here to filter/search. -->
-			    <option value="{{ issue_id }}">{{ issue_name|e('wp_kses_post')|raw }}</option>
-			{% endfor %}
-		    </select>
-		{% endif %}
-	    {% else %}
-		<!-- set default or do nothing -->
-	    {% endif %}
-	    {% if fields.posts %}
-		{% for post in fields.posts %}
-		    {% if post.post_title %}
-			<h2>{{ post.post_title|e('wp_kses_post')|raw }}</h2>
-		    {% endif %}
-		    {% if post.post_content %}
-			<p>{{ post.post_content|e('wp_kses_post')|raw }}</p>
-		    {% endif %}
-		    {% if post.img_url %}
-			<img src="{{ post.img_url }}"/>
-		    {% endif %}
-		{% endfor %}
-	    {% endif %}
+	{% if ( fields ) %}
+	<section class="section-articles-list layout-{{ classname }}">
+		<div class="ct-container">
+			<div class="content">
+				{% if fields.title %}
+					<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+				{% endif %}
+				{% if ( fields.layout == 'tag_filters' and fields.tags ) %}
+					<div class="tags">
+						{% for tag_name, tag_id in fields.tags %}
+							<!-- TODO: link to search page -->
+							<a href="#{{ tag_id }}" class="button tag">{{ tag_name|e('wp_kses_post')|raw }}</a>
+						{% endfor %}
+					</div>
+				{% elseif ( fields.layout == 'dropdown_filters' ) %}
+					<div class="dropdowns">
+						<!-- We use select/dropdown to filter -->
+						{% if ( fields.year_oldest and fields.year_now ) %}
+							<div class="select">
+								<select>
+									{% for year in fields.year_oldest..fields.year_now %}
+										<!-- TODO frontend: Use any mechanism here to filter/search. -->
+										<option value="{{ year }}">{{ year }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						{% endif %}
+						{% if ( fields.main_issues ) %}
+							<div class="select">
+								<select>
+									{% for issue_name, issue_id in fields.main_issues %}
+										<!-- Use any mechanism here to filter/search. -->
+										<option value="{{ issue_id }}">{{ issue_name|e('wp_kses_post')|raw }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						{% endif %}
+					</div>
+				{% endif %}
+			</div>
+			{% if fields.posts %}
+				<div class="posts">
+					{% for post in fields.posts %}
+						<a href="{{ post.link }}" class="card-update compact">
+							<div
+								class="thumbnail lazy"
+								data-bg="url({{ post.img_url }})"
+							></div>
+							<div class="box">
+								<div class="meta-box">
+									<div>
+										<!-- TODO: print real issue -->
+										<span class="issue oceans">海洋</span>
+										<!-- TODO: print post type -->
+										<span>新聞</span>
+									</div>
+								</div>
+								<p>
+									{{ post.post_title|e('wp_kses_post')|raw }}
+								</p>
+								<div class="meta-box">
+									<div>
+										{% if post.reading_time %}
+											<span> <span class="icon-clock"></span> {{ post.reading_time|e('wp_kses_post')|raw }} </span>
+										{% endif %}
+										<span>{{ post.post_date|date }}</span>
+									</div>
+								</div>
+							</div>
+						</a>
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
 	</section>
-    {% endif %}
+	{% endif %}
 {% endblock %}
