@@ -106,8 +106,8 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 				$attributes['form'] = '[p4en_form id="' . $gpea_options['gpea_tag_cloud_newsletter_form'] . '" en_form_style="" /]';
 				$attributes['gpea_default_en_subscription_page'] = $gpea_options['gpea_default_en_subscription_page'];
 				/* thanks messages */
-				$attributes['gpea_subscription_page_thankyou_title'] = $gpea_options['gpea_subscription_page_thankyou_title'];
-				$attributes['gpea_subscription_page_thankyou_subtitle'] = $gpea_options['gpea_subscription_page_thankyou_subtitle'];
+				$attributes['gpea_subscription_page_thankyou_title'] = isset( $gpea_options['gpea_subscription_page_thankyou_title'] ) ? $gpea_options['gpea_subscription_page_thankyou_title'] : '';
+				$attributes['gpea_subscription_page_thankyou_subtitle'] = isset( $gpea_options['gpea_subscription_page_thankyou_subtitle'] ) ? $gpea_options['gpea_subscription_page_thankyou_subtitle'] : '';
 			}
 			// else {
 			// 	return false;

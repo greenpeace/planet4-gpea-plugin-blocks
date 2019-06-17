@@ -139,13 +139,13 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 						if ( has_term( 'petition', 'post_tag', $post->ID ) ) {
 							$post->is_campaign = 1;
 							if ( 'page-templates/project.php' === get_post_meta( $post->ID, '_wp_page_template', true ) ) {
-								$post->engaging_pageid = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_pageid', true )
-								$post->engaging_target = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_target', true )
+								$post->engaging_pageid = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_pageid', true );
+								$post->engaging_target = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_target', true );
 								/* if external link is set, we use that instead of standard one */
-								$external_link = get_post_meta( $post->ID, 'p4-gpea_petition_external_link', true )
+								$external_link = get_post_meta( $post->ID, 'p4-gpea_petition_external_link', true );
 								if ( $external_link ) $post->link = $external_link;
 							}
-						}						
+						}
 
 						// get related main issues!
 						$planet4_options = get_option( 'planet4_options' );
