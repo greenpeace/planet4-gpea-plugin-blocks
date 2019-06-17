@@ -95,8 +95,8 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 
 			foreach ( $campaigns as $campaign ) {
 				$campaign->engaging_id = get_term_meta( $campaign->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true );
+				if ( $campaign->engaging_id ) $attributes['campaigns'] = $campaigns;
 			}
-			$attributes['campaigns'] = $campaigns;
 
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
@@ -105,6 +105,9 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 			if ( isset( $gpea_options['gpea_tag_cloud_newsletter_form'] ) && isset( $gpea_options['gpea_default_en_subscription_page'] ) ) {
 				$attributes['form'] = '[p4en_form id="' . $gpea_options['gpea_tag_cloud_newsletter_form'] . '" en_form_style="" /]';
 				$attributes['gpea_default_en_subscription_page'] = $gpea_options['gpea_default_en_subscription_page'];
+				/* thanks messages */
+				$attributes['gpea_subscription_page_thankyou_title'] = $gpea_options['gpea_subscription_page_thankyou_title'];
+				$attributes['gpea_subscription_page_thankyou_subtitle'] = $gpea_options['gpea_subscription_page_thankyou_subtitle'];
 			}
 			// else {
 			// 	return false;

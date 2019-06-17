@@ -134,11 +134,18 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 							$post->img_url = $img_data[0];
 						}
 
+						$post->link = get_permalink( $post->ID );
+
 						if ( has_term( 'petition', 'post_tag', $post->ID ) ) {
 							$post->is_campaign = 1;
-						}
-
-						$post->link = get_permalink( $post->ID );
+							if ( 'page-templates/project.php' === get_post_meta( $post->ID, '_wp_page_template', true ) ) {
+								$post->engaging_pageid = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_pageid', true )
+								$post->engaging_target = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_target', true )
+								/* if external link is set, we use that instead of standard one */
+								$external_link = get_post_meta( $post->ID, 'p4-gpea_petition_external_link', true )
+								if ( $external_link ) $post->link = $external_link;
+							}
+						}						
 
 						// get related main issues!
 						$planet4_options = get_option( 'planet4_options' );
@@ -165,8 +172,7 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 						$post->reading_time = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
 						$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' ); 					
 						if ( $news_type ) {
-							$news_type = $news_type[0]->name;
-							$post->news_type = __( $news_type, 'planet4-gpea-blocks' );
+							$post->news_type = $news_type[0]->name;
 						}
 
 						$formatted_posts[] = $post;

@@ -5,8 +5,8 @@
 
 			<input type="hidden" name="enblock_submit" value="">
 			<input type="hidden" name="en_page_id" value="{{ fields.gpea_default_en_subscription_page|raw }}">
-			<input type="hidden" name="thankyou_title" value="">
-			<input type="hidden" name="thankyou_subtitle" value="">
+			<input type="hidden" name="thankyou_title" value="{{ fields.gpea_subscription_page_thankyou_title|raw }}">
+			<input type="hidden" name="thankyou_subtitle" value="{{ fields.gpea_subscription_page_thankyou_subtitle|raw }}">
 			<input type="hidden" name="enform_goal" id="enform_goal" value="">
 
 			<div class="ct-container">
@@ -16,6 +16,7 @@
 					<div class="tags">
 					{% for campaign in fields.campaigns %}
 						<div data-engaging='{{ campaign.engaging_id }}' data-slug='{{ campaign.slug }}' class="topic-button button tag">{{ campaign.name|raw }}</div>
+						<input id="en__field_supporter_questions_{{ campaign.engaging_id }}" type="hidden" class="js-question-{{ campaign.slug }}" value="" name="supporter.questions.{{ campaign.engaging_id }}">
 					{% endfor %}
 					</div>
 					<a id="topic-submit-button" class="button">TODO 立即關注</a>

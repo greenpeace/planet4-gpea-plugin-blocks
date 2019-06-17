@@ -16,7 +16,7 @@
 					{% if fields.posts %}
 						{% for post in fields.posts %}
 							{% if post.is_campaign %}
-								<div class="swiper-slide card-petition">
+								<div class="swiper-slide card-petition" data-pageid="{{ post.engaging_pageid }}" data-target="{{ post.engaging_target }}">
 									<div
 									class="thumbnail"
 									style="background-image: url({{ post.img_url }})"
