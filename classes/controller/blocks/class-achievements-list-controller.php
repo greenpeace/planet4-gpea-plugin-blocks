@@ -180,30 +180,35 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 						$img_data = wp_get_attachment_image_src( $img_id, 'medium_large' );
 						$post->img_url = $img_data[0];
 					}
-					/* get main issue category */
-					$issues     = get_category_by_slug( 'issues' );
-					if ( $issues ) {
-						$issues     = $issues->term_id;
+					$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+					if ( ! $main_issues_category_id ) {
+						$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+						if ( $main_issues_category ) $main_issues_category_id = $main_issues_category->term_id;
+					}
+
+					if ( $main_issues_category_id ) {
 						$categories = get_the_category( $post->ID );
-						$categories = array_filter(
-							$categories, function( $cat ) use ( $issues ) {
-								return $cat->category_parent === $issues;
+						if ( ! empty( $categories ) ) {
+							$categories = array_filter( $categories, function( $cat ) use ( $main_issues_category_id ) {
+								return $cat->category_parent === intval( $main_issues_category_id );
+							});
+							if ( ! empty( $categories ) ) {
+								$first_category = array_values( $categories )[0];
+								$post->main_issue = $first_category->name;
+								$post->main_issue_slug = $first_category->slug;
 							}
-						);
-						if ( $categories ) {
-							$post->main_cat = $categories[0]->name;
 						}
 					}
 
 					/* get reading time */
 					$post->reading_time = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
+					$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' ); 					
+					if ( $news_type ) {
+						$news_type = $news_type[0]->name;
+						$post->news_type = __( $news_type, 'planet4-gpea-blocks' );
+					}
 					$post->link = get_the_permalink( $post->ID );
 
-					if ( has_post_thumbnail( $post->ID ) ) {
-						$img_id = get_post_thumbnail_id( $post->ID );
-						$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
-						$post->img_url = $img_data[0];
-					}
 					$formatted_posts[] = $post;
 				}
 			}
