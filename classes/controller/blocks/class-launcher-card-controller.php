@@ -80,7 +80,7 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 
 				'Card' => [
 					[
-						'label' => __( '<i>Launcher %s Title</i>', 'planet4-gpea-blocks' ),
+						'label' => __( '<i>Launcher %s Title</i>*', 'planet4-gpea-blocks' ),
 						'attr'  => 'subtitle',					
 						'type'  => 'text',
 						'meta'  => [
