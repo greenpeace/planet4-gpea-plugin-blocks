@@ -1,54 +1,44 @@
 {% block launcher %}
 	{% if ( fields ) %}
+	<section class="section-launcher">
+		<div class="ct-container">
 	{% if ( fields.layout == 'standard' ) %}
 		{% set classname = fields.img ? '' : 'no-image' %}
-		<section class="section-image-cta">
-			<div class="generic-content">
-				<div class="action fluid {{ classname }}">
-					{% if ( fields.title ) %}
-						<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-					{% endif %}
-					{% if ( fields.description ) %}
-						<p>{{ fields.description|e('wp_kses_post')|raw }}</p>
-					{% endif %}
-					{% if ( fields.img ) %}
-						<img src="{{ fields.img }}" />
-					{% endif %}
-					{% if ( fields.btn_label and fields.btn_link ) %}
-						<a href="{{ fields.btn_link }}" class="button">{{ fields.btn_label|e('wp_kses_post')|raw }}</a>
-					{% endif %}
-				</div>
-			</div>
-		</section>
+		<div class="action fluid {{ classname }}">
+			{% if ( fields.title ) %}
+				<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+			{% endif %}
+			{% if ( fields.paragraph ) %}
+				<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
+			{% endif %}
+			{% if ( fields.img ) %}
+				<img src="{{ fields.img }}" />
+			{% endif %}
+			{% if ( fields.btn_label and fields.btn_link ) %}
+				<a href="{{ fields.btn_link }}" class="button">{{ fields.btn_label|e('wp_kses_post')|raw }}</a>
+			{% endif %}
+		</div>
 	{% elseif ( fields.layout == 'card' ) %}
-		<section class="section-latest-active pink">
-		<div class="ct-container">
-			<div class="content">
-			<div class="swiper-slide first">
-				{% if ( fields.title ) %}
-				<h1>{{ fields.title|e('wp_kses_post')|raw }}</h1>
-				{% endif %}
-			</div>
-			<div class="swiper-slide second" style="background-image: url({{ fields.img }})">
-				<div class="box">
+		<div class="action as-card">
+			<div class="thumbnail" style="background-image: url({{ fields.img }})"></div>
+			<div class="box">
 				<div class="content">
 					{% if ( fields.subtitle ) %}
-					<h2>{{ fields.subtitle|e('wp_kses_post')|raw }}</h2>
+					<h4>{{ fields.subtitle|e('wp_kses_post')|raw }}</h4>
 					{% endif %}
-					{% if ( fields.description ) %}
-					<p>{{ fields.description|e('wp_kses_post')|raw }}</p>
+					{% if ( fields.paragraph ) %}
+					<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 					{% endif %}
 					{% if ( fields.btn_label and fields.btn_link ) %}
-					<a href="{{ fields.btn_link }}" class="button light">{{ fields.btn_label|e('wp_kses_post')|raw }}</a>
+					<a href="{{ fields.btn_link }}" class="button primary">{{ fields.btn_label|e('wp_kses_post')|raw }}</a>
 					{% endif %}
 				</div>
-				</div>
 			</div>
-			</div>
-		</div>
-		</section>
+		</div>		
 	{% else %}
 		<!-- do nothing -->
 	{% endif %}
+		</div>
+	</section>
 	{% endif %}
 {% endblock %}
