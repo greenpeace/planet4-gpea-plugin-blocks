@@ -138,6 +138,7 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 
 				$query = new \WP_Query(
 					array(
+						'post_type'      => array( 'post', 'page' ),
 						'tag__in'        => $tag_ids,
 						'order'          => 'desc',
 						'orderby'        => 'date',

@@ -50,10 +50,8 @@
 							<div class="box">
 								<div class="meta-box">
 									<div>
-										<!-- TODO: print real issue -->
-										<span class="issue oceans">海洋</span>
-										<!-- TODO: print post type -->
-										<span>新聞</span>
+										<span class="issue {{ post.main_issue_slug }}">{{ post.main_issue }}</span>
+										<span>{{ post.news_type }}</span>
 									</div>
 								</div>
 								<p>
