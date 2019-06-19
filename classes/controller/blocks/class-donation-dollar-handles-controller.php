@@ -140,7 +140,7 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>amount</i> (must be present to display the dollar handle)', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( 'One-off: <strong>%s</strong> <i>amount</i> (must be present to display the dollar handle)', 'planet4-gpea-blocks' ), $i ),
 						'attr'  => 'amount_handle_' . $i,
 						'type'  => 'number',
 						'meta'  => [
@@ -156,7 +156,7 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label'       => sprintf( __( '<strong>%s</strong> <i>image</i>', 'planet4-gpea-blocks' ), $i ),
+						'label'       => sprintf( __( 'One-off: <strong>%s</strong> <i>image</i>', 'planet4-gpea-blocks' ), $i ),
 						'attr'        => 'img_handle_' . $i,
 						'type'        => 'attachment',
 						'libraryType' => array( 'image' ),
@@ -175,8 +175,59 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>paragraph</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( 'One-off: <strong>%s</strong> <i>paragraph</i>', 'planet4-gpea-blocks' ), $i ),
 						'attr'  => 'paragraph_handle_' . $i,
+						'type'  => 'textarea',
+						'meta'  => [
+							// translators: placeholder represents the ordinal of the field.
+							'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks',
+							'data-element-type' => 'handle',
+							'data-element-name' => 'handle',
+							'data-element-number' => $i,
+						],
+					];
+
+				$fields[] =
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => sprintf( __( 'Recurring: <strong>%s</strong> <i>amount</i> (must be present to display the dollar handle)', 'planet4-gpea-blocks' ), $i ),
+						'attr'  => 'recurring_amount_handle_' . $i,
+						'type'  => 'number',
+						'meta'  => [
+							// translators: placeholder represents the ordinal of the field.
+							'placeholder' => sprintf( __( 'Enter amount %s', 'planet4-gpea-blocks' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks',
+							'data-element-type' => 'handle',
+							'data-element-name' => 'handle',
+							'data-element-number' => $i,
+						],
+					];
+
+				$fields[] =
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label'       => sprintf( __( 'Recurring: <strong>%s</strong> <i>image</i>', 'planet4-gpea-blocks' ), $i ),
+						'attr'        => 'recurring_img_handle_' . $i,
+						'type'        => 'attachment',
+						'libraryType' => array( 'image' ),
+						'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
+						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+						'meta'        => [
+							// translators: placeholder represents the ordinal of the field.
+							'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpea-blocks' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks',
+							'data-element-type' => 'handle',
+							'data-element-name' => 'handle',
+							'data-element-number' => $i,
+						],
+					];
+
+				$fields[] =
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => sprintf( __( 'Recurring: <strong>%s</strong> <i>paragraph</i>', 'planet4-gpea-blocks' ), $i ),
+						'attr'  => 'recurring_paragraph_handle_' . $i,
 						'type'  => 'textarea',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
@@ -217,6 +268,16 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 				if ( isset( $attributes[ 'img_handle_' . $i ] ) ) {
 					$attributes[ 'img_handle_' . $i ] = wp_get_attachment_url( $attributes[ 'img_handle_' . $i ] );
 				}
+				if ( isset( $attributes[ 'recurring_img_handle_' . $i ] ) ) {
+					$attributes[ 'recurring_img_handle_' . $i ] = wp_get_attachment_url( $attributes[ 'recurring_img_handle_' . $i ] );
+				}
+			}
+
+			if ( isset( $attributes['bg_img'] ) ) {
+				$attributes['bg_img'] = wp_get_attachment_url( $attributes['bg_img'] );
+			}
+			if ( isset( $attributes['bg_img_mobile'] ) ) {
+				$attributes['bg_img_mobile'] = wp_get_attachment_url( $attributes['bg_img_mobile'] );
 			}
 
 			return [

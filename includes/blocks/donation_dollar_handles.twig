@@ -1,47 +1,91 @@
 {% block donation_dollar_handles %}
     <!-- TODO Frontend all -->
     {% if ( fields ) %}
-        <section>
-            {% if fields.title %}
-	        <h2>{{ fields.title }}</h2>
-	    {% endif %}
-            {% if fields.paragraph %}
-	        <p>{{ fields.paragraph }}</p>
-	    {% endif %}
-            {% if fields.label_donate_once %}
-	        <p>{{ fields.label_donate_once }}</p>
-	    {% endif %}
-            {% if fields.label_donate_monthly %}
-	        <p>{{ fields.label_donate_monthly }}</p>
-	    {% endif %}
-            {% if fields.currency_code %}
-	        <p>{{ fields.currency_code }}</p>
-	    {% endif %}
-            {% if fields.label_free_amount %}
-	        <p>{{ fields.label_free_amount }}</p>
-	    {% endif %}
-            {% if fields.button_label and fields.button_landing_url %}
-	        <a href="{{ fields.button_landing_url }}">{{ fields.button_label }}</a>
-	    {% endif %}
-            {% if fields.bg_img %}
-                <img src="{{ fields.bg_img }}" />
-	    {% endif %}
-            {% if fields.bg_img_mobile %}
-                <img src="{{ fields.bg_img_mobile }}" />
-	    {% endif %}
-	    {% for i in 1..3 %}
-	        {% if fields['amount_handle_'~i] %}
-                    {% if fields['amount_handle_'~i] %}
-                        <p>{{ fields['amount_handle_'~i] }}</p>
-	            {% endif %}
-                    {% if fields['img_handle_'~i] %}
-                        <img src="{{ fields['img_handle_'~i] }}" />
-	            {% endif %}
-                    {% if fields['paragraph_handle_'~i] %}
-                        <p>{{ fields['paragraph_handle_'~i] }}</p>
-	            {% endif %}
-                {% endif %}
-            {% endfor %}
+        <section class="section-donate {{ fields.upper_blur ? 'upper-fade' : '' }}">
+            <div class="bg-image-desktop" style="background-image: url({{ fields.bg_img }})"></div>
+            <div class="bg-image-mobile" style="background-image: url({{ fields.bg_img_mobile }})"></div>
+            <div class="ct-container">
+                <div class="content">
+                    <h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+                    <p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
+                </div>
+                <div class="donation-form">
+                    <div class="tab-bar">
+                        <div class="tab-item">{{ fields.label_donate_once|e('wp_kses_post')|raw }}</div>
+                        <div class="tab-item active">{{ fields.label_donate_monthly|e('wp_kses_post')|raw }}</div>
+                    </div>
+                    <form action="{{ fields.button_landing_link }}" method="POST">
+                        <input type="hidden" name="frequency" value="{{ fields.label_donate_monthly|e('wp_kses_post')|raw }}" />
+                        <input type="hidden" name="currency" value="{{ fields.currency_code|e('wp_kses_post')|raw }}" />
+                        <div class="dollar-handles dollar-handles__recurring">
+                            {% for i in 1..3 %}
+                            {% if fields['amount_handle_'~i] %}
+                                {% if fields['amount_handle_'~i] %}
+                                    <input type="radio" id="a{{ fields['amount_handle_'~i] }}" name="dollar-handle" value="{{ fields['amount_handle_'~i] }}" data-paragraph="{{ fields['paragraph_handle_'~i] }}"/>
+                                {% endif %}
+                                {% if fields['img_handle_'~i] %}
+                                    <label
+                                    for="a{{ fields['amount_handle_'~i] }}"
+                                    style="background-image: url({{ fields['img_handle_'~i] }}"
+                                    ><span>{{ fields['amount_handle_'~i] }} {{ fields.currency_code|e('wp_kses_post')|raw }}</span></label
+                                >
+                                {% endif %}
+                            {% endif %}
+                            {% endfor %}                            
+                        </div>
+                        <div class="dollar-handles dollar-handles__recurring">
+                            {% for i in 1..3 %}
+                            {% if fields['recurring_amount_handle_'~i] %}
+                                {% if fields['recurring_amount_handle_'~i] %}
+                                <input type="radio" id="a{{ fields['recurring_amount_handle_'~i] }}" name="dollar-handle" value="{{ fields['recurring_amount_handle_'~i] }}" data-paragraph="{{ fields['recurring_paragraph_handle_'~i] }}"/>
+                                {% endif %}
+                                {% if fields['recurring_img_handle_'~i] %}
+                                    <label
+                                    for="a{{ fields['recurring_amount_handle_'~i] }}"
+                                    style="background-image: url({{ fields['recurring_img_handle_'~i] }}"
+                                    ><span>{{ fields['recurring_amount_handle_'~i] }} {{ fields.currency_code|e('wp_kses_post')|raw }}</span></label
+                                >
+                                {% endif %}
+                            {% endif %}
+                            {% endfor %}                            
+                        </div>
+                        <p class="caption">
+                            {{ fields['recurring_paragraph_handle_1'] }}
+                        </p>
+                        <div class="form-group small">
+                            <label>{{ fields.label_free_amount }}</label>
+                            <span class="currency">{{ fields.currency_code|e('wp_kses_post')|raw }}</span>
+                            <input
+                                class="free-amount"
+                                name="free-amount"
+                                type="number"
+                                aria-label="{{ fields.currency_code|e('wp_kses_post')|raw }}"
+                                min="1"
+                                step="1"
+                            />
+                        </div>
+                        <button type="submit" class="button primary fluid">{{ fields.button_label|e('wp_kses_post')|raw }}</button>
+                    </form>
+
+                    <form action="{{ fields.button_landing_link }}" method="POST">
+                        <!-- NOTE!!   This ↴ must be equal to the "active" default tab   -->
+                        <input type="hidden" name="frequency" value="{{ fields.label_donate_monthly|e('wp_kses_post')|raw }}" />
+                        <input type="hidden" name="currency" value="{{ fields.currency_code|e('wp_kses_post')|raw }}" />
+                        <div class="form-group">
+                            <span class="currency">{{ fields.currency_code|e('wp_kses_post')|raw }}</span>
+                            <input
+                                name="amount"
+                                type="number"
+                                aria-label="{{ fields.currency_code|e('wp_kses_post')|raw }}"
+                                required
+                                min="1"
+                                step="1"
+                            />
+                        </div>
+                        <button type="submit" class="button primary fluid">{{ fields.button_label|e('wp_kses_post')|raw }}</button>
+                    </form>
+                </div>
+            </div>
         </section>
     {% endif %}
 {% endblock %}
