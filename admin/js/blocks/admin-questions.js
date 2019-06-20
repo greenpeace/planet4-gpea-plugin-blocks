@@ -4,7 +4,7 @@ jQuery(document).ready(function() {
   var selectId = 'engaging_campaign_ID';
   var containerId = '#' + selectId + '_container';
   // var apiUrl = document.location.origin + '/wp-json/planet4-engaging-networks/v1/questions_available';
-  var apiUrl = wpApiSettings.root + 'planet4-engaging-networks/v1/questions_available';
+  var apiUrl = wpgpeaApiSettings.jsonUrl + 'planet4-engaging-networks/v1/questions_available';
   // var itemId = 417462;
 
   var questionsContainer = $(containerId);

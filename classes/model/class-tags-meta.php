@@ -58,6 +58,16 @@ if ( ! class_exists( 'Tags_Meta' ) ) {
 				true
 			);
 
+			wp_localize_script(
+				'p4nlbks_admin_questions_script',
+				'wpgpeaApiSettings',
+				array(
+					'jsonUrl' => esc_url_raw( get_rest_url() ),
+				)
+			);
+
+			wp_add_inline_script( 'p4nlbks_admin_questions_script', 'try{Typekit.load({ async: true });}catch(e){}' );
+
 			if ( isset( $wp_tag ) && $wp_tag instanceof \WP_term ) {
 				$engaging_campaign_id = get_term_meta( $wp_tag->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true );
 				?>
