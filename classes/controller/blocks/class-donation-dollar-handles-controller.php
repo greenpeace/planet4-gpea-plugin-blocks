@@ -138,115 +138,119 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
 
 				$fields[] =
-					[
-						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( 'One-off: <strong>%s</strong> <i>amount</i> (must be present to display the dollar handle)', 'planet4-gpea-blocks' ), $i ),
-						'attr'  => 'amount_handle_' . $i,
-						'type'  => 'number',
-						'meta'  => [
-							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter amount %s', 'planet4-gpea-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpea-blocks',
-							'data-element-type' => 'handle',
-							'data-element-name' => 'handle',
-							'data-element-number' => $i,
-						],
-					];
+						  [
+							  // translators: placeholder represents the ordinal of the field.
+							  'label' => sprintf( __( '<strong>One-off: %s</strong> <i>amount</i> (must be present to display the dollar handle)', 'planet4-gpea-blocks' ), $i ),
+							  'attr'  => 'amount_handle_' . $i,
+							  'type'  => 'number',
+							  'meta'  => [
+								  // translators: placeholder represents the ordinal of the field.
+								  'placeholder' => sprintf( __( 'Enter amount %s', 'planet4-gpea-blocks' ), $i ),
+								  'data-plugin' => 'planet4-gpea-blocks',
+								  'data-element-type' => 'handle',
+								  'data-element-name' => 'handle',
+								  'data-element-number' => $i,
+							  ],
+						  ];
 
 				$fields[] =
-					[
-						// translators: placeholder represents the ordinal of the field.
-						'label'       => sprintf( __( 'One-off: <strong>%s</strong> <i>image</i>', 'planet4-gpea-blocks' ), $i ),
-						'attr'        => 'img_handle_' . $i,
-						'type'        => 'attachment',
-						'libraryType' => array( 'image' ),
-						'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
-						'meta'        => [
-							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpea-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpea-blocks',
-							'data-element-type' => 'handle',
-							'data-element-name' => 'handle',
-							'data-element-number' => $i,
-						],
-					];
+						  [
+							  // translators: placeholder represents the ordinal of the field.
+							  'label'       => sprintf( __( '<strong>One-off: %s</strong> <i>image</i>', 'planet4-gpea-blocks' ), $i ),
+							  'attr'        => 'img_handle_' . $i,
+							  'type'        => 'attachment',
+							  'libraryType' => array( 'image' ),
+							  'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
+							  'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+							  'meta'     => [
+								  // translators: placeholder represents the ordinal of the field.
+								  'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpea-blocks' ), $i ),
+								  'data-plugin' => 'planet4-gpea-blocks',
+								  'data-element-type' => 'handle',
+								  'data-element-name' => 'handle',
+								  'data-element-number' => $i,
+							  ],
+						  ];
 
 				$fields[] =
-					[
-						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( 'One-off: <strong>%s</strong> <i>paragraph</i>', 'planet4-gpea-blocks' ), $i ),
-						'attr'  => 'paragraph_handle_' . $i,
-						'type'  => 'textarea',
-						'meta'  => [
-							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpea-blocks',
-							'data-element-type' => 'handle',
-							'data-element-name' => 'handle',
-							'data-element-number' => $i,
-						],
-					];
+						  [
+							  // translators: placeholder represents the ordinal of the field.
+							  'label' => sprintf( __( '<strong>One-off: %s</strong> <i>paragraph</i>', 'planet4-gpea-blocks' ), $i ),
+							  'attr'  => 'paragraph_handle_' . $i,
+							  'type'  => 'textarea',
+							  'meta'  => [
+								  // translators: placeholder represents the ordinal of the field.
+								  'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks' ), $i ),
+								  'data-plugin' => 'planet4-gpea-blocks',
+								  'data-element-type' => 'handle',
+								  'data-element-name' => 'handle',
+								  'data-element-number' => $i,
+							  ],
+						  ];
+
+			}
+
+			// This block will have at most MAX_REPEATER different items.
+			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
+				$fields[] =
+						  [
+							  // translators: placeholder represents the ordinal of the field.
+							  'label' => sprintf( __( '<strong>Recurring: %s</strong> <i>amount</i> (must be present to display the dollar handle)', 'planet4-gpea-blocks' ), $i ),
+							  'attr'  => 'recurring_amount_handle_' . $i,
+							  'type'  => 'number',
+							  'meta'  => [
+								  // translators: placeholder represents the ordinal of the field.
+								  'placeholder' => sprintf( __( 'Enter amount %s', 'planet4-gpea-blocks' ), $i ),
+								  'data-plugin' => 'planet4-gpea-blocks',
+								  'data-element-type' => 'handle',
+								  'data-element-name' => 'handle',
+								  'data-element-number' => $i,
+							  ],
+						  ];
 
 				$fields[] =
-					[
-						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( 'Recurring: <strong>%s</strong> <i>amount</i> (must be present to display the dollar handle)', 'planet4-gpea-blocks' ), $i ),
-						'attr'  => 'recurring_amount_handle_' . $i,
-						'type'  => 'number',
-						'meta'  => [
-							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter amount %s', 'planet4-gpea-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpea-blocks',
-							'data-element-type' => 'handle',
-							'data-element-name' => 'handle',
-							'data-element-number' => $i,
-						],
-					];
+						  [
+							  // translators: placeholder represents the ordinal of the field.
+							  'label'       => sprintf( __( '<strong>Recurring: %s</strong> <i>image</i>', 'planet4-gpea-blocks' ), $i ),
+							  'attr'        => 'recurring_img_handle_' . $i,
+							  'type'        => 'attachment',
+							  'libraryType' => array( 'image' ),
+							  'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
+							  'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+							  'meta'        => [
+								  // translators: placeholder represents the ordinal of the field.
+								  'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpea-blocks' ), $i ),
+								  'data-plugin' => 'planet4-gpea-blocks',
+								  'data-element-type' => 'handle',
+								  'data-element-name' => 'handle',
+								  'data-element-number' => $i,
+							  ],
+						  ];
 
 				$fields[] =
-					[
-						// translators: placeholder represents the ordinal of the field.
-						'label'       => sprintf( __( 'Recurring: <strong>%s</strong> <i>image</i>', 'planet4-gpea-blocks' ), $i ),
-						'attr'        => 'recurring_img_handle_' . $i,
-						'type'        => 'attachment',
-						'libraryType' => array( 'image' ),
-						'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
-						'meta'        => [
-							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpea-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpea-blocks',
-							'data-element-type' => 'handle',
-							'data-element-name' => 'handle',
-							'data-element-number' => $i,
-						],
-					];
-
-				$fields[] =
-					[
-						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( 'Recurring: <strong>%s</strong> <i>paragraph</i>', 'planet4-gpea-blocks' ), $i ),
-						'attr'  => 'recurring_paragraph_handle_' . $i,
-						'type'  => 'textarea',
-						'meta'  => [
-							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpea-blocks',
-							'data-element-type' => 'handle',
-							'data-element-name' => 'handle',
-							'data-element-number' => $i,
-						],
-					];
+						  [
+							  // translators: placeholder represents the ordinal of the field.
+							  'label' => sprintf( __( '<strong>Recurring: %s</strong> <i>paragraph</i>', 'planet4-gpea-blocks' ), $i ),
+							  'attr'  => 'recurring_paragraph_handle_' . $i,
+							  'type'  => 'textarea',
+							  'meta'  => [
+								  // translators: placeholder represents the ordinal of the field.
+								  'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks' ), $i ),
+								  'data-plugin' => 'planet4-gpea-blocks',
+								  'data-element-type' => 'handle',
+								  'data-element-name' => 'handle',
+								  'data-element-number' => $i,
+							  ],
+						  ];
 
 			}
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Donation Dollar Handles', 'planet4-gpea-blocks' ),
+				'label'             => __( 'GPEA | Donation Dollar Handles', 'planet4-gpea-blocks' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
-				'attrs'         => $fields,
-				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
+				'attrs'             => $fields,
+				'post_type'         => P4EABKS_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
