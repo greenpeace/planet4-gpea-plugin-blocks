@@ -1,66 +1,89 @@
 {% block support_launcher %}
-    <!-- TODO Frontend all -->
-    {% if ( fields ) %}
-        {% if ( fields.layout == 'form' ) %}
-            {% set classname = 'form' %}
-        {% elseif ( fields.layout == 'button' ) %}
-            {% set classname = 'button' %}
-        {% else %}
-            <!-- set default or do nothing -->
-	    {% set classname = 'some_default' %}
-        {% endif %}
-        <section class="layout-{{ classname }}">
-            {% if fields.title %}
-	        <h2>{{ fields.title }}</h2>
-	    {% endif %}
-            {% if fields.subtitle %}
-	        <p>{{ fields.subtitle }}</p>
-	    {% endif %}
-            {% if fields.paragraph %}
-	        <p>{{ fields.paragraph }}</p>
-	    {% endif %}
-            {% if fields.thanks_message %}
-                <!-- Reminder frontend: this fields is invisible initially -->
-                <div style="display: none;">
-                    <p>{{ fields.thanks_message }}</p>
-                </div>
-	    {% endif %}
-            {% if fields.img %}
-	        <img src="{{ fields.img }}" />
-            {% endif %}
-            {% if ( fields.layout == 'form' ) %}
-                {% if fields.accordion_label %}
-	            <p>{{ fields.accordion_label }}</p>
-                {% endif %}
-                <div class="hidden_accordion_form">
-                    {% if fields.recipient_email %}
-                        <!-- Frontend note: jQuery hooks
-                             .form-support-launcher-message
-                             .form-support-launcher
-                        -->
-                        <p class="form-support-launcher-message"></p>
-                        <form class="form-support-launcher">
-                            <input type="hidden" name="recipient_email" value="{{ fields.recipient_email }}">
-                            <input type="hidden" name="subject" value="contact from {{ fields.title }}">
-                            <input type="hidden" name="send_to" value="{{ fields.admin_ajax }}">
-                            <p>
-                                <input type="text" name="sender_name" value="" placeholder="your name" required><br />
-                                <input type="email" name="sender_email" value="" placeholder="your email" required><br />
-                                <textarea name="message" placeholder="your message" required></textarea><br />
-                                <input type="submit" name="send" value="Send"><br />
-                            </p>
-                            {{ fields.wp_nonce|raw }}
-                        </form>
-                    {% else %}
-                        <p>Missing field in backend, please check this module configuration</p>
-                    {% endif %}
-                </div>
-                
-            {% elseif ( fields.layout == 'button' ) %}
-                {% if fields.button_label and fields.button_url %}
-                    <a href="{{ fields.button_url }}">{{ fields.button_label }}</a>
-                {% endif %}
-            {% endif %}            
-        </section>
-    {% endif %}
+	{% if ( fields ) %}
+
+		{#% if ( fields.layout == 'form' ) %}
+			{% set classname = 'form' %}
+		{% elseif ( fields.layout == 'button' ) %}
+			{% set classname = 'button' %}
+		{% else %}
+			<!-- set default or do nothing -->
+			{% set classname = 'some_default' %}
+		{% endif %#}
+
+		<div class="support-launcher">
+			{% if fields.img %}
+				<img src="{{ fields.img }}" alt="" />
+			{% endif %}
+			{% if fields.title %}
+				<h3>{{ fields.title }}</h3>
+			{% endif %}
+			{% if fields.subtitle %}
+				<p class="subtitle">{{ fields.subtitle }}</p>
+			{% endif %}
+			{% if fields.paragraph %}
+				<p>{{ fields.paragraph }}</p>
+			{% endif %}
+
+			{% if fields.thanks_message %}
+				<!-- Reminder frontend: this fields is invisible initially -->
+				<div style="display: none;">
+					<p>{{ fields.thanks_message }}</p>
+				</div>
+			{% endif %}
+
+			{% if ( fields.layout == 'form' ) %}
+
+				{% set toggleeId = 'togglee-' ~ random() %}
+				{% if fields.accordion_label %}
+					<p>
+						<a href="javascript:void(0)" class="toggle" data-togglee-selector=".{{ toggleeId }}">
+							{{ fields.accordion_label }}
+						</a>
+					</p>
+				{% endif %}
+				<div class="togglee {{ toggleeId }}">
+					{% if fields.recipient_email %}
+						<!-- Frontend note: jQuery hooks
+							 .form-support-launcher-message
+							 .form-support-launcher
+						-->
+						<form class="form-support-launcher launcher-form" method="POST" action="#">
+							<input type="hidden" name="recipient_email" value="{{ fields.recipient_email }}">
+							<input type="hidden" name="subject" value="contact from {{ fields.title }}">
+							<input type="hidden" name="send_to" value="{{ fields.admin_ajax }}">
+							<div class="form-group">
+								<label for="launcher-form-name">Your name</label>
+								<input id="launcher-form-name" name="name" type="text">
+							</div>
+							<div class="form-group">
+								<label for="launcher-form-email">Your e-mail</label>
+								<input id="launcher-form-email" name="email" type="email">
+							</div>
+							<div class="form-group">
+								<label for="launcher-form-message">Your message</label>
+								<textarea id="launcher-form-message" name="message"></textarea>
+							</div>
+							<button type="submit" class="button fluid">Submit</button>
+							{{ fields.wp_nonce|raw }}
+							<p class="form-support-launcher-message"></p>
+							<!-- Examples:
+								<p class="success form-support-launcher-message">Your message has been submitted!</p>
+								<p class="error form-support-launcher-message">There was an error. Please try again.</p>
+							-->
+						</form>
+					{% else %}
+						<p>Missing field in backend, please check this module configuration</p>
+					{% endif %}
+				</div>
+
+			{% elseif ( fields.layout == 'button' ) %}
+				{% if fields.button_label and fields.button_url %}
+					<p>
+						<a class="button secondary" href="{{ fields.button_url }}">{{ fields.button_label }}</a>
+					</p>
+				{% endif %}
+			{% endif %}
+		</div>
+
+	{% endif %}
 {% endblock %}
