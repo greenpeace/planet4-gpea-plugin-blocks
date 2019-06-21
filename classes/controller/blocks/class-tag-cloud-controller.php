@@ -45,6 +45,26 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 
 			$fields = [
 				[
+					'label'       => 'Select the layout',
+					'description' => 'Select the layout',
+					'attr'        => 'layout',
+					'type'        => 'radio',
+					'options' => [
+						[
+							'value' => 'Standard',
+							'label' => __( 'Standard', 'planet4-gpea-blocks' ),
+							'desc'  => 'Standard list of cloud',
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+						],
+						[
+							'value' => 'following',
+							'label' => __( 'Current user following list', 'planet4-gpea-blocks' ),
+							'desc'  => 'Followed list with newsletter subscription',
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+						],
+					],
+				],
+				[
 					'label' => __( 'Title', 'planet4-gpea-blocks' ),
 					'attr'  => 'title',
 					'type'  => 'text',
@@ -95,7 +115,7 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 
 			foreach ( $campaigns as $campaign ) {
 				$campaign->engaging_id = get_term_meta( $campaign->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true );
-				if ( $campaign->engaging_id ) $attributes['campaigns'] = $campaigns;
+				if ( $campaign->engaging_id ) $attributes['campaigns'][] = $campaign;
 			}
 
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;

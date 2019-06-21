@@ -1,33 +1,58 @@
 {% block issue_list %}
 	{% if ( fields ) %}
 	<section class="section-choose-topics">
-		<form id="p4en_form" name="p4en_form" method="post" novalidate>
-
-			<input type="hidden" name="enblock_submit" value="">
-			<input type="hidden" name="en_page_id" value="{{ fields.gpea_default_en_subscription_page|raw }}">
-			<input type="hidden" name="thankyou_title" value="{{ fields.gpea_subscription_page_thankyou_title|raw }}">
-			<input type="hidden" name="thankyou_subtitle" value="{{ fields.gpea_subscription_page_thankyou_subtitle|raw }}">
-			<input type="hidden" name="enform_goal" id="enform_goal" value="">
-
-			<div class="ct-container">
-				<div class="content">
-					<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-					<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-					<div class="tags">
-					{% for campaign in fields.campaigns %}
-						<div data-engaging='{{ campaign.engaging_id }}' data-slug='{{ campaign.slug }}' class="topic-button button tag">{{ campaign.name|raw }}</div>
-						<input id="en__field_supporter_questions_{{ campaign.engaging_id }}" type="hidden" class="js-question-{{ campaign.slug }}" value="" name="supporter.questions.{{ campaign.engaging_id }}">
-					{% endfor %}
-					</div>
-					<a id="topic-submit-button" class="button">TODO 立即關注</a>
-
-					<div class="tag_cloud_form" style="display: none;">
-						{{ fields.form|shortcodes|raw }}
-					</div>
-
-				</div>
+		{% if (fields.layout) == 'following' %}
+		<div class="tag-cloud__following ct-container">
+			<div class="content">
+				<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+				<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+				<div class="tags js-tag-cloud">
+				{% for campaign in fields.campaigns %}
+					<div data-engaging='{{ campaign.engaging_id }}' data-slug='{{ campaign.slug }}' data-taxonomy="{{ campaign.taxonomy }}" class="topic-button button tag" style="display: none">{{ campaign.name|raw }}</div>
+				{% endfor %}
+				</div>					
 			</div>
-		</form>
+			<div class="content">
+				test
+				<form id="p4en_form" name="p4en_form" method="post" novalidate>
+					<input type="hidden" name="enblock_submit" value="">
+					<input type="hidden" name="en_page_id" value="{{ fields.gpea_default_en_subscription_page|raw }}">
+					<input type="hidden" name="thankyou_title" value="{{ fields.gpea_subscription_page_thankyou_title|raw }}">
+					<input type="hidden" name="thankyou_subtitle" value="{{ fields.gpea_subscription_page_thankyou_subtitle|raw }}">
+					<input type="hidden" name="enform_goal" id="enform_goal" value="">
+					{{ fields.form|shortcodes|raw }}
+				</form>	
+			</div>			
+		</div>
+		{% else %}
+			<form id="p4en_form" name="p4en_form" method="post" novalidate>
+
+				<input type="hidden" name="enblock_submit" value="">
+				<input type="hidden" name="en_page_id" value="{{ fields.gpea_default_en_subscription_page|raw }}">
+				<input type="hidden" name="thankyou_title" value="{{ fields.gpea_subscription_page_thankyou_title|raw }}">
+				<input type="hidden" name="thankyou_subtitle" value="{{ fields.gpea_subscription_page_thankyou_subtitle|raw }}">
+				<input type="hidden" name="enform_goal" id="enform_goal" value="">
+
+				<div class="ct-container">
+					<div class="content">
+						<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+						<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+						<div class="tags js-tag-cloud">
+						{% for campaign in fields.campaigns %}
+							<div data-engaging='{{ campaign.engaging_id }}' data-slug='{{ campaign.slug }}' data-taxonomy="{{ campaign.taxonomy }}" class="topic-button button tag">{{ campaign.name|raw }}</div>
+							<input id="en__field_supporter_questions_{{ campaign.engaging_id }}" type="hidden" class="js-question-{{ campaign.slug }}" value="" name="supporter.questions.{{ campaign.engaging_id }}">
+						{% endfor %}
+						</div>
+						<a id="topic-submit-button" class="button">TODO 立即關注</a>
+
+						<div class="tag_cloud_form" style="display: none;">
+							{{ fields.form|shortcodes|raw }}
+						</div>
+
+					</div>
+				</div>
+			</form>
+		{% endif %}
 	</section>
 	{% endif %}
 {% endblock %}
