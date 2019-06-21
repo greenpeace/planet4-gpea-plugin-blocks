@@ -2,8 +2,7 @@
 	{% if ( fields ) %}
 	<section class="section-article-row">
 		<div class="ct-container">
-			<!-- TODO: add link -->
-			<h2><a href="#">{{ fields.title|e('wp_kses_post')|raw }}<span class="icon-chevron-right"></span></a></h2>
+			<h2><a href="{{ post.link }}">{{ fields.title|e('wp_kses_post')|raw }}<span class="icon-chevron-right"></span></a></h2>
 			<div class="swiper-container mini-swiper">
 				<div class="swiper-wrapper">
 					{% for post in fields.posts %}
@@ -13,11 +12,11 @@
 							<p><a href="#" class="button">Click here</a></p>
 						</div>
 					{% endif %}
-						<a href="#" class="swiper-slide card-mini">
+						<a href="{{ post.link }}" class="swiper-slide card-mini" data-index="{{ fields.index }}">
 							{% if post.img_url %}
 								<div
 									class="thumbnail lazy"
-									data-bg="url({{ group.post.img_url }})"
+									data-bg="url({{ post.img_url }})"
 								></div>
 							{% endif %}
 							<div class="meta-box">
@@ -25,8 +24,7 @@
 									<span>{{ post.post_date }}</span>
 								</div>
 								<div>
-									<!-- TODO: print post type -->
-									<span>新聞</span>
+									<span>{{ post.news_type }}</span>
 								</div>
 							</div>
 							<p class="caption">{{ post.post_title }}</p>

@@ -150,12 +150,42 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 
 				if ( $posts ) {
 					foreach ( $posts as $post ) {
+						$post->link = get_permalink( $post->ID );
 						$post->post_date = date( 'Y - m - d' , strtotime( $post->post_date ) );
 						$post->tags = array_filter(
 							get_the_tags( $post->ID ), function( $tag ) use ( $tag_ids ) {
 								return in_array( $tag->term_id, $tag_ids, true );
 							}
 						);
+						if ( has_post_thumbnail( $post->ID ) ) {
+							$img_id = get_post_thumbnail_id( $post->ID );
+							$img_data = wp_get_attachment_image_src( $img_id, 'medium_large' );
+							$post->img_url = $img_data[0];
+						}
+						$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' ); 					
+						if ( $news_type ) {
+							$post->news_type = $news_type[0]->name;
+						}
+						$planet4_options = get_option( 'planet4_options' );
+						$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+						if ( ! $main_issues_category_id ) {
+							$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+							if ( $main_issues_category ) $main_issues_category_id = $main_issues_category->term_id;
+						}
+
+						if ( $main_issues_category_id ) {
+							$categories = get_the_category( $post->ID );
+							if ( ! empty( $categories ) ) {
+								$categories = array_filter( $categories, function( $cat ) use ( $main_issues_category_id ) {
+									return $cat->category_parent === intval( $main_issues_category_id );
+								});
+								if ( ! empty( $categories ) ) {
+									$first_category = array_values( $categories )[0];
+									$post->main_issue = $first_category->name;
+									$post->main_issue_slug = $first_category->slug;
+								}
+							}
+						}
 					}
 				}
 
