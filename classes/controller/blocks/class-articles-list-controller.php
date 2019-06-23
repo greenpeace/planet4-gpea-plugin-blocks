@@ -84,6 +84,10 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 							'value' => 'press-release',
 							'label' => __( 'Press Release', 'planet4-gpea-blocks' ),
 						],
+						[
+							'value' => 'video',
+							'label' => __( 'Video', 'planet4-gpea-blocks' ),
+						],
 					],
 				],
 				[
@@ -156,6 +160,15 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 							'taxonomy' => 'p4-page-type',
 							'field' => 'slug',
 							'terms' => 'press-release',
+						),
+					);
+				}
+				if ( isset( $attributes['article_post_type'] ) && 'video' === $attributes['article_post_type'] ) {
+					$options['tax_query'] = array(
+						array(
+							'taxonomy' => 'p4-page-type',
+							'field' => 'slug',
+							'terms' => 'video',
 						),
 					);
 				}
