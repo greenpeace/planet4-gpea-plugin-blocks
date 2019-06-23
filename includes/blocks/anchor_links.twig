@@ -1,8 +1,10 @@
 {% block anchor_links %}
-    <!-- TODO Frontend all -->
-    {% if ( fields ) %}
-        <section>
-            <h2 id="{{ fields.anchor_id }}" data-labelmenu="{{ fields.menu_label }}" class="js-anchor-menu">{{ fields.anchor_text }}</h2>
-        </section>
-    {% endif %}
+  <!-- TODO Frontend all -->
+  {% if ( fields ) %}
+    <section class="section-anchor-link">
+      <div class="ct-container">
+        <h2 id="{{ fields.anchor_id }}" data-labelmenu="{{ fields.menu_label }}" class="js-anchor-menu">{{ fields.anchor_text }}</h2>
+      </div>
+    </section>
+  {% endif %}
 {% endblock %}

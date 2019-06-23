@@ -1,69 +1,70 @@
 {% block slideshow %}
-	{% if ( fields ) %}
-		{% if ( fields.layout == 'light' ) %}
-			<!-- Light BG, labeled slides -->
-			{% set classname = 'light' %}
-			{% set cardclass = '' %}
-		{% else %}
-			<!-- Dark BG, dotted -->
-			{% set classname = 'dark' %}
-			{% set cardclass = 'wide-text' %}
-		{% endif %}
-		<section class="section-slideshow layout-{{ classname }}">
-			<div class="ct-container">
-				{% if fields.title %}
-					<h2>{{ fields.title }}</h2>
-				{% endif %}
-				{% if fields.paragraph %}
-					<p>{{ fields.title }}</p>
-				{% endif %}
+  {% if ( fields ) %}
+    {% if ( fields.layout == 'light' ) %}
+      <!-- Light BG, labeled slides -->
+      {% set classname = 'light' %}
+      {% set cardclass = '' %}
+    {% else %}
+      <!-- Dark BG, dotted -->
+      {% set classname = 'dark' %}
+      {% set cardclass = 'wide-text' %}
+    {% endif %}
+    {% set swiperId = 'swiper-' ~ i ~ random() %}
+    <section class="section-slideshow layout-{{ classname }}">
+      <div class="ct-container">
+        {% if fields.title %}
+          <h2>{{ fields.title }}</h2>
+        {% endif %}
+        {% if fields.paragraph %}
+          <p>{{ fields.title }}</p>
+        {% endif %}
 
-				{% if ( fields.layout == 'light' ) %}
-					<div class="swiper-container label-swiper">
-						<div class="swiper-wrapper">
-							{% for i in 1..25 %}
-							{% if fields['title_slide_'~i] %}
-								<div class="swiper-slide label-slide">{{ fields['label_slide_'~i] }}</div>
-							{% endif %}
-							{% endfor %}
-						</div>
-					</div>
-				{% endif %}
+        {% if ( fields.layout == 'light' ) %}
+          <div class="swiper-container label-swiper" data-controls=".{{ swiperId }}">
+            <div class="swiper-wrapper">
+              {% for i in 1..25 %}
+                {% if fields['title_slide_'~i] %}
+                  <div class="swiper-slide label-slide">{{ fields['label_slide_'~i] }}</div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
 
-			<div class="swiper-container maxi-swiper maxi-swiper-centered cards-swiper">
-				<div class="swiper-wrapper">
-				{% for i in 1..25 %}
-					{% if fields['title_slide_'~i] %}
+        <div class="swiper-container maxi-swiper maxi-swiper-centered cards-swiper controlled-swiper {{ swiperId }}">
+          <div class="swiper-wrapper">
+            {% for i in 1..25 %}
+              {% if fields['title_slide_'~i] %}
 
-						<div class="swiper-slide card-explainer {{ cardclass }}">
-							<div class="description">
-								<h4>{{ fields['title_slide_'~i] }}</h4>
-								<p class="subtitle">{{ fields['subtitle_slide_'~i] }}</p>
-								<p>{{ fields['paragraph_slide_'~i] }}</p>
-							</div>
-							<div class="thumbnail lazy" data-bg="url({{ fields['img_slide_'~i] }})"></div>
-						</div>
+                <div class="swiper-slide card-explainer {{ cardclass }}">
+                  <div class="description">
+                    <h4>{{ fields['title_slide_'~i] }}</h4>
+                    <p class="subtitle">{{ fields['subtitle_slide_'~i] }}</p>
+                    <p>{{ fields['paragraph_slide_'~i] }}</p>
+                  </div>
+                  <div class="thumbnail lazy" data-bg="url({{ fields['img_slide_'~i] }})"></div>
+                </div>
 
-					{% endif %}
-				{% endfor %}
-				</div>
-				{% if not ( fields.layout == 'light' ) %}
-					<div class="swiper-pagination"></div>
-				{% endif %}
-				<div class="swiper-button-next">
-					<span class="icon-chevron-right"></span>
-				</div>
-				<div class="swiper-button-prev">
-					<span class="icon-chevron-right"></span>
-				</div>
-			</div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% if not ( fields.layout == 'light' ) %}
+            <div class="swiper-pagination"></div>
+          {% endif %}
+          <div class="swiper-button-next">
+            <span class="icon-chevron-right"></span>
+          </div>
+          <div class="swiper-button-prev">
+            <span class="icon-chevron-right"></span>
+          </div>
+        </div>
 
-				{% if fields.link_label and fields.link_url %}
-					<p class="see-more">
-						<a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
-					</p>
-				{% endif %}
-			</div>
-		</section>
-	{% endif %}
+        {% if fields.link_label and fields.link_url %}
+          <p class="see-more">
+            <a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
+          </p>
+        {% endif %}
+      </div>
+    </section>
+  {% endif %}
 {% endblock %}

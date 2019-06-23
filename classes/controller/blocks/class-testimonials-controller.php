@@ -56,6 +56,12 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
+							'value' => 'tiny-carousel',
+							'label' => __( 'Tiny carousel', 'planet4-gpea-blocks' ),
+							'desc'  => 'Tiny carousel',
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+						],
+						[
 							'value' => 'list',
 							'label' => __( 'List', 'planet4-gpea-blocks' ),
 							'desc'  => 'List',
