@@ -133,6 +133,9 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 			// 	return false;
 			// }
 
+			// nonce for form
+			$attributes['nonce_action'] = 'enform_submit';
+
 			return [
 				'fields' => $attributes,
 			];

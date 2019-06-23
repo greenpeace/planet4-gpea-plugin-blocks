@@ -67,6 +67,26 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					],
 				],
 				[
+					'label'       => 'Post type',
+					'description' => 'Articles to be shown',
+					'attr'        => 'article_post_type',
+					'type'        => 'select',
+					'options' => [
+						[
+							'value' => 'any',
+							'label' => __( 'Any type (default)', 'planet4-gpea-blocks' ),
+						],
+						[
+							'value' => 'update',
+							'label' => __( 'Updates', 'planet4-gpea-blocks' ),
+						],
+						[
+							'value' => 'press-release',
+							'label' => __( 'Press Release', 'planet4-gpea-blocks' ),
+						],
+					],
+				],
+				[
 					'label'    => __( 'Select tags', 'planet4-gpea-blocks' ),
 					'attr'     => 'tag_ids',
 					'type'     => 'term_select',
@@ -120,6 +140,26 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					'orderby'        => 'date',
 					'posts_per_page' => 4,
 				);
+
+				if ( isset( $attributes['article_post_type'] ) && 'update' === $attributes['article_post_type'] ) {
+					$options['tax_query'] = array(
+						array(
+							'taxonomy' => 'p4-page-type',
+							'field' => 'slug',
+							'terms' => 'update',
+						),
+					);
+				}
+				if ( isset( $attributes['article_post_type'] ) && 'press-release' === $attributes['article_post_type'] ) {
+					$options['tax_query'] = array(
+						array(
+							'taxonomy' => 'p4-page-type',
+							'field' => 'slug',
+							'terms' => 'press-release',
+						),
+					);
+				}
+
 				$query = new \WP_Query( $options );
 
 				if ( $query->posts ) {
