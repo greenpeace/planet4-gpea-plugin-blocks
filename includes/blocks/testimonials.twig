@@ -71,6 +71,7 @@
                       {% endif %}
                       <div class="name">{{ post.post_title|e('wp_kses_post')|raw }}</div>
                       <div class="position">{{ post.team_role|e('wp_kses_post')|raw }}</div>
+                      <p class="caption">{{ post.short_bio|e('wp_kses_post')|raw }}</p>
                     </div>
                   </div>
                 {% endfor %}
@@ -78,22 +79,22 @@
             </div>
           </div>
 
-        {% elseif ( fields.layout == 'list' ) %}
+          {#% elseif ( fields.layout == 'list' ) %}
 
-          {% if fields.posts %}
-            {% for post in fields.posts %}
-              <div class="card-testimonial">
-                <div class="profile">
-                  {% if post.img_url %}
-                    <img src="{{ post.img_url }}" alt=""/>
-                  {% endif %}
-                  <div class="name">{{ post.post_title|e('wp_kses_post')|raw }}</div>
-                  <div class="position">{{ post.team_role|e('wp_kses_post')|raw }}</div>
-                </div>
-                <p>{{ post.post_content }}</p>
-              </div>
-            {% endfor %}
-          {% endif %}
+                              {% if fields.posts %}
+                                {% for post in fields.posts %}
+                                  <div class="card-testimonial">
+                                    <div class="profile">
+                                      {% if post.img_url %}
+                                        <img src="{{ post.img_url }}" alt=""/>
+                                      {% endif %}
+                                      <div class="name">{{ post.post_title|e('wp_kses_post')|raw }}</div>
+                                      <div class="position">{{ post.team_role|e('wp_kses_post')|raw }}</div>
+                                    </div>
+                                    <p>{{ post.post_content }}</p>
+                                  </div>
+                                {% endfor %}
+                              {% endif %#}
 
         {% endif %}
       </div>

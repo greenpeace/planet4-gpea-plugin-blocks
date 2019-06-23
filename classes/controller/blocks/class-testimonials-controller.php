@@ -61,12 +61,12 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 							'desc'  => 'Tiny carousel',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
-						[
-							'value' => 'list',
-							'label' => __( 'List', 'planet4-gpea-blocks' ),
-							'desc'  => 'List',
-							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
-						],
+						// [
+						// 	'value' => 'list',
+						// 	'label' => __( 'List', 'planet4-gpea-blocks' ),
+						// 	'desc'  => 'List',
+						// 	'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+						// ],
 					],
 				],
 				[
