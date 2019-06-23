@@ -252,12 +252,14 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 
 				$options = array(
 					'post_type'      => array( 'post', 'page' ),
-					'tag__in'        => explode( ',', $attributes['tag_ids'] ),
 					'post_status'    => 'publish',
 					'orderby'        => 'date',
 					'posts_per_page' => 1,
 					'order'          => 'ASC',
 				);
+				if ( isset( $attributes['tag_ids'] ) ) {
+					$options['tag__in'] = explode( ',', $attributes['tag_ids'] );
+				}
 				$query = new \WP_Query( $options );
 				if ( $query->posts ) {
 					$attributes['year_oldest'] = date( 'Y' , strtotime( $query->posts[0]->post_date ) );
