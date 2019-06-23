@@ -16,7 +16,7 @@
 					{% if fields.posts %}
 						{% for post in fields.posts %}
 							{% if post.is_campaign %}
-								<div class="swiper-slide card-petition" data-pageid="{{ post.engaging_pageid }}" data-target="{{ post.engaging_target }}">
+								<div class="swiper-slide card-petition" data-index="{{ loop.index }}" data-postid="{{ post.ID }}" data-pageid="{{ post.engaging_pageid }}" data-target="{{ post.engaging_target }}">
 									<div
 									class="thumbnail"
 									style="background-image: url({{ post.img_url }})"
@@ -36,8 +36,7 @@
 									</div>
 								</div>
 							{% else %}
-								<!-- TODO: link to post -->
-								<a href="{{ post.link }}" class="swiper-slide card-update">
+								<a href="{{ post.link }}" class="swiper-slide card-update"  data-index="{{ loop.index }}" data-postid="{{ post.ID }}">
 									<div
 									class="thumbnail"
 									style="background-image: url({{ post.img_url }})"
@@ -45,9 +44,7 @@
 									<div class="box">
 										<div class="meta-box">
 											<div>
-												<!-- TODO: get right issue -->
 												<span class="issue {{ post.main_issue_slug }}">{{ post.main_issue|raw }}</span>
-												<!-- TODO: [post type] -->
 												<span>{{ post.news_type }}</span>
 											</div>
 											<div>
@@ -57,7 +54,6 @@
 														<span class="icon-clock"></span> {{ post.reading_time }} 閱讀
 													{% endif %}
 												</span>
-												<!-- TODO: -->
 												<span>{{ post.date }}</span>
 											</div>
 										</div>
