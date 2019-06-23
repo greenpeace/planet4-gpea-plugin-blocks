@@ -70,23 +70,16 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					'label'       => 'Post type',
 					'description' => 'Articles to be shown',
 					'attr'        => 'article_post_type',
-					'type'        => 'select',
-					'options' => [
-						[
-							'value' => 'any',
-							'label' => __( 'Any type (default)', 'planet4-gpea-blocks' ),
-						],
-						[
-							'value' => 'update',
-							'label' => __( 'Updates', 'planet4-gpea-blocks' ),
-						],
-						[
-							'value' => 'press-release',
-							'label' => __( 'Press Release', 'planet4-gpea-blocks' ),
-						],
-						[
-							'value' => 'video',
-							'label' => __( 'Video', 'planet4-gpea-blocks' ),
+					'type'        => 'term_select',
+					'taxonomy'    => 'p4-page-type',
+					'multiple'    => false,
+					'meta'        => [
+						'select2_options' => [
+							'allowClear'             => true,
+							'placeholder'            => __( 'Select post type', 'planet4-gpea-blocks' ),
+							'closeOnSelect'          => true,
+							'minimumInputLength'     => 0,
+							'maximumSelectionLength' => 10,
 						],
 					],
 				],
@@ -145,30 +138,12 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				$options['tag__in'] = $tag_ids;
 			}
 
-			if ( isset( $attributes['article_post_type'] ) && 'update' === $attributes['article_post_type'] ) {
+			if ( isset( $attributes['article_post_type'] ) ) {
 				$options['tax_query'] = array(
 					array(
 						'taxonomy' => 'p4-page-type',
-						'field' => 'slug',
-						'terms' => 'update',
-					),
-				);
-			}
-			if ( isset( $attributes['article_post_type'] ) && 'press-release' === $attributes['article_post_type'] ) {
-				$options['tax_query'] = array(
-					array(
-						'taxonomy' => 'p4-page-type',
-						'field' => 'slug',
-						'terms' => 'press-release',
-					),
-				);
-			}
-			if ( isset( $attributes['article_post_type'] ) && 'video' === $attributes['article_post_type'] ) {
-				$options['tax_query'] = array(
-					array(
-						'taxonomy' => 'p4-page-type',
-						'field' => 'slug',
-						'terms' => 'video',
+						'field'    => 'id',
+						'terms'    => $attributes['article_post_type'],
 					),
 				);
 			}
