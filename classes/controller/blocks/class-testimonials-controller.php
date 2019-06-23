@@ -175,6 +175,9 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 						$team_role = get_post_meta( $post->ID, 'p4-gpea_team_role', true );
 						$post->team_role = $team_role ?? '';
 
+						$short_bio = get_post_meta( $post->ID, 'p4-gpea_short_bio', true );
+						$post->short_bio = $short_bio ?? '';
+
 						$formatted_posts[] = $post;
 					}
 				}

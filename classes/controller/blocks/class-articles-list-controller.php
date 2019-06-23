@@ -84,6 +84,10 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 							'value' => 'press-release',
 							'label' => __( 'Press Release', 'planet4-gpea-blocks' ),
 						],
+						[
+							'value' => 'video',
+							'label' => __( 'Video', 'planet4-gpea-blocks' ),
+						],
 					],
 				],
 				[
@@ -129,95 +133,105 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 
 			$formatted_posts = [];
 
+			$options = array(
+				'post_type'      => array( 'post', 'page' ),
+				'post_status'    => 'publish',
+				'orderby'        => 'date',
+				'posts_per_page' => 4,
+			);
+
 			if ( isset( $attributes['tag_ids'] ) ) {
-
 				$tag_ids = array_map( 'intval', explode( ',', $attributes['tag_ids'] ) );
+				$options['tag__in'] = $tag_ids;
+			}
 
-				$options = array(
-					'post_type'      => array( 'post', 'page' ),
-					'tag__in'        => $tag_ids,
-					'post_status'    => 'publish',
-					'orderby'        => 'date',
-					'posts_per_page' => 4,
+			if ( isset( $attributes['article_post_type'] ) && 'update' === $attributes['article_post_type'] ) {
+				$options['tax_query'] = array(
+					array(
+						'taxonomy' => 'p4-page-type',
+						'field' => 'slug',
+						'terms' => 'update',
+					),
 				);
+			}
+			if ( isset( $attributes['article_post_type'] ) && 'press-release' === $attributes['article_post_type'] ) {
+				$options['tax_query'] = array(
+					array(
+						'taxonomy' => 'p4-page-type',
+						'field' => 'slug',
+						'terms' => 'press-release',
+					),
+				);
+			}
+			if ( isset( $attributes['article_post_type'] ) && 'video' === $attributes['article_post_type'] ) {
+				$options['tax_query'] = array(
+					array(
+						'taxonomy' => 'p4-page-type',
+						'field' => 'slug',
+						'terms' => 'video',
+					),
+				);
+			}
 
-				if ( isset( $attributes['article_post_type'] ) && 'update' === $attributes['article_post_type'] ) {
-					$options['tax_query'] = array(
-						array(
-							'taxonomy' => 'p4-page-type',
-							'field' => 'slug',
-							'terms' => 'update',
-						),
-					);
-				}
-				if ( isset( $attributes['article_post_type'] ) && 'press-release' === $attributes['article_post_type'] ) {
-					$options['tax_query'] = array(
-						array(
-							'taxonomy' => 'p4-page-type',
-							'field' => 'slug',
-							'terms' => 'press-release',
-						),
-					);
-				}
+			$query = new \WP_Query( $options );
 
-				$query = new \WP_Query( $options );
+			if ( $query->posts ) {
+				foreach ( $query->posts as $post ) {
+					$post->link = get_permalink( $post->ID );
+					if ( has_post_thumbnail( $post->ID ) ) {
+						$img_id = get_post_thumbnail_id( $post->ID );
+						$img_data = wp_get_attachment_image_src( $img_id, 'medium_large' );
+						$post->img_url = $img_data[0];
+					}
 
-				if ( $query->posts ) {
-					foreach ( $query->posts as $post ) {
-						$post->link = get_permalink( $post->ID );
-						if ( has_post_thumbnail( $post->ID ) ) {
-							$img_id = get_post_thumbnail_id( $post->ID );
-							$img_data = wp_get_attachment_image_src( $img_id, 'medium_large' );
-							$post->img_url = $img_data[0];
-						}
+					$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' ); 					
+					if ( $news_type ) {
+						$post->news_type = $news_type[0]->name;
+					}
 
-						$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' ); 					
-						if ( $news_type ) {
-							$post->news_type = $news_type[0]->name;
-						}
+					// get related main issues!
 
-						// get related main issues!
+					$planet4_options = get_option( 'planet4_options' );
+					$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+					if ( ! $main_issues_category_id ) {
+						$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+						if ( $main_issues_category ) $main_issues_category_id = $main_issues_category->term_id;
+					}
 
-						$planet4_options = get_option( 'planet4_options' );
-						$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
-						if ( ! $main_issues_category_id ) {
-							$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
-							if ( $main_issues_category ) $main_issues_category_id = $main_issues_category->term_id;
-						}
-
-						if ( $main_issues_category_id ) {
-							$categories = get_the_category( $post->ID );
+					if ( $main_issues_category_id ) {
+						$categories = get_the_category( $post->ID );
+						if ( ! empty( $categories ) ) {
+							$categories = array_filter( $categories, function( $cat ) use ( $main_issues_category_id ) {
+								return $cat->category_parent === intval( $main_issues_category_id );
+							});
 							if ( ! empty( $categories ) ) {
-								$categories = array_filter( $categories, function( $cat ) use ( $main_issues_category_id ) {
-									return $cat->category_parent === intval( $main_issues_category_id );
-								});
-								if ( ! empty( $categories ) ) {
-									$first_category = array_values( $categories )[0];
-									$post->main_issue = $first_category->name;
-									$post->main_issue_slug = $first_category->slug;
-								}
+								$first_category = array_values( $categories )[0];
+								$post->main_issue = $first_category->name;
+								$post->main_issue_slug = $first_category->slug;
 							}
 						}
-
-						$formatted_posts[] = $post;
 					}
+
+					$formatted_posts[] = $post;
 				}
+			}
 
-				wp_reset_postdata();
+			wp_reset_postdata();
 
-				$attributes['posts'] = $formatted_posts;
-				$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
+			$attributes['posts'] = $formatted_posts;
+			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
-				// Layout-specific queries.
-				if ( 'tag_filters' === $attributes['layout'] ) {
+			// Layout-specific queries.
+			if ( 'tag_filters' === $attributes['layout'] ) {
 
-					// $tags = get_terms(
-					// 	'post_tag',
-					// 	array(
-					// 		'include' => $tag_ids,
-					// 	)
-					// );
+				// $tags = get_terms(
+				// 	'post_tag',
+				// 	array(
+				// 		'include' => $tag_ids,
+				// 	)
+				// );
 
+				if ( isset( $attributes['tag_ids'] ) ) {
 					$tag_names = array();
 					foreach ( $tag_ids as $tag_id ) {
 						$tag = get_term($tag_id);
@@ -232,42 +246,42 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					// );
 
 					$attributes['tags'] = array_combine( $tag_names, $tag_ids );
-
-				} elseif ( 'dropdown_filters' === $attributes['layout'] ) {
-
-					$options = array(
-						'post_type'      => array( 'post', 'page' ),
-						'tag__in'        => explode( ',', $attributes['tag_ids'] ),
-						'post_status'    => 'publish',
-						'orderby'        => 'date',
-						'posts_per_page' => 1,
-						'order'          => 'ASC',
-					);
-					$query = new \WP_Query( $options );
-					if ( $query->posts ) {
-						$attributes['year_oldest'] = date( 'Y' , strtotime( $query->posts[0]->post_date ) );
-						$attributes['year_now'] = date( 'Y' );
-					}
-					wp_reset_postdata();
-
-					$issues = get_category_by_slug( 'issues' );
-					if ( $issues ) {
-						$main_issues_array = array();
-						$main_issues = get_terms(
-							'category',
-							array(
-								'parent' => $issues->term_id,
-							)
-						);
-						foreach ( $main_issues as $main_issue ) {
-							$main_issues_array[ $main_issue->name ] = $main_issue->term_id;
-						}
-						$attributes['main_issues'] = $main_issues_array;
-					}
-				} else {
-					// Do nothing.
 				}
-			}
+
+			} elseif ( 'dropdown_filters' === $attributes['layout'] ) {
+
+				$options = array(
+					'post_type'      => array( 'post', 'page' ),
+					'tag__in'        => explode( ',', $attributes['tag_ids'] ),
+					'post_status'    => 'publish',
+					'orderby'        => 'date',
+					'posts_per_page' => 1,
+					'order'          => 'ASC',
+				);
+				$query = new \WP_Query( $options );
+				if ( $query->posts ) {
+					$attributes['year_oldest'] = date( 'Y' , strtotime( $query->posts[0]->post_date ) );
+					$attributes['year_now'] = date( 'Y' );
+				}
+				wp_reset_postdata();
+
+				$issues = get_category_by_slug( 'issues' );
+				if ( $issues ) {
+					$main_issues_array = array();
+					$main_issues = get_terms(
+						'category',
+						array(
+							'parent' => $issues->term_id,
+						)
+					);
+					foreach ( $main_issues as $main_issue ) {
+						$main_issues_array[ $main_issue->name ] = $main_issue->term_id;
+					}
+					$attributes['main_issues'] = $main_issues_array;
+				}
+			} else {
+				// Do nothing.
+			}			
 
 			return [
 				'fields' => $attributes,
