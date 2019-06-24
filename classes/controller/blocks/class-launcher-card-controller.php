@@ -44,25 +44,6 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 		public function prepare_fields() {
 
 			$fields = [
-				/*[
-					'label' => __( 'Select the layout', 'planet4-gpea-blocks' ),
-					'attr' => 'layout',
-					'type' => 'radio',
-					'options' => [
-						[
-							'value' => 'standard',
-							'label' => __( 'Standard', 'planet4-gpea-blocks' ),
-							'desc'  => 'Standard',
-							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 'card',
-							'label' => __( 'Card', 'planet4-gpea-blocks' ),
-							'desc'  => 'Card',
-							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
-						],
-					],
-				],*/
 				[
 					'label' => __( 'Title', 'planet4-gpea-blocks' ),
 					'attr'  => 'title',
@@ -72,16 +53,16 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
-				],				
+				],
 			];
-
 
 			$field_groups = [
 
 				'Card' => [
 					[
+						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Launcher %s Title</i>*', 'planet4-gpea-blocks' ),
-						'attr'  => 'subtitle',					
+						'attr'  => 'subtitle',
 						'type'  => 'text',
 						'meta'  => [
 							'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
@@ -89,6 +70,7 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 						],
 					],
 					[
+						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Launcher %s Paragraph</i>', 'planet4-gpea-blocks' ),
 						'attr'  => 'paragraph',
 						'type'  => 'textarea',
@@ -98,6 +80,7 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 						],
 					],
 					[
+						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Launcher %s Optional image</i>', 'planet4-gpea-blocks' ),
 						'attr'        => 'img',
 						'type'        => 'attachment',
@@ -106,6 +89,7 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
 					],
 					[
+						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Launcher %s Button label</i>', 'planet4-gpea-blocks' ),
 						'attr'  => 'btnlabel',
 						'type'  => 'text',
@@ -115,6 +99,7 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 						],
 					],
 					[
+						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Launcher %s Button link</i>', 'planet4-gpea-blocks' ),
 						'attr'  => 'btnlink',
 						'type'  => 'url',

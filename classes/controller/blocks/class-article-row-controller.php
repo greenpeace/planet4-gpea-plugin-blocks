@@ -89,7 +89,7 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 					'meta'     => [
 						'select2_options' => [
 							'allowClear'         => true,
-							'placeholder'        => __( 'Select Tags', 'planet4-blocks-backend' ),
+							'placeholder'        => __( 'Select Tags', 'planet4-gpea-blocks' ),
 							'closeOnSelect'      => true,
 							'minimumInputLength' => 0,
 							'maximumSelectionLength' => 3,
