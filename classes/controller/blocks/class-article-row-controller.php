@@ -138,7 +138,7 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 
 				$query = new \WP_Query(
 					array(
-						'post_type'      => array( 'post', 'page' ),
+						'post_type'      => array( 'post', 'page', 'user_story' ),
 						'tag__in'        => $tag_ids,
 						'order'          => 'desc',
 						'orderby'        => 'date',
@@ -201,9 +201,11 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 					true
 				);
 
-				// Pop last post if we're displaying submit form.
+				// Pop last post if we're displaying submit form + pass the ugc link.
 				if ( $display_submit_form && count( $posts ) === 4 ) {
 					array_pop( $posts );
+					$gpea_options = get_option( 'gpea_options' );
+					$attributes['ugc_link'] = isset( $gpea_options['gpea_default_ugc_link'] ) ? get_permalink( $gpea_options['gpea_default_ugc_link'] ) : site_url();
 				}
 			}
 

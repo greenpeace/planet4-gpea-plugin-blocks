@@ -21,14 +21,7 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 		 *
 		 * @const string BLOCK_NAME
 		 */
-		const BLOCK_NAME = 'ugc';
-
-		/**
-		 * The block default layout.
-		 *
-		 * @const string DEFAULT_LAYOUT
-		 */
-		const DEFAULT_LAYOUT = 'default';
+		const BLOCK_NAME = 'ugc';		
 
 		/**
 		 * The nonce string.
@@ -43,49 +36,14 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 		 */
 		public function prepare_fields() {
 
-			$fields = [
+			$fields = [				
 				[
-					'label' => __( 'Title label', 'planet4-gpea-blocks' ),
-					'attr'  => 'title_label',
-					'type'  => 'text',
+					'label' => __( 'Thank you message', 'planet4-gpea-blocks' ),
+					'attr'  => 'thankyou_message',
+					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Title label', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Thanks', 'planet4-gpea-blocks' ),
 						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label' => __( 'Content label', 'planet4-gpea-blocks' ),
-					'attr'  => 'content_label',
-					'type'  => 'text',
-					'meta'  => [
-						'placeholder' => __( 'Content label', 'planet4-gpea-blocks' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label'       => 'Select the layout',
-					'description' => 'Select the layout',
-					'attr'        => 'layout',
-					'type'        => 'radio',
-					'options'     => [
-						[
-							'value' => 1,
-							'label' => __( 'Layout A', 'planet4-gpea-blocks' ),
-							'desc'  => 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 2,
-							'label' => __( 'Layout B', 'planet4-gpea-blocks' ),
-							'desc'  => 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 3,
-							'label' => __( 'Layout C', 'planet4-gpea-blocks' ),
-							'desc'  => 'Sample layout description',
-							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
-						],
 					],
 				],
 			];
@@ -113,9 +71,7 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			$attributes['submit_msg'] = self::save_if_submitted();
-
-			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
+			$attributes['submit_result'] = self::save_if_submitted();
 			$attributes['wp_nonce'] = wp_nonce_field( self::NONCE_STRING );
 
 			return [
@@ -154,26 +110,44 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 			}
 
 			if ( ! wp_verify_nonce( $_POST['_wpnonce'], self::NONCE_STRING ) ) {
-				return 'Did not save because your form seemed to be invalid. Sorry';
+				return array(
+					'result'  => 'error',
+					'message' => __( 'Did not save because your form seemed to be invalid. Sorry', 'planet4-gpea-blocks' ),
+				);
 			}
 
 			// TODO validate form here.
 			if ( strlen( $_POST['ugc_title'] ) < 3 ) {
-				return 'The title must be 3 characters or more';
+				return array(
+					'result'  => 'error',
+					'message' => __( 'The title must be 3 characters or more', 'planet4-gpea-blocks' ),
+				);
 			}
 			if ( strlen( $_POST['ugc_content'] ) < 10 ) {
-				return 'The content must be 10 characters or more';
+				return array(
+					'result'  => 'error',
+					'message' => __( 'The content must be 10 characters or more', 'planet4-gpea-blocks' ),
+				);
 			}
 
 			$post = array(
-				'post_title'    => htmlspecialchars( $_POST['ugc_title'] ), // TODO check if sanitizing needed here.
-				'post_content'  => htmlspecialchars( $_POST['ugc_content'] ), // TODO check if sanitizing needed here.
+				'post_title'    => htmlspecialchars( sanitize_text_field( $_POST['ugc_title'] ) ), // TODO check if sanitizing needed here.
+				'post_content'  => htmlspecialchars( sanitize_textarea_field( $_POST['ugc_content'] ) ), // TODO check if sanitizing needed here.
 				'post_status'   => 'draft',
-				'post_type'     => 'post',
+				'post_type'     => 'user_story',
+				'meta_input'   => array(
+					'p4_author_override' => sanitize_text_field( $_POST['user_name'] ),
+					'p4_author_email_address' => sanitize_text_field( $_POST['user_email'] ),
+				),
 			);
 			wp_insert_post( $post );
 
-			return 'Post saved.';
+			$thanks_message = sanitize_text_field( $_POST['thankyou_message'] );
+
+			return array(
+				'result'  => 'success',
+				'message' => $thanks_message,
+			);
 
 		}
 	}

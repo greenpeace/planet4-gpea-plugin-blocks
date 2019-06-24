@@ -8,8 +8,8 @@
 					{% for post in fields.posts %}
 					{% if ( fields.display_submit_form and loop.index == 3 ) %}
 						<div class="swiper-slide card-mini">
-							<p>Want to add your story?</p>
-							<p><a href="#" class="button">Click here</a></p>
+							<p>{{ __('Want to add your story?', 'planet4-gpea-blocks') }}</p>
+							<p><a href="{{ fields.ugc_link }}" class="button">{{ __('Submit here', 'planet4-gpea-blocks') }}</a></p>
 						</div>
 					{% endif %}
 						<a href="{{ post.link }}" class="swiper-slide card-mini" data-index="{{ fields.index }}">
