@@ -157,6 +157,10 @@ if ( ! class_exists( 'Donation_Basic_Controller' ) ) {
 				$attributes['bg_img_mobile'] = wp_get_attachment_url( $attributes['bg_img_mobile'] );
 			}
 
+			// engaging and other crm integration
+			$gpea_options = get_option( 'gpea_options' );
+			$attributes['external_recurring_question'] = isset( $gpea_options['gpea_donation_recurring_question'] ) ? $gpea_options['gpea_donation_recurring_question'] : 'recurring';
+
 			return [
 				'fields' => $attributes,
 			];

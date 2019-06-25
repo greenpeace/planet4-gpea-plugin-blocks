@@ -10,12 +10,13 @@
                 </div>
                 <div class="donation-form">
                     <div class="tab-bar">
-                        <div class="tab-item js-tab-item tab-item__once">{{ fields.label_donate_once|e('wp_kses_post')|raw }}</div>
-                        <div class="tab-item js-tab-item tab-item__recurring is-active">{{ fields.label_donate_monthly|e('wp_kses_post')|raw }}</div>
+                        <div class="tab-item js-tab-item tab-item__once" data-recurring="N">{{ fields.label_donate_once|e('wp_kses_post')|raw }}</div>
+                        <div class="tab-item js-tab-item tab-item__recurring is-active" data-recurring="Y">{{ fields.label_donate_monthly|e('wp_kses_post')|raw }}</div>
                     </div>
-                    <form action="{{ fields.button_landing_url }}" method="GET">
-                        <input type="hidden" name="frequency" value="{{ fields.label_donate_monthly|e('wp_kses_post')|raw }}" />
+                    <form action="{{ fields.button_landing_url }}" method="GET" class="js-donation-launcher-form">
+                        <input type="hidden" name="frequency" value="Y" />
                         <input type="hidden" name="currency" value="{{ fields.currency_code|e('wp_kses_post')|raw }}" />
+                        <input type="hidden" name="en_recurring_question" value="{{ fields.external_recurring_question }}" />
                         <div class="dollar-handles dollar-handles__once">
                             {% for i in 1..3 %}
                             {% if fields['amount_handle_'~i] %}

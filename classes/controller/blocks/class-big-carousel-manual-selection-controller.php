@@ -112,6 +112,10 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
+			// engaging assets
+			$engaging_settings = get_option( 'p4en_main_settings' );
+			$engaging_token = $engaging_settings['p4en_frontend_public_api'];
+
 			$formatted_posts = [];
 
 			if ( isset( $attributes['carousel_item_ids'] ) ) {
@@ -138,9 +142,22 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 
 						if ( has_term( 'petition', 'post_tag', $post->ID ) ) {
 							$post->is_campaign = 1;
-							if ( 'page-templates/project.php' === get_post_meta( $post->ID, '_wp_page_template', true ) ) {
+							if ( 'page-templates/petition.php' === get_post_meta( $post->ID, '_wp_page_template', true ) ) {
 								$post->engaging_pageid = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_pageid', true );
 								$post->engaging_target = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_target', true );
+
+								if ( $post->engaging_pageid ) {
+									$json = file_get_contents( 'http://www.e-activist.com/ea-dataservice/data.service?service=EaDataCapture&token=' . $engaging_token . '&campaignId=' . $post->engaging_pageid . '&contentType=json&resultType=summary' );
+									$obj = json_decode($json, true);
+									$post->signatures = $obj['rows'][0]['columns'][3]['value'];									
+								}
+
+								if ( $post->engaging_target && $post->signatures ) {
+									$post->percentage = intval( intval( $post->signatures ) * 100 / intval( $post->engaging_target ) );
+								} else {
+									$post->percentage = 100;
+								}
+
 								/* if external link is set, we use that instead of standard one */
 								$external_link = get_post_meta( $post->ID, 'p4-gpea_petition_external_link', true );
 								if ( $external_link ) $post->link = $external_link;

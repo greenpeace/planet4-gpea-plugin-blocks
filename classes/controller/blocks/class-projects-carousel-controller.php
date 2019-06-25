@@ -211,7 +211,7 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 					}
 					$project_percent = get_post_meta( $post->ID, 'p4-gpea_project_percentage', true );
 					$post->link = get_permalink( $post->ID );
-					$post->img_url = $img_data[0];
+					$post->img_url = $img_data[0] ?? '';
 					$post->project_percentage = (int) $project_percent;
 					$post->stroke_dashoffset = $project_percent ? 697.433 * ( ( 100 - $project_percent ) / 100 ) : 0;
 					// get related main issues!
@@ -244,7 +244,7 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 					);
 					$count_query = new \WP_Query( $count_args );
 					$post->related_posts = $count_query->post_count;
-					
+
 					$formatted_posts[] = $post;
 				}
 			}
