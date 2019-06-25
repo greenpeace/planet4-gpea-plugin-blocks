@@ -149,7 +149,7 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 								if ( $post->engaging_pageid ) {
 									$json = file_get_contents( 'http://www.e-activist.com/ea-dataservice/data.service?service=EaDataCapture&token=' . $engaging_token . '&campaignId=' . $post->engaging_pageid . '&contentType=json&resultType=summary' );
 									$obj = json_decode($json, true);
-									$post->signatures = $obj['rows'][0]['columns'][3]['value'];									
+									$post->signatures = $obj['rows'][0]['columns'][4]['value'];									
 								}
 
 								if ( $post->engaging_target && $post->signatures ) {
