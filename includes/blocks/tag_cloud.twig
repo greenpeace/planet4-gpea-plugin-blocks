@@ -13,7 +13,7 @@
 				</div>					
 			</div>
 			<div class="content">
-				<form id="p4en_form" name="p4en_form" method="post" novalidate>
+				<form id="p4en_form" name="p4en_form" method="post" novalidate id="enform">
 					{{ fn( 'wp_nonce_field', fields.nonce_action, '_wpnonce', true, false )|raw }}
 					<input type="hidden" name="enblock_submit" value="">
 					<input type="hidden" name="en_page_id" value="{{ fields.gpea_default_en_subscription_page|raw }}">
@@ -22,7 +22,7 @@
 					<input type="hidden" name="enform_goal" id="enform_goal" value="">
 					{{ fields.form|shortcodes|raw }}
 					<div class=" submit">
-						<button type="submit" form="p4en_form" name="p4en_form_save_button" id="p4en_form_save_button" class="btn btn-primary btn-block button primary fluid" >立即聯署 demo
+						<button type="submit" form="p4en_form" name="p4en_form_save_button" id="p4en_form_save_button" class="btn btn-primary btn-block button primary fluid" >{{ __('Subscribe', 'planet4-gpea-blocks') }}
 							<div class="three-quarters en-spinner" id="spinner" style="display:none;">...</div>
 						</button>
 						<div class="enform-notice"></div>
@@ -31,8 +31,8 @@
 			</div>			
 		</div>
 		{% else %}
-			<form id="p4en_form" name="p4en_form" method="post" novalidate>
-					{{ fn( 'wp_nonce_field', fields.nonce_action, '_wpnonce', true, false )|raw }}
+			<form id="p4en_form" name="p4en_form" method="post" novalidate id="enform">
+				{{ fn( 'wp_nonce_field', fields.nonce_action, '_wpnonce', true, false )|raw }}
 				<input type="hidden" name="enblock_submit" value="Send">
 				<input type="hidden" name="en_page_id" value="{{ fields.gpea_default_en_subscription_page|raw }}">
 				<input type="hidden" name="thankyou_title" value="{{ fields.gpea_subscription_page_thankyou_title|raw }}">
@@ -49,13 +49,14 @@
 							<input id="en__field_supporter_questions_{{ campaign.engaging_id }}" type="hidden" class="js-question-{{ campaign.slug }}" value="" name="supporter.questions.{{ campaign.engaging_id }}">
 						{% endfor %}
 						</div>
-						<a id="topic-submit-button" class="button">立即關注</a>
+						<a id="topic-submit-button" class="button">{{ __('Follow', 'planet4-gpea-blocks') }}</a>
 
 						<div class="tag_cloud_form" style="display: none;">
+							<p>{{ __('Would you like to receive updates about these topics?', 'planet4-gpea-blocks') }}</p>
 							<div class="signatures">
 								{{ fields.form|shortcodes|raw }}
 								<div class=" submit">
-									<button type="submit" form="p4en_form" name="p4en_form_save_button" id="p4en_form_save_button" class="btn btn-primary btn-block button primary fluid" >立即聯署 demo
+									<button type="submit" form="p4en_form" name="p4en_form_save_button" id="p4en_form_save_button" class="btn btn-primary btn-block button primary fluid" >{{ __('Subscribe', 'planet4-gpea-blocks') }}
 										<div class="three-quarters en-spinner" id="spinner" style="display:none;">...</div>
 									</button>
 									<div class="enform-notice"></div>
