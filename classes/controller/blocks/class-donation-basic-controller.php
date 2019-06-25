@@ -161,6 +161,10 @@ if ( ! class_exists( 'Donation_Basic_Controller' ) ) {
 			$gpea_options = get_option( 'gpea_options' );
 			$attributes['external_recurring_question'] = isset( $gpea_options['gpea_donation_recurring_question'] ) ? $gpea_options['gpea_donation_recurring_question'] : 'recurring';
 
+			if ( ! isset( $attributes['button_landing_link'] ) ) {
+				$attributes['button_landing_link'] = isset( $gpea_options['gpea_default_donation_link'] ) ? $gpea_options['gpea_default_donation_link'] : '';
+			}
+
 			return [
 				'fields' => $attributes,
 			];
