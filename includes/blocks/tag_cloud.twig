@@ -10,7 +10,7 @@
 				{% for campaign in fields.campaigns %}
 					<div data-engaging='{{ campaign.engaging_id }}' data-topic='{{ campaign.term_id }}' data-slug='{{ campaign.slug }}' data-taxonomy="{{ campaign.taxonomy }}" class="topic-button button tag" style="display: none">{{ campaign.name|raw }}</div>
 				{% endfor %}
-				</div>					
+				</div>
 			</div>
 			<div class="content">
 				<form id="p4en_form" name="p4en_form" method="post" novalidate id="enform">
@@ -27,8 +27,8 @@
 						</button>
 						<div class="enform-notice"></div>
 					</div>
-				</form>	
-			</div>			
+				</form>
+			</div>
 		</div>
 		{% else %}
 			<form id="p4en_form" name="p4en_form" method="post" novalidate id="enform">
@@ -49,7 +49,7 @@
 							<input id="en__field_supporter_questions_{{ campaign.engaging_id }}" type="hidden" class="js-question-{{ campaign.slug }}" value="" name="supporter.questions.{{ campaign.engaging_id }}">
 						{% endfor %}
 						</div>
-						<a id="topic-submit-button" class="button">{{ __('Follow', 'planet4-gpea-blocks') }}</a>
+						<button type="button" id="topic-submit-button" class="button">{{ __('Follow', 'planet4-gpea-blocks') }}</button>
 
 						<div class="tag_cloud_form" style="display: none;">
 							<p>{{ __('Would you like to receive updates about these topics?', 'planet4-gpea-blocks') }}</p>
