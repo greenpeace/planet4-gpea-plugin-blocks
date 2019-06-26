@@ -35,7 +35,7 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 		 *
 		 * @const string ENGAGING_CAMPAIGN_ID_META_KEY
 		 */
-		const ENGAGING_CAMPAIGN_ID_META_KEY = 'engaging_campaign_ID';		
+		const ENGAGING_CAMPAIGN_ID_META_KEY = 'engaging_campaign_ID';
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -154,14 +154,14 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
-			// TODO move this JS to theme assets.
-			wp_enqueue_script(
-				'issue_list_engaging_js',
-				P4EABKS_ASSETS_DIR . 'js/issue-list-engaging.js',
-				[ 'jquery' ],
-				'0.1',
-				true
-			);
+			// TODO move this JS to theme assets. // DONE
+			// wp_enqueue_script(
+			// 	'issue_list_engaging_js',
+			// 	P4EABKS_ASSETS_DIR . 'js/issue-list-engaging.js',
+			// 	[ 'jquery' ],
+			// 	'0.1',
+			// 	true
+			// );
 
 			$data = $this->prepare_data( $fields );
 
