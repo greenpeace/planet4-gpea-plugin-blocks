@@ -147,9 +147,27 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 								$post->engaging_target = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_target', true );
 
 								if ( $post->engaging_pageid ) {
-									$json = file_get_contents( 'http://www.e-activist.com/ea-dataservice/data.service?service=EaDataCapture&token=' . $engaging_token . '&campaignId=' . $post->engaging_pageid . '&contentType=json&resultType=summary' );
-									$obj = json_decode($json, true);
-									$post->signatures = $obj['rows'][0]['columns'][4]['value'];									
+									global $wp_version;
+									$url = 'http://www.e-activist.com/ea-dataservice/data.service?service=EaDataCapture&token=' . $engaging_token . '&campaignId=' . $post->engaging_pageid . '&contentType=json&resultType=summary';
+									echo $url;
+									$args = array(
+										'timeout'     => 5,
+										'redirection' => 5,
+										'httpversion' => '1.0',
+										'user-agent'  => 'WordPress/' . $wp_version . '; ' . home_url(),
+										'blocking'    => true,
+										'headers'     => array(),
+										'cookies'     => array(),
+										'body'        => null,
+										'compress'    => false,
+										'decompress'  => true,
+										'sslverify'   => true,
+										'stream'      => false,
+										'filename'    => null,
+									);
+									$result = wp_remote_get( $url, $args );
+									$obj = json_decode( $result['body'], true );
+									$post->signatures = $obj['rows'][0]['columns'][4]['value'];
 								}
 
 								if ( $post->engaging_target && $post->signatures ) {
