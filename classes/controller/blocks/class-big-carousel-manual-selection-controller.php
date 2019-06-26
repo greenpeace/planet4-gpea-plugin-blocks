@@ -149,7 +149,6 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 								if ( $post->engaging_pageid ) {
 									global $wp_version;
 									$url = 'http://www.e-activist.com/ea-dataservice/data.service?service=EaDataCapture&token=' . $engaging_token . '&campaignId=' . $post->engaging_pageid . '&contentType=json&resultType=summary';
-									echo $url;
 									$args = array(
 										'timeout'     => 5,
 										'redirection' => 5,
