@@ -13,7 +13,8 @@
 				</div>
 			</div>
 			<div class="content">
-				<form id="p4en_form" name="p4en_form" method="post" novalidate id="enform">
+				<form id="p4en_form" name="p4en_form" method="post" novalidate>
+					<span id="enform">
 					{{ fn( 'wp_nonce_field', fields.nonce_action, '_wpnonce', true, false )|raw }}
 					<input type="hidden" name="enblock_submit" value="">
 					<input type="hidden" name="en_page_id" value="{{ fields.gpea_default_en_subscription_page|raw }}">
@@ -27,11 +28,13 @@
 						</button>
 						<div class="enform-notice"></div>
 					</div>
+					</span>
 				</form>
 			</div>
 		</div>
 		{% else %}
-			<form id="p4en_form" name="p4en_form" method="post" novalidate id="enform">
+			<form id="p4en_form" name="p4en_form" method="post" novalidate>
+				<span id="enform">
 				{{ fn( 'wp_nonce_field', fields.nonce_action, '_wpnonce', true, false )|raw }}
 				<input type="hidden" name="enblock_submit" value="Send">
 				<input type="hidden" name="en_page_id" value="{{ fields.gpea_default_en_subscription_page|raw }}">
@@ -66,6 +69,7 @@
 
 					</div>
 				</div>
+				</span>
 			</form>
 		{% endif %}
 	</section>
