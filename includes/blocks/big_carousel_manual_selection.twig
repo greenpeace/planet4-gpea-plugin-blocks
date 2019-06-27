@@ -1,4 +1,5 @@
 {% block big_carousel_manual_selection %}
+	{#  !!! KEEP SYNCRONIZED with base.twig !!! #}
 	{% if ( fields ) %}
 	<section class="section-featured">
 		<div class="ct-container">
@@ -34,22 +35,23 @@
 										</div>
 									</div>
 								</div>
-							{% else %}
-								<a href="{{ post.link }}" class="swiper-slide card-update"  data-index="{{ loop.index }}" data-postid="{{ post.ID }}">
-									<div
-									class="thumbnail"
-									style="background-image: url({{ post.img_url }})"
-									></div>
+								{% else %}
+								<a href="{{ post.link }}" class="swiper-slide card-update" data-index="{{ loop.index }}" data-postid="{{ post.ID }}">
+									<div class="thumbnail" style="background-image: url({{ post.img_url }})"></div>
 									<div class="box">
 										<div class="meta-box">
 											<div>
 												<span class="issue {{ post.main_issue_slug }}">{{ post.main_issue|raw }}</span>
-												<span>{{ post.news_type }}</span>
+												{% if post.news_type %}
+													<span>{{ post.news_type }}</span>
+												{% endif %}
 											</div>
 											<div>
 												<span>
 													{% if post.reading_time %}
-														<span class="icon-clock"></span> {{ post.reading_time }} {{ lexicon.reading_time }}
+														<span class="icon-clock"></span>
+														{{ post.reading_time }}
+														{{ lexicon.reading_time }}
 													{% endif %}
 												</span>
 												<span>{{ post.date }}</span>
@@ -60,19 +62,33 @@
 										</p>
 									</div>
 								</a>
-							{% endif %}
-						{% endfor %}
-					{% endif %}
-				</div>
-				<div class="swiper-pagination"></div>
-				<div class="swiper-button-next">
+								{% endif %}
+							{% endfor %}
+						{% endif %}
+					</div>
+					<div class="swiper-pagination"></div>
+					<div class="swiper-button-next">
 						<span class="icon-chevron-right"></span>
-				</div>
-				<div class="swiper-button-prev">
+					</div>
+					<div class="swiper-button-prev">
 						<span class="icon-chevron-right"></span>
+					</div>
+					<div class="lds-spinner">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 	{% endif %}
 {% endblock %}
