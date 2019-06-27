@@ -74,8 +74,18 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 			$attributes['submit_result'] = self::save_if_submitted();
 			$attributes['wp_nonce'] = wp_nonce_field( self::NONCE_STRING );
 
+
+			// lexicon entries
+			$lexicon['submit_story'] = __( 'Submit your story', 'planet4-gpea-blocks' );
+			$lexicon['your_name'] = __( 'Your name', 'planet4-gpea-blocks' );
+			$lexicon['your_email_address'] = __( 'Your email address', 'planet4-gpea-blocks' );
+			$lexicon['story_subject'] = __( 'Subject of your story', 'planet4-gpea-blocks' );
+			$lexicon['story_text'] = __( 'Your story', 'planet4-gpea-blocks' );
+			$lexicon['story_publish'] = __( 'Publish your story', 'planet4-gpea-blocks' );
+
 			return [
 				'fields' => $attributes,
+				'lexicon' => $lexicon,
 			];
 
 		}

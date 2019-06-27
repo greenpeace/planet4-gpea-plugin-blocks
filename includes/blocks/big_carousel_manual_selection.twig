@@ -30,7 +30,7 @@
 										{% if post.signatures %}<div class="stats">{{ __('%s signers', 'planet4-gpea-blocks')|format(post.signatures)| raw }}</div>{% endif %}
 										<div class="content">
 											<p>{{ post.post_title }}</p>
-											<a href="{{ post.link }}" class="button">{{ __('Sign now', 'planet4-gpea-blocks') }}</a>
+											<a href="{{ post.link }}" class="button">{{ lexicon.sign_now }}</a>
 										</div>
 									</div>
 								</div>
@@ -49,7 +49,7 @@
 											<div>
 												<span>
 													{% if post.reading_time %}
-														<span class="icon-clock"></span> {{ post.reading_time }} {{ __('Reading time', 'planet4-gpea-blocks') }}
+														<span class="icon-clock"></span> {{ post.reading_time }} {{ lexicon.reading_time }}
 													{% endif %}
 												</span>
 												<span>{{ post.date }}</span>

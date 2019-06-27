@@ -150,8 +150,12 @@ if ( ! class_exists( 'Main_Issues_Carousel_Controller' ) ) {
 
 			wp_reset_postdata();
 
+			// lexicon entries
+			$lexicon['achievements'] = __( 'Achievements', 'planet4-gpea-blocks' );
+
 			return [
 				'fields' => $attributes,
+				'lexicon' => $lexicon,
 			];
 
 		}

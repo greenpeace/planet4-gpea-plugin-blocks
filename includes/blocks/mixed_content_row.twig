@@ -40,21 +40,23 @@
 				{% for group in field_groups %}
 					{% if group.__group_type__ == 'post' and group.post %}
 						<div class="swiper-slide card-mini">
+							<a href="{{ group.post.link }}" >
 							<div
 								class="thumbnail lazy"
 								data-bg="url({{ group.post.img_url }})"
 							></div>
+							</a>
 							<div class="meta-box">
 								<div>
-									<!-- TODO: print date -->
-									<span>2018-11-15</span>
+									<span>{{ group.post.post_date }}</span>
 								</div>
 								<div>
-									<!-- TODO: print issue -->
-									<span class="issue oceans">新聞</span>
+									<span class="issue {{ group.post.main_issue_slug }}">{{ group.post.main_issue }}</span>
 								</div>
 							</div>
-							<p class="caption">{{ group.post.post_title }}</p>
+							<p class="caption">
+									<a href="{{ group.post.link }}" >{{ group.post.post_title }}</a>
+							</p>
 						</div>
 					{% elseif group.__group_type__ == 'textonly' %}
 						<div class="swiper-slide card-mini">

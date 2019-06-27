@@ -218,8 +218,13 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 
 			$attributes['posts'] = $formatted_posts;
 
+			// lexicon entries
+			$lexicon['reading_time'] = __( 'Reading time', 'planet4-gpea-blocks' );
+			$lexicon['sign_now'] = __( 'Sign now', 'planet4-gpea-blocks' );
+
 			return [
 				'fields' => $attributes,
+				'lexicon' => $lexicon,
 			];
 
 		}

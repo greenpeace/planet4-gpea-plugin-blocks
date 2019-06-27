@@ -136,8 +136,14 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 			// nonce for form
 			$attributes['nonce_action'] = 'enform_submit';
 
+			// lexicon entries
+			$lexicon['subscribe']       = __( 'Subscribe', 'planet4-gpea-blocks' );
+			$lexicon['follow']          = __( 'Follow', 'planet4-gpea-blocks' );
+			$lexicon['receive_updates'] = __( 'Would you like to receive updates about these topics?', 'planet4-gpea-blocks' );
+
 			return [
 				'fields' => $attributes,
+				'lexicon' => $lexicon,
 			];
 
 		}

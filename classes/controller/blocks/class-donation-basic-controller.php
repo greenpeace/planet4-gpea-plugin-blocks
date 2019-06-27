@@ -165,6 +165,20 @@ if ( ! class_exists( 'Donation_Basic_Controller' ) ) {
 				$attributes['button_landing_link'] = isset( $gpea_options['gpea_default_donation_link'] ) ? $gpea_options['gpea_default_donation_link'] : '';
 			}
 
+			// lexicon fallback values
+			if ( ! isset( $attributes['label_donate_once'] ) ) {
+				$attributes['label_donate_once'] = __( 'One-off', 'planet4-gpea-blocks' );
+			}
+			if ( ! isset( $attributes['label_donate_monthly'] ) ) {
+				$attributes['label_donate_monthly'] = __( 'Monthly', 'planet4-gpea-blocks' );
+			}
+			if ( ! isset( $attributes['button_label'] ) ) {
+				$attributes['button_label'] = __( 'Donate', 'planet4-gpea-blocks' );
+			}
+			if ( ! isset( $attributes['currency_code'] ) ) {
+				$attributes['currency_code'] = __( 'currency_code', 'planet4-gpea-blocks' );
+			}
+
 			return [
 				'fields' => $attributes,
 			];
