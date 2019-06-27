@@ -82,6 +82,22 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
+				[
+					'label' => __( 'How many topics you want to show?', 'planet4-gpea-blocks-backend' ),
+					'desc' => __( 'Used only for "standard" layout: limit to 10 topics or show them all?', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'number_topics',
+					'type'  => 'radio',
+					'options' => [
+						[
+							'value' => 'limited',
+							'label' => __( 'Fiftheen most used', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => 'all',
+							'label' => __( 'Show all topics and issues?', 'planet4-gpea-blocks-backend' ),
+						],
+					],
+				],
 			];
 
 			// Define the Shortcode UI arguments.
@@ -107,15 +123,31 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			$campaigns = get_terms(
-				array(
-					'taxonomy' => array( 'post_tag', 'category' ),
-				)
-			);
+			$options = array();
+			$options['taxonomy'] = array( 'post_tag', 'category' );
 
+			$attributes['number_topics'] = isset( $attributes['number_topics'] ) ? $attributes['number_topics'] : 'limited';
+
+			if ( 'all' != $attributes['number_topics'] ) {
+				$options['orderby'] = 'count';
+				$options['order'] = 'DESC';
+			}
+
+			// in any case we limit to 100... let's talk just in case..
+			$options['number'] = 100;
+
+			$campaigns = get_terms( $options );
+
+			$counter = 0;
 			foreach ( $campaigns as $campaign ) {
+				if ( ( 'all' != $attributes['number_topics'] ) && ( $counter > 14 ) ) {
+					continue;
+				}
 				$campaign->engaging_id = get_term_meta( $campaign->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true );
-				if ( $campaign->engaging_id ) $attributes['campaigns'][] = $campaign;
+				if ( $campaign->engaging_id ) {
+					$attributes['campaigns'][] = $campaign;
+					$counter++;
+				}
 			}
 
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
