@@ -51,20 +51,20 @@ if ( ! class_exists( 'People_List_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+					'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'subtitle',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -76,12 +76,12 @@ if ( ! class_exists( 'People_List_Controller' ) ) {
 				$fields[] =
 						  [
 							  // translators: placeholder represents the ordinal of the field.
-							  'label' => sprintf( __( '<strong>%s</strong> <i>person name</i>', 'planet4-gpea-blocks' ), $i ),
+							  'label' => sprintf( __( '<strong>%s</strong> <i>person name</i>', 'planet4-gpea-blocks-backend' ), $i ),
 							  'attr'  => 'name_person_' . $i,
 							  'type'  => 'text',
 							  'meta'  => [
 								  // translators: placeholder represents the ordinal of the field.
-								  'placeholder' => sprintf( __( 'Enter person %s name', 'planet4-gpea-blocks' ), $i ),
+								  'placeholder' => sprintf( __( 'Enter person %s name', 'planet4-gpea-blocks-backend' ), $i ),
 								  'data-plugin' => 'planet4-gpea-blocks',
 								  'data-element-type' => 'person',
 								  'data-element-name' => 'person',
@@ -92,12 +92,12 @@ if ( ! class_exists( 'People_List_Controller' ) ) {
 				$fields[] =
 						  [
 							  // translators: placeholder represents the ordinal of the field.
-							  'label' => sprintf( __( '<strong>%s</strong> <i>person code</i>', 'planet4-gpea-blocks' ), $i ),
+							  'label' => sprintf( __( '<strong>%s</strong> <i>person code</i>', 'planet4-gpea-blocks-backend' ), $i ),
 							  'attr'  => 'code_person_' . $i,
 							  'type'  => 'text',
 							  'meta'  => [
 								  // translators: placeholder represents the ordinal of the field.
-								  'placeholder' => sprintf( __( 'Enter person %s code', 'planet4-gpea-blocks' ), $i ),
+								  'placeholder' => sprintf( __( 'Enter person %s code', 'planet4-gpea-blocks-backend' ), $i ),
 								  'data-plugin' => 'planet4-gpea-blocks',
 								  'data-element-type' => 'person',
 								  'data-element-name' => 'person',
@@ -108,15 +108,15 @@ if ( ! class_exists( 'People_List_Controller' ) ) {
 				$fields[] =
 						  [
 							  // translators: placeholder represents the ordinal of the field.
-							  'label'       => sprintf( __( '<strong>%s</strong> <i>person picture</i>', 'planet4-gpea-blocks' ), $i ),
+							  'label'       => sprintf( __( '<strong>%s</strong> <i>person picture</i>', 'planet4-gpea-blocks-backend' ), $i ),
 							  'attr'        => 'img_person_' . $i,
 							  'type'        => 'attachment',
 							  'libraryType' => array( 'image' ),
-							  'addButton'   => __( 'Select picture', 'planet4-gpea-blocks' ),
-							  'frameTitle'  => __( 'Select picture', 'planet4-gpea-blocks' ),
+							  'addButton'   => __( 'Select picture', 'planet4-gpea-blocks-backend' ),
+							  'frameTitle'  => __( 'Select picture', 'planet4-gpea-blocks-backend' ),
 							  'meta'        => [
 								  // translators: placeholder represents the ordinal of the field.
-								  'placeholder' => sprintf( __( 'Enter person %s picture', 'planet4-gpea-blocks' ), $i ),
+								  'placeholder' => sprintf( __( 'Enter person %s picture', 'planet4-gpea-blocks-backend' ), $i ),
 								  'data-plugin' => 'planet4-gpea-blocks',
 								  'data-element-type' => 'person',
 								  'data-element-name' => 'person',
@@ -128,7 +128,7 @@ if ( ! class_exists( 'People_List_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Street foundraisers', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Street foundraisers', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

@@ -45,24 +45,24 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'tag_filters',
-							'label' => __( 'Tag filters', 'planet4-gpea-blocks' ),
+							'label' => __( 'Tag filters', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Tag filters',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'dropdown_filters',
-							'label' => __( 'Dropdown filters', 'planet4-gpea-blocks' ),
+							'label' => __( 'Dropdown filters', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Dropdown filters',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -76,7 +76,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					'meta'        => [
 						'select2_options' => [
 							'allowClear'             => true,
-							'placeholder'            => __( 'Select post type', 'planet4-gpea-blocks' ),
+							'placeholder'            => __( 'Select post type', 'planet4-gpea-blocks-backend' ),
 							'closeOnSelect'          => true,
 							'minimumInputLength'     => 0,
 							'maximumSelectionLength' => 10,
@@ -84,7 +84,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					],
 				],
 				[
-					'label'    => __( 'Select tags', 'planet4-gpea-blocks' ),
+					'label'    => __( 'Select tags', 'planet4-gpea-blocks-backend' ),
 					'attr'     => 'tag_ids',
 					'type'     => 'term_select',
 					'taxonomy' => 'post_tag',
@@ -92,7 +92,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					'meta'     => [
 						'select2_options' => [
 							'allowClear'             => true,
-							'placeholder'            => __( 'Select tags', 'planet4-gpea-blocks' ),
+							'placeholder'            => __( 'Select tags', 'planet4-gpea-blocks-backend' ),
 							'closeOnSelect'          => true,
 							'minimumInputLength'     => 0,
 							'maximumSelectionLength' => 10,
@@ -103,7 +103,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Articles List', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Articles List', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

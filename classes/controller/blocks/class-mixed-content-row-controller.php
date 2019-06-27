@@ -52,58 +52,58 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'green_grey',
-							'label' => __( 'Green title, grey text', 'planet4-gpea-blocks' ),
+							'label' => __( 'Green title, grey text', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Green title, grey text.',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'green_white',
-							'label' => __( 'Green title, white text', 'planet4-gpea-blocks' ),
+							'label' => __( 'Green title, white text', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Green title, white text.',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'grey_grey',
-							'label' => __( 'Default, takes color from section or if not available shows grey title and grey text', 'planet4-gpea-blocks' ),
+							'label' => __( 'Default, takes color from section or if not available shows grey title and grey text', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Grey title, grey text.',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+					'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'subtitle',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Optional background image', 'planet4-gpea-blocks' ),
+					'label' => __( 'Optional background image', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'image',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
-					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 				],
 			];
 
@@ -125,7 +125,7 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 			array_unshift(
 				$posts, [
 					'value' => '',
-					'label' => __( 'Please select a post', 'planet4-gpea-blocks' ),
+					'label' => __( 'Please select a post', 'planet4-gpea-blocks-backend' ),
 				]
 			);
 
@@ -149,7 +149,7 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 			array_unshift(
 				$tips, [
 					'value' => '',
-					'label' => __( 'Please select a tip', 'planet4-gpea-blocks' ),
+					'label' => __( 'Please select a tip', 'planet4-gpea-blocks-backend' ),
 				]
 			);
 
@@ -160,21 +160,21 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 				'Title and text' => [
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Block %s title</i>', 'planet4-gpea-blocks' ),
+						'label' => __( '<i>Block %s title</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'title',
 						'type'  => 'text',
 						'meta'  => [
-							'placeholder' => __( 'Enter title', 'planet4-gpea-blocks' ),
+							'placeholder' => __( 'Enter title', 'planet4-gpea-blocks-backend' ),
 							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Block %s text</i>', 'planet4-gpea-blocks' ),
+						'label' => __( '<i>Block %s text</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'textblock',
 						'type'  => 'textarea',
 						'meta'  => [
-							'placeholder' => __( 'Enter text', 'planet4-gpea-blocks' ),
+							'placeholder' => __( 'Enter text', 'planet4-gpea-blocks-backend' ),
 							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
@@ -183,31 +183,31 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 				'Two line title and text' => [
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Block %s title line 1</i>', 'planet4-gpea-blocks' ),
+						'label' => __( '<i>Block %s title line 1</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'titlea',
 						'type'  => 'text',
 						'meta'  => [
-							'placeholder' => __( 'Enter line 1', 'planet4-gpea-blocks' ),
+							'placeholder' => __( 'Enter line 1', 'planet4-gpea-blocks-backend' ),
 							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Block %s title</i>', 'planet4-gpea-blocks' ),
+						'label' => __( '<i>Block %s title</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'titleb',
 						'type'  => 'text',
 						'meta'  => [
-							'placeholder' => __( 'Enter title', 'planet4-gpea-blocks' ),
+							'placeholder' => __( 'Enter title', 'planet4-gpea-blocks-backend' ),
 							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Block %s text</i>', 'planet4-gpea-blocks' ),
+						'label' => __( '<i>Block %s text</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'textblock',
 						'type'  => 'textarea',
 						'meta'  => [
-							'placeholder' => __( 'Enter text', 'planet4-gpea-blocks' ),
+							'placeholder' => __( 'Enter text', 'planet4-gpea-blocks-backend' ),
 							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
@@ -216,11 +216,11 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 				'Text only' => [
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Block %s text</i>', 'planet4-gpea-blocks' ),
+						'label' => __( '<i>Block %s text</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'textblock',
 						'type'  => 'textarea',
 						'meta'  => [
-							'placeholder' => __( 'Enter text', 'planet4-gpea-blocks' ),
+							'placeholder' => __( 'Enter text', 'planet4-gpea-blocks-backend' ),
 							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
@@ -229,12 +229,12 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 				'Tip' => [
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Block %s tip text</i>', 'planet4-gpea-blocks' ),
+						'label' => __( '<i>Block %s tip text</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'     => 'tip',
 						'type'     => 'select',
 						'options'  => $tips,
 						'meta'     => [
-							'placeholder' => __( 'Select tip', 'planet4-gpea-blocks' ),
+							'placeholder' => __( 'Select tip', 'planet4-gpea-blocks-backend' ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-input-transform' => 'js-select2-enable',
 						],
@@ -244,13 +244,13 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 				'Post' => [
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Block %s post</i>', 'planet4-gpea-blocks' ),
+						'label' => __( '<i>Block %s post</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'post',
 						'type'  => 'select',
 						'options' => $posts,
 						'meta'  => [
-							'placeholder'          => __( 'Select post', 'planet4-gpea-blocks' ),
-							'data-plugin'          => 'planet4-gpea-blocks',
+							'placeholder'          => __( 'Select post', 'planet4-gpea-blocks-backend' ),
+							'data-plugin'          => 'planet4-gpea-blocks-backend',
 							'data-input-transform' => 'js-select2-enable',
 						],
 					],
@@ -262,7 +262,7 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Mixed Content Row', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Mixed Content Row', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
@@ -359,11 +359,35 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 					);
 					if ( $query->posts ) {
 						$post = $query->posts[0];
+
+						$post->link = get_permalink( $post->ID );
+						$post->post_date = date( 'Y - m - d' , strtotime( $post->post_date ) );
+
 						if ( has_post_thumbnail( $post->ID ) ) {
 							$img_id = get_post_thumbnail_id( $post->ID );
 							$img_data = wp_get_attachment_image_src( $img_id , 'medium' );
 							$post->img_url = $img_data[0];
 							$post->tags = get_the_tags( $post->ID );
+						}
+						$planet4_options = get_option( 'planet4_options' );
+						$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+						if ( ! $main_issues_category_id ) {
+							$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+							if ( $main_issues_category ) $main_issues_category_id = $main_issues_category->term_id;
+						}
+
+						if ( $main_issues_category_id ) {
+							$categories = get_the_category( $post->ID );
+							if ( ! empty( $categories ) ) {
+								$categories = array_filter( $categories, function( $cat ) use ( $main_issues_category_id ) {
+									return $cat->category_parent === intval( $main_issues_category_id );
+								});
+								if ( ! empty( $categories ) ) {
+									$first_category = array_values( $categories )[0];
+									$post->main_issue = $first_category->name;
+									$post->main_issue_slug = $first_category->slug;
+								}
+							}
 						}
 						$group['post'] = $post;
 					} else {

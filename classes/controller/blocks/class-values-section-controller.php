@@ -50,20 +50,20 @@ if ( ! class_exists( 'Values_Section_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Values section title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Values section title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Values section title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Values section title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Values section description', 'planet4-gpea-blocks' ),
+					'label' => __( 'Values section description', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'subtitle',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Values section description', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Values section description', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -75,19 +75,19 @@ if ( ! class_exists( 'Values_Section_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 1,
-							'label' => __( 'Layout A', 'planet4-gpea-blocks' ),
+							'label' => __( 'Layout A', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Sample layout description',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 2,
-							'label' => __( 'Layout B', 'planet4-gpea-blocks' ),
+							'label' => __( 'Layout B', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Sample layout description',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 3,
-							'label' => __( 'Layout C', 'planet4-gpea-blocks' ),
+							'label' => __( 'Layout C', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Sample layout description',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
@@ -101,12 +101,12 @@ if ( ! class_exists( 'Values_Section_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<i>Title %s</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<i>Title %s</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'title_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					];
@@ -114,12 +114,12 @@ if ( ! class_exists( 'Values_Section_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<i>Description %s</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<i>Description %s</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'description_' . $i,
 						'type'  => 'textarea',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter description %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter description %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					];
@@ -128,7 +128,7 @@ if ( ! class_exists( 'Values_Section_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Values section', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Values section', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/values_block.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

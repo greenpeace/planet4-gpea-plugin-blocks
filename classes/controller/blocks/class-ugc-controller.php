@@ -38,11 +38,11 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 
 			$fields = [				
 				[
-					'label' => __( 'Thank you message', 'planet4-gpea-blocks' ),
+					'label' => __( 'Thank you message', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'thankyou_message',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Thanks', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Thanks', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -50,7 +50,7 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | UGC Form', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | UGC Form', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
@@ -74,8 +74,18 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 			$attributes['submit_result'] = self::save_if_submitted();
 			$attributes['wp_nonce'] = wp_nonce_field( self::NONCE_STRING );
 
+
+			// lexicon entries
+			$lexicon['submit_story'] = __( 'Submit your story', 'planet4-gpea-blocks' );
+			$lexicon['your_name'] = __( 'Your name', 'planet4-gpea-blocks' );
+			$lexicon['your_email_address'] = __( 'Your email address', 'planet4-gpea-blocks' );
+			$lexicon['story_subject'] = __( 'Subject of your story', 'planet4-gpea-blocks' );
+			$lexicon['story_text'] = __( 'Your story', 'planet4-gpea-blocks' );
+			$lexicon['story_publish'] = __( 'Publish your story', 'planet4-gpea-blocks' );
+
 			return [
 				'fields' => $attributes,
+				'lexicon' => $lexicon,
 			];
 
 		}
@@ -112,7 +122,7 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 			if ( ! wp_verify_nonce( $_POST['_wpnonce'], self::NONCE_STRING ) ) {
 				return array(
 					'result'  => 'error',
-					'message' => __( 'Did not save because your form seemed to be invalid. Sorry', 'planet4-gpea-blocks' ),
+					'message' => __( 'Did not save because your form seemed to be invalid. Sorry', 'planet4-gpea-blocks-backend' ),
 				);
 			}
 
@@ -120,13 +130,13 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 			if ( strlen( $_POST['ugc_title'] ) < 3 ) {
 				return array(
 					'result'  => 'error',
-					'message' => __( 'The title must be 3 characters or more', 'planet4-gpea-blocks' ),
+					'message' => __( 'The title must be 3 characters or more', 'planet4-gpea-blocks-backend' ),
 				);
 			}
 			if ( strlen( $_POST['ugc_content'] ) < 10 ) {
 				return array(
 					'result'  => 'error',
-					'message' => __( 'The content must be 10 characters or more', 'planet4-gpea-blocks' ),
+					'message' => __( 'The content must be 10 characters or more', 'planet4-gpea-blocks-backend' ),
 				);
 			}
 

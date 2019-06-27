@@ -38,90 +38,90 @@ if ( ! class_exists( 'Donation_Basic_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Label donate once', 'planet4-gpea-blocks' ),
+					'label' => __( 'Label donate once', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'label_donate_once',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Label donate once', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Label donate once', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Label donate monthly', 'planet4-gpea-blocks' ),
+					'label' => __( 'Label donate monthly', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'label_donate_monthly',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Label donate monthly', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Label donate monthly', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Currency code', 'planet4-gpea-blocks' ),
+					'label' => __( 'Currency code', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'currency_code',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Currency code', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Currency code', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Button label', 'planet4-gpea-blocks' ),
+					'label' => __( 'Button label', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'button_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Button label', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Button label', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Button landing link', 'planet4-gpea-blocks' ),
+					'label' => __( 'Button landing link', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'button_landing_link',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Button landing link', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Button landing link', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Background image', 'planet4-gpea-blocks' ),
+					'label' => __( 'Background image', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'bg_img',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
-					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Background image mobile', 'planet4-gpea-blocks' ),
+					'label' => __( 'Background image mobile', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'bg_img_mobile',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
-					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Blur upper border', 'planet4-gpea-blocks' ),
+					'label' => __( 'Blur upper border', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'upper_blur',
 					'type'        => 'checkbox',
 					'meta'  => [
-						'placeholder' => __( 'Blur upper border', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Blur upper border', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -129,7 +129,7 @@ if ( ! class_exists( 'Donation_Basic_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Donation Basic', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Donation Basic', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/donation_block.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
@@ -163,6 +163,20 @@ if ( ! class_exists( 'Donation_Basic_Controller' ) ) {
 
 			if ( ! isset( $attributes['button_landing_link'] ) ) {
 				$attributes['button_landing_link'] = isset( $gpea_options['gpea_default_donation_link'] ) ? $gpea_options['gpea_default_donation_link'] : '';
+			}
+
+			// lexicon fallback values
+			if ( ! isset( $attributes['label_donate_once'] ) ) {
+				$attributes['label_donate_once'] = __( 'One-off', 'planet4-gpea-blocks' );
+			}
+			if ( ! isset( $attributes['label_donate_monthly'] ) ) {
+				$attributes['label_donate_monthly'] = __( 'Monthly', 'planet4-gpea-blocks' );
+			}
+			if ( ! isset( $attributes['button_label'] ) ) {
+				$attributes['button_label'] = __( 'Donate', 'planet4-gpea-blocks' );
+			}
+			if ( ! isset( $attributes['currency_code'] ) ) {
+				$attributes['currency_code'] = __( 'currency_code', 'planet4-gpea-blocks' );
 			}
 
 			return [

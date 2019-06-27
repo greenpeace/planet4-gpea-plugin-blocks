@@ -38,34 +38,34 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+					'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'subtitle',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label'       => __( 'Carousel Items (max 8)', 'planet4-gpea-blocks' ),
+					'label'       => __( 'Carousel Items (max 8)', 'planet4-gpea-blocks-backend' ),
 					'attr'     => 'carousel_item_ids',
 					'type'     => 'post_select',
 					'multiple' => 'multiple',
@@ -78,7 +78,7 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 					'meta'     => [
 						'select2_options' => [
 							'allowClear'             => true,
-							'placeholder'            => __( 'Select carousel items (max 8)', 'planet4-gpea-blocks' ),
+							'placeholder'            => __( 'Select carousel items (max 8)', 'planet4-gpea-blocks-backend' ),
 							'closeOnSelect'          => false,
 							'minimumInputLength'     => 0,
 							'multiple'               => true,
@@ -91,7 +91,7 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Big carousel - manual selection', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Big carousel - manual selection', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/general_updates.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
@@ -218,8 +218,13 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 
 			$attributes['posts'] = $formatted_posts;
 
+			// lexicon entries
+			$lexicon['reading_time'] = __( 'Reading time', 'planet4-gpea-blocks' );
+			$lexicon['sign_now'] = __( 'Sign now', 'planet4-gpea-blocks' );
+
 			return [
 				'fields' => $attributes,
+				'lexicon' => $lexicon,
 			];
 
 		}

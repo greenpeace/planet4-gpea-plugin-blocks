@@ -59,29 +59,29 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'show_tag',
-							'label' => __( 'Display the tag', 'planet4-gpea-blocks' ),
+							'label' => __( 'Display the tag', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Display the tag',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'hide_tag',
-							'label' => __( 'Hide the tag', 'planet4-gpea-blocks' ),
+							'label' => __( 'Hide the tag', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Hide the tag',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
-						'data-plugin' => 'planet4-gpea-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks-backend',
 					],
 				],
 				[
-					'label'    => __( 'Article tags to display', 'planet4-gpea-blocks' ),
+					'label'    => __( 'Article tags to display', 'planet4-gpea-blocks-backend' ),
 					'attr'     => 'tag_ids',
 					'type'     => 'term_select',
 					'taxonomy' => 'post_tag',
@@ -89,7 +89,7 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 					'meta'     => [
 						'select2_options' => [
 							'allowClear'         => true,
-							'placeholder'        => __( 'Select Tags', 'planet4-gpea-blocks' ),
+							'placeholder'        => __( 'Select Tags', 'planet4-gpea-blocks-backend' ),
 							'closeOnSelect'      => true,
 							'minimumInputLength' => 0,
 							'maximumSelectionLength' => 3,
@@ -100,7 +100,7 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Article Row', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Article Row', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
@@ -213,8 +213,13 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 			$attributes['posts'] = $posts;
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
+			// lexicon entries
+			$lexicon['add_your_story_par'] = __( 'Want to add your story?', 'planet4-gpea-blocks' );
+			$lexicon['add_your_story_submit'] = __( 'Submit here', 'planet4-gpea-blocks' );
+
 			return [
 				'fields' => $attributes,
+				'lexicon' => $lexicon,
 			];
 
 		}

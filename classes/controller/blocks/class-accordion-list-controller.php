@@ -51,12 +51,12 @@ if ( ! class_exists( 'Accordion_List_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
-						'data-plugin' => 'planet4-gpea-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks-backend',
 					],
 				],
 			];
@@ -67,13 +67,13 @@ if ( ! class_exists( 'Accordion_List_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>accordion title</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>accordion title</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'title_accordion_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter accordion title %s', 'planet4-gpea-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpea-blocks',
+							'placeholder' => sprintf( __( 'Enter accordion title %s', 'planet4-gpea-blocks-backend' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks-backend',
 							'data-element-type' => 'accordion',
 							'data-element-name' => 'accordion',
 							'data-element-number' => $i,
@@ -83,13 +83,13 @@ if ( ! class_exists( 'Accordion_List_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>accordion paragraph</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>accordion paragraph</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'paragraph_accordion_' . $i,
 						'type'  => 'textarea',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter accordion paragraph %s', 'planet4-gpea-blocks' ), $i ),
-							'data-plugin' => 'planet4-gpea-blocks',
+							'placeholder' => sprintf( __( 'Enter accordion paragraph %s', 'planet4-gpea-blocks-backend' ), $i ),
+							'data-plugin' => 'planet4-gpea-blocks-backend',
 							'data-element-type' => 'accordion',
 							'data-element-name' => 'accordion',
 							'data-element-number' => $i,
@@ -100,7 +100,7 @@ if ( ! class_exists( 'Accordion_List_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Accordion List', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Accordion List', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

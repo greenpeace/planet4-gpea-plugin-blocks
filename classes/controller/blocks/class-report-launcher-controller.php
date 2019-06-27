@@ -31,73 +31,73 @@ if ( ! class_exists( 'Report_Launcher_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+					'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'subtitle',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Caption', 'planet4-gpea-blocks' ),
+					'label' => __( 'Caption', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'caption',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Caption', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Caption', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Image', 'planet4-gpea-blocks' ),
+					'label' => __( 'Image', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'img',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
-					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Button label', 'planet4-gpea-blocks' ),
+					'label' => __( 'Button label', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'btn_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Button label', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Button label', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Button link', 'planet4-gpea-blocks' ),
+					'label' => __( 'Button link', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'btn_link',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Button link', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Button link', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Label "See All"', 'planet4-gpea-blocks' ),
+					'label' => __( 'Label "See All"', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'see_all_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Label "See All"', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Label "See All"', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link "See All"', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link "See All"', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'see_all_link',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Link "See All"', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link "See All"', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Report_Launcher_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Report Launcher', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Report Launcher', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

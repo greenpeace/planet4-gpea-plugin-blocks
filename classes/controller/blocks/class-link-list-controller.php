@@ -58,51 +58,51 @@ if ( ! class_exists( 'Link_List_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'simple',
-							'label' => __( 'Simple list', 'planet4-gpea-blocks' ),
+							'label' => __( 'Simple list', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Simple list',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'accordion',
-							'label' => __( 'With accordion', 'planet4-gpea-blocks' ),
+							'label' => __( 'With accordion', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'With accordion',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
 				[
-					'label' => __( 'Main link label', 'planet4-gpea-blocks' ),
+					'label' => __( 'Main link label', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'main_link_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Main link label', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Main link label', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Main link URL', 'planet4-gpea-blocks' ),
+					'label' => __( 'Main link URL', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'main_link_url',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Main link URL', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Main link URL', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link description', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link description', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'link_description',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Link description', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link description', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Accordion label (used only if "Accordion" layout is selected)', 'planet4-gpea-blocks' ),
+					'label' => __( 'Accordion label (used only if "Accordion" layout is selected)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'accordion_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Accordion label', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Accordion label', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -114,12 +114,12 @@ if ( ! class_exists( 'Link_List_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>link label</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>link label</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'label_link_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter link label %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter link label %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'link',
 							'data-element-name' => 'link',
@@ -130,12 +130,12 @@ if ( ! class_exists( 'Link_List_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>link url</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>link url</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'url_link_' . $i,
 						'type'  => 'url',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter link url %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter link url %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'link',
 							'data-element-name' => 'link',
@@ -146,12 +146,25 @@ if ( ! class_exists( 'Link_List_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>link description</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>Attachement</i>', 'planet4-gpea-blocks-backend' ), $i ),
+						'desc' => __( 'If you add a file, this will linked instead of the above link', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'attachment_link_' . $i,
+						'type'  => 'attachment',
+						// 'libraryType' => array( 'image' ),
+						'multiple'    => false,
+						'addButton'   => __( 'Select attachment', 'planet4-gpea-blocks-backend' ),
+						'frameTitle'  => __( 'Select attachment', 'planet4-gpea-blocks-backend' ),
+					];
+
+				$fields[] =
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => sprintf( __( '<strong>%s</strong> <i>link description</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'description_link_' . $i,
 						'type'  => 'textarea',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter link description %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter link description %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'link',
 							'data-element-name' => 'link',
@@ -163,7 +176,7 @@ if ( ! class_exists( 'Link_List_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Link List', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Link List', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
@@ -187,6 +200,9 @@ if ( ! class_exists( 'Link_List_Controller' ) ) {
 			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
 				if ( isset( $attributes[ 'img_' . $i ] ) ) {
 					$attributes[ 'img_' . $i ] = wp_get_attachment_url( $attributes[ 'img_' . $i ] );
+				}
+				if ( isset( $attributes[ 'attachment_link_' . $i ] ) ) {
+					$attributes[ 'attachment_link_' . $i ] = wp_get_attachment_url( $attributes[ 'attachment_link_' . $i ] );
 				}
 			}
 

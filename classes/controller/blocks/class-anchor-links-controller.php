@@ -37,28 +37,28 @@ if ( ! class_exists( 'Anchor_Links_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Menu label', 'planet4-gpea-blocks' ),
+					'label' => __( 'Menu label', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'menu_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Menu label', 'planet4-gpea-blocks' ),
-						'data-plugin' => 'planet4-gpea-blocks',
+						'placeholder' => __( 'Menu label', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks-backend',
 					],
 				],
 				[
-					'label' => __( 'Anchor text', 'planet4-gpea-blocks' ),
+					'label' => __( 'Anchor text', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'anchor_text',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Anchor text', 'planet4-gpea-blocks' ),
-						'data-plugin' => 'planet4-gpea-blocks',
+						'placeholder' => __( 'Anchor text', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks-backend',
 					],
 				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Anchor links', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Anchor links', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

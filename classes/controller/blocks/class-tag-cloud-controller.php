@@ -52,41 +52,57 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'Standard',
-							'label' => __( 'Standard', 'planet4-gpea-blocks' ),
+							'label' => __( 'Standard', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Standard list of cloud',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'following',
-							'label' => __( 'Current user following list', 'planet4-gpea-blocks' ),
+							'label' => __( 'Current user following list', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Followed list with newsletter subscription',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+					'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'subtitle',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'How many topics you want to show?', 'planet4-gpea-blocks-backend' ),
+					'desc' => __( 'Used only for "standard" layout: limit to 10 topics or show them all?', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'number_topics',
+					'type'  => 'radio',
+					'options' => [
+						[
+							'value' => 'limited',
+							'label' => __( 'Fiftheen most used', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => 'all',
+							'label' => __( 'Show all topics and issues?', 'planet4-gpea-blocks-backend' ),
+						],
 					],
 				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Tag Cloud', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Tag Cloud', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/issues_list.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
@@ -107,15 +123,31 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			$campaigns = get_terms(
-				array(
-					'taxonomy' => array( 'post_tag', 'category' ),
-				)
-			);
+			$options = array();
+			$options['taxonomy'] = array( 'post_tag', 'category' );
 
+			$attributes['number_topics'] = isset( $attributes['number_topics'] ) ? $attributes['number_topics'] : 'limited';
+
+			if ( 'all' != $attributes['number_topics'] ) {
+				$options['orderby'] = 'count';
+				$options['order'] = 'DESC';
+			}
+
+			// in any case we limit to 100... let's talk just in case..
+			$options['number'] = 100;
+
+			$campaigns = get_terms( $options );
+
+			$counter = 0;
 			foreach ( $campaigns as $campaign ) {
+				if ( ( 'all' != $attributes['number_topics'] ) && ( $counter > 14 ) ) {
+					continue;
+				}
 				$campaign->engaging_id = get_term_meta( $campaign->term_id, self::ENGAGING_CAMPAIGN_ID_META_KEY, true );
-				if ( $campaign->engaging_id ) $attributes['campaigns'][] = $campaign;
+				if ( $campaign->engaging_id ) {
+					$attributes['campaigns'][] = $campaign;
+					$counter++;
+				}
 			}
 
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
@@ -136,8 +168,14 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 			// nonce for form
 			$attributes['nonce_action'] = 'enform_submit';
 
+			// lexicon entries
+			$lexicon['subscribe']       = __( 'Subscribe', 'planet4-gpea-blocks' );
+			$lexicon['follow']          = __( 'Follow', 'planet4-gpea-blocks' );
+			$lexicon['receive_updates'] = __( 'Would you like to receive updates about these topics?', 'planet4-gpea-blocks' );
+
 			return [
 				'fields' => $attributes,
+				'lexicon' => $lexicon,
 			];
 
 		}
