@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-06-26T19:52:07+00:00\n"
+"POT-Creation-Date: 2019-06-27T13:45:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.2.0\n"
 "X-Domain: planet4-gpea-blocks\n"
@@ -67,8 +67,6 @@ msgstr ""
 #: classes/controller/blocks/class-achievements-list-controller.php:45
 #: classes/controller/blocks/class-mixed-content-row-controller.php:74
 #: classes/controller/blocks/class-mixed-content-row-controller.php:78
-#: classes/controller/blocks/class-achievement-about-controller.php:34
-#: classes/controller/blocks/class-achievement-about-controller.php:38
 #: classes/controller/blocks/class-tag-cloud-controller.php:68
 #: classes/controller/blocks/class-tag-cloud-controller.php:72
 #: classes/controller/blocks/class-milestones-controller.php:47
@@ -281,15 +279,30 @@ msgstr ""
 
 #. translators: placeholder represents the ordinal of the field.
 #: classes/controller/blocks/class-link-list-controller.php:149
+msgid "<strong>%s</strong> <i>Attachement</i>"
+msgstr ""
+
+#. translators: placeholder represents the ordinal of the field.
+#: classes/controller/blocks/class-link-list-controller.php:150
+msgid "If you add a file, this will linked instead of the above link"
+msgstr ""
+
+#: classes/controller/blocks/class-link-list-controller.php:155
+#: classes/controller/blocks/class-link-list-controller.php:156
+msgid "Select attachment"
+msgstr ""
+
+#. translators: placeholder represents the ordinal of the field.
+#: classes/controller/blocks/class-link-list-controller.php:162
 msgid "<strong>%s</strong> <i>link description</i>"
 msgstr ""
 
 #. translators: placeholder represents the ordinal of the field.
-#: classes/controller/blocks/class-link-list-controller.php:154
+#: classes/controller/blocks/class-link-list-controller.php:167
 msgid "Enter link description %s"
 msgstr ""
 
-#: classes/controller/blocks/class-link-list-controller.php:166
+#: classes/controller/blocks/class-link-list-controller.php:179
 msgid "GPEA | Link List"
 msgstr ""
 
@@ -393,6 +406,14 @@ msgstr ""
 
 #: classes/controller/blocks/class-article-row-controller.php:103
 msgid "GPEA | Article Row"
+msgstr ""
+
+#: classes/controller/blocks/class-article-row-controller.php:217
+msgid "Want to add your story?"
+msgstr ""
+
+#: classes/controller/blocks/class-article-row-controller.php:218
+msgid "Submit here"
 msgstr ""
 
 #. translators: placeholder represents the ordinal of the field.
@@ -543,15 +564,39 @@ msgstr ""
 msgid "GPEA | UGC Form"
 msgstr ""
 
-#: classes/controller/blocks/class-ugc-controller.php:115
+#: classes/controller/blocks/class-ugc-controller.php:79
+msgid "Submit your story"
+msgstr ""
+
+#: classes/controller/blocks/class-ugc-controller.php:80
+msgid "Your name"
+msgstr ""
+
+#: classes/controller/blocks/class-ugc-controller.php:81
+msgid "Your email address"
+msgstr ""
+
+#: classes/controller/blocks/class-ugc-controller.php:82
+msgid "Subject of your story"
+msgstr ""
+
+#: classes/controller/blocks/class-ugc-controller.php:83
+msgid "Your story"
+msgstr ""
+
+#: classes/controller/blocks/class-ugc-controller.php:84
+msgid "Publish your story"
+msgstr ""
+
+#: classes/controller/blocks/class-ugc-controller.php:125
 msgid "Did not save because your form seemed to be invalid. Sorry"
 msgstr ""
 
-#: classes/controller/blocks/class-ugc-controller.php:123
+#: classes/controller/blocks/class-ugc-controller.php:133
 msgid "The title must be 3 characters or more"
 msgstr ""
 
-#: classes/controller/blocks/class-ugc-controller.php:129
+#: classes/controller/blocks/class-ugc-controller.php:139
 msgid "The content must be 10 characters or more"
 msgstr ""
 
@@ -894,26 +939,6 @@ msgstr ""
 msgid "GPEA | Mixed Content Row"
 msgstr ""
 
-#: classes/controller/blocks/class-achievement-about-controller.php:43
-msgid "Label for link"
-msgstr ""
-
-#: classes/controller/blocks/class-achievement-about-controller.php:48
-msgid "Link address"
-msgstr ""
-
-#: classes/controller/blocks/class-achievement-about-controller.php:53
-msgid "Achievement"
-msgstr ""
-
-#: classes/controller/blocks/class-achievement-about-controller.php:66
-msgid "Select Achievement"
-msgstr ""
-
-#: classes/controller/blocks/class-achievement-about-controller.php:79
-msgid "GPEA | About section: Achievements"
-msgstr ""
-
 #: classes/controller/blocks/class-tag-cloud-controller.php:55
 msgid "Standard"
 msgstr ""
@@ -924,6 +949,18 @@ msgstr ""
 
 #: classes/controller/blocks/class-tag-cloud-controller.php:89
 msgid "GPEA | Tag Cloud"
+msgstr ""
+
+#: classes/controller/blocks/class-tag-cloud-controller.php:140
+msgid "Subscribe"
+msgstr ""
+
+#: classes/controller/blocks/class-tag-cloud-controller.php:141
+msgid "Follow"
+msgstr ""
+
+#: classes/controller/blocks/class-tag-cloud-controller.php:142
+msgid "Would you like to receive updates about these topics?"
 msgstr ""
 
 #: classes/controller/blocks/class-anchor-links-controller.php:40
@@ -1008,6 +1045,14 @@ msgstr ""
 msgid "GPEA | Big carousel - manual selection"
 msgstr ""
 
+#: classes/controller/blocks/class-big-carousel-manual-selection-controller.php:222
+msgid "Reading time"
+msgstr ""
+
+#: classes/controller/blocks/class-big-carousel-manual-selection-controller.php:223
+msgid "Sign now"
+msgstr ""
+
 #: classes/controller/blocks/class-articles-list-controller.php:48
 msgid "Tag filters"
 msgstr ""
@@ -1058,6 +1103,10 @@ msgstr ""
 
 #: classes/controller/blocks/class-main-issues-carousel-controller.php:69
 msgid "GPEA | Main issues carousel"
+msgstr ""
+
+#: classes/controller/blocks/class-main-issues-carousel-controller.php:154
+msgid "Achievements"
 msgstr ""
 
 #: classes/controller/blocks/class-launcher-controller.php:68
@@ -1146,6 +1195,26 @@ msgstr ""
 
 #: classes/controller/blocks/class-donation-dollar-handles-controller.php:250
 msgid "GPEA | Donation Dollar Handles"
+msgstr ""
+
+#: classes/controller/blocks/class-donation-dollar-handles-controller.php:297
+#: classes/controller/blocks/class-donation-basic-controller.php:170
+msgid "One-off"
+msgstr ""
+
+#: classes/controller/blocks/class-donation-dollar-handles-controller.php:300
+#: classes/controller/blocks/class-donation-basic-controller.php:173
+msgid "Monthly"
+msgstr ""
+
+#: classes/controller/blocks/class-donation-dollar-handles-controller.php:303
+#: classes/controller/blocks/class-donation-basic-controller.php:176
+msgid "Donate"
+msgstr ""
+
+#: classes/controller/blocks/class-donation-dollar-handles-controller.php:306
+#: classes/controller/blocks/class-donation-basic-controller.php:179
+msgid "currency_code"
 msgstr ""
 
 #: classes/controller/blocks/class-donation-basic-controller.php:95
