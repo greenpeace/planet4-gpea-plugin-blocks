@@ -91,6 +91,21 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 					],
 				],
 				[
+					'label'    => __( 'Filter by Topic', 'planet4-gpea-blocks-backend' ),
+					'attr'     => 'topic',
+					'type'     => 'term_select',
+					'taxonomy' => 'post_tag',
+					'multiple' => false,
+					'meta'     => [
+						'select2_options' => [
+							'allowClear'         => true,
+							'placeholder'        => __( 'Select Topic', 'planet4-gpea-blocks-backend' ),
+							'closeOnSelect'      => true,
+							'minimumInputLength' => 0,
+						],
+					],
+				],
+				[
 					'label'       => __( 'Carousel Items (max 8)', 'planet4-gpea-blocks-backend' ),
 					'attr'     => 'carousel_item_ids',
 					'type'     => 'post_select',
@@ -172,6 +187,8 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 			// Check if result needs to be filtered by category.
 			$cat_id = $attributes['main_issue'] ?? '';
 
+			$tag_id = $attributes['topic'] ?? '';
+
 			if ( isset( $attributes['carousel_item_ids'] ) ) {
 
 				$options = array(
@@ -193,10 +210,20 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 				);
 
 				if ( '' !== $cat_id ) {
+					$options['tax_query'] = array(
+						'relation' => 'AND',
+						array(
+							'taxonomy' => 'category',
+							'field' => 'term_id',
+							'terms' => $cat_id,
+						),
+					);
+				}
+				if ( '' !== $tag_id ) {
 					$options['tax_query'][] = array(
-						'taxonomy' => 'category',
+						'taxonomy' => 'post_tag',
 						'field' => 'term_id',
-						'terms' => $cat_id,
+						'terms' => $tag_id,
 					);
 				}
 			}
