@@ -45,12 +45,12 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
-					'description'  => __( 'This will appear over all the cards', 'planet4-gpea-blocks' ),
+					'description'  => __( 'This will appear over all the cards', 'planet4-gpea-blocks-backend' ),
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -61,50 +61,50 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 				'Card' => [
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Launcher %s Title</i>*', 'planet4-gpea-blocks' ),
+						'label' => __( '<i>Launcher %s Title</i>*', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'subtitle',
 						'type'  => 'text',
 						'meta'  => [
-							'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+							'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Launcher %s Paragraph</i>', 'planet4-gpea-blocks' ),
+						'label' => __( '<i>Launcher %s Paragraph</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'paragraph',
 						'type'  => 'textarea',
 						'meta'  => [
-							'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+							'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Launcher %s Optional image</i>', 'planet4-gpea-blocks' ),
+						'label' => __( '<i>Launcher %s Optional image</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'        => 'img',
 						'type'        => 'attachment',
 						'libraryType' => array( 'image' ),
-						'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+						'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Launcher %s Button label</i>', 'planet4-gpea-blocks' ),
+						'label' => __( '<i>Launcher %s Button label</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'btnlabel',
 						'type'  => 'text',
 						'meta'  => [
-							'placeholder' => __( 'Button label', 'planet4-gpea-blocks' ),
+							'placeholder' => __( 'Button label', 'planet4-gpea-blocks-backend' ),
 							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Launcher %s Button link</i>', 'planet4-gpea-blocks' ),
+						'label' => __( '<i>Launcher %s Button link</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'btnlink',
 						'type'  => 'url',
 						'meta'  => [
-							'placeholder' => __( 'Button link', 'planet4-gpea-blocks' ),
+							'placeholder' => __( 'Button link', 'planet4-gpea-blocks-backend' ),
 							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
@@ -115,7 +115,7 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Card Launcher', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Card Launcher', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

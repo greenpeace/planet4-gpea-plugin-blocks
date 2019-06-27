@@ -51,35 +51,35 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'carousel',
-							'label' => __( 'Carousel', 'planet4-gpea-blocks' ),
+							'label' => __( 'Carousel', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Carousel',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'tiny-carousel',
-							'label' => __( 'Tiny carousel', 'planet4-gpea-blocks' ),
+							'label' => __( 'Tiny carousel', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Tiny carousel',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						// [
 						// 	'value' => 'list',
-						// 	'label' => __( 'List', 'planet4-gpea-blocks' ),
+						// 	'label' => __( 'List', 'planet4-gpea-blocks-backend' ),
 						// 	'desc'  => 'List',
 						// 	'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						// ],
 					],
 				],
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label'       => __( 'Select the team people for testimonials', 'planet4-gpea-blocks' ),
+					'label'       => __( 'Select the team people for testimonials', 'planet4-gpea-blocks-backend' ),
 					'attr'     => 'testimonial_ids',
 					'type'     => 'post_select',
 					'multiple' => 'multiple',
@@ -91,38 +91,38 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Link label 1', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link label 1', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'link_label_1',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Link label 1', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link label 1', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link URL 1', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link URL 1', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'link_url_1',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Link URL 1', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link URL 1', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link label 2', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link label 2', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'link_label_2',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Link label 2', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link label 2', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link URL 2', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link URL 2', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'link_url_2',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Link URL 2', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link URL 2', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -130,7 +130,7 @@ if ( ! class_exists( 'Testimonials_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | People', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | People', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

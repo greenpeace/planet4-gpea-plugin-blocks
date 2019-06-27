@@ -59,95 +59,95 @@ if ( ! class_exists( 'Support_Launcher_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'form',
-							'label' => __( 'Form', 'planet4-gpea-blocks' ),
+							'label' => __( 'Form', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Form',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'button',
-							'label' => __( 'Button', 'planet4-gpea-blocks' ),
+							'label' => __( 'Button', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Button',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+					'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'subtitle',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Thanks message', 'planet4-gpea-blocks' ),
+					'label' => __( 'Thanks message', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'thanks_message',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Thanks message', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Thanks message', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Image', 'planet4-gpea-blocks' ),
+					'label' => __( 'Image', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'img',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
-					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Accordion label (used only with "Form" layout)', 'planet4-gpea-blocks' ),
+					'label' => __( 'Accordion label (used only with "Form" layout)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'accordion_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Accordion label', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Accordion label', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Recipient e-mail (used only with "Form" layout)', 'planet4-gpea-blocks' ),
+					'label' => __( 'Recipient e-mail (used only with "Form" layout)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'recipient_email',
 					'type'  => 'email',
 					'meta'  => [
-						'placeholder' => __( 'Recipient e-mail', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Recipient e-mail', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Button label (used only with "Button" layout)', 'planet4-gpea-blocks' ),
+					'label' => __( 'Button label (used only with "Button" layout)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'button_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Button label', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Button label', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Button URL (used only with "Button" layout)', 'planet4-gpea-blocks' ),
+					'label' => __( 'Button URL (used only with "Button" layout)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'button_url',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Button URL', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Button URL', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -155,7 +155,7 @@ if ( ! class_exists( 'Support_Launcher_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Support Launcher', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Support Launcher', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

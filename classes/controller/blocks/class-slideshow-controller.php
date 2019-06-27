@@ -58,51 +58,51 @@ if ( ! class_exists( 'Slideshow_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'light',
-							'label' => __( 'Light background, labeled slides', 'planet4-gpea-blocks' ),
+							'label' => __( 'Light background, labeled slides', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Light background, labeled slides',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'dark',
-							'label' => __( 'Dark background, dotted', 'planet4-gpea-blocks' ),
+							'label' => __( 'Dark background, dotted', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Dark background, dotted',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link label', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link label', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'link_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Link label', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link label', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link URL', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link URL', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'link_url',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Link URL', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link URL', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -114,12 +114,12 @@ if ( ! class_exists( 'Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>label</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>label</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'label_slide_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter label %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter label %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'slide',
 							'data-element-name' => 'slide',
@@ -130,12 +130,12 @@ if ( ! class_exists( 'Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>title</i> (must be present to display the slideshow item)', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>title</i> (must be present to display the slideshow item)', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'title_slide_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'slide',
 							'data-element-name' => 'slide',
@@ -146,12 +146,12 @@ if ( ! class_exists( 'Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>subtitle</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>subtitle</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'subtitle_slide_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter subtitle %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter subtitle %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'slide',
 							'data-element-name' => 'slide',
@@ -162,12 +162,12 @@ if ( ! class_exists( 'Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>paragraph</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>paragraph</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'paragraph_slide_' . $i,
 						'type'  => 'textarea',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'slide',
 							'data-element-name' => 'slide',
@@ -178,15 +178,15 @@ if ( ! class_exists( 'Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label'       => sprintf( __( '<strong>%s</strong> <i>image</i>', 'planet4-gpea-blocks' ), $i ),
+						'label'       => sprintf( __( '<strong>%s</strong> <i>image</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'        => 'img_slide_' . $i,
 						'type'        => 'attachment',
 						'libraryType' => array( 'image' ),
-						'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+						'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 						'meta'        => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'slide',
 							'data-element-name' => 'slide',
@@ -197,7 +197,7 @@ if ( ! class_exists( 'Slideshow_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Slideshow', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Slideshow', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

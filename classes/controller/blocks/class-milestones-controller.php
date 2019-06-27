@@ -44,20 +44,20 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -69,12 +69,12 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<i>Milestone %s date</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<i>Milestone %s date</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'date_milestone_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter date %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter date %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
@@ -85,12 +85,12 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<i>Milestone %s paragraph</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<i>Milestone %s paragraph</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'paragraph_milestone_' . $i,
 						'type'  => 'textarea',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
@@ -101,7 +101,7 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<i>Tick if milestone %s was achieved</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<i>Tick if milestone %s was achieved</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'achieved_milestone_' . $i,
 						'type'  => 'checkbox',
 						'meta'  => [
@@ -115,7 +115,7 @@ if ( ! class_exists( 'Milestones_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Milestones', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Milestones', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

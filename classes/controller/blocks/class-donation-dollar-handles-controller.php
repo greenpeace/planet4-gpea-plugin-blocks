@@ -44,92 +44,92 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Label donate once', 'planet4-gpea-blocks' ),
+					'label' => __( 'Label donate once', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'label_donate_once',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Label donate once', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Label donate once', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Label donate monthly', 'planet4-gpea-blocks' ),
+					'label' => __( 'Label donate monthly', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'label_donate_monthly',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Label donate monthly', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Label donate monthly', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Currency code', 'planet4-gpea-blocks' ),
+					'label' => __( 'Currency code', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'currency_code',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Currency code', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Currency code', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Label free amount', 'planet4-gpea-blocks' ),
+					'label' => __( 'Label free amount', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'label_free_amount',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Label free amount', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Label free amount', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Button label', 'planet4-gpea-blocks' ),
+					'label' => __( 'Button label', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'button_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Button label', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Button label', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Button landing URL', 'planet4-gpea-blocks' ),
+					'label' => __( 'Button landing URL', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'button_landing_url',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Button landing URL', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Button landing URL', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Background image', 'planet4-gpea-blocks' ),
+					'label' => __( 'Background image', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'bg_img',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
-					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Background image (mobile)', 'planet4-gpea-blocks' ),
+					'label' => __( 'Background image (mobile)', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'bg_img_mobile',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
-					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 				],
 
 			];
@@ -140,12 +140,12 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 				$fields[] =
 						  [
 							  // translators: placeholder represents the ordinal of the field.
-							  'label' => sprintf( __( '<strong>One-off: %s</strong> <i>amount</i> (must be present to display the dollar handle)', 'planet4-gpea-blocks' ), $i ),
+							  'label' => sprintf( __( '<strong>One-off: %s</strong> <i>amount</i> (must be present to display the dollar handle)', 'planet4-gpea-blocks-backend' ), $i ),
 							  'attr'  => 'amount_handle_' . $i,
 							  'type'  => 'number',
 							  'meta'  => [
 								  // translators: placeholder represents the ordinal of the field.
-								  'placeholder' => sprintf( __( 'Enter amount %s', 'planet4-gpea-blocks' ), $i ),
+								  'placeholder' => sprintf( __( 'Enter amount %s', 'planet4-gpea-blocks-backend' ), $i ),
 								  'data-plugin' => 'planet4-gpea-blocks',
 								  'data-element-type' => 'handle',
 								  'data-element-name' => 'handle',
@@ -156,15 +156,15 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 				$fields[] =
 						  [
 							  // translators: placeholder represents the ordinal of the field.
-							  'label'       => sprintf( __( '<strong>One-off: %s</strong> <i>image</i>', 'planet4-gpea-blocks' ), $i ),
+							  'label'       => sprintf( __( '<strong>One-off: %s</strong> <i>image</i>', 'planet4-gpea-blocks-backend' ), $i ),
 							  'attr'        => 'img_handle_' . $i,
 							  'type'        => 'attachment',
 							  'libraryType' => array( 'image' ),
-							  'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-							  'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+							  'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+							  'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 							  'meta'     => [
 								  // translators: placeholder represents the ordinal of the field.
-								  'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpea-blocks' ), $i ),
+								  'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpea-blocks-backend' ), $i ),
 								  'data-plugin' => 'planet4-gpea-blocks',
 								  'data-element-type' => 'handle',
 								  'data-element-name' => 'handle',
@@ -175,12 +175,12 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 				$fields[] =
 						  [
 							  // translators: placeholder represents the ordinal of the field.
-							  'label' => sprintf( __( '<strong>One-off: %s</strong> <i>paragraph</i>', 'planet4-gpea-blocks' ), $i ),
+							  'label' => sprintf( __( '<strong>One-off: %s</strong> <i>paragraph</i>', 'planet4-gpea-blocks-backend' ), $i ),
 							  'attr'  => 'paragraph_handle_' . $i,
 							  'type'  => 'textarea',
 							  'meta'  => [
 								  // translators: placeholder represents the ordinal of the field.
-								  'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks' ), $i ),
+								  'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks-backend' ), $i ),
 								  'data-plugin' => 'planet4-gpea-blocks',
 								  'data-element-type' => 'handle',
 								  'data-element-name' => 'handle',
@@ -195,12 +195,12 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 				$fields[] =
 						  [
 							  // translators: placeholder represents the ordinal of the field.
-							  'label' => sprintf( __( '<strong>Recurring: %s</strong> <i>amount</i> (must be present to display the dollar handle)', 'planet4-gpea-blocks' ), $i ),
+							  'label' => sprintf( __( '<strong>Recurring: %s</strong> <i>amount</i> (must be present to display the dollar handle)', 'planet4-gpea-blocks-backend' ), $i ),
 							  'attr'  => 'recurring_amount_handle_' . $i,
 							  'type'  => 'number',
 							  'meta'  => [
 								  // translators: placeholder represents the ordinal of the field.
-								  'placeholder' => sprintf( __( 'Enter amount %s', 'planet4-gpea-blocks' ), $i ),
+								  'placeholder' => sprintf( __( 'Enter amount %s', 'planet4-gpea-blocks-backend' ), $i ),
 								  'data-plugin' => 'planet4-gpea-blocks',
 								  'data-element-type' => 'handle',
 								  'data-element-name' => 'handle',
@@ -211,15 +211,15 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 				$fields[] =
 						  [
 							  // translators: placeholder represents the ordinal of the field.
-							  'label'       => sprintf( __( '<strong>Recurring: %s</strong> <i>image</i>', 'planet4-gpea-blocks' ), $i ),
+							  'label'       => sprintf( __( '<strong>Recurring: %s</strong> <i>image</i>', 'planet4-gpea-blocks-backend' ), $i ),
 							  'attr'        => 'recurring_img_handle_' . $i,
 							  'type'        => 'attachment',
 							  'libraryType' => array( 'image' ),
-							  'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-							  'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+							  'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+							  'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 							  'meta'        => [
 								  // translators: placeholder represents the ordinal of the field.
-								  'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpea-blocks' ), $i ),
+								  'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpea-blocks-backend' ), $i ),
 								  'data-plugin' => 'planet4-gpea-blocks',
 								  'data-element-type' => 'handle',
 								  'data-element-name' => 'handle',
@@ -230,12 +230,12 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 				$fields[] =
 						  [
 							  // translators: placeholder represents the ordinal of the field.
-							  'label' => sprintf( __( '<strong>Recurring: %s</strong> <i>paragraph</i>', 'planet4-gpea-blocks' ), $i ),
+							  'label' => sprintf( __( '<strong>Recurring: %s</strong> <i>paragraph</i>', 'planet4-gpea-blocks-backend' ), $i ),
 							  'attr'  => 'recurring_paragraph_handle_' . $i,
 							  'type'  => 'textarea',
 							  'meta'  => [
 								  // translators: placeholder represents the ordinal of the field.
-								  'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks' ), $i ),
+								  'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks-backend' ), $i ),
 								  'data-plugin' => 'planet4-gpea-blocks',
 								  'data-element-type' => 'handle',
 								  'data-element-name' => 'handle',
@@ -247,7 +247,7 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'             => __( 'GPEA | Donation Dollar Handles', 'planet4-gpea-blocks' ),
+				'label'             => __( 'GPEA | Donation Dollar Handles', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'             => $fields,
 				'post_type'         => P4EABKS_ALLOWED_PAGETYPE,

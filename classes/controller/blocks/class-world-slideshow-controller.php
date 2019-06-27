@@ -44,11 +44,11 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -60,12 +60,12 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>date</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>date</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'date_milestone_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter date %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter date %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
@@ -76,12 +76,12 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>latitude</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>latitude</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'lat_milestone_' . $i,
 						'type'  => 'number',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter latitude %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter latitude %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
@@ -92,12 +92,12 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>longitude</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>longitude</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'lon_milestone_' . $i,
 						'type'  => 'number',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter longitude %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter longitude %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
@@ -108,12 +108,12 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>title</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>title</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'title_milestone_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter title %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
@@ -124,12 +124,12 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>subtitle</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>subtitle</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'subtitle_milestone_' . $i,
 						'type'  => 'text',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter subtitle %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter subtitle %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
@@ -140,12 +140,12 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => sprintf( __( '<strong>%s</strong> <i>paragraph</i>', 'planet4-gpea-blocks' ), $i ),
+						'label' => sprintf( __( '<strong>%s</strong> <i>paragraph</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'  => 'paragraph_milestone_' . $i,
 						'type'  => 'textarea',
 						'meta'  => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter paragraph %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
@@ -156,15 +156,15 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label'       => sprintf( __( '<strong>%s</strong> <i>image</i>', 'planet4-gpea-blocks' ), $i ),
+						'label'       => sprintf( __( '<strong>%s</strong> <i>image</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'        => 'img_milestone_' . $i,
 						'type'        => 'attachment',
 						'libraryType' => array( 'image' ),
-						'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+						'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 						'meta'        => [
 							// translators: placeholder represents the ordinal of the field.
-							'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpea-blocks' ), $i ),
+							'placeholder' => sprintf( __( 'Enter image %s', 'planet4-gpea-blocks-backend' ), $i ),
 							'data-plugin' => 'planet4-gpea-blocks',
 							'data-element-type' => 'milestone',
 							'data-element-name' => 'milestone',
@@ -175,7 +175,7 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | World Slideshow', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | World Slideshow', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

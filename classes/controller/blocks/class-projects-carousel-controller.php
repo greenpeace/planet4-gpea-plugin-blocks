@@ -45,38 +45,38 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'dark',
-							'label' => __( 'Dark background, light text', 'planet4-gpea-blocks' ),
+							'label' => __( 'Dark background, light text', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Dark background, light text',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'light',
-							'label' => __( 'Light background, dark text', 'planet4-gpea-blocks' ),
+							'label' => __( 'Light background, dark text', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Light background, dark text',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label'    => __( 'Filter by Main Issue', 'planet4-gpea-blocks' ),
+					'label'    => __( 'Filter by Main Issue', 'planet4-gpea-blocks-backend' ),
 					'attr'     => 'main_issue',
 					'type'     => 'term_select',
 					'taxonomy' => 'category',
@@ -84,14 +84,14 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 					'meta'     => [
 						'select2_options' => [
 							'allowClear'         => true,
-							'placeholder'        => __( 'Select Main Issue', 'planet4-gpea-blocks' ),
+							'placeholder'        => __( 'Select Main Issue', 'planet4-gpea-blocks-backend' ),
 							'closeOnSelect'      => true,
 							'minimumInputLength' => 0,
 						],
 					],
 				],
 				[
-					'label'       => __( 'Carousel Items (max 8)', 'planet4-gpea-blocks' ),
+					'label'       => __( 'Carousel Items (max 8)', 'planet4-gpea-blocks-backend' ),
 					'attr'     => 'carousel_item_ids',
 					'type'     => 'post_select',
 					'multiple' => 'multiple',
@@ -106,7 +106,7 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 					'meta'     => [
 						'select2_options' => [
 							'allowClear'             => true,
-							'placeholder'            => __( 'Select carousel items (max 8)', 'planet4-gpea-blocks' ),
+							'placeholder'            => __( 'Select carousel items (max 8)', 'planet4-gpea-blocks-backend' ),
 							'closeOnSelect'          => false,
 							'minimumInputLength'     => 0,
 							'multiple'               => true,
@@ -116,29 +116,29 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Link label "See more"', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link label "See more"', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'see_more_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Link label "See more"', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link label "See more"', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link URL "See more"', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link URL "See more"', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'see_more_link',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Link URL "See more"', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link URL "See more"', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Show vertical list', 'planet4-gpea-blocks' ),
+					'label' => __( 'Show vertical list', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'show_vertical',
 					'type'  => 'checkbox',
 					'meta'  => [
-						'placeholder' => __( 'Show vertical list', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Show vertical list', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -146,7 +146,7 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Projects Carousel', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Projects Carousel', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/projects_block.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

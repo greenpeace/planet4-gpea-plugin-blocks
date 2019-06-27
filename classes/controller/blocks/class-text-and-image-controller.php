@@ -45,74 +45,74 @@ if ( ! class_exists( 'Text_And_Image_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'light',
-							'label' => __( 'Light background, dark text - issue color', 'planet4-gpea-blocks' ),
+							'label' => __( 'Light background, dark text - issue color', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Dark text on light background. The main color changes, based on the issue.',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'dark',
-							'label' => __( 'Dark background, light text - issue color', 'planet4-gpea-blocks' ),
+							'label' => __( 'Dark background, light text - issue color', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Dark text on light background. The main color changes, based on the issue.',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'plain_light',
-							'label' => __( 'White background, black', 'planet4-gpea-blocks' ),
+							'label' => __( 'White background, black', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Black text on white background.',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
 				],
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link label', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link label', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'link_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Link label', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link label', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link URL', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link URL', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'link_url',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Link URL', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link URL', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Optional image(s)', 'planet4-gpea-blocks' ),
+					'label' => __( 'Optional image(s)', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'images',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
 					'multiple'    => true,
-					'addButton'   => __( 'Select image(s)', 'planet4-gpea-blocks' ),
-					'frameTitle'  => __( 'Select image(s)', 'planet4-gpea-blocks' ),
+					'addButton'   => __( 'Select image(s)', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image(s)', 'planet4-gpea-blocks-backend' ),
 				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Free text/image', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Free text/image', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

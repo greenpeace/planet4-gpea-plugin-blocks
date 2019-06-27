@@ -37,89 +37,89 @@ if ( ! class_exists( 'Heart_Counter_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Left side title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Left side title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'left_title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Left side title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Left side title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Left side image', 'planet4-gpea-blocks' ),
+					'label' => __( 'Left side image', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'left_img',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
-					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Left side image description (for accessibility, required)', 'planet4-gpea-blocks' ),
+					'label' => __( 'Left side image description (for accessibility, required)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'left_img_desc',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Left side image description', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Left side image description', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Right side title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Right side title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'text_above',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Right side title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Right side title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Right side number', 'planet4-gpea-blocks' ),
+					'label' => __( 'Right side number', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'number',
 					'type'  => 'number',
 					'meta'  => [
-						'placeholder' => __( '1000', 'planet4-gpea-blocks' ),
+						'placeholder' => __( '1000', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Right side paragraph', 'planet4-gpea-blocks' ),
+					'label' => __( 'Right side paragraph', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'text_below',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Right side paragraph', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Right side paragraph', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link label', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link label', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'link_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Link label', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link label', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link URL', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link URL', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'link_url',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Link URL', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link URL', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Right side image', 'planet4-gpea-blocks' ),
+					'label' => __( 'Right side image', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'bg_img',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
-					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Heart Counter', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Heart Counter', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

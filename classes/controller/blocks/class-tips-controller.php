@@ -37,34 +37,34 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+					'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'subtitle',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label'       => __( 'Tips (10 max)', 'planet4-gpea-blocks' ),
+					'label'       => __( 'Tips (10 max)', 'planet4-gpea-blocks-backend' ),
 					'attr'     => 'tip_ids',
 					'type'     => 'post_select',
 					'multiple' => 'multiple',
@@ -77,7 +77,7 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 					'meta'     => [
 						'select2_options' => [
 							'allowClear'             => true,
-							'placeholder'            => __( 'Select tips (max 10)', 'planet4-gpea-blocks' ),
+							'placeholder'            => __( 'Select tips (max 10)', 'planet4-gpea-blocks-backend' ),
 							'closeOnSelect'          => false,
 							'minimumInputLength'     => 0,
 							'multiple'               => true,
@@ -88,20 +88,20 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 
 				],
 				[
-					'label' => __( 'Label "See more"', 'planet4-gpea-blocks' ),
+					'label' => __( 'Label "See more"', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'see_more_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Label "See more"', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Label "See more"', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Link "See more"', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link "See more"', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'see_more_link',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Link "See more"', 'planet4-gpea-blocks' ),
+						'placeholder' => __( 'Link "See more"', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -109,7 +109,7 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Tips', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Tips', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,

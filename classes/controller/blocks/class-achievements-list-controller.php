@@ -38,41 +38,41 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks' ),
+					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks' ),
-						'data-plugin' => 'planet4-gpea-blocks',
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks-backend',
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpea-blocks' ),
+					'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'subtitle',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks' ),
-						'data-plugin' => 'planet4-gpea-blocks',
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks-backend',
 					],
 				],
 				[
-					'label' => __( 'Module image', 'planet4-gpea-blocks' ),
+					'label' => __( 'Module image', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'bg_img',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
-					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Module image (mobile)', 'planet4-gpea-blocks' ),
+					'label' => __( 'Module image (mobile)', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'bg_img_mobile',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
-					'addButton'   => __( 'Select image', 'planet4-gpea-blocks' ),
-					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 				],
 				[
-					'label'    => __( 'Prominent achievement', 'planet4-gpea-blocks' ),
+					'label'    => __( 'Prominent achievement', 'planet4-gpea-blocks-backend' ),
 					'attr'     => 'main_achievement_id',
 					'type'     => 'post_select',
 					'query'    => [
@@ -85,34 +85,34 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 					'meta'     => [
 						'select2_options' => [
 							'allowClear'             => true,
-							'placeholder'            => __( 'Select prominent achievement', 'planet4-gpea-blocks' ),
+							'placeholder'            => __( 'Select prominent achievement', 'planet4-gpea-blocks-backend' ),
 							'closeOnSelect'          => true,
 						],
 					],
 				],
 				[
-					'label' => __( 'Label "See more"', 'planet4-gpea-blocks' ),
+					'label' => __( 'Label "See more"', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'see_more_label',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Label "See more"', 'planet4-gpea-blocks' ),
-						'data-plugin' => 'planet4-gpea-blocks',
+						'placeholder' => __( 'Label "See more"', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks-backend',
 					],
 				],
 				[
-					'label' => __( 'Link "See more"', 'planet4-gpea-blocks' ),
+					'label' => __( 'Link "See more"', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'see_more_link',
 					'type'  => 'url',
 					'meta'  => [
-						'placeholder' => __( 'Link "See more"', 'planet4-gpea-blocks' ),
-						'data-plugin' => 'planet4-gpea-blocks',
+						'placeholder' => __( 'Link "See more"', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks-backend',
 					],
 				],
 			];
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Achievements List', 'planet4-gpea-blocks' ),
+				'label'         => __( 'GPEA | Achievements List', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/achivements_block.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
