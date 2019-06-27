@@ -146,6 +146,19 @@ if ( ! class_exists( 'Link_List_Controller' ) ) {
 				$fields[] =
 					[
 						// translators: placeholder represents the ordinal of the field.
+						'label' => sprintf( __( '<strong>%s</strong> <i>Attachement</i>', 'planet4-gpea-blocks' ), $i ),
+						'desc' => __( 'If you add a file, this will linked instead of the above link', 'planet4-gpea-blocks' ),
+						'attr'  => 'attachment_link_' . $i,
+						'type'  => 'attachment',
+						// 'libraryType' => array( 'image' ),
+						'multiple'    => false,
+						'addButton'   => __( 'Select attachment', 'planet4-gpea-blocks' ),
+						'frameTitle'  => __( 'Select attachment', 'planet4-gpea-blocks' ),
+					];
+
+				$fields[] =
+					[
+						// translators: placeholder represents the ordinal of the field.
 						'label' => sprintf( __( '<strong>%s</strong> <i>link description</i>', 'planet4-gpea-blocks' ), $i ),
 						'attr'  => 'description_link_' . $i,
 						'type'  => 'textarea',
@@ -187,6 +200,9 @@ if ( ! class_exists( 'Link_List_Controller' ) ) {
 			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
 				if ( isset( $attributes[ 'img_' . $i ] ) ) {
 					$attributes[ 'img_' . $i ] = wp_get_attachment_url( $attributes[ 'img_' . $i ] );
+				}
+				if ( isset( $attributes[ 'attachment_link_' . $i ] ) ) {
+					$attributes[ 'attachment_link_' . $i ] = wp_get_attachment_url( $attributes[ 'attachment_link_' . $i ] );
 				}
 			}
 

@@ -19,9 +19,14 @@
 				<div class="link-list {{ fields.layout == 'accordion' ? 'togglee ' ~ toggleeId : '' }}">
 					<div>
 						{% for i in 1..20 %}
-							{% if ( fields['label_link_'~i] and fields['url_link_'~i] ) %}
+							{% if ( fields['label_link_'~i] and ( fields['url_link_'~i] or fields['attachment_link_'~i] ) ) %}
+								{% if (fields['attachment_link_'~i]) %} 
+									{% set target_link = fields['attachment_link_'~i] %} 
+								{% else %} 
+									{% set target_link = fields['url_link_'~i] %} 
+								{% endif %}
 								<p class="see-more">
-									<a href="{{ fields['url_link_'~i] }}">{{ fields['label_link_'~i] }}</a>
+									<a href="{{ target_link }}" target="_blank">{{ fields['label_link_'~i] }}</a>
 									{% if fields['description_link_'~i] %}
 										<br /><small>{{ fields['description_link_'~i] }}</small>
 									{% endif %}
