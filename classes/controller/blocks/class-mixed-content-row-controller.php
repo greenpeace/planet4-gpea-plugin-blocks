@@ -110,8 +110,7 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 			$query = new \WP_Query(
 				[
 					'post_type' => array( 'post' ),
-					'orderby' => 'title',
-					'order' => 'asc',
+					'posts_per_page' => -1
 				]
 			);
 			$posts = array_map(
@@ -250,7 +249,7 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 						'options' => $posts,
 						'meta'  => [
 							'placeholder'          => __( 'Select post', 'planet4-gpea-blocks-backend' ),
-							'data-plugin'          => 'planet4-gpea-blocks-backend',
+							'data-plugin'          => 'planet4-gpea-blocks',
 							'data-input-transform' => 'js-select2-enable',
 						],
 					],
