@@ -150,24 +150,29 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 						$post->img_url = $tip_icon ?? '';
 						$frequency = get_post_meta( $post->ID, 'p4-gpea_tip_frequency', true );
 						$post->frequency = $frequency ?? '';
-						// TODO:
-						// - abstract this one to parent.
-						// - also avoid magic constant 'issues'.
-						$issues = get_category_by_slug( 'issues' );
-						$issues = $issues->term_id;
-						$categories = get_the_category( $post->ID );
-						$categories = array_filter(
-							$categories , function( $cat ) use ( $issues ) {
-								return $cat->category_parent === $issues;
+
+						// get related main issues!
+						$planet4_options = get_option( 'planet4_options' );
+						$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+						if ( ! $main_issues_category_id ) {
+							$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+							if ( $main_issues_category ) $main_issues_category_id = $main_issues_category->term_id;
+						}
+
+						if ( $main_issues_category_id ) {
+							$categories = get_the_category( $post->ID );
+							if ( ! empty( $categories ) ) {
+								$categories = array_filter( $categories, function( $cat ) use ( $main_issues_category_id ) {
+									return $cat->category_parent === intval( $main_issues_category_id );
+								});
+								if ( ! empty( $categories ) ) {
+									$first_category = array_values( $categories )[0];
+									$post->main_issue = $first_category->name;
+									$post->main_issue_slug = $first_category->slug;
+								}
 							}
-						);
-						$categories = array_map(
-							function( $cat ) {
-									return $cat->slug;
-							}, $categories
-						);
-						$categories = join( ', ', $categories );
-						$post->categories = $categories ?? '';
+						}
+
 						$formatted_posts[] = $post;
 					}
 				}

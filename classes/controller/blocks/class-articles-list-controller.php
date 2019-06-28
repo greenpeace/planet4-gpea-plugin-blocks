@@ -8,6 +8,8 @@
 
 namespace P4EABKS\Controllers\Blocks;
 
+use P4EABKS\Views\View;
+
 if ( ! class_exists( 'Articles_List_Controller' ) ) {
 	/**
 	 * Class Articles_List_Controller
@@ -31,6 +33,46 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 		const DEFAULT_LAYOUT = 'tag_filters';
 
 		/**
+		 * The number of posts per page.
+		 *
+		 * @const int POSTS_PER_PAGE
+		 */
+		const POSTS_PER_PAGE = 4;
+
+		/**
+		 * The nonce string.
+		 *
+		 * @const string NONCE_STRING
+		 */
+		const NONCE_STRING = 'articles_list';
+
+		/**
+		 * The list of allowed layouts to be set upon init.
+		 *
+		 * @var array $allowed_layouts
+		 */
+		private $allowed_layouts;
+
+		public function __construct( View $view ) {
+			parent::__construct( $view );
+			$this->allowed_layouts = [
+				[
+					'value' => 'tag_filters',
+					'label' => __( 'Tag filters', 'planet4-gpea-blocks-backend' ),
+					'desc'  => 'Tag filters',
+					'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+				],
+				[
+					'value' => 'dropdown_filters',
+					'label' => __( 'Dropdown filters', 'planet4-gpea-blocks-backend' ),
+					'desc'  => 'Dropdown filters',
+					'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+				],
+			];
+			add_action( 'wp_ajax_gpea_blocks_articles_load_more', [ $this, 'articles_load_more' ] );
+		}
+
+		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
 		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
 		 */
@@ -42,20 +84,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					'description' => 'Select the layout',
 					'attr'        => 'layout',
 					'type'        => 'radio',
-					'options' => [
-						[
-							'value' => 'tag_filters',
-							'label' => __( 'Tag filters', 'planet4-gpea-blocks-backend' ),
-							'desc'  => 'Tag filters',
-							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 'dropdown_filters',
-							'label' => __( 'Dropdown filters', 'planet4-gpea-blocks-backend' ),
-							'desc'  => 'Dropdown filters',
-							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
-						],
-					],
+					'options'     => $this->allowed_layouts,
 				],
 				[
 					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
@@ -130,7 +159,8 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				'post_type'      => array( 'post', 'page' ),
 				'post_status'    => 'publish',
 				'orderby'        => 'date',
-				'posts_per_page' => 4,
+				'posts_per_page' => self::POSTS_PER_PAGE,
+				'paged'          => $attributes['_paged'] ?? 1,
 			);
 
 			if ( isset( $attributes['tag_ids'] ) ) {
@@ -159,7 +189,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 						$post->img_url = $img_data[0];
 					}
 
-					$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' ); 					
+					$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' );
 					if ( $news_type ) {
 						$post->news_type = $news_type[0]->name;
 					}
@@ -170,15 +200,19 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
 					if ( ! $main_issues_category_id ) {
 						$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
-						if ( $main_issues_category ) $main_issues_category_id = $main_issues_category->term_id;
+						if ( $main_issues_category ) {
+							$main_issues_category_id = $main_issues_category->term_id;
+						}
 					}
 
 					if ( $main_issues_category_id ) {
 						$categories = get_the_category( $post->ID );
 						if ( ! empty( $categories ) ) {
-							$categories = array_filter( $categories, function( $cat ) use ( $main_issues_category_id ) {
-								return $cat->category_parent === intval( $main_issues_category_id );
-							});
+							$categories = array_filter(
+								$categories, function( $cat ) use ( $main_issues_category_id ) {
+									return intval( $main_issues_category_id ) === $cat->category_parent;
+								}
+							);
 							if ( ! empty( $categories ) ) {
 								$first_category = array_values( $categories )[0];
 								$post->main_issue = $first_category->name;
@@ -209,9 +243,12 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				if ( isset( $attributes['tag_ids'] ) ) {
 					$tag_names = array();
 					foreach ( $tag_ids as $tag_id ) {
-						$tag = get_term($tag_id);
-						if ($tag) $tag_names[] = $tag->name;
-						else $tag_names[] = '';
+						$tag = get_term( $tag_id );
+						if ( $tag ) {
+							$tag_names[] = $tag->name;
+						} else {
+							$tag_names[] = '';
+						}
 					}
 
 					// $tag_names = array_map(
@@ -222,7 +259,6 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 
 					$attributes['tags'] = array_combine( $tag_names, $tag_ids );
 				}
-
 			} elseif ( 'dropdown_filters' === $attributes['layout'] ) {
 
 				$options = array(
@@ -258,10 +294,17 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				}
 			} else {
 				// Do nothing.
-			}			
+			}
+
+			$attributes['wp_nonce'] = wp_nonce_field( self::NONCE_STRING );
+
+			$lexicon = [
+				'load_more' => __( 'Load more posts', 'planet4-gpea-blocks' ),
+			];
 
 			return [
-				'fields' => $attributes,
+				'fields'  => $attributes,
+				'lexicon' => $lexicon,
 			];
 
 		}
@@ -286,5 +329,64 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 			// echo '<pre>' . print_r( $data, true ) . '</pre>';
 			return ob_get_clean();
 		}
+
+		/**
+		 * Get post results for AJAX autocomplete.
+		 */
+		public function articles_load_more() {
+			$query = $_POST['query'];
+			if ( wp_verify_nonce( $query['_wpnonce'], self::NONCE_STRING ) && $this->validate_input( $query ) ) {
+				$fields = [
+					'layout'            => $query['l'] ?? self::DEFAULT_LAYOUT,
+					'article_post_type' => $query['apt'],
+					'tag_ids'           => $query['tid'],
+					'_paged'            => 2,
+				];
+				$fields = array_filter(
+					$fields, function( $filter ) {
+						return $filter;
+					}
+				);
+				$data = $this->prepare_data( $fields );
+				$this->safe_echo( print_r( $data ), false );
+			} else {
+				$this->safe_echo( 'Something\'s wrong with the request...', false );
+			}
+		}
+
+		/**
+		 * Validate input AJAX data.
+		 * @param array $query The input query as an associative array.
+		 * @return bool Whether the query is safe.
+		 */
+		function validate_input( $query ) {
+			$allowed_layouts = array_map(
+				function( $l ) {
+					return $l['value'];
+				}, $this->allowed_layouts
+			);
+			if ( ! in_array( $query['l'], $allowed_layouts ) ) {
+				return false;
+			}
+			if ( ! preg_match( '/^\d*$/', $query['apt'] ) ) {
+				return false;
+			}
+			if ( ! preg_match( '/^(\d+,?)*$/', $query['tid'] ) ) {
+				return false;
+			}
+			return true;
+		}
+
+		/**
+		 * Echo escaped response and stop processing the request.
+		 *
+		 * @param string $string The message to be sent.
+		 * @param bool   $escape Whether to esc_html $string.
+		 */
+		private function safe_echo( $string, $escape = true ) {
+			echo $escape ? esc_html( $string ) : $string;
+			wp_die();
+		}
+
 	}
 }
