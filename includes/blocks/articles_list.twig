@@ -68,6 +68,13 @@
 							</div>
 						</a>
 					{% endfor %}
+					<form action="#" method="POST" id="articles_list_load_more">
+						<input type="submit" value="{{ lexicon.load_more }}">
+						<input type="hidden" value="{{ fields.tag_ids }}" name="tid">
+						<input type="hidden" value="{{ fields.article_post_type }}" name="apt">
+						<input type="hidden" value="{{ fields.layout }}" name="l">
+						{{ fields.wp_nonce|raw }}
+					</form>
 				</div>
 			{% endif %}
 		</div>
