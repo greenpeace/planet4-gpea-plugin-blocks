@@ -21,7 +21,7 @@ jQuery(document).ready(function() {
       activeValid = res.find( (r) => r.id === activeCampaign );
 
       if(res.length) {
-        select.append($('<option disabled selected value> -- select an issue related -- </option>'));
+        select.append($('<option selected value=""> -- select an issue related -- </option>'));
         $.each(res, function(_, option) {
           select.append($('<option></option>').attr('value', option.id).text(option.name));
         });
