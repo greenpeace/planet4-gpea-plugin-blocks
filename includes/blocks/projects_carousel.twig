@@ -1,5 +1,5 @@
 {% block projects_carousel %}
-	{% if ( fields ) %}
+	{% if ( fields ) and ( fields.posts ) %}
 	{% set section_class = fields.layout == 'light' ? 'light' : 'dark' %}
 	{#% set container_class = fields.layout == 'light' ? 'dark' : 'light' %#}
 	<section class="section-projects {{ section_class }} {{ fields.show_vertical ? 'show-vertical' : '' }}">
@@ -50,10 +50,8 @@
 								<div class="description">
 									<h4>{{ post.post_title }}</h4>
 									<div class="meta-box">
-										<!-- TODO: collegare issue; contare numero updates -->
 										<div class="issue {{ post.main_issue_slug }}">{{ post.main_issue|raw }}</div>
-										<!-- updates -->
-										<div>{{ post.related_posts }} 次更新</div>
+										<div>{{ post.related_posts }} {{ lexicon.updates }}</div>
 									</div>
 								</div>
 							</a>

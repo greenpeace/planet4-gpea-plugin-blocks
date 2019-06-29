@@ -281,8 +281,12 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 			$attributes['posts'] = $formatted_posts;
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
+			// lexicon entries
+			$lexicon['updates'] = __( 'Updates', 'planet4-gpea-blocks' );
+
 			return [
 				'fields' => $attributes,
+				'lexicon' => $lexicon,
 			];
 
 		}
