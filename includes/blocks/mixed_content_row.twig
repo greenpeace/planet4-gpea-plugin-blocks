@@ -21,7 +21,7 @@
 	{% endif %}
 
 	<section class="section-mixed-content-row layout-{{ classname }} {{ container_classname }} lazy"  data-bg="url({{ static_fields.image }})"> <!-- e.g. layout-green-grey -->
-		<div class="ct-container">
+		<div class="ct-container slim">
 
 			{% if ( static_fields.title or static_fields.subtitle ) %}
 				<div class="content">
@@ -39,13 +39,11 @@
 				<div class="swiper-wrapper">
 				{% for group in field_groups %}
 					{% if group.__group_type__ == 'post' and group.post %}
-						<div class="swiper-slide card-mini">
-							<a href="{{ group.post.link }}" >
+						<a href="{{ group.post.link }}" class="swiper-slide card-mini">
 							<div
 								class="thumbnail lazy"
 								data-bg="url({{ group.post.img_url }})"
 							></div>
-							</a>
 							<div class="meta-box">
 								<div>
 									<span>{{ group.post.post_date }}</span>
@@ -55,9 +53,9 @@
 								</div>
 							</div>
 							<p class="caption">
-									<a href="{{ group.post.link }}" >{{ group.post.post_title }}</a>
+								{{ group.post.post_title }}
 							</p>
-						</div>
+						</a>
 					{% elseif group.__group_type__ == 'textonly' %}
 						<div class="swiper-slide card-mini">
 							<p>{{ group.textblock }}</p>

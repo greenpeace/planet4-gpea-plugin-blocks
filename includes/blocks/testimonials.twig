@@ -14,7 +14,7 @@
     <section
       class="section-testimonials layout-{{ classname }}">
       <!-- e.g. layout-carousel -->
-      <div class="ct-container">
+      <div class="ct-container slim">
         {% if fields.title %}
           <h2>{{ fields.title }}</h2>
         {% endif %}
@@ -46,15 +46,15 @@
               <span class="icon-chevron-right"></span>
             </div>
           </div>
-          <p class="see-more">
             {% if fields.link_label_1 and fields.link_url_1 %}
-              <a href="{{ fields.link_url_1 }}">{{ fields.link_label_1 }}</a>
-            {% endif %}
-            {% if fields.link_label_1 and fields.link_url_1 and fields.link_label_2 and fields.link_url_2 %}
-              <br/>
+				<p class="see-more">
+		            <a href="{{ fields.link_url_1 }}">{{ fields.link_label_1 }}</a>
+				</p>
             {% endif %}
             {% if fields.link_label_2 and fields.link_url_2 %}
-              <a href="{{ fields.link_url_2 }}">{{ fields.link_label_2 }}</a>
+				<p class="see-more">
+  		    		<a href="{{ fields.link_url_2 }}">{{ fields.link_label_2 }}</a>
+				</p>
             {% endif %}
           </p>
 

@@ -2,7 +2,7 @@
 	{% if ( fields ) %}
 		{% if ( not fields.images and fields.layout == 'plain_light') %}
 			<section class="section-text-images">
-				<div class="ct-container">
+				<div class="ct-container slim">
 					{% if ( fields.title ) %}
 						<h2>{{ fields.title }}</h2>
 					{% endif %}
@@ -26,7 +26,7 @@
 				<div class="boxes">
 					<div class="box {{ box_color }}">
 						{% if not ( fields.images ) %}
-							<div class="ct-container">
+							<div class="ct-container slim">
 								{% if ( fields.title ) %}
 									<h2>{{ fields.title }}</h2>
 								{% endif %}

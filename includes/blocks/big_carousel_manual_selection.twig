@@ -44,20 +44,24 @@
 										<div class="box">
 											<div class="meta-box">
 												<div>
-													<span class="issue {{ post.main_issue_slug }}">{{ post.main_issue|raw }}</span>
+													{% if post.main_issue_slug %}
+														<span class="issue {{ post.main_issue_slug }}">{{ post.main_issue|raw }}</span>
+													{% endif %}
 													{% if post.news_type %}
 														<span>{{ post.news_type }}</span>
 													{% endif %}
 												</div>
 												<div>
-													<span>
-														{% if post.reading_time %}
+													{% if post.reading_time %}
+														<span>
 															<span class="icon-clock"></span>
 															{{ post.reading_time }}
 															{{ lexicon.reading_time }}
-														{% endif %}
-													</span>
-													<span>{{ post.date }}</span>
+														</span>
+													{% endif %}
+													{% if post.date %}
+														<span>{{ post.date }}</span>
+													{% endif %}
 												</div>
 											</div>
 											<p>
