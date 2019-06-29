@@ -9,6 +9,7 @@
 namespace P4EABKS\Controllers\Blocks;
 
 use P4EABKS\Views\View;
+use WP_Query;
 
 if ( ! class_exists( 'Articles_List_Controller' ) ) {
 	/**
@@ -53,6 +54,11 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 		 */
 		private $allowed_layouts;
 
+		/**
+		 * Articles_List_Controller constructor.
+		 *
+		 * @param View $view The view instance.
+		 */
 		public function __construct( View $view ) {
 			parent::__construct( $view );
 			$this->allowed_layouts = [
@@ -70,6 +76,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				],
 			];
 			add_action( 'wp_ajax_gpea_blocks_articles_load_more', [ $this, 'articles_load_more' ] );
+			add_action( 'wp_ajax_nopriv_gpea_blocks_articles_load_more', [ $this, 'articles_load_more' ] );
 		}
 
 		/**
@@ -160,8 +167,17 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				'post_status'    => 'publish',
 				'orderby'        => 'date',
 				'posts_per_page' => self::POSTS_PER_PAGE,
-				'paged'          => $attributes['_paged'] ?? 1,
 			);
+
+			if ( ! isset( $attributes['_paged'] ) ) {
+				$attributes['wp_nonce'] = wp_nonce_field( self::NONCE_STRING );
+			}
+			if ( isset( $attributes['_paged'] ) ) {
+				$options['paged'] = $attributes['_paged'];
+			}
+			if ( isset( $attributes['_main_issue_id'] ) ) {
+				$options['cat'] = $attributes['_main_issue_id'];
+			}
 
 			if ( isset( $attributes['tag_ids'] ) ) {
 				$tag_ids = array_map( 'intval', explode( ',', $attributes['tag_ids'] ) );
@@ -178,7 +194,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				);
 			}
 
-			$query = new \WP_Query( $options );
+			$query = new WP_Query( $options );
 
 			if ( $query->posts ) {
 				foreach ( $query->posts as $post ) {
@@ -195,7 +211,6 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					}
 
 					// get related main issues!
-
 					$planet4_options = get_option( 'planet4_options' );
 					$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
 					if ( ! $main_issues_category_id ) {
@@ -233,13 +248,6 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 			// Layout-specific queries.
 			if ( 'tag_filters' === $attributes['layout'] ) {
 
-				// $tags = get_terms(
-				// 	'post_tag',
-				// 	array(
-				// 		'include' => $tag_ids,
-				// 	)
-				// );
-
 				if ( isset( $attributes['tag_ids'] ) ) {
 					$tag_names = array();
 					foreach ( $tag_ids as $tag_id ) {
@@ -250,12 +258,6 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 							$tag_names[] = '';
 						}
 					}
-
-					// $tag_names = array_map(
-					// 	function( $tag ) {
-					// 		return $tag->name;
-					// 	}, $tags
-					// );
 
 					$attributes['tags'] = array_combine( $tag_names, $tag_ids );
 				}
@@ -271,7 +273,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				if ( isset( $attributes['tag_ids'] ) ) {
 					$options['tag__in'] = explode( ',', $attributes['tag_ids'] );
 				}
-				$query = new \WP_Query( $options );
+				$query = new WP_Query( $options );
 				if ( $query->posts ) {
 					$attributes['year_oldest'] = date( 'Y' , strtotime( $query->posts[0]->post_date ) );
 					$attributes['year_now'] = date( 'Y' );
@@ -292,11 +294,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					}
 					$attributes['main_issues'] = $main_issues_array;
 				}
-			} else {
-				// Do nothing.
 			}
-
-			$attributes['wp_nonce'] = wp_nonce_field( self::NONCE_STRING );
 
 			$lexicon = [
 				'load_more' => __( 'Load more posts', 'planet4-gpea-blocks' ),
@@ -334,47 +332,63 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 		 * Get post results for AJAX autocomplete.
 		 */
 		public function articles_load_more() {
-			$query = $_POST['query'];
-			if ( wp_verify_nonce( $query['_wpnonce'], self::NONCE_STRING ) && $this->validate_input( $query ) ) {
-				$fields = [
-					'layout'            => $query['l'] ?? self::DEFAULT_LAYOUT,
-					'article_post_type' => $query['apt'],
-					'tag_ids'           => $query['tid'],
-					'_paged'            => 2,
-				];
-				$fields = array_filter(
-					$fields, function( $filter ) {
-						return $filter;
-					}
-				);
-				$data = $this->prepare_data( $fields );
-				$this->safe_echo( print_r( $data ), false );
-			} else {
-				$this->safe_echo( 'Something\'s wrong with the request...', false );
+			if ( 'POST' === filter_input( INPUT_SERVER, 'REQUEST_METHOD' ) ) {
+				$query = $this->validate_input();
+				if ( $query ) {
+					$fields = [
+						'layout'            => $query['l'] ?? self::DEFAULT_LAYOUT,
+						'article_post_type' => $query['apt'],
+						'tag_ids'           => $query['tid'],
+						'_main_issue_id'    => $query['miid'],
+						'_paged'            => 2,
+					];
+					$fields = array_filter(
+						$fields, function( $field ) {
+							return $field;
+						}
+					);
+					$data = $this->prepare_data( $fields );
+					$this->safe_echo( wp_json_encode( $data['fields']['posts'] ), false );
+				} else {
+					$this->safe_echo( 'Something\'s wrong with the request...', false );
+				}
 			}
 		}
 
 		/**
 		 * Validate input AJAX data.
-		 * @param array $query The input query as an associative array.
-		 * @return bool Whether the query is safe.
+		 *
+		 * @return array|bool The query data, or false if unsafe.
 		 */
-		function validate_input( $query ) {
+		function validate_input() {
+			$args = [
+				'query' => [
+					'filter' => FILTER_SANITIZE_STRING,
+					'flags'  => FILTER_REQUIRE_ARRAY,
+				],
+			];
+			$query = filter_input_array( INPUT_POST , $args , false )['query'];
+			if ( ! $query ) {
+				return false;
+			}
 			$allowed_layouts = array_map(
 				function( $l ) {
 					return $l['value'];
 				}, $this->allowed_layouts
 			);
-			if ( ! in_array( $query['l'], $allowed_layouts ) ) {
+			if ( ! in_array( $query['l'], $allowed_layouts, true ) ) {
 				return false;
 			}
 			if ( ! preg_match( '/^\d*$/', $query['apt'] ) ) {
 				return false;
 			}
+			if ( ! preg_match( '/^\d*$/', $query['miid'] ) ) {
+				return false;
+			}
 			if ( ! preg_match( '/^(\d+,?)*$/', $query['tid'] ) ) {
 				return false;
 			}
-			return true;
+			return $query;
 		}
 
 		/**
