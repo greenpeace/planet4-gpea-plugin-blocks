@@ -5,26 +5,28 @@
 			{% if ( static_fields.title ) %}
 			<h2>{{ static_fields.title|e('wp_kses_post')|raw }}</h2>
 			{% endif %}
-			{% if ( field_groups|length > 0 ) %}
-				{% for group in field_groups %}
-					{% if ( group.subtitle ) %}
-					<div class="action as-card">
-						<div class="thumbnail" style="background-image: url({{ group.img }})"></div>
-						<div class="box">
-							<div class="content">
-								<h4>{{ group.subtitle|e('wp_kses_post')|raw }}</h4>
-								{% if ( group.paragraph ) %}
-								<p>{{ group.paragraph|e('wp_kses_post')|raw }}</p>
-								{% endif %}
-								{% if ( group.btnlabel and group.btnlink ) %}
-								<a href="{{ group.btnlink }}" class="button primary">{{ group.btnlabel|e('wp_kses_post')|raw }}</a>
-								{% endif %}
+			<div class="launchers">
+				{% if ( field_groups|length > 0 ) %}
+					{% for group in field_groups %}
+						{% if ( group.subtitle ) %}
+						<div class="action as-card">
+							<div class="thumbnail" style="background-image: url({{ group.img }})"></div>
+							<div class="box">
+								<div class="content">
+									<h4>{{ group.subtitle|e('wp_kses_post')|raw }}</h4>
+									{% if ( group.paragraph ) %}
+									<p>{{ group.paragraph|e('wp_kses_post')|raw }}</p>
+									{% endif %}
+									{% if ( group.btnlabel and group.btnlink ) %}
+									<a href="{{ group.btnlink }}" class="button primary">{{ group.btnlabel|e('wp_kses_post')|raw }}</a>
+									{% endif %}
+								</div>
 							</div>
 						</div>
-					</div>
-					{% endif %}
-				{% endfor %}
-			{% endif %}
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+			</div>
 		</div>
 	</section>
 	{% endif %}

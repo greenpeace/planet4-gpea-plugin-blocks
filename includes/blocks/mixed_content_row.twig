@@ -39,7 +39,7 @@
 				<div class="swiper-wrapper">
 				{% for group in field_groups %}
 					{% if group.__group_type__ == 'post' and group.post %}
-						<a href="{{ group.post.link }}" class="swiper-slide card-mini">
+						<a href="{{ group.post.link }}" class="swiper-slide card-mini mini-update">
 							<div
 								class="thumbnail lazy"
 								data-bg="url({{ group.post.img_url }})"
@@ -52,7 +52,7 @@
 									<span class="issue {{ group.post.main_issue_slug }}">{{ group.post.main_issue }}</span>
 								</div>
 							</div>
-							<p class="caption">
+							<p>
 								{{ group.post.post_title }}
 							</p>
 						</a>
@@ -85,6 +85,12 @@
 						<!-- do nothing -->
 					{% endif %}
 				{% endfor %}
+				</div>
+				<div class="swiper-button-next">
+					<span class="icon-chevron-right"></span>
+				</div>
+				<div class="swiper-button-prev">
+					<span class="icon-chevron-right"></span>
 				</div>
 			</div>
 			{% endif %}

@@ -12,7 +12,7 @@
 							<p><a href="{{ fields.ugc_link }}" class="button">{{ lexicon.add_your_story_submit }}</a></p>
 						</div>
 					{% endif %}
-						<a href="{{ post.link }}" class="swiper-slide card-mini" data-index="{{ fields.index }}">
+						<a href="{{ post.link }}" class="swiper-slide card-mini mini-update" data-index="{{ fields.index }}">
 							{% if post.img_url %}
 								<div
 									class="thumbnail lazy"
@@ -27,9 +27,15 @@
 									<span>{{ post.news_type }}</span>
 								</div>
 							</div>
-							<p class="caption">{{ post.post_title }}</p>
+							<p>{{ post.post_title }}</p>
 						</a>
 					{% endfor %}
+				</div>
+				<div class="swiper-button-next">
+					<span class="icon-chevron-right"></span>
+				</div>
+				<div class="swiper-button-prev">
+					<span class="icon-chevron-right"></span>
 				</div>
 			</div>
 		</div>

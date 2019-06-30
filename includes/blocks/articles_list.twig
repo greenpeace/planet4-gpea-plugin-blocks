@@ -1,6 +1,6 @@
 {% block articles_list %}
 	{% if ( fields ) %}
-	<section class="section-articles-list layout-{{ classname }}">
+	<section class="section-articles-list">
 		<div class="ct-container">
 			<div class="content">
 				{% if fields.title %}
@@ -50,7 +50,9 @@
 							<div class="box">
 								<div class="meta-box">
 									<div>
-										<span class="issue {{ post.main_issue_slug }}">{{ post.main_issue|raw }}</span>
+										{% if post.main_issue_slug %}
+											<span class="issue {{ post.main_issue_slug }}">{{ post.main_issue|raw }}</span>
+										{% endif %}
 										<span>{{ post.news_type }}</span>
 									</div>
 								</div>
@@ -69,7 +71,7 @@
 						</a>
 					{% endfor %}
 					<form action="#" method="POST" id="articles_list_load_more">
-						<input type="submit" value="{{ lexicon.load_more }}">
+						<button class="button" type="submit">{{ lexicon.load_more }}</button>
 						<input type="hidden" value="{{ fields.tag_ids }}" name="tid">
 						<input type="hidden" value="{{ fields.article_post_type }}" name="apt">
 						<input type="hidden" value="{{ fields.layout }}" name="l">

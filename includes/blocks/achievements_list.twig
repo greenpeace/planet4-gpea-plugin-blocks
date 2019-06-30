@@ -4,9 +4,8 @@
 		<div class="ct-container">
 			<div class="first">
 				<!-- TODO: link to achievements page? -->
-				<h2 class="mobile-only"><a href="#">{{ fields.title|e('wp_kses_post')|raw }} <span class="icon-chevron-right"></span></a></h2>
-				<h2 class="desktop-only">{{ fields.title|e('wp_kses_post')|raw }}</h2>
-				<p class="caption">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+				<h2><a href="#">{{ fields.title|e('wp_kses_post')|raw }} <span class="icon-chevron-right"></span></a></h2>
+				<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
 				<img src="{{ fields.bg_img  }}" alt="">
 			</div>
 			{% if fields.posts %}
@@ -47,7 +46,7 @@
 									<div>
 										<span class="issue {{ post.main_issue_slug }}">{{ post.main_issue|raw }}</span>
 										<span>{{ post.news_type }}</span>
-										
+
 									</div>
 								</div>
 								<p>
