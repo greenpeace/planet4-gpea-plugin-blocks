@@ -5,6 +5,8 @@
 			{% if fields.title %}
 				<h2>{{ fields.title }}</h2>
 			{% endif %}
+			</div>
+			<div class="ct-container slim">
 			{% for i in 1..20 %}
 				{% if fields['title_accordion_'~i] and fields['paragraph_accordion_'~i] %}
 					{% set toggleeId = 'togglee-' ~ i ~ random() %}

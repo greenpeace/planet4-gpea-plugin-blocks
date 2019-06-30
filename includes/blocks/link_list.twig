@@ -2,7 +2,7 @@
 	{% if ( fields ) %}
 		{% set toggleeId = 'togglee-' ~ random() %}
 		<section class="section-link-list">
-			<div class="ct-container">
+			<div class="ct-container slim">
 				{% if fields.main_link_label and fields.main_link_url %}
 					<h5>
 						<a href="{{ fields.main_link_url }}">{{ fields.main_link_label }}</a>
@@ -20,10 +20,10 @@
 					<div>
 						{% for i in 1..20 %}
 							{% if ( fields['label_link_'~i] and ( fields['url_link_'~i] or fields['attachment_link_'~i] ) ) %}
-								{% if (fields['attachment_link_'~i]) %} 
-									{% set target_link = fields['attachment_link_'~i] %} 
-								{% else %} 
-									{% set target_link = fields['url_link_'~i] %} 
+								{% if (fields['attachment_link_'~i]) %}
+									{% set target_link = fields['attachment_link_'~i] %}
+								{% else %}
+									{% set target_link = fields['url_link_'~i] %}
 								{% endif %}
 								<p class="see-more">
 									<a href="{{ target_link }}" target="_blank">{{ fields['label_link_'~i] }}</a>

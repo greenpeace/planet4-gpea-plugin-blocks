@@ -38,15 +38,17 @@
 								{% endif %}
 							</div>
 						{% else %}
-							{% if ( fields.title ) %}
-								<h2>{{ fields.title }}</h2>
-							{% endif %}
-							<p>{{ fields.paragraph }}</p>
-							{% if ( fields.link_label and fields.link_url ) %}
-								<p class="see-more">
-									<a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
-								</p>
-							{% endif %}
+							<div class="with-images">
+								{% if ( fields.title ) %}
+									<h2>{{ fields.title }}</h2>
+								{% endif %}
+								<p>{{ fields.paragraph }}</p>
+								{% if ( fields.link_label and fields.link_url ) %}
+									<p class="see-more">
+										<a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
+									</p>
+								{% endif %}
+							</div>
 						{% endif %}
 					</div>
 					{% if ( fields.images ) %}
