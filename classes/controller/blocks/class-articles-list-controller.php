@@ -371,6 +371,9 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 			if ( ! $query ) {
 				return false;
 			}
+			if ( ! wp_verify_nonce( $query['_wpnonce'], self::NONCE_STRING ) ) {
+				return false;
+			}
 			$allowed_layouts = array_map(
 				function( $l ) {
 					return $l['value'];
