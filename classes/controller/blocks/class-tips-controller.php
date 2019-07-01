@@ -8,6 +8,8 @@
 
 namespace P4EABKS\Controllers\Blocks;
 
+use P4EABKS\Views\View;
+
 if ( ! class_exists( 'Tips_Controller' ) ) {
 	/**
 	 * Class Tips_Controller
@@ -23,6 +25,24 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 		 * @const string BLOCK_NAME
 		 */
 		const BLOCK_NAME = 'tips';
+
+		/**
+		 * The nonce string.
+		 *
+		 * @const string NONCE_STRING
+		 */
+		const NONCE_STRING = 'tips_controller';
+
+		/**
+		 * Tips_Controller constructor.
+		 *
+		 * @param View $view The view instance.
+		 */
+		public function __construct( View $view ) {
+			parent::__construct( $view );
+			add_action( 'wp_ajax_gpea_tips_pledge', [ $this, 'tips_pledge_increase' ] );
+			add_action( 'wp_ajax_nopriv_gpea_tips_pledge', [ $this, 'tips_pledge_increase' ] );
+		}
 
 		/**
 		 * Shortcode UI setup for the tasks shortcode.
@@ -150,21 +170,29 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 						$post->img_url = $tip_icon ?? '';
 						$frequency = get_post_meta( $post->ID, 'p4-gpea_tip_frequency', true );
 						$post->frequency = $frequency ?? '';
+						$engage = get_post_meta( $post->ID, 'p4-gpea_tip_engage', true );
+						$post->engage = $engage ?? '';
+						$commitments = get_post_meta( $post->ID, 'p4-gpea_tip_commitments', true );
+						$post->commitments = $commitments ?? 0;
 
 						// get related main issues!
 						$planet4_options = get_option( 'planet4_options' );
 						$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
 						if ( ! $main_issues_category_id ) {
 							$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
-							if ( $main_issues_category ) $main_issues_category_id = $main_issues_category->term_id;
+							if ( $main_issues_category ) {
+								$main_issues_category_id = $main_issues_category->term_id;
+							}
 						}
 
 						if ( $main_issues_category_id ) {
 							$categories = get_the_category( $post->ID );
 							if ( ! empty( $categories ) ) {
-								$categories = array_filter( $categories, function( $cat ) use ( $main_issues_category_id ) {
-									return $cat->category_parent === intval( $main_issues_category_id );
-								});
+								$categories = array_filter(
+									$categories, function( $cat ) use ( $main_issues_category_id ) {
+										return intval( $main_issues_category_id ) === $cat->category_parent;
+									}
+								);
 								if ( ! empty( $categories ) ) {
 									$first_category = array_values( $categories )[0];
 									$post->main_issue = $first_category->name;
@@ -181,9 +209,15 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 			}
 
 			$attributes['posts'] = $formatted_posts;
+			$attributes['wp_nonce'] = wp_nonce_field( self::NONCE_STRING );
+
+			$lexicon = [
+				'tip_cta' => __( 'I\'ll do it!', 'planet4-gpea-blocks' ),
+			];
 
 			return [
 				'fields' => $attributes,
+				'lexicon' => $lexicon,
 			];
 
 		}
@@ -207,5 +241,41 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 			$this->view->block( self::BLOCK_NAME, $data );
 			return ob_get_clean();
 		}
+
+		/**
+		 * Increases tip pledge amount by one.
+		 */
+		public function tips_pledge_increase() {
+			if ( 'POST' === filter_input( INPUT_SERVER, 'REQUEST_METHOD' ) ) {
+				$query = $this->validate_input();
+				if ( $query && $query['pid'] ) {
+					$post_id = (int) $query['pid'];
+					$pledge = get_post_meta( $post_id, 'p4-gpea_tip_commitments', true ) ?? 0;
+					$pledge++;
+					update_post_meta( $post_id, 'p4-gpea_tip_commitments', $pledge );
+				}
+			}
+			wp_die();
+		}
+
+		/**
+		 * Validate input AJAX data.
+		 *
+		 * @return array|bool The query data, or false if unsafe.
+		 */
+		function validate_input() {
+			$args = [
+				'query' => [
+					'filter' => FILTER_SANITIZE_STRING,
+					'flags'  => FILTER_REQUIRE_ARRAY,
+				],
+			];
+			$query = filter_input_array( INPUT_POST , $args , false )['query'];
+			if ( $query && wp_verify_nonce( $query['_wpnonce'], self::NONCE_STRING ) ) {
+				return $query;
+			}
+			return false;
+		}
+
 	}
 }

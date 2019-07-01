@@ -34,6 +34,17 @@
 												<span class="icon-whatsapp"></span>
 											</a>
 										</div>
+{#										TODO frontend: style this one#}
+                                        {% if ( post.engage ) %}
+											<p class="post_commitments" id="post_commitments_post_{{ post.ID }}">
+												{{ post.commitments }}
+											</p>
+											<form action="#" method="POST" class="tip_engage">
+												<button class="button" type="submit">{{ lexicon.tip_cta }}</button>
+												<input type="hidden" value="{{ post.ID }}" name="pid">
+												{{ fields.wp_nonce|raw }}
+											</form>
+										{% endif %}
 									</div>
 								</div>
 							{% endfor %}
