@@ -162,21 +162,28 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 
 			$formatted_posts = [];
 
+			$year = $attributes['_ajax_year'] ?? date( 'Y' );
+
 			$options = array(
 				'post_type'      => array( 'post', 'page' ),
 				'post_status'    => 'publish',
 				'orderby'        => 'date',
 				'posts_per_page' => self::POSTS_PER_PAGE,
+				'date_query'     => [
+					[
+						'year' => $year,
+					],
+				],
 			);
 
-			if ( ! isset( $attributes['_paged'] ) ) {
+			if ( ! isset( $attributes['_ajax_paged'] ) ) {
 				$attributes['wp_nonce'] = wp_nonce_field( self::NONCE_STRING );
 			}
-			if ( isset( $attributes['_paged'] ) ) {
-				$options['paged'] = $attributes['_paged'];
+			if ( isset( $attributes['_ajax_paged'] ) ) {
+				$options['paged'] = $attributes['_ajax_paged'];
 			}
-			if ( isset( $attributes['_main_issue_id'] ) ) {
-				$options['cat'] = $attributes['_main_issue_id'];
+			if ( isset( $attributes['_ajax_main_issue_id'] ) ) {
+				$options['cat'] = $attributes['_ajax_main_issue_id'];
 			}
 
 			if ( isset( $attributes['tag_ids'] ) ) {
@@ -336,11 +343,12 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				$query = $this->validate_input();
 				if ( $query ) {
 					$fields = [
-						'layout'            => $query['l'] ?? self::DEFAULT_LAYOUT,
-						'article_post_type' => $query['apt'],
-						'tag_ids'           => $query['tid'],
-						'_main_issue_id'    => $query['miid'],
-						'_paged'            => 2,
+						'layout'              => $query['l'] ?? self::DEFAULT_LAYOUT,
+						'article_post_type'   => $query['apt'],
+						'tag_ids'             => $query['tid'],
+						'_ajax_main_issue_id' => $query['miid'],
+						'_ajax_year'          => $query['year'],
+						'_ajax_paged'         => $query['paged'],
 					];
 					$fields = array_filter(
 						$fields, function( $field ) {
@@ -348,7 +356,11 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 						}
 					);
 					$data = $this->prepare_data( $fields );
-					$this->safe_echo( wp_json_encode( $data['fields']['posts'] ), false );
+					if ( count( $data['fields']['posts'] ) ) {
+						$this->safe_echo( wp_json_encode( $data['fields']['posts'] ), false );
+					} else {
+						$this->safe_echo( __( 'Nothing found, sorry.', 'planet4-gpea-blocks' ) );
+					}
 				} else {
 					$this->safe_echo( 'Something\'s wrong with the request...', false );
 				}

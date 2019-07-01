@@ -18,9 +18,8 @@
 						<!-- We use select/dropdown to filter -->
 						{% if ( fields.year_oldest and fields.year_now ) %}
 							<div class="select">
-								<select>
-									{% for year in fields.year_oldest..fields.year_now %}
-										<!-- TODO frontend: Use any mechanism here to filter/search. -->
+								<select id="articles_list_load_more_year">
+									{% for year in fields.year_now..fields.year_oldest %}
 										<option value="{{ year }}">{{ year }}</option>
 									{% endfor %}
 								</select>
@@ -28,9 +27,8 @@
 						{% endif %}
 						{% if ( fields.main_issues ) %}
 							<div class="select">
-								<select>
+								<select id="articles_list_load_more_issue">
 									{% for issue_name, issue_id in fields.main_issues %}
-										<!-- Use any mechanism here to filter/search. -->
 										<option value="{{ issue_id }}">{{ issue_name|e('wp_kses_post')|raw }}</option>
 									{% endfor %}
 								</select>
@@ -70,14 +68,16 @@
 							</div>
 						</a>
 					{% endfor %}
-					<form action="#" method="POST" id="articles_list_load_more">
-						<button class="button" type="submit">{{ lexicon.load_more }}</button>
-						<input type="hidden" value="{{ fields.tag_ids }}" name="tid">
-						<input type="hidden" value="{{ fields.article_post_type }}" name="apt">
-						<input type="hidden" value="{{ fields.layout }}" name="l">
-						{{ fields.wp_nonce|raw }}
-					</form>
-				</div>
+					{% if ( fields.layout == 'dropdown_filters' ) %}
+						<form action="#" method="POST" id="articles_list_load_more">
+							<button class="button" type="submit">{{ lexicon.load_more }}</button>
+							<input type="hidden" value="{{ fields.tag_ids }}" name="tid">
+							<input type="hidden" value="{{ fields.article_post_type }}" name="apt">
+							<input type="hidden" value="{{ fields.layout }}" name="l">
+							{{ fields.wp_nonce|raw }}
+						</form>
+					{% endif %}
+					</div>
 			{% endif %}
 		</div>
 	</section>
