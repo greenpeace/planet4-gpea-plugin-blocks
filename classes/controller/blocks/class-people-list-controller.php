@@ -68,63 +68,22 @@ if ( ! class_exists( 'People_List_Controller' ) ) {
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
+				[
+					'label'    => __( 'Filter by Category', 'planet4-gpea-blocks-backend' ),
+					'attr'     => 'team_category',
+					'type'     => 'term_select',
+					'taxonomy' => 'p4_gpea_team_category',
+					'multiple' => false,
+					'meta'     => [
+						'select2_options' => [
+							'allowClear'         => true,
+							'placeholder'        => __( 'Select Category', 'planet4-gpea-blocks-backend' ),
+							'closeOnSelect'      => true,
+							'minimumInputLength' => 0,
+						],
+					],
+				],
 			];
-
-			// This block will have at most MAX_REPEATER different items.
-			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
-
-				$fields[] =
-						  [
-							  // translators: placeholder represents the ordinal of the field.
-							  'label' => sprintf( __( '<strong>%s</strong> <i>person name</i>', 'planet4-gpea-blocks-backend' ), $i ),
-							  'attr'  => 'name_person_' . $i,
-							  'type'  => 'text',
-							  'meta'  => [
-								  // translators: placeholder represents the ordinal of the field.
-								  'placeholder' => sprintf( __( 'Enter person %s name', 'planet4-gpea-blocks-backend' ), $i ),
-								  'data-plugin' => 'planet4-gpea-blocks',
-								  'data-element-type' => 'person',
-								  'data-element-name' => 'person',
-								  'data-element-number' => $i,
-							  ],
-						  ];
-
-				$fields[] =
-						  [
-							  // translators: placeholder represents the ordinal of the field.
-							  'label' => sprintf( __( '<strong>%s</strong> <i>person code</i>', 'planet4-gpea-blocks-backend' ), $i ),
-							  'attr'  => 'code_person_' . $i,
-							  'type'  => 'text',
-							  'meta'  => [
-								  // translators: placeholder represents the ordinal of the field.
-								  'placeholder' => sprintf( __( 'Enter person %s code', 'planet4-gpea-blocks-backend' ), $i ),
-								  'data-plugin' => 'planet4-gpea-blocks',
-								  'data-element-type' => 'person',
-								  'data-element-name' => 'person',
-								  'data-element-number' => $i,
-							  ],
-						  ];
-
-				$fields[] =
-						  [
-							  // translators: placeholder represents the ordinal of the field.
-							  'label'       => sprintf( __( '<strong>%s</strong> <i>person picture</i>', 'planet4-gpea-blocks-backend' ), $i ),
-							  'attr'        => 'img_person_' . $i,
-							  'type'        => 'attachment',
-							  'libraryType' => array( 'image' ),
-							  'addButton'   => __( 'Select picture', 'planet4-gpea-blocks-backend' ),
-							  'frameTitle'  => __( 'Select picture', 'planet4-gpea-blocks-backend' ),
-							  'meta'        => [
-								  // translators: placeholder represents the ordinal of the field.
-								  'placeholder' => sprintf( __( 'Enter person %s picture', 'planet4-gpea-blocks-backend' ), $i ),
-								  'data-plugin' => 'planet4-gpea-blocks',
-								  'data-element-type' => 'person',
-								  'data-element-name' => 'person',
-								  'data-element-number' => $i,
-							  ],
-						  ];
-
-			}
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
@@ -149,11 +108,45 @@ if ( ! class_exists( 'People_List_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
-				if ( isset( $attributes[ 'img_person_' . $i ] ) ) {
-					$attributes[ 'img_person_' . $i ] = wp_get_attachment_url( $attributes[ 'img_person_' . $i ] );
+			$formatted_posts = [];
+
+			$team_cat_id = $attributes['team_category'] ?? '';
+
+			$options = array(
+				'order'       => 'desc',
+				'orderby'     => 'date',
+				'post_type'   => 'team',
+				'posts_per_page' => 500,				
+			);
+			if ( '' !== $team_cat_id ) {
+				$options['tax_query'] = array(
+					array(
+						'taxonomy' => 'p4_gpea_team_category',
+						'field' => 'term_id',
+						'terms' => $team_cat_id,
+					),
+				);
+			}
+
+			$query = new \WP_Query( $options );
+
+			if ( $query->posts ) {
+				foreach ( $query->posts as $post ) {
+					if ( has_post_thumbnail( $post->ID ) ) {
+						$img_id = get_post_thumbnail_id( $post->ID );
+						$img_data = wp_get_attachment_image_src( $img_id, 'medium_large' );
+						$post->img_url = $img_data[0];
+					}
+					$team_code = get_post_meta( $post->ID, 'p4-gpea_team_code', true );
+					if ( $team_code ) $post->team_code = $team_code;
+
+					$formatted_posts[] = $post;
 				}
 			}
+
+			wp_reset_postdata();
+
+			$attributes['posts'] = $formatted_posts;
 
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
