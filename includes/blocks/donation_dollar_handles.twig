@@ -28,7 +28,7 @@
 										<label
 										for="a{{ fields['amount_handle_'~i] }}"
 										style="background-image: url({{ fields['img_handle_'~i] }}"
-										><span>{{ fields['amount_handle_'~i] }} {{ fields.currency_code|e('wp_kses_post')|raw }}</span></label
+										><span>{{ fields.currency_code|e('wp_kses_post')|raw }} {{ fields['amount_handle_'~i] }}</span></label
 									>
 									{% endif %}
 								</div>
@@ -40,13 +40,13 @@
                             {% if fields['recurring_amount_handle_'~i] %}
 								<div class="dollar-handle">
 									{% if fields['recurring_amount_handle_'~i] %}
-									<input type="radio" id="a{{ fields['recurring_amount_handle_'~i] }}" name="dollar-handle" value="{{ fields['recurring_amount_handle_'~i] }}" data-paragraph="{{ fields['recurring_paragraph_handle_'~i] }}" {{ i == 2 ? 'checked' : '' }} />
+									<input type="radio" id="b{{ fields['recurring_amount_handle_'~i] }}" name="dollar-handle" value="{{ fields['recurring_amount_handle_'~i] }}" data-paragraph="{{ fields['recurring_paragraph_handle_'~i] }}" {{ i == 2 ? 'checked' : '' }} />
 									{% endif %}
 									{% if fields['recurring_img_handle_'~i] %}
 										<label
-										for="a{{ fields['recurring_amount_handle_'~i] }}"
+										for="b{{ fields['recurring_amount_handle_'~i] }}"
 										style="background-image: url({{ fields['recurring_img_handle_'~i] }}"
-										><span>{{ fields['recurring_amount_handle_'~i] }} {{ fields.currency_code|e('wp_kses_post')|raw }}</span></label
+										><span>{{ fields.currency_code|e('wp_kses_post')|raw }} {{ fields['recurring_amount_handle_'~i] }}</span></label
 									>
 								</div>
                                 {% endif %}
