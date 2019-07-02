@@ -138,17 +138,9 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
   me.hide_element = function (row) {
     var $element = $('.field-block').filter($('div[class$=\'_' + row + '\']'));
     // Clear all text, textarea fields for this row/element.
-    $element.
-      children().
-      filter($('input, textarea')).each(function (index, element) {
-        $(element).val('').trigger('input');
-      });
-    // Clear image attachment if set in this row/element.
-    $element.
-      find($('.attachment-previews .remove')).each(function (index, element) {
-        $(element).click();
-      });
-    // Hide element's fields.
+    $element.children().filter($('input, textarea')).each(function (index, element) {
+      $(element).val('').trigger('input').trigger('change');
+    });
     $element.hide(300);
   };
 
