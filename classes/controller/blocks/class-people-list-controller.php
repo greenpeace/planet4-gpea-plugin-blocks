@@ -29,7 +29,7 @@ if ( ! class_exists( 'People_List_Controller' ) ) {
 		 *
 		 * @const string MAX_REPEATER
 		 */
-		const MAX_REPEATER = 20;
+		const MAX_REPEATER = 50;
 
 		/**
 		 * The block default layout.
