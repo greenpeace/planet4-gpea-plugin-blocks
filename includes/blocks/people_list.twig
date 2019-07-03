@@ -1,5 +1,5 @@
 {% block people_list %}
-	{% if ( fields ) %}
+	{% if ( fields ) and ( fields.posts ) %}
 		<section class="section-people-list">
 			<div class="ct-container">
 				<div class="content">
@@ -13,16 +13,14 @@
 
 				<div class="swiper-container mini-swiper">
 					<div class="swiper-wrapper">
-						{% for i in 1..20 %}
-							{% if fields['name_person_'~i] %}
-								<div class="swiper-slide card-mini has-profile">
-									<div class="profile">
-										<img src="{{ fields['img_person_'~i] }}" alt="" />
-										<div class="name">{{ fields['name_person_'~i] }}</div>
-										<div class="position">{{ fields['code_person_'~i] }}</div>
-									</div>
+						{% for post in fields.posts %}
+							<div class="swiper-slide card-mini has-profile">
+								<div class="profile">
+									<img src="{{ post.img_url }}" alt="" />
+									<div class="name">{{ post.post_title|e('wp_kses_post')|raw }}</div>
+									<div class="position">{{ post.team_code|e('wp_kses_post')|raw }}</div>
 								</div>
-							{% endif %}
+							</div>
 						{% endfor %}
 					</div>
 				</div>
