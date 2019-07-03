@@ -299,6 +299,12 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					foreach ( $main_issues as $main_issue ) {
 						$main_issues_array[ $main_issue->name ] = $main_issue->term_id;
 					}
+					// super hard code, check if category "others" exists and add...
+					$other_category = get_category_by_slug( 'others' );
+					if ( $other_category ) {
+						$main_issues_array[ $other_category->name ] = $other_category->term_id;
+					}
+
 					$attributes['main_issues'] = $main_issues_array;
 				}
 			}

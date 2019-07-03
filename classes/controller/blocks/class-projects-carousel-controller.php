@@ -204,7 +204,7 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 					'order'       => 'desc',
 					'orderby'     => 'date',
 					'post_type'   => 'page',
-					'posts_per_page' => 10,
+					'posts_per_page' => 20,
 					'meta_key'    => '_wp_page_template',
 					'meta_value'  => 'page-templates/project.php',
 				);

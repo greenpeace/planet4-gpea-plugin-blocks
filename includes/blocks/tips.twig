@@ -21,16 +21,15 @@
 									<div class="tip" style="transform: rotate({{ random(-4, 4) }}deg)">
 										<div class="meta-box">
 											<div>{{ post.frequency }}</div>
-											<!-- TODO: print real issue -->
 											<div class="issue {{ post.main_issue_slug }}">{{ post.main_issue }}</div>
 										</div>
 										<div class="tip-icon"><img src="{{ post.img_url }}" /></div>
 										<p>{{ post.post_title|e('wp_kses_post')|raw }}</p>
 										<div class="social-box">
-											<a href="">
+											<a href="https://www.facebook.com/sharer/sharer.php?u={{ post.link }}">
 												<span class="icon-facebook"></span>
 											</a>
-											<a href="">
+											<a href="whatsapp://send?text={{ post.link }}">
 												<span class="icon-whatsapp"></span>
 											</a>
 										</div>
