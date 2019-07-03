@@ -1,31 +1,35 @@
 {% block main_issues_carousel %}
 	{% if ( fields ) %}
-	<section class="section-issues">
-		<div class="ct-container">
-			<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-			<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-			<div class="swiper-container {{ fields.layout == 'list' ? 'issues-list' : 'issues-swiper' }}">
-				<div class="swiper-wrapper">
-					{% if fields.categories %}
-					{% for cat in fields.categories %}
-						<a href="{{ cat.link }}" class="swiper-slide card-issue">
-							<div class="image lazy" data-bg="url({{ cat.img_url }})">
-								<h4>{{ cat.post_title }}</h4>
-								<div class="issue {{ cat.main_issue_slug }}">{{ cat.main_issue_slug }}</div>
-							</div>
-							<p>{{ cat.main_issue_description }}</p>
-							{#
-							<div class="status">
-									<b>{{ cat.related_posts }}</b>
-									{{ lexicon.achievements }}
-							</div>
-							#}
-						</a>
-					{% endfor %}
-					{% endif %}
+		{% if (fields.layout) and (fields.layout=='list')  %}
+			Here list style
+		{%else %}
+		<section class="section-issues">
+			<div class="ct-container">
+				<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+				<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+				<div class="swiper-container {{ fields.layout == 'list' ? 'issues-list' : 'issues-swiper' }}">
+					<div class="swiper-wrapper">
+						{% if fields.categories %}
+						{% for cat in fields.categories %}
+							<a href="{{ cat.link }}" class="swiper-slide card-issue">
+								<div class="image lazy" data-bg="url({{ cat.img_url }})">
+									<h4>{{ cat.post_title }}</h4>
+									<div class="issue {{ cat.main_issue_slug }}">{{ cat.main_issue_slug }}</div>
+								</div>
+								<p>{{ cat.main_issue_description }}</p>
+								{#
+								<div class="status">
+										<b>{{ cat.related_posts }}</b>
+										{{ lexicon.achievements }}
+								</div>
+								#}
+							</a>
+						{% endfor %}
+						{% endif %}
+					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+		{% endif %}
 	{% endif %}
 {% endblock %}

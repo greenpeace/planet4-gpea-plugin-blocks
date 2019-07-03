@@ -45,6 +45,23 @@ if ( ! class_exists( 'Main_Issues_Carousel_Controller' ) ) {
 
 			$fields = [
 				[
+					'label' => 'Select the layout',
+					'description' => 'Select the layout',
+					'attr' => 'layout',
+					'type' => 'radio',
+					'options' => [
+						[
+							'value' => 'carousel',
+							'label' => __( 'Inline', 'planet4-gpea-blocks-backend' ),
+							'desc'  => 'Inline, carousel behaviour on smaller screen - default',
+						],
+						[
+							'value' => 'list',
+							'label' => __( 'List', 'planet4-gpea-blocks-backend' ),
+						],
+					],
+				],
+				[
 					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
