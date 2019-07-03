@@ -2,7 +2,7 @@
 	{% if ( fields ) and ( fields.posts ) %}
 	{% set section_class = fields.layout == 'light' ? 'light' : 'dark' %}
 	{#% set container_class = fields.layout == 'light' ? 'dark' : 'light' %#}
-	<section class="section-projects {{ section_class }} {{ fields.show_vertical ? 'show-vertical' : '' }}">
+	<section class="section-projects {{ section_class }} {{ fields.show_vertical ? 'has-projects-list' : '' }}">
 		<div class="ct-container">
 			<div class="big-carousel-description">
 				<div class="swiper-pagination"></div>
@@ -10,7 +10,7 @@
 				<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 			</div>
 			<div class="big-carousel-clip">
-				<div class="{{ fields.show_vertical ? '' : 'swiper-container projects-swiper' }} {#{ container_class }#}">
+				<div class="swiper-container {{ fields.show_vertical ? 'projects-list' : 'projects-swiper' }} {#{ container_class }#}">
 					<div class="swiper-wrapper">
 						{# <div class="swiper-slide first">
 							<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
