@@ -75,7 +75,10 @@
 			<div class="articles-list-form-wrapper" style="text-align: center">
 				<div id="articles_list_messages"></div>
 				<form action="#" method="POST" id="articles_list_load_more">
-					<button class="button" type="submit" id="articles_list_load_more_btn">{{ lexicon.load_more }}</button>
+					<button
+							class="button" type="submit" id="articles_list_load_more_btn"
+							{{ fields.posts|length == 4 ? '' : 'disabled' }}
+					>{{ lexicon.load_more }}</button>
 					<input type="hidden" value="{{ fields.tag_ids }}" name="tid">
 					<input type="hidden" value="{{ fields.article_post_type }}" name="apt">
 					<input type="hidden" value="{{ fields.layout }}" name="l">
