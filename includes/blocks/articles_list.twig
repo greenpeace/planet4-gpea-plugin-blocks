@@ -10,7 +10,7 @@
 					<div class="tags">
 						{% for tag_name, tag_id in fields.tags %}
 							<!-- TODO: link to search page -->
-							<a href="#{{ tag_id }}" class="button tag">{{ tag_name|e('wp_kses_post')|raw }}</a>
+							<a href="/?s&f&f[tag]={{ tag_id }}" class="button tag">{{ tag_name|e('wp_kses_post')|raw }}</a>
 						{% endfor %}
 					</div>
 				{% elseif ( fields.layout == 'dropdown_filters' ) %}
