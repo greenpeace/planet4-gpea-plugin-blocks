@@ -377,7 +377,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 							wp_json_encode(
 								[
 									'html_data'   => __( 'Nothing found, sorry.', 'planet4-gpea-blocks' ),
-									'posts_found' => false,
+									'posts_found' => 0,
 								]
 							), false
 						);
