@@ -80,6 +80,56 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 					],
 				],
 				[
+					'label' => __( 'Minimum amount for one-off donation', 'planet4-gpea-blocks-backend' ),
+					'desc' => __( 'If you leave it empty, default value will be used', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'minimum_oneoff',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Minimum amount', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Minimum amount for regular donation', 'planet4-gpea-blocks-backend' ),
+					'desc' => __( 'If you leave it empty, default value will be used', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'minimum_regular',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Minimum amount', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Suggested amount for one-off donation', 'planet4-gpea-blocks-backend' ),
+					'desc' => __( 'If you leave it empty, default value will be used', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'suggested_oneoff',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Suggested amount', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Suggested amount for regular donation', 'planet4-gpea-blocks-backend' ),
+					'desc' => __( 'If you leave it empty, default value will be used', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'suggested_regular',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Suggested amount', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Error message in case lower amount', 'planet4-gpea-blocks-backend' ),
+					'desc' => __( 'If you leave it empty, default value will be used', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'minimum_error',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Message', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
 					'label' => __( 'Currency code', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'currency_code',
 					'type'  => 'text',
@@ -290,6 +340,23 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 
 			if ( ! isset( $attributes['button_landing_url'] ) ) {
 				$attributes['button_landing_url'] = isset( $gpea_options['gpea_default_donation_link'] ) ? $gpea_options['gpea_default_donation_link'] : '';
+			}
+
+			// minimum amount, suggested and error message
+			if ( ! isset( $attributes['minimum_oneoff'] ) ) {
+				$attributes['minimum_oneoff'] = isset( $gpea_options['gpea_donation_minimum-oneoff'] ) ? $gpea_options['gpea_donation_minimum-oneoff'] : '';
+			}
+			if ( ! isset( $attributes['minimum_regular'] ) ) {
+				$attributes['minimum_regular'] = isset( $gpea_options['gpea_donation_minimum-regular'] ) ? $gpea_options['gpea_donation_minimum-regular'] : '';
+			}
+			if ( ! isset( $attributes['suggested_oneoff'] ) ) {
+				$attributes['suggested_oneoff'] = isset( $gpea_options['gpea_donation_suggested-oneoff'] ) ? $gpea_options['gpea_donation_suggested-oneoff'] : '';
+			}
+			if ( ! isset( $attributes['suggested_regular'] ) ) {
+				$attributes['suggested_regular'] = isset( $gpea_options['gpea_donation_suggested-regular'] ) ? $gpea_options['gpea_donation_suggested-regular'] : '';
+			}
+			if ( ! isset( $attributes['minimum_error'] ) ) {
+				$attributes['minimum_error'] = isset( $gpea_options['gpea_donation_minimum-error-message'] ) ? $gpea_options['gpea_donation_minimum-error-message'] : '';
 			}
 
 			// lexicon fallback values
