@@ -362,10 +362,25 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 						}
 					);
 					$data = $this->prepare_data( $fields );
-					if ( count( $data['fields']['posts'] ) ) {
-						$this->safe_echo( wp_json_encode( $data['fields']['posts'] ), false );
+					$n_posts_found = count( $data['fields']['posts'] );
+					if ( $n_posts_found ) {
+						$this->safe_echo(
+							wp_json_encode(
+								[
+									'html_data'   => $this->render_partial( $data ),
+									'posts_found' => $n_posts_found,
+								]
+							), false
+						);
 					} else {
-						$this->safe_echo( __( 'Nothing found, sorry.', 'planet4-gpea-blocks' ) );
+						$this->safe_echo(
+							wp_json_encode(
+								[
+									'html_data'   => __( 'Nothing found, sorry.', 'planet4-gpea-blocks' ),
+									'posts_found' => 0,
+								]
+							), false
+						);
 					}
 				} else {
 					$this->safe_echo( 'Something\'s wrong with the request...', false );
@@ -421,6 +436,19 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 		private function safe_echo( $string, $escape = true ) {
 			echo $escape ? esc_html( $string ) : $string;
 			wp_die();
+		}
+
+		/**
+		 * Echo escaped response and stop processing the request.
+		 *
+		 * @param array $data The posts data.
+		 *
+		 * @return false|string
+		 */
+		private function render_partial( $data ) {
+			ob_start();
+			$this->view->block( self::BLOCK_NAME . '_ajax', $data );
+			return ob_get_clean();
 		}
 
 	}

@@ -1,0 +1,33 @@
+{% block articles_list_ajax %}
+	{% if fields.posts %}
+		{% for post in fields.posts %}
+			<a href="{{ post.link }}" class="card-update compact">
+				<div
+						class="thumbnail lazy"
+						data-bg="url({{ post.img_url }})"
+				></div>
+				<div class="box">
+					<div class="meta-box">
+						<div>
+							{% if post.main_issue_slug %}
+								<span class="issue {{ post.main_issue_slug }}">{{ post.main_issue|raw }}</span>
+							{% endif %}
+							<span>{{ post.news_type }}</span>
+						</div>
+					</div>
+					<p>
+						{{ post.post_title|e('wp_kses_post')|raw }}
+					</p>
+					<div class="meta-box">
+						<div>
+							{% if post.reading_time %}
+								<span> <span class="icon-clock"></span> {{ post.reading_time|e('wp_kses_post')|raw }} </span>
+							{% endif %}
+							<span>{{ post.post_date|date }}</span>
+						</div>
+					</div>
+				</div>
+			</a>
+		{% endfor %}
+	{% endif %}
+{% endblock %}
