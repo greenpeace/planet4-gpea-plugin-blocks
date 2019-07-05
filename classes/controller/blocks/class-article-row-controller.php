@@ -56,20 +56,20 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 					'description' => 'Select the layout',
 					'attr' => 'layout',
 					'type' => 'radio',
-					'options' => [
-						[
-							'value' => 'show_tag',
-							'label' => __( 'Display the tag', 'planet4-gpea-blocks-backend' ),
-							'desc'  => 'Display the tag',
-							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
-						],
-						[
-							'value' => 'hide_tag',
-							'label' => __( 'Hide the tag', 'planet4-gpea-blocks-backend' ),
-							'desc'  => 'Hide the tag',
-							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
-						],
-					],
+					// 'options' => [
+					// 	[
+					// 		'value' => 'show_tag',
+					// 		'label' => __( 'Display the tag', 'planet4-gpea-blocks-backend' ),
+					// 		'desc'  => 'Display the tag',
+					// 		'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+					// 	],
+					// 	[
+					// 		'value' => 'hide_tag',
+					// 		'label' => __( 'Hide the tag', 'planet4-gpea-blocks-backend' ),
+					// 		'desc'  => 'Hide the tag',
+					// 		'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+					// 	],
+					// ],
 				],
 				[
 					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
@@ -85,7 +85,7 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 					'attr'     => 'tag_ids',
 					'type'     => 'term_select',
 					'taxonomy' => 'post_tag',
-					'multiple' => true,
+					'multiple' => false,
 					'meta'     => [
 						'select2_options' => [
 							'allowClear'         => true,
@@ -127,6 +127,8 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 
 			if ( isset( $attributes['tag_ids'] ) ) {
 
+				/* all good with multiple tags selection 
+				*
 				$tag_ids = array_map( 'intval', explode( ',', $attributes['tag_ids'] ) );
 
 				$tags = get_terms(
@@ -145,18 +147,31 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 						'posts_per_page' => self::MAX_ARTICLES,
 					)
 				);
+				*/
+
+				$tag_id = intval( $attributes['tag_ids'] );				
+
+				$query = new \WP_Query(
+					array(
+						'post_type'      => array( 'post', 'page', 'user_story' ),
+						'tag_id'         => intval( $tag_id ),
+						'order'          => 'desc',
+						'orderby'        => 'date',
+						'posts_per_page' => self::MAX_ARTICLES,
+					)
+				);
 
 				$posts = $query->posts;
 
 				if ( $posts ) {
 					foreach ( $posts as $post ) {
 						$post->link = get_permalink( $post->ID );
-						$post->post_date = date( 'Y - m - d' , strtotime( $post->post_date ) );
-						$post->tags = array_filter(
-							get_the_tags( $post->ID ), function( $tag ) use ( $tag_ids ) {
-								return in_array( $tag->term_id, $tag_ids, true );
-							}
-						);
+						$post->post_date = date( 'Y-m-d', strtotime( $post->post_date ) );
+						// $post->tags = array_filter(
+						// 	get_the_tags( $post->ID ), function( $tag ) use ( $tag_ids ) {
+						// 		return in_array( $tag->term_id, $tag_ids, true );
+						// 	}
+						// );
 						if ( has_post_thumbnail( $post->ID ) ) {
 							$img_id = get_post_thumbnail_id( $post->ID );
 							$img_data = wp_get_attachment_image_src( $img_id, 'medium_large' );
@@ -191,7 +206,7 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 
 				wp_reset_postdata();
 
-				$display_submit_form = in_array(
+				/*$display_submit_form = in_array(
 					self::DISPLAY_FORM_FLAG_TAG,
 					array_map(
 						function( $tag ) {
@@ -199,7 +214,11 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 						}, $tags
 					),
 					true
-				);
+				);*/
+				$tag = get_term_by( 'id', intval( $tag_id ), 'post_tag' );
+				if ( $tag ) {
+					$display_submit_form = ( self::DISPLAY_FORM_FLAG_TAG === $tag->slug ) ? 1 : 0;
+				}
 
 				// Pop last post if we're displaying submit form + pass the ugc link.
 				if ( $display_submit_form && count( $posts ) === 4 ) {
@@ -209,9 +228,12 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 				}
 			}
 
+			$attributes['tag_id'] = $tag_id;
 			$attributes['display_submit_form'] = $display_submit_form;
 			$attributes['posts'] = $posts;
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
+
+			$attributes['home_url'] = site_url();
 
 			// lexicon entries
 			$lexicon['add_your_story_par'] = __( 'Want to add your story?', 'planet4-gpea-blocks' );

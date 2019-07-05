@@ -13,7 +13,7 @@
 					<div class="tab-item js-tab-item tab-item__once" data-recurring="N">{{ fields.label_donate_once|e('wp_kses_post')|raw }}</div>
 					<div class="tab-item is-active js-tab-item tab-item__recurring" data-recurring="Y">{{ fields.label_donate_monthly|e('wp_kses_post')|raw }}</div>
 				</div>
-				<form action="{{ fields.button_landing_link }}" method="POST" class="js-donation-launcher-form">
+				<form action="{{ fields.button_landing_link }}" method="POST" class="js-donation-launcher-form" data-minimum-regular="{{ fields.minimum_regular }}" data-minimum-oneoff="{{ fields.minimum_oneoff }}" data-minimum-error="{{ fields.minimum_error }}" data-suggested-regular="{{ fields.suggested_regular }}" data-suggested-oneoff="{{ fields.suggested_oneoff }}">
 					<!-- NOTE!!   This ↴ must be equal to the "active" default tab   -->
 					<input type="hidden" name="frequency" value="Y" />
 					<input type="hidden" name="currency" value="{{ fields.currency_code|e('wp_kses_post')|raw }}" />
@@ -27,6 +27,7 @@
 							required
 							min="1"
 							step="1"
+							value="{{ fields.suggested_regular }}"
 						/>
 					</div>
 					<button type="submit" class="button primary fluid">{{ fields.button_label|e('wp_kses_post')|raw }}</button>
