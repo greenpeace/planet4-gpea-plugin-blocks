@@ -233,6 +233,8 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 			$attributes['posts'] = $posts;
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
+			$attributes['home_url'] = site_url();
+
 			// lexicon entries
 			$lexicon['add_your_story_par'] = __( 'Want to add your story?', 'planet4-gpea-blocks' );
 			$lexicon['add_your_story_submit'] = __( 'Submit here', 'planet4-gpea-blocks' );

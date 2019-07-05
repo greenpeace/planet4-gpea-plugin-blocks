@@ -313,6 +313,8 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				'load_more' => __( 'Load more posts', 'planet4-gpea-blocks' ),
 			];
 
+			$attributes['home_url'] = site_url();
+
 			return [
 				'fields'  => $attributes,
 				'lexicon' => $lexicon,
