@@ -28,6 +28,7 @@
 						{% if ( fields.main_issues ) %}
 							<div class="select">
 								<select id="articles_list_load_more_issue">
+									<option value="">{{ lexicon.any }}</option>
 									{% for issue_name, issue_id in fields.main_issues %}
 										<option value="{{ issue_id }}">{{ issue_name|e('wp_kses_post')|raw }}</option>
 									{% endfor %}
