@@ -28,7 +28,7 @@
 										<div class="tip-actions">
 											<div class="tip-commitments" id="tip_commitments_post_{{ post.ID }}">
 												{% if ( post.engage ) %}
-													<span class="js-tip-commitments">{{ post.commitments }}</span> committed
+													<span class="js-tip-commitments">{{ post.commitments }}</span> {{ lexicon.committed }}
 												{% endif %}
 											</div>
 											<div class="tip-action-buttons {{ not post.engage ? 'is-static' : '' }}">
