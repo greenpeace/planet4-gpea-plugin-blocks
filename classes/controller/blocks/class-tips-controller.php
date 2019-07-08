@@ -174,6 +174,7 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 						$post->engage = $engage ?? '';
 						$commitments = get_post_meta( $post->ID, 'p4-gpea_tip_commitments', true );
 						$post->commitments = $commitments ?? 0;
+						$post->link = get_permalink( $post->ID );
 
 						// get related main issues!
 						$planet4_options = get_option( 'planet4_options' );
