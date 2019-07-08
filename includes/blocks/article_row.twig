@@ -5,13 +5,7 @@
 			<h2><a href="{{ fields.home_url }}/?s&f&f[tag]={{ fields.tag_id }}">{{ fields.title|e('wp_kses_post')|raw }}<span class="icon-chevron-right"></span></a></h2>
 			<div class="swiper-container mini-swiper">
 				<div class="swiper-wrapper">
-					{% for post in fields.posts %}
-					{% if ( fields.display_submit_form and loop.index == 3 ) %}
-						<div class="swiper-slide card-mini">
-							<p>{{ lexicon.add_your_story_par }}</p>
-							<p><a href="{{ fields.ugc_link }}" class="button">{{ lexicon.add_your_story_submit }}</a></p>
-						</div>
-					{% endif %}
+					{% for post in fields.posts %}					
 						<a href="{{ post.link }}" class="swiper-slide card-mini mini-update" data-index="{{ fields.index }}">
 							{% if post.img_url %}
 								<div
@@ -29,6 +23,12 @@
 							</div>
 							<p>{{ post.post_title }}</p>
 						</a>
+						{% if ( fields.display_submit_form and loop.index == 2 ) %}
+						<div class="swiper-slide card-mini">
+							<p>{{ lexicon.add_your_story_par }}</p>
+							<p><a href="{{ fields.ugc_link }}" class="button">{{ lexicon.add_your_story_submit }}</a></p>
+						</div>
+						{% endif %}
 					{% endfor %}
 				</div>
 				<div class="swiper-button-next">
