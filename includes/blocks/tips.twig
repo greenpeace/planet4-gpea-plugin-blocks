@@ -25,25 +25,30 @@
 										</div>
 										<div class="tip-icon"><img src="{{ post.img_url }}" /></div>
 										<p>{{ post.post_title|e('wp_kses_post')|raw }}</p>
-										<div class="social-box">
-											<a href="https://www.facebook.com/sharer/sharer.php?u={{ post.link }}">
-												<span class="icon-facebook"></span>
-											</a>
-											<a href="whatsapp://send?text={{ post.link }}">
-												<span class="icon-whatsapp"></span>
-											</a>
+										<div class="tip-actions">
+											<div class="tip-commitments" id="tip_commitments_post_{{ post.ID }}">
+												{% if ( post.engage ) %}
+													<span class="js-tip-commitments">{{ post.commitments }}</span> committed
+												{% endif %}
+											</div>
+											<div class="tip-action-buttons {{ not post.engage ? 'is-static' : '' }}">
+												<div class="social-box">
+													<a href="https://www.facebook.com/sharer/sharer.php?u={{ post.link }}" target="_blank" rel="noopener noreferrer">
+														<span class="icon-facebook"></span>
+													</a>
+													<a href="whatsapp://send?text={{ post.link }}" target="_blank" rel="noopener noreferrer">
+														<span class="icon-whatsapp"></span>
+													</a>
+												</div>
+												{% if ( post.engage ) %}
+													<form action="#" method="POST" class="tip-engage">
+														<button class="button" type="submit">{{ lexicon.tip_cta }}</button>
+														<input type="hidden" value="{{ post.ID }}" name="pid">
+														{{ fields.wp_nonce|raw }}
+													</form>
+												{% endif %}
+											</div>
 										</div>
-{#										TODO frontend: style this one#}
-                                        {% if ( post.engage ) %}
-											<p class="post_commitments" id="post_commitments_post_{{ post.ID }}">
-												{{ post.commitments }}
-											</p>
-											<form action="#" method="POST" class="tip_engage">
-												<button class="button" type="submit">{{ lexicon.tip_cta }}</button>
-												<input type="hidden" value="{{ post.ID }}" name="pid">
-												{{ fields.wp_nonce|raw }}
-											</form>
-										{% endif %}
 									</div>
 								</div>
 							{% endfor %}
