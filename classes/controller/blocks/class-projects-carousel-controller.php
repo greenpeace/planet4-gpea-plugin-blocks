@@ -270,7 +270,7 @@ if ( ! class_exists( 'Projects_Carousel_Controller' ) ) {
 						'meta_value'  => $post->ID,
 					);
 					$count_query = new \WP_Query( $count_args );
-					$post->related_posts = $count_query->post_count;
+					$post->related_posts = $count_query->found_posts;
 
 					$formatted_posts[] = $post;
 				}
