@@ -226,7 +226,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					$post->link = get_permalink( $post->ID );
 					if ( has_post_thumbnail( $post->ID ) ) {
 						$img_id = get_post_thumbnail_id( $post->ID );
-						$img_data = wp_get_attachment_image_src( $img_id, 'medium_large' );
+						$img_data = wp_get_attachment_image_src( $img_id, 'thumbnail' );
 						$post->img_url = $img_data[0];
 					}
 
