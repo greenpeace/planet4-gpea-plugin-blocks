@@ -203,6 +203,8 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 			}
 			if ( isset( $attributes['_ajax_main_issue_id'] ) ) {
 				$options['cat'] = $attributes['_ajax_main_issue_id'];
+			} else {
+				$options['category__in'] = array_values( $this->main_issues_array );
 			}
 
 			if ( isset( $attributes['tag_ids'] ) ) {
