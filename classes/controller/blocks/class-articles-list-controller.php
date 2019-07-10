@@ -19,6 +19,8 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 	 */
 	class Articles_List_Controller extends Controller {
 
+		const DEFAULT_CACHE_TTL = 600;
+
 		/**
 		 * The block name constant.
 		 *
@@ -391,27 +393,36 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 		/**
 		 * Populate main issue variables
 		 */
-		function populate_main_issues() {
+		function populate_main_issues( $cache_group = 'article_list_controller' ) {
 
-			$planet4_options = get_option( 'planet4_options' );
-			$this->main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
-			if ( ! $this->main_issues_category_id ) {
-				$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
-				if ( $main_issues_category ) {
-					$this->main_issues_category_id = $main_issues_category->term_id;
+			$this->main_issues_category_id = wp_cache_get( 'main_issues_category_id', $cache_group );
+			$this->main_issues_array = wp_cache_get( 'main_issues_array', $cache_group );
+
+			if ( false === $this->main_issues_category_id ) {
+				$planet4_options = get_option( 'planet4_options' );
+				$this->main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+				if ( ! $this->main_issues_category_id ) {
+					$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+					if ( $main_issues_category ) {
+						$this->main_issues_category_id = $main_issues_category->term_id;
+					}
 				}
+				wp_cache_add( 'main_issues_category_id', $this->main_issues_category_id, $cache_group, self::DEFAULT_CACHE_TTL );
 			}
 
-			if ( $this->main_issues_category_id ) {
-				$this->main_issues_array = array();
-				$main_issues = get_terms(
-					'category',
-					array(
-						'parent' => $this->main_issues_category_id,
-					)
-				);
-				foreach ( $main_issues as $main_issue ) {
-					$this->main_issues_array[ $main_issue->name ] = $main_issue->term_id;
+			if ( false === $this->main_issues_array ) {
+				if ( $this->main_issues_category_id ) {
+					$this->main_issues_array = array();
+					$main_issues = get_terms(
+						'category',
+						array(
+							'parent' => $this->main_issues_category_id,
+						)
+					);
+					foreach ( $main_issues as $main_issue ) {
+						$this->main_issues_array[ $main_issue->name ] = $main_issue->term_id;
+					}
+					wp_cache_add( 'main_issues_array', $this->main_issues_array, $cache_group, self::DEFAULT_CACHE_TTL );
 				}
 			}
 		}
