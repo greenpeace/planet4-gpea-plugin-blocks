@@ -288,6 +288,9 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					'posts_per_page' => 1,
 					'order'          => 'ASC',
 				);
+				if ( isset( $this->main_issues_array ) && count( $this->main_issues_array ) ) {
+					$options['category__in'] = array_values( $this->main_issues_array );
+				}
 				if ( isset( $attributes['tag_ids'] ) ) {
 					$options['tag__in'] = explode( ',', $attributes['tag_ids'] );
 				}
