@@ -220,6 +220,13 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
+			$js_creation = filectime( get_stylesheet_directory() . '/static/js/world.js' );
+
+			wp_register_script( 'world-script', get_stylesheet_directory_uri() . '/static/js/world.js',['child-script'], $js_creation, true );
+			wp_enqueue_script( 'world-script' );
+			$translation_array = array( 'templateUrl' => get_stylesheet_directory_uri() );
+			wp_localize_script( 'world-script', 'world_vars', $translation_array );
+
 			$data = $this->prepare_data( $fields );
 
 			// Shortcode callbacks must return content, hence, output buffering here.
