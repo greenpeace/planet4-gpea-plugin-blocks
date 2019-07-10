@@ -203,8 +203,6 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 			}
 			if ( isset( $attributes['_ajax_main_issue_id'] ) ) {
 				$options['cat'] = $attributes['_ajax_main_issue_id'];
-			} else {
-				$options['category__in'] = array_values( $this->main_issues_array );
 			}
 
 			if ( isset( $attributes['tag_ids'] ) ) {
@@ -283,19 +281,8 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				}
 			} elseif ( 'dropdown_filters' === $attributes['layout'] ) {
 
-				$options = array(
-					'post_type'      => array( 'post', 'page' ),
-					'post_status'    => 'publish',
-					'orderby'        => 'date',
-					'posts_per_page' => 1,
-					'order'          => 'ASC',
-				);
-				if ( isset( $this->main_issues_array ) && count( $this->main_issues_array ) ) {
-					$options['category__in'] = array_values( $this->main_issues_array );
-				}
-				if ( isset( $attributes['tag_ids'] ) ) {
-					$options['tag__in'] = explode( ',', $attributes['tag_ids'] );
-				}
+				$options['posts_per_page'] = 1;
+				$options['order']          = 'ASC';
 				$query = new WP_Query( $options );
 				if ( $query->posts ) {
 					$attributes['year_oldest'] = date( 'Y' , strtotime( $query->posts[0]->post_date ) );
