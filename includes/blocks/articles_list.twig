@@ -19,6 +19,7 @@
 						{% if ( fields.year_oldest and fields.year_now ) %}
 							<div class="select">
 								<select id="articles_list_load_more_year">
+									<option value="">{{ lexicon.any }}</option>
 									{% for year in fields.year_now..fields.year_oldest %}
 										<option value="{{ year }}">{{ year }}</option>
 									{% endfor %}

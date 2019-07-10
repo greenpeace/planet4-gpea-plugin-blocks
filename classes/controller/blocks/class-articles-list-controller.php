@@ -178,30 +178,29 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 
 			$formatted_posts = [];
 
-			$year = $attributes['_ajax_year'] ?? date( 'Y' );
-
 			$options = array(
 				'post_type'      => array( 'post', 'page' ),
 				'post_status'    => 'publish',
 				'orderby'        => 'date',
 				'posts_per_page' => self::POSTS_PER_PAGE,
-				'date_query'     => [
-					[
-						'year' => $year,
-					],
-				],
 			);
 
 			if ( ! isset( $attributes['_ajax_paged'] ) ) {
 				$attributes['wp_nonce'] = wp_nonce_field( self::NONCE_STRING );
 			}
+
 			if ( isset( $attributes['_ajax_paged'] ) ) {
 				$options['paged'] = $attributes['_ajax_paged'];
 			}
+			if ( isset( $attributes['_ajax_year'] ) ) {
+				$options['date_query'] = [
+					[
+						'year' => $attributes['_ajax_year'],
+					],
+				];
+			}
 			if ( isset( $attributes['_ajax_main_issue_id'] ) ) {
 				$options['cat'] = $attributes['_ajax_main_issue_id'];
-			} elseif ( isset( $this->main_issues_array ) ) {
-				//$options['cat'] = reset( $this->main_issues_array );
 			}
 
 			if ( isset( $attributes['tag_ids'] ) ) {
