@@ -213,6 +213,8 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 			}
 
 			$attributes['posts'] = $formatted_posts;
+			if ( $achievement_tag ) $attributes['achievement_tag'] = $achievement_tag->term_id;
+			$attributes['home_url'] = site_url();
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
 
 			wp_reset_postdata();
