@@ -20,7 +20,10 @@
 		{% set container_classname = 'has-bg-image' %}
 	{% endif %}
 
-	<section class="section-mixed-content-row layout-{{ classname }} {{ container_classname }} lazy"  data-bg="url({{ static_fields.image }})"> <!-- e.g. layout-green-grey -->
+	<section class="section-mixed-content-row layout-{{ classname }} {{ container_classname }}"> <!-- e.g. layout-green-grey -->
+		{% if ( static_fields.image ) %}
+			<div class="background js-parallax-me lazy"  data-bg="url({{ static_fields.image }})"></div>
+		{% endif %}
 		<div class="ct-container">
 
 			{% if ( static_fields.title or static_fields.subtitle ) %}
