@@ -219,3 +219,12 @@ msgstr "명 참여중"
 
 msgid "I\'ll do it!"
 msgstr "1명 참여중"
+
+msgid "Load more posts"
+msgstr ""
+
+msgid "Nothing found, sorry."
+msgstr ""
+
+msgid "%s signers"
+msgstr ""

@@ -214,3 +214,12 @@ msgstr ""
 
 msgid "I\'ll do it!"
 msgstr ""
+
+msgid "Load more posts"
+msgstr "顯示更多"
+
+msgid "Nothing found, sorry."
+msgstr "抱歉，查無搜尋結果"
+
+msgid "%s signers"
+msgstr "%s 連署人"

@@ -213,3 +213,12 @@ msgstr ""
 
 msgid "I\'ll do it!"
 msgstr ""
+
+msgid "Load more posts"
+msgstr ""
+
+msgid "Nothing found, sorry."
+msgstr ""
+
+msgid "%s signers"
+msgstr ""
