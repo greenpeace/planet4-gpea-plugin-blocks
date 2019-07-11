@@ -204,3 +204,12 @@ msgstr ""
 #: classes/class-loader.php:213
 msgid "Class P4EABKS_Loader already exists."
 msgstr ""
+
+msgid "Any"
+msgstr ""
+
+msgid "committed"
+msgstr ""
+
+msgid "I\'ll do it!"
+msgstr ""

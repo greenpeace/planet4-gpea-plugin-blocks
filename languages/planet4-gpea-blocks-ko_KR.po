@@ -210,3 +210,12 @@ msgstr "충돌오류"
 #: classes/class-loader.php:213
 msgid "Class P4EABKS_Loader already exists."
 msgstr "P4EABKS_Loader 클래스가 이미 존재합니다."
+
+msgid "Any"
+msgstr "모두 선택"
+
+msgid "committed"
+msgstr "명 참여중"
+
+msgid "I\'ll do it!"
+msgstr "1명 참여중"

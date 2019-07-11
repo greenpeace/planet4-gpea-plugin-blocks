@@ -205,3 +205,12 @@ msgstr "Conflict Error"
 #: classes/class-loader.php:213
 msgid "Class P4EABKS_Loader already exists."
 msgstr "Class P4EABKS_Loader already exists."
+
+msgid "Any"
+msgstr ""
+
+msgid "committed"
+msgstr ""
+
+msgid "I\'ll do it!"
+msgstr ""
