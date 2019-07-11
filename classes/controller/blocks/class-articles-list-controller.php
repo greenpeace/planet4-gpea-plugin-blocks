@@ -221,6 +221,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 			}
 
 			$query = new WP_Query( $options );
+			$max_pages = $query->max_num_pages;
 
 			if ( $query->posts ) {
 
@@ -308,8 +309,9 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 			$attributes['home_url'] = site_url();
 
 			return [
-				'fields'  => $attributes,
-				'lexicon' => $lexicon,
+				'fields'    => $attributes,
+				'lexicon'   => $lexicon,
+				'max_pages' => $max_pages,
 			];
 
 		}
@@ -357,12 +359,14 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					);
 					$data = $this->prepare_data( $fields );
 					$n_posts_found = count( $data['fields']['posts'] );
+					$has_more_posts = $query['paged'] < $data['max_pages'];
 					if ( $n_posts_found ) {
 						$this->safe_echo(
 							wp_json_encode(
 								[
-									'html_data'   => $this->render_partial( $data ),
-									'posts_found' => $n_posts_found,
+									'html_data'      => $this->render_partial( $data ),
+									'posts_found'    => $n_posts_found,
+									'has_more_posts' => $has_more_posts,
 								]
 							), false
 						);
@@ -370,8 +374,9 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 						$this->safe_echo(
 							wp_json_encode(
 								[
-									'html_data'   => __( 'Nothing found, sorry.', 'planet4-gpea-blocks' ),
-									'posts_found' => 0,
+									'html_data'      => __( 'Nothing found, sorry.', 'planet4-gpea-blocks' ),
+									'posts_found'    => 0,
+									'has_more_posts' => false,
 								]
 							), false
 						);
