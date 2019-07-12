@@ -1,8 +1,9 @@
 {% block projects_carousel %}
+	{% set is_front_page = fn('is_front_page') %}
 	{% if ( fields ) and ( fields.posts ) %}
 	{% set section_class = fields.layout == 'light' ? 'light' : 'dark' %}
 	{#% set container_class = fields.layout == 'light' ? 'dark' : 'light' %#}
-	<section class="section-projects {{ section_class }} {{ fields.show_vertical ? 'has-projects-list' : '' }}">
+	<section class="section-projects {{ section_class }} {{ fields.show_vertical ? 'has-projects-list' : '' }}" data-aos="fade" data-aos-delay="{{ is_front_page ? '400' : '200' }}" data-aos-duration="600">
 		<div class="ct-container">
 			<div class="big-carousel-description">
 				<div class="swiper-pagination"></div>
@@ -10,7 +11,7 @@
 				<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 			</div>
 			<div class="big-carousel-clip">
-				<div class="swiper-container {{ fields.show_vertical ? 'projects-list' : 'projects-swiper' }} {#{ container_class }#}">
+				<div class="swiper-container {{ fields.show_vertical ? 'projects-list' : 'projects-swiper' }} {#{ container_class }#}" {{ not is_front_page ? 'data-aos="fade-left" data-aos-delay="400" data-aos-duration="600"' : '' }}>
 					<div class="swiper-wrapper">
 						{# <div class="swiper-slide first">
 							<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>

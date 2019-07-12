@@ -2,13 +2,13 @@
 	{% if ( fields ) %}
 	<section class="section-featured section-featured-tips" id="anchor_tips">
 		<div class="ct-container">
-			<div class="big-carousel-description">
+			<div class="big-carousel-description" data-aos="fade" data-aos-delay="200" data-aos-duration="600">
 				<div class="swiper-pagination"></div>
 				<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
 				<p class="subtitle">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
 			</div>
 			<div class="big-carousel-clip">
-				<div class="swiper-container maxi-swiper tips-swiper">
+				<div class="swiper-container maxi-swiper tips-swiper" data-aos="fade-left" data-aos-delay="400" data-aos-duration="600">
 					<div class="swiper-wrapper">
 						{# <div class="swiper-slide first">
 							<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
