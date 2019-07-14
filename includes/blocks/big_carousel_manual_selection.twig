@@ -1,7 +1,11 @@
 {% block big_carousel_manual_selection %}
+	{% set is_front_page = fn('is_front_page') %}
 	{#  !!! KEEP SYNCRONIZED with base.twig !!! #}
 	{% if ( fields ) %}
-	<section class="section-featured section-featured-manual">
+	<section class="section-featured section-featured-manual" data-aos="fade" data-aos-delay="200" data-aos-duration="600">
+		{% if is_front_page %}
+			<div class="section-featured-background js-parallax-me" data-prlx-speed="2"></div>
+		{% endif %}
 		<div class="ct-container">
 			<div class="big-carousel-description">
 				<div class="swiper-pagination"></div>
@@ -10,7 +14,7 @@
 				<p class="desktop-only">{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 			</div>
 			<div class="big-carousel-clip">
-				<div class="swiper-container maxi-swiper featured-swiper">
+				<div class="swiper-container maxi-swiper featured-swiper" {{ not is_front_page ? 'data-aos="fade-left" data-aos-delay="400" data-aos-duration="600"' : '' }}>
 					<div class="swiper-wrapper">
 						{# <div class="swiper-slide first">
 							<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>

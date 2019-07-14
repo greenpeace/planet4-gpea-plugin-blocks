@@ -1,8 +1,8 @@
 {% block donation_dollar_handles %}
     {% if ( fields ) %}
         <section class="section-donate has-dollar-handle {{ fields.upper_blur ? 'upper-fade' : '' }}">
-            <div class="bg-image-desktop js-parallax-me" data-from-top="true" style="background-image: url({{ fields.bg_img }})"></div>
-            <div class="bg-image-mobile js-parallax-me" data-from-top="true" style="background-image: url({{ fields.bg_img_mobile }})"></div>
+            <div class="bg-image-desktop js-parallax-me" data-prlx-from-top="true" style="background-image: url({{ fields.bg_img }})"></div>
+            <div class="bg-image-mobile js-parallax-me" data-prlx-from-top="true" style="background-image: url({{ fields.bg_img_mobile }})"></div>
             <div class="ct-container">
                 <div class="content">
                     <h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>

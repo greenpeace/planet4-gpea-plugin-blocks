@@ -27,7 +27,7 @@
 		<div class="ct-container">
 
 			{% if ( static_fields.title or static_fields.subtitle ) %}
-				<div class="content">
+				<div class="content" data-aos="fade" data-aos-delay="200" data-aos-duration="600">
 					{% if ( static_fields.title ) %}
 						<h2>{{ static_fields.title }}</h2>
 					{% endif %}
@@ -38,7 +38,7 @@
 			{% endif %}
 
 			{% if ( field_groups|length > 0 ) %}
-			<div class="swiper-container mini-swiper">
+			<div class="swiper-container mini-swiper" {{ not static_fields.image ? 'data-aos="fade-left" data-aos-delay="400" data-aos-duration="600"' : '' }} >
 				<div class="swiper-wrapper">
 				{% for group in field_groups %}
 					{% if group.__group_type__ == 'post' and group.post %}
