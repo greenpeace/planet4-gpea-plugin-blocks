@@ -5,7 +5,7 @@
 			<div class="project-phase">
 				<div class="project-phase-description">
 					<h2>{{ fields.title }}</h2>
-					<p>{{ fields.paragraph }}</p>
+					<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 				</div>
 				<!-- one or more milestones, each can be achieved or not achieved -->
 				<div class="project-phase-milestones">
@@ -13,7 +13,7 @@
 					{% if fields['paragraph_milestone_'~i] %}
 						<div class="project-phase-milestone {{ fields['achieved_milestone_'~i] ? 'achieved' : '' }}">
 							<div class="project-phase-milestone-date">{{ fields['date_milestone_'~i] }}</div>
-							<p>{{ fields['paragraph_milestone_'~i] }}</p>
+							<p>{{ fields['paragraph_milestone_'~i]|e('wp_kses_post')|raw }}</p>
 						</div>
 					{% endif %}
 					{% endfor %}

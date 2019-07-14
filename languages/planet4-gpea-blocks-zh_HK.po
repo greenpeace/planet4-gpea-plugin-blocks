@@ -219,7 +219,7 @@ msgid "Load more posts"
 msgstr "顯示更多"
 
 msgid "Nothing found, sorry."
-msgstr "抱歉，查無搜尋結果"
+msgstr "没有找到任何相關结果"
 
 msgid "%s signers"
-msgstr "%s 連署人"
+msgstr "%s 人已參與聯署"
