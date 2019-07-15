@@ -222,4 +222,4 @@ msgid "Nothing found, sorry."
 msgstr "没有找到任何相關结果"
 
 msgid "%s signers"
-msgstr "%s 人已參與聯署"
+msgstr "%s 人已聯署"

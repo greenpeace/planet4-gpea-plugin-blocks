@@ -218,6 +218,7 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 				$tag = get_term_by( 'id', intval( $tag_id ), 'post_tag' );
 				if ( $tag ) {
 					$display_submit_form = ( self::DISPLAY_FORM_FLAG_TAG === $tag->slug ) ? 1 : 0;
+					$tag_slug = $tag->slug;
 				}
 
 				// Pop last post if we're displaying submit form + pass the ugc link.
@@ -230,6 +231,7 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 			}
 
 			$attributes['tag_id'] = $tag_id;
+			$attributes['tag_slug'] = $tag_slug ?? '';
 			$attributes['display_submit_form'] = $display_submit_form;
 			$attributes['posts'] = $posts;
 			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
