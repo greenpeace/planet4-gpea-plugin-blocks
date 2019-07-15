@@ -19,6 +19,8 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 	 */
 	class Articles_List_Controller extends Controller {
 
+		const DEFAULT_CACHE_TTL = 600;
+
 		/**
 		 * The block name constant.
 		 *
@@ -53,6 +55,20 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 		 * @var array $allowed_layouts
 		 */
 		private $allowed_layouts;
+
+		/**
+		 * The ID of the main issues category
+		 *
+		 * @var int $main_issues_category_id
+		 */
+		private $main_issues_category_id;
+
+		/**
+		 * The main issues term array
+		 *
+		 * @var array $main_issues_array
+		 */
+		private $main_issues_array;
 
 		/**
 		 * Articles_List_Controller constructor.
@@ -160,27 +176,30 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
-			$formatted_posts = [];
+			$this->populate_main_issues();
 
-			$year = $attributes['_ajax_year'] ?? date( 'Y' );
+			$formatted_posts = [];
 
 			$options = array(
 				'post_type'      => array( 'post', 'page' ),
 				'post_status'    => 'publish',
 				'orderby'        => 'date',
 				'posts_per_page' => self::POSTS_PER_PAGE,
-				'date_query'     => [
-					[
-						'year' => $year,
-					],
-				],
 			);
 
 			if ( ! isset( $attributes['_ajax_paged'] ) ) {
 				$attributes['wp_nonce'] = wp_nonce_field( self::NONCE_STRING );
 			}
+
 			if ( isset( $attributes['_ajax_paged'] ) ) {
 				$options['paged'] = $attributes['_ajax_paged'];
+			}
+			if ( isset( $attributes['_ajax_year'] ) ) {
+				$options['date_query'] = [
+					[
+						'year' => $attributes['_ajax_year'],
+					],
+				];
 			}
 			if ( isset( $attributes['_ajax_main_issue_id'] ) ) {
 				$options['cat'] = $attributes['_ajax_main_issue_id'];
@@ -202,13 +221,15 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 			}
 
 			$query = new WP_Query( $options );
+			$max_pages = $query->max_num_pages;
 
 			if ( $query->posts ) {
+
 				foreach ( $query->posts as $post ) {
 					$post->link = get_permalink( $post->ID );
 					if ( has_post_thumbnail( $post->ID ) ) {
 						$img_id = get_post_thumbnail_id( $post->ID );
-						$img_data = wp_get_attachment_image_src( $img_id, 'medium_large' );
+						$img_data = wp_get_attachment_image_src( $img_id, 'thumbnail' );
 						$post->img_url = $img_data[0];
 					}
 
@@ -217,19 +238,10 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 						$post->news_type = $news_type[0]->name;
 					}
 
-					// get related main issues!
-					$planet4_options = get_option( 'planet4_options' );
-					$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
-					if ( ! $main_issues_category_id ) {
-						$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
-						if ( $main_issues_category ) {
-							$main_issues_category_id = $main_issues_category->term_id;
-						}
-					}
-
-					if ( $main_issues_category_id ) {
+					if ( $this->main_issues_category_id ) {
 						$categories = get_the_category( $post->ID );
 						if ( ! empty( $categories ) ) {
+							$main_issues_category_id = $this->main_issues_category_id;
 							$categories = array_filter(
 								$categories, function( $cat ) use ( $main_issues_category_id ) {
 									return intval( $main_issues_category_id ) === $cat->category_parent;
@@ -270,16 +282,8 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				}
 			} elseif ( 'dropdown_filters' === $attributes['layout'] ) {
 
-				$options = array(
-					'post_type'      => array( 'post', 'page' ),
-					'post_status'    => 'publish',
-					'orderby'        => 'date',
-					'posts_per_page' => 1,
-					'order'          => 'ASC',
-				);
-				if ( isset( $attributes['tag_ids'] ) ) {
-					$options['tag__in'] = explode( ',', $attributes['tag_ids'] );
-				}
+				$options['posts_per_page'] = 1;
+				$options['order']          = 'ASC';
 				$query = new WP_Query( $options );
 				if ( $query->posts ) {
 					$attributes['year_oldest'] = date( 'Y' , strtotime( $query->posts[0]->post_date ) );
@@ -287,37 +291,27 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				}
 				wp_reset_postdata();
 
-				$issues = get_category_by_slug( 'issues' );
-				if ( $issues ) {
-					$main_issues_array = array();
-					$main_issues = get_terms(
-						'category',
-						array(
-							'parent' => $issues->term_id,
-						)
-					);
-					foreach ( $main_issues as $main_issue ) {
-						$main_issues_array[ $main_issue->name ] = $main_issue->term_id;
-					}
+				if ( $this->main_issues_category_id ) {
 					// super hard code, check if category "others" exists and add...
 					$other_category = get_category_by_slug( 'others' );
 					if ( $other_category ) {
-						$main_issues_array[ $other_category->name ] = $other_category->term_id;
+						$this->main_issues_array[ $other_category->name ] = $other_category->term_id;
 					}
-
-					$attributes['main_issues'] = $main_issues_array;
+					$attributes['main_issues'] = $this->main_issues_array;
 				}
 			}
 
 			$lexicon = [
 				'load_more' => __( 'Load more posts', 'planet4-gpea-blocks' ),
+				'any'       => __( 'Any', 'planet4-gpea-blocks' ),
 			];
 
 			$attributes['home_url'] = site_url();
 
 			return [
-				'fields'  => $attributes,
-				'lexicon' => $lexicon,
+				'fields'    => $attributes,
+				'lexicon'   => $lexicon,
+				'max_pages' => $max_pages,
 			];
 
 		}
@@ -365,12 +359,14 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					);
 					$data = $this->prepare_data( $fields );
 					$n_posts_found = count( $data['fields']['posts'] );
+					$has_more_posts = $query['paged'] < $data['max_pages'];
 					if ( $n_posts_found ) {
 						$this->safe_echo(
 							wp_json_encode(
 								[
-									'html_data'   => $this->render_partial( $data ),
-									'posts_found' => $n_posts_found,
+									'html_data'      => $this->render_partial( $data ),
+									'posts_found'    => $n_posts_found,
+									'has_more_posts' => $has_more_posts,
 								]
 							), false
 						);
@@ -378,14 +374,52 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 						$this->safe_echo(
 							wp_json_encode(
 								[
-									'html_data'   => __( 'Nothing found, sorry.', 'planet4-gpea-blocks' ),
-									'posts_found' => 0,
+									'html_data'      => __( 'Nothing found, sorry.', 'planet4-gpea-blocks' ),
+									'posts_found'    => 0,
+									'has_more_posts' => false,
 								]
 							), false
 						);
 					}
 				} else {
 					$this->safe_echo( 'Something\'s wrong with the request...', false );
+				}
+			}
+		}
+
+		/**
+		 * Populate main issue variables
+		 */
+		function populate_main_issues( $cache_group = 'article_list_controller' ) {
+
+			$this->main_issues_category_id = wp_cache_get( 'main_issues_category_id', $cache_group );
+			$this->main_issues_array = wp_cache_get( 'main_issues_array', $cache_group );
+
+			if ( false === $this->main_issues_category_id ) {
+				$planet4_options = get_option( 'planet4_options' );
+				$this->main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : false;
+				if ( ! $this->main_issues_category_id ) {
+					$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+					if ( $main_issues_category ) {
+						$this->main_issues_category_id = $main_issues_category->term_id;
+					}
+				}
+				wp_cache_add( 'main_issues_category_id', $this->main_issues_category_id, $cache_group, self::DEFAULT_CACHE_TTL );
+			}
+
+			if ( false === $this->main_issues_array ) {
+				if ( $this->main_issues_category_id ) {
+					$this->main_issues_array = array();
+					$main_issues = get_terms(
+						'category',
+						array(
+							'parent' => $this->main_issues_category_id,
+						)
+					);
+					foreach ( $main_issues as $main_issue ) {
+						$this->main_issues_array[ $main_issue->name ] = $main_issue->term_id;
+					}
+					wp_cache_add( 'main_issues_array', $this->main_issues_array, $cache_group, self::DEFAULT_CACHE_TTL );
 				}
 			}
 		}

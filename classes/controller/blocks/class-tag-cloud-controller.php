@@ -131,7 +131,7 @@ if ( ! class_exists( 'Tag_Cloud_Controller' ) ) {
 			if ( 'all' != $attributes['number_topics'] ) {
 				$options['orderby'] = 'count';
 				$options['order'] = 'DESC';
-				$options['number'] = 15;
+				$options['number'] = 100;
 			} else {
 				// in any case we limit to 100... let's talk just in case..
 				$options['number'] = 100;

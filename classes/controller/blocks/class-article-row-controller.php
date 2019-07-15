@@ -221,10 +221,11 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 				}
 
 				// Pop last post if we're displaying submit form + pass the ugc link.
-				if ( $display_submit_form && count( $posts ) === 4 ) {
-					array_pop( $posts );
+				if ( $display_submit_form ) {
 					$gpea_options = get_option( 'gpea_options' );
 					$attributes['ugc_link'] = isset( $gpea_options['gpea_default_ugc_link'] ) ? get_permalink( $gpea_options['gpea_default_ugc_link'] ) : site_url();
+					// if there are 4 posts, remove one of them...
+					if ( count( $posts ) === 4 ) array_pop( $posts );
 				}
 			}
 

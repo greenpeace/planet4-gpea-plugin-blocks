@@ -1,6 +1,7 @@
 {% block ugc %}
     {% if ( fields ) %}
-	<div class="ct-container">	    		
+	<section class="section-ugc">
+		<div class="ct-container">
 		    <h3>{{ __('Submit your story', 'planet4-gpea-blocks') }}</h3>
 		    {% if ( fields.submit_result.message ) %}
 			<p>{{ fields.submit_result.message }}</p>
@@ -21,9 +22,9 @@
 						<input type="text" id="ugc_title" value="" tabindex="1" size="20" name="ugc_title" required minlength="3" />
 					</div>
 					<div class="form-group">
-						<label for="ugc_content">{{ __('Your story', 'planet4-gpea-blocks') }}</label><br />
+						<label for="ugc_content">{{ __('Your story', 'planet4-gpea-blocks') }}</label>
 						<textarea id="ugc_content" tabindex="3" name="ugc_content" cols="50" rows="10" required minlength="10"></textarea>
-					</div>				
+					</div>
 					{{ fields.wp_nonce|raw }}
 					<input type="hidden" name="thankyou_message" value="{{ fields.thankyou_message }}" />
 					<div class="form-group">
@@ -31,9 +32,9 @@
 					</div>
 				</form>
 			</div>
-		    {% endif %}		    	
-	</div>
-	<hr />
+		    {% endif %}
+		</div>
+	</section>
     {% endif %}
 {% endblock %}
 

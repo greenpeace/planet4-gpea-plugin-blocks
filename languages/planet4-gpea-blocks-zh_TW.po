@@ -205,3 +205,21 @@ msgstr "Conflict Error"
 #: classes/class-loader.php:213
 msgid "Class P4EABKS_Loader already exists."
 msgstr "Class P4EABKS_Loader already exists."
+
+msgid "Any"
+msgstr "所有"
+
+msgid "committed"
+msgstr "人正在實踐！"
+
+msgid "I\'ll do it!"
+msgstr "我願意！"
+
+msgid "Load more posts"
+msgstr "顯示更多"
+
+msgid "Nothing found, sorry."
+msgstr "抱歉，查無搜尋結果"
+
+msgid "%s signers"
+msgstr "%s 連署人"

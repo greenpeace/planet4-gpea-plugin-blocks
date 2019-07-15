@@ -174,6 +174,7 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 						$post->engage = $engage ?? '';
 						$commitments = get_post_meta( $post->ID, 'p4-gpea_tip_commitments', true );
 						$post->commitments = $commitments ?? 0;
+						$post->link = get_permalink( $post->ID );
 
 						// get related main issues!
 						$planet4_options = get_option( 'planet4_options' );
@@ -213,6 +214,7 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 
 			$lexicon = [
 				'tip_cta' => __( 'I\'ll do it!', 'planet4-gpea-blocks' ),
+				'committed' => __( 'Committed', 'planet4-gpea-blocks' ),
 			];
 
 			return [

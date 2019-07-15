@@ -19,6 +19,7 @@
 						{% if ( fields.year_oldest and fields.year_now ) %}
 							<div class="select">
 								<select id="articles_list_load_more_year">
+									<option value="">{{ lexicon.any }}</option>
 									{% for year in fields.year_now..fields.year_oldest %}
 										<option value="{{ year }}">{{ year }}</option>
 									{% endfor %}
@@ -28,6 +29,7 @@
 						{% if ( fields.main_issues ) %}
 							<div class="select">
 								<select id="articles_list_load_more_issue">
+									<option value="">{{ lexicon.any }}</option>
 									{% for issue_name, issue_id in fields.main_issues %}
 										<option value="{{ issue_id }}">{{ issue_name|e('wp_kses_post')|raw }}</option>
 									{% endfor %}
@@ -77,6 +79,7 @@
 				<form action="#" method="POST" id="articles_list_load_more">
 					<button
 							class="button" type="submit" id="articles_list_load_more_btn"
+                            data-paged="2"
 							{{ fields.posts|length == 4 ? '' : 'disabled' }}
 					>{{ lexicon.load_more }}</button>
 					<input type="hidden" value="{{ fields.tag_ids }}" name="tid">
