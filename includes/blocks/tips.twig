@@ -8,7 +8,7 @@
 				<p class="subtitle">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
 			</div>
 			<div class="big-carousel-clip">
-				<div class="swiper-container maxi-swiper tips-swiper" data-aos="fade-left" data-aos-delay="400" data-aos-duration="600">
+				<div class="swiper-container maxi-swiper tips-swiper">
 					<div class="swiper-wrapper">
 						{# <div class="swiper-slide first">
 							<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
@@ -17,7 +17,7 @@
 						</div> #}
 						{% if fields.posts %}
 							{% for post in fields.posts %}
-								<div class="swiper-slide">
+								<div class="swiper-slide" data-aos="fade-left" data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
 									<div class="tip" style="transform: rotate({{ random(-4, 4) }}deg)">
 										<div class="meta-box">
 											<div>{{ post.frequency }}</div>
