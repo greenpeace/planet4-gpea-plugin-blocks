@@ -228,3 +228,18 @@ msgstr ""
 
 msgid "%s signers"
 msgstr ""
+
+msgid "Any year"
+msgstr "모두 선택"
+
+msgid "Any issue"
+msgstr "모두 선택"
+
+msgid "Any topic"
+msgstr "모두 선택"
+
+msgid "Your message"
+msgstr ""
+
+msgid "Submit"
+msgstr ""

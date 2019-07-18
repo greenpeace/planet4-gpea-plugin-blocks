@@ -22,7 +22,7 @@
                             {% if fields['amount_handle_'~i] %}
 								<div class="dollar-handle">
 									{% if fields['amount_handle_'~i] %}
-										<input type="radio" id="a{{ fields['amount_handle_'~i] }}" name="dollar-handle" value="{{ fields['amount_handle_'~i] }}" data-paragraph="{{ fields['paragraph_handle_'~i] }}"/>
+										<input type="radio" id="a{{ fields['amount_handle_'~i] }}" name="dollar-handle" value="{{ fields['amount_handle_'~i] }}" data-paragraph="{{ fields['paragraph_handle_'~i]|e('wp_kses_post')|raw }}"/>
 									{% endif %}
 									{% if fields['img_handle_'~i] %}
 										<label
@@ -40,7 +40,7 @@
                             {% if fields['recurring_amount_handle_'~i] %}
 								<div class="dollar-handle">
 									{% if fields['recurring_amount_handle_'~i] %}
-									<input type="radio" id="b{{ fields['recurring_amount_handle_'~i] }}" name="dollar-handle" value="{{ fields['recurring_amount_handle_'~i] }}" data-paragraph="{{ fields['recurring_paragraph_handle_'~i] }}" {{ i == 2 ? 'checked' : '' }} />
+									<input type="radio" id="b{{ fields['recurring_amount_handle_'~i] }}" name="dollar-handle" value="{{ fields['recurring_amount_handle_'~i] }}" data-paragraph="{{ fields['recurring_paragraph_handle_'~i]|e('wp_kses_post')|raw }}" {{ i == 2 ? 'checked' : '' }} />
 									{% endif %}
 									{% if fields['recurring_img_handle_'~i] %}
 										<label
@@ -56,7 +56,7 @@
                         <p class="caption paragraph-handles__once">
                         </p>
                         <p class="caption paragraph-handles__recurring is-active">
-                            {{ fields['recurring_paragraph_handle_2'] }}
+                            {{ fields['recurring_paragraph_handle_2']|e('wp_kses_post')|raw }}
                         </p>
                         <div class="form-group small">
                             <label>{{ fields.label_free_amount }}</label>

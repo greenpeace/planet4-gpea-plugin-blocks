@@ -304,6 +304,9 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 			$lexicon = [
 				'load_more' => __( 'Load more posts', 'planet4-gpea-blocks' ),
 				'any'       => __( 'Any', 'planet4-gpea-blocks' ),
+				'any_year'  => __( 'Any year', 'planet4-gpea-blocks' ),
+				'any_issue' => __( 'Any issue', 'planet4-gpea-blocks' ),
+				'any_topic' => __( 'Any topic', 'planet4-gpea-blocks' ),
 			];
 
 			$attributes['home_url'] = site_url();

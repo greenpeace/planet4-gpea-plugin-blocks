@@ -223,3 +223,18 @@ msgstr "没有找到任何相關结果"
 
 msgid "%s signers"
 msgstr "%s 人已聯署"
+
+msgid "Any year"
+msgstr "所有年份"
+
+msgid "Any issue"
+msgstr "所有主題"
+
+msgid "Any topic"
+msgstr "所有議題"
+
+msgid "Your message"
+msgstr "你的訊息"
+
+msgid "Submit"
+msgstr "發送"
