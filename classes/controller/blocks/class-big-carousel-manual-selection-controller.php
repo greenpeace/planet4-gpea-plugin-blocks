@@ -144,10 +144,12 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 						if ( has_term( 'petition', 'post_tag', $post->ID ) ) {
 							$post->is_campaign = 1;
 							if ( 'page-templates/petition.php' === get_post_meta( $post->ID, '_wp_page_template', true ) ) {
+
 								$post->engaging_pageid = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_pageid', true );
 								$post->engaging_target = get_post_meta( $post->ID, 'p4-gpea_petition_engaging_target', true );
+								$post->signatures      = get_post_meta( $post->ID, 'p4-gpea_petition_current_signatures', true );
 
-								if ( $post->engaging_pageid ) {
+								if ( $post->engaging_pageid && ! $post->signatures ) {
 									global $wp_version;
 									$url = 'http://www.e-activist.com/ea-dataservice/data.service?service=EaDataCapture&token=' . $engaging_token . '&campaignId=' . $post->engaging_pageid . '&contentType=json&resultType=summary';
 									$args = array(
