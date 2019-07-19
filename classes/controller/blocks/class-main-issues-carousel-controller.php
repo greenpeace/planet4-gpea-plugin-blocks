@@ -121,7 +121,7 @@ if ( ! class_exists( 'Main_Issues_Carousel_Controller' ) ) {
 				foreach ( $query->posts as $post ) {
 					if ( has_post_thumbnail( $post->ID ) ) {
 						$img_id = get_post_thumbnail_id( $post->ID );
-						$img_data = wp_get_attachment_image_src( $img_id , 'medium_large' );
+						$img_data = wp_get_attachment_image_src( $img_id, 'medium' );
 						$post->img_url = $img_data[0];
 					}
 
