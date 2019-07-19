@@ -214,7 +214,7 @@ if ( ! class_exists( 'Tips_Controller' ) ) {
 
 			$lexicon = [
 				'tip_cta' => __( 'I\'ll do it!', 'planet4-gpea-blocks' ),
-				'committed' => __( 'Committed', 'planet4-gpea-blocks' ),
+				'committed' => __( 'committed', 'planet4-gpea-blocks' ),
 			];
 
 			return [
