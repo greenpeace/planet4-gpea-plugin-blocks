@@ -210,7 +210,7 @@ msgid "Any"
 msgstr "所有"
 
 msgid "committed"
-msgstr "人正在實踐！"
+msgstr "人已做到！"
 
 msgid "I\'ll do it!"
 msgstr "我做得到！"
@@ -222,4 +222,25 @@ msgid "Nothing found, sorry."
 msgstr "没有找到任何相關结果"
 
 msgid "%s signers"
-msgstr "%s 人已參與聯署"
+msgstr "%s 人已聯署"
+
+msgid "Any year"
+msgstr "所有年份"
+
+msgid "Any issue"
+msgstr "所有主題"
+
+msgid "Any topic"
+msgstr "所有議題"
+
+msgid "Your message"
+msgstr "你的訊息"
+
+msgid "Submit"
+msgstr "發送"
+
+msgid "Minimum required for single donation is %s"
+msgstr "最低捐款金額為：%s HK$"
+
+msgid "Minimum required for recurring donation is %s"
+msgstr "最低捐款金額為：%s HK$"

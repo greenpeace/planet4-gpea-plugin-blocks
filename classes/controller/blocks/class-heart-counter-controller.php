@@ -74,7 +74,7 @@ if ( ! class_exists( 'Heart_Counter_Controller' ) ) {
 				[
 					'label' => __( 'Right side number', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'number',
-					'type'  => 'number',
+					'type'  => 'text',
 					'meta'  => [
 						'placeholder' => __( '1000', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',

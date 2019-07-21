@@ -30,7 +30,7 @@
 								{% if ( fields.title ) %}
 									<h2>{{ fields.title }}</h2>
 								{% endif %}
-								<p>{{ fields.paragraph }}</p>
+								<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 								{% if ( fields.link_label and fields.link_url ) %}
 									<p class="see-more">
 										<a href="{{ fields.link_url }}">{{ fields.link_label }}</a>

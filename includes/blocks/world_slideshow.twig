@@ -18,11 +18,8 @@
           <div class="swiper-wrapper">
             {% for i in 1..25 %}
               {% if fields['title_milestone_'~i] %}
-                <!-- TODO frontend: latitude
-                						{{ fields['lat_milestone_'~i] }} -->
-                <!-- TODO frontend: longitude
-                						{{ fields['lon_milestone_'~i] }} -->
-                  <div class="swiper-slide card-explainer"> <div class="description">
+                  <div class="swiper-slide card-explainer" {{ ( fields['lat_milestone_'~i] != '' ) ? ('data-latitude="'~fields['lat_milestone_'~i]~'"')|raw : '' }} {{ ( fields['lon_milestone_'~i] != '' ) ? ('data-longitude="'~fields['lon_milestone_'~i]~'"')|raw : '' }}>
+				  <div class="description">
                     <h4>{{ fields['title_milestone_'~i] }}</h4>
                     <p class="subtitle">{{ fields['subtitle_milestone_'~i] }}</p>
                     <p>{{ fields['paragraph_milestone_'~i] }}</p>

@@ -27,7 +27,7 @@
 		<div class="ct-container">
 
 			{% if ( static_fields.title or static_fields.subtitle ) %}
-				<div class="content" data-aos="fade" data-aos-delay="200" data-aos-duration="600">
+				<div class="content" {{ not static_fields.image ? 'data-aos="fade"' : '' }} data-aos-delay="200" data-aos-duration="600">
 					{% if ( static_fields.title ) %}
 						<h2>{{ static_fields.title }}</h2>
 					{% endif %}
@@ -38,11 +38,11 @@
 			{% endif %}
 
 			{% if ( field_groups|length > 0 ) %}
-			<div class="swiper-container mini-swiper" {{ not static_fields.image ? 'data-aos="fade-left" data-aos-delay="400" data-aos-duration="600"' : '' }} >
+			<div class="swiper-container mini-swiper">
 				<div class="swiper-wrapper">
 				{% for group in field_groups %}
 					{% if group.__group_type__ == 'post' and group.post %}
-						<a href="{{ group.post.link }}" class="swiper-slide card-mini mini-update">
+						<a href="{{ group.post.link }}" class="swiper-slide card-mini mini-update" {{ not static_fields.image ? 'data-aos="fade-left"' : '' }} data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
 							<div
 								class="thumbnail lazy"
 								data-bg="url({{ group.post.img_url }})"
@@ -60,21 +60,21 @@
 							</p>
 						</a>
 					{% elseif group.__group_type__ == 'textonly' %}
-						<div class="swiper-slide card-mini">
+						<div class="swiper-slide card-mini" {{ not static_fields.image ? 'data-aos="fade-left"' : '' }} data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
 							<p>{{ group.textblock }}</p>
 						</div>
 					{% elseif group.__group_type__ == 'titleandtext' %}
-						<div class="swiper-slide card-mini">
+						<div class="swiper-slide card-mini" {{ not static_fields.image ? 'data-aos="fade-left"' : '' }} data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
 							<h4>{{ group.title }}</h4>
 							<p>{{ group.textblock }}</p>
 						</div>
 					{% elseif group.__group_type__ == 'twolinetitleandtext' %}
-						<div class="swiper-slide card-mini">
+						<div class="swiper-slide card-mini" {{ not static_fields.image ? 'data-aos="fade-left"' : '' }} data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
 							<h4 class="data"><i>{{ group.titlea }}</i> {{ group.titleb }}</h4>
 							<p>{{ group.textblock }}</p>
 						</div>
 					{% elseif group.__group_type__ == 'tip' %}
-						<div class="swiper-slide card-mini has-tip">
+						<div class="swiper-slide card-mini has-tip" {{ not static_fields.image ? 'data-aos="fade-left"' : '' }} data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
 							<div class="mini-tip" style="transform: rotate({{ random(-4, 4) }}deg)">
 								<div class="tip-icon"><img src="{{ group.post.img_url }}" /></div>
 								<p>{{ group.post.post_title|e('wp_kses_post')|raw }}</p>

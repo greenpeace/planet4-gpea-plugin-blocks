@@ -120,7 +120,7 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Error message in case lower amount', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Error message in case lower amount (NO MORE USED)', 'planet4-gpea-blocks-backend' ),
 					'desc' => __( 'If you leave it empty, default value will be used', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'minimum_error',
 					'type'  => 'text',
@@ -355,9 +355,11 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 			if ( ! isset( $attributes['suggested_regular'] ) ) {
 				$attributes['suggested_regular'] = isset( $gpea_options['gpea_donation_suggested-regular'] ) ? $gpea_options['gpea_donation_suggested-regular'] : '';
 			}
-			if ( ! isset( $attributes['minimum_error'] ) ) {
-				$attributes['minimum_error'] = isset( $gpea_options['gpea_donation_minimum-error-message'] ) ? $gpea_options['gpea_donation_minimum-error-message'] : '';
-			}
+			// if ( ! isset( $attributes['minimum_error'] ) ) {
+			// 	$attributes['minimum_error'] = isset( $gpea_options['gpea_donation_minimum-error-message'] ) ? $gpea_options['gpea_donation_minimum-error-message'] : '';
+			// }
+			$attributes['minimum_error_single']    = sprintf( __( 'Minimum required for single donation is %s', 'planet4-gpea-blocks' ), $attributes['minimum_oneoff'] );
+			$attributes['minimum_error_recurring'] = sprintf( __( 'Minimum required for recurring donation is %s', 'planet4-gpea-blocks' ), $attributes['minimum_regular'] );
 
 			// lexicon fallback values
 			if ( ! isset( $attributes['label_donate_once'] ) ) {

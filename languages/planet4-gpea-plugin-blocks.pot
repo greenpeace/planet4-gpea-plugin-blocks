@@ -222,3 +222,24 @@ msgstr ""
 
 msgid "%s signers"
 msgstr ""
+
+msgid "Any year"
+msgstr ""
+
+msgid "Any issue"
+msgstr ""
+
+msgid "Any topic"
+msgstr ""
+
+msgid "Your message"
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Minimum required for single donation is %s"
+msgstr ""
+
+msgid "Minimum required for recurring donation is %s"
+msgstr ""

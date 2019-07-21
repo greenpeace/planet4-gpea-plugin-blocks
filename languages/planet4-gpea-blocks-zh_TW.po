@@ -223,3 +223,24 @@ msgstr "抱歉，查無搜尋結果"
 
 msgid "%s signers"
 msgstr "%s 連署人"
+
+msgid "Any year"
+msgstr "모두 선택"
+
+msgid "Any issue"
+msgstr "모두 선택"
+
+msgid "Any topic"
+msgstr "모두 선택"
+
+msgid "Your message"
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Minimum required for single donation is %s"
+msgstr ""
+
+msgid "Minimum required for recurring donation is %s"
+msgstr ""

@@ -2,7 +2,7 @@
 	{% if ( fields ) %}
 	<section class="section-choose-topics">
 		{% if (fields.layout) == 'following' %}
-		<div class="tag-cloud__following ct-container">
+		<div class="tag-cloud__following ct-container" id="enform-content">
 			<div class="content">
 				<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
 				<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
@@ -32,7 +32,18 @@
 				</form>
 			</div>
 		</div>
+		<div class="content">
+			<div class="thankyou" style="display: none;">
+				<h2>
+					{{ fields.gpea_subscription_page_thankyou_title|raw }}
+				</h2>
+				<h2>
+					<span class="thankyou-subtitle">{{ fields.gpea_subscription_page_thankyou_subtitle|raw }}</span>
+				</h2>
+			</div>
+		</div>
 		{% else %}
+		<div id="enform-content">
 			<form id="p4en_form" name="p4en_form" method="post" novalidate>
 				<span id="enform">
 				{{ fn( 'wp_nonce_field', fields.nonce_action, '_wpnonce', true, false )|raw }}
@@ -71,6 +82,17 @@
 				</div>
 				</span>
 			</form>
+		</div>
+		<div class="content">
+			<div class="thankyou" style="display: none;">
+				<h2>
+					{{ fields.gpea_subscription_page_thankyou_title|raw }}
+				</h2>
+				<p>
+					<span class="thankyou-subtitle">{{ fields.gpea_subscription_page_thankyou_subtitle|raw }}</span>
+				</p>
+			</div>
+		</div>
 		{% endif %}
 	</section>
 	{% endif %}

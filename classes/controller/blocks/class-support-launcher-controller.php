@@ -185,8 +185,16 @@ if ( ! class_exists( 'Support_Launcher_Controller' ) ) {
 			$attributes['admin_ajax'] = admin_url( 'admin-ajax.php' );
 			$attributes['wp_nonce'] = wp_nonce_field( self::NONCE_STRING );
 
+			$lexicon = [
+				'your_name'    => __( 'Your name', 'planet4-gpea-blocks' ),
+				'your_email'   => __( 'Your email address', 'planet4-gpea-blocks' ),
+				'your_message' => __( 'Your message', 'planet4-gpea-blocks' ),
+				'submit'       => __( 'Submit', 'planet4-gpea-blocks' ),
+			];
+
 			return [
-				'fields' => $attributes,
+				'fields'  => $attributes,
+				'lexicon' => $lexicon,
 			];
 
 		}
