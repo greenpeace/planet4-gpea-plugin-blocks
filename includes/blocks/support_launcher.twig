@@ -53,19 +53,19 @@
 							<input type="hidden" name="send_to" value="{{ fields.admin_ajax }}">
 							<div class="form-group">
 								<label for="launcher-form-name">{{ lexicon.your_name }}</label>
-								<input id="launcher-form-name" name="name" type="text">
+								<input id="launcher-form-name" name="name" type="text" required />
 							</div>
 							<div class="form-group">
 								<label for="launcher-form-email">{{ lexicon.your_email }}</label>
-								<input id="launcher-form-email" name="email" type="email">
+								<input id="launcher-form-email" name="email" type="email" required />
 							</div>
 							<div class="form-group">
 								<label for="launcher-form-message">{{ lexicon.your_message }}</label>
-								<textarea id="launcher-form-message" name="message"></textarea>
+								<textarea id="launcher-form-message" name="message" required></textarea>
 							</div>
 							<button type="submit" class="button fluid">{{ lexicon.submit }}</button>
 							{{ fields.wp_nonce|raw }}
-							<p class="form-support-launcher-message"></p>
+							<p class="form-support-launcher-message" style="display: none;">{{ fields.thanks_message }}</p>
 							<!-- Examples:
 								<p class="success form-support-launcher-message">Your message has been submitted!</p>
 								<p class="error form-support-launcher-message">There was an error. Please try again.</p>
