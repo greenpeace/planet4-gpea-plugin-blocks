@@ -166,7 +166,9 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 				if ( $posts ) {
 					foreach ( $posts as $post ) {
 						$post->link = get_permalink( $post->ID );
-						$post->post_date = date( 'Y-m-d', strtotime( $post->post_date ) );
+						// $post->post_date = date( 'Y-m-d', strtotime( $post->post_date ) );
+						$post->post_date = get_the_date( '', $post->ID );
+
 						// $post->tags = array_filter(
 						// 	get_the_tags( $post->ID ), function( $tag ) use ( $tag_ids ) {
 						// 		return in_array( $tag->term_id, $tag_ids, true );
