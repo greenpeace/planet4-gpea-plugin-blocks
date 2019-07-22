@@ -360,7 +360,8 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 						$post = $query->posts[0];
 
 						$post->link = get_permalink( $post->ID );
-						$post->post_date = date( 'Y - m - d' , strtotime( $post->post_date ) );
+						// $post->post_date = date( 'Y - m - d' , strtotime( $post->post_date ) );
+						$post->post_date = get_the_date( '', $post->ID );
 
 						if ( has_post_thumbnail( $post->ID ) ) {
 							$img_id = get_post_thumbnail_id( $post->ID );

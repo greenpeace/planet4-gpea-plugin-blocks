@@ -139,7 +139,8 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 						}
 
 						$post->link = get_permalink( $post->ID );
-						$post->post_date = date( 'Y - m - d', strtotime( $post->post_date ) );
+						// $post->post_date = date( 'Y - m - d', strtotime( $post->post_date ) );
+						$post->post_date = get_the_date( '', $post->ID );
 
 						if ( has_term( 'petition', 'post_tag', $post->ID ) ) {
 							$post->is_campaign = 1;
