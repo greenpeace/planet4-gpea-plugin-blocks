@@ -2,7 +2,7 @@
 	{% if ( fields ) %}
 	<section class="section-article-row" data-source="{{ fields.tag_slug }}">
 		<div class="ct-container">
-			<h2><a href="{{ fields.home_url }}/?s&f&f[tag]={{ fields.tag_id }}">{{ fields.title|e('wp_kses_post')|raw }}<span class="icon-chevron-right"></span></a></h2>
+			<h2><a href="{{ fields.home_url }}/?s&f&f[tag]={{ fields.tag_id }}#search_form_inner">{{ fields.title|e('wp_kses_post')|raw }}<span class="icon-chevron-right"></span></a></h2>
 			<div class="swiper-container mini-swiper">
 				<div class="swiper-wrapper">
 					{% for post in fields.posts %}

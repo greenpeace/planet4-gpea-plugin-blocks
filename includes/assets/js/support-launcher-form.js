@@ -5,7 +5,7 @@ jQuery(document).ready(function() {
 
     var actionName = 'supportLauncher';
     var $this = jQuery(this);
-    var messageBox = $('.form-support-launcher-message');
+    var messageBox = $(this).find('.form-support-launcher-message');
     var destination = $this.find('input[name=send_to]').val();
 
     var data = $this.serializeArray(),
@@ -27,7 +27,8 @@ jQuery(document).ready(function() {
           method: 'POST',
         }
       ).done(function(response) {
-        messageBox.html(response);
+        // messageBox.html(response);
+        messageBox.show();
       });
     }
 
