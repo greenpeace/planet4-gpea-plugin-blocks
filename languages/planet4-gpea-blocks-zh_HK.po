@@ -73,15 +73,15 @@ msgstr "發佈你的故事"
 
 #: classes/controller/blocks/class-tag-cloud-controller.php:140
 msgid "Subscribe"
-msgstr "訂閱"
+msgstr "訂閱電子報"
 
 #: classes/controller/blocks/class-tag-cloud-controller.php:141
 msgid "Follow"
-msgstr "追蹤"
+msgstr "按此追縱"
 
 #: classes/controller/blocks/class-tag-cloud-controller.php:142
 msgid "Would you like to receive updates about these topics?"
-msgstr "你最關注哪些議題？"
+msgstr "你也可以透過電郵，接收綠色和平的最新消息："
 
 #: classes/controller/blocks/class-big-carousel-manual-selection-controller.php:222
 msgid "Reading time"
@@ -244,3 +244,6 @@ msgstr "最低捐款金額為：%s HK$"
 
 msgid "Minimum required for recurring donation is %s"
 msgstr "最低捐款金額為：%s HK$"
+
+msgid "Updates"
+msgstr "篇專題報導"
