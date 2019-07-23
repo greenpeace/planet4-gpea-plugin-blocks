@@ -53,11 +53,11 @@ msgstr "提交你的故事"
 
 #: classes/controller/blocks/class-ugc-controller.php:80
 msgid "Your name"
-msgstr "姓名"
+msgstr "您的名字"
 
 #: classes/controller/blocks/class-ugc-controller.php:81
 msgid "Your email address"
-msgstr "電郵"
+msgstr "您的電子信箱"
 
 #: classes/controller/blocks/class-ugc-controller.php:82
 msgid "Subject of your story"
@@ -77,7 +77,7 @@ msgstr "訂閱"
 
 #: classes/controller/blocks/class-tag-cloud-controller.php:141
 msgid "Follow"
-msgstr "追蹤"
+msgstr "按此追縱蹤"
 
 #: classes/controller/blocks/class-tag-cloud-controller.php:142
 msgid "Would you like to receive updates about these topics?"
@@ -89,7 +89,7 @@ msgstr "閱讀時間"
 
 #: classes/controller/blocks/class-big-carousel-manual-selection-controller.php:223
 msgid "Sign now"
-msgstr "立即聯署"
+msgstr "立即連署"
 
 #: classes/controller/blocks/class-main-issues-carousel-controller.php:154
 msgid "Achievements"
@@ -225,25 +225,25 @@ msgid "%s signers"
 msgstr "%s 連署人"
 
 msgid "Any year"
-msgstr "모두 선택"
+msgstr "所有年份"
 
 msgid "Any issue"
-msgstr "모두 선택"
+msgstr "所有議題"
 
 msgid "Any topic"
-msgstr "모두 선택"
+msgstr "所有主題"
 
 msgid "Your message"
-msgstr ""
+msgstr "您的訊息"
 
 msgid "Submit"
-msgstr ""
+msgstr "提交"
 
 msgid "Minimum required for single donation is %s"
-msgstr ""
+msgstr "最低捐款金額為：NT$ %s"
 
 msgid "Minimum required for recurring donation is %s"
-msgstr ""
+msgstr "最低捐款金額為：NT$ %s"
 
 msgid "Updates"
-msgstr ""
+msgstr "篇專題報導"

@@ -54,7 +54,7 @@ msgstr ""
 
 #: classes/controller/blocks/class-ugc-controller.php:79
 msgid "Submit your story"
-msgstr "스토리 제출하기"
+msgstr "나의 환경 이야기"
 
 #: classes/controller/blocks/class-ugc-controller.php:80
 msgid "Your name"
@@ -62,19 +62,19 @@ msgstr "이름"
 
 #: classes/controller/blocks/class-ugc-controller.php:81
 msgid "Your email address"
-msgstr "이메일 주소"
+msgstr "이메일"
 
 #: classes/controller/blocks/class-ugc-controller.php:82
 msgid "Subject of your story"
-msgstr "스토리 주제"
+msgstr "테마"
 
 #: classes/controller/blocks/class-ugc-controller.php:83
 msgid "Your story"
-msgstr "당신의 스토리"
+msgstr "여러분의 이야기를 적어주세요"
 
 #: classes/controller/blocks/class-ugc-controller.php:84
 msgid "Publish your story"
-msgstr "스토리 출판하기"
+msgstr "제출하기"
 
 #: classes/controller/blocks/class-tag-cloud-controller.php:140
 msgid "Subscribe"
@@ -94,7 +94,7 @@ msgstr "읽는 시간"
 
 #: classes/controller/blocks/class-big-carousel-manual-selection-controller.php:223
 msgid "Sign now"
-msgstr "지금 서명하세요."
+msgstr "지금 서명하기"
 
 #: classes/controller/blocks/class-main-issues-carousel-controller.php:154
 msgid "Achievements"
@@ -218,16 +218,16 @@ msgid "committed"
 msgstr "명 참여중"
 
 msgid "I\'ll do it!"
-msgstr "1명 참여중"
+msgstr "동참하기"
 
 msgid "Load more posts"
-msgstr ""
+msgstr "더보기"
 
 msgid "Nothing found, sorry."
 msgstr ""
 
 msgid "%s signers"
-msgstr ""
+msgstr "%s 명 서명"
 
 msgid "Any year"
 msgstr "모두 선택"
@@ -239,16 +239,16 @@ msgid "Any topic"
 msgstr "모두 선택"
 
 msgid "Your message"
-msgstr ""
+msgstr "여러분의 이야기를 적어주세요"
 
 msgid "Submit"
-msgstr ""
+msgstr "제출하기"
 
 msgid "Minimum required for single donation is %s"
-msgstr ""
+msgstr "일시후원 최소 금액은 %s 원 입니다"
 
 msgid "Minimum required for recurring donation is %s"
-msgstr ""
+msgstr "정기후원 최소 금액은 %s 입니다"
 
 msgid "Updates"
-msgstr ""
+msgstr "개 포스트 업데이트"
