@@ -77,7 +77,7 @@ msgstr "訂閱"
 
 #: classes/controller/blocks/class-tag-cloud-controller.php:141
 msgid "Follow"
-msgstr "按此追縱蹤"
+msgstr "按此追蹤"
 
 #: classes/controller/blocks/class-tag-cloud-controller.php:142
 msgid "Would you like to receive updates about these topics?"
