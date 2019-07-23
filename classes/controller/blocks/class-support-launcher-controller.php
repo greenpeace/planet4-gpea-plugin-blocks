@@ -216,7 +216,7 @@ if ( ! class_exists( 'Support_Launcher_Controller' ) ) {
 				'support_launcher_form_js',
 				P4EABKS_ASSETS_DIR . 'js/support-launcher-form.js',
 				[ 'jquery' ],
-				'0.1',
+				'0.2',
 				true
 			);
 
