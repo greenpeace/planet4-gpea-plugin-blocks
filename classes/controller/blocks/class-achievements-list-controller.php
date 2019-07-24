@@ -136,11 +136,15 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 			$formatted_posts = [];
 
 			if ( isset( $attributes['bg_img'] ) ) {
-				$attributes['bg_img'] = wp_get_attachment_url( $attributes['bg_img'] );
+				// $attributes['bg_img'] = wp_get_attachment_url( $attributes['bg_img'] );
+				$big_img = wp_get_attachment_image_src( $attributes['bg_img'], 'medium_large' );
+				$attributes['bg_img'] = $big_img[0];
 			}
 
 			if ( isset( $attributes['bg_img_mobile'] ) ) {
-				$attributes['bg_img_mobile'] = wp_get_attachment_url( $attributes['bg_img_mobile'] );
+				// $attributes['bg_img_mobile'] = wp_get_attachment_url( $attributes['bg_img_mobile'] );
+				$big_img_mobile = wp_get_attachment_image_src( $attributes['bg_img_mobile'], 'medium' );
+				$attributes['bg_img_mobile'] = $big_img_mobile[0];
 			}
 
 			// get original name of achievemt tag!
