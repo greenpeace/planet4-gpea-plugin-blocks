@@ -49,7 +49,7 @@ msgstr "Shortcode UI plugin must be active for Planet4 - EA - Blocks plugin to w
 
 #: classes/controller/blocks/class-ugc-controller.php:79
 msgid "Submit your story"
-msgstr "提交你的故事"
+msgstr "提交您的故事"
 
 #: classes/controller/blocks/class-ugc-controller.php:80
 msgid "Your name"
@@ -65,11 +65,11 @@ msgstr "故事主題"
 
 #: classes/controller/blocks/class-ugc-controller.php:83
 msgid "Your story"
-msgstr "你的故事"
+msgstr "您的故事"
 
 #: classes/controller/blocks/class-ugc-controller.php:84
 msgid "Publish your story"
-msgstr "發佈你的故事"
+msgstr "發佈您的故事"
 
 #: classes/controller/blocks/class-tag-cloud-controller.php:140
 msgid "Subscribe"
