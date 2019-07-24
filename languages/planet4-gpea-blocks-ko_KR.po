@@ -245,10 +245,10 @@ msgid "Submit"
 msgstr "제출하기"
 
 msgid "Minimum required for single donation is %s"
-msgstr "일시후원 최소 금액은 %s 원 입니다"
+msgstr "일시후원 최소 금액은 %s원 입니다"
 
 msgid "Minimum required for recurring donation is %s"
-msgstr "정기후원 최소 금액은 %s 입니다"
+msgstr "정기후원 최소 금액은 %s원 입니다"
 
 msgid "Updates"
 msgstr "개 포스트 업데이트"
