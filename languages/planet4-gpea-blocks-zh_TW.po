@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-06-27T14:02:59+00:00\n"
-"PO-Revision-Date: 2019-07-03 22:02+0800\n"
+"PO-Revision-Date: 2019-07-25 16:13+0900\n"
 "X-Generator: Poedit 2.2.3\n"
 "X-Domain: planet4-gpea-blocks\n"
 "Last-Translator: \n"
@@ -37,7 +37,7 @@ msgstr "http://www.greenpeace.org/nl"
 
 #: classes/controller/blocks/class-article-row-controller.php:217
 msgid "Want to add your story?"
-msgstr "想分享你的故事？"
+msgstr "想分享您的故事？"
 
 #: classes/controller/blocks/class-article-row-controller.php:218
 msgid "Submit here"
@@ -212,7 +212,7 @@ msgstr "所有"
 msgid "committed"
 msgstr "人正在實踐！"
 
-msgid "I\'ll do it!"
+msgid "I'll do it!"
 msgstr "我願意！"
 
 msgid "Load more posts"
