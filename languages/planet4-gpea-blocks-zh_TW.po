@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-06-27T14:02:59+00:00\n"
-"PO-Revision-Date: 2019-07-25 16:13+0900\n"
+"PO-Revision-Date: 2019-07-25 18:02+0900\n"
 "X-Generator: Poedit 2.2.3\n"
 "X-Domain: planet4-gpea-blocks\n"
 "Last-Translator: \n"
@@ -81,7 +81,7 @@ msgstr "按此追蹤"
 
 #: classes/controller/blocks/class-tag-cloud-controller.php:142
 msgid "Would you like to receive updates about these topics?"
-msgstr "您你最關注哪些議題？"
+msgstr "您最關注哪些議題？"
 
 #: classes/controller/blocks/class-big-carousel-manual-selection-controller.php:222
 msgid "Reading time"
