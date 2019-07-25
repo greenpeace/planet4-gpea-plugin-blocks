@@ -81,7 +81,7 @@ msgstr "按此追蹤"
 
 #: classes/controller/blocks/class-tag-cloud-controller.php:142
 msgid "Would you like to receive updates about these topics?"
-msgstr "你最關注哪些議題？"
+msgstr "您你最關注哪些議題？"
 
 #: classes/controller/blocks/class-big-carousel-manual-selection-controller.php:222
 msgid "Reading time"
