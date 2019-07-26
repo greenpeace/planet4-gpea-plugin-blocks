@@ -182,6 +182,13 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 								/* if external link is set, we use that instead of standard one */
 								$external_link = get_post_meta( $post->ID, 'p4-gpea_petition_external_link', true );
 								if ( $external_link ) $post->link = $external_link;
+								/* if external link is set, we use that instead of standard one */
+								$external_link_cta = get_post_meta( $post->ID, 'p4-gpea_cta_external_link', true );
+								if ( $external_link_cta ) {
+									$post->cta = $external_link_cta;
+								} else {
+									$post->cta = __( 'Sign now', 'planet4-gpea-blocks' );
+								}
 							}
 						}
 

@@ -38,7 +38,7 @@
 											{% if post.signatures %}<div class="stats">{{ __('%s signers', 'planet4-gpea-blocks')|format(post.signatures)| raw }}</div>{% endif %}
 											<div class="content">
 												<p>{{ post.post_title }}</p>
-												<button class="button">{{ lexicon.sign_now }}</button>
+												<button class="button">{{ post.cta }}</button>
 											</div>
 										</div>
 									</a>
