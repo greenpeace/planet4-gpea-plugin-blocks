@@ -246,3 +246,6 @@ msgstr ""
 
 msgid "Updates"
 msgstr ""
+
+msgid "Reading time pre"
+msgstr ""
