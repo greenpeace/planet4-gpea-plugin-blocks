@@ -247,3 +247,6 @@ msgstr "最低捐款金額為：HK$ %s"
 
 msgid "Updates"
 msgstr "篇專題報導"
+
+msgid "Reading time pre"
+msgstr " "

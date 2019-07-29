@@ -248,3 +248,6 @@ msgstr "最低捐款金額為：NT$ %s"
 
 msgid "Updates"
 msgstr "篇專題報導"
+
+msgid "Reading time pre"
+msgstr " "

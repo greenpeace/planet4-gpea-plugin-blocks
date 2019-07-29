@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-06-27T14:02:59+00:00\n"
-"PO-Revision-Date: 2019-07-01 11:22+0900\n"
+"PO-Revision-Date: 2019-07-29 10:45+0200\n"
 "X-Generator: Poedit 2.2.3\n"
 "X-Domain: planet4-gpea-blocks\n"
 "Last-Translator: \n"
@@ -90,7 +90,7 @@ msgstr "이 주제에 대해 지속적으로 업데이트 받으시겠습니까?
 
 #: classes/controller/blocks/class-big-carousel-manual-selection-controller.php:222
 msgid "Reading time"
-msgstr "읽는 시간"
+msgstr " "
 
 #: classes/controller/blocks/class-big-carousel-manual-selection-controller.php:223
 msgid "Sign now"
@@ -217,7 +217,7 @@ msgstr "전체 보기"
 msgid "committed"
 msgstr "명 참여중"
 
-msgid "I\'ll do it!"
+msgid "I'll do it!"
 msgstr "동참하기"
 
 msgid "Load more posts"
@@ -252,3 +252,6 @@ msgstr "정기후원 최소 금액은 %s원 입니다"
 
 msgid "Updates"
 msgstr "개 포스트 업데이트"
+
+msgid "Reading time pre"
+msgstr "읽는 시간"
