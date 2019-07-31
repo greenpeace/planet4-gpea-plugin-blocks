@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-06-27T14:02:59+00:00\n"
-"PO-Revision-Date: 2019-07-29 10:45+0200\n"
+"PO-Revision-Date: 2019-07-31 11:05+0200\n"
 "X-Generator: Poedit 2.2.3\n"
 "X-Domain: planet4-gpea-blocks\n"
 "Last-Translator: \n"
@@ -39,7 +39,7 @@ msgstr "http://www.greenpeace.org/nl"
 
 #: classes/controller/blocks/class-article-row-controller.php:217
 msgid "Want to add your story?"
-msgstr "당신의 스토리를 추가하시겠습니까?"
+msgstr "당신의 이야기를 추가하시겠습니까?"
 
 #: classes/controller/blocks/class-article-row-controller.php:218
 msgid "Submit here"
@@ -66,7 +66,7 @@ msgstr "이메일"
 
 #: classes/controller/blocks/class-ugc-controller.php:82
 msgid "Subject of your story"
-msgstr "테마"
+msgstr "환경주제"
 
 #: classes/controller/blocks/class-ugc-controller.php:83
 msgid "Your story"
