@@ -4,7 +4,7 @@
 			<section class="section-text-images">
 				<div class="ct-container slim">
 					{% if ( fields.title ) %}
-						<h2>{{ fields.title }}</h2>
+						<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
 					{% endif %}
 					{% if ( fields.paragraph ) %}
 						<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
@@ -28,7 +28,7 @@
 						{% if not ( fields.images ) %}
 							<div class="ct-container slim">
 								{% if ( fields.title ) %}
-									<h2>{{ fields.title }}</h2>
+									<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
 								{% endif %}
 								<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 								{% if ( fields.link_label and fields.link_url ) %}
@@ -40,9 +40,9 @@
 						{% else %}
 							<div class="with-images">
 								{% if ( fields.title ) %}
-									<h2>{{ fields.title }}</h2>
+									<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
 								{% endif %}
-								<p>{{ fields.paragraph }}</p>
+								<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 								{% if ( fields.link_label and fields.link_url ) %}
 									<p class="see-more">
 										<a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
