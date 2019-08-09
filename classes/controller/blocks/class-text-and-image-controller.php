@@ -45,7 +45,7 @@ if ( ! class_exists( 'Text_And_Image_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'light',
-							'label' => __( 'Light background, dark text - issue color', 'planet4-gpea-blocks-backend' ),
+							'label' => __( 'Light background, dark text - issue color (no more used)', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Dark text on light background. The main color changes, based on the issue.',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
@@ -113,7 +113,7 @@ if ( ! class_exists( 'Text_And_Image_Controller' ) ) {
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
 				'label'         => __( 'GPEA | Free text/image', 'planet4-gpea-blocks-backend' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ) . '" />',
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/text-image-block.jpg' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
 			];
