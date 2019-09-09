@@ -35,7 +35,7 @@ if ( ! class_exists( 'Article_Row_Controller' ) ) {
 		 *
 		 * @const string MAX_ARTICLES
 		 */
-		const MAX_ARTICLES = 4;
+		const MAX_ARTICLES = 8;
 
 		/**
 		 * The tag to display the user content submit form.
