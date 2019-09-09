@@ -119,6 +119,15 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					],
 				],
 				[
+					'label' => __( 'Subitle', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'subtitle',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
 					'label'       => 'Post type',
 					'description' => 'Articles to be shown',
 					'attr'        => 'article_post_type',
