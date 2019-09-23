@@ -16,6 +16,25 @@
 					{% endif %}
 				</div>
 			</section>
+		{% elseif ( fields.images and not fields.title and not fields.paragraph ) %}
+			<section class="section-text-images only-images">
+				<div class="swiper-container section-text-images-swiper">
+					<div class="swiper-wrapper">
+						{% if fields.images|length > 0 %}
+							{% for img in fields.images %}
+								<div class="swiper-slide image lazy" data-bg="url({{ img }})"></div>
+							{% endfor %}
+						{% endif %}
+					</div>
+					<div class="swiper-pagination"></div>
+					<div class="swiper-button-next">
+						<span class="icon-chevron-right"></span>
+					</div>
+					<div class="swiper-button-prev">
+						<span class="icon-chevron-right"></span>
+					</div>
+				</div>
+			</section>
 		{% else %}
 			{% if fields.layout == 'plain_light' %}
 				{% set box_color = 'plain' %}
