@@ -8,7 +8,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-06-27T14:02:59+00:00\n"
-"PO-Revision-Date: 2019-07-25 16:13+0900\n"
+"PO-Revision-Date: 2019-09-23 14:41+0200\n"
 "X-Generator: Poedit 2.2.3\n"
 "X-Domain: planet4-gpea-blocks\n"
 "Last-Translator: \n"
@@ -82,7 +82,6 @@ msgstr "按此追蹤"
 #: classes/controller/blocks/class-tag-cloud-controller.php:142
 msgid "Would you like to receive updates about these topics?"
 msgstr "您最關注哪些議題？"
-
 
 #: classes/controller/blocks/class-big-carousel-manual-selection-controller.php:222
 msgid "Reading time"
@@ -244,7 +243,7 @@ msgid "Minimum required for single donation is %s"
 msgstr "最低捐款金額為：NT$ %s"
 
 msgid "Minimum required for recurring donation is %s"
-msgstr "最低捐款金額為：NT$ %s"
+msgstr "推薦您以每月%s元以上捐款支持，以負擔每月基礎行政費用。或請您改以一次性捐款支持，謝謝您！"
 
 msgid "Updates"
 msgstr "篇專題報導"
