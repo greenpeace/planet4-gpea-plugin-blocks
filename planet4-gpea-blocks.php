@@ -39,7 +39,7 @@ if ( ! defined( 'P4EABKS_REQUIRED_PLUGINS' ) ) {
 				'rel_path'    => 'shortcode-ui/shortcode-ui.php',
 			],
 			'p4_engaging'    => [
-				'min_version' => '1.6',
+				'min_version' => '2.14',
 				'rel_path'    => 'planet4-plugin-engagingnetworks/planet4-engagingnetworks.php',
 			],
 		]
