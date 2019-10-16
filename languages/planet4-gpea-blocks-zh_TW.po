@@ -250,3 +250,15 @@ msgstr "篇專題報導"
 
 msgid "Reading time pre"
 msgstr " "
+
+msgid "Donation reminder box"
+msgstr "您的每月捐助非常重要！"
+
+msgid "Donation reminder description"
+msgstr "綠色和平依靠熱心公眾的每月個人捐助，以確保獨立公正及財政穩健，在規劃長遠環境工作項目的同時，適時調配資源應對最新環境危機。"
+
+msgid "Donation reminder give oneoff"
+msgstr "一次性捐款"
+
+msgid "Donation reminder give regular"
+msgstr "每月捐款"

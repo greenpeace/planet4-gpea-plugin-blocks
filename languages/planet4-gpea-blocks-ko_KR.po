@@ -255,3 +255,15 @@ msgstr "개 포스트 업데이트"
 
 msgid "Reading time pre"
 msgstr "읽는 시간"
+
+msgid "Donation reminder box"
+msgstr ""
+
+msgid "Donation reminder description"
+msgstr ""
+
+msgid "Donation reminder give oneoff"
+msgstr ""
+
+msgid "Donation reminder give regular"
+msgstr ""
