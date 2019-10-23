@@ -9,6 +9,20 @@
                     <p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
                 </div>
                 <div class="donation-form">
+                    {% if fields.reminder_box %}
+                    <div class="donation-reminder-box">
+                        <div class="box">
+                            <div class="donation-reminder-box--content">
+                                <h4>{{ lexicon.reminder_box_title }}</h4>
+                                <h6>{{ lexicon.reminder_box_description }}</h6>
+                                <div class="donation-reminder-box--buttons">
+                                    <button type="button" class="button js-donation-confirm-oneoff">{{ lexicon.reminder_box_give_oneoff }}</button>
+                                    <button type="button" class="button primary js-donation-confirm-regular">{{ lexicon.reminder_box_give_regular }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
                     <div class="tab-bar">
                         <div class="tab-item js-tab-item tab-item__recurring is-active" data-recurring="Y">{{ fields.label_donate_monthly|e('wp_kses_post')|raw }}</div>
                         <div class="tab-item js-tab-item tab-item__once" data-recurring="N">{{ fields.label_donate_once|e('wp_kses_post')|raw }}</div>                        

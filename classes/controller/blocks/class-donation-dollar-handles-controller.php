@@ -62,6 +62,16 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 					],
 				],
 				[
+					'label' => __( 'Show friendly reminder box?', 'planet4-gpea-blocks-backend' ),
+					'desc' => __( 'If you enable it, user who switch from regular to one-off will see this reminder box', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'reminder_box',
+					'type'  => 'checkbox',
+					'meta'  => [
+						'placeholder' => __( 'Show friendly reminder box', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
 					'label' => __( 'Label donate once', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'label_donate_once',
 					'type'  => 'text',
@@ -375,8 +385,15 @@ if ( ! class_exists( 'Donation_Dollar_Handles_Controller' ) ) {
 				$attributes['currency_code'] = __( 'currency_code', 'planet4-gpea-blocks' );
 			}
 
+			// lexicon entries
+			$lexicon['reminder_box_title'] = __( 'Donation reminder box', 'planet4-gpea-blocks' );
+			$lexicon['reminder_box_description'] = __( 'Donation reminder description', 'planet4-gpea-blocks' );
+			$lexicon['reminder_box_give_oneoff'] = __( 'Donation reminder give oneoff', 'planet4-gpea-blocks' );
+			$lexicon['reminder_box_give_regular'] = __( 'Donation reminder give regular', 'planet4-gpea-blocks' );
+
 			return [
 				'fields' => $attributes,
+				'lexicon' => $lexicon,
 			];
 
 		}
