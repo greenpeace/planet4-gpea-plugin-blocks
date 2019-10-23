@@ -46,6 +46,16 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
+				[
+					'label' => __( 'Recipient e-mail', 'planet4-gpea-blocks-backend' ),
+					'desc' => __( 'will receive the mail with text and attachment', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'recipient_email',
+					'type'  => 'email',
+					'meta'  => [
+						'placeholder' => __( 'Recipient e-mail', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
 			];
 
 			// Define the Shortcode UI arguments.
@@ -110,10 +120,20 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 			return ob_get_clean();
 		}
 
+		public function prefix_phpmailer_init(PHPMailer $phpmailer) {
+			$count = count($_FILES['ugc_cover']['tmp_name']); //Count the number of files
+			for ($i = 0; $i < $count; $i++) { //loop on each file
+				if (empty($_FILES['ugc_cover']['error'][$i]))
+					$phpmailer->addAttachment($_FILES['ugc_cover']['tmp_name'][$i], $_FILES['ugc_cover']['name'][$i]); //Pass both path and name
+			}
+		}
+
 		/**
 		 * Saves user generated post as draft if request is POST
 		 */
 		private function save_if_submitted() {
+
+			print_r($_FILES);
 
 			if ( ! isset( $_POST['ugc_title'] ) ) {
 				return;
@@ -140,24 +160,74 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 				);
 			}
 
-			$post = array(
-				'post_title'    => htmlspecialchars( sanitize_text_field( $_POST['ugc_title'] ) ), // TODO check if sanitizing needed here.
-				'post_content'  => htmlspecialchars( sanitize_textarea_field( $_POST['ugc_content'] ) ), // TODO check if sanitizing needed here.
-				'post_status'   => 'draft',
-				'post_type'     => 'user_story',
-				'meta_input'   => array(
-					'p4_author_override' => sanitize_text_field( $_POST['user_name'] ),
-					'p4_author_email_address' => sanitize_text_field( $_POST['user_email'] ),
-				),
+			// send mail
+			$data_mail = array(
+				'title'         => htmlspecialchars( sanitize_text_field( $_POST['ugc_title'] ) ), // TODO check if sanitizing needed here.
+				'message'         => htmlspecialchars( sanitize_textarea_field( $_POST['ugc_content'] ) ), // TODO check if sanitizing needed here.
+				//'recipient_email' => filter_var( $_POST[ 'ugc_cover' ], FILTER_SANITIZE_EMAIL ),
+				'recipient_email' => 'recipient@example.com',
+				'author'          => filter_var( $_POST[ 'user_name' ], FILTER_SANITIZE_STRING ),
+				'author_email'    => filter_var( $_POST[ 'user_email' ], FILTER_SANITIZE_EMAIL ),
+				// 'post_status'     => 'draft',
+				// 'post_type'       => 'user_story',
+				// 'meta_input'      => array(
+				// 	'p4_author_override' => sanitize_text_field( $_POST['user_name'] ),
+				// 	'p4_author_email_address' => sanitize_text_field( $_POST['user_email'] ),
+				// ),
 			);
-			wp_insert_post( $post );
+
+			// $attachment = $_POST['ugc_cover'];
+			// $attachment = array( $_FILES['ugc_cover']['tmp_name'], 'ugc_cover.jpg' );
+
+			$sent = false;
+			// We assume $data['recipient_email'], $data['subject'] to have correct values.
+			if ( $data_mail['author'] && $data_mail['recipient_email'] && $data_mail['message'] ) {
+
+				$message = 'Title ' . $data_mail['title'] . ' <br /> Author ' . $data_mail['author'] . '<br /> Author email ' . $data_mail['author_email'] . '<br /> Message ' . $data_mail['message'];
+
+				$to = $data_mail[ 'recipient_email' ];
+				$subject = 'UGC from gp website';
+				// $message = $data['message'];
+				// $headers  = 'MIME-Version: 1.0' . "\r\n";
+				$headers = array('Content-type: text/html; charset=UTF-8');
+
+				// $headers .= 'From: ' . $data_mail['author'] . '<no-reply@lattecreative.com>\n';
+
+				
+				
+				add_action('phpmailer_init', 'prefix_phpmailer_init');
+
+				$sent = wp_mail( $to, $subject, $message, $headers );
+
+				remove_action('phpmailer_init', 'prefix_phpmailer_init');
+
+				// $this->safe_echo( __( 'Message sent.', 'gpea_theme' ) );
+				// return;
+
+			} 
+			// else {
+			// 	$this->safe_echo( __( 'Could not send the message, form fields missing.', 'gpea_theme' ) );
+			// 	return;
+			// }
+
+			// wp_insert_post( $post );
 
 			$thanks_message = sanitize_text_field( $_POST['thankyou_message'] );
+			$error_message = 'Message could not be sent';
 
-			return array(
-				'result'  => 'success',
-				'message' => $thanks_message,
-			);
+			if ( $sent ) {
+				return array(
+					'result'  => 'success',
+					'message' => $thanks_message,
+				);
+			} else {
+				return array(
+					'result'  => 'error',
+					'message' => $error_message,
+				);
+			}
+
+			return;
 
 		}
 	}

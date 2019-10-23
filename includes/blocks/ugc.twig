@@ -8,7 +8,7 @@
 			{% endif %}
 			{% if ( fields.submit_result.result != 'success' ) %}
 			<div id="ugc_postbox">
-				<form id="new_post" name="new_post" method="post">
+				<form id="new_post" enctype="multipart/form-data" name="new_post" method="post">
 					<div class="form-group">
 						<label for="your_name">{{ __('Your name', 'planet4-gpea-blocks') }}</label>
 						<input type="text" id="user_name" value="" tabindex="1" size="20" name="user_name" required />
@@ -24,6 +24,16 @@
 					<div class="form-group">
 						<label for="ugc_content">{{ __('Your story', 'planet4-gpea-blocks') }}</label>
 						<textarea id="ugc_content" tabindex="3" name="ugc_content" cols="50" rows="10" required minlength="10"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="ugc_cover">{{ __('Upload a cover image', 'planet4-gpea-blocks') }}</label>
+						<input type="file" id="ugc_cover" value="" size="20" name="ugc_cover" />
+					</div>
+					<div class="form-group">
+						<label for="ugc_consent" class="ugc_consent__long">
+							<input type="checkbox" id="ugc_consent" value="1" size="20" name="ugc_consent" required />
+							{{ __('Cover image consent', 'planet4-gpea-blocks') }}
+						</label>						
 					</div>
 					{{ fields.wp_nonce|raw }}
 					<input type="hidden" name="thankyou_message" value="{{ fields.thankyou_message }}" />
