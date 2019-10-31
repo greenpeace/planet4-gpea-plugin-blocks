@@ -92,6 +92,8 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 			$lexicon['story_subject'] = __( 'Subject of your story', 'planet4-gpea-blocks' );
 			$lexicon['story_text'] = __( 'Your story', 'planet4-gpea-blocks' );
 			$lexicon['story_publish'] = __( 'Publish your story', 'planet4-gpea-blocks' );
+			$lexicon['upload_cover'] = __( 'Upload a cover image', 'planet4-gpea-blocks' );
+			$lexicon['conver_consent'] = __( 'Cover image consent', 'planet4-gpea-blocks' );
 
 			return [
 				'fields' => $attributes,
@@ -133,7 +135,7 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 		 */
 		private function save_if_submitted() {
 
-			print_r($_FILES);
+			// print_r($_FILES);
 
 			if ( ! isset( $_POST['ugc_title'] ) ) {
 				return;
@@ -165,7 +167,7 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 				'title'         => htmlspecialchars( sanitize_text_field( $_POST['ugc_title'] ) ), // TODO check if sanitizing needed here.
 				'message'         => htmlspecialchars( sanitize_textarea_field( $_POST['ugc_content'] ) ), // TODO check if sanitizing needed here.
 				//'recipient_email' => filter_var( $_POST[ 'ugc_cover' ], FILTER_SANITIZE_EMAIL ),
-				'recipient_email' => 'recipient@example.com',
+				'recipient_email' => 'example@example.com',
 				'author'          => filter_var( $_POST[ 'user_name' ], FILTER_SANITIZE_STRING ),
 				'author_email'    => filter_var( $_POST[ 'user_email' ], FILTER_SANITIZE_EMAIL ),
 				// 'post_status'     => 'draft',
@@ -177,7 +179,7 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 			);
 
 			// $attachment = $_POST['ugc_cover'];
-			// $attachment = array( $_FILES['ugc_cover']['tmp_name'], 'ugc_cover.jpg' );
+			$attachment = array( $_FILES['ugc_cover']['tmp_name'], 'ugc_cover.jpg' );
 
 			$sent = false;
 			// We assume $data['recipient_email'], $data['subject'] to have correct values.
@@ -195,11 +197,11 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 
 				
 				
-				add_action('phpmailer_init', 'prefix_phpmailer_init');
+				// add_action('phpmailer_init', 'prefix_phpmailer_init');
 
-				$sent = wp_mail( $to, $subject, $message, $headers );
+				$sent = wp_mail( $to, $subject, $message, $headers, $attachment );
 
-				remove_action('phpmailer_init', 'prefix_phpmailer_init');
+				// remove_action('phpmailer_init', 'prefix_phpmailer_init');
 
 				// $this->safe_echo( __( 'Message sent.', 'gpea_theme' ) );
 				// return;

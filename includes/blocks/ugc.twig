@@ -26,13 +26,13 @@
 						<textarea id="ugc_content" tabindex="3" name="ugc_content" cols="50" rows="10" required minlength="10"></textarea>
 					</div>
 					<div class="form-group">
-						<label for="ugc_cover">{{ __('Upload a cover image', 'planet4-gpea-blocks') }}</label>
+						<label for="ugc_cover">{{ lexicon.upload_cover }}</label>
 						<input type="file" id="ugc_cover" value="" size="20" name="ugc_cover" />
 					</div>
 					<div class="form-group">
 						<label for="ugc_consent" class="ugc_consent__long">
 							<input type="checkbox" id="ugc_consent" value="1" size="20" name="ugc_consent" required />
-							{{ __('Cover image consent', 'planet4-gpea-blocks') }}
+							{{ lexicon.conver_consent|e('wp_kses_post')|raw }}
 						</label>						
 					</div>
 					{{ fields.wp_nonce|raw }}
