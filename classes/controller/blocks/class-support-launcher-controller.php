@@ -127,10 +127,16 @@ if ( ! class_exists( 'Support_Launcher_Controller' ) ) {
 				[
 					'label' => __( 'Recipient e-mail (used only with "Form" layout)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'recipient_email',
-					'type'  => 'email',
-					'meta'  => [
-						'placeholder' => __( 'Recipient e-mail', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
+					'type' => 'radio',
+					'options' => [
+						[
+							'value' => 'general',
+							'label' => __( 'General information about support', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => 'special',
+							'label' => __( 'Information about special donations', 'planet4-gpea-blocks-backend' ),
+						],
 					],
 				],
 				[
