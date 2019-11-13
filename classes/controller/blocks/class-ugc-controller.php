@@ -162,12 +162,14 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 				);
 			}
 
+			$gpea_options = get_option( 'gpea_options' );
+
 			// send mail
 			$data_mail = array(
 				'title'         => htmlspecialchars( sanitize_text_field( $_POST['ugc_title'] ) ), // TODO check if sanitizing needed here.
 				'message'         => htmlspecialchars( sanitize_textarea_field( $_POST['ugc_content'] ) ), // TODO check if sanitizing needed here.
 				//'recipient_email' => filter_var( $_POST[ 'ugc_cover' ], FILTER_SANITIZE_EMAIL ),
-				'recipient_email' => 'example@example.com',
+				'recipient_email' => $gpea_options['gpea_ugc_recipient_email'],
 				'author'          => filter_var( $_POST[ 'user_name' ], FILTER_SANITIZE_STRING ),
 				'author_email'    => filter_var( $_POST[ 'user_email' ], FILTER_SANITIZE_EMAIL ),
 				// 'post_status'     => 'draft',
