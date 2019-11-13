@@ -36,13 +36,23 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 		 */
 		public function prepare_fields() {
 
-			$fields = [				
+			$fields = [
 				[
 					'label' => __( 'Thank you message', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'thankyou_message',
 					'type'  => 'textarea',
 					'meta'  => [
 						'placeholder' => __( 'Thanks', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Add attachemnt field?', 'planet4-gpea-blocks-backend' ),
+					'desc' => __( 'If checked the attach file field will be shown and email will be sent', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'show_attachemnt',
+					'type'  => 'checkbox',
+					'meta'  => [
+						'placeholder' => __( 'Add attachemnt field?', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -82,6 +92,8 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 			$lexicon['story_subject'] = __( 'Subject of your story', 'planet4-gpea-blocks' );
 			$lexicon['story_text'] = __( 'Your story', 'planet4-gpea-blocks' );
 			$lexicon['story_publish'] = __( 'Publish your story', 'planet4-gpea-blocks' );
+			$lexicon['upload_cover'] = __( 'Upload a cover image', 'planet4-gpea-blocks' );
+			$lexicon['conver_consent'] = __( 'Cover image consent', 'planet4-gpea-blocks' );
 
 			return [
 				'fields' => $attributes,
@@ -150,14 +162,65 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 					'p4_author_email_address' => sanitize_text_field( $_POST['user_email'] ),
 				),
 			);
-			wp_insert_post( $post );
+			$post_inserted = wp_insert_post( $post );
+
+			/* send notification email, in case it's present attach also the file */
+
+			// get general options (for the recipient email)
+			$gpea_options = get_option( 'gpea_options' );
+
+			// if recipient mail is set go on
+			if ( isset( $gpea_options['gpea_ugc_recipient_email'] ) && $gpea_options['gpea_ugc_recipient_email'] ) {
+
+				// send mail
+				$data_mail = array(
+					'title'           => htmlspecialchars( sanitize_text_field( $_POST['ugc_title'] ) ), // TODO check if sanitizing needed here.
+					'message'         => htmlspecialchars( sanitize_textarea_field( $_POST['ugc_content'] ) ), // TODO check if sanitizing needed here.
+					'recipient_email' => filter_var( $gpea_options['gpea_ugc_recipient_email'], FILTER_SANITIZE_EMAIL ),
+					'author'          => filter_var( $_POST[ 'user_name' ], FILTER_SANITIZE_STRING ),
+					'author_email'    => filter_var( $_POST[ 'user_email' ], FILTER_SANITIZE_EMAIL ),
+				);
+
+				// $attachment 
+				$attachment = array( $_FILES['ugc_cover']['tmp_name'], 'ugc_cover.jpg' );
+
+				$sent = false;
+
+				if ( $data_mail['author'] && $data_mail['recipient_email'] && $data_mail['message'] ) {
+
+					$message = 'Title ' . $data_mail['title'] . ' <br /> Author ' . $data_mail['author'] . '<br /> Author email ' . $data_mail['author_email'] . '<br /> Message ' . $data_mail['message'];
+					$to      = $data_mail['recipient_email'];
+					$subject = 'UGC from gp website';
+					// $message = $data['message'];
+					// $headers  = 'MIME-Version: 1.0' . "\r\n";
+					$headers = array('Content-type: text/html; charset=UTF-8');
+					// $headers .= 'From: ' . $data_mail['author'] . '<no-reply@lattecreative.com>\n';
+					// add_action('phpmailer_init', 'prefix_phpmailer_init');
+
+					$sent = wp_mail( $to, $subject, $message, $headers, $attachment );
+
+					// remove_action('phpmailer_init', 'prefix_phpmailer_init');
+					// $this->safe_echo( __( 'Message sent.', 'gpea_theme' ) );
+					// return;
+				}
+			}
 
 			$thanks_message = sanitize_text_field( $_POST['thankyou_message'] );
+			$error_message = 'Message could not be sent';
 
-			return array(
-				'result'  => 'success',
-				'message' => $thanks_message,
-			);
+			if ( $post_inserted && $sent ) {
+				return array(
+					'result'  => 'success',
+					'message' => $thanks_message,
+				);
+			} else {
+				return array(
+					'result'  => 'error',
+					'message' => $error_message,
+				);
+			}
+
+			return;
 
 		}
 	}
