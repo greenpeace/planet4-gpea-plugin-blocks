@@ -47,12 +47,12 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Add attachemnt field?', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Add attachment field?', 'planet4-gpea-blocks-backend' ),
 					'desc' => __( 'If checked the attach file field will be shown and email will be sent', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'show_attachemnt_field',
+					'attr'  => 'show_attachment_field',
 					'type'  => 'checkbox',
 					'meta'  => [
-						'placeholder' => __( 'Add attachemnt field?', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'Add attachment field?', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -170,7 +170,11 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 			$gpea_options = get_option( 'gpea_options' );
 
 			// if recipient mail is set go on
+			// $sent store the success of mail sent, $file_error info if file too big or wrong format, $attachment if the attachemt is present or not
 			$sent = false;
+			$file_error = false;
+			$attachment = false;
+
 			if ( isset( $gpea_options['gpea_ugc_recipient_email'] ) && $gpea_options['gpea_ugc_recipient_email'] ) {
 
 				// send mail
@@ -182,23 +186,32 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 					'author_email'    => filter_var( $_POST[ 'user_email' ], FILTER_SANITIZE_EMAIL ),
 				);
 
-				// $attachment 
-				$attachment = false;
+				// $attachment 				
 				if ( isset( $_FILES['ugc_cover'] ) && $_FILES['ugc_cover']['tmp_name'] ) {
+					// mark file error true, if everything is fine will change
+					$file_error = true;
 					// allowed images format
-					$allowed_format = array( 'image/png', 'image/git', 'image/jpg', 'image/jpeg' );
+					$allowed_format = array( 'image/png', 'image/gif', 'image/jpg', 'image/jpeg' );
 					if ( filesize( $_FILES['ugc_cover']['tmp_name'] ) > 2000000 ) {
+						// originally we sent email with info about problem with attachemtn, now no mail is sent if there are error with attach
 						$data_mail['message'] .= '<br /> File was too big so it has not been sent';
 					} elseif ( in_array( mime_content_type( $_FILES['ugc_cover']['tmp_name'] ), $allowed_format ) ) {
-						$attachment = array( $_FILES['ugc_cover']['tmp_name'], 'ugc_cover.jpg' );
-					} else {
+						// try to set a nicer name, if everything is fine prepare attachemnt info
+						if ( move_uploaded_file( $_FILES['ugc_cover']['tmp_name'], $_FILES['ugc_cover']['tmp_name'] . '_' . $_FILES['ugc_cover']['name']) ) {
+							// if everything is fine mark $file_error false and add attachment variable
+							$file_error = false;
+							$attachment = array( $_FILES['ugc_cover']['tmp_name'] . '_' . $_FILES['ugc_cover']['name'], 'ugc_cover.jpg' );
+						}
+					} 
+					else {
+						// originally we sent email with info about problem with attachemtn, now no mail is sent if there are error with attach
 						$data_mail['message'] .= '<br /> Not allowed file type was added so it has not been sent';
 					}
 				}
 
-				if ( $data_mail['author'] && $data_mail['recipient_email'] && $data_mail['message'] ) {
+				if ( $data_mail['author'] && $data_mail['recipient_email'] && $data_mail['message'] && ( ! $file_error ) ) {
 
-					$message = 'Title ' . $data_mail['title'] . ' <br /> Author ' . $data_mail['author'] . '<br /> Author email ' . $data_mail['author_email'] . '<br /> Message ' . $data_mail['message'];
+					$message = 'Title ' . $data_mail['title'] . ' <br /> <br /> Author ' . $data_mail['author'] . '<br /> Author email ' . $data_mail['author_email'] . '<br /> Message ' . $data_mail['message'];
 					$to      = $data_mail['recipient_email'];
 					$subject = 'UGC from gp website';
 					// $message = $data['message'];
@@ -209,6 +222,12 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 
 					$sent = wp_mail( $to, $subject, $message, $headers, $attachment );
 
+					// remove file from tmp
+					if ( $attachment ) {
+						@unlink($_FILES['ugc_cover']['tmp_name'] . '_' . $_FILES['ugc_cover']['name']);
+					}
+
+
 					// remove_action('phpmailer_init', 'prefix_phpmailer_init');
 					// $this->safe_echo( __( 'Message sent.', 'gpea_theme' ) );
 					// return;
@@ -218,7 +237,12 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 			}
 
 			$thanks_message = sanitize_text_field( $_POST['thankyou_message'] );
-			$error_message = 'Message could not be sent';
+			$error_message = __( 'Your story could not be sent', 'planet4-gpea-blocks' );
+
+			if ( $file_error ) {
+				// if there were problem with file, add more info about the error
+				$error_message .= '<br />' . __( 'Attachment problem', 'planet4-gpea-blocks' );
+			}
 
 			if ( $post_inserted && $sent ) {
 				return array(
