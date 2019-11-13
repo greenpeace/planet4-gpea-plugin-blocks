@@ -49,7 +49,7 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 				[
 					'label' => __( 'Add attachemnt field?', 'planet4-gpea-blocks-backend' ),
 					'desc' => __( 'If checked the attach file field will be shown and email will be sent', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'show_attachemnt',
+					'attr'  => 'show_attachemnt_field',
 					'type'  => 'checkbox',
 					'meta'  => [
 						'placeholder' => __( 'Add attachemnt field?', 'planet4-gpea-blocks-backend' ),
@@ -93,7 +93,7 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 			$lexicon['story_text'] = __( 'Your story', 'planet4-gpea-blocks' );
 			$lexicon['story_publish'] = __( 'Publish your story', 'planet4-gpea-blocks' );
 			$lexicon['upload_cover'] = __( 'Upload a cover image', 'planet4-gpea-blocks' );
-			$lexicon['conver_consent'] = __( 'Cover image consent', 'planet4-gpea-blocks' );
+			$lexicon['cover_consent'] = __( 'Cover image consent', 'planet4-gpea-blocks' );
 
 			return [
 				'fields' => $attributes,
