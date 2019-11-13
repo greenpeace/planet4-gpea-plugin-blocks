@@ -170,6 +170,7 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 			$gpea_options = get_option( 'gpea_options' );
 
 			// if recipient mail is set go on
+			$sent = false;
 			if ( isset( $gpea_options['gpea_ugc_recipient_email'] ) && $gpea_options['gpea_ugc_recipient_email'] ) {
 
 				// send mail
@@ -182,9 +183,18 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 				);
 
 				// $attachment 
-				$attachment = array( $_FILES['ugc_cover']['tmp_name'], 'ugc_cover.jpg' );
-
-				$sent = false;
+				$attachment = false;
+				if ( isset( $_FILES['ugc_cover'] ) && $_FILES['ugc_cover']['tmp_name'] ) {
+					// allowed images format
+					$allowed_format = array( 'image/png', 'image/git', 'image/jpg', 'image/jpeg' );
+					if ( filesize( $_FILES['ugc_cover']['tmp_name'] ) > 2000000 ) {
+						$data_mail['message'] .= '<br /> File was too big so it has not been sent';
+					} elseif ( in_array( mime_content_type( $_FILES['ugc_cover']['tmp_name'] ), $allowed_format ) ) {
+						$attachment = array( $_FILES['ugc_cover']['tmp_name'], 'ugc_cover.jpg' );
+					} else {
+						$data_mail['message'] .= '<br /> Not allowed file type was added so it has not been sent';
+					}
+				}
 
 				if ( $data_mail['author'] && $data_mail['recipient_email'] && $data_mail['message'] ) {
 
@@ -203,6 +213,8 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 					// $this->safe_echo( __( 'Message sent.', 'gpea_theme' ) );
 					// return;
 				}
+			} else {
+				$sent = true;
 			}
 
 			$thanks_message = sanitize_text_field( $_POST['thankyou_message'] );

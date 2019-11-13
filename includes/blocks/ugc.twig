@@ -8,7 +8,7 @@
 			{% endif %}
 			{% if ( fields.submit_result.result != 'success' ) %}
 			<div id="ugc_postbox">
-				<form id="new_post" name="new_post" method="post">
+				<form id="new_post" enctype="multipart/form-data" name="new_post" method="post">
 					<div class="form-group">
 						<label for="your_name">{{ __('Your name', 'planet4-gpea-blocks') }}</label>
 						<input type="text" id="user_name" value="" tabindex="1" size="20" name="user_name" required />
