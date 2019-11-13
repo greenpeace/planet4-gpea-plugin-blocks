@@ -269,3 +269,8 @@ msgstr ""
 msgid "Cover image consent"
 msgstr "透過上載照片，我同意授權綠色和平東亞分部為推動環境保護把我提供的照片和個人訊息用於網站，以及任何綠色和平所生產、使用或授權出版或使用的刊物或其他通訊及傳媒用材料，包括但不限於：報告、小冊子、短片、報章、雜誌及其他綠色和平辦公室的網站等。<br />  \n 如果閣下需要查閱、更正或者刪除您所提供的照片或者個人訊息，或有任何其他相關問題，請電郵至enquiry.hk@greenpeace.org或致電(852) 2854 8300聯絡我們。<br /> \n 感謝你的支持！"
 
+msgid "Your story could not be sent"
+msgstr ""
+
+msgid "Attachment problem"
+msgstr ""
