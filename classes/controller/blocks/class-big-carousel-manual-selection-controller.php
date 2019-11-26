@@ -169,8 +169,13 @@ if ( ! class_exists( 'Big_Carousel_Manual_Selection_Controller' ) ) {
 										'filename'    => null,
 									);
 									$result = wp_remote_get( $url, $args );
-									$obj = json_decode( $result['body'], true );
-									$post->signatures = $obj['rows'][0]['columns'][4]['value'];
+									if( is_wp_error( $result ) ) {
+										$post->signatures = 0;
+										// return false;
+									} else {
+										$obj = json_decode( $result['body'], true );
+										$post->signatures = $obj['rows'][0]['columns'][4]['value'];
+									}									
 								}
 
 								if ( $post->engaging_target && $post->signatures ) {
