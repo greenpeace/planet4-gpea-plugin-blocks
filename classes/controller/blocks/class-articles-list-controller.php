@@ -40,7 +40,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 		 *
 		 * @const int POSTS_PER_PAGE
 		 */
-		const POSTS_PER_PAGE = 4;
+		// private $posts_per_page;
 
 		/**
 		 * The nonce string.
@@ -88,6 +88,12 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					'value' => 'dropdown_filters',
 					'label' => __( 'Dropdown filters', 'planet4-gpea-blocks-backend' ),
 					'desc'  => 'Dropdown filters',
+					'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+				],
+				[
+					'value' => 'simple_list',
+					'label' => __( 'Simple list', 'planet4-gpea-blocks-backend' ),
+					'desc'  => 'Simple list with load more button',
 					'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 				],
 			];
@@ -189,11 +195,19 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 
 			$formatted_posts = [];
 
+			// set default posts_per_page
+			if ( 'simple_list' === $attributes['layout'] ) {
+				// set default posts_per_page
+				$attributes['posts_per_page'] = 6;
+			} else {
+				$attributes['posts_per_page'] = 4;
+			}			
+
 			$options = array(
 				'post_type'      => array( 'post', 'page' ),
 				'post_status'    => 'publish',
 				'orderby'        => 'date',
-				'posts_per_page' => self::POSTS_PER_PAGE,
+				'posts_per_page' => $attributes['posts_per_page'],
 			);
 
 			if ( ! isset( $attributes['_ajax_paged'] ) ) {
@@ -271,7 +285,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 			wp_reset_postdata();
 
 			$attributes['posts'] = $formatted_posts;
-			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;
+			$attributes['layout'] = isset( $attributes['layout'] ) ? $attributes['layout'] : self::DEFAULT_LAYOUT;			
 
 			// Layout-specific queries.
 			if ( 'tag_filters' === $attributes['layout'] ) {
@@ -308,6 +322,23 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					}
 					$attributes['main_issues'] = $this->main_issues_array;
 				}
+			} elseif ( 'simple_list' === $attributes['layout'] ) {
+
+				// $this->posts_per_page = 12;
+
+				if ( isset( $attributes['tag_ids'] ) ) {
+					$tag_names = array();
+					foreach ( $tag_ids as $tag_id ) {
+						$tag = get_term( $tag_id );
+						if ( $tag ) {
+							$tag_names[] = $tag->name;
+						} else {
+							$tag_names[] = '';
+						}
+					}
+
+					$attributes['tags'] = array_combine( $tag_names, $tag_ids );
+				}
 			}
 
 			$lexicon = [
@@ -326,7 +357,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				'max_pages' => $max_pages,
 			];
 
-		}
+		} 
 
 		/**
 		 * Callback for the shortcake_noindex shortcode.
