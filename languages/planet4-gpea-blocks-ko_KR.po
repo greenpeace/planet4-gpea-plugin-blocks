@@ -273,3 +273,9 @@ msgstr "나의 이야기를 업로드 할 수 없습니다. 다시 시도해 주
 
 msgid "Attachment problem"
 msgstr "파일사이즈가 너무 크거나 확장자가 맞지않아 업로드가 불가합니다."
+
+msgid "No file chosen"
+msgstr "파일이 선택되지 않았습니다."
+
+msgid "Choose a file"
+msgstr "파일선택"

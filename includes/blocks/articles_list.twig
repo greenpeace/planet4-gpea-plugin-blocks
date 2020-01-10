@@ -1,6 +1,6 @@
 {% block articles_list %}
 	{% if ( fields ) %}
-	<section class="section-articles-list">
+	<section class="section-articles-list {% if ( fields.layout == 'simple_list' ) %} simple-list-posts-container {% endif %}">
 		<div class="ct-container">
 			<div class="content">
 				{% if fields.title %}

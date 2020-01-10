@@ -27,8 +27,14 @@
 					</div>
 					{% if fields.show_attachment_field %}
 						<div class="form-group">
-							<label for="ugc_cover">{{ lexicon.upload_cover }}</label>
-							<input type="file" id="ugc_cover" value="" name="ugc_cover" accept="image/*" />
+							<label for="ugc_cover">
+								{{ lexicon.upload_cover }}
+								<p>
+									<span class="ugc_input_file_selected">{{ lexicon.input_file_chosen }}</span>
+									<span class="ugc_input_file_button">{{ lexicon.choose_file_button }}</span>
+								</p>
+								<input type="file" id="ugc_cover" class="js-ugc_cover" value="" name="ugc_cover" accept="image/*" style="display: none" />
+							</label>
 						</div>
 						<div class="form-group">
 							<label for="ugc_consent" class="ugc_consent__long">
