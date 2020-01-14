@@ -94,6 +94,8 @@ if ( ! class_exists( 'UGC_Controller' ) ) {
 			$lexicon['story_publish'] = __( 'Publish your story', 'planet4-gpea-blocks' );
 			$lexicon['upload_cover'] = __( 'Upload a cover image', 'planet4-gpea-blocks' );
 			$lexicon['cover_consent'] = __( 'Cover image consent', 'planet4-gpea-blocks' );
+			$lexicon['input_file_chosen'] = __( 'No file chosen', 'planet4-gpea-blocks' );
+			$lexicon['choose_file_button'] = __( 'Choose a file', 'planet4-gpea-blocks' );
 
 			return [
 				'fields' => $attributes,

@@ -1,6 +1,6 @@
 {% block articles_list %}
 	{% if ( fields ) %}
-	<section class="section-articles-list">
+	<section class="section-articles-list {% if ( fields.layout == 'simple_list' ) %} simple-list-posts-container {% endif %}">
 		<div class="ct-container">
 			<div class="content">
 				{% if fields.title %}
@@ -42,8 +42,14 @@
 					</div>
 				{% endif %}
 			</div>
+
+			{% if ( fields.layout == 'simple_list' ) %}
+				</div>
+				<div class="ct-container">
+			{% endif %}
+
 			{% if fields.posts %}
-				<div class="posts" id="articles_list_post_container">
+				<div class="posts {% if ( fields.layout == 'simple_list' ) %} simple-list-posts {% endif %}" id="articles_list_post_container">
 					{% for post in fields.posts %}
 						<a href="{{ post.link }}" class="card-update compact">
 							<div
@@ -75,15 +81,15 @@
 					{% endfor %}
 					</div>
 			{% endif %}
-		</div>
-		{% if ( fields.layout == 'dropdown_filters' ) %}
+			</div>
+		{% if ( fields.layout == 'dropdown_filters' or fields.layout == 'simple_list' ) %}
 			<div class="articles-list-form-wrapper" style="text-align: center">
 				<div id="articles_list_messages"></div>
 				<form action="#" method="POST" id="articles_list_load_more">
 					<button
 							class="button" type="submit" id="articles_list_load_more_btn"
                             data-paged="2"
-							{{ fields.posts|length == 4 ? '' : 'disabled' }}
+							{{ ( fields.posts|length == fields.posts_per_page ) ? '' : 'disabled' }}
 					>{{ lexicon.load_more }}</button>
 					<input type="hidden" value="{{ fields.tag_ids }}" name="tid">
 					<input type="hidden" value="{{ fields.article_post_type }}" name="apt">
