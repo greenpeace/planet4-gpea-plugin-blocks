@@ -1,33 +1,51 @@
 {% block launcher %}
-	{% if ( static_fields ) %}
+	{% if ( field_groups|length > 0 ) %}
+
 	<section class="section-launcher">
 		<div class="ct-container">
 			{% if ( static_fields.title ) %}
-			<h2>{{ static_fields.title|e('wp_kses_post')|raw }}</h2>
+				<h2>{{ static_fields.title|e('wp_kses_post')|raw }}</h2>
 			{% endif %}
-			<div class="launchers">
-				{% if ( field_groups|length > 0 ) %}
-					{% for group in field_groups %}
-						{% if ( group.subtitle ) %}
-						<div class="action as-card">
-							<div class="thumbnail" style="background-image: url({{ group.img }})"></div>
-							<div class="box">
-								<div class="content">
-									<h4>{{ group.subtitle|e('wp_kses_post')|raw }}</h4>
-									{% if ( group.paragraph ) %}
-									<p>{{ group.paragraph|e('wp_kses_post')|raw }}</p>
-									{% endif %}
-									{% if ( group.btnlabel and group.btnlink ) %}
-									<a href="{{ group.btnlink }}" class="button primary">{{ group.btnlabel|e('wp_kses_post')|raw }}</a>
-									{% endif %}
+
+			{% if ( field_groups|length > 0 ) %}
+				<div class="swiper-container maxi-swiper launcher-card-swiper">
+					<div class="swiper-wrapper">
+						{% for group in field_groups %}
+							{% if ( group.subtitle ) %}
+							<div class="action as-card swiper-slide"
+								data-aos="fade-left"
+								data-aos-delay="{{ 100 + 200*loop.index0 }}"
+								data-aos-duration="600"
+							>
+								<div class="thumbnail" style="background-image: url({{ group.img }})"></div>
+								<div class="box">
+									<div class="content">
+										<h4>{{ group.subtitle|e('wp_kses_post')|raw }}</h4>
+										{% if ( group.paragraph ) %}
+										<p>{{ group.paragraph|e('wp_kses_post')|raw }}</p>
+										{% endif %}
+										{% if ( group.btnlabel and group.btnlink ) %}
+										<a href="{{ group.btnlink }}" class="button primary">{{ group.btnlabel|e('wp_kses_post')|raw }}</a>
+										{% endif %}
+									</div>
 								</div>
 							</div>
-						</div>
-						{% endif %}
-					{% endfor %}
-				{% endif %}
-			</div>
+							{% endif %}
+						{% endfor %}
+					</div>
+
+					<div class="swiper-button-next swiper-button-disabled">
+					  <span class="icon-chevron-right"></span>
+					</div>
+					<div class="swiper-button-prev swiper-button-disabled">
+					  <span class="icon-chevron-right"></span>
+					</div>
+				</div>
+			{% endif %}
 		</div>
 	</section>
+	{% else %}
+	<div>static_fields is empty</div>
+	<div>{{static_fields | json_encode()}}</div>
 	{% endif %}
 {% endblock %}

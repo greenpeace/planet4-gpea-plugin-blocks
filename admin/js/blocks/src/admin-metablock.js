@@ -1,3 +1,4 @@
+/* eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 /* global wp */
 
 function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
@@ -39,17 +40,17 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
     var inactive_elements = [];
     var all_elements = me.get_element_map_array(element_count, element_types);
     all_elements.forEach(function (element_id) {
-        var input_values = $('.field-block')
-            .filter($('div[class$=\'_' + element_id + '\']'))
-            .children()
-            .filter($('input, textarea, select'))
-            .map(function (idx, elem) {
-              return $(elem).val();
-            }).get().join('');
+      var input_values = $('.field-block')
+        .filter($('div[class$=\'_' + element_id + '\']'))
+        .children()
+        .filter($('input, textarea, select'))
+        .map(function (idx, elem) {
+          return $(elem).val();
+        }).get().join('');
 
-        if ('' === input_values) {
-          inactive_elements.push(element_id);
-        }
+      if ('' === input_values) {
+        inactive_elements.push(element_id);
+      }
     });
 
     var active_elements = all_elements.filter(function(el) {
@@ -57,9 +58,9 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
     });
 
     var max_row = active_elements.length === 0 ? 0 :
-        Math.max.apply(null, active_elements.map(function(el) {
-          return parseInt(el.match(/\d+$/g)[0]);
-        }));
+      Math.max.apply(null, active_elements.map(function(el) {
+        return parseInt(el.match(/\d+$/g)[0]);
+      }));
 
     $('.' + me.add_btn_class).parent().data('row', max_row);
     max_row !== 0 && $('.' + me.remove_btn_class).removeAttr('disabled');
@@ -206,7 +207,7 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
       .map( function() {
         return $(this).data('element-number');
       }).toArray();
-    element_count = Math.max.apply(null, element_count); 
+    element_count = Math.max.apply(null, element_count);
 
     return {
       element_types: element_types,
@@ -266,6 +267,7 @@ jQuery(document).ready(function() {
     'shortcake_link_list',
     'shortcake_people_list',
     'shortcake_accordion_list',
+    'shortcake_launcher_card'
   ];
 
   // Attach hooks when rendering a new metablock.

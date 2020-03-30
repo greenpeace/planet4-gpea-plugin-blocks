@@ -35,7 +35,7 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 		 *
 		 * @const string MAX_REPEATER
 		 */
-		const MAX_REPEATER = 3;
+		const MAX_REPEATER = 20;
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
