@@ -1,7 +1,7 @@
 {% block launcher %}
 	{% if ( fields ) %}
-	<section class="section-launcher">
-		<div class="ct-container">	
+	<section class="section-launcher image-vertical-{{fields.image_vertical_align}}">
+		<div class="ct-container">
 			{% set classname = fields.img ? '' : 'no-image' %}
 			<div class="action fluid {{ classname }}">
 				{% if ( fields.title ) %}
