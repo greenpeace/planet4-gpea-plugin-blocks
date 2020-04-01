@@ -19,19 +19,7 @@
           <p>{{ fields.paragraph }}</p>
         {% endif %}
 
-        {% if ( fields.layout == 'light' ) %}
-          <div class="swiper-container label-swiper" data-controls=".{{ swiperId }}">
-            <div class="swiper-wrapper">
-              {% for i in 1..25 %}
-                {% if fields['title_slide_'~i] %}
-                  <div class="swiper-slide label-slide">{{ fields['label_slide_'~i] }}</div>
-                {% endif %}
-              {% endfor %}
-            </div>
-          </div>
-        {% endif %}
-
-        <div class="swiper-container maxi-swiper maxi-swiper-centered cards-swiper {{ fields.layout == 'light' ? 'controlled-swiper '~swiperId : '' }}">
+        <div class="swiper-container maxi-swiper maxi-swiper-centered cards-swiper">
           <div class="swiper-wrapper">
             {% for i in 1..25 %}
               {% if fields['title_slide_'~i] %}
@@ -48,9 +36,9 @@
               {% endif %}
             {% endfor %}
           </div>
-          {% if not ( fields.layout == 'light' ) %}
-            <div class="swiper-pagination"></div>
-          {% endif %}
+
+          <div class="swiper-pagination"></div>
+
           <div class="swiper-button-next">
             <span class="icon-chevron-right"></span>
           </div>
