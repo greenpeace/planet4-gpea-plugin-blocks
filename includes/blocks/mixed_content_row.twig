@@ -1,10 +1,10 @@
 {% block mixed_content_row %}
 
 	<!-- TODO frontend - here are the layout variants. Insert HTML accordingly, or set classes as below: -->
-	{% if ( static_fields.layout == 'green_grey' ) %}
+	{% if ( static_fields.layout == 'light_green_grey' ) %}
 		<!-- Green title, grey text -->
-		{% set classname = 'green-titles' %}
-	{% elseif ( static_fields.layout == 'green_white' ) %}
+		{% set classname = 'light' %}
+	{% elseif ( static_fields.layout == 'dark_green_white' ) %}
 		<!-- Green title, white text -->
 		{% set classname = 'dark' %}
 	{% elseif ( static_fields.layout == 'grey_grey' ) %}

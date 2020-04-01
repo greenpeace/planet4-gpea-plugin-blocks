@@ -51,14 +51,14 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 					'type' => 'radio',
 					'options' => [
 						[
-							'value' => 'green_grey',
-							'label' => __( 'Green title, grey text', 'planet4-gpea-blocks-backend' ),
+							'value' => 'light_green_grey',
+							'label' => __( 'Light Theme', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Green title, grey text.',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
-							'value' => 'green_white',
-							'label' => __( 'Green title, white text', 'planet4-gpea-blocks-backend' ),
+							'value' => 'dark_green_white',
+							'label' => __( 'Dark Theme', 'planet4-gpea-blocks-backend' ),
 							'desc'  => 'Green title, white text.',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
