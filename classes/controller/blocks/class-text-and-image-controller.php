@@ -44,21 +44,18 @@ if ( ! class_exists( 'Text_And_Image_Controller' ) ) {
 					'type' => 'radio',
 					'options' => [
 						[
-							'value' => 'light',
-							'label' => __( 'Light background, dark text - issue color (no more used)', 'planet4-gpea-blocks-backend' ),
-							'desc'  => 'Dark text on light background. The main color changes, based on the issue.',
+							'value' => 'light_theme',
+							'label' => __( 'Light Theme', 'planet4-gpea-blocks-backend' ),
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
-							'value' => 'dark',
-							'label' => __( 'Dark background, light text - issue color', 'planet4-gpea-blocks-backend' ),
-							'desc'  => 'Dark text on light background. The main color changes, based on the issue.',
+							'value' => 'dark_theme',
+							'label' => __( 'Dark Theme', 'planet4-gpea-blocks-backend' ),
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
-							'value' => 'plain_light',
-							'label' => __( 'White background, black', 'planet4-gpea-blocks-backend' ),
-							'desc'  => 'Black text on white background.',
+							'value' => 'green_theme',
+							'label' => __( 'Green Theme', 'planet4-gpea-blocks-backend' ),
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
