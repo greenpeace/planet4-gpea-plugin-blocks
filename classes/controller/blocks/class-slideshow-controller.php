@@ -177,6 +177,17 @@ if ( ! class_exists( 'Slideshow_Controller' ) ) {
 
 				$fields[] =
 					[
+						'label' => sprintf(__( '<strong>%s</strong> Link URL', 'planet4-gpea-blocks-backend' ), $i),
+						'attr'  => 'link_url_'.$i,
+						'type'  => 'url',
+						'meta'  => [
+							'placeholder' => __( 'Link URL', 'planet4-gpea-blocks-backend' ),
+							'data-plugin' => 'planet4-gpea-blocks',
+						],
+					];
+
+				$fields[] =
+					[
 						// translators: placeholder represents the ordinal of the field.
 						'label'       => sprintf( __( '<strong>%s</strong> <i>image</i>', 'planet4-gpea-blocks-backend' ), $i ),
 						'attr'        => 'img_slide_' . $i,
@@ -193,6 +204,8 @@ if ( ! class_exists( 'Slideshow_Controller' ) ) {
 							'data-element-number' => $i,
 						],
 					];
+
+
 			}
 
 			// Define the Shortcode UI arguments.
