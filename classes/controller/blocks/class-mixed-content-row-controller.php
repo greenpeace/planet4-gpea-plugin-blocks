@@ -98,8 +98,16 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Optional background image', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Optional PC background image', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'image',
+					'type'        => 'attachment',
+					'libraryType' => array( 'image' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+				],
+				[
+					'label' => __( 'Optional mobile background image. (Leave blank to use the same image as background image)', 'planet4-gpea-blocks-backend' ),
+					'attr'        => 'bg_img_mobile',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
 					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
@@ -251,6 +259,29 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 							'placeholder'          => __( 'Select post', 'planet4-gpea-blocks-backend' ),
 							'data-plugin'          => 'planet4-gpea-blocks',
 							'data-input-transform' => 'js-select2-enable',
+						],
+					],
+				],
+
+				'Animate Number' => [
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => __( '<i>Block %s animate number</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'number',
+						'type'  => 'text',
+						'meta'  => [
+							'placeholder' => __( 'Enter animate number', 'planet4-gpea-blocks-backend' ),
+							'data-plugin' => 'planet4-gpea-blocks',
+						],
+					],
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => __( '<i>Block %s description</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'description',
+						'type'  => 'textarea',
+						'meta'  => [
+							'placeholder' => __( 'Enter description', 'planet4-gpea-blocks-backend' ),
+							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
 				],
@@ -432,6 +463,10 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 
 			if ( isset( $static_fields['image'] ) ) {
 				$static_fields['image'] = wp_get_attachment_url( $static_fields['image'] );
+			}
+
+			if ( isset( $static_fields['bg_img_mobile'] ) ) {
+				$static_fields['bg_img_mobile'] = wp_get_attachment_url( $static_fields['bg_img_mobile'] );
 			}
 
 			return [

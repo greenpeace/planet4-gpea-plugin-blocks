@@ -21,11 +21,14 @@
 	{% endif %}
 
 	<section class="section-mixed-content-row layout-{{ classname }} {{ container_classname }}"> <!-- e.g. layout-green-grey -->
-		{% if ( static_fields.image ) %}
+		{% if ( static_fields.image and static_fields.bg_img_mobile ) %}
+			<div class="mobile-background js-parallax-me lazy"  data-bg="url({{ static_fields.bg_img_mobile }})"></div>
+			<div class="background js-parallax-me lazy"  data-bg="url({{ static_fields.image }})"></div>
+		{% elseif ( static_fields.image ) %}
 			<div class="background js-parallax-me lazy"  data-bg="url({{ static_fields.image }})"></div>
 		{% endif %}
-		<div class="ct-container">
 
+		<div class="ct-container">
 			{% if ( static_fields.title or static_fields.subtitle ) %}
 				<div class="content" {{ not static_fields.image ? 'data-aos="fade"' : '' }} data-aos-delay="200" data-aos-duration="600">
 					{% if ( static_fields.title ) %}
@@ -83,6 +86,11 @@
 								<span class="tip-frequency">{{ group.post.frequency }}</span>
 									-->
 							</div>
+						</div>
+					{% elseif group.__group_type__ == 'animatenumber' %}
+						<div class="swiper-slide card-mini" {{ not static_fields.image ? 'data-aos="fade-left"' : '' }} data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
+							<h4 class="counter" data-count="{{ group.number }}"></h4>
+							<p>{{ group.description }}</p>
 						</div>
 					{% else %}
 						<!-- do nothing -->
