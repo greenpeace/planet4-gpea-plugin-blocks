@@ -31,6 +31,24 @@ if ( ! class_exists( 'Report_Launcher_Controller' ) ) {
 
 			$fields = [
 				[
+					'label' => 'Select the layout',
+					'description' => 'Select the layout',
+					'attr' => 'layout',
+					'type' => 'radio',
+					'options' => [
+						[
+							'value' => 'light_theme',
+							'label' => __( 'Light Theme', 'planet4-gpea-blocks-backend' ),
+							'desc'  => 'Light background'
+						],
+						[
+							'value' => 'dark_theme',
+							'label' => __( 'Dark Theme', 'planet4-gpea-blocks-backend' ),
+							'desc'  => 'Dark background'
+						]
+					],
+				],
+				[
 					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
