@@ -24,14 +24,25 @@
             {% for i in 1..25 %}
               {% if fields['title_slide_'~i] %}
 
-                <div class="swiper-slide card-explainer {{ cardclass }}">
-                  <div class="description">
-                    <h4>{{ fields['title_slide_'~i] }}</h4>
-                    <p class="subtitle">{{ fields['subtitle_slide_'~i] }}</p>
-                    <p>{{ fields['paragraph_slide_'~i] }}</p>
+                {% if fields['link_url_'~i] %}
+                  <a class="swiper-slide card-explainer {{ cardclass }}" href="{{fields['link_url_'~i]}}" title="{{fields['title_slide_'~i]}}">
+                {% else %}
+                  <div class="swiper-slide card-explainer {{ cardclass }}">
+                {% endif %}
+
+                    <div class="description">
+                      <h4>{{ fields['title_slide_'~i] }}</h4>
+                      <p class="subtitle">{{ fields['subtitle_slide_'~i] }}</p>
+                      <p>{{ fields['paragraph_slide_'~i] }}</p>
+                    </div>
+
+                    <div class="thumbnail lazy" data-bg="url({{ fields['img_slide_'~i] }})"></div>
+
+                {% if fields['link_url_'~i] %}
+                  </a>
+                {% else %}
                   </div>
-                  <div class="thumbnail lazy" data-bg="url({{ fields['img_slide_'~i] }})"></div>
-                </div>
+                {% endif %}
 
               {% endif %}
             {% endfor %}
