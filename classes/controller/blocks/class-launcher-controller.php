@@ -36,7 +36,25 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 		 */
 		public function prepare_fields() {
 
-			$fields = [				
+			$fields = [
+				[
+					'label' => 'Select the layout',
+					'description' => 'Select the layout',
+					'attr' => 'layout',
+					'type' => 'radio',
+					'options' => [
+						[
+							'value' => 'light_theme',
+							'label' => __( 'Light Theme', 'planet4-gpea-blocks-backend' ),
+							'desc'  => 'Light background'
+						],
+						[
+							'value' => 'dark_theme',
+							'label' => __( 'Dark Theme', 'planet4-gpea-blocks-backend' ),
+							'desc'  => 'Dark background'
+						]
+					],
+				],
 				[
 					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
@@ -48,7 +66,7 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 				],
 				// [
 				// 	'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
-				// 	'attr'  => 'subtitle',					
+				// 	'attr'  => 'subtitle',
 				// 	'type'  => 'text',
 				// 	'meta'  => [
 				// 		'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
@@ -71,6 +89,22 @@ if ( ! class_exists( 'Launcher_Controller' ) ) {
 					'libraryType' => array( 'image' ),
 					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+				],
+				[
+					'label' => __( 'Image vertical alignment', 'planet4-gpea-blocks-backend' ),
+					'description' => 'Select the layout',
+					'attr' => 'image_vertical_align',
+					'type' => 'radio',
+					'options' => [
+						[
+							'value' => 'center',
+							'label' => __( 'Center', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => 'bottom',
+							'label' => __( 'Bottom', 'planet4-gpea-blocks-backend' ),
+						]
+					],
 				],
 				[
 					'label' => __( 'Button label', 'planet4-gpea-blocks-backend' ),

@@ -1,7 +1,15 @@
 {% block text_and_image %}
+	{% set theme_class = 'light-theme' %}
+	{% if fields.layout == 'green' %}
+		{% set theme_class = 'green-theme' %}
+	{% elseif fields.layout == 'dark' %}
+		{% set theme_class = 'dark-theme' %}
+	{% endif %}
+
 	{% if ( fields ) %}
-		{% if ( not fields.images and fields.layout == 'plain_light') %}
-			<section class="section-text-images">
+		{# Only text #}
+		{% if ( not fields.images ) %}
+			<section class="section-text-images {{theme_class}}">
 				<div class="ct-container slim">
 					{% if ( fields.title ) %}
 						<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
@@ -11,13 +19,15 @@
 					{% endif %}
 					{% if ( fields.link_label and fields.link_url ) %}
 						<p class="see-more">
-							<a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
+							<a href="{{ fields.link_url }}" class="{{theme_class=='green-theme' ? "button":""}}">{{ fields.link_label }}</a>
 						</p>
 					{% endif %}
 				</div>
 			</section>
+
+		{# Only images #}
 		{% elseif ( fields.images and not fields.title and not fields.paragraph ) %}
-			<section class="section-text-images only-images">
+			<section class="section-text-images only-images {{theme_class}}">
 				<div class="swiper-container section-text-images-swiper">
 					<div class="swiper-wrapper">
 						{% if fields.images|length > 0 %}
@@ -35,15 +45,12 @@
 					</div>
 				</div>
 			</section>
+
+		{# with text and images #}
 		{% else %}
-			{% if fields.layout == 'plain_light' %}
-				{% set box_color = 'plain' %}
-			{% else %}
-				{% set box_color = (fields.layout == 'dark' or fields.images) ? 'dark' : '' %}
-			{% endif %}
-			<section class="section-text-images">
+			<section class="section-text-images {{theme_class}}">
 				<div class="boxes">
-					<div class="box {{ box_color }}">
+					<div class="box">
 						{% if not ( fields.images ) %}
 							<div class="ct-container slim">
 								{% if ( fields.title ) %}
@@ -52,7 +59,7 @@
 								<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 								{% if ( fields.link_label and fields.link_url ) %}
 									<p class="see-more">
-										<a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
+										<a href="{{ fields.link_url }}" class="{{theme_class=='green-theme' ? "button":""}}">{{ fields.link_label }}</a>
 									</p>
 								{% endif %}
 							</div>
@@ -64,7 +71,7 @@
 								<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 								{% if ( fields.link_label and fields.link_url ) %}
 									<p class="see-more">
-										<a href="{{ fields.link_url }}">{{ fields.link_label }}</a>
+										<a href="{{ fields.link_url }}" class="{{theme_class=='green-theme' ? "button":""}}">{{ fields.link_label }}</a>
 									</p>
 								{% endif %}
 							</div>

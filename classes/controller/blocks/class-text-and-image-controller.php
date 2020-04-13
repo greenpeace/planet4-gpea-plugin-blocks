@@ -45,20 +45,20 @@ if ( ! class_exists( 'Text_And_Image_Controller' ) ) {
 					'options' => [
 						[
 							'value' => 'light',
-							'label' => __( 'Light background, dark text - issue color (no more used)', 'planet4-gpea-blocks-backend' ),
-							'desc'  => 'Dark text on light background. The main color changes, based on the issue.',
+							'label' => __( 'Light Theme (Black text on white background)', 'planet4-gpea-blocks-backend' ),
+							'desc'  => 'Black text on white background',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
 							'value' => 'dark',
-							'label' => __( 'Dark background, light text - issue color', 'planet4-gpea-blocks-backend' ),
-							'desc'  => 'Dark text on light background. The main color changes, based on the issue.',
+							'label' => __( 'Dark Theme (White text on dark background)', 'planet4-gpea-blocks-backend' ),
+							'desc'  => 'White text on dark background',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 						[
-							'value' => 'plain_light',
-							'label' => __( 'White background, black', 'planet4-gpea-blocks-backend' ),
-							'desc'  => 'Black text on white background.',
+							'value' => 'green',
+							'label' => __( 'Green Theme (White text on green background)', 'planet4-gpea-blocks-backend' ),
+							'desc'  => 'White text on green background',
 							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
 						],
 					],
