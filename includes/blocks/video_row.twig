@@ -1,0 +1,35 @@
+{% block video_row %}
+  {% if ( fields ) %}
+  <section class="section-video-row-container">
+    <!-- video row wrapper start-->
+    {% if fields.width_type == 'full_width' %}
+    <div>
+      <div class="gpea-video-row-wrapper-full">
+    {% else %}
+    <div class="ct-container">
+      <div class="gpea-video-row-wrapper">  
+    {% endif %}
+          {% if isShowVideo %}
+          <video class="video-row-video" autoplay loop muted>
+            <source type="video/mp4" src="https://www.w3schools.com/html/mov_bbb.mp4">
+          </video>
+          {% elseif isShowYoutube %}
+          <div class="video-row-youtube video-row-video" id="{{ id }}">youtube</div>
+          {% else %}
+          <div>No video data</div>
+          {% endif %}
+          <div class="gpea-video-row-footer m-2 p-2">
+            <div class=" d-flex align-items-center">
+              <button type="button" class="btn btn-primary btn-circle btn-xl">Blue</button>
+            </div>
+            <div class="ml-3">
+              <h2>{{ fields.title }}</h2>
+              <div class="subtitle">{{ fields.sub_title }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- video row wrapper end -->
+    </section>
+  {% endif %}
+{% endblock %}
