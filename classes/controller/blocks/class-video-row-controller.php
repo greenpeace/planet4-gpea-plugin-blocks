@@ -108,7 +108,7 @@ if ( ! class_exists( 'Video_Row_Controller' ) ) {
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
 				'label'         => __( 'GPEA | Video Row', 'planet4-gpea-blocks-backend' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/world-slideshow-block.jpg' ) . '" />',
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/video-row.png' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
 			];
@@ -126,20 +126,35 @@ if ( ! class_exists( 'Video_Row_Controller' ) ) {
 		 * @return array The data to be passed in the View.
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
+			$youtubeId = null;
+			$video = isset($attributes['video'])?wp_get_attachment_url($attributes['video']):null;
+			$youtubeUrl = isset($attributes['youtube_url'])?$attributes['youtube_url']:null;
+			$isShowVideo = isset($attributes['video']);
+			$isShowYoutube = isset($attributes['youtube_url']);
 
+			if($isShowYoutube){
+				$youtubeId = $this->getYoutubeId($youtubeUrl);
+				if($youtubeId == false) {
+					$isShowYoutube = false;
+				}
+			}
+			
 			return [
 				'fields' => $attributes,
-				'video' => isset($attributes['video'])?wp_get_attachment_url($attributes['video']):null,
-				'youtubeUrl' => isset($attributes['youtube_url'])?$this->getYoutubeId($attributes['youtube_url']):null,
-				'isShowVideo' => isset($attributes['video']),
-				'isShowYoutube' => isset($attributes['youtube_url']),
+				'video' => $video,
+				'youtubeUrl' => $youtubeUrl,
+				'youtubeId' => $youtubeId,
+				'isShowVideo' => $isShowVideo,
+				'isShowYoutube' => $isShowYoutube,
 				'id' => $this->generateRandomString(5)
 			];
 
 		}
 
 		private function getYoutubeId($url) {
-			return '668nUCeBHyY';
+			$pattern = '/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/';
+        	preg_match($pattern, $url, $matches);
+        	return (isset($matches[7])) ? $matches[7] : false;
 		}
 
 		private function generateRandomString($length = 10) {
