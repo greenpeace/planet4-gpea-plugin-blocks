@@ -11,7 +11,8 @@
                     {% if fields.is_autoplay %}is-auto-play{% else %}is-stopped{% endif %}" 
              data-id="{{ id }}"
              is-autoplay="{% if fields.is_autoplay %}1{% endif %}" 
-             src-type="{% if isShowVideo %}video{% elseif isShowYoutube %}youtube{% endif %}" 
+             src-type="{% if isShowVideo %}video{% elseif isShowYoutube %}youtube{% endif %}"
+             youtube-id="{{ youtubeId }}" 
              >  
           {% if isShowVideo %}
           <video class="video-row-video" 

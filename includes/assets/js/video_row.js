@@ -55,12 +55,12 @@ jQuery(document).ready(function() {
         // use YT here
         jQuery('.video-row-youtube').each(function(idx, el){
             const id = jQuery(this).attr('id');
-            const isAutoplay = jQuery(this)
-                                    .parent('.gpea-video-row-wrapper-full')
-                                    .attr('is-autoplay') || 0;
+            const parent = jQuery(this).parent('.gpea-video-row-wrapper-full');
+            const isAutoplay = parent.attr('is-autoplay') || 0;
+            const ytId = parent.attr('youtube-id');
             player[id] = new YT.Player(id, {
                 width: '100%',
-                videoId: 'a3ICNMQW7Ok',
+                videoId: ytId,
                 host: 'https://www.youtube-nocookie.com',
                 playerVars: {
                     'autoplay': isAutoplay,
