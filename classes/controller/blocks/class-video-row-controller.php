@@ -83,6 +83,7 @@ if ( ! class_exists( 'Video_Row_Controller' ) ) {
 					'label' => __( 'Auto play (Only support on PC)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'is_autoplay',
 					'type'  => 'checkbox',
+					'value' => 'true',
 					'meta'  => [
 						'placeholder' => __( 'Auto play (Only support on PC)', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
@@ -92,6 +93,7 @@ if ( ! class_exists( 'Video_Row_Controller' ) ) {
 					'label' => 'Video Layout',
 					'attr' => 'width_type',
 					'type' => 'radio',
+					'value' => 'full_width',
 					'options' => [
 						[
 							'value' => 'full_width',
