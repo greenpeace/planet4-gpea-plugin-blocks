@@ -1,0 +1,15 @@
+{% block video_row %}
+    {% if ( fields ) %}
+        <section class="section-iframe-container">
+            {% if fields.width_type == 'full_width' %}
+            <div>
+            {% else %}
+            <div class="ct-container">
+            {% endif %}
+            <!-- iframe content start -->
+            {{ content | raw }}
+            <!-- iframe content end -->    
+        </div>
+    </section>
+    {% endif %}
+{% endblock %}
