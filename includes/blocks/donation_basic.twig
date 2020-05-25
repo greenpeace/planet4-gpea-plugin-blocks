@@ -23,13 +23,19 @@
 					</div>
 				</div>
 				{% endif %}
-				<div class="tab-bar">					
+				<div class="tab-bar">	
+					{% if fields.isShowMonthlyTab and fields.isShowOnceTab %}				
 					<div class="tab-item is-active js-tab-item tab-item__recurring" data-recurring="Y">{{ fields.label_donate_monthly|e('wp_kses_post')|raw }}</div>
 					<div class="tab-item js-tab-item tab-item__once" data-recurring="N">{{ fields.label_donate_once|e('wp_kses_post')|raw }}</div>
+					{% elseif fields.isShowMonthlyTab %}				
+					<div class="tab-item is-active js-tab-item tab-item__recurring" data-recurring="Y">{{ fields.label_donate_monthly|e('wp_kses_post')|raw }}</div>
+					{% elseif fields.isShowOnceTab %}				
+					<div class="tab-item is-active js-tab-item tab-item__once" data-recurring="N">{{ fields.label_donate_once|e('wp_kses_post')|raw }}</div>
+					{% endif %}
 				</div>
 				<form action="{{ fields.button_landing_link }}" method="POST" class="js-donation-launcher-form js-donation-basic" data-minimum-regular="{{ fields.minimum_regular }}" data-minimum-oneoff="{{ fields.minimum_oneoff }}" data-minimum-single-error="{{ fields.minimum_error_single }}" data-minimum-recurring-error="{{ fields.minimum_error_recurring }}"  data-suggested-regular="{{ fields.suggested_regular }}" data-suggested-oneoff="{{ fields.suggested_oneoff }}">
 					<!-- NOTE!!   This ↴ must be equal to the "active" default tab   -->
-					<input type="hidden" name="frequency" value="Y" />
+					<input type="hidden" name="frequency" value="{{ fields.defaultFrequecy }}" />
 					<input type="hidden" name="currency" value="{{ fields.currency_code|e('wp_kses_post')|raw }}" />
 					<input type="hidden" name="en_recurring_question" value="{{ fields.external_recurring_question }}" />
 					<div class="form-group">
@@ -41,7 +47,7 @@
 							required
 							min="1"
 							step="1"
-							value="{{ fields.suggested_regular }}"
+							value="{{  fields.defaultAmt | default(fields.suggested_regular) }}"
 						/>
 					</div>
 					<button type="submit" class="button primary fluid" id="gpea_donation_form_button">{{ fields.button_label|e('wp_kses_post')|raw }}</button>
