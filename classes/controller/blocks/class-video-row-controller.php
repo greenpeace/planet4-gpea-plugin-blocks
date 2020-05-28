@@ -72,14 +72,6 @@ if ( ! class_exists( 'Video_Row_Controller' ) ) {
 					'frameTitle'  => __( 'Select a Video', 'planet4-blocks-backend' )
 				],
 				[
-					'label'       => __( 'Poster Image (For mobile browser)', 'planet4-blocks-backend' ),
-					'attr'        => 'poster_image',
-					'type'        => 'attachment',
-					'libraryType' => [ 'image' ],
-					'addButton'   => __( 'Select a Image', 'planet4-blocks-backend' ),
-					'frameTitle'  => __( 'Select a Image', 'planet4-blocks-backend' )
-				],
-				[
 					'label' => __( 'Auto play (Only support on PC)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'is_autoplay',
 					'type'  => 'checkbox',
@@ -180,13 +172,6 @@ if ( ! class_exists( 'Video_Row_Controller' ) ) {
 		 * @return string The complete html of the block
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
-
-			//$js_creation = filectime( get_stylesheet_directory() . '/static/js/world.js' );
-
-			//wp_register_script( 'world-script', get_stylesheet_directory_uri() . '/static/js/world.js',['child-script'], $js_creation, true );
-			//wp_enqueue_script( 'world-script' );
-			//$translation_array = array( 'templateUrl' => get_stylesheet_directory_uri() );
-			//wp_localize_script( 'world-script', 'world_vars', $translation_array );
 			wp_enqueue_script(
 				'video_row.js',
 				P4EABKS_ASSETS_DIR . 'js/video_row.js',
