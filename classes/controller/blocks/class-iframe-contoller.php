@@ -108,6 +108,11 @@ if ( ! class_exists( 'Iframe_Controller' ) ) {
 
 			$data = $this->prepare_data( $fields );
 
+			wp_enqueue_style(
+				'iframe.css',
+				P4EABKS_ASSETS_DIR . 'css/iframe.css'
+			);
+
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
 			$this->view->block( self::BLOCK_NAME, $data );

@@ -1,0 +1,18 @@
+@media (min-width: 576px) { 
+    .section-iframe-container iframe{
+        min-width: 480px;
+        min-height: 272px;
+    }
+}
+
+@media (min-width: 768px) { 
+    .section-iframe-container iframe{
+        min-width: 560px;
+        min-height: 315px;
+    }
+}
+
+section.section-iframe-container{
+    min-height: 0px;
+    background: none;
+}
