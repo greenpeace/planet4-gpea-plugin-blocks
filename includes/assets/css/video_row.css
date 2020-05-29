@@ -55,6 +55,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 2px solid rgba(0,0,0,0.1);
+    background-color: white;
 }
 .pause {
     width: 1.5rem;
@@ -75,4 +77,27 @@
 .gpea-video-row-wrapper-full:hover.is-playing .video-row-stop
 {
     display: flex;
+    opacity: 0.5;
+}
+
+@media (max-width: 576px) { 
+    .video-row-title{
+        font-size: 1rem;
+    }
+    .video-row-sub-title{
+        font-size: 0.8rem;
+    }
+    .video-row-btn{
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;;
+    }
+    .gpea-video-row-footer{
+        padding: 1rem;
+    }
+    .pause {
+        height: 15px;
+        border-right: 4px solid #6c0;
+        border-left: 4px solid #6c0;
+    }
 }
