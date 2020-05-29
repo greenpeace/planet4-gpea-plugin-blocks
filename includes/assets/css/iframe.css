@@ -16,3 +16,8 @@ section.section-iframe-container{
     min-height: 0px;
     background: none;
 }
+
+.section-iframe-container .full-container,
+.section-iframe-container .ct-container {
+    text-align: center;
+}
