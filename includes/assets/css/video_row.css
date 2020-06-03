@@ -101,3 +101,10 @@
         border-left: 4px solid #6c0;
     }
 }
+
+.video-row-youtube { pointer-events: none; }
+
+section.section-video-row-container{
+    min-height: 0px;
+    background: none;
+}

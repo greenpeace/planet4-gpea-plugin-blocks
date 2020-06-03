@@ -13,13 +13,31 @@ jQuery(document).ready(function() {
     const srcVideo = 'video';
     const srcYoutube = 'youtube';
 
+    function removeAutoplayClass(id){
+        const wrapper = $('.gpea-video-row-wrapper-full[data-id=' + id + ']');
+        wrapper.removeClass(classIsAutoPlay);
+    }
+
+    function toggleWrapperStyle(id, isPlaying){
+        const wrapper = $('.gpea-video-row-wrapper-full[data-id=' + id + ']');
+        if(isPlaying) {
+            if(wrapper.hasClass(classIsStopped))
+                wrapper.removeClass(classIsStopped);
+            wrapper.addClass(classIsPlaying);
+        }else{
+            if(wrapper.hasClass(classIsPlaying))
+                wrapper.removeClass(classIsPlaying);
+            wrapper.addClass(classIsStopped);
+        }
+    }
+
     function bindButton(){
         $('.video-row-play').click(function(e){
             const parent = $(this).parents('.gpea-video-row-wrapper-full');
             const id = parent.attr('data-id');
             const src = parent.attr('src-type');
-            parent.removeClass(classIsStopped).removeClass(classIsAutoPlay);
-            parent.addClass(classIsPlaying);
+            removeAutoplayClass(id);
+            toggleWrapperStyle(id, true);
             switch(src){
                 case srcVideo: 
                     var video = document.getElementById(id);
@@ -38,8 +56,7 @@ jQuery(document).ready(function() {
             const parent = $(this).parents('.gpea-video-row-wrapper-full');
             const id = parent.attr('data-id');
             const src = parent.attr('src-type');
-            parent.removeClass(classIsPlaying).removeClass(classIsAutoPlay);
-            parent.addClass(classIsStopped);
+            toggleWrapperStyle(id, false);
             switch(src){
                 case srcVideo: 
                     document.getElementById(id).pause();
@@ -75,7 +92,12 @@ jQuery(document).ready(function() {
                 events: {
                     'onReady': function(){ },
                     'onStateChange': function onPlayerStateChange(event) {
-                        if (event.data == YT.PlayerState.PLAYING) { }
+                        if (event.data == YT.PlayerState.PLAYING) { 
+                            toggleWrapperStyle(id, true);
+                        }
+                        if (event.data == YT.PlayerState.PAUSED) { 
+                            toggleWrapperStyle(id, false);
+                        }
                         if (event.data === YT.PlayerState.ENDED) {
                             player[id].playVideo();
                         }
