@@ -12,7 +12,7 @@ jQuery(document).ready(function() {
     const classIsStopped = 'is-stopped';
     const srcVideo = 'video';
     const srcYoutube = 'youtube';
-
+    
     function removeAutoplayClass(id){
         const wrapper = $('.gpea-video-row-wrapper-full[data-id=' + id + ']');
         wrapper.removeClass(classIsAutoPlay);
@@ -38,6 +38,7 @@ jQuery(document).ready(function() {
             const src = parent.attr('src-type');
             removeAutoplayClass(id);
             toggleWrapperStyle(id, true);
+
             switch(src){
                 case srcVideo: 
                     var video = document.getElementById(id);
