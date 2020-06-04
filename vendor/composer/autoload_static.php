@@ -70,6 +70,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4EABKS\\Controllers\\Blocks\\Tips_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-tips-controller.php',
         'P4EABKS\\Controllers\\Blocks\\UGC_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-ugc-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Values_Section_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-values-section-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Video_Row_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-video-row-controller.php',
         'P4EABKS\\Controllers\\Blocks\\World_Slideshow_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-world-slideshow-controller.php',
         'P4EABKS\\Controllers\\Menu\\Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-controller.php',
         'P4EABKS\\Controllers\\Menu\\Settings_Controller' => __DIR__ . '/../..' . '/classes/controller/menu/class-settings-controller.php',

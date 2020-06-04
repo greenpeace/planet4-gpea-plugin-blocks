@@ -35,6 +35,7 @@ return array(
     'P4EABKS\\Controllers\\Blocks\\Tips_Controller' => $baseDir . '/classes/controller/blocks/class-tips-controller.php',
     'P4EABKS\\Controllers\\Blocks\\UGC_Controller' => $baseDir . '/classes/controller/blocks/class-ugc-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Values_Section_Controller' => $baseDir . '/classes/controller/blocks/class-values-section-controller.php',
+    'P4EABKS\\Controllers\\Blocks\\Video_Row_Controller' => $baseDir . '/classes/controller/blocks/class-video-row-controller.php',
     'P4EABKS\\Controllers\\Blocks\\World_Slideshow_Controller' => $baseDir . '/classes/controller/blocks/class-world-slideshow-controller.php',
     'P4EABKS\\Controllers\\Menu\\Controller' => $baseDir . '/classes/controller/menu/class-controller.php',
     'P4EABKS\\Controllers\\Menu\\Settings_Controller' => $baseDir . '/classes/controller/menu/class-settings-controller.php',
