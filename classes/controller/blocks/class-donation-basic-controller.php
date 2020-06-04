@@ -261,11 +261,60 @@ if ( ! class_exists( 'Donation_Basic_Controller' ) ) {
 			$lexicon['reminder_box_give_oneoff'] = __( 'Donation reminder give oneoff', 'planet4-gpea-blocks' );
 			$lexicon['reminder_box_give_regular'] = __( 'Donation reminder give regular', 'planet4-gpea-blocks' );
 
+			//tab visibility
+			$donateAmt = isset($_GET['donate_amt'])?$_GET['donate_amt']:'';
+			$donateAmtData = $this -> create_donate_amt_data($donateAmt);
+			//data from donate_amt query string
+			if ( ! isset( $attributes['isShowOnceTab'] ) ) {
+				$attributes['isShowOnceTab'] = $donateAmtData['isShowOnceTab'];
+			}
+			if ( ! isset( $attributes['isShowMonthlyTab'] ) ) {
+				$attributes['isShowMonthlyTab'] = $donateAmtData['isShowMonthlyTab'];
+			}
+			if ( ! isset( $attributes['defaultFrequecy'] ) ) {
+				$attributes['defaultFrequecy'] = $donateAmtData['defaultFrequecy'];
+			}
+			if ( ! isset( $attributes['defaultAmt'] ) ) {
+				$attributes['defaultAmt'] = $donateAmtData['defaultAmt'];
+			}
+
 			return [
 				'fields' => $attributes,
 				'lexicon' => $lexicon,
 			];
 
+		}
+
+		private function create_donate_amt_data( $queryStr ){
+			//default values
+			$isShowOnceTab = true;
+			$isShowMonthlyTab = true;
+			$defaultFrequecy = 'Y';
+			$defaultAmt = null;
+
+			$splitText = explode(':', $queryStr);
+			if (!$splitText == FALSE) {
+				if($splitText[0] == 's') { //once only
+					$isShowMonthlyTab = false;
+					$defaultFrequecy = 'N';
+					if(isset($splitText[1])){
+						$defaultAmt = $splitText[1];
+					}
+				}
+				if($splitText[0] == 'm') { //monthly only
+					$isShowOnceTab = false;
+					$defaultFrequecy = 'Y';
+					if(isset($splitText[1])){
+						$defaultAmt = $splitText[1];
+					}
+				}
+			}
+			return [
+				'isShowOnceTab' => $isShowOnceTab,
+				'isShowMonthlyTab' => $isShowMonthlyTab,
+				'defaultFrequecy' => $defaultFrequecy,
+				'defaultAmt' => $defaultAmt
+			];
 		}
 
 
