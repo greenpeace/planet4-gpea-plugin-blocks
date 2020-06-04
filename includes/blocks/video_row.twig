@@ -1,0 +1,56 @@
+{% block video_row %}
+  {% if ( fields ) %}
+  <section class="section-video-row-container">
+    <!-- video row wrapper start-->
+    {% if fields.width_type == 'full_width' %}
+    <div>
+    {% else %}
+    <div class="ct-container">
+    {% endif %}
+        <div class="gpea-video-row-wrapper-full 
+                    {% if fields.is_autoplay %}is-auto-play{% else %}is-stopped{% endif %}" 
+             data-id="{{ id }}"
+             is-autoplay="{% if fields.is_autoplay %}1{% endif %}" 
+             src-type="{% if isShowVideo %}video{% elseif isShowYoutube %}youtube{% endif %}"
+             youtube-id="{{ youtubeId }}" 
+             >  
+          {% if isShowVideo %}
+          <video class="video-row-video" 
+              id="{{ id }}"
+              {% if fields.is_autoplay %}autoplay{% endif %}
+              loop 
+              muted >
+            <source type="video/mp4" src="{{ video }}">
+          </video>
+          {% elseif isShowYoutube %}
+          <div class="video-row-youtube video-row-video" id="{{ id }}" >
+          </div>
+          {% else %}
+          <div>No video data</div>
+          {% endif %}
+          <div class="gpea-video-row-footer">
+            <div class="">
+              <button type="button" 
+                      class="btn btn-primary video-row-btn video-row-stop">
+                <div class="pause"></div>
+              </button>
+              <button type="button" 
+                      class="btn btn-primary video-row-btn video-row-play">
+                <span class="icon-play"></span>
+              </button>
+            </div>
+            <div class="video-row-info">
+              <div class="video-row-title">
+                {{ fields.title }}
+              </div>
+              <div class="video-row-sub-title">
+                {{ fields.sub_title }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- video row wrapper end -->
+    </section>
+  {% endif %}
+{% endblock %}

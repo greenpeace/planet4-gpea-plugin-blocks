@@ -134,6 +134,7 @@ P4EABKS\Loader::get_instance(
 		'P4EABKS\Controllers\Blocks\Testimonials_Controller',
 		'P4EABKS\Controllers\Blocks\Tips_Controller',
 		'P4EABKS\Controllers\Blocks\Iframe_Controller',
+		'P4EABKS\Controllers\Blocks\Video_Row_Controller',
 		'P4EABKS\Models\Taxonomy',
 		'P4EABKS\Models\Tags_Meta',
 	], 'P4EABKS\Views\View'
