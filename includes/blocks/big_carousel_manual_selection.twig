@@ -26,8 +26,8 @@
 								{% if post.is_campaign %}
 									<a href="{{ post.link }}" class="swiper-slide card-petition" data-index="{{ loop.index }}" data-postid="{{ post.ID }}" data-pageid="{{ post.engaging_pageid }}" data-target="{{ post.engaging_target }}" {{ not is_front_page ? 'data-aos="fade-left"' : '' }} data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
 										<div
-										class="thumbnail"
-										style="background-image: url({{ post.img_url }})"
+										class="thumbnail lazy"
+										data-bg="url({{ post.img_url }})"
 										></div>
 										<div class="box">
 											<div class="progress-bar">
@@ -44,7 +44,9 @@
 									</a>
 									{% else %}
 									<a href="{{ post.link }}" class="swiper-slide card-update" data-index="{{ loop.index }}" data-postid="{{ post.ID }}" {{ not is_front_page ? 'data-aos="fade-left"' : '' }} data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
-										<div class="thumbnail" style="background-image: url({{ post.img_url }})"></div>
+										<div class="thumbnail lazy" 
+											 data-bg="url({{ post.img_url }})" 
+										></div>
 										<div class="box">
 											<div class="meta-box">
 												<div>
