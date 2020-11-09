@@ -31,5 +31,12 @@
 		"> 0.2%",
 		"not dead"
 	],
+	"scripts": {
+		"start": "gulp",
+		"watch": "gulp watch",
+		"build": "gulp build",
+		"test": "jest",
+		"test-nc": "jest --no-cache"
+	},
 	"dependencies": {}
 }

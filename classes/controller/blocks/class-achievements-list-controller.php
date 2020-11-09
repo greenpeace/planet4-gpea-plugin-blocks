@@ -91,15 +91,6 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Label "See more"', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'see_more_label',
-					'type'  => 'text',
-					'meta'  => [
-						'placeholder' => __( 'Label "See more"', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks-backend',
-					],
-				],
-				[
 					'label' => __( 'Link "See more"', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'see_more_link',
 					'type'  => 'url',
@@ -206,7 +197,7 @@ if ( ! class_exists( 'Achievements_List_Controller' ) ) {
 
 					/* get reading time */
 					$post->reading_time = get_post_meta( $post->ID, 'p4-gpea_post_reading_time', true );
-					$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' ); 					
+					$news_type = wp_get_post_terms( $post->ID, 'p4-page-type' );
 					if ( $news_type ) {
 						$post->news_type = $news_type[0]->name;
 					}
