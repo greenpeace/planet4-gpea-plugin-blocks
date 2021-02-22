@@ -34,3 +34,4 @@ includes/assets/js/onsubmit\.js
 .tern-port
 .dir-locals.el
 yarn.lock
+.remote-sync.json
