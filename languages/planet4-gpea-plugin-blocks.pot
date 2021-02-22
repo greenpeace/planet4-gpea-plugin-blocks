@@ -249,3 +249,22 @@ msgstr ""
 
 msgid "Reading time pre"
 msgstr ""
+
+msgid "First Name*"
+msgstr ""
+msgid "Last Name*"
+msgstr ""
+msgid "Email*"
+msgstr ""
+msgid "Yes! Please send me important updates from Greenpeace. Greenpeace respects and protects your personal information and you can unsubscribe at any time. For more details please refer to Greenpeace privacy policy Greenpeace's privacy policy"
+msgstr ""
+
+msgid "Required"
+msgstr ""
+msgid "Please enter a valid e-mail address."
+msgstr ""
+msgid "Do you mean %s ?"
+msgstr ""
+
+msgid "There was a problem with the submission"
+msgstr ""
