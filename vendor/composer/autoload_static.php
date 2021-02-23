@@ -55,6 +55,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4EABKS\\Controllers\\Blocks\\Launcher_Card_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-launcher-card-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Launcher_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-launcher-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Link_List_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-link-list-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\MC_Subscription_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-mc-subscription-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Main_Issues_Carousel_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-main-issues-carousel-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Milestones_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-milestones-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Mixed_Content_Row_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-mixed-content-row-controller.php',
