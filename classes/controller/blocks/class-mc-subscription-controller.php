@@ -42,7 +42,7 @@ if ( ! class_exists( 'MC_Subscription_Controller' ) ) {
 				[
 					'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'subtitle',
-					'type'  => 'text',
+					'type'  => 'textarea',
 					'meta'  => [
 						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
@@ -82,8 +82,8 @@ if ( ! class_exists( 'MC_Subscription_Controller' ) ) {
 					'label' => __( 'MC Endpoint URL', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'endpoint',
 					'type'  => 'url',
-					// 'value' => 'https://cloud.greentw.greenpeace.org/websign',
-					'value' => 'https://cloud.greenhk.greenpeace.org/websign-dev',
+					'value' => 'https://cloud.greentw.greenpeace.org/websign',
+					// 'value' => 'https://cloud.greenhk.greenpeace.org/websign-dev',
 					'meta'  => [
 						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 					],

@@ -32,8 +32,8 @@
 						</div>
 					</div>
 					<div class="form-row yes-checkbox">
-						<label class="custom-checkbox ">
-							<input name="supporter.emailok" type="checkbox" class="" checked="1" onclick="return false;">
+						<label class="custom-checkbox " for="optin">
+							<input name="supporter.emailok" type="checkbox" class="" checked="1" id="optin">
 							<span class="custom-control-description">
 								{{lexicon.pricacy_checkbox_text|raw}}
 							</span>
@@ -50,7 +50,7 @@
 			</div>
 		</div>
 
-		<div class="ct-container thankyou">
+		<div class="ct-container thankyou hide">
 			<div class="content">
 				<h2>
 					{{ fields.thankyou_title|raw }}
