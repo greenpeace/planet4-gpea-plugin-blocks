@@ -3,17 +3,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Planet4 - GPEA Blocks 0.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/planet4-gpea-plugin-blocks\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/planet4-gpea-"
+"plugin-blocks\n"
 "POT-Creation-Date: 2019-06-27T14:02:59+00:00\n"
-"PO-Revision-Date: 2020-01-15 12:20+0100\n"
-"X-Generator: Poedit 2.2.3\n"
-"X-Domain: planet4-gpea-blocks\n"
+"PO-Revision-Date: 2021-04-08 17:45+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_HK\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Domain: planet4-gpea-blocks\n"
 
 #. Plugin Name of the plugin
 msgid "Planet4 - GPEA Blocks"
@@ -44,8 +45,10 @@ msgid "Submit here"
 msgstr "提交"
 
 #: classes/controller/blocks/class-controller.php:86
-msgid "Shortcode UI plugin must be active for Planet4 - EA - Blocks plugin to work."
-msgstr "Shortcode UI plugin must be active for Planet4 - EA - Blocks plugin to work."
+msgid ""
+"Shortcode UI plugin must be active for Planet4 - EA - Blocks plugin to work."
+msgstr ""
+"Shortcode UI plugin must be active for Planet4 - EA - Blocks plugin to work."
 
 #: classes/controller/blocks/class-ugc-controller.php:79
 msgid "Submit your story"
@@ -251,35 +254,74 @@ msgstr "篇專題報導"
 msgid "Reading time pre"
 msgstr " "
 
-msgid "Donation reminder box"
-msgstr "您的每月捐助非常重要！"
+msgid "First Name*"
+msgstr "名字*"
 
-msgid "Donation reminder description"
-msgstr "綠色和平依靠熱心公眾的每月個人捐助，以確保獨立公正及財政穩健，在規劃長遠環境工作項目的同時，適時調配資源應對最新環境危機。"
+msgid "Last Name*"
+msgstr "姓氏*"
 
-msgid "Donation reminder give oneoff"
-msgstr "單次捐款"
+msgid "Email*"
+msgstr "電郵地址 Email"
 
-msgid "Donation reminder give regular"
-msgstr "每月捐款"
-
-msgid "Upload a cover image"
-msgstr "請上傳圖片"
-
-msgid "Cover image consent"
+msgid ""
+"Yes! Please send me important updates from Greenpeace. Greenpeace respects "
+"and protects your personal information and you can unsubscribe at any time. "
+"For more details please refer to Greenpeace privacy policy Greenpeace's "
+"privacy policy"
 msgstr ""
-"透過上載照片，我同意授權綠色和平東亞分部為推動環境保護把我提供的照片和個人訊息用於網站，以及任何綠色和平所生產、使用或授權出版或使用的刊物或其他通訊及傳媒用材料，包括但不限於：報告、小冊子、短片、報章、雜誌及其他綠色和平辦公室的網站等。<br />  \n"
-" 如果閣下需要查閱、更正或者刪除您所提供的照片或者個人訊息，或有任何其他相關問題，請電郵至enquiry.hk@greenpeace.org或致電(852) 2854 8300聯絡我們。<br /> \n"
-" 感謝你的支持！"
+" 我願意收到綠色和平發送的通訊，讓我能掌握環保工作的最新脈動！我同意綠色和平"
+"按照 <a href=\"/hongkong/policies/privacy-and-cookies\" title=\"個人資料政策"
+"\" target=\"_blank\">個人資料政策</a>與我聯絡，包括提供環保工作資訊及捐款呼"
+"籲等。"
 
-msgid "Your story could not be sent"
-msgstr "抱歉，系統無法儲存你的內容"
+msgid "Required"
+msgstr "請填入以上資料"
 
-msgid "Attachment problem"
-msgstr "系統無法儲存你的內容，因為附件太大(>2MB)或圖片檔案有誤"
+msgid "Please enter a valid e-mail address."
+msgstr "請填上有效電郵地址"
 
-msgid "No file chosen"
-msgstr "尚未選擇檔案"
+msgid "Do you mean %s ?"
+msgstr "您想輸入的是 %s 嗎？"
 
-msgid "Choose a file"
-msgstr "選擇檔案"
+msgid "There was a problem with the submission"
+msgstr "Oops, 訂閱時發生了一點錯誤。"
+
+#~ msgid "Donation reminder box"
+#~ msgstr "您的每月捐助非常重要！"
+
+#~ msgid "Donation reminder description"
+#~ msgstr ""
+#~ "綠色和平依靠熱心公眾的每月個人捐助，以確保獨立公正及財政穩健，在規劃長遠"
+#~ "環境工作項目的同時，適時調配資源應對最新環境危機。"
+
+#~ msgid "Donation reminder give oneoff"
+#~ msgstr "單次捐款"
+
+#~ msgid "Donation reminder give regular"
+#~ msgstr "每月捐款"
+
+#~ msgid "Upload a cover image"
+#~ msgstr "請上傳圖片"
+
+#~ msgid "Cover image consent"
+#~ msgstr ""
+#~ "透過上載照片，我同意授權綠色和平東亞分部為推動環境保護把我提供的照片和個"
+#~ "人訊息用於網站，以及任何綠色和平所生產、使用或授權出版或使用的刊物或其他"
+#~ "通訊及傳媒用材料，包括但不限於：報告、小冊子、短片、報章、雜誌及其他綠色"
+#~ "和平辦公室的網站等。<br />  \n"
+#~ " 如果閣下需要查閱、更正或者刪除您所提供的照片或者個人訊息，或有任何其他相"
+#~ "關問題，請電郵至enquiry.hk@greenpeace.org或致電(852) 2854 8300聯絡我們。"
+#~ "<br /> \n"
+#~ " 感謝你的支持！"
+
+#~ msgid "Your story could not be sent"
+#~ msgstr "抱歉，系統無法儲存你的內容"
+
+#~ msgid "Attachment problem"
+#~ msgstr "系統無法儲存你的內容，因為附件太大(>2MB)或圖片檔案有誤"
+
+#~ msgid "No file chosen"
+#~ msgstr "尚未選擇檔案"
+
+#~ msgid "Choose a file"
+#~ msgstr "選擇檔案"
