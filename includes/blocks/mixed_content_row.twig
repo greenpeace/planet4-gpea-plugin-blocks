@@ -29,13 +29,16 @@
 		{% endif %}
 
 		<div class="ct-container">
-			{% if ( static_fields.title or static_fields.subtitle ) %}
+			{% if ( static_fields.title or static_fields.subtitle or static_fields.paragraph ) %}
 				<div class="content" {{ not static_fields.image ? 'data-aos="fade"' : '' }} data-aos-delay="200" data-aos-duration="600">
 					{% if ( static_fields.title ) %}
 						<h2>{{ static_fields.title }}</h2>
 					{% endif %}
 					{% if ( static_fields.subtitle ) %}
-						<p>{{ static_fields.subtitle }}</p>
+						<p class="subtitle">{{ static_fields.subtitle }}</p>
+					{% endif %}
+					{% if ( static_fields.paragraph ) %}
+						<p>{{ static_fields.paragraph|raw }}</p>
 					{% endif %}
 				</div>
 			{% endif %}
@@ -104,9 +107,6 @@
 					<span class="icon-chevron-right"></span>
 				</div>
 			</div>
-			{% endif %}
-			{% if ( static_fields.paragraph ) %}
-				<p>{{ static_fields.paragraph }}</p>
 			{% endif %}
 		</div>
 	</section>
