@@ -71,21 +71,21 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 					],
 				],
 				[
-					'label' => 'Select text-align',
+					'label' => __( 'Select text-align', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'align',
 					'type'  => 'radio',
 					'options' => [
 						[
 							'value' => 'left',
-							'label' => 'Left',
+							'label' => __( 'Left', 'planet4-gpea-blocks-backend' ),
 						],
 						[
 							'value' => 'center',
-							'label' => 'Center',
+							'label' => __( 'Center', 'planet4-gpea-blocks-backend' ),
 						],
 						[
 							'value' => 'right',
-							'label' => 'Right',
+							'label' => __( 'Right', 'planet4-gpea-blocks-backend' ),
 						],
 					],
 				],
