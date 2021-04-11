@@ -51,12 +51,40 @@ if ( ! class_exists( 'Accordion_List_Controller' ) ) {
 
 			$fields = [
 				[
+					'label' => __( 'Select text-align', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'align',
+					'type'  => 'radio',
+					'options' => [
+						[
+							'value' => 'left',
+							'label' => __( 'Left', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => 'center',
+							'label' => __( 'Center', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => 'right',
+							'label' => __( 'Right', 'planet4-gpea-blocks-backend' ),
+						],
+					],
+				],
+				[
 					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
 						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks-backend',
+					],
+				],
+				[
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'paragraph',
+					'type'  => 'textarea',
+					'meta'  => [
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 			];
