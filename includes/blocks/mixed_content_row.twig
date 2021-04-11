@@ -20,7 +20,14 @@
 		{% set container_classname = 'has-bg-image' %}
 	{% endif %}
 
-	<section class="section-mixed-content-row layout-{{ classname }} {{ container_classname }}"> <!-- e.g. layout-green-grey -->
+	{% if ( static_fields.align ) %}
+		{% set align_classname = static_fields.align %}
+	{% else %}
+		{% set align_classname = 'default' %}
+	{% endif %}
+
+
+	<section class="section-mixed-content-row layout-{{ classname }} text-align-{{ align_classname }} {{ container_classname }}"> <!-- e.g. layout-green-grey -->
 		{% if ( static_fields.image and static_fields.bg_img_mobile ) %}
 			<div class="mobile-background js-parallax-me lazy"  data-bg="url({{ static_fields.bg_img_mobile }})"></div>
 			<div class="background js-parallax-me lazy"  data-bg="url({{ static_fields.image }})"></div>

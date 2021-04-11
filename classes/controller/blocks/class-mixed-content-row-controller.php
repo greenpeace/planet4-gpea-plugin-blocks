@@ -71,6 +71,25 @@ if ( ! class_exists( 'Mixed_Content_Row_Controller' ) ) {
 					],
 				],
 				[
+					'label' => 'Select text-align',
+					'attr'  => 'align',
+					'type'  => 'radio',
+					'options' => [
+						[
+							'value' => 'left',
+							'label' => 'Left',
+						],
+						[
+							'value' => 'center',
+							'label' => 'Center',
+						],
+						[
+							'value' => 'right',
+							'label' => 'Right',
+						],
+					],
+				],
+				[
 					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
