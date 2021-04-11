@@ -1,9 +1,19 @@
 {% block link_list %}
+
+	{% if ( fields.align ) %}
+		{% set align_classname = fields.align %}
+	{% else %}
+		{% set align_classname = 'default' %}
+	{% endif %}
+
 	{% if ( fields ) %}
-		<section class="section-accordion-list">
+		<section class="section-accordion-list text-align-{{ align_classname }}">
 			<div class="ct-container">
 			{% if fields.title %}
 				<h2>{{ fields.title }}</h2>
+			{% endif %}
+			{% if fields.paragraph %}
+				<p>{{ fields.paragraph }}</p>
 			{% endif %}
 			</div>
 			<div class="ct-container slim">
@@ -25,4 +35,5 @@
 			</div>
 		</section>
 	{% endif %}
+
 {% endblock %}
