@@ -55,11 +55,11 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Sub-Title (Optional)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'subtitle',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'Sub-Title (Optional)', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
