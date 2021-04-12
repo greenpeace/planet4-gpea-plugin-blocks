@@ -18,49 +18,17 @@
 		{% set column_classname = 'two' %}
 	{% endif %}
 
+	{% if ( not fields.images ) %}
+		{% set type_classname = 'only-text' %}
+	{% elseif ( not fields.title and not fields.paragraph ) %}
+		{% set type_classname = 'only-images' %}
+	{% else %}
+		{% set type_classname = 'text-and-images' %}
+	{% endif %}
+
 	{% if ( fields ) %}
-		{# Only text #}
-		{% if ( not fields.images ) %}
-			<section class="section-text-images {{theme_class}} text-align-{{ align_classname }} column-{{column_classname}}">
-				<div class="ct-container slim">
-					{% if ( fields.title ) %}
-						<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-					{% endif %}
-					{% if ( fields.paragraph ) %}
-						<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
-					{% endif %}
-					{% if ( fields.link_label and fields.link_url ) %}
-						<p class="see-more">
-							<a href="{{ fields.link_url }}" class="{{theme_class=='green-theme' ? "button":""}}">{{ fields.link_label }}</a>
-						</p>
-					{% endif %}
-				</div>
-			</section>
-
-		{# Only images #}
-		{% elseif ( fields.images and not fields.title and not fields.paragraph ) %}
-			<section class="section-text-images only-images {{theme_class}}">
-				<div class="swiper-container section-text-images-swiper">
-					<div class="swiper-wrapper">
-						{% if fields.images|length > 0 %}
-							{% for img in fields.images %}
-								<div class="swiper-slide image lazy" data-bg="url({{ img }})"></div>
-							{% endfor %}
-						{% endif %}
-					</div>
-					<div class="swiper-pagination"></div>
-					<div class="swiper-button-next">
-						<span class="icon-chevron-right"></span>
-					</div>
-					<div class="swiper-button-prev">
-						<span class="icon-chevron-right"></span>
-					</div>
-				</div>
-			</section>
-
-		{# with text and images #}
-		{% else %}
-			<section class="section-text-images {{theme_class}}">
+		{% if ( not fields.one_column and fields.images and fields.title and fields.paragraph ) %}
+			<section class="section-text-images {{type_classname}} {{theme_class}} text-align-{{ align_classname }} column-{{column_classname}}">
 				<div class="boxes">
 					<div class="box">
 						{% if not ( fields.images ) %}
@@ -110,6 +78,42 @@
 						</div>
 					{% endif %}
 				</div>
+			</section>
+		{% else %}
+			<section class="section-text-images {{type_classname}} {{theme_class}} text-align-{{ align_classname }} column-{{column_classname}}">
+				{% if ( fields.images ) %}
+				<div class="swiper-container section-text-images-swiper">
+					<div class="swiper-wrapper">
+						{% if fields.images|length > 0 %}
+							{% for img in fields.images %}
+								<div class="swiper-slide image lazy" data-bg="url({{ img }})"></div>
+							{% endfor %}
+						{% endif %}
+					</div>
+					<div class="swiper-pagination"></div>
+					<div class="swiper-button-next">
+						<span class="icon-chevron-right"></span>
+					</div>
+					<div class="swiper-button-prev">
+						<span class="icon-chevron-right"></span>
+					</div>
+				</div>
+				{% endif %}
+				{% if ( fields.title or fields.paragraph ) %}
+				<div class="ct-container slim">
+					{% if ( fields.title ) %}
+						<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+					{% endif %}
+					{% if ( fields.paragraph ) %}
+						<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
+					{% endif %}
+					{% if ( fields.link_label and fields.link_url ) %}
+						<p class="see-more">
+							<a href="{{ fields.link_url }}" class="{{theme_class=='green-theme' ? "button":""}}">{{ fields.link_label }}</a>
+						</p>
+					{% endif %}
+				</div>
+				{% endif %}
 			</section>
 		{% endif %}
 	{% endif %}
