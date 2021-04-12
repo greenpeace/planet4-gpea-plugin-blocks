@@ -54,6 +54,7 @@ if ( ! class_exists( 'Accordion_List_Controller' ) ) {
 					'label' => __( 'Select text-align', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'align',
 					'type'  => 'radio',
+					'value' => 'left',
 					'options' => [
 						[
 							'value' => 'left',
