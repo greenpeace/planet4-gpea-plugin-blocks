@@ -54,6 +54,15 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
+				[
+					'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'subtitle',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
 			];
 
 			$field_groups = [
