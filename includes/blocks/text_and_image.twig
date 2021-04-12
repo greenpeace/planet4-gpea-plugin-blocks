@@ -6,10 +6,22 @@
 		{% set theme_class = 'dark-theme' %}
 	{% endif %}
 
+	{% if ( fields.align ) %}
+		{% set align_classname = fields.align %}
+	{% else %}
+		{% set align_classname = 'default' %}
+	{% endif %}
+
+	{% if ( fields.one_column ) %}
+		{% set column_classname = 'one' %}
+	{% else %}
+		{% set column_classname = 'two' %}
+	{% endif %}
+
 	{% if ( fields ) %}
 		{# Only text #}
 		{% if ( not fields.images ) %}
-			<section class="section-text-images {{theme_class}}">
+			<section class="section-text-images {{theme_class}} text-align-{{ align_classname }} column-{{column_classname}}">
 				<div class="ct-container slim">
 					{% if ( fields.title ) %}
 						<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>

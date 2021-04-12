@@ -64,6 +64,26 @@ if ( ! class_exists( 'Text_And_Image_Controller' ) ) {
 					],
 				],
 				[
+					'label' => __( 'Select text-align', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'align',
+					'type'  => 'radio',
+					'value' => 'center',
+					'options' => [
+						[
+							'value' => 'left',
+							'label' => __( 'Left', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => 'center',
+							'label' => __( 'Center', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => 'right',
+							'label' => __( 'Right', 'planet4-gpea-blocks-backend' ),
+						],
+					],
+				],
+				[
 					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
@@ -107,6 +127,11 @@ if ( ! class_exists( 'Text_And_Image_Controller' ) ) {
 					'multiple'    => true,
 					'addButton'   => __( 'Select image(s)', 'planet4-gpea-blocks-backend' ),
 					'frameTitle'  => __( 'Select image(s)', 'planet4-gpea-blocks-backend' ),
+				],
+				[
+					'label' => __( 'Show Title and paragraph over the image', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'one_column',
+					'type'  => 'checkbox',
 				],
 			];
 
