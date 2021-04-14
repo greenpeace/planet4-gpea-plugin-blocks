@@ -267,7 +267,8 @@ jQuery(document).ready(function() {
     'shortcake_link_list',
     'shortcake_people_list',
     'shortcake_accordion_list',
-    'shortcake_launcher_card'
+    'shortcake_launcher_card',
+    'shortcake_grid_images'
   ];
 
   // Attach hooks when rendering a new metablock.
