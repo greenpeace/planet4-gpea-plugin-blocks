@@ -40,15 +40,16 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
     var inactive_elements = [];
     var all_elements = me.get_element_map_array(element_count, element_types);
     all_elements.forEach(function (element_id) {
-      var input_values = $('.field-block')
-        .filter($('div[class$=\'_' + element_id + '\']'))
+      var element = $('.field-block')
+        .filter($('div[class$=\'_' + element_id + '\']'));
+      var input_values = element
         .children()
         .filter($('input, textarea, select'))
         .map(function (idx, elem) {
           return $(elem).val();
         }).get().join('');
-
-      if ('' === input_values) {
+      var preview_images = element.find('.attachment-previews .attachment-preview');
+      if ('' === input_values && preview_images.length == 0) {
         inactive_elements.push(element_id);
       }
     });

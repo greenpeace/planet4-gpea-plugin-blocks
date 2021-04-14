@@ -50,7 +50,7 @@ if ( ! class_exists( 'Grid_Images_Controller' ) ) {
 				'Card' => [
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Grid %s Optional image</i>', 'planet4-gpea-blocks-backend' ),
+						'label' => __( '<i>Card %s image</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'        => 'img',
 						'type'        => 'attachment',
 						'libraryType' => array( 'image' ),
@@ -59,13 +59,9 @@ if ( ! class_exists( 'Grid_Images_Controller' ) ) {
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Grid %s Button link</i>', 'planet4-gpea-blocks-backend' ),
+						'label' => __( '<i>Card %s link (Optional)</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'btnlink',
 						'type'  => 'url',
-						'meta'  => [
-							'placeholder' => __( 'Button link', 'planet4-gpea-blocks-backend' ),
-							'data-plugin' => 'planet4-gpea-blocks',
-						],
 					],
 				],
 			];
