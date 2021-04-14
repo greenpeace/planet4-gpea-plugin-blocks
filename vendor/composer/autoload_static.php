@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
+class ComposerStaticInit0e1b1e452bbb566bff38328f70865857
 {
     public static $prefixLengthsPsr4 = array (
         'P' => 
@@ -50,6 +50,7 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
         'P4EABKS\\Controllers\\Blocks\\Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Donation_Basic_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-donation-basic-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Donation_Dollar_Handles_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-donation-dollar-handles-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Grid_Images_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-grid-images-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Heart_Counter_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-heart-counter-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Iframe_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-iframe-contoller.php',
         'P4EABKS\\Controllers\\Blocks\\Launcher_Card_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-launcher-card-controller.php',
@@ -85,9 +86,9 @@ class ComposerStaticInit336100170ff2882375cd04c4c76f9df3
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit336100170ff2882375cd04c4c76f9df3::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit336100170ff2882375cd04c4c76f9df3::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit336100170ff2882375cd04c4c76f9df3::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit0e1b1e452bbb566bff38328f70865857::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit0e1b1e452bbb566bff38328f70865857::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit0e1b1e452bbb566bff38328f70865857::$classMap;
 
         }, null, ClassLoader::class);
     }
