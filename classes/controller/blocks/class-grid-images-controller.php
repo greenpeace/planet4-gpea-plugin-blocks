@@ -71,7 +71,7 @@ if ( ! class_exists( 'Grid_Images_Controller' ) ) {
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
 				'label'         => __( 'GPEA | Grid Images', 'planet4-gpea-blocks-backend' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/card-launcher-block.jpg' ) . '" />',
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/grid-images-block.jpg' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
 			];
