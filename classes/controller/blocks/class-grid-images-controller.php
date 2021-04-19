@@ -135,7 +135,11 @@ if ( ! class_exists( 'Grid_Images_Controller' ) ) {
 		 *
 		 * @return array The data to be passed in the View.
 		 */
-		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
+		public function prepare_data( $attributes = '', $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
+
+			if(!is_array($attributes)) {
+				$attributes = [];
+			}
 
 			$field_groups = [];
 
