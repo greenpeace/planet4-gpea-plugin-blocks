@@ -1,12 +1,13 @@
 /* eslint no-console: ["error", { allow: ["log", "warn", "error"] }] */
 /* global wp */
 
-function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
+function MetaBlock(shortcode_tag, required_image) { // eslint-disable-line no-unused-vars
 
   var me = this;
   me.shortcode_tag = shortcode_tag;
   me.add_btn_class  = me.shortcode_tag + '-add-element';
   me.remove_btn_class  = me.shortcode_tag + '-remove-element';
+  me.required_image = required_image || false;
 
 
   /**
@@ -40,16 +41,16 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
     var inactive_elements = [];
     var all_elements = me.get_element_map_array(element_count, element_types);
     all_elements.forEach(function (element_id) {
-      var element = $('.field-block')
+      var $element = $('.field-block')
         .filter($('div[class$=\'_' + element_id + '\']'));
-      var input_values = element
+      var input_values = $element
         .children()
         .filter($('input, textarea, select'))
         .map(function (idx, elem) {
           return $(elem).val();
         }).get().join('');
-      var preview_images = element.find('.attachment-previews .attachment-preview');
-      if ('' === input_values && preview_images.length == 0) {
+      var $preview_images = me.required_image ? $element.find('.attachment-previews .attachment-preview') : null;
+      if ('' === input_values && (!me.required_image || $preview_images.length == 0)) {
         inactive_elements.push(element_id);
       }
     });
@@ -143,6 +144,9 @@ function MetaBlock(shortcode_tag) { // eslint-disable-line no-unused-vars
     $element.children().filter($('input, textarea')).each(function (index, element) {
       $(element).val('').trigger('input').trigger('change');
     });
+    if(me.required_image) {
+      $element.find('.attachment-previews .attachment-preview .button.remove').trigger('click');
+    }
     $element.hide(300);
   };
 
@@ -272,11 +276,15 @@ jQuery(document).ready(function() {
     'shortcake_grid_images'
   ];
 
+  var required_image = [
+    'shortcake_grid_images'
+  ];
+
   // Attach hooks when rendering a new metablock.
   wp.shortcake.hooks.addAction('shortcode-ui.render_new', function (shortcode) {
     var shortcode_tag = shortcode.get('shortcode_tag');
     if(allowed_shortcodes.includes(shortcode_tag)) {
-      var mb = new MetaBlock(shortcode_tag);
+      var mb = new MetaBlock(shortcode_tag, required_image.includes(shortcode_tag));
       mb.render_new();
     }
   });
@@ -285,7 +293,7 @@ jQuery(document).ready(function() {
   wp.shortcake.hooks.addAction('shortcode-ui.render_edit', function (shortcode) {
     var shortcode_tag = shortcode.get('shortcode_tag');
     if(allowed_shortcodes.includes(shortcode_tag)) {
-      var mb = new MetaBlock(shortcode_tag);
+      var mb = new MetaBlock(shortcode_tag, required_image.includes(shortcode_tag));
       mb.render_edit();
     }
   });
