@@ -27,56 +27,40 @@
 	{% endif %}
 
 	{% if ( fields ) %}
-		{% if ( not fields.one_column and fields.images and fields.title and fields.paragraph ) %}
+		{% if ( not fields.one_column and fields.images and ( fields.title or fields.paragraph ) ) %}
 			<section class="section-text-images {{type_classname}} {{theme_class}} text-align-{{ align_classname }} column-{{column_classname}}">
 				<div class="boxes">
 					<div class="box">
-						{% if not ( fields.images ) %}
-							<div class="ct-container slim">
-								{% if ( fields.title ) %}
-									<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-								{% endif %}
-								<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
-								{% if ( fields.link_label and fields.link_url ) %}
-									<p class="see-more">
-										<a href="{{ fields.link_url }}" class="{{theme_class=='green-theme' ? "button":""}}">{{ fields.link_label }}</a>
-									</p>
-								{% endif %}
-							</div>
-						{% else %}
-							<div class="with-images">
-								{% if ( fields.title ) %}
-									<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-								{% endif %}
-								<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
-								{% if ( fields.link_label and fields.link_url ) %}
-									<p class="see-more">
-										<a href="{{ fields.link_url }}" class="{{theme_class=='green-theme' ? "button":""}}">{{ fields.link_label }}</a>
-									</p>
-								{% endif %}
-							</div>
-						{% endif %}
+						<div class="with-images">
+							{% if ( fields.title ) %}
+								<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
+							{% endif %}
+							<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
+							{% if ( fields.link_label and fields.link_url ) %}
+								<p class="see-more">
+									<a href="{{ fields.link_url }}" class="{{theme_class=='green-theme' ? "button":""}}">{{ fields.link_label }}</a>
+								</p>
+							{% endif %}
+						</div>
 					</div>
-					{% if ( fields.images ) %}
-						<div class="box fit">
-							<div class="swiper-container section-text-images-swiper">
-								<div class="swiper-wrapper">
-									{% if fields.images|length > 0 %}
-										{% for img in fields.images %}
-											<div class="swiper-slide image lazy" data-bg="url({{ img }})"></div>
-										{% endfor %}
-									{% endif %}
-								</div>
-								<div class="swiper-pagination"></div>
-								<div class="swiper-button-next">
-									<span class="icon-chevron-right"></span>
-								</div>
-								<div class="swiper-button-prev">
-									<span class="icon-chevron-right"></span>
-								</div>
+					<div class="box fit">
+						<div class="swiper-container section-text-images-swiper">
+							<div class="swiper-wrapper">
+								{% if fields.images|length > 0 %}
+									{% for img in fields.images %}
+										<div class="swiper-slide image lazy" data-bg="url({{ img }})"></div>
+									{% endfor %}
+								{% endif %}
+							</div>
+							<div class="swiper-pagination"></div>
+							<div class="swiper-button-next">
+								<span class="icon-chevron-right"></span>
+							</div>
+							<div class="swiper-button-prev">
+								<span class="icon-chevron-right"></span>
 							</div>
 						</div>
-					{% endif %}
+					</div>
 				</div>
 			</section>
 		{% else %}
