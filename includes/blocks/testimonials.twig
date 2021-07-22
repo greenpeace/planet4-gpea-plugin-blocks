@@ -28,7 +28,7 @@
                   <div class="swiper-slide card-testimonial">
                     <div class="profile">
                       {% if post.img_url %}
-                        <img src="{{ post.img_url }}" alt=""/>
+                        <img loading="lazy" src="{{ post.img_url }}" alt=""/>
                       {% endif %}
                       <div class="name">{{ post.post_title|e('wp_kses_post')|raw }}</div>
                       <div class="position">{{ post.team_role|e('wp_kses_post')|raw }}</div>
@@ -66,7 +66,7 @@
                   <div class="swiper-slide card-mini has-profile">
                     <div class="profile">
                       {% if post.img_url %}
-                        <img src="{{ post.img_url }}" alt=""/>
+                        <img loading="lazy" src="{{ post.img_url }}" alt=""/>
                       {% endif %}
                       <div class="name">{{ post.post_title|e('wp_kses_post')|raw }}</div>
                       <div class="position">{{ post.team_role|e('wp_kses_post')|raw }}</div>
@@ -91,7 +91,7 @@
                                   <div class="card-testimonial">
                                     <div class="profile">
                                       {% if post.img_url %}
-                                        <img src="{{ post.img_url }}" alt=""/>
+                                        <img loading="lazy" src="{{ post.img_url }}" alt=""/>
                                       {% endif %}
                                       <div class="name">{{ post.post_title|e('wp_kses_post')|raw }}</div>
                                       <div class="position">{{ post.team_role|e('wp_kses_post')|raw }}</div>

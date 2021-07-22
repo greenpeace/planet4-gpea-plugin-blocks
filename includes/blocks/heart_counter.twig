@@ -6,7 +6,7 @@
 					<h2>{{ fields.left_title }}</h2>
 				{% endif %}
 				{% if fields.left_img and fields.left_img_desc %}
-					<img src="{{ fields.left_img }}" alt="{{ fields.left_img_desc }}" />
+					<img loading="lazy" src="{{ fields.left_img }}" alt="{{ fields.left_img_desc }}" />
 				{% endif %}
 			</div>
 			<div class="support-data-right">
@@ -15,7 +15,7 @@
 				{% endif %}
 				<div class="support-data-heart">
 					{% if fields.bg_img %}
-						<img src="{{ fields.bg_img }}" alt="" />
+						<img loading="lazy" src="{{ fields.bg_img }}" alt="" />
 					{% endif %}
 					{% if fields.number %}
 						<p class="caption">
