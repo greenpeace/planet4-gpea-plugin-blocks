@@ -18,7 +18,7 @@
 						<p>{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 					{% endif %}
 					{% if ( fields.img ) %}
-						<img src="{{ fields.img }}" />
+						<img loading="lazy" src="{{ fields.img }}" />
 					{% endif %}
 					{% if ( fields.btn_label and fields.btn_link ) %}
 						<a href="{{ fields.btn_link }}" class="button {{fields.layout=="dark_theme" ? "primary":""}}">{{ fields.btn_label|e('wp_kses_post')|raw }}</a>
