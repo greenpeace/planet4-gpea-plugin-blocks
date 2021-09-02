@@ -20,9 +20,9 @@
 								data-aos-delay="{{ 100 + 200*loop.index0 }}"
 								data-aos-duration="600"
 							>
-                <div class="thumbnail is-background-image">
-                  <img src="{{ group.img }}" alt="{{ group.paragraph|e('wp_kses_post')|raw }}" />
-                </div>
+								<div class="thumbnail is-background-image" style="background-image: url({{ group.img }})">
+									<img loading="lazy" src="{{ group.img }}" alt="{{ group.paragraph|e('wp_kses_post')|raw }}" />
+								</div>
 								<div class="box">
 									<div class="content">
 										<h4>{{ group.subtitle|e('wp_kses_post')|raw }}</h4>

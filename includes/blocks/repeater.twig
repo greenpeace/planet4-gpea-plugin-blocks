@@ -24,7 +24,7 @@
 														{% if attachment %}
 																<div class="attachment-container">
 																		{% if link %}<a href="{{ link|e('esc_url') }}">{% endif %}
-																				<img src="{{ attachment }}" alt="{{ title }}">
+																				<img loading="lazy" src="{{ attachment }}" alt="{{ title }}">
 																				{% if link %}</a>{% endif %}
 																</div>
 														{% endif %}

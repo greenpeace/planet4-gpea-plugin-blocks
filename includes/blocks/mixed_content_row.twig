@@ -89,7 +89,7 @@
 					{% elseif group.__group_type__ == 'tip' %}
 						<div class="swiper-slide card-mini has-tip" {{ not static_fields.image ? 'data-aos="fade-left"' : '' }} data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
 							<div class="mini-tip" style="transform: rotate({{ random(-4, 4) }}deg)">
-								<div class="tip-icon"><img src="{{ group.post.img_url }}" /></div>
+								<div class="tip-icon"><img loading="lazy" src="{{ group.post.img_url }}" /></div>
 								<p>{{ group.post.post_title|e('wp_kses_post')|raw }}</p>
 								<!-- TODO frontend style tip frequency -->
 								<!-- [manu]: siamo sicuri che c'è? per ora lo commento

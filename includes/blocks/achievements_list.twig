@@ -14,7 +14,7 @@
 						</a>
 				</h2>
 				<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
-				<img src="{{ fields.bg_img  }}" alt="">
+				<img loading="lazy" src="{{ fields.bg_img  }}" alt="">
 			</div>
 			{% if fields.posts %}
 				{% set post = fields.posts[0] %}
@@ -74,7 +74,7 @@
 				</div>
 			{% endif %}
 			<div class="mobile-bottom-box">
-				<img src="{{ fields.bg_img_mobile }}" alt="">
+				<img loading="lazy" src="{{ fields.bg_img_mobile }}" alt="">
 				<!-- <p class="caption">{{ fields.subtitle|e('wp_kses_post')|raw }}</p> -->
 			</div>
 		</div>
