@@ -3,7 +3,7 @@
 	{% if ( fields ) and ( fields.posts ) %}
 	{% set section_class = fields.layout == 'light' ? 'light' : 'dark' %}
 	{#% set container_class = fields.layout == 'light' ? 'dark' : 'light' %#}
-	<section class="section-projects {{ section_class }} {{ fields.show_vertical ? 'has-projects-list' : '' }}">
+	<section class="section-projects is-loaded {{ section_class }} {{ fields.show_vertical ? 'has-projects-list' : '' }} ">
 		<div class="ct-container">
 			<div class="big-carousel-description" data-aos="fade" data-aos-delay="{{ is_front_page ? '400' : '200' }}" data-aos-duration="600">
 				<div class="swiper-pagination"></div>
