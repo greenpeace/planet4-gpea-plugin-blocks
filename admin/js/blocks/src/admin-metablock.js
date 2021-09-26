@@ -273,7 +273,8 @@ jQuery(document).ready(function() {
     'shortcake_people_list',
     'shortcake_accordion_list',
     'shortcake_launcher_card',
-    'shortcake_grid_images'
+    'shortcake_grid_images',
+    'shortcake_donation_block'
   ];
 
   var required_image = [
