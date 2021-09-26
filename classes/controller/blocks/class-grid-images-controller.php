@@ -10,7 +10,7 @@ namespace P4EABKS\Controllers\Blocks;
 
 if ( ! class_exists( 'Grid_Images_Controller' ) ) {
 	/**
-	 * Class Launcher_Controller
+	 * Class Grid_Images_Controller
 	 *
 	 * @package P4EABKS\Controllers\Blocks
 	 */
