@@ -81,7 +81,7 @@ if ( ! class_exists( 'Donation_Block_Controller' ) ) {
 				'label'             => __( 'GPEA | Donation Block', 'planet4-gpea-blocks-backend' ),
 				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/donation-block.jpg' ) . '" />',
 				'attrs'             => $fields,
-				'post_type'         => P4EABKS_ALLOWED_PAGETYPE,
+				'post_type'         => P4EABKS_DONATION_BLOCK_ALLOWED_PAGETYPE,
 			];
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );

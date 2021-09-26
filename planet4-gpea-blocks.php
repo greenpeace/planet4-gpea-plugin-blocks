@@ -89,6 +89,14 @@ if ( ! defined( 'P4EABKS_ALLOWED_PAGETYPE' ) ) {
 		]
 	);
 }
+if ( ! defined( 'P4EABKS_DONATION_BLOCK_ALLOWED_PAGETYPE' ) ) {
+	define(
+		'P4EABKS_DONATION_BLOCK_ALLOWED_PAGETYPE',   [
+			'page',
+			'post',
+		]
+	);
+}
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	define( 'WP_UNINSTALL_PLUGIN',      P4EABKS_PLUGIN_BASENAME );
 }
