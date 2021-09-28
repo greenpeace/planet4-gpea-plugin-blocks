@@ -39,10 +39,21 @@ if ( ! class_exists( 'Donation_Block_Controller' ) ) {
 			$fields = [
 				[
 					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use default.', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
 						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Description', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use default.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'desc',
+					'type'  => 'textarea',
+					'meta'  => [
+						'placeholder' => __( 'Description', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -68,6 +79,7 @@ if ( ! class_exists( 'Donation_Block_Controller' ) ) {
 				],
 				[
 					'label' => __( 'Background Image', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use default.', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'bg_img',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
@@ -120,6 +132,14 @@ if ( ! class_exists( 'Donation_Block_Controller' ) ) {
 				$donation_block_default_title = $donation_block_options['gpea_donation_block_default_title'];
 			}
 
+			$donation_block_default_desc = '';
+			if( isset( $main_issue_slug ) && isset( $donation_block_options['gpea_donation_block_' . $main_issue_slug . '_desc'] ) && @strlen( $donation_block_options['gpea_donation_block_' . $main_issue_slug . '_desc'] ) ) {
+				$donation_block_default_desc = $donation_block_options['gpea_donation_block_' . $main_issue_slug . '_desc'];
+			}
+			elseif( isset( $donation_block_options['gpea_donation_block_default_desc'] ) ) {
+				$donation_block_default_desc = $donation_block_options['gpea_donation_block_default_desc'];
+			}
+
 			$donation_block_default_link = '';
 			if( isset( $main_issue_slug ) && isset( $donation_block_options['gpea_donation_block_' . $main_issue_slug . '_button_link'] ) && @strlen( $donation_block_options['gpea_donation_block_' . $main_issue_slug . '_button_link'] ) ) {
 				$donation_block_default_link = $donation_block_options['gpea_donation_block_' . $main_issue_slug . '_button_link'];
@@ -150,6 +170,10 @@ if ( ! class_exists( 'Donation_Block_Controller' ) ) {
 
 			if ( !isset( $attributes['title'] ) || !@strlen( $attributes['title'] ) ) {
 				$attributes['title'] = $donation_block_default_title;
+			}
+
+			if ( !isset( $attributes['desc'] ) || !@strlen( $attributes['desc'] ) ) {
+				$attributes['desc'] = nl2br($donation_block_default_desc);
 			}
 
 			if ( !isset( $attributes['button_link'] ) || !@strlen( $attributes['button_link'] ) ) {
