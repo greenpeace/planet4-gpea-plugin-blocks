@@ -136,6 +136,18 @@ if ( ! class_exists( 'Donation_Block_Controller' ) ) {
 				$donation_block_default_text = $donation_block_options['gpea_donation_block_default_button_text'];
 			}
 
+			$donation_block_default_img = '';
+			if( isset( $main_issue_slug ) && isset( $donation_block_options['gpea_donation_block_' . $main_issue_slug . '_bg_img'] ) && @strlen( $donation_block_options['gpea_donation_block_' . $main_issue_slug . '_bg_img'] ) ) {
+				$donation_block_default_img = $donation_block_options['gpea_donation_block_' . $main_issue_slug . '_bg_img'];
+			}
+			elseif( isset( $donation_block_options['gpea_donation_block_default_bg_img'] ) ) {
+				$donation_block_default_img = $donation_block_options['gpea_donation_block_default_bg_img'];
+			}
+
+			if(!is_array($attributes)) {
+				$attributes = [];
+			}
+
 			if ( !isset( $attributes['title'] ) || !@strlen( $attributes['title'] ) ) {
 				$attributes['title'] = $donation_block_default_title;
 			}
@@ -148,8 +160,11 @@ if ( ! class_exists( 'Donation_Block_Controller' ) ) {
 				$attributes['button_text'] = $donation_block_default_text;
 			}
 
-			if ( isset( $attributes['bg_img'] ) ) {
+			if ( isset( $attributes['bg_img'] ) && @strlen( $attributes['button_text'] ) ) {
 				$attributes['bg_img'] = wp_get_attachment_url( $attributes['bg_img'] );
+			}
+			else {
+				$attributes['bg_img'] = $donation_block_default_img;
 			}
 
 			return [
