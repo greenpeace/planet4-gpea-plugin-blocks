@@ -38,6 +38,22 @@ if ( ! class_exists( 'Donation_Block_Controller' ) ) {
 
 			$fields = [
 				[
+					'label' => __( '<h3>Donation Block</h3>', 'planet4-gpea-blocks-backend' ),
+					'description' => sprintf(__( '
+						<ol>
+							<li>Location: it\'s better to set around the middle area of the post.</li>
+							<li>Leave the fields empty to use the default value.</li>
+							<li>Go to the setting &quot;%s > Post/Page Donation Blocks&quot; to setup default values.</li>
+						</ol>
+					', 'planet4-gpea-blocks-backend' ), __( 'Settings' )),
+					'attr'  => 'title',
+					'type'  => 'radio',
+					'meta'  => [
+						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
 					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'description' => __( 'Leave empty to use default.', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
@@ -48,22 +64,12 @@ if ( ! class_exists( 'Donation_Block_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Description', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Description<br>For a better user experience, it\'s better to leave empty or not over 20 characters.', 'planet4-gpea-blocks-backend' ),
 					'description' => __( 'Leave empty to use default.', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'desc',
 					'type'  => 'textarea',
 					'meta'  => [
 						'placeholder' => __( 'Description', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label'       => __( 'Button label', 'planet4-gpea-blocks-backend' ),
-					'description' => __( 'Leave empty to use default.', 'planet4-gpea-blocks-backend' ),
-					'attr'        => 'button_text',
-					'type'        => 'text',
-					'meta'        => [
-						'placeholder' => __( 'Button label', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -74,6 +80,16 @@ if ( ! class_exists( 'Donation_Block_Controller' ) ) {
 					'type'        => 'url',
 					'meta'        => [
 						'placeholder' => __( 'Button Link', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label'       => __( 'Button label', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use default.', 'planet4-gpea-blocks-backend' ),
+					'attr'        => 'button_text',
+					'type'        => 'text',
+					'meta'        => [
+						'placeholder' => __( 'Button label', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
