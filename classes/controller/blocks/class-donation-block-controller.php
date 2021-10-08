@@ -130,7 +130,7 @@ if ( ! class_exists( 'Donation_Block_Controller' ) ) {
 			global $post;
 			if ( class_exists( 'P4CT_Site' ) ) {
 				$gpea_extra = new \P4CT_Site();
-				$main_issue = $gpea_extra->gpea_get_main_issue($post->ID);
+				$main_issue = $gpea_extra->gpea_get_main_issue( $post->ID );
 				if( $main_issue ) {
 					$main_issue_slug = $main_issue->slug;
 				}
@@ -193,7 +193,10 @@ if ( ! class_exists( 'Donation_Block_Controller' ) ) {
 			}
 
 			if ( !isset( $attributes['button_link'] ) || !@strlen( $attributes['button_link'] ) ) {
-				$attributes['button_link'] = $donation_block_default_link;
+				$attributes['button_link'] = $gpea_extra->add_post_ref_query_to_link_url( $donation_block_default_link, $post );
+			}
+			else {
+				$attributes['button_link'] = $gpea_extra->add_post_ref_query_to_link_url( $attributes['button_link'], $post );
 			}
 
 			if ( !isset( $attributes['button_text'] ) || !@strlen( $attributes['button_text'] ) ) {
