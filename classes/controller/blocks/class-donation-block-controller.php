@@ -46,10 +46,9 @@ if ( ! class_exists( 'Donation_Block_Controller' ) ) {
 							<li>Go to the setting &quot;%s > Post/Page Donation Blocks&quot; to setup default values.</li>
 						</ol>
 					', 'planet4-gpea-blocks-backend' ), __( 'Settings' )),
-					'attr'  => 'title',
+					'attr'  => 'hint',
 					'type'  => 'radio',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
