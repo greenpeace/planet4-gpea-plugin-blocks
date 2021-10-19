@@ -44,6 +44,26 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 		public function prepare_fields() {
 
 			$fields = [
+        [
+					'label' => 'Carousel type or Grid type',
+					'description' => 'Select the layout',
+					'attr' => 'layout',
+					'type' => 'radio',
+					'options' => [
+						[
+							'value' => 'carousel',
+							'label' => __( 'Carousel type', 'planet4-gpea-blocks-backend' ),
+							'desc'  => 'The cards will display in a carousel',
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+						],
+						[
+							'value' => 'grid',
+							'label' => __( 'Grid type', 'planet4-gpea-blocks-backend' ),
+							'desc'  => 'The cards will display in a max. 3 column grid ',
+							'image' => esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/latte.png' ),
+						]
+					],
+				],
 				[
 					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
