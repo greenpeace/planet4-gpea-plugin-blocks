@@ -3,18 +3,19 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Planet4 - GPEA Blocks 0.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/planet4-gpea-plugin-blocks\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/planet4-gpea-"
+"plugin-blocks\n"
+"POT-Creation-Date: 2019-06-27T14:02:59+00:00\n"
+"PO-Revision-Date: 2021-12-03 16:51+0800\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: ko_KR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-06-27T14:02:59+00:00\n"
-"PO-Revision-Date: 2019-12-17 13:00+0100\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 3.0\n"
 "X-Domain: planet4-gpea-blocks\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: ko_KR\n"
 
 #. Plugin Name of the plugin
 msgid "Planet4 - GPEA Blocks"
@@ -45,8 +46,11 @@ msgid "Submit here"
 msgstr "제출하기"
 
 #: classes/controller/blocks/class-controller.php:86
-msgid "Shortcode UI plugin must be active for Planet4 - EA - Blocks plugin to work."
-msgstr "P4- EA - 블록 플러그인이 작동하기 위해서는 Shortcode UI 플로그인이 반드시 활성화 되어야 합니다. "
+msgid ""
+"Shortcode UI plugin must be active for Planet4 - EA - Blocks plugin to work."
+msgstr ""
+"P4- EA - 블록 플러그인이 작동하기 위해서는 Shortcode UI 플로그인이 반드시 활"
+"성화 되어야 합니다. "
 
 #: classes/controller/blocks/class-ugc-controller.php:79
 msgid "Submit your story"
@@ -96,23 +100,28 @@ msgstr "지금 서명하기"
 msgid "Achievements"
 msgstr "성과들"
 
-#: classes/controller/blocks/class-donation-dollar-handles-controller.php:297 classes/controller/blocks/class-donation-basic-controller.php:170
+#: classes/controller/blocks/class-donation-dollar-handles-controller.php:297
+#: classes/controller/blocks/class-donation-basic-controller.php:170
 msgid "One-off"
 msgstr "일시후원"
 
-#: classes/controller/blocks/class-donation-dollar-handles-controller.php:300 classes/controller/blocks/class-donation-basic-controller.php:173
+#: classes/controller/blocks/class-donation-dollar-handles-controller.php:300
+#: classes/controller/blocks/class-donation-basic-controller.php:173
 msgid "Monthly"
 msgstr "정기후원"
 
-#: classes/controller/blocks/class-donation-dollar-handles-controller.php:303 classes/controller/blocks/class-donation-basic-controller.php:176
+#: classes/controller/blocks/class-donation-dollar-handles-controller.php:303
+#: classes/controller/blocks/class-donation-basic-controller.php:176
 msgid "Donate"
 msgstr "후원하기"
 
-#: classes/controller/blocks/class-donation-dollar-handles-controller.php:306 classes/controller/blocks/class-donation-basic-controller.php:179
+#: classes/controller/blocks/class-donation-dollar-handles-controller.php:306
+#: classes/controller/blocks/class-donation-basic-controller.php:179
 msgid "currency_code"
 msgstr "통화_코드"
 
-#: classes/controller/menu/class-settings-controller.php:27 classes/controller/menu/class-settings-controller.php:28
+#: classes/controller/menu/class-settings-controller.php:27
+#: classes/controller/menu/class-settings-controller.php:28
 msgid "Blocks"
 msgstr "블록들"
 
@@ -247,35 +256,76 @@ msgstr "개 포스트 업데이트"
 msgid "Reading time pre"
 msgstr "읽는 시간"
 
-msgid "Donation reminder box"
+#. MC Subscription blocks
+msgid "First Name*"
 msgstr ""
 
-msgid "Donation reminder description"
+msgid "Last Name*"
 msgstr ""
 
-msgid "Donation reminder give oneoff"
+msgid "Email*"
 msgstr ""
 
-msgid "Donation reminder give regular"
+msgid ""
+"Yes! Please send me important updates from Greenpeace. Greenpeace respects "
+"and protects your personal information and you can unsubscribe at any time. "
+"For more details please refer to Greenpeace privacy policy Greenpeace's "
+"privacy policy"
 msgstr ""
 
-msgid "Upload a cover image"
-msgstr "상단 이미지 업로드"
-
-msgid "Cover image consent"
+#. Checkboxes for Korean site only (separate into 2 checkboxes)
+msgid "Yes! Please send me important updates from Greenpeace."
 msgstr ""
-"상기 개인정보와 이미지를 제출함으로써 본인은 그린피스가  환경보호 촉진을 위해 그린피스 서울사무소 또는 대한민국 외에 소재지를 둔 그린피스 사무소의 웹사이트 또는 그린피스가 제작, 혹은 라이센스를 부여한 간행물, 기타 커뮤니케이션 및 미디어(SNS, 보고서, 연차보고서, 브로슈어, 서적, 신문, 잡지, 비디오 등)의 자료"
-"로 사용할 수 있음에 동의합니다. 또한 그린피스가 <a href=\"https://www.greenpeace.org/korea/privacy-and-cookies/\" target=\"_blank\">개인정보보호정책</a>에 따라 개인정보를 수집/이용함에 동의하며 본 건 이미지 사용과 관련하여 필요한 경우 대한민국 외에 소재지를 둔 그린피스 사무소에 해당정보를 제공할 수 있음에 "
-"동의합니다. <br /> *이미지 활용 및 개인정보의 수집/이용에 동의하시지 않는 경우 본 활동에 참여하실 수 없습니다. "
+"캠페인 및 후원 관련 소식 받기 <a href=\"/korea/news/feature-story/1/2018/"
+"privacy-policy/\" target=\"_blank\">더 보기</a>"
 
-msgid "Your story could not be sent"
-msgstr "나의 이야기를 업로드 할 수 없습니다. 다시 시도해 주세요."
+msgid ""
+"Greenpeace respects and protects your personal information and you can "
+"unsubscribe at any time. For more details please refer to Greenpeace privacy "
+"policy Greenpeace's privacy policy"
+msgstr ""
+"(필수) 개인정보 수집/이용에 동의  <a href=\"/korea/personal-info-agreement-"
+"petition/\" target=\"_blank\">내용 보기</a>"
 
-msgid "Attachment problem"
-msgstr "파일사이즈가 너무 크거나 확장자가 맞지않아 업로드가 불가합니다."
+msgid "Required"
+msgstr ""
 
-msgid "No file chosen"
-msgstr "파일이 선택되지 않았습니다."
+msgid "Please enter a valid e-mail address."
+msgstr ""
 
-msgid "Choose a file"
-msgstr "파일선택"
+msgid "Do you mean %s ?"
+msgstr ""
+
+msgid "Please check the box to agree."
+msgstr "개인정보 제공 필수 항목입니다"
+
+msgid "There was a problem with the submission"
+msgstr ""
+
+#~ msgid "Upload a cover image"
+#~ msgstr "상단 이미지 업로드"
+
+#~ msgid "Cover image consent"
+#~ msgstr ""
+#~ "상기 개인정보와 이미지를 제출함으로써 본인은 그린피스가  환경보호 촉진을 "
+#~ "위해 그린피스 서울사무소 또는 대한민국 외에 소재지를 둔 그린피스 사무소의 "
+#~ "웹사이트 또는 그린피스가 제작, 혹은 라이센스를 부여한 간행물, 기타 커뮤니"
+#~ "케이션 및 미디어(SNS, 보고서, 연차보고서, 브로슈어, 서적, 신문, 잡지, 비디"
+#~ "오 등)의 자료로 사용할 수 있음에 동의합니다. 또한 그린피스가 <a href="
+#~ "\"https://www.greenpeace.org/korea/privacy-and-cookies/\" target=\"_blank"
+#~ "\">개인정보보호정책</a>에 따라 개인정보를 수집/이용함에 동의하며 본 건 이"
+#~ "미지 사용과 관련하여 필요한 경우 대한민국 외에 소재지를 둔 그린피스 사무소"
+#~ "에 해당정보를 제공할 수 있음에 동의합니다. <br /> *이미지 활용 및 개인정보"
+#~ "의 수집/이용에 동의하시지 않는 경우 본 활동에 참여하실 수 없습니다. "
+
+#~ msgid "Your story could not be sent"
+#~ msgstr "나의 이야기를 업로드 할 수 없습니다. 다시 시도해 주세요."
+
+#~ msgid "Attachment problem"
+#~ msgstr "파일사이즈가 너무 크거나 확장자가 맞지않아 업로드가 불가합니다."
+
+#~ msgid "No file chosen"
+#~ msgstr "파일이 선택되지 않았습니다."
+
+#~ msgid "Choose a file"
+#~ msgstr "파일선택"
