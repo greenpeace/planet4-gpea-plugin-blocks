@@ -250,6 +250,7 @@ msgstr ""
 msgid "Reading time pre"
 msgstr ""
 
+#. MC Subscription blocks
 msgid "First Name*"
 msgstr ""
 msgid "Last Name*"
@@ -259,11 +260,19 @@ msgstr ""
 msgid "Yes! Please send me important updates from Greenpeace. Greenpeace respects and protects your personal information and you can unsubscribe at any time. For more details please refer to Greenpeace privacy policy Greenpeace's privacy policy"
 msgstr ""
 
+#. Checkboxes for Korean site only (separate into 2 checkboxes)
+msgid "Yes! Please send me important updates from Greenpeace."
+msgstr ""
+msgid "Greenpeace respects and protects your personal information and you can unsubscribe at any time. For more details please refer to Greenpeace privacy policy Greenpeace's privacy policy"
+msgstr ""
+
 msgid "Required"
 msgstr ""
 msgid "Please enter a valid e-mail address."
 msgstr ""
 msgid "Do you mean %s ?"
+msgstr ""
+msgid "Please check the box to agree."
 msgstr ""
 
 msgid "There was a problem with the submission"
