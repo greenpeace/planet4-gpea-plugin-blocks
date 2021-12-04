@@ -31,14 +31,16 @@
 								<div class="do-you-mean"></div>
 						</div>
 					</div>
+					{% for checkbox_text in lexicon.policy_checkbox_text %}
 					<div class="form-row yes-checkbox">
-						<label class="custom-checkbox " for="optin">
-							<input name="supporter.emailok" type="checkbox" class="" checked="1" id="optin">
+						<label class="custom-checkbox">
+							<input name="supporter.policy[]" type="checkbox" class="" checked="1">
 							<span class="custom-control-description">
-								{{lexicon.pricacy_checkbox_text|raw}}
+								{{checkbox_text|raw}}
 							</span>
 						</label>
 					</div>
+					{% endfor %}
 
 					<div class="form-row submit-part">
 						<button class="submit btn btn-primary btn-block button primary fluid">
