@@ -141,8 +141,9 @@ if ( ! class_exists( 'MC_Subscription_Controller' ) ) {
 			$lexicon['input_required_err_message'] = __( 'Required', 'planet4-gpea-blocks');
 			$lexicon['email_format_err_message'] = __( 'Please enter a valid e-mail address.', 'planet4-gpea-blocks');
 			$lexicon['email_do_you_mean'] = __( 'Do you mean %s ?', 'planet4-gpea-blocks');
+			$lexicon['policy_required_err_message'] = __( 'Please check the box to agree.', 'planet4-gpea-blocks');
 
-			$lexicon['server_error'] = __( 'There was a problem with the submission', 'planet4-gpea-blocks');
+			$lexicon['server_err_message'] = __( 'There was a problem with the submission', 'planet4-gpea-blocks');
 
 			return [
 				'fields' => $attributes,
