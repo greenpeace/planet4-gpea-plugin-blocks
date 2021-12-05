@@ -146,6 +146,7 @@ P4EABKS\Loader::get_instance(
 		'P4EABKS\Controllers\Blocks\MC_Subscription_Controller',
 		'P4EABKS\Controllers\Blocks\Grid_Images_Controller',
 		'P4EABKS\Controllers\Blocks\Donation_Block_Controller',
+		'P4EABKS\Controllers\Blocks\Homepage_B2_Controller',
 		'P4EABKS\Models\Taxonomy',
 		'P4EABKS\Models\Tags_Meta',
 	], 'P4EABKS\Views\View'
