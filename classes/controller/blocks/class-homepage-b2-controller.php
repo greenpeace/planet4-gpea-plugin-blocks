@@ -24,13 +24,6 @@ if ( ! class_exists( 'Homepage_B2_Controller' ) ) {
 		const BLOCK_NAME = 'homepage_b2';
 
 		/**
-		 * The block default layout.
-		 *
-		 * @const string DEFAULT_LAYOUT
-		 */
-		const DEFAULT_LAYOUT = 'standard';
-
-		/**
 		 * The maximum number of sum-elements.
 		 *
 		 * @const string MAX_REPEATER

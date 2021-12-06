@@ -2,53 +2,75 @@
 	<section class="section-mc-subscription">
 		<div class="ct-container subscribe">
 			<div class="content">
-				<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-				<p>{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+				<h2>{{ static_fields.title|e('wp_kses_post')|raw }}</h2>
+				<p>{{ static_fields.subtitle|e('wp_kses_post')|raw }}</p>
 			</div>
 			<div class="content">
-				<form name="mc-subscription-form" action="{{ fields.endpoint|raw }}">
-					<input type="hidden" name="sf_campaign_id" value="{{ fields.sf_campaign_id|raw }}">
+				<form class="form-container" name="mc-subscription-form" action="{{ static_fields.endpoint|raw }}">
 
-					<input type="hidden" name="thankyou_title" value="{{ fields.gpea_subscription_page_thankyou_title|raw }}">
-					<input type="hidden" name="thankyou_subtitle" value="{{ fields.gpea_subscription_page_thankyou_subtitle|raw }}">
+					<input type="hidden" name="sf_campaign_id" value="{{ static_fields.sf_campaign_id|raw }}">
+
+					<input type="hidden" name="thankyou_title" value="{{ static_fields.gpea_subscription_page_thankyou_title|raw }}">
+					<input type="hidden" name="thankyou_subtitle" value="{{ static_fields.gpea_subscription_page_thankyou_subtitle|raw }}">
 
 					<input type="hidden" name="input_required_err_message" value="{{ lexicon.input_required_err_message|raw}}" />
 					<input type="hidden" name="email_format_err_message" value="{{ lexicon.email_format_err_message|raw}}" />
 					<input type="hidden" name="email_do_you_mean" value="{{ lexicon.email_do_you_mean|raw}}" />
-					<input type="hidden" name="server_err_message" value="{{ lexicon.server_err_message|raw}}" />
 					<input type="hidden" name="policy_required_err_message" value="{{ lexicon.policy_required_err_message|raw}}" />
+					<input type="hidden" name="server_err_message" value="{{ lexicon.server_err_message|raw}}" />
 
-					<div class="form-row name-part">
-						<div class="en__field__element">
-								<input type="text" name="supporter.lastname" value="" placeholder="{{ lexicon.lastname_input_placeholder }}" required>
-						</div>
-						<div class="en__field__element">
-							<input type="text" name="supporter.firstname" value="" placeholder="{{ lexicon.firstname_input_placeholder }}" required>
-						</div>
-					</div>
-					<div class="form-row email-part">
-						<div class="en__field__element">
+					<div class="form-column form-column--fields">
+						<div class="form-row email-part">
+							<div class="en__field__element en__field__element--is-required">
 								<input type="email" name="supporter.email" placeholder="{{ lexicon.email_input_placeholder }}" required>
-								<div class="do-you-mean"></div>
+								<div class="do-you-mean invalid-feedback"></div>
+							</div>
+						</div>
+						<div class="form-row name-part">
+							<div class="en__field__element en__field__element--first-name en__field__element--is-required">
+								<input type="text" name="supporter.firstname" value="" placeholder="{{ lexicon.firstname_input_placeholder }}" required>
+							</div>
+							<div class="en__field__element en__field__element--last-name en__field__element--is-required">
+								<input type="text" name="supporter.lastname" value="" placeholder="{{ lexicon.lastname_input_placeholder }}" required>
+							</div>
+						</div>
+						{% for checkbox_text in lexicon.policy_checkbox_text %}
+						<div class="form-row checkbox-part">
+							<label class="en__field__element custom-checkbox en__field__element--is-required">
+								<input type="checkbox" checked required>
+								<span class="custom-checkbox__mark"></span>
+								<span class="custom-control-description">
+									{{checkbox_text|raw}}
+								</span>
+							</label>
+						</div>
+						{% endfor %}
+						{% for checkbox_item in field_groups %}
+						<div class="form-row checkbox-part">
+							<label class="en__field__element custom-checkbox {{ checkbox_item.required ? 'en__field__element--is-required' }}">
+								{% if checkbox_item.name %}
+								<input type="checkbox" name="{{checkbox_item.name|e('html_attr')}}" {{ checkbox_item.required ? 'checked required' }}>
+								{% else %}
+								<input type="checkbox" {{ checkbox_item.required ? 'checked required' }}>
+								{% endif %}
+								<span class="custom-checkbox__mark"></span>
+								<span class="custom-control-description">
+									{{checkbox_item.label|raw}}
+								</span>
+							</label>
+						</div>
+						{% endfor %}
+					</div>
+
+					<div class="form-column form-column--submit">
+						<div class="form-row submit-part">
+							<button class="submit btn btn-primary btn-block button primary fluid">
+								{{ static_fields.submit_btn_text|e('wp_kses_post')|raw }}
+							</button>
+							<div class="enform-notice"></div>
 						</div>
 					</div>
-					{% for checkbox_text in lexicon.policy_checkbox_text %}
-					<div class="form-row yes-checkbox">
-						<label class="custom-checkbox">
-							<input name="supporter.policy[]" type="checkbox" class="" checked="1">
-							<span class="custom-control-description">
-								{{checkbox_text|raw}}
-							</span>
-						</label>
-					</div>
-					{% endfor %}
 
-					<div class="form-row submit-part">
-						<button class="submit btn btn-primary btn-block button primary fluid">
-							{{ fields.submit_btn_text|e('wp_kses_post')|raw }}
-						</button>
-						<div class="enform-notice"></div>
-					</div>
 				</form>
 			</div>
 		</div>
@@ -56,10 +78,10 @@
 		<div class="ct-container thankyou hide">
 			<div class="content">
 				<h2>
-					{{ fields.thankyou_title|raw }}
+					{{ static_fields.thankyou_title|raw }}
 				</h2>
 				<p>
-					<span class="thankyou-subtitle">{{ fields.thankyou_content|raw }}</span>
+					<span class="thankyou-subtitle">{{ static_fields.thankyou_content|raw }}</span>
 				</p>
 			</div>
 		</div>

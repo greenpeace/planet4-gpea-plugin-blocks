@@ -24,6 +24,13 @@ if ( ! class_exists( 'MC_Subscription_Controller' ) ) {
 		const BLOCK_NAME = 'mc_subscription';
 
 		/**
+		 * The maximum number of sum-elements.
+		 *
+		 * @const string MAX_REPEATER
+		 */
+		const MAX_REPEATER = 50;
+
+		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
 		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
 		 */
@@ -31,20 +38,20 @@ if ( ! class_exists( 'MC_Subscription_Controller' ) ) {
 
 			$fields = [
 				[
+					'label' => __( 'Section title', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'subtitle',
+					'type'  => 'textarea',
+					'meta'  => [
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
 					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
 						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'subtitle',
-					'type'  => 'textarea',
-					'meta'  => [
-						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -99,6 +106,33 @@ if ( ! class_exists( 'MC_Subscription_Controller' ) ) {
 				],
 			];
 
+			$field_groups = [
+
+				'Option' => [
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => __( '<i>Option %s label</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'label',
+						'type'  => 'text',
+					],
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => __( '<i>Option %s is required</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'required',
+						'type'  => 'checkbox',
+					],
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => __( '<i>Option %s field name</i>', 'planet4-gpea-blocks-backend' ),
+						'description' => __( 'Field name post to MC Endpoint.', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'name',
+						'type'  => 'text',
+					],
+				],
+			];
+
+			$fields = $this->format_meta_fields( $fields, $field_groups );
+
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
 				'label'         => __( 'GPEA | MC Subscription', 'planet4-gpea-blocks-backend' ),
@@ -114,6 +148,52 @@ if ( ! class_exists( 'MC_Subscription_Controller' ) ) {
 		/**
 		 * Get all the data that will be needed to render the block correctly.
 		 *
+		 * @param array $fields This will contain the fields to be rendered.
+		 * @param array $field_groups This contains the field templates to be repeated.
+		 *
+		 * @return array The fields to be rendered
+		 */
+		private function format_meta_fields( $fields, $field_groups ) : array {
+
+			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
+				foreach ( $field_groups as $group_name => $group_fields ) {
+					foreach ( $group_fields as $field ) {
+
+						$safe_name = preg_replace( '/\s/', '', strtolower( $group_name ) );
+						$attr_extension = '_' . $safe_name . '_' . $i;
+
+						if ( array_key_exists( 'attr' , $field ) ) {
+							$field['attr'] .= $attr_extension;
+						} else {
+							$field['attr'] = $i . $attr_extension;
+						}
+
+						if ( array_key_exists( 'label' , $field ) ) {
+							$field['label'] = sprintf( $field['label'], $i );
+						} else {
+							$field['label'] = $field['attr'];
+						}
+
+						$new_meta = [
+							'data-element-type' => $safe_name,
+							'data-element-name' => $group_name,
+							'data-element-number' => $i,
+						];
+						if ( ! array_key_exists( 'meta' , $field ) ) {
+							$field['meta'] = [];
+						}
+						$field['meta'] += $new_meta;
+
+						$fields[] = $field;
+					}
+				}
+			}
+			return $fields;
+		}
+
+		/**
+		 * Get all the data that will be needed to render the block correctly.
+		 *
 		 * @param array  $attributes This is the array of fields of this block.
 		 * @param string $content This is the post content.
 		 * @param string $shortcode_tag The shortcode tag of this block.
@@ -121,13 +201,12 @@ if ( ! class_exists( 'MC_Subscription_Controller' ) ) {
 		 * @return array The data to be passed in the View.
 		 */
 		public function prepare_data( $attributes, $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
-			$options = array();
 
 			// lexicon entries
 			$lexicon = array();
-			$lexicon['firstname_input_placeholder'] = __( 'First Name*', 'planet4-gpea-blocks');
-			$lexicon['lastname_input_placeholder'] = __( 'Last Name*', 'planet4-gpea-blocks');
-			$lexicon['email_input_placeholder'] = __( 'Email*', 'planet4-gpea-blocks');
+			$lexicon['firstname_input_placeholder'] = __( 'First Name', 'planet4-gpea-blocks');
+			$lexicon['lastname_input_placeholder'] = __( 'Last Name', 'planet4-gpea-blocks');
+			$lexicon['email_input_placeholder'] = __( 'Email', 'planet4-gpea-blocks');
 
 			$lexicon['policy_checkbox_text'] = [];
 			if(get_locale() == 'ko_KR') {
@@ -145,8 +224,45 @@ if ( ! class_exists( 'MC_Subscription_Controller' ) ) {
 
 			$lexicon['server_err_message'] = __( 'There was a problem with the submission', 'planet4-gpea-blocks');
 
+			if(!is_array($attributes)) {
+				$attributes = [];
+			}
+
+			$field_groups = [];
+
+			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
+
+				// Group fields based on index number.
+				$group = [];
+				$group_type = false;
+				foreach ( $attributes as $field_name => $field_content ) {
+					if ( preg_match( '/_' . $i . '$/', $field_name ) ) {
+						$field_name_data = explode( '_', $field_name );
+						$group[ $field_name_data[0] ] = $field_content;
+						$group_type = $field_name_data[1]; // TODO assigning multiple times here, can be more elegant?
+					}
+				}
+
+				// Extract group field type.
+				if ( $group_type ) {
+					$group['__group_type__'] = $group_type;
+				} else {
+					continue;
+				}
+
+				$field_groups[] = $group;
+			}
+
+			// Extract static fields only.
+			$static_fields = [];
+			foreach ( $attributes as $field_name => $field_content ) {
+				if ( ! preg_match( '/_\d+$/', $field_name ) ) {
+					$static_fields[ $field_name ] = $field_content;
+				}
+			}
 			return [
-				'fields' => $attributes,
+				'field_groups' => $field_groups,
+				'static_fields' => $static_fields,
 				'lexicon' => $lexicon,
 			];
 
@@ -163,6 +279,7 @@ if ( ! class_exists( 'MC_Subscription_Controller' ) ) {
 		 * @return string The complete html of the block
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
+			
 			$data = $this->prepare_data( $fields );
 
 			// Shortcode callbacks must return content, hence, output buffering here.

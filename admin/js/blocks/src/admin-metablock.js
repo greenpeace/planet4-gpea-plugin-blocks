@@ -276,6 +276,7 @@ jQuery(document).ready(function() {
     'shortcake_grid_images',
     'shortcake_donation_block',
     'shortcake_homepage_b2',
+    'shortcake_mc_subscription',
   ];
 
   var required_image = [
