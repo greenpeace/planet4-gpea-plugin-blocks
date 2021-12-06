@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/planet4-gpea-"
 "plugin-blocks\n"
 "POT-Creation-Date: 2019-06-27T14:02:59+00:00\n"
-"PO-Revision-Date: 2021-12-03 16:49+0800\n"
+"PO-Revision-Date: 2021-12-04 13:56+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -255,14 +255,14 @@ msgid "Reading time pre"
 msgstr " "
 
 #. MC Subscription blocks
-msgid "First Name*"
-msgstr "名字*"
+msgid "First Name"
+msgstr "名字"
 
-msgid "Last Name*"
-msgstr "姓氏*"
+msgid "Last Name"
+msgstr "姓氏"
 
-msgid "Email*"
-msgstr "電子信箱*"
+msgid "Email"
+msgstr "電子信箱"
 
 msgid ""
 "Yes! Please send me important updates from Greenpeace. Greenpeace respects "
@@ -285,7 +285,7 @@ msgid ""
 msgstr ""
 
 msgid "Required"
-msgstr "此欄位為必填"
+msgstr "必填"
 
 msgid "Please enter a valid e-mail address."
 msgstr "Email 格式錯誤"
@@ -294,7 +294,7 @@ msgid "Do you mean %s ?"
 msgstr "您想輸入的是 %s 嗎？"
 
 msgid "Please check the box to agree."
-msgstr "請勾選方格以表示同意"
+msgstr "勾選才能收到電子報唷！"
 
 msgid "There was a problem with the submission"
 msgstr "訂閱時發生了一點錯誤，這不尋常。"
