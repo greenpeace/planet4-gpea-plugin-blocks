@@ -1,11 +1,11 @@
 {% block mc_subscription %}
 	<section class="section-mc-subscription">
 		<div class="ct-container subscribe">
-			<div class="content">
+			<div class="content content--title">
 				<h2>{{ static_fields.title|e('wp_kses_post')|raw }}</h2>
 				<p>{{ static_fields.subtitle|e('wp_kses_post')|raw }}</p>
 			</div>
-			<div class="content">
+			<div class="content content--form">
 				<form class="form-container" name="mc-subscription-form" action="{{ static_fields.endpoint|raw }}">
 
 					<input type="hidden" name="sf_campaign_id" value="{{ static_fields.sf_campaign_id|raw }}">
