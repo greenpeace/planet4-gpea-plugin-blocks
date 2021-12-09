@@ -1,6 +1,6 @@
 <?php
 /**
- * Homepage B2 class
+ * Hero Set Module (Homepage B Version 1st Screen)
  *
  * @package P4EABKS
  * @since 0.1
@@ -28,7 +28,7 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 		 *
 		 * @const string MAX_REPEATER
 		 */
-		const MAX_REPEATER = 5;
+		const MAX_REPEATER = 30;
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -38,20 +38,90 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title (for PC)', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'title',
-					'type'  => 'textarea',
+					'label' => __( 'Layout', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'layout',
+					'type'  => 'radio',
+					'value' => 'center',
+					'options' => [
+						[
+							'value' => 'left',
+							'label' => __( 'Left', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => 'center',
+							'label' => __( 'Center', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => 'right',
+							'label' => __( 'Right', 'planet4-gpea-blocks-backend' ),
+						],
+					],
 					'meta'  => [
-						'placeholder' => __( 'Title (for PC)', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Title (for mobile)', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'title_mobile',
+					'label' => __( 'Title (Part 1)', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'title',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Title (Part 1)', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Title (Part 1) Color', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'title_color',
+					'type'  => 'radio',
+					'value' => 'light',
+					'options' => [
+						[
+							'value' => 'light',
+							'label' => __( 'White', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => 'dark',
+							'label' => __( 'Black', 'planet4-gpea-blocks-backend' ),
+						],
+					],
+					'meta'  => [
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Title (Part 2)', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'secondary_title',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Title (Part 2)', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Title (Part 2) Color', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'secondary_title_color',
+					'type'  => 'radio',
+					'value' => 'green',
+					'options' => [
+						[
+							'value' => 'green',
+							'label' => __( 'Green', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => 'orange',
+							'label' => __( 'Orange', 'planet4-gpea-blocks-backend' ),
+						],
+					],
+					'meta'  => [
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'subtitle',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Title (for mobile)', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -59,10 +129,18 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 
 			$field_groups = [
 
-				'Item' => [
+				'Background' => [
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Item %s image</i>', 'planet4-gpea-blocks-backend' ),
+						'type'        => 'text',
+						'meta'  => [
+							'data-plugin' => 'planet4-gpea-blocks',
+							'data-hidden' => TRUE,
+						],
+					],
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => __( '<i>Background %s image (for PC)</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'        => 'img',
 						'type'        => 'attachment',
 						'libraryType' => array( 'image' ),
@@ -71,15 +149,33 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Item %s title</i>', 'planet4-gpea-blocks-backend' ),
-						'attr'  => 'title',
-						'type'  => 'text',
+						'label' => __( '<i>Background %s image (for mobile)</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'        => 'img_mobile',
+						'type'        => 'attachment',
+						'libraryType' => array( 'image' ),
+						'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Item %s text</i>', 'planet4-gpea-blocks-backend' ),
-						'attr'  => 'content',
-						'type'  => 'textarea',
+						'label' => __( '<i>Background %s overlay opacity</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'opacity',
+						'type'  => 'radio',
+						'value' => '0.25',
+						'options' => [
+							[
+								'value' => '0.25',
+								'label' => __( '25%', 'planet4-gpea-blocks-backend' ),
+							],
+							[
+								'value' => '0.5',
+								'label' => __( '50%', 'planet4-gpea-blocks-backend' ),
+							],
+							[
+								'value' => '0.75',
+								'label' => __( '75%', 'planet4-gpea-blocks-backend' ),
+							],
+						],
 					],
 				],
 			];
@@ -141,6 +237,7 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 					}
 				}
 			}
+
 			return $fields;
 		}
 
@@ -170,7 +267,7 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 					if ( preg_match( '/_' . $i . '$/', $field_name ) ) {
 						$field_name_data = explode( '_', $field_name );
 
-						if ( ( 'img' === $field_name_data[0] ) && isset( $field_content ) ) {
+						if ( ( 'img' === $field_name_data[0] || 'img_mobile' === $field_name_data[0] ) && isset( $field_content ) ) {
 							$field_content = wp_get_attachment_url( $field_content );
 						}
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Marketing Cloud Subscription Module
+ * Marketing Cloud Subscription Module (Homepage B Version 7th Screen, Modified from old module)
  *
  * @package P4EABKS
  * @since 0.1
