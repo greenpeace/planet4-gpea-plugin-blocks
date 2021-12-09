@@ -1,6 +1,6 @@
 <?php
 /**
- * Homepage B2 class
+ * Steps Set Module (Homepage B Version 2nd Screen)
  *
  * @package P4EABKS
  * @since 0.1
