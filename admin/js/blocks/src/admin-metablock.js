@@ -220,6 +220,10 @@ function MetaBlock(shortcode_tag, required_image) { // eslint-disable-line no-un
       }).toArray();
     element_count = Math.max.apply(null, element_count);
 
+    $('[data-hidden]').each(function() {
+      $(this).closest('.field-block').parent('div').hide();
+    });
+
     return {
       element_types: element_types,
       element_names: element_names,
