@@ -8,20 +8,20 @@
 
 namespace P4EABKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Homepage_B2_Controller' ) ) {
+if ( ! class_exists( 'Steps_Set_Controller' ) ) {
 	/**
-	 * Class Homepage_B2_Controller
+	 * Class Steps_Set_Controller
 	 *
 	 * @package P4EABKS\Controllers\Blocks
 	 */
-	class Homepage_B2_Controller extends Controller {
+	class Steps_Set_Controller extends Controller {
 
 		/**
 		 * The block name constant.
 		 *
 		 * @const string BLOCK_NAME
 		 */
-		const BLOCK_NAME = 'homepage_b2';
+		const BLOCK_NAME = 'steps_set';
 
 		/**
 		 * The maximum number of sum-elements.
@@ -88,8 +88,8 @@ if ( ! class_exists( 'Homepage_B2_Controller' ) ) {
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Homepage B Version 2nd Screen', 'planet4-gpea-blocks-backend' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/homepage-b2-block.jpg' ) . '" />',
+				'label'         => __( 'GPEA | Steps Set', 'planet4-gpea-blocks-backend' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/steps-set-block.jpg' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
 			];

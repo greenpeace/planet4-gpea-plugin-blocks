@@ -18,7 +18,7 @@ return array(
     'P4EABKS\\Controllers\\Blocks\\Donation_Dollar_Handles_Controller' => $baseDir . '/classes/controller/blocks/class-donation-dollar-handles-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Grid_Images_Controller' => $baseDir . '/classes/controller/blocks/class-grid-images-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Heart_Counter_Controller' => $baseDir . '/classes/controller/blocks/class-heart-counter-controller.php',
-    'P4EABKS\\Controllers\\Blocks\\Homepage_B2_Controller' => $baseDir . '/classes/controller/blocks/class-homepage-b2-controller.php',
+    'P4EABKS\\Controllers\\Blocks\\Steps_Set_Controller' => $baseDir . '/classes/controller/blocks/class-steps-set-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Iframe_Controller' => $baseDir . '/classes/controller/blocks/class-iframe-contoller.php',
     'P4EABKS\\Controllers\\Blocks\\Launcher_Card_Controller' => $baseDir . '/classes/controller/blocks/class-launcher-card-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Launcher_Controller' => $baseDir . '/classes/controller/blocks/class-launcher-controller.php',
