@@ -275,6 +275,7 @@ jQuery(document).ready(function() {
     'shortcake_launcher_card',
     'shortcake_grid_images',
     'shortcake_donation_block',
+    'shortcake_hero_set',
     'shortcake_steps_set',
     'shortcake_mc_subscription',
   ];
