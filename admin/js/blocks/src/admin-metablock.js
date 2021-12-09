@@ -68,7 +68,9 @@ function MetaBlock(shortcode_tag, required_image) { // eslint-disable-line no-un
     max_row !== 0 && $('.' + me.remove_btn_class).removeAttr('disabled');
 
     inactive_elements.map(function(element_id) {
-      $('.field-block').filter($('div[class$=\'_' + element_id + '\']')).hide();
+      var $element = $('.field-block').filter($('div[class$=\'_' + element_id + '\']'));
+      $element.find('input[type="checkbox"], input[type="radio"]').prop('checked', false).trigger('change');
+      $element.hide();
     });
 
     if (all_elements.length - inactive_elements.length === element_count) {
@@ -140,10 +142,9 @@ function MetaBlock(shortcode_tag, required_image) { // eslint-disable-line no-un
    */
   me.hide_element = function (row) {
     var $element = $('.field-block').filter($('div[class$=\'_' + row + '\']'));
-    // Clear all text, textarea fields for this row/element.
-    $element.children().filter($('input, textarea')).each(function (index, element) {
-      $(element).val('').trigger('input').trigger('change');
-    });
+    // Disable all text, textarea fields for this row/element.
+    $element.find('input[type="checkbox"], input[type="radio"]').prop('checked', false).trigger('change');
+    $element.find('input:not([type="checkbox"]):not([type="radio"]), textarea').val('').trigger('input').trigger('change');
     if(me.required_image) {
       $element.find('.attachment-previews .attachment-preview .button.remove').trigger('click');
     }
@@ -157,7 +158,9 @@ function MetaBlock(shortcode_tag, required_image) { // eslint-disable-line no-un
    */
   me.hide_all_elements = function (element_count) {
     me.get_element_map_array(element_count).forEach(function (row) {
-      $( '.field-block' ).filter( $( 'div[class$=\'_'+row+'\']' ) ).hide();
+      var $element = $('.field-block').filter($('div[class$=\'_' + row + '\']'));
+      $element.find('input[type="checkbox"], input[type="radio"]').prop('checked', false).trigger('change');
+      $element.hide();
     });
   };
 
@@ -168,6 +171,9 @@ function MetaBlock(shortcode_tag, required_image) { // eslint-disable-line no-un
    */
   me.show_element = function (row, element_type, element_count) {
     $('.field-block').filter($('div[class$=\'_' + element_type + '_' +row + '\']')).show(300, function () {
+      $(this).find('input[type="checkbox"][checked], input[type="radio"][checked]').each(function() {
+        $(this).prop('checked', true).trigger('change');
+      });
       me.toggle_images(element_count);
       $('.media-frame-content').animate({
         scrollTop: $('.shortcode-ui-content').prop('scrollHeight'),
@@ -281,7 +287,8 @@ jQuery(document).ready(function() {
   ];
 
   var required_image = [
-    'shortcake_grid_images'
+    'shortcake_grid_images',
+    'shortcake_hero_set',
   ];
 
   // Attach hooks when rendering a new metablock.
