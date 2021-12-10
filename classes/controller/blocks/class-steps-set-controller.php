@@ -48,6 +48,7 @@ if ( ! class_exists( 'Steps_Set_Controller' ) ) {
 				],
 				[
 					'label' => __( 'Title (for mobile)', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use PC version.', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title_mobile',
 					'type'  => 'textarea',
 					'meta'  => [

@@ -4,7 +4,7 @@
 		<div class="ct-container">
 			<h2 class="title">
 				<span class="title__text title__text--pc">{{ static_fields.title | raw }}</span>
-				<span class="title__text title__text--mobile">{{ static_fields.title_mobile | raw }}</span>
+				<span class="title__text title__text--mobile">{{ static_fields.title_mobile | raw | default(static_fields.title) }}</span>
 			</h2>
 			<div class="grid">
 				{% for group in field_groups %}
