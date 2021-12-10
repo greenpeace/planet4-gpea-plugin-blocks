@@ -277,3 +277,13 @@ msgstr ""
 
 msgid "There was a problem with the submission"
 msgstr ""
+
+#. Geography set blocks
+msgid "Witness"
+msgstr ""
+msgid "Rainbow Warrior"
+msgstr ""
+msgid "Rsperanza"
+msgstr ""
+msgid "Arctic Sunrise"
+msgstr ""
