@@ -61,16 +61,26 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Title (Part 1)', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Title Part 1 (for PC)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title (Part 1)', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'Title Part 1 (for PC)', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Title (Part 1) Color', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Title Part 1 (for mobile)', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use PC version.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'title_mobile',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Title Part 1 (for mobile)', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Title Part 1 Color', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title_color',
 					'type'  => 'radio',
 					'value' => 'light',
@@ -89,16 +99,26 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Title (Part 2)', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Title Part 2 (for PC)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'secondary_title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title (Part 2)', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'Title Part 2 (for PC)', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Title (Part 2) Color', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Title Part 2 (for mobile)', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use PC version.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'secondary_title_mobile',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Title Part 2 (for mobile)', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Title Part 2 Color', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'secondary_title_color',
 					'type'  => 'radio',
 					'value' => 'green',
@@ -150,6 +170,7 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 					[
 						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Background %s image (for mobile)</i>', 'planet4-gpea-blocks-backend' ),
+						'description' => __( 'Leave empty to use PC version.', 'planet4-gpea-blocks-backend' ),
 						'attr'        => 'img_mobile',
 						'type'        => 'attachment',
 						'libraryType' => array( 'image' ),
@@ -161,18 +182,18 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 						'label' => __( '<i>Background %s overlay opacity</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'opacity',
 						'type'  => 'radio',
-						'value' => '0.25',
+						'value' => '25',
 						'options' => [
 							[
-								'value' => '0.25',
+								'value' => '25',
 								'label' => __( '25%', 'planet4-gpea-blocks-backend' ),
 							],
 							[
-								'value' => '0.5',
+								'value' => '50',
 								'label' => __( '50%', 'planet4-gpea-blocks-backend' ),
 							],
 							[
-								'value' => '0.75',
+								'value' => '75',
 								'label' => __( '75%', 'planet4-gpea-blocks-backend' ),
 							],
 						],
@@ -265,14 +286,18 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 				$group_type = false;
 				foreach ( $attributes as $field_name => $field_content ) {
 					if ( preg_match( '/_' . $i . '$/', $field_name ) ) {
-						$field_name_data = explode( '_', $field_name );
 
-						if ( ( 'img' === $field_name_data[0] || 'img_mobile' === $field_name_data[0] ) && isset( $field_content ) ) {
+						$field_name_data = explode( '_', $field_name );
+						array_pop($field_name_data);
+						$group_type = array_pop($field_name_data);
+						$field_name_data = implode('_', $field_name_data);
+
+						if ( ( 'img' === $field_name_data || 'img_mobile' === $field_name_data ) && isset( $field_content ) ) {
 							$field_content = wp_get_attachment_url( $field_content );
 						}
 
-						$group[ $field_name_data[0] ] = $field_content;
-						$group_type = $field_name_data[1]; // TODO assigning multiple times here, can be more elegant?
+						$group[ $field_name_data ] = $field_content;
+
 					}
 				}
 
