@@ -71,6 +71,7 @@ class ComposerStaticInit0e1b1e452bbb566bff38328f70865857
         'P4EABKS\\Controllers\\Blocks\\Support_Launcher_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-support-launcher-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Tag_Cloud_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-tag-cloud-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Testimonials_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-testimonials-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Testimony_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-testimony-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Text_And_Image_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-text-and-image-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Tips_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-tips-controller.php',
         'P4EABKS\\Controllers\\Blocks\\UGC_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-ugc-controller.php',

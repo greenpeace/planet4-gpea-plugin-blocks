@@ -36,6 +36,7 @@ return array(
     'P4EABKS\\Controllers\\Blocks\\Support_Launcher_Controller' => $baseDir . '/classes/controller/blocks/class-support-launcher-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Tag_Cloud_Controller' => $baseDir . '/classes/controller/blocks/class-tag-cloud-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Testimonials_Controller' => $baseDir . '/classes/controller/blocks/class-testimonials-controller.php',
+    'P4EABKS\\Controllers\\Blocks\\Testimony_Controller' => $baseDir . '/classes/controller/blocks/class-testimony-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Text_And_Image_Controller' => $baseDir . '/classes/controller/blocks/class-text-and-image-controller.php',
     'P4EABKS\\Controllers\\Blocks\\Tips_Controller' => $baseDir . '/classes/controller/blocks/class-tips-controller.php',
     'P4EABKS\\Controllers\\Blocks\\UGC_Controller' => $baseDir . '/classes/controller/blocks/class-ugc-controller.php',
