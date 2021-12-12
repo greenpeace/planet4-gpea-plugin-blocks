@@ -62,7 +62,7 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 				'key' => '4',
 				'title' => 'Horizontal card, light text',
 				'image' => TRUE,
-			]
+			],
 		];
 
 		/**

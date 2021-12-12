@@ -21,7 +21,14 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 		 *
 		 * @const string BLOCK_NAME
 		 */
-		const BLOCK_NAME = 'geography-set';
+		const BLOCK_NAME = 'geography_set';
+
+		/**
+		 * The maximum number of sum-elements.
+		 *
+		 * @const string MAX_REPEATER
+		 */
+		const MAX_REPEATER = 10;
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -31,26 +38,62 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Section title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'Section title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'paragraph',
-					'type'  => 'textarea',
+					'label' => __( 'Paragraph 1', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'paragraph_1',
+					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'Paragraph 1', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Paragraph 2', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'paragraph_2',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Paragraph 2', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 			];
 
-			$fields = $this->format_meta_fields( $fields );
+			$field_groups = [
+
+				'Ship' => [
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => __( '<i>Ship %s icon</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'        => 'icon',
+						'type'        => 'attachment',
+						'libraryType' => array( 'image' ),
+						'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					],
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => __( '<i>Ship %s title</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'title',
+						'type'  => 'text',
+					],
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => __( '<i>Ship %s subtitle</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'subtitle',
+						'type'  => 'textarea',
+					],
+				],
+			];
+
+			$fields = $this->format_meta_fields( $fields, $field_groups );
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
@@ -62,6 +105,52 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
 
+		}
+
+		/**
+		 * Get all the data that will be needed to render the block correctly.
+		 *
+		 * @param array $fields This will contain the fields to be rendered.
+		 * @param array $field_groups This contains the field templates to be repeated.
+		 *
+		 * @return array The fields to be rendered
+		 */
+		private function format_meta_fields( $fields, $field_groups ) : array {
+
+			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
+				foreach ( $field_groups as $group_name => $group_fields ) {
+					foreach ( $group_fields as $field ) {
+
+						$safe_name = preg_replace( '/\s/', '', strtolower( $group_name ) );
+						$attr_extension = '_' . $safe_name . '_' . $i;
+
+						if ( array_key_exists( 'attr' , $field ) ) {
+							$field['attr'] .= $attr_extension;
+						} else {
+							$field['attr'] = $i . $attr_extension;
+						}
+
+						if ( array_key_exists( 'label' , $field ) ) {
+							$field['label'] = sprintf( $field['label'], $i );
+						} else {
+							$field['label'] = $field['attr'];
+						}
+
+						$new_meta = [
+							'data-element-type' => $safe_name,
+							'data-element-name' => $group_name,
+							'data-element-number' => $i,
+						];
+						if ( ! array_key_exists( 'meta' , $field ) ) {
+							$field['meta'] = [];
+						}
+						$field['meta'] += $new_meta;
+
+						$fields[] = $field;
+					}
+				}
+			}
+			return $fields;
 		}
 
 		/**

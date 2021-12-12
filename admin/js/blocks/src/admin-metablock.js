@@ -287,6 +287,7 @@ jQuery(document).ready(function() {
     'shortcake_donation_block',
     'shortcake_hero_set',
     'shortcake_steps_set',
+    'shortcake_geography_set',
     'shortcake_mc_subscription',
     'shortcake_testimony',
   ];
