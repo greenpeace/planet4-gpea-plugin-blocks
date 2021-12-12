@@ -10,9 +10,9 @@
 				{% for group in field_groups %}
 				<div class="grid__box">
 					<div class="grid__inner">
-						<div class="grid__image" style="background-image: url({{ group.img }})"></div>
+						<div class="grid__image" style="background-image: url({{ group.img | e('html_attr') }})"></div>
 						<div class="grid__text">
-							<h4 class="grid__title">{{ group.title }}</h4>
+							<h4 class="grid__title">{{ group.title | e }}</h4>
 							<p class="grid__desc">{{ group.content | raw }}</p>
 						</div>
 					</div>

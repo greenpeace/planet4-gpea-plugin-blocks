@@ -1,28 +1,45 @@
 {% block testimony %}
 	<section class="section-testimony">
-		<div class="ct-container slim">
-			<div class="content">
+		<div class="ct-container">
+			<div class="content content--title">
 				<h2 class="title">
-					<span class="title__text">{{ static_fields.title | e }}</span>
+					{{ static_fields.title | e }}
 				</h2>
 				<p class="desc">
 					{{ static_fields.paragraph | raw }}
 				</p>
 			</div>
 			{% if ( field_groups|length > 0 ) %}
-		    <div class="slides-swiper">
+		    <div class="swiper-container testimony-swiper">
 				<div class="swiper-wrapper">
 				{% for group in field_groups %}
-					<div class="swiper-slide slide-item slide-item--{{ group.opacity }}">
-					{% if ( group.img and group.img_mobile ) %}
-						<div class="bg bg--mobile" style="background-image: url({{ group.img_mobile }})"></div>
-						<div class="bg bg--pc" style="background-image: url({{ group.img }})"></div>
-					{% elseif ( group.img ) %}
-						<div class="bg bg--pc" style="background-image: url({{ group.img }})"></div>
+					{% if ( group.start_slide_group ) %}
+					<div class="swiper-slide slide-item">
 					{% endif %}
+						<div class="slide-item__inner slide-item__inner--{{ group.layout | e('html_attr') }}">
+							{% if ( group.img ) %}
+							<div class="bg" style="background-image: url({{ group.img | e('html_attr') }})"></div>
+							{% elseif ( default_bg_images[group.layout] ) %}
+							<div class="bg" style="background-image: url({{ default_bg_images[group.layout] | e('html_attr') }})"></div>
+							{% endif %}
+							<div class="text-container">
+								<div class="text text--title">
+									<p class="text__title">{{ group.title | e }}</p>
+									<h4 class="text__name">{{ group.name | e }}</h4>
+								</div>
+								<p class="text text--desc">
+									{{ group.paragraph | raw }}
+								</p>
+							</div>
+						</div>
+					{% if ( group.end_slide_group ) %}
 					</div>
+					{% endif %}
 				{% endfor %}
 				</div>
+			</div>
+			<div class="footer">
+				<div class="swiper-pagination"></div>
 			</div>
 			{% endif %}
 		</div>

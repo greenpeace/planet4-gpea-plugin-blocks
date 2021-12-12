@@ -197,11 +197,22 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 		 */
 		public function prepare_data( $attributes = '', $content = '', $shortcode_tag = 'shortcake_' . self::BLOCK_NAME ) : array {
 
+			// Get block options
+
+			$testimony_block_options = get_option( 'gpea_testimony_block_options' );
+			$testimony_block_default_bg_img = [];
+			for( $i = 1; $i <= 4; $i ++ ) {
+				$option_name = 'gpea_testimony_block_' . $i . '_bg_img';
+				$testimony_block_default_bg_img[$i] = isset( $testimony_block_options[$option_name] ) && @strlen( $testimony_block_options[$option_name] ) ? $testimony_block_options[$option_name] : '';
+				
+			}
+
 			if(!is_array($attributes)) {
 				$attributes = [];
 			}
 
 			$field_groups = [];
+			$last_is_horizontal_card = FALSE;
 
 			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
 
@@ -232,7 +243,29 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 					continue;
 				}
 
+				$group[ 'start_slide_group' ] = FALSE;
+				$group[ 'end_slide_group' ] = FALSE;
+				if( isset($group[ 'layout' ]) && in_array( $group[ 'layout' ] , [ 3, 4 ] ) ) {
+					if( !$last_is_horizontal_card ) {
+						$group[ 'start_slide_group' ] = TRUE;
+						$last_is_horizontal_card = TRUE;
+					}
+					else {
+						$group[ 'end_slide_group' ] = TRUE;
+						$last_is_horizontal_card = FALSE;
+					}
+				}
+				else {
+					$group[ 'start_slide_group' ] = TRUE;
+					$group[ 'end_slide_group' ] = TRUE;
+					$last_is_horizontal_card = FALSE;
+				}
+
 				$field_groups[] = $group;
+			}
+
+			if( $last_is_horizontal_card ) {
+				$field_groups[ count($field_groups) - 1 ][ 'end_slide_group' ] = TRUE;
 			}
 
 			// Extract static fields only.
@@ -245,6 +278,7 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 			return [
 				'field_groups' => $field_groups,
 				'static_fields' => $static_fields,
+				'default_bg_images' => $testimony_block_default_bg_img,
 			];
 
 		}
