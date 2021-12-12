@@ -31,6 +31,41 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 		const MAX_REPEATER = 9;
 
 		/**
+		 * Default layout option key.
+		 *
+		 * @const string DEFAULT_LAYOUT
+		 */
+		const DEFAULT_LAYOUT = '1';
+
+		/**
+		 * The layout options for this module & planet 4 child theme.
+		 *
+		 * @const array LAYOUT_OPTIONS
+		 */
+		const LAYOUT_OPTIONS = [
+			[
+				'key' => '1',
+				'title' => 'Vertical card, dark text',
+				'image' => TRUE,
+			],
+			[
+				'key' => '2',
+				'title' => 'Vertical card, light text',
+				'image' => TRUE,
+			],
+			[
+				'key' => '3',
+				'title' => 'Horizontal card, dark text',
+				'image' => FALSE,
+			],
+			[
+				'key' => '4',
+				'title' => 'Horizontal card, light text',
+				'image' => TRUE,
+			]
+		];
+
+		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
 		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
 		 */
@@ -57,6 +92,14 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 				],
 			];
 
+			$layout_options = [];
+			foreach(static::LAYOUT_OPTIONS as $layout_data) {
+				$layout_options[] = [
+					'value' => $layout_data[ 'key' ],
+					'label' => __( $layout_data[ 'key' ] . '. ' . $layout_data[ 'title' ] . ( $layout_data[ 'image' ] ? '' : ' (no image)' ), 'planet4-gpea-blocks-backend' ),
+				];
+			}
+
 			$field_groups = [
 
 				'Card' => [
@@ -65,25 +108,8 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 						'label' => __( '<i>Card %s layout</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'layout',
 						'type'  => 'radio',
-						'value' => '1',
-						'options' => [
-							[
-								'value' => '1',
-								'label' => __( '1. Vertical card, dark text', 'planet4-gpea-blocks-backend' ),
-							],
-							[
-								'value' => '2',
-								'label' => __( '2. Vertical card, light text', 'planet4-gpea-blocks-backend' ),
-							],
-							[
-								'value' => '3',
-								'label' => __( '3. Horizontal card, dark text (no image)', 'planet4-gpea-blocks-backend' ),
-							],
-							[
-								'value' => '4',
-								'label' => __( '4. Horizontal card, light text', 'planet4-gpea-blocks-backend' ),
-							],
-						],
+						'value' => static::DEFAULT_LAYOUT,
+						'options' => $layout_options,
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
