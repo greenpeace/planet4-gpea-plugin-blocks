@@ -148,6 +148,7 @@ P4EABKS\Loader::get_instance(
 		'P4EABKS\Controllers\Blocks\Donation_Block_Controller',
 		'P4EABKS\Controllers\Blocks\Hero_Set_Controller',
 		'P4EABKS\Controllers\Blocks\Steps_Set_Controller',
+		'P4EABKS\Controllers\Blocks\Testimony_Controller',
 		'P4EABKS\Models\Taxonomy',
 		'P4EABKS\Models\Tags_Meta',
 	], 'P4EABKS\Views\View'

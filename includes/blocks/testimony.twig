@@ -1,0 +1,32 @@
+{% block testimony %}
+	<section class="section-testimony">
+		<div class="ct-container slim">
+			<div class="content">
+				<h2 class="title">
+					<span class="title__text">{{ static_fields.title | e }}</span>
+				</h2>
+				<p class="desc">
+					{{ static_fields.paragraph | raw }}
+				</p>
+			</div>
+			{% if ( field_groups|length > 0 ) %}
+		    <div class="slides-swiper">
+				<div class="swiper-wrapper">
+				{% for group in field_groups %}
+					<div class="swiper-slide slide-item slide-item--{{ group.opacity }}">
+					{% if ( group.img and group.img_mobile ) %}
+						<div class="bg bg--mobile" style="background-image: url({{ group.img_mobile }})"></div>
+						<div class="bg bg--pc" style="background-image: url({{ group.img }})"></div>
+					{% elseif ( group.img ) %}
+						<div class="bg bg--pc" style="background-image: url({{ group.img }})"></div>
+					{% endif %}
+					</div>
+				{% endfor %}
+				</div>
+			</div>
+			{% endif %}
+		</div>
+	</section>
+{% endblock %}
+
+

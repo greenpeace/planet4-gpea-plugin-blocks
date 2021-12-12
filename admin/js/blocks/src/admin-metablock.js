@@ -288,6 +288,7 @@ jQuery(document).ready(function() {
     'shortcake_hero_set',
     'shortcake_steps_set',
     'shortcake_mc_subscription',
+    'shortcake_testimony',
   ];
 
   var required_image = [
