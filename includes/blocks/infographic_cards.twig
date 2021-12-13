@@ -1,9 +1,25 @@
 {% block infographic_cards %}
+	{% if ( field_groups|length > 0 ) %}
 	<section class="section-infographic-cards">
 		<div class="ct-container">
-			Test 5-2
+			<div class="grid">
+				{% for group in field_groups %}
+				<div class="grid__box">
+					<div class="grid__inner">
+						<div class="grid__text">
+							{% if ( group.title ) %}
+							<h4 class="grid__title">{{ group.title | raw | nl2br }}</h4>
+							{% endif %}
+							<p class="grid__desc">{{ group.content | raw | nl2br }}</p>
+						</div>
+						<div class="grid__image" style="background-image: url({{ group.img | e('html_attr') }})"></div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
 		</div>
 	</section>
+	{% endif %}
 {% endblock %}
 
 
