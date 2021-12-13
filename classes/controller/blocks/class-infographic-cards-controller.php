@@ -24,104 +24,52 @@ if ( ! class_exists( 'Infographic_Cards_Controller' ) ) {
 		const BLOCK_NAME = 'infographic_cards';
 
 		/**
+		 * The maximum number of sum-elements.
+		 *
+		 * @const string MAX_REPEATER
+		 */
+		const MAX_REPEATER = 3;
+
+		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
 		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
 		 */
 		public function prepare_fields() {
 
-			$fields = [
-				[
-					'label' => __( 'Section title', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'title',
-					'type'  => 'text',
-					'meta'  => [
-						'placeholder' => __( 'Section title', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
+			$fields = [];
+
+			$field_groups = [
+
+				'Card' => [
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => __( '<i>Card %s image</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'        => 'img',
+						'type'        => 'attachment',
+						'libraryType' => array( 'image' ),
+						'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 					],
-				],
-				[
-					'label' => __( 'Title 1', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'title_1',
-					'type'  => 'text',
-					'meta'  => [
-						'placeholder' => __( 'Title 1', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => __( '<i>Card %s title</i>', 'planet4-gpea-blocks-backend' ),
+						'description' => __( 'Leave empty to hide the title.<br>Shortcodes could be used: <code>[hightlight_number]12[/hightlight_number]</code>.', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'title',
+						'type'  => 'textarea',
+						'encode' => TRUE,
 					],
-				],
-				[
-					'label' => __( 'Paragraph 1', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'paragraph_1',
-					'type'  => 'text',
-					'meta'  => [
-						'placeholder' => __( 'Paragraph 1', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label' => __( 'Button 1 link', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'button_1_link',
-					'type'  => 'url',
-					'meta'  => [
-						'placeholder' => __( 'Button 1 link', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label' => __( 'Button 1 label', 'planet4-gpea-blocks-backend' ),
-					'description' => printf(__( 'Leave empty to use default (%s).', 'planet4-gpea-blocks-backend' ), __( 'Act Now', 'planet4-gpea-blocks-backend' )),
-					'attr'  => 'button_1_text',
-					'type'  => 'url',
-					'meta'  => [
-						'placeholder' => __( 'Button 1 label', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label' => __( 'Button 2 link', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'button_2_link',
-					'type'  => 'url',
-					'meta'  => [
-						'placeholder' => __( 'Button 2 link', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label' => __( 'Button 2 label', 'planet4-gpea-blocks-backend' ),
-					'description' => printf(__( 'Leave empty to use default (%s).', 'planet4-gpea-blocks-backend' ), __( 'Act Now', 'planet4-gpea-blocks-backend' )),
-					'attr'  => 'button_2_text',
-					'type'  => 'url',
-					'meta'  => [
-						'placeholder' => __( 'Button 2 label', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label' => __( 'Book Image', 'planet4-gpea-blocks-backend' ),
-					'attr'        => 'book_img',
-					'type'        => 'attachment',
-					'libraryType' => array( 'image' ),
-					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
-					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
-				],	
-				[
-					'label' => __( 'Title 2', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'title_2',
-					'type'  => 'textarea',
-					'meta'  => [
-						'placeholder' => __( 'Title 2', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label' => __( 'Paragraph 2', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'paragraph_2',
-					'type'  => 'text',
-					'meta'  => [
-						'placeholder' => __( 'Paragraph 2', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => __( '<i>Card %s text</i>', 'planet4-gpea-blocks-backend' ),
+						'description' => __( 'Shortcodes could be used: <code>[hightlight_text]text[/hightlight_text]</code>, <code>[hightlight_number]12[/hightlight_number]</code>, <code>[large_number]12[/large_number]</code>.', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'content',
+						'type'  => 'textarea',
+						'encode' => TRUE,
 					],
 				],
 			];
+
+			$fields = $this->format_meta_fields( $fields, $field_groups );
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
@@ -133,6 +81,52 @@ if ( ! class_exists( 'Infographic_Cards_Controller' ) ) {
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
 
+		}
+
+		/**
+		 * Get all the data that will be needed to render the block correctly.
+		 *
+		 * @param array $fields This will contain the fields to be rendered.
+		 * @param array $field_groups This contains the field templates to be repeated.
+		 *
+		 * @return array The fields to be rendered
+		 */
+		private function format_meta_fields( $fields, $field_groups ) : array {
+
+			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
+				foreach ( $field_groups as $group_name => $group_fields ) {
+					foreach ( $group_fields as $field ) {
+
+						$safe_name = preg_replace( '/\s/', '', strtolower( $group_name ) );
+						$attr_extension = '_' . $safe_name . '_' . $i;
+
+						if ( array_key_exists( 'attr' , $field ) ) {
+							$field['attr'] .= $attr_extension;
+						} else {
+							$field['attr'] = $i . $attr_extension;
+						}
+
+						if ( array_key_exists( 'label' , $field ) ) {
+							$field['label'] = sprintf( $field['label'], $i );
+						} else {
+							$field['label'] = $field['attr'];
+						}
+
+						$new_meta = [
+							'data-element-type' => $safe_name,
+							'data-element-name' => $group_name,
+							'data-element-number' => $i,
+						];
+						if ( ! array_key_exists( 'meta' , $field ) ) {
+							$field['meta'] = [];
+						}
+						$field['meta'] += $new_meta;
+
+						$fields[] = $field;
+					}
+				}
+			}
+			return $fields;
 		}
 
 		/**
@@ -150,15 +144,44 @@ if ( ! class_exists( 'Infographic_Cards_Controller' ) ) {
 				$attributes = [];
 			}
 
-			// Extract static fields only.
-			$static_fields = [];
-			foreach ( $attributes as $field_name => $field_content ) {
-				if ( ! preg_match( '/_\d+$/', $field_name ) ) {
-					$static_fields[ $field_name ] = $field_content;
+			$attributes = shortcode_atts( $attributes, $attributes, $shortcode_tag );
+
+			$field_groups = [];
+
+			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
+
+				// Group fields based on index number.
+				$group = [];
+				$group_type = false;
+				foreach ( $attributes as $field_name => $field_content ) {
+					if ( preg_match( '/_' . $i . '$/', $field_name ) ) {
+						$field_name_data = explode( '_', $field_name );
+
+						if ( ( 'img' === $field_name_data[0] ) && isset( $field_content ) ) {
+							$field_content = wp_get_attachment_url( $field_content );
+						}
+
+						if ( ( 'title' === $field_name_data[0] || 'content' === $field_name_data[0] ) && isset( $field_content ) ) {
+							$field_content = do_shortcode(urldecode( $field_content ));
+						}
+
+						$group[ $field_name_data[0] ] = $field_content;
+						$group_type = $field_name_data[1]; // TODO assigning multiple times here, can be more elegant?
+					}
 				}
+
+				// Extract group field type.
+				if ( $group_type ) {
+					$group['__group_type__'] = $group_type;
+				} else {
+					continue;
+				}
+
+				$field_groups[] = $group;
 			}
+
 			return [
-				'static_fields' => $static_fields,
+				'field_groups' => $field_groups,
 			];
 
 		}
@@ -175,6 +198,10 @@ if ( ! class_exists( 'Infographic_Cards_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
+			add_shortcode( 'hightlight_text', [ $this, 'render_shortcode_hightlight_text' ] );
+			add_shortcode( 'hightlight_number', [ $this, 'render_shortcode_hightlight_number' ] );
+			add_shortcode( 'large_number', [ $this, 'render_shortcode_large_number' ] );
+
 			$data = $this->prepare_data( $fields );
 
 			// Shortcode callbacks must return content, hence, output buffering here.
@@ -182,5 +209,16 @@ if ( ! class_exists( 'Infographic_Cards_Controller' ) ) {
 			$this->view->block( self::BLOCK_NAME, $data );
 			return ob_get_clean();
 		}
+
+		public function render_shortcode_hightlight_text($attr, $content, $tag) {
+			return '<span class="hightlight hightlight--text">' . $content . '</span>';
+		}
+		public function render_shortcode_hightlight_number($attr, $content, $tag) {
+			return '<span class="hightlight hightlight--number">' . $content . '</span>';
+		}
+		public function render_shortcode_large_number($attr, $content, $tag) {
+			return '<span class="hightlight hightlight--number hightlight--large">' . $content . '</span>';
+		}
+
 	}
 }

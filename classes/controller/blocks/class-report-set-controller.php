@@ -51,9 +51,27 @@ if ( ! class_exists( 'Report_Set_Controller' ) ) {
 				[
 					'label' => __( 'Paragraph 1', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph_1',
-					'type'  => 'text',
+					'type'  => 'textarea',
 					'meta'  => [
 						'placeholder' => __( 'Paragraph 1', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Title 2', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'title_2',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Title 2', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Paragraph 2', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'paragraph_2',
+					'type'  => 'textarea',
+					'meta'  => [
+						'placeholder' => __( 'Paragraph 2', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -68,9 +86,9 @@ if ( ! class_exists( 'Report_Set_Controller' ) ) {
 				],
 				[
 					'label' => __( 'Button 1 label', 'planet4-gpea-blocks-backend' ),
-					'description' => printf(__( 'Leave empty to use default (%s).', 'planet4-gpea-blocks-backend' ), __( 'Act Now', 'planet4-gpea-blocks-backend' )),
+					'description' => sprintf(__( 'Leave empty to use default: "%s".', 'planet4-gpea-blocks-backend' ), __( 'Act Now', 'planet4-gpea-blocks' )),
 					'attr'  => 'button_1_text',
-					'type'  => 'url',
+					'type'  => 'text',
 					'meta'  => [
 						'placeholder' => __( 'Button 1 label', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
@@ -87,9 +105,9 @@ if ( ! class_exists( 'Report_Set_Controller' ) ) {
 				],
 				[
 					'label' => __( 'Button 2 label', 'planet4-gpea-blocks-backend' ),
-					'description' => printf(__( 'Leave empty to use default (%s).', 'planet4-gpea-blocks-backend' ), __( 'Act Now', 'planet4-gpea-blocks-backend' )),
+					'description' => sprintf(__( 'Leave empty to use default: "%s".', 'planet4-gpea-blocks-backend' ), __( 'Act Now', 'planet4-gpea-blocks' )),
 					'attr'  => 'button_2_text',
-					'type'  => 'url',
+					'type'  => 'text',
 					'meta'  => [
 						'placeholder' => __( 'Button 2 label', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
@@ -103,24 +121,6 @@ if ( ! class_exists( 'Report_Set_Controller' ) ) {
 					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 				],	
-				[
-					'label' => __( 'Title 2', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'title_2',
-					'type'  => 'textarea',
-					'meta'  => [
-						'placeholder' => __( 'Title 2', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label' => __( 'Paragraph 2', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'paragraph_2',
-					'type'  => 'text',
-					'meta'  => [
-						'placeholder' => __( 'Paragraph 2', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
 			];
 
 			// Define the Shortcode UI arguments.
@@ -159,6 +159,7 @@ if ( ! class_exists( 'Report_Set_Controller' ) ) {
 			}
 			return [
 				'static_fields' => $static_fields,
+				'default_button_label' => __( 'Act Now', 'planet4-gpea-blocks' ),
 			];
 
 		}
