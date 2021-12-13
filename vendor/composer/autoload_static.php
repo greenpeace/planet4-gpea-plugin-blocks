@@ -56,6 +56,7 @@ class ComposerStaticInit0e1b1e452bbb566bff38328f70865857
         'P4EABKS\\Controllers\\Blocks\\Heart_Counter_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-heart-counter-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Hero_Set_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-hero-set-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Iframe_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-iframe-contoller.php',
+        'P4EABKS\\Controllers\\Blocks\\Infographic_Cards_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-infographic-cards-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Launcher_Card_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-launcher-card-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Launcher_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-launcher-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Link_List_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-link-list-controller.php',

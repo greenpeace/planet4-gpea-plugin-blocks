@@ -143,14 +143,15 @@ P4EABKS\Loader::get_instance(
 		'P4EABKS\Controllers\Blocks\Tips_Controller',
 		'P4EABKS\Controllers\Blocks\Iframe_Controller',
 		'P4EABKS\Controllers\Blocks\Video_Row_Controller',
-		'P4EABKS\Controllers\Blocks\MC_Subscription_Controller', // 7th
 		'P4EABKS\Controllers\Blocks\Grid_Images_Controller',
 		'P4EABKS\Controllers\Blocks\Donation_Block_Controller',
 		'P4EABKS\Controllers\Blocks\Hero_Set_Controller', // 1st
 		'P4EABKS\Controllers\Blocks\Steps_Set_Controller', // 2nd
 		'P4EABKS\Controllers\Blocks\Geography_Set_Controller', // 3rd
 		'P4EABKS\Controllers\Blocks\Report_Set_Controller', // 5th (top)
+		'P4EABKS\Controllers\Blocks\Infographic_Cards_Controller', // 5th (bottom)
 		'P4EABKS\Controllers\Blocks\Testimony_Controller', // 6th
+		'P4EABKS\Controllers\Blocks\MC_Subscription_Controller', // 7th
 		'P4EABKS\Models\Taxonomy',
 		'P4EABKS\Models\Tags_Meta',
 	], 'P4EABKS\Views\View'
