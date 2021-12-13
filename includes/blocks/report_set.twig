@@ -1,7 +1,40 @@
 {% block report_set %}
 	<section class="section-report-set">
 		<div class="ct-container">
-			Test 5-1
+			<div class="content content--title">
+				<h2 class="title">
+					{{ static_fields.title | e }}
+				</h2>
+			</div>
+			<div class="content content--desc">
+				<div class="content__inner content__inner--1">
+					<h4 class="title">
+						{{ static_fields.title_1 | e }}
+					</h4>
+					<p class="desc">
+						{{ static_fields.paragraph_1 | raw }}
+					</p>
+				</div>
+				<div class="content__inner content__inner--2">
+					<div class="buttons">
+						<a class="buttons__link buttons__link--primary button btn-primary" href="{{ static_fields.button_1_link | e('html_attr') }}">{{ static_fields.button_1_text | e | default(default_button_label) }}<span class="buttons__arrow"></span></a>
+						<a class="buttons__link buttons__link--secondary" href="{{ static_fields.button_2_link | e('html_attr') }}">{{ static_fields.button_2_text | e | default(default_button_label) }}<span class="buttons__arrow"></span></a>
+					</div>
+					<div class="image">
+						{% if ( static_fields.book_img ) %}
+						<div class="bg" style="background-image: url({{ static_fields.book_img | e('html_attr') }})"></div>
+						{% endif %}
+					</div>
+				</div>
+				<div class="content__inner content__inner--3">
+					<h4 class="title">
+						{{ static_fields.title_2 | e }}
+					</h4>
+					<p class="desc">
+						{{ static_fields.paragraph_2 | raw }}
+					</p>
+				</div>
+			</div>
 		</div>
 	</section>
 {% endblock %}

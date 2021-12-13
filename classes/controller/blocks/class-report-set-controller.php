@@ -150,15 +150,15 @@ if ( ! class_exists( 'Report_Set_Controller' ) ) {
 				$attributes = [];
 			}
 
-			// Extract static fields only.
-			$static_fields = [];
-			foreach ( $attributes as $field_name => $field_content ) {
-				if ( ! preg_match( '/_\d+$/', $field_name ) ) {
-					$static_fields[ $field_name ] = $field_content;
-				}
+			if ( isset( $attributes['book_img'] ) ) {
+				$attributes['book_img'] = wp_get_attachment_url( $attributes['book_img'] );
 			}
+			else {
+				$attributes['book_img'] = $donation_block_default_img;
+			}
+
 			return [
-				'static_fields' => $static_fields,
+				'static_fields' => $attributes,
 				'default_button_label' => __( 'Act Now', 'planet4-gpea-blocks' ),
 			];
 
