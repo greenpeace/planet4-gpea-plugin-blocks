@@ -285,11 +285,11 @@ jQuery(document).ready(function() {
     'shortcake_launcher_card',
     'shortcake_grid_images',
     'shortcake_donation_block',
-    'shortcake_hero_set',
-    'shortcake_steps_set',
-    'shortcake_geography_set',
-    'shortcake_mc_subscription',
-    'shortcake_testimony',
+    'shortcake_hero_set', // 1st
+    'shortcake_steps_set', // 2nd
+    'shortcake_geography_set', // 3rd
+    'shortcake_testimony', // 6th
+    'shortcake_mc_subscription', // 7th
   ];
 
   var required_image = [
