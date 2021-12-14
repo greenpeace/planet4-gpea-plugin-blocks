@@ -148,6 +148,8 @@ P4EABKS\Loader::get_instance(
 		'P4EABKS\Controllers\Blocks\Hero_Set_Controller', // 1st
 		'P4EABKS\Controllers\Blocks\Steps_Set_Controller', // 2nd
 		'P4EABKS\Controllers\Blocks\Geography_Set_Controller', // 3rd
+		'P4EABKS\Controllers\Blocks\Get_Involved_Controller', // 4th (top)
+		'P4EABKS\Controllers\Blocks\Get_Involved_Cards_Controller', // 4th (bottom)
 		'P4EABKS\Controllers\Blocks\Report_Set_Controller', // 5th (top)
 		'P4EABKS\Controllers\Blocks\Infographic_Cards_Controller', // 5th (bottom)
 		'P4EABKS\Controllers\Blocks\Testimony_Controller', // 6th

@@ -52,6 +52,8 @@ class ComposerStaticInit0e1b1e452bbb566bff38328f70865857
         'P4EABKS\\Controllers\\Blocks\\Donation_Block_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-donation-block-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Donation_Dollar_Handles_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-donation-dollar-handles-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Geography_Set_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-geography-set-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Get_Involved_Cards_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-get-involved-cards-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Get_Involved_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-get-involved-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Grid_Images_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-grid-images-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Heart_Counter_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-heart-counter-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Hero_Set_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-hero-set-controller.php',
