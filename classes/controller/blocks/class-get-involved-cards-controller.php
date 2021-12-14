@@ -1,6 +1,6 @@
 <?php
 /**
- * Geography Set Module (Homepage B Version 3rd Screen)
+ * Get Involved Cards Module (Homepage B Version 4th Screen, Bottom Part)
  *
  * @package P4EABKS
  * @since 0.1
@@ -8,20 +8,20 @@
 
 namespace P4EABKS\Controllers\Blocks;
 
-if ( ! class_exists( 'Geography_Set_Controller' ) ) {
+if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 	/**
-	 * Class Geography_Set_Controller
+	 * Class Get_Involved_Cards_Controller
 	 *
 	 * @package P4EABKS\Controllers\Blocks
 	 */
-	class Geography_Set_Controller extends Controller {
+	class Get_Involved_Cards_Controller extends Controller {
 
 		/**
 		 * The block name constant.
 		 *
 		 * @const string BLOCK_NAME
 		 */
-		const BLOCK_NAME = 'geography_set';
+		const BLOCK_NAME = 'get_involved_cards';
 
 		/**
 		 * The maximum number of sum-elements.
@@ -37,87 +37,17 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 		public function prepare_fields() {
 
 			$fields = [
-				[
-					'label' => __( 'Section title', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'title',
-					'type'  => 'text',
-					'meta'  => [
-						'placeholder' => __( 'Section title', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label' => __( 'Paragraph 1', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'paragraph_1',
-					'type'  => 'textarea',
-					'meta'  => [
-						'placeholder' => __( 'Paragraph 1', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				[
-					'label' => __( 'Paragraph 2', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'paragraph_2',
-					'type'  => 'textarea',
-					'meta'  => [
-						'placeholder' => __( 'Paragraph 2', 'planet4-gpea-blocks-backend' ),
-						'data-plugin' => 'planet4-gpea-blocks',
-					],
-				],
-				// 封面圖片
-				// 影片 or YouTube
-				// Title
 			];
 
 			$field_groups = [
-
-				'Ship' => [
-					[
-						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Ship %s icon</i>', 'planet4-gpea-blocks-backend' ),
-						'attr'        => 'icon',
-						'type'        => 'attachment',
-						'libraryType' => array( 'image' ),
-						'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
-						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
-					],
-					[
-						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Ship %s name</i>', 'planet4-gpea-blocks-backend' ),
-						'attr'  => 'title',
-						'type'  => 'text',
-					],
-					[
-						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Ship %s subtitle</i>', 'planet4-gpea-blocks-backend' ),
-						'attr'  => 'subtitle',
-						'type'  => 'text',
-					],
-					[
-						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Ship %s paragraph</i>', 'planet4-gpea-blocks-backend' ),
-						'attr'  => 'subtitle',
-						'type'  => 'textarea',
-					],
-					[
-						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Ship %s position endpoint URL</i>', 'planet4-gpea-blocks-backend' ),
-						'attr'  => 'endpoint',
-						'type'  => 'url',
-					],
-					// enabled
-					// 封面圖片
-					// 影片 or YouTube
-					// autoplay enabled
-				],
 			];
 
 			$fields = $this->format_meta_fields( $fields, $field_groups );
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
-				'label'         => __( 'GPEA | Geography Set', 'planet4-gpea-blocks-backend' ),
-				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/geography-set-block.jpg' ) . '" />',
+				'label'         => __( 'GPEA | Get Involved Cards', 'planet4-gpea-blocks-backend' ),
+				'listItemImage' => '<img src="' . esc_url( plugins_url() . '/planet4-gpea-plugin-blocks/admin/img/get-involved-cards-block.jpg' ) . '" />',
 				'attrs'         => $fields,
 				'post_type'     => P4EABKS_ALLOWED_PAGETYPE,
 			];
