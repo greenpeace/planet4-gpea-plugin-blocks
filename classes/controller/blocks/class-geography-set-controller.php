@@ -47,33 +47,64 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Paragraph 1', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'paragraph_1',
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'paragraph',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Paragraph 1', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Paragraph 2', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'paragraph_2',
+					'label' => __( 'Video thumbnail', 'planet4-gpea-blocks-backend' ),
+					'attr'        => 'video_img',
+					'type'        => 'attachment',
+					'libraryType' => array( 'image' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+				],
+				[
+					'label' => __( 'Paragraph under thumbnail', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'video_paragraph',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Paragraph 2', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'Paragraph under thumbnail', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
-				// 封面圖片
-				// 影片 or YouTube
-				// Title
+				[
+					'label' => __( 'Video title', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use resource\'s title. (Not support on YouTube)', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'video_title',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Video title', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Youtube URL', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'video_youtube',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Youtube URL', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label'       => __( 'Or choose a video file', 'planet4-blocks-backend' ),
+					'attr'        => 'video',
+					'type'        => 'attachment',
+					'libraryType' => [ 'video' ],
+					'addButton'   => __( 'Select a Video', 'planet4-blocks-backend' ),
+					'frameTitle'  => __( 'Select a Video', 'planet4-blocks-backend' )
+				],
 			];
 
 			$field_groups = [
 
 				'Ship' => [
 					[
-						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Ship %s icon</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'        => 'icon',
 						'type'        => 'attachment',
@@ -82,33 +113,70 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 					],
 					[
-						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Ship %s name</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'title',
 						'type'  => 'text',
 					],
 					[
-						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Ship %s subtitle</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'subtitle',
 						'type'  => 'text',
 					],
 					[
-						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Ship %s paragraph</i>', 'planet4-gpea-blocks-backend' ),
-						'attr'  => 'subtitle',
+						'attr'  => 'paragraph',
 						'type'  => 'textarea',
 					],
 					[
-						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Ship %s position endpoint URL</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'endpoint',
 						'type'  => 'url',
 					],
-					// enabled
-					// 封面圖片
-					// 影片 or YouTube
-					// autoplay enabled
+					[
+						'label' => __( '<i>Ship %s image</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'        => 'img',
+						'type'        => 'attachment',
+						'libraryType' => array( 'image' ),
+						'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					],
+					[
+						'label' => __( '<i>Ship %s is visible on map</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'enabled',
+						'type'  => 'checkbox',
+						// 'value' => 'true',
+					],
+					[
+						'label' => __( '<i>Ship %s video button is visible</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'layout',
+						'type'  => 'video_enabled',
+						'type'  => 'checkbox',
+						// 'value' => 'true',
+					],
+					[
+						'label' => __( '<i>Ship %s video button label</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'video_button_label',
+						'type'  => 'text',
+					],
+					[
+						'label' => __( 'Youtube URL', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'video_youtube',
+						'type'  => 'text',
+					],
+					[
+						'label'       => __( 'Or choose a video file', 'planet4-blocks-backend' ),
+						'attr'        => 'video',
+						'type'        => 'attachment',
+						'libraryType' => [ 'video' ],
+						'addButton'   => __( 'Select a Video', 'planet4-blocks-backend' ),
+						'frameTitle'  => __( 'Select a Video', 'planet4-blocks-backend' )
+					],
+					[
+						'label' => __( 'Auto play (Only support on PC)', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'video_autoplay',
+						'type'  => 'checkbox',
+						// 'value' => 'true',
+					],
 				],
 			];
 
