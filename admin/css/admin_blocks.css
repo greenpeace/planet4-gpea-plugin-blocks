@@ -1,8 +1,12 @@
-.block-attribute-wrapper {
+/* .block-attribute-wrapper {
     display: inline-block;
     margin-right: 20px;
 }
 
 button.shortcake_main_issues-remove-element[disabled] {
 	display: none;
+} */
+
+.edit-shortcode-form .edit-shortcode-form-fields > div {
+    position: relative;
 }
