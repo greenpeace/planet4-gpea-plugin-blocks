@@ -315,6 +315,9 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 			$static_fields = [];
 			foreach ( $attributes as $field_name => $field_content ) {
 				if ( ! preg_match( '/_\d+$/', $field_name ) ) {
+					if( 'title' === $field_name || 'title_mobile' === $field_name ) {
+						$field_content = str_replace( [ '<p>', '</p>' ], '<br />', $field_content );
+					}
 					$static_fields[ $field_name ] = $field_content;
 				}
 			}

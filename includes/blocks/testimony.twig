@@ -5,8 +5,8 @@
 				<h2 class="title">
 					{{ static_fields.title | e }}
 				</h2>
-				<p class="desc">
-					{{ static_fields.paragraph | raw }}
+				<div class="desc">
+					<p>{{ static_fields.paragraph | raw }}</p>
 				</p>
 			</div>
 			{% if ( field_groups|length > 0 ) %}
@@ -27,9 +27,9 @@
 									<p class="text__title">{{ group.title | e }}</p>
 									<h4 class="text__name">{{ group.name | e }}</h4>
 								</div>
-								<p class="text text--desc">
-									{{ group.paragraph | raw }}
-								</p>
+								<div class="text text--desc">
+									<p>{{ group.paragraph | raw }}</p>
+								</div>
 							</div>
 						</div>
 					{% if ( group.end_slide_group ) %}

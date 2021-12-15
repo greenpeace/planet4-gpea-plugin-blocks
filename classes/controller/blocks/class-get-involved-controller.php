@@ -88,7 +88,7 @@ if ( ! class_exists( 'Get_Involved_Controller' ) ) {
 					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 					'description' => __( 'Leave empty to use the selected page\'s first paragraph.', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph',
-					'type'  => 'text',
+					'type'  => 'textarea',
 					'meta'  => [
 						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
@@ -152,15 +152,21 @@ if ( ! class_exists( 'Get_Involved_Controller' ) ) {
 				$attributes = [];
 			}
 
-			// Extract static fields only.
-			$static_fields = [];
-			foreach ( $attributes as $field_name => $field_content ) {
-				if ( ! preg_match( '/_\d+$/', $field_name ) ) {
-					$static_fields[ $field_name ] = $field_content;
-				}
+			$tanslate = [];
+
+			$tanslate['default_button_label'] = __( 'Act Now', 'planet4-gpea-blocks' );
+			$tanslate['category_label'] = __( 'Spotlight of the mounth:', 'planet4-gpea-blocks' );
+
+			if ( isset( $attributes['img'] ) ) {
+				$attributes['img'] = wp_get_attachment_url( $attributes['img'] );
 			}
+			else {
+				$attributes['img'] = $donation_block_default_img;
+			}
+
 			return [
-				'static_fields' => $static_fields,
+				'static_fields' => $attributes,
+				'tanslate_strings' => $tanslate,
 			];
 
 		}

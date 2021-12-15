@@ -171,7 +171,7 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 				[
 					'label' => __( '<i>%s: Card %s paragraph</i>', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph',
-					'type'  => 'text',
+					'type'  => 'textarea',
 				],
 				[
 					'label' => __( '<i>%s: Card %s link</i>', 'planet4-gpea-blocks-backend' ),

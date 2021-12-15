@@ -2,10 +2,10 @@
 	{% if ( field_groups|length > 0 ) %}
 	<section class="section-steps-set">
 		<div class="ct-container">
-			<h2 class="title">
-				<span class="title__text title__text--pc">{{ static_fields.title | raw }}</span>
-				<span class="title__text title__text--mobile">{{ static_fields.title_mobile | raw | default(static_fields.title) }}</span>
-			</h2>
+			<div class="title">
+				<h2 class="title__text title__text--pc">{{ static_fields.title | raw }}</h2>
+				<p class="title__text title__text--mobile">{{ static_fields.title_mobile | default(static_fields.title) | raw }}</p>
+			</div>
 			<div class="grid">
 				{% for group in field_groups %}
 				<div class="grid__box">
@@ -13,7 +13,9 @@
 						<div class="grid__image" style="background-image: url({{ group.img | e('html_attr') }})"></div>
 						<div class="grid__text">
 							<h4 class="grid__title">{{ group.title | e }}</h4>
-							<p class="grid__desc">{{ group.content | raw }}</p>
+							<div class="grid__desc">
+								<p>{{ group.content | raw }}</p>
+							</div>
 						</div>
 					</div>
 				</div>

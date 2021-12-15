@@ -3,15 +3,19 @@
 		<div class="ct-container slim">
 			<div class="content content--{{ static_fields.layout | e('html_attr') }}">
 				<div class="content__text">
-					<h2 class="title">
-						<span class="title__text title__text--pc title__text--1 title__text--{{ static_fields.title_color | e('html_attr') }}">{{ static_fields.title | e }}</span>
-						<span class="title__text title__text--pc title__text--2 title__text--{{ static_fields.secondary_title_color | e('html_attr') }}">{{ static_fields.secondary_title | e }}</span>
-						<span class="title__text title__text--mobile title__text--1 title__text--{{ static_fields.title_color | e('html_attr') }}">{{ static_fields.title_mobile | e | default(static_fields.title) }}</span>
-						<span class="title__text title__text--mobile title__text--2 title__text--{{ static_fields.secondary_title_color | e('html_attr') }}">{{ static_fields.secondary_title_mobile | e | default(static_fields.secondary_title) }}</span>
-					</h2>
-					<p class="desc">
-						{{ static_fields.subtitle | raw }}
-					</p>
+					<div class="title">
+						<h2>
+							<span class="title__text title__text--pc title__text--1 title__text--{{ static_fields.title_color | e('html_attr') }}">{{ static_fields.title | e }}</span>
+							<span class="title__text title__text--pc title__text--2 title__text--{{ static_fields.secondary_title_color | e('html_attr') }}">{{ static_fields.secondary_title | e }}</span>
+						</h2>
+						<p>
+							<span class="title__text title__text--mobile title__text--1 title__text--{{ static_fields.title_color | e('html_attr') }}">{{ static_fields.title_mobile | default(static_fields.title) | e }}</span>
+							<span class="title__text title__text--mobile title__text--2 title__text--{{ static_fields.secondary_title_color | e('html_attr') }}">{{ static_fields.secondary_title_mobile | default(static_fields.secondary_title) | e }}</span>
+						</p>
+					</div>
+					<div class="desc">
+						<p>{{ static_fields.subtitle | raw }}</p>
+					</div>
 				</div>
 				<span class="arrow"></span>
 			</div>
