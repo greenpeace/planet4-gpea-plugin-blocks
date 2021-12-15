@@ -288,7 +288,7 @@ jQuery(document).ready(function() {
     'shortcake_hero_set', // 1st
     'shortcake_steps_set', // 2nd
     'shortcake_geography_set', // 3rd
-    'shortcake_get_involved_cards', // 4th (bottom)
+    // 'shortcake_get_involved_cards', // 4th (bottom)
     'shortcake_infographic_cards', // 5th (bottom)
     'shortcake_testimony', // 6th
     'shortcake_mc_subscription', // 7th
