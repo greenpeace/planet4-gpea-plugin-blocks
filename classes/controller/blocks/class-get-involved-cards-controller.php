@@ -28,7 +28,7 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 		 *
 		 * @const string MAX_REPEATER
 		 */
-		const MAX_REPEATER = 10;
+		const MAX_REPEATER = 3;
 
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
@@ -36,11 +36,209 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 		 */
 		public function prepare_fields() {
 
-			$fields = [
+			// get issues list
+
+			$planet4_options = get_option( 'planet4_options' );
+			$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : FALSE;
+			if ( ! $main_issues_category_id ) {
+				$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
+				if ( $main_issues_category ) {
+					$main_issues_category_id = $main_issues_category->term_id;
+				}
+			}
+
+			$main_issues = [];
+			if( $main_issues_category_id ) {
+				$main_issues = get_terms([
+					'taxonomy' => 'category',
+					'parent' => $main_issues_category_id,
+				]);
+			}
+
+			$main_issue_options = [];
+			$main_issue_options[] = [
+				'value' => '',
+				'label' => __( 'Use the selected page\'s category', 'planet4-gpea-blocks-backend' ),
+			];
+			foreach($main_issues as $issue_item) {
+				$main_issue_options[] = [
+					'value' => $issue_item->slug,
+					'label' => esc_html($issue_item->name),
+				];
+			}
+
+			// group list
+
+			$group_name_list = [
+				1 => 'Group 1',
+				2 => 'Group 2',
+				3 => 'Group 3',
 			];
 
-			$field_groups = [
+			// static fields
+
+			$see_all_label = __( 'See all', 'planet4-gpea-blocks' );
+
+			$fields = [];
+
+			foreach($group_name_list as $i => $group_name) {
+				$fields[] = [
+					'label' => __( $group_name . ' link text', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'button_' . $i . '_label',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( $group_name . ' link text', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				];
+				$fields[] = [
+					'label' => __( $group_name . ' link is visible</i>', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'button_' . $i . '_enabled',
+					'type'  => 'checkbox',
+					// 'value' => 'true',
+				];
+			}
+
+			$fields[] = [
+				'label' => sprintf(__( '"%s" link url', 'planet4-gpea-blocks-backend' ), $see_all_label),
+				'attr'  => 'button_more_url',
+				'type'  => 'url',
 			];
+			$fields[] = [
+				'label' => sprintf(__( '"%s" link is visible', 'planet4-gpea-blocks-backend' ), $see_all_label),
+				'attr'  => 'button_more_enabled',
+				'type'  => 'checkbox',
+				// 'value' => 'true',
+			];
+
+			// group fields
+
+			$location_label = __( 'LOCATION', 'planet4-gpea-blocks' );
+			$people_label = __( 'PEOPLE', 'planet4-gpea-blocks' );
+
+			$group_field_list = [
+				[
+					'label'       => __( '<i>%s: Card %s project page</i>', 'planet4-gpea-blocks-backend' ),
+					'attr'     => 'post_id',
+					'type'     => 'post_select',
+					// 'multiple' => 'multiple',
+					'query'    => [
+						'post_type'   => array( 'page' ),
+						'post_status' => 'publish',
+						'orderby'     => 'post_title',
+						'order'           => 'ASC',
+						'meta_key'    => '_wp_page_template',
+						'meta_value'  => 'page-templates/project.php',
+					],
+					'meta'     => [
+						'select2_options' => [
+							'allowClear'             => TRUE,
+							'placeholder'            => __( 'Select project page', 'planet4-gpea-blocks-backend' ),
+							'closeOnSelect'          => FALSE,
+							'minimumInputLength'     => 0,
+							'multiple'               => FALSE,
+							'maximumSelectionLength' => 1,
+							'width'                  => '80%',
+						],
+					],
+				],
+				[
+					'label' => __( '<i>%s: Card %s project category</i>', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'category',
+					'type'  => 'select',
+					'options'  => $main_issue_options,
+				],
+				[
+					'label' => __( '<i>%s: Card %s project title</i>', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use the selected page\'s title.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'post_title',
+					'type'  => 'text',
+				],
+				[
+					'label' => __( '<i>%s: Card %s Image</i>', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use the selected page\'s featured image.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'img',
+					'type'        => 'attachment',
+					'libraryType' => array( 'image' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+				],
+				[
+					'label' => __( '<i>%s: Card %s subtitle</i>', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'subtitle',
+					'type'  => 'text',
+				],
+				[
+					'label' => __( '<i>%s: Card %s paragraph</i>', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'paragraph',
+					'type'  => 'text',
+				],
+				[
+					'label' => __( '<i>%s: Card %s link</i>', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use the selected page\'s permalink.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'url',
+					'type'  => 'text',
+				],
+				[
+					'label' => __( '<i>%s: Card %s layout</i>', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'layout',
+					'type'  => 'radio',
+					'value' => '1',
+					'options' => [
+						[
+							'value' => '1',
+							'label' => __( 'Location & pecentage', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => '2',
+							'label' => __( 'Only location', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => '3',
+							'label' => __( 'No location & pecentage', 'planet4-gpea-blocks-backend' ),
+						],
+					],
+				],
+				[
+					'label' => __( '<i>%s: Card %s pecentage</i>', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use the selected page\'s setting.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'pecentage',
+					'type'  => 'text',
+				],
+				[
+					'label' => __( '<i>%s: Card %s location label</i>', 'planet4-gpea-blocks-backend' ),
+					'description' => sprintf(__( 'Leave empty to use the default: "%s".', 'planet4-gpea-blocks-backend' ), $location_label),
+					'attr'  => 'location_label',
+					'type'  => 'text',
+				],
+				[
+					'label' => __( '<i>%s: Card %s location</i>', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use the selected page\'s setting.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'location',
+					'type'  => 'text',
+				],
+				[
+					'label' => __( '<i>%s: Card %s people label</i>', 'planet4-gpea-blocks-backend' ),
+					'description' => sprintf(__( 'Leave empty to use the default: "%s".', 'planet4-gpea-blocks-backend' ), $people_label),
+					'attr'  => 'people_label',
+					'type'  => 'text',
+				],
+				[
+					'label' => __( '<i>%s: Card %s people</i>', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'people',
+					'type'  => 'text',
+				],
+				[
+					'label' => __( '<i>%s: Card %s people unit</i>', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'people_unit',
+					'type'  => 'text',
+				],
+			];
+
+			$field_groups = [];
+			foreach($group_name_list as $group_name) {
+				$field_groups[$group_name] = $group_field_list;
+			}
 
 			$fields = $this->format_meta_fields( $fields, $field_groups );
 
@@ -80,7 +278,7 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 						}
 
 						if ( array_key_exists( 'label' , $field ) ) {
-							$field['label'] = sprintf( $field['label'], $i );
+							$field['label'] = sprintf( $field['label'], $group_name, $i );
 						} else {
 							$field['label'] = $field['attr'];
 						}

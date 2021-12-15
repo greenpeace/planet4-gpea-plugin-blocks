@@ -278,6 +278,20 @@ msgstr ""
 msgid "There was a problem with the submission"
 msgstr ""
 
-#. Report Set blocks
+#. Report Set blocks & Get Involved blocks
 msgid "Act Now"
+msgstr ""
+
+#. Get Involved blocks
+msgid "Spotlight of the mounth:"
+msgstr ""
+
+#. Get Involved Cards blocks
+msgid "hot items"
+msgstr ""
+msgid "See all"
+msgstr ""
+msgid "LOCATION"
+msgstr ""
+msgid "PEOPLE"
 msgstr ""

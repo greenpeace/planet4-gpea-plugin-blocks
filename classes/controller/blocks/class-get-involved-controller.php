@@ -24,25 +24,106 @@ if ( ! class_exists( 'Get_Involved_Controller' ) ) {
 		const BLOCK_NAME = 'get_involved';
 
 		/**
-		 * The maximum number of sum-elements.
-		 *
-		 * @const string MAX_REPEATER
-		 */
-		const MAX_REPEATER = 10;
-
-		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
 		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
 		 */
 		public function prepare_fields() {
 
 			$fields = [
+				[
+					'label' => __( 'Section title', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'title',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Section Title', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label'       => __( 'Project page', 'planet4-gpea-blocks-backend' ),
+					'attr'     => 'post_id',
+					'type'     => 'post_select',
+					// 'multiple' => 'multiple',
+					'query'    => [
+						'post_type'   => array( 'page' ),
+						'post_status' => 'publish',
+						'orderby'     => 'post_title',
+						'order'           => 'ASC',
+						'meta_key'    => '_wp_page_template',
+						'meta_value'  => 'page-templates/project.php',
+					],
+					'meta'     => [
+						'select2_options' => [
+							'allowClear'             => TRUE,
+							'placeholder'            => __( 'Select project page', 'planet4-gpea-blocks-backend' ),
+							'closeOnSelect'          => FALSE,
+							'minimumInputLength'     => 0,
+							'multiple'               => FALSE,
+							'maximumSelectionLength' => 1,
+							'width'                  => '80%',
+						],
+					],
+				],
+				[
+					'label' => __( 'Project category', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use the selected page\'s category name.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'category',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Project category', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Project title', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use the selected page\'s title.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'post_title',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Project title', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use the selected page\'s first paragraph.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'paragraph',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Button label', 'planet4-gpea-blocks-backend' ),
+					'description' => sprintf(__( 'Leave empty to use default: "%s".', 'planet4-gpea-blocks-backend' ), __( 'Act Now', 'planet4-gpea-blocks' )),
+					'attr'  => 'button_label',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Button label', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Button link', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use the selected page\'s permalink.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'button_url',
+					'type'  => 'text',
+					'meta'  => [
+						'placeholder' => __( 'Button link', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( 'Image', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use the selected page\'s featured image.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'img',
+					'type'        => 'attachment',
+					'libraryType' => array( 'image' ),
+					'addButton'   => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
+				],
 			];
-
-			$field_groups = [
-			];
-
-			$fields = $this->format_meta_fields( $fields, $field_groups );
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
@@ -54,52 +135,6 @@ if ( ! class_exists( 'Get_Involved_Controller' ) ) {
 
 			shortcode_ui_register_for_shortcode( 'shortcake_' . self::BLOCK_NAME, $shortcode_ui_args );
 
-		}
-
-		/**
-		 * Get all the data that will be needed to render the block correctly.
-		 *
-		 * @param array $fields This will contain the fields to be rendered.
-		 * @param array $field_groups This contains the field templates to be repeated.
-		 *
-		 * @return array The fields to be rendered
-		 */
-		private function format_meta_fields( $fields, $field_groups ) : array {
-
-			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
-				foreach ( $field_groups as $group_name => $group_fields ) {
-					foreach ( $group_fields as $field ) {
-
-						$safe_name = preg_replace( '/\s/', '', strtolower( $group_name ) );
-						$attr_extension = '_' . $safe_name . '_' . $i;
-
-						if ( array_key_exists( 'attr' , $field ) ) {
-							$field['attr'] .= $attr_extension;
-						} else {
-							$field['attr'] = $i . $attr_extension;
-						}
-
-						if ( array_key_exists( 'label' , $field ) ) {
-							$field['label'] = sprintf( $field['label'], $i );
-						} else {
-							$field['label'] = $field['attr'];
-						}
-
-						$new_meta = [
-							'data-element-type' => $safe_name,
-							'data-element-name' => $group_name,
-							'data-element-number' => $i,
-						];
-						if ( ! array_key_exists( 'meta' , $field ) ) {
-							$field['meta'] = [];
-						}
-						$field['meta'] += $new_meta;
-
-						$fields[] = $field;
-					}
-				}
-			}
-			return $fields;
 		}
 
 		/**
