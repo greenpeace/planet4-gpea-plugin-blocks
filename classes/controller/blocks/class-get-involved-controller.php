@@ -152,21 +152,57 @@ if ( ! class_exists( 'Get_Involved_Controller' ) ) {
 				$attributes = [];
 			}
 
+			if ( isset( $attributes[ 'img' ] ) && @strlen( $attributes[ 'img' ] ) ) {
+				$attributes[ 'img' ] = wp_get_attachment_url( $attributes[ 'img' ] );
+			}
+
+			if ( isset( $attributes[ 'paragraph' ] ) && @strlen( $attributes[ 'paragraph' ] ) ) {
+				$attributes[ 'paragraph' ] = '<p>' . $attributes[ 'paragraph' ] . '</p>';
+			}
+
 			$tanslate = [];
 
-			$tanslate['default_button_label'] = __( 'Act Now', 'planet4-gpea-blocks' );
-			$tanslate['category_label'] = __( 'Spotlight of the mounth:', 'planet4-gpea-blocks' );
+			$tanslate[ 'default_button_label' ] = __( 'Act Now', 'planet4-gpea-blocks' );
+			$tanslate[ 'category_label' ] = __( 'Spotlight of the mounth:', 'planet4-gpea-blocks' );
 
-			if ( isset( $attributes['img'] ) ) {
-				$attributes['img'] = wp_get_attachment_url( $attributes['img'] );
+			$default = [];
+
+			$post = NULL;
+			if ( isset( $attributes[ 'post_id' ] ) && @strlen( $attributes[ 'post_id' ] ) ) {
+				$post_id = $attributes[ 'post_id' ];
+				$post = get_post( $post_id );
+				if( $post ) {
+					$default[ 'post_title' ] = $post->post_title;
+					$default[ 'button_url' ] = get_permalink( $post_id );
+					$default[ 'img' ] = get_the_post_thumbnail_url( $post_id, 'post-thumbnails' );
+					preg_match_all( 
+						'/' . get_shortcode_regex() . '/',
+						$post->post_content,
+						$shortcodes,
+						PREG_SET_ORDER
+					);
+					foreach( $shortcodes as $shortcode_item ) {
+						$shortcode_attr = shortcode_parse_atts( $shortcode_item[ 0 ] );
+						if( isset( $shortcode_attr[ 'layout' ], $shortcode_attr[ 'paragraph' ] ) && 'plain_light' === $shortcode_attr[ 'layout' ] ) {
+							$default[ 'paragraph' ] = wpautop( $shortcode_attr[ 'paragraph' ] );
+						}
+					}
+				}
 			}
-			else {
-				$attributes['img'] = $donation_block_default_img;
+
+			if ( $post && class_exists( 'P4CT_Site' ) ) {
+				$gpea_extra = new \P4CT_Site();
+				$main_issue = $gpea_extra->gpea_get_main_issue( $post->ID );
+				if( $main_issue ) {
+					$attributes[ 'category_slug' ] = $main_issue->slug;
+					$default[ 'category' ] = $main_issue->name;
+				}
 			}
 
 			return [
 				'static_fields' => $attributes,
 				'tanslate_strings' => $tanslate,
+				'default_strings' => $default,
 			];
 
 		}
