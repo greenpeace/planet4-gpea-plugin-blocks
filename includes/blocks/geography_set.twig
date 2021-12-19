@@ -13,7 +13,7 @@
 					<div class="desc">
 						<p>{{ static_fields.paragraph | raw }}</p>
 					</div>
-					<div class="image play-section-video" {% if ( static_fields.video_img ) %}style="background-image: url({{ static_fields.video_img | e('html_attr') }})"{% endif %}>
+					<div class="image" data-target="geography-set-video" {% if ( static_fields.video_img ) %}style="background-image: url({{ static_fields.video_img | e('html_attr') }})"{% endif %}>
 					</div>
 					<div class="desc">
 						<p>{{ static_fields.video_paragraph | raw }}</p>
@@ -21,11 +21,35 @@
 				</div>
 				<div class="content__inner content__inner--2">
 					<div class="image">
+						{% for key, group in field_groups %}
+							{% if ( group.enabled ) %}
+							<div class="image__ship" data-target="geography-set-ship" data-ship="{{ key | e('html_attr') }}">
+								<div class="image__name">{{ group.title | e }}</div>
+								{% if ( group.icon ) %}
+								<div class="image__icon" style="background-image: url({{ group.icon | e('html_attr') }})"></div>
+								{% endif %}
+							</div>
+							{% endif %}
+						{% endfor %}
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<div class="section-geography-set__lightbox section-geography-set__video">
+		<div class="lightbox__inner">
+			
+		</div>
+	</div>
+	{% for key, group in field_groups %}
+		{% if ( group.enabled ) %}
+		<div class="section-geography-set__lightbox section-geography-set__ship" data-ship="{{ key | e('html_attr') }}">
+			<div class="lightbox__inner">
+				
+			</div>
+		</div>
+		{% endif %}
+	{% endfor %}
 {% endblock %}
 
 

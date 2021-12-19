@@ -148,8 +148,7 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 					],
 					[
 						'label' => __( '<i>Ship %s video button is visible</i>', 'planet4-gpea-blocks-backend' ),
-						'attr'  => 'layout',
-						'type'  => 'video_enabled',
+						'attr'  => 'video_enabled',
 						'type'  => 'checkbox',
 						// 'value' => 'true',
 					],
@@ -159,12 +158,12 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 						'type'  => 'text',
 					],
 					[
-						'label' => __( 'Youtube URL', 'planet4-gpea-blocks-backend' ),
+						'label' => __( '<i>Ship %s Youtube URL</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'video_youtube',
 						'type'  => 'text',
 					],
 					[
-						'label'       => __( 'Or choose a video file', 'planet4-blocks-backend' ),
+						'label'       => __( '<i>Or choose a video file</i>', 'planet4-blocks-backend' ),
 						'attr'        => 'video',
 						'type'        => 'attachment',
 						'libraryType' => [ 'video' ],
@@ -172,7 +171,7 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 						'frameTitle'  => __( 'Select a Video', 'planet4-blocks-backend' )
 					],
 					[
-						'label' => __( 'Auto play (Only support on PC)', 'planet4-gpea-blocks-backend' ),
+						'label' => __( '<i>Auto play (Only support on PC)</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'video_autoplay',
 						'type'  => 'checkbox',
 						// 'value' => 'true',
@@ -255,17 +254,84 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 				$attributes = [];
 			}
 
+			$default = [];
+			$field_groups = [];
+
+			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
+
+				// Group fields based on index number.
+				$group = [];
+				$group_type = false;
+				foreach ( $attributes as $field_name => $field_content ) {
+					if ( preg_match( '/_' . $i . '$/', $field_name ) ) {
+						$field_name_data = explode( '_', $field_name );
+
+						$field_name_data = explode( '_', $field_name );
+						array_pop($field_name_data);
+						$group_type = array_pop($field_name_data);
+						$field_name_data = implode('_', $field_name_data);
+
+						if ( ( 'img' === $field_name_data || 'icon' === $field_name_data || 'video' === $field_name_data ) && isset( $field_content ) ) {
+							$field_content = wp_get_attachment_url( $field_content );
+						}
+						elseif( 'video_youtube' === $field_name_data ) {
+							$field_content = $this->getYoutubeId( $field_content );
+						}
+
+						$group[ $field_name_data ] = $field_content;
+
+					}
+				}
+
+				// Extract group field type.
+				if ( $group_type ) {
+					$group['__group_type__'] = $group_type;
+				} else {
+					continue;
+				}
+
+				$field_groups[ $i ] = $group;
+
+			}
+
 			// Extract static fields only.
 			$static_fields = [];
 			foreach ( $attributes as $field_name => $field_content ) {
 				if ( ! preg_match( '/_\d+$/', $field_name ) ) {
+					if( 'video_img' === $field_name || 'video' === $field_name ) {
+						$attachment_id = $field_content;
+						$field_content = wp_get_attachment_url( $attachment_id );
+						if( 'video' === $field_name ) {
+							$static_fields[ 'default_video_title' ] = get_the_title( $attachment_id );
+						}
+					}
+					elseif( 'video_youtube' === $field_name ) {
+						$field_content = $this->getYoutubeId( $field_content );
+					}
 					$static_fields[ $field_name ] = $field_content;
 				}
 			}
 			return [
 				'static_fields' => $static_fields,
+				'field_groups' => $field_groups,
 			];
 
+		}
+
+		private function getYoutubeId($url) {
+			$pattern = '/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/';
+        	preg_match($pattern, $url, $matches);
+        	return (isset($matches[7])) ? $matches[7] : false;
+		}
+
+		private function generateRandomString($length = 10) {
+			$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			$charactersLength = strlen($characters);
+			$randomString = '';
+			for ($i = 0; $i < $length; $i++) {
+				$randomString .= $characters[rand(0, $charactersLength - 1)];
+			}
+			return $randomString;
 		}
 
 		/**
@@ -280,6 +346,28 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 		 */
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
+			global $post;
+
+			wp_enqueue_script(
+				'youtube_embed_api.js',
+				'https://www.youtube.com/iframe_api'
+			);
+
+			wp_enqueue_script(
+				'geography-set',
+				P4EABKS_ASSETS_DIR . 'js/geography-set.js',
+				[ 'jquery' ]
+			);
+			// Pass options to frontend code.
+			wp_localize_script(
+				'geography-set',
+				'geography_set_data_object',
+				[
+					'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+					'postId' => $post->ID,
+				]
+			);
+
 			$data = $this->prepare_data( $fields );
 
 			// Shortcode callbacks must return content, hence, output buffering here.
@@ -287,5 +375,84 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 			$this->view->block( self::BLOCK_NAME, $data );
 			return ob_get_clean();
 		}
+
 	}
 }
+
+function ajax_geography_get_ships() {
+	if( !isset( $_POST['post_id'] ) ) {
+		wp_send_json_error();
+		return;
+	}
+	if( $post_content = get_the_content( NULL, FALSE, $_POST['post_id'] ) ) {
+		preg_match_all(
+			'/' . get_shortcode_regex() . '/',
+			$post_content,
+			$shortcodes,
+			PREG_SET_ORDER
+		);
+	}
+	else {
+		wp_send_json_error();
+		return;
+	}
+	$ships = [];
+	foreach( $shortcodes as $shortcode_item ) {
+		$shortcode_name = $shortcode_item[ 2 ];
+		$shortcode_attr = shortcode_parse_atts( $shortcode_item[ 3 ] );
+		if( 'shortcake_geography_set' === $shortcode_name ) {
+			$current_ships = [];
+			foreach( $shortcode_attr as $field_name => $field_value ) {
+				if ( preg_match( '/^endpoint_(ship)_([0-9]+)$/', $field_name, $matches ) ) {
+					$group_name = $matches[1];
+					$ship_key = $matches[2];
+					if( isset( $shortcode_attr[ 'enabled_' . $group_name . '_' . $ship_key ] ) && $shortcode_attr[ 'enabled_' . $group_name . '_' . $ship_key ] ) {
+						$curl = curl_init();
+					}
+					if( !isset( $curl ) || !$curl ) {
+						wp_send_json_error();
+						continue;
+					}
+					curl_setopt( $curl, CURLOPT_URL, $field_value );
+					curl_setopt( $curl, CURLOPT_RETURNTRANSFER, TRUE );
+					$ship_data = curl_exec( $curl );
+					curl_close( $curl );
+					$ship_data = @json_decode($ship_data, TRUE);
+					if( isset( $ship_data[ 'features' ][ 0 ][ 'geometry' ][ 'coordinates' ] ) ) {
+						$ship_position = $ship_data[ 'features' ][ 0 ][ 'geometry' ][ 'coordinates' ];
+					}
+					if( !isset( $ship_position ) || count( $ship_position ) != 2 ) {
+						wp_send_json_error();
+						continue;
+					}
+
+					$long = $ship_position[0];
+					$lat = $ship_position[1];
+
+					$left = $long + ($long < -170 ? 360 : 0);
+					$left += 168;
+					$left /= 358;
+
+					$top = $lat * -1;
+					$top += 83;
+					$top /= 139;
+
+					$current_ships[ $ship_key ] = [
+						'long' => $long,
+						'lat' => $lat,
+						'x' => ($left * 80) . '%',
+						'y' => ($top * 100) . '%',
+					];
+				}
+			}
+			$ships[] = $current_ships;
+		}
+		//$aaa[] = $shortcode_attr;
+		/*if( isset( $shortcode_attr[ 'layout' ], $shortcode_attr[ 'paragraph' ] ) && 'plain_light' === $shortcode_attr[ 'layout' ] ) {
+			$default[ 'paragraph' ] = wpautop( $shortcode_attr[ 'paragraph' ] );
+		}*/
+	}
+	wp_send_json_success($ships);
+}
+add_action( 'wp_ajax_nopriv_geography_get_ships', 'P4EABKS\Controllers\Blocks\ajax_geography_get_ships' );
+add_action( 'wp_ajax_geography_get_ships', 'P4EABKS\Controllers\Blocks\ajax_geography_get_ships' );

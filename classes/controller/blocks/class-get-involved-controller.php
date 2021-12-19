@@ -182,7 +182,7 @@ if ( ! class_exists( 'Get_Involved_Controller' ) ) {
 						PREG_SET_ORDER
 					);
 					foreach( $shortcodes as $shortcode_item ) {
-						$shortcode_attr = shortcode_parse_atts( $shortcode_item[ 0 ] );
+						$shortcode_attr = shortcode_parse_atts( $shortcode_item[ 3 ] );
 						if( isset( $shortcode_attr[ 'layout' ], $shortcode_attr[ 'paragraph' ] ) && 'plain_light' === $shortcode_attr[ 'layout' ] ) {
 							$default[ 'paragraph' ] = wpautop( $shortcode_attr[ 'paragraph' ] );
 						}
