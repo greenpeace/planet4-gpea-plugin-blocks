@@ -31,6 +31,17 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 		const MAX_REPEATER = 3;
 
 		/**
+		 * The group names.
+		 *
+		 * @const array GROUP_NAMES
+		 */
+		const GROUP_NAMES = [
+			1 => 'Group 1',
+			2 => 'Group 2',
+			3 => 'Group 3',
+		];
+
+		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
 		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
 		 */
@@ -69,11 +80,7 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 
 			// group list
 
-			$group_name_list = [
-				1 => 'Group 1',
-				2 => 'Group 2',
-				3 => 'Group 3',
-			];
+			$group_name_list = self::GROUP_NAMES;
 
 			// static fields
 
@@ -144,6 +151,7 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 				],
 				[
 					'label' => __( '<i>%s: Card %s project category</i>', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use the selected page\'s category.', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'category',
 					'type'  => 'select',
 					'options'  => $main_issue_options,
@@ -180,14 +188,18 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 					'type'  => 'text',
 				],
 				[
-					'label' => __( '<i>%s: Card %s layout</i>', 'planet4-gpea-blocks-backend' ),
+					'label' => __( '<i>%s: Card %s layout/visiblity</i>', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'layout',
 					'type'  => 'radio',
-					'value' => '1',
+					'value' => '0',
 					'options' => [
 						[
+							'value' => '0',
+							'label' => __( 'Don\'t show this card', 'planet4-gpea-blocks-backend' ),
+						],
+						[
 							'value' => '1',
-							'label' => __( 'Location & pecentage', 'planet4-gpea-blocks-backend' ),
+							'label' => __( 'Location & percentage', 'planet4-gpea-blocks-backend' ),
 						],
 						[
 							'value' => '2',
@@ -195,14 +207,14 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 						],
 						[
 							'value' => '3',
-							'label' => __( 'No location & pecentage', 'planet4-gpea-blocks-backend' ),
+							'label' => __( 'No location & percentage', 'planet4-gpea-blocks-backend' ),
 						],
 					],
 				],
 				[
-					'label' => __( '<i>%s: Card %s pecentage</i>', 'planet4-gpea-blocks-backend' ),
+					'label' => __( '<i>%s: Card %s percentage</i>', 'planet4-gpea-blocks-backend' ),
 					'description' => __( 'Leave empty to use the selected page\'s setting.', 'planet4-gpea-blocks-backend' ),
-					'attr'  => 'pecentage',
+					'attr'  => 'percentage',
 					'type'  => 'text',
 				],
 				[
@@ -264,11 +276,13 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 		 */
 		private function format_meta_fields( $fields, $field_groups ) : array {
 
-			for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
-				foreach ( $field_groups as $group_name => $group_fields ) {
+			foreach ( $field_groups as $group_name => $group_fields ) {
+				for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
+
+					$safe_name = preg_replace( '/\s/', '', strtolower( $group_name ) );
+
 					foreach ( $group_fields as $field ) {
 
-						$safe_name = preg_replace( '/\s/', '', strtolower( $group_name ) );
 						$attr_extension = '_' . $safe_name . '_' . $i;
 
 						if ( array_key_exists( 'attr' , $field ) ) {
@@ -315,15 +329,109 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 				$attributes = [];
 			}
 
+			$tanslate = [
+				'more_button_label' => __( 'See all', 'planet4-gpea-blocks' ),
+				'category_label' => __( 'hot items', 'planet4-gpea-blocks' ),
+				'location_label' => __( 'LOCATION', 'planet4-gpea-blocks' ),
+				'people_label' => __( 'PEOPLE', 'planet4-gpea-blocks' ),
+			];
+
+			$default = [];
+			$field_groups = [];
+
+			// Group fields based on index number.
+
+			$group_name_list = self::GROUP_NAMES;
+
+			foreach( $group_name_list as $group_name ) {
+
+				$safe_name = preg_replace( '/\s/', '', strtolower( $group_name ) );
+
+				for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
+
+					$attr_extension = '_' . $safe_name . '_' . $i;
+
+					foreach ( $attributes as $field_name => $field_content ) {
+
+						if ( preg_match( '/(.+)' . $attr_extension . '$/', $field_name, $matches ) ) {
+
+							$field_name_data = $matches[ 1 ];
+							$post = NULL;
+
+							if ( ( 'img' === $field_name_data ) && isset( $field_content ) && strlen( $field_content ) ) {
+								$field_content = wp_get_attachment_url( $field_content );
+							}
+							elseif ( ( 'post_id' === $field_name_data ) && isset( $field_content ) && strlen( $field_content ) ) {
+								$post = get_post( $field_content );
+							}
+
+							if( $post ) {
+								$post_default = [];
+								$post_default[ 'post_title' ] = $post->post_title;
+								$post_default[ 'url' ] = get_permalink( $post->ID );
+								$post_default[ 'img' ] = get_the_post_thumbnail_url( $post->ID, 'post-thumbnails' );
+								$post_default[ 'percentage' ] = get_post_meta( $post->ID, 'p4-gpea_project_percentage', TRUE );
+								$post_default[ 'location' ] = get_post_meta( $post->ID, 'p4-gpea_project_localization', TRUE );
+							}
+							if ( $post && class_exists( 'P4CT_Site' ) ) {
+								$gpea_extra = new \P4CT_Site();
+								$main_issue = $gpea_extra->gpea_get_main_issue( $post->ID );
+								if( $main_issue ) {
+									$post_default[ 'category_slug' ] = $main_issue->slug;
+									$post_default[ 'category' ] = $main_issue->name;
+								}
+							}
+							if( $post && !isset( $default[ $safe_name ] )) {
+								$default[ $safe_name ] = [];
+							}
+							if( $post ) {
+								$default[ $safe_name ][ $i ] = $post_default;
+							}
+
+							if( !isset( $field_groups[ $safe_name ] ) ) {
+								$field_groups[ $safe_name ] = [];
+							}
+							if( !isset( $field_groups[ $safe_name ][ $i ] ) ) {
+								$field_groups[ $safe_name ][ $i ] = [];
+							}
+
+							if ( ( 'category' === $field_name_data ) && isset( $field_content ) && strlen( $field_content ) ) {
+								if( $category = get_term_by( 'slug', $field_content, 'category' ) ) {
+									$field_groups[ $safe_name ][ $i ][ 'category_slug' ] = $field_content;
+									$field_groups[ $safe_name ][ $i ][ $field_name_data ] = $category->name;
+								}
+							}
+							else {
+								$field_groups[ $safe_name ][ $i ][ $field_name_data ] = $field_content;
+							}
+
+						}
+
+					}
+
+
+				}
+
+			}
+
 			// Extract static fields only.
 			$static_fields = [];
 			foreach ( $attributes as $field_name => $field_content ) {
-				if ( ! preg_match( '/_\d+$/', $field_name ) ) {
-					$static_fields[ $field_name ] = $field_content;
+				if( preg_match( '/^(button)_([a-z0-9]+)_([a-z]+)$/', $field_name, $matches ) ) {
+					$safe_name = $matches[ 1 ];
+					$i = $matches[ 2 ];
+					$field_name_data = $matches[ 3 ];
+					if( !isset( $static_fields[ $i ] ) ) {
+						$static_fields[ $i ] = [];
+					}
+					$static_fields[ $i ][ $field_name_data ] = $field_content;
 				}
 			}
 			return [
+				'field_groups' => $field_groups,
 				'static_fields' => $static_fields,
+				'tanslate_strings' => $tanslate,
+				'default_strings' => $default,
 			];
 
 		}
