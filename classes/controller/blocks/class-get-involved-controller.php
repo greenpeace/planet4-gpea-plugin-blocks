@@ -160,10 +160,10 @@ if ( ! class_exists( 'Get_Involved_Controller' ) ) {
 				$attributes[ 'paragraph' ] = '<p>' . $attributes[ 'paragraph' ] . '</p>';
 			}
 
-			$tanslate = [];
-
-			$tanslate[ 'default_button_label' ] = __( 'Act Now', 'planet4-gpea-blocks' );
-			$tanslate[ 'category_label' ] = __( 'Spotlight of the mounth:', 'planet4-gpea-blocks' );
+			$tanslate = [
+				'default_button_label' => __( 'Act Now', 'planet4-gpea-blocks' ),
+				'category_label' => __( 'Spotlight of the mounth:', 'planet4-gpea-blocks' ),
+			];
 
 			$default = [];
 

@@ -1,7 +1,80 @@
 {% block get_involved_cards %}
 	<section class="section-get-involved-cards">
+		<div class="ct-container ct-container--thin">
+			{% set first_card = true %}
+			<div class="content content--title">
+				<h4 class="title">{{ tanslate_strings.category_label | e }}</h4>
+				<div class="buttons">
+				{% for i in 1..3 %}
+					{% if ( static_fields[i].enabled ) %}
+					<span class="link {% if ( first_card ) %}link--actived{% endif %}" data-group="{{ i | e('html_attr') }}">{{ static_fields[i].label | e }}</span>
+					{% set first_card = false %}
+					{% endif %}
+				{% endfor %}
+				</div>
+				{% if ( static_fields.more.enabled ) %}
+				<a class="link link--more" href="{{ static_fields.more.url | e('html_attr') }}">{{ tanslate_strings.more_button_label | e }}</a>
+				{% endif %}
+			</div>
+		</div>
 		<div class="ct-container">
-			Test 4-2
+			<div class="content content--desc">
+			{% set first_card = true %}
+			{% for i in 1..3 %}
+				{% if ( static_fields[i].enabled ) %}
+				<div class="grid {% if ( first_card ) %}grid--actived{% endif %}" data-group="{{ i | e('html_attr') }}" {% if ( first_card ) %}data-aos="fade-up" data-aos-anchor-placement="center-bottom"{% endif %}>
+					{% set first_card = false %}
+					{% set group_name = 'group' ~ i %}
+					{% for card_key, group in field_groups[group_name] %}
+						{% if ( group.layout ) %}
+						<a class="grid__box grid__box--issue-{{ group.category_slug | default(default_strings[group_name][card_key].category_slug) | e('html_attr') }}" href="{{ group.url | default(default_strings[group_name][card_key].url) | e('html_attr') }}">
+							<div class="grid__inner">
+								<div class="grid__header">
+									<p class="category"><span class="category__name">{{ group.category | default(default_strings[group_name][card_key].category) | e }}</span></p>
+									<h5 class="title">{{ group.post_title | default(default_strings[group_name][card_key].post_title) | e }}</h5>
+									{% if ( group.img or default_strings[group_name][card_key].img ) %}
+									<div class="img" style="background-image: url({{ group.img | default(default_strings[group_name][card_key].img) | e('html_attr') }});"></div>
+									{% endif %}
+									<p class="subtitle">{{ group.subtitle | e }}</p>
+									<div class="desc">
+										<p>{{ group.paragraph | raw }}</p>
+									</div>
+								</div>
+								<div class="grid__footer">
+									{% if ( group.layout < 2 ) %}
+									<div class="percentage">
+										<div class="percentage__inner" style="width: {{ group.percentage | default(default_strings[group_name][card_key].percentage) | e('html_attr') }}%">
+											<div class="percentage__num">{{ group.percentage | default(default_strings[group_name][card_key].percentage) | e }}%</div>
+										</div>
+									</div>
+									{% endif %}
+									<div class="counter-box">
+									{% if ( group.layout < 3 ) %}
+										<div class="counter-box__inner counter-box__inner--location">
+											<div class="counter-box__label">{{ group.location_label | default(tanslate_strings.location_label) }}</div>
+											<div class="counter-box__num">{{ group.location | default(default_strings[group_name][card_key].location) | e }}</div>
+										</div>
+									{% endif %}
+
+									{% if ( group.layout < 2 ) %}
+										<div class="counter-box__inner counter-box__inner--people">
+											<div class="counter-box__label">{{ group.people_label | default(tanslate_strings.people_label) }}</div>
+											<div class="counter-box__num">
+												{{ group.people | e }}
+												{{ group.people_unit | e }}
+											</div>
+										</div>
+									{% endif %}
+									</div>
+								</div>
+							</div>
+						</a>
+						{% endif %}
+					{% endfor %}
+				</div>
+				{% endif %}
+			{% endfor %}
+			</div>
 		</div>
 	</section>
 {% endblock %}
