@@ -1,7 +1,29 @@
 {% block geography_set %}
 	<section class="section-geography-set">
+		<div class="ct-container ct-container--thin">
+			<div class="content content--title">
+				<h2 class="title">
+					{{ static_fields.title | e }}
+				</h2>
+			</div>
+		</div>
 		<div class="ct-container">
-			Test 3
+			<div class="content content--desc">
+				<div class="content__inner content__inner--1">
+					<div class="desc">
+						<p>{{ static_fields.paragraph | raw }}</p>
+					</div>
+					<div class="image play-section-video" {% if ( static_fields.video_img ) %}style="background-image: url({{ static_fields.video_img | e('html_attr') }})"{% endif %}>
+					</div>
+					<div class="desc">
+						<p>{{ static_fields.video_paragraph | raw }}</p>
+					</div>
+				</div>
+				<div class="content__inner content__inner--2">
+					<div class="image">
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 {% endblock %}
