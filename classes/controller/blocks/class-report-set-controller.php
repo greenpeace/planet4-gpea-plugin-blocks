@@ -153,9 +153,6 @@ if ( ! class_exists( 'Report_Set_Controller' ) ) {
 			if ( isset( $attributes['book_img'] ) ) {
 				$attributes['book_img'] = wp_get_attachment_url( $attributes['book_img'] );
 			}
-			else {
-				$attributes['book_img'] = $donation_block_default_img;
-			}
 
 			return [
 				'static_fields' => $attributes,
