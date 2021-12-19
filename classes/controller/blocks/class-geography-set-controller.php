@@ -314,6 +314,7 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 			return [
 				'static_fields' => $static_fields,
 				'field_groups' => $field_groups,
+				'id' => $this->generateRandomString(5),
 			];
 
 		}
@@ -441,7 +442,7 @@ function ajax_geography_get_ships() {
 						'long' => $long,
 						'lat' => $lat,
 						'x' => ($left * 80) . '%',
-						'y' => ($top * 100) . '%',
+						'y' => ($top * 80) . '%',
 					];
 				}
 			}

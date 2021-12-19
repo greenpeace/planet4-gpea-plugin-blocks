@@ -1,5 +1,5 @@
 {% block geography_set %}
-	<section class="section-geography-set">
+	<section class="section-geography-set" data-section="{{ id | e('html_attr') }}">
 		<div class="ct-container ct-container--thin">
 			<div class="content content--title">
 				<h2 class="title">
@@ -36,16 +36,71 @@
 			</div>
 		</div>
 	</section>
-	<div class="section-geography-set__lightbox section-geography-set__video">
-		<div class="lightbox__inner">
-			
+	<div class="section-geography-set__lightbox section-geography-set__video" data-section="{{ id | e('html_attr') }}">
+		<div class="ct-container lightbox">
+			<div class="lightbox__inner">
+				<button class="lightbox__close-button">
+					<span class="icon-close"></span>
+				</button>
+				<h4 class="title">{{ static_fields.video_title | default(static_fields.default_video_title) | e }}</h4>
+				<div class="lightbox__content">
+					{% if ( static_fields.video ) %}
+					<video id="file-id-video-{{ id | e('html_attr') }}" class="video-content video-content--file" loop muted controls>
+						<source type="video/mp4" src="{{ static_fields.video | e('html_attr') }}">
+					</video>
+					{% elseif ( static_fields.video_youtube ) %}
+					<div data-controls="1" data-youtube-id="{{ static_fields.video_youtube | e('html_attr') }}" class="video-content video-content--youtube">
+						<div class="youtube-embed" id="youtube-id-video-{{ id | e('html_attr') }}"></div>
+					</div>
+					{% endif %}
+				</div>
+			</div>
 		</div>
 	</div>
 	{% for key, group in field_groups %}
 		{% if ( group.enabled ) %}
-		<div class="section-geography-set__lightbox section-geography-set__ship" data-ship="{{ key | e('html_attr') }}">
-			<div class="lightbox__inner">
-				
+		<div class="section-geography-set__lightbox section-geography-set__ship" data-ship="{{ key | e('html_attr') }}" data-section="{{ id | e('html_attr') }}">
+			<div class="ct-container lightbox">
+				<div class="lightbox__inner">
+					<button class="lightbox__close-button">
+						<span class="icon-close"></span>
+					</button>
+					<div class="lightbox__content">
+						<div class="lightbox__column lightbox__column--text">
+							<div class="lightbox__header">
+								<h4 class="title">{{ group.title | e }}</h4>
+								<p class="subtitle">{{ group.subtitle | e }}</p>
+								<p>{{ group.paragraph | raw }}</p>
+							</div>
+							<div class="lightbox__footer">
+								<span class="position position--lat"></span>° / <span class="position position--long"></span>°
+							</div>
+						</div>
+						<div class="lightbox__column lightbox__column--video" data-playing="0">
+							<div class="media">
+								{% if ( group.img ) %}
+								<div class="image" style="background-image: url({{ group.img | e('html_attr') }})"></div>
+								{% endif %}
+								{% if ( not group.video_enabled ) %}
+								{% elseif ( group.video ) %}
+								<video id="file-id-ship-{{ id | e('html_attr') }}-{{ key | e('html_attr') }}" data-autoplay="{% if ( group.video_autoplay ) %}1{% endif %}" class="video-content video-content--file" loop muted>
+									<source type="video/mp4" src="{{ group.video | e('html_attr') }}">
+								</video>
+								{% elseif ( group.video_youtube ) %}
+								<div data-autoplay="{% if ( group.video_autoplay ) %}1{% endif %}" data-youtube-id="{{ group.video_youtube | e('html_attr') }}" class="video-content video-content--youtube">
+									<div class="youtube-embed" id="youtube-id-ship-{{ id | e('html_attr') }}-{{ key | e('html_attr') }}"></div>
+								</div>
+								{% endif %}
+								{% if ( group.video_enabled ) %}
+								<div class="buttons">
+									<div class="video-button video-button--play">{{ group.video_button_label | e }}</div>
+									<div class="video-button video-button--pause"></div>
+								</div>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		{% endif %}
