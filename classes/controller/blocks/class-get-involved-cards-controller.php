@@ -48,22 +48,10 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 		public function prepare_fields() {
 
 			// get issues list
-
-			$planet4_options = get_option( 'planet4_options' );
-			$main_issues_category_id = isset( $planet4_options['issues_parent_category'] ) ? $planet4_options['issues_parent_category'] : FALSE;
-			if ( ! $main_issues_category_id ) {
-				$main_issues_category = get_term_by( 'slug', 'issues', 'category' );
-				if ( $main_issues_category ) {
-					$main_issues_category_id = $main_issues_category->term_id;
-				}
-			}
-
 			$main_issues = [];
-			if( $main_issues_category_id ) {
-				$main_issues = get_terms([
-					'taxonomy' => 'category',
-					'parent' => $main_issues_category_id,
-				]);
+			if ( class_exists( 'P4CT_Site' ) ) {
+				$gpea_extra = new \P4CT_Site();
+				$main_issues = $gpea_extra->gpea_get_all_main_issues( TRUE );
 			}
 
 			$main_issue_options = [];
