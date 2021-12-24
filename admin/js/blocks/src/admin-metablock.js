@@ -297,6 +297,9 @@ jQuery(document).ready(function() {
   var required_image = [
     'shortcake_grid_images',
     'shortcake_hero_set',
+    'shortcake_steps_set',
+    'shortcake_infographic_cards',
+    'shortcake_testimony'
   ];
 
   // Attach hooks when rendering a new metablock.
