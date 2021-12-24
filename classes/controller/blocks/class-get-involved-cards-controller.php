@@ -28,7 +28,7 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 		 *
 		 * @const string MAX_REPEATER
 		 */
-		const MAX_REPEATER = 3;
+		const MAX_REPEATER = 12;
 
 		/**
 		 * The group names.
