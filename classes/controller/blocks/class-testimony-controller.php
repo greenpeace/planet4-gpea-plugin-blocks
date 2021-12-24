@@ -272,6 +272,7 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 				$group[ 'start_slide_group' ] = FALSE;
 				$group[ 'end_slide_group' ] = FALSE;
 				if( isset($group[ 'layout' ]) && in_array( $group[ 'layout' ] , [ 3, 4 ] ) ) {
+					$group[ 'layout_classes' ] = 'short';
 					if( !$last_is_horizontal_card ) {
 						$group[ 'start_slide_group' ] = TRUE;
 						$last_is_horizontal_card = TRUE;
@@ -282,6 +283,7 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 					}
 				}
 				else {
+					$group[ 'layout_classes' ] = 'tall';
 					$group[ 'start_slide_group' ] = TRUE;
 					$group[ 'end_slide_group' ] = TRUE;
 					$last_is_horizontal_card = FALSE;
