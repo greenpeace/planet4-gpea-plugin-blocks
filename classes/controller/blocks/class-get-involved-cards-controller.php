@@ -265,9 +265,28 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 		private function format_meta_fields( $fields, $field_groups ) : array {
 
 			foreach ( $field_groups as $group_name => $group_fields ) {
+
+				$safe_name = preg_replace( '/\s/', '', strtolower( $group_name ) );
+
+				$fields[] = [
+					'label' => __( '<h3>' . esc_html($group_name) . '</h3><hr>', 'planet4-gpea-blocks-backend' ),
+					'attr'  => $safe_name . '_hint',
+					'type'  => 'radio',
+					'meta'  => [
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				];
+
 				for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
 
-					$safe_name = preg_replace( '/\s/', '', strtolower( $group_name ) );
+					$fields[] = [
+						'label' => __( '<h4>Card ' . $i . '</h4><hr>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => $safe_name . '_card_' . $i . '_hint',
+						'type'  => 'radio',
+						'meta'  => [
+							'data-plugin' => 'planet4-gpea-blocks',
+						],
+					];
 
 					foreach ( $group_fields as $field ) {
 
