@@ -141,7 +141,7 @@ if ( ! class_exists( 'Controller' ) ) {
 
 			$request = add_query_arg(
 				array_merge(
-					$fields,
+					array_map( 'urlencode', $fields ),
 					[
 						'_tag'     => $shortcode_tag,
 						'_content' => $content,
