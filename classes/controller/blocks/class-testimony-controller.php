@@ -28,7 +28,7 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 		 *
 		 * @const string MAX_REPEATER
 		 */
-		const MAX_REPEATER = 9;
+		const MAX_REPEATER = 15;
 
 		/**
 		 * Default layout option key.
