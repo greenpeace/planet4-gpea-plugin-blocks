@@ -212,9 +212,7 @@ if ( ! class_exists( 'Controller' ) ) {
 				<body style="background-color: transparent;">
 					<?php echo $this->prepare_template( $fields, $content, $tag ); ?>
 				</body>
-				<footer>
-					<?php do_action( 'wp_footer' ); ?>
-				</footer>
+				<?php do_action( 'wp_footer' ); ?>
 			</html>
 			<?php
 
