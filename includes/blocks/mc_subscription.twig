@@ -30,11 +30,11 @@
 						</div>
 						<div class="form-toggle-part">
 							<div class="form-row name-part">
-								<div class="en__field__element en__field__element--first-name en__field__element--is-required">
-									<input type="text" name="supporter.firstname" value="" placeholder="{{ lexicon.firstname_input_placeholder }}" required>
-								</div>
 								<div class="en__field__element en__field__element--last-name en__field__element--is-required">
 									<input type="text" name="supporter.lastname" value="" placeholder="{{ lexicon.lastname_input_placeholder }}" required>
+								</div>
+								<div class="en__field__element en__field__element--first-name en__field__element--is-required">
+									<input type="text" name="supporter.firstname" value="" placeholder="{{ lexicon.firstname_input_placeholder }}" required>
 								</div>
 							</div>
 							{% for checkbox_text in lexicon.policy_checkbox_text %}
