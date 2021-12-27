@@ -38,7 +38,7 @@
 								</div>
 							</div>
 							{% for checkbox_text in lexicon.policy_checkbox_text %}
-							<div class="form-row checkbox-part">
+							<div class="form-row checkbox-part checkbox-part--static">
 								<label class="en__field__element custom-checkbox en__field__element--is-required">
 									<input type="checkbox" checked required>
 									<span class="custom-checkbox__mark"></span>
@@ -49,7 +49,7 @@
 							</div>
 							{% endfor %}
 							{% for checkbox_item in field_groups %}
-							<div class="form-row checkbox-part">
+							<div class="form-row checkbox-part checkbox-part--custom">
 								<label class="en__field__element custom-checkbox {{ checkbox_item.required ? 'en__field__element--is-required' }}">
 									{% if checkbox_item.name %}
 									<input type="checkbox" name="{{checkbox_item.name|e('html_attr')}}" {{ checkbox_item.required ? 'checked required' }}>
