@@ -30,6 +30,8 @@ if ( ! class_exists( 'MC_Subscription_Controller' ) ) {
 		 */
 		const MAX_REPEATER = 50;
 
+		const EXCEPTION_LANG = 'ko_KR';
+
 		/**
 		 * Shortcode UI setup for the noindexblock shortcode.
 		 * It is called when the Shortcake action hook `register_shortcode_ui` is called.
@@ -208,8 +210,11 @@ if ( ! class_exists( 'MC_Subscription_Controller' ) ) {
 			$lexicon['lastname_input_placeholder'] = __( 'Last Name', 'planet4-gpea-blocks');
 			$lexicon['email_input_placeholder'] = __( 'Email', 'planet4-gpea-blocks');
 
+			$lexicon['first_name_is_required'] = TRUE;
+
 			$lexicon['policy_checkbox_text'] = [];
-			if(get_locale() == 'ko_KR') {
+			if(get_locale() == self::EXCEPTION_LANG) {
+				$lexicon['first_name_is_required'] = FALSE;
 				$lexicon['policy_checkbox_text'][] = __( "Yes! Please send me important updates from Greenpeace.", 'planet4-gpea-blocks');
 				$lexicon['policy_checkbox_text'][] = __( "Greenpeace respects and protects your personal information and you can unsubscribe at any time. For more details please refer to Greenpeace privacy policy Greenpeace's privacy policy", 'planet4-gpea-blocks');
 			}
