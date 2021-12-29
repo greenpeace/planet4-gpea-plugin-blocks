@@ -8,7 +8,7 @@
 				</div>
 			</div>
 			<div class="content content--form">
-				<form class="form-container" name="mc-subscription-form" action="{{ static_fields.endpoint|raw }}">
+				<form class="form-container form-container--{% if (lexicon.first_name_is_required) %}is-required-first-name{% else %}not-required-first-name{% endif %}" name="mc-subscription-form" action="{{ static_fields.endpoint|raw }}">
 
 					<input type="hidden" name="sf_campaign_id" value="{{ static_fields.sf_campaign_id|raw }}">
 
@@ -30,15 +30,17 @@
 						</div>
 						<div class="form-toggle-part">
 							<div class="form-row name-part">
-								<div class="en__field__element en__field__element--first-name en__field__element--is-required">
-									<input type="text" name="supporter.firstname" value="" placeholder="{{ lexicon.firstname_input_placeholder }}" required>
-								</div>
 								<div class="en__field__element en__field__element--last-name en__field__element--is-required">
 									<input type="text" name="supporter.lastname" value="" placeholder="{{ lexicon.lastname_input_placeholder }}" required>
 								</div>
+								{% if (lexicon.first_name_is_required) %}
+								<div class="en__field__element en__field__element--first-name en__field__element--is-required">
+									<input type="text" name="supporter.firstname" value="" placeholder="{{ lexicon.firstname_input_placeholder }}" required>
+								</div>
+								{% endif %}
 							</div>
 							{% for checkbox_text in lexicon.policy_checkbox_text %}
-							<div class="form-row checkbox-part">
+							<div class="form-row checkbox-part checkbox-part--static">
 								<label class="en__field__element custom-checkbox en__field__element--is-required">
 									<input type="checkbox" checked required>
 									<span class="custom-checkbox__mark"></span>
@@ -49,7 +51,7 @@
 							</div>
 							{% endfor %}
 							{% for checkbox_item in field_groups %}
-							<div class="form-row checkbox-part">
+							<div class="form-row checkbox-part checkbox-part--custom">
 								<label class="en__field__element custom-checkbox {{ checkbox_item.required ? 'en__field__element--is-required' }}">
 									{% if checkbox_item.name %}
 									<input type="checkbox" name="{{checkbox_item.name|e('html_attr')}}" {{ checkbox_item.required ? 'checked required' }}>
