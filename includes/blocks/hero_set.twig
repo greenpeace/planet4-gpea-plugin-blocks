@@ -29,7 +29,7 @@
 						<div class="bg bg--mobile" style="background-image: url({{ group.img_mobile | e('html_attr') }})"></div>
 						<div class="bg bg--pc" style="background-image: url({{ group.img | e('html_attr') }})"></div>
 					{% elseif ( group.img ) %}
-						<div class="bg bg--pc" style="background-image: url({{ group.img | e('html_attr') }})"></div>
+						<div class="bg" style="background-image: url({{ group.img | e('html_attr') }})"></div>
 					{% endif %}
 					</div>
 				{% endfor %}
