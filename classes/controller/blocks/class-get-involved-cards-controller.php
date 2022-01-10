@@ -148,7 +148,7 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 					'label' => __( '<i>%s: Card %s project title</i>', 'planet4-gpea-blocks-backend' ),
 					'description' => __( 'Leave empty to use the selected page\'s title.', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'post_title',
-					'type'  => 'text',
+					'type'  => 'textarea',
 				],
 				[
 					'label' => __( '<i>%s: Card %s Image</i>', 'planet4-gpea-blocks-backend' ),
@@ -370,6 +370,9 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 							}
 							elseif ( ( 'post_id' === $field_name_data ) && isset( $field_content ) && strlen( $field_content ) ) {
 								$post = get_post( $field_content );
+							}
+							elseif ( ( 'post_title' === $field_name_data ) ) {
+								$field_content = str_replace( [ '<p>', '</p>' ], '<br />', $field_content );
 							}
 
 							if( $post ) {
