@@ -73,11 +73,11 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Section Title', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'Section Title', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -87,6 +87,17 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 					'type'  => 'textarea',
 					'meta'  => [
 						'placeholder' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
+					'label' => __( '', 'planet4-gpea-blocks-backend' ),
+					'description' => sprintf(__( '
+						Click "Add Card" to start editing. (Max ' . static::MAX_REPEATER . ' Cards)
+					', 'planet4-gpea-blocks-backend' ), __( 'Settings' )),
+					'attr'  => 'add_card_hint',
+					'type'  => 'radio',
+					'meta'  => [
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
