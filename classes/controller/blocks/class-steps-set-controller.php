@@ -42,7 +42,7 @@ if ( ! class_exists( 'Steps_Set_Controller' ) ) {
 					'attr'  => 'title',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Title (for PC)', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'Headline for Steps (for PC)', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -52,7 +52,7 @@ if ( ! class_exists( 'Steps_Set_Controller' ) ) {
 					'attr'  => 'title_mobile',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Title (for mobile)', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'Headline for Steps (for mobile)', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
