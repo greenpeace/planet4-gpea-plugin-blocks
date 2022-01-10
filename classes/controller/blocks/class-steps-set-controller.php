@@ -38,7 +38,7 @@ if ( ! class_exists( 'Steps_Set_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Title (for PC)', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Headline for Steps (for PC)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'textarea',
 					'meta'  => [
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Steps_Set_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Title (for mobile)', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Headline for Steps (for mobile, you can change it to a shorter state)', 'planet4-gpea-blocks-backend' ),
 					'description' => __( 'Leave empty to use PC version.', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title_mobile',
 					'type'  => 'textarea',
@@ -63,7 +63,8 @@ if ( ! class_exists( 'Steps_Set_Controller' ) ) {
 				'Item' => [
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Item %s image</i>', 'planet4-gpea-blocks-backend' ),
+						'label' => __( '<i>Step %s image</i>', 'planet4-gpea-blocks-backend' ),
+						'description' => __('Graphic requirement: Please make a graphic in the center of 160x140px image frame, and with 30% white space on four sides.'),
 						'attr'        => 'img',
 						'type'        => 'attachment',
 						'libraryType' => array( 'image' ),
@@ -72,13 +73,13 @@ if ( ! class_exists( 'Steps_Set_Controller' ) ) {
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Item %s title</i>', 'planet4-gpea-blocks-backend' ),
+						'label' => __( '<i>Step %s title</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'title',
 						'type'  => 'text',
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Item %s text</i>', 'planet4-gpea-blocks-backend' ),
+						'label' => __( '<i>Step %s text</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => 'content',
 						'type'  => 'textarea',
 					],

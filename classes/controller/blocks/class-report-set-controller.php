@@ -86,7 +86,7 @@ if ( ! class_exists( 'Report_Set_Controller' ) ) {
 				],
 				[
 					'label' => __( 'Button 1 label', 'planet4-gpea-blocks-backend' ),
-					'description' => sprintf(__( 'Leave empty to use default: "%s".', 'planet4-gpea-blocks-backend' ), __( 'Act Now', 'planet4-gpea-blocks' )),
+					'description' => sprintf(__( 'Leave empty to use default: "%s".', 'planet4-gpea-blocks-backend' ), __( 'Annual report', 'planet4-gpea-blocks' )),
 					'attr'  => 'button_1_text',
 					'type'  => 'text',
 					'meta'  => [
@@ -105,7 +105,7 @@ if ( ! class_exists( 'Report_Set_Controller' ) ) {
 				],
 				[
 					'label' => __( 'Button 2 label', 'planet4-gpea-blocks-backend' ),
-					'description' => sprintf(__( 'Leave empty to use default: "%s".', 'planet4-gpea-blocks-backend' ), __( 'Act Now', 'planet4-gpea-blocks' )),
+					'description' => sprintf(__( 'Leave empty to use default: "%s".', 'planet4-gpea-blocks-backend' ), __( 'See all reports', 'planet4-gpea-blocks' )),
 					'attr'  => 'button_2_text',
 					'type'  => 'text',
 					'meta'  => [
@@ -114,7 +114,7 @@ if ( ! class_exists( 'Report_Set_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Book Image', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Report Cover', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'book_img',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
@@ -156,7 +156,8 @@ if ( ! class_exists( 'Report_Set_Controller' ) ) {
 
 			return [
 				'static_fields' => $attributes,
-				'default_button_label' => __( 'Act Now', 'planet4-gpea-blocks' ),
+				'default_button_1_label' => __( 'Annual report', 'planet4-gpea-blocks' ),
+				'default_button_2_label' => __( 'See all reports', 'planet4-gpea-blocks' ),
 			];
 
 		}
