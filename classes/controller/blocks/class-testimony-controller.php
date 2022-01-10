@@ -45,22 +45,22 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 		const LAYOUT_OPTIONS = [
 			[
 				'key' => '1',
-				'title' => 'Vertical card, dark text',
+				'title' => 'Vertical card, horizontal photo, dark text',
 				'image' => TRUE,
 			],
 			[
 				'key' => '2',
-				'title' => 'Vertical card, light text',
+				'title' => 'Vertical card, vertical photo, light text',
 				'image' => TRUE,
 			],
 			[
 				'key' => '3',
-				'title' => 'Horizontal card, dark text',
+				'title' => 'Horizontal card, without photo, dark text',
 				'image' => FALSE,
 			],
 			[
 				'key' => '4',
-				'title' => 'Horizontal card, light text',
+				'title' => 'Horizontal card, horizontal photo, light text',
 				'image' => TRUE,
 			],
 		];
@@ -96,7 +96,7 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 			foreach(static::LAYOUT_OPTIONS as $layout_data) {
 				$layout_options[] = [
 					'value' => $layout_data[ 'key' ],
-					'label' => __( $layout_data[ 'key' ] . '. ' . $layout_data[ 'title' ] . ( $layout_data[ 'image' ] ? '' : ' (no image)' ), 'planet4-gpea-blocks-backend' ),
+					'label' => __( $layout_data[ 'key' ] . '. ' . $layout_data[ 'title' ], 'planet4-gpea-blocks-backend' ),
 				];
 			}
 
@@ -122,7 +122,7 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 					],
 					[
-						'label'       => __( 'Card %s title', 'planet4-gpea-blocks-backend' ),
+						'label'       => __( 'Card %s: Speaker\'s title', 'planet4-gpea-blocks-backend' ),
 						'attr'        => 'title',
 						'type'        => 'text',
 						'meta'        => [
@@ -131,7 +131,7 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 						],
 					],
 					[
-						'label'       => __( 'Card %s name', 'planet4-gpea-blocks-backend' ),
+						'label'       => __( 'Card %s: Speaker\'s name', 'planet4-gpea-blocks-backend' ),
 						'attr'        => 'name',
 						'type'        => 'text',
 						'meta'        => [
@@ -140,7 +140,7 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 						],
 					],
 					[
-						'label'       => __( 'Card %s paragraph', 'planet4-gpea-blocks-backend' ),
+						'label'       => __( 'Card %s: Speaker\'s quote', 'planet4-gpea-blocks-backend' ),
 						'attr'        => 'paragraph',
 						'type'        => 'textarea',
 						'meta'        => [
