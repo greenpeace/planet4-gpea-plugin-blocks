@@ -45,11 +45,11 @@
 				<h4 class="title">{{ static_fields.video_title | default(static_fields.default_video_title) | e }}</h4>
 				<div class="lightbox__content">
 					{% if ( static_fields.video ) %}
-					<video id="file-id-video-{{ id | e('html_attr') }}" class="video-content video-content--file" loop muted controls>
+					<video id="file-id-video-{{ id | e('html_attr') }}" class="video-content video-content--file" data-autoplay="1" loop muted>
 						<source type="video/mp4" src="{{ static_fields.video | e('html_attr') }}">
 					</video>
 					{% elseif ( static_fields.video_youtube ) %}
-					<div data-controls="1" data-youtube-id="{{ static_fields.video_youtube | e('html_attr') }}" class="video-content video-content--youtube">
+					<div data-autoplay="1" data-youtube-id="{{ static_fields.video_youtube | e('html_attr') }}" class="video-content video-content--youtube">
 						<div class="youtube-embed" id="youtube-id-video-{{ id | e('html_attr') }}"></div>
 					</div>
 					{% endif %}
