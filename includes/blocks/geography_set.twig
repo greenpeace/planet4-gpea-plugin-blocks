@@ -13,7 +13,7 @@
 					<div class="desc">
 						<p>{{ static_fields.paragraph | raw }}</p>
 					</div>
-					<div class="image" data-target="geography-set-video" {% if ( static_fields.video_img ) %}style="background-image: url({{ static_fields.video_img | e('html_attr') }})"{% endif %}>
+					<div class="image" data-target="geography-set-video" {% if ( static_fields.video_img or static_fields.default_video_img ) %}style="background-image: url({{ static_fields.video_img | default(static_fields.default_video_img) | e('html_attr') }})"{% endif %}>
 					</div>
 					<div class="desc">
 						<p>{{ static_fields.video_paragraph | raw }}</p>

@@ -324,6 +324,7 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 					}
 					elseif( 'video_youtube' === $field_name ) {
 						$field_content = $this->getYoutubeId( $field_content );
+						$static_fields[ 'default_video_img' ] = 'http://i1.ytimg.com/vi/' . $field_content . '/maxresdefault.jpg';
 					}
 					$static_fields[ $field_name ] = $field_content;
 				}
