@@ -130,8 +130,8 @@ jQuery(document).ready(function() {
             let yPosive = $(this).offset().top - $this.offset().top > 0 ? -1 : 1;
             let xPosive = $(this).offset().left - $this.offset().left > 0 ? -1 : 1;
             $(this).css({
-              transform: 'translate(' + Math.floor(Math.random() * 25 * xPosive + 25 * xPosive) + 'px, ' +
-                Math.floor(Math.random() * 25 * yPosive + 25 * yPosive) + 'px' + ')',
+              transform: 'translate(' + Math.floor(Math.random() * 30 * xPosive + 30 * xPosive) + 'px, ' +
+                Math.floor(Math.random() * 30 * yPosive + 30 * yPosive) + 'px' + ')',
             });
           }
         });

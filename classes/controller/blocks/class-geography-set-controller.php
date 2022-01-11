@@ -459,8 +459,8 @@ function ajax_geography_get_ships() {
 					$current_ships[ $ship_key ] = [
 						'long' => $long,
 						'lat' => $lat,
-						'x' => ($left * 80) . '%',
-						'y' => ($top * 80) . '%',
+						'x' => ($left * 100) . '%',
+						'y' => ($top * 100) . '%',
 					];
 				}
 			}

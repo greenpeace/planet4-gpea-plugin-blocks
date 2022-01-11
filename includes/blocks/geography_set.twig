@@ -21,6 +21,7 @@
 				</div>
 				<div class="content__inner content__inner--2">
 					<div class="image">
+						<div class="image__inner">
 						{% for key, group in field_groups %}
 							{% if ( group.enabled ) %}
 							<div class="image__ship" data-target="geography-set-ship" data-ship="{{ key | e('html_attr') }}">
@@ -31,6 +32,7 @@
 							</div>
 							{% endif %}
 						{% endfor %}
+						</div>
 					</div>
 				</div>
 			</div>
