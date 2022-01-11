@@ -47,7 +47,7 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Paragraph', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Paragraph, keep it in 6 lines.', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph',
 					'type'  => 'textarea',
 					'meta'  => [
@@ -56,7 +56,7 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Video thumbnail', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Video cover (first shot)', 'planet4-gpea-blocks-backend' ),
 					'attr'        => 'video_img',
 					'type'        => 'attachment',
 					'libraryType' => array( 'image' ),
@@ -64,11 +64,11 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 				],
 				[
-					'label' => __( 'Paragraph under thumbnail', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Paragraph under video cover (Please follow the headline or explanation from original video/youtube)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'video_paragraph',
 					'type'  => 'textarea',
 					'meta'  => [
-						'placeholder' => __( 'Paragraph under thumbnail', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'Paragraph under video cover', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
@@ -98,6 +98,23 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 					'libraryType' => [ 'video' ],
 					'addButton'   => __( 'Select a Video', 'planet4-blocks-backend' ),
 					'frameTitle'  => __( 'Select a Video', 'planet4-blocks-backend' )
+				],
+				[
+					'label' => __( '<h3>Ships on the Map</h3>', 'planet4-gpea-blocks-backend' ),
+					'description' => sprintf(__( '
+						Ship position endpoint URL:
+						<ol>
+							<li>極地曙光號 ARCTIC SUNRISE: https://maps.greenpeace.org/maps/gpships/arctic_sunrise_gps_lastpoint.geojson</li>
+							<li>希望號 ESPERANZA: https://maps.greenpeace.org/maps/gpships/esperanza_gps_lastpoint.geojson</li>
+							<li>彩虹勇士號 RAINBOW WARRIOR: https://maps.greenpeace.org/maps/gpships/rainbow_warrior_gps_lastpoint.geojson</li>
+							<li>見證者號 WITNESS: N/A</li>
+						</ol>
+					', 'planet4-gpea-blocks-backend' ), __( 'Settings' )),
+					'attr'  => 'hint',
+					'type'  => 'radio',
+					'meta'  => [
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
 				],
 			];
 
