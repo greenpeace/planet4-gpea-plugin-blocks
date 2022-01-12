@@ -17,8 +17,8 @@
 				</div>
 				<div class="content__inner content__inner--2">
 					<div class="buttons">
-						<a class="buttons__link buttons__link--primary button primary" href="{{ static_fields.button_1_link | e('html_attr') }}">{{ static_fields.button_1_text | default(default_button_label) | e }}<span class="buttons__arrow"></span></a>
-						<a class="buttons__link buttons__link--secondary button secondary" href="{{ static_fields.button_2_link | e('html_attr') }}">{{ static_fields.button_2_text | default(default_button_label) | e }}<span class="buttons__arrow"></span></a>
+						<a class="buttons__link buttons__link--primary button primary" href="{{ static_fields.button_1_link | e('html_attr') }}">{{ static_fields.button_1_text | default(default_button_1_label) | e }}<span class="buttons__arrow"></span></a>
+						<a class="buttons__link buttons__link--secondary button secondary" href="{{ static_fields.button_2_link | e('html_attr') }}">{{ static_fields.button_2_text | default(default_button_2_label) | e }}<span class="buttons__arrow"></span></a>
 					</div>
 					<div class="image">
 						{% if ( static_fields.book_img ) %}

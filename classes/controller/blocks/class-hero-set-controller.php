@@ -38,7 +38,7 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 
 			$fields = [
 				[
-					'label' => __( 'Layout', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Layout: Place H1, H2 at left, center or right.', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'layout',
 					'type'  => 'radio',
 					'value' => 'center',
@@ -61,26 +61,26 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Title Part 1 (for PC)', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'H1 Part1, first sentence (for PC)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title Part 1 (for PC)', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'H1 Part1, first sentence', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Title Part 1 (for mobile)', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'H1 Part1, first sentence (for mobile, you can change it to a shorter state)', 'planet4-gpea-blocks-backend' ),
 					'description' => __( 'Leave empty to use PC version.', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title_mobile',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title Part 1 (for mobile)', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'H1 Part1, first sentence', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Title Part 1 Color', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'H1 Part1, first sentence\'s color', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title_color',
 					'type'  => 'radio',
 					'value' => 'light',
@@ -99,26 +99,26 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Title Part 2 (for PC)', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'H1 Part2, second sentence (for PC)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'secondary_title',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title Part 2 (for PC)', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'H1 Part2, second sentence (for PC)', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Title Part 2 (for mobile)', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'H1 Part2, second sentence (for mobile, you can change it to a shorter state)', 'planet4-gpea-blocks-backend' ),
 					'description' => __( 'Leave empty to use PC version.', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'secondary_title_mobile',
 					'type'  => 'text',
 					'meta'  => [
-						'placeholder' => __( 'Title Part 2 (for mobile)', 'planet4-gpea-blocks-backend' ),
+						'placeholder' => __( 'H1 Part2, second sentence', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				],
 				[
-					'label' => __( 'Title Part 2 Color', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'H1 Part2, second sentence\'s color', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'secondary_title_color',
 					'type'  => 'radio',
 					'value' => 'green',
@@ -137,7 +137,7 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Subtitle', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Subtitle, focus on your value proposition', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'subtitle',
 					'type'  => 'textarea',
 					'meta'  => [
@@ -160,7 +160,7 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Background %s image (for PC)</i>', 'planet4-gpea-blocks-backend' ),
+						'label' => __( '<i>Background %s image (for PC, 1366x768)</i>', 'planet4-gpea-blocks-backend' ),
 						'attr'        => 'img',
 						'type'        => 'attachment',
 						'libraryType' => array( 'image' ),
@@ -169,7 +169,7 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 					],
 					[
 						// translators: placeholder represents the ordinal of the field.
-						'label' => __( '<i>Background %s image (for mobile)</i>', 'planet4-gpea-blocks-backend' ),
+						'label' => __( '<i>Background %s image (for mobile, 375x814)</i>', 'planet4-gpea-blocks-backend' ),
 						'description' => __( 'Leave empty to use PC version.', 'planet4-gpea-blocks-backend' ),
 						'attr'        => 'img_mobile',
 						'type'        => 'attachment',

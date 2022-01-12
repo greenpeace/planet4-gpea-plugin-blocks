@@ -29,6 +29,25 @@ if ( ! class_exists( 'Get_Involved_Controller' ) ) {
 		 */
 		public function prepare_fields() {
 
+			// get issues list
+			$main_issues = [];
+			if ( class_exists( 'P4CT_Site' ) ) {
+				$gpea_extra = new \P4CT_Site();
+				$main_issues = $gpea_extra->gpea_get_all_main_issues( TRUE );
+			}
+
+			$main_issue_options = [];
+			$main_issue_options[] = [
+				'value' => '',
+				'label' => __( 'Use the selected page\'s category', 'planet4-gpea-blocks-backend' ),
+			];
+			foreach($main_issues as $issue_item) {
+				$main_issue_options[] = [
+					'value' => $issue_item->slug,
+					'label' => esc_html($issue_item->name),
+				];
+			}
+
 			$fields = [
 				[
 					'label' => __( 'Section title', 'planet4-gpea-blocks-backend' ),
@@ -40,7 +59,7 @@ if ( ! class_exists( 'Get_Involved_Controller' ) ) {
 					],
 				],
 				[
-					'label'       => __( 'Project page', 'planet4-gpea-blocks-backend' ),
+					'label'       => __( 'Project page (only filter from all projects page)', 'planet4-gpea-blocks-backend' ),
 					'attr'     => 'post_id',
 					'type'     => 'post_select',
 					// 'multiple' => 'multiple',
@@ -65,7 +84,14 @@ if ( ! class_exists( 'Get_Involved_Controller' ) ) {
 					],
 				],
 				[
-					'label' => __( 'Project category', 'planet4-gpea-blocks-backend' ),
+					'label' => __( 'Project category color</i>', 'planet4-gpea-blocks-backend' ),
+					'description' => __( 'Leave empty to use the selected page\'s category.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'category_slug',
+					'type'  => 'select',
+					'options'  => $main_issue_options,
+				],
+				[
+					'label' => __( 'Project category title', 'planet4-gpea-blocks-backend' ),
 					'description' => __( 'Leave empty to use the selected page\'s category name.', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'category',
 					'type'  => 'text',
@@ -194,7 +220,9 @@ if ( ! class_exists( 'Get_Involved_Controller' ) ) {
 				$gpea_extra = new \P4CT_Site();
 				$main_issue = $gpea_extra->gpea_get_main_issue( $post->ID );
 				if( $main_issue ) {
-					$attributes[ 'category_slug' ] = $main_issue->slug;
+					if( !isset( $attributes[ 'category_slug' ] ) || !@strlen( $attributes[ 'category_slug' ] ) ) {
+						$attributes[ 'category_slug' ] = $main_issue->slug;
+					}
 					$default[ 'category' ] = $main_issue->name;
 				}
 			}

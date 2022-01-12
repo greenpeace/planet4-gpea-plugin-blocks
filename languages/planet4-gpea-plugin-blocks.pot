@@ -281,6 +281,10 @@ msgstr ""
 #. Report Set blocks & Get Involved blocks
 msgid "Act Now"
 msgstr ""
+msgid "Annual report"
+msgstr ""
+msgid "See all reports"
+msgstr ""
 
 #. Get Involved blocks
 msgid "Spotlight of the mounth:"

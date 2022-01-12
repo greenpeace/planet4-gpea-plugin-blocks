@@ -113,7 +113,7 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 
 			$group_field_list = [
 				[
-					'label'       => __( '<i>%s: Card %s project page</i>', 'planet4-gpea-blocks-backend' ),
+					'label'       => __( '<i>%s: Card %s project page (only filter from all projects page, leave empty if you want to connect to the other page by adding link)</i>', 'planet4-gpea-blocks-backend' ),
 					'attr'     => 'post_id',
 					'type'     => 'post_select',
 					// 'multiple' => 'multiple',
@@ -145,10 +145,10 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 					'options'  => $main_issue_options,
 				],
 				[
-					'label' => __( '<i>%s: Card %s project title</i>', 'planet4-gpea-blocks-backend' ),
+					'label' => __( '<i>%s: Card %s project title (keep in two lines)</i>', 'planet4-gpea-blocks-backend' ),
 					'description' => __( 'Leave empty to use the selected page\'s title.', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'post_title',
-					'type'  => 'text',
+					'type'  => 'textarea',
 				],
 				[
 					'label' => __( '<i>%s: Card %s Image</i>', 'planet4-gpea-blocks-backend' ),
@@ -160,12 +160,12 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 					'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 				],
 				[
-					'label' => __( '<i>%s: Card %s subtitle</i>', 'planet4-gpea-blocks-backend' ),
+					'label' => __( '<i>%s: Card %s subtitle (show the main goal)</i>', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'subtitle',
 					'type'  => 'text',
 				],
 				[
-					'label' => __( '<i>%s: Card %s paragraph</i>', 'planet4-gpea-blocks-backend' ),
+					'label' => __( '<i>%s: Card %s paragraph (main method and will improve what?)</i>', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'paragraph',
 					'type'  => 'textarea',
 				],
@@ -269,7 +269,7 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 				$safe_name = preg_replace( '/\s/', '', strtolower( $group_name ) );
 
 				$fields[] = [
-					'label' => __( '<h3>' . esc_html($group_name) . '</h3><hr>', 'planet4-gpea-blocks-backend' ),
+					'label' => __( '<h3>' . esc_html($group_name) . ' (Max ' . static::MAX_REPEATER . ' Cards)</h3><hr>', 'planet4-gpea-blocks-backend' ),
 					'attr'  => $safe_name . '_hint',
 					'type'  => 'radio',
 					'meta'  => [
@@ -280,7 +280,7 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 				for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
 
 					$fields[] = [
-						'label' => __( '<h4>Card ' . $i . '</h4><hr>', 'planet4-gpea-blocks-backend' ),
+						'label' => __( '<h4>' . esc_html($group_name) . ' / Card ' . $i . '</h4><hr>', 'planet4-gpea-blocks-backend' ),
 						'attr'  => $safe_name . '_card_' . $i . '_hint',
 						'type'  => 'radio',
 						'meta'  => [
@@ -370,6 +370,9 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 							}
 							elseif ( ( 'post_id' === $field_name_data ) && isset( $field_content ) && strlen( $field_content ) ) {
 								$post = get_post( $field_content );
+							}
+							elseif ( ( 'post_title' === $field_name_data ) ) {
+								$field_content = str_replace( [ '<p>', '</p>' ], '<br />', $field_content );
 							}
 
 							if( $post ) {

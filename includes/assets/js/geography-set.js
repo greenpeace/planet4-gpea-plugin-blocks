@@ -40,9 +40,11 @@ jQuery(document).ready(function() {
 
   $('.section-geography-set [data-target="geography-set-video"]').on('click', function() {
     let $container = $(this).closest('.section-geography-set');
+    let $target = $('.section-geography-set__video[data-section="' + $container.data('section') + '"]');
     closeAllLightboxes();
-    $('.section-geography-set__video[data-section="' + $container.data('section') + '"]').addClass('section-geography-set__lightbox--actived');
+    $target.addClass('section-geography-set__lightbox--actived');
     $('body').addClass('has-open-section-geography-set-lightbox');
+    playVideo($target, true);
   });
 
   $('.section-geography-set [data-target="geography-set-ship"]').on('click', function() {
@@ -128,8 +130,8 @@ jQuery(document).ready(function() {
             let yPosive = $(this).offset().top - $this.offset().top > 0 ? -1 : 1;
             let xPosive = $(this).offset().left - $this.offset().left > 0 ? -1 : 1;
             $(this).css({
-              transform: 'translate(' + Math.floor(Math.random() * 25 * xPosive + 25 * xPosive) + 'px, ' +
-                Math.floor(Math.random() * 25 * yPosive + 25 * yPosive) + 'px' + ')',
+              transform: 'translate(' + Math.floor(Math.random() * 30 * xPosive + 30 * xPosive) + 'px, ' +
+                Math.floor(Math.random() * 30 * yPosive + 30 * yPosive) + 'px' + ')',
             });
           }
         });
