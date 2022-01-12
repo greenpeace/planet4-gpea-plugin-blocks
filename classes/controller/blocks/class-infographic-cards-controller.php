@@ -36,7 +36,19 @@ if ( ! class_exists( 'Infographic_Cards_Controller' ) ) {
 		 */
 		public function prepare_fields() {
 
-			$fields = [];
+			$fields = [
+				[
+					'label' => __( '', 'planet4-gpea-blocks-backend' ),
+					'description' => sprintf(__( '
+						Click "Add Card" to start editing. (Max ' . static::MAX_REPEATER . ' Cards)
+					', 'planet4-gpea-blocks-backend' ), __( 'Settings' )),
+					'attr'  => 'add_card_hint',
+					'type'  => 'radio',
+					'meta'  => [
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+			];
 
 			$field_groups = [
 
@@ -162,7 +174,8 @@ if ( ! class_exists( 'Infographic_Cards_Controller' ) ) {
 						}
 
 						if ( ( 'title' === $field_name_data[0] || 'content' === $field_name_data[0] ) && isset( $field_content ) ) {
-							$field_content = do_shortcode(urldecode( $field_content ));
+							$field_content = nl2br( do_shortcode( urldecode( $field_content ) ) );
+							$field_content = str_replace("<br />\n<br />", "</p><p>", $field_content);
 						}
 
 						$group[ $field_name_data[0] ] = $field_content;

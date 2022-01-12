@@ -106,6 +106,17 @@ if ( ! class_exists( 'MC_Subscription_Controller' ) ) {
 						'placeholder' => __( 'Salesforce CampaignId', 'planet4-gpea-blocks-backend' ),
 					],
 				],
+				[
+					'label' => __( '', 'planet4-gpea-blocks-backend' ),
+					'description' => sprintf(__( '
+						Click "Add Option" if you have the second or more checkbox items.
+					', 'planet4-gpea-blocks-backend' ), __( 'Settings' )),
+					'attr'  => 'add_card_hint',
+					'type'  => 'radio',
+					'meta'  => [
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
 			];
 
 			$field_groups = [

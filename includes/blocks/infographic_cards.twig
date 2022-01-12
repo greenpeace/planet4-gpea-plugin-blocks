@@ -8,9 +8,9 @@
 					<div class="grid__inner">
 						<div class="grid__text">
 							{% if ( group.title ) %}
-							<h5 class="grid__title">{{ group.title | raw | nl2br }}</h5>
+							<h5 class="grid__title">{{ group.title | raw }}</h5>
 							{% endif %}
-							<p class="grid__desc">{{ group.content | raw | nl2br }}</p>
+							<div class="grid__desc"><p>{{ group.content | raw }}</p></div>
 						</div>
 						<div class="grid__image" style="background-image: url({{ group.img | e('html_attr') }})"></div>
 					</div>
