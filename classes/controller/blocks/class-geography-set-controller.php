@@ -403,10 +403,10 @@ function ajax_geography_get_ships() {
 		wp_send_json_error();
 		return;
 	}
-	if( $post_content = get_the_content( NULL, FALSE, $_POST['post_id'] ) ) {
+	if( $post = get_post( $_POST['post_id'] ) ) {
 		preg_match_all(
 			'/' . get_shortcode_regex() . '/',
-			$post_content,
+			$post->post_content,
 			$shortcodes,
 			PREG_SET_ORDER
 		);
