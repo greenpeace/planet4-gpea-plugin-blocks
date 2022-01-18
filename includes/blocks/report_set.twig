@@ -7,7 +7,7 @@
 				</h2>
 			</div>
 			<div class="content content--desc">
-				<div class="content__inner content__inner--1">
+				<div class="content__inner content__inner--1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
 					<h4 class="title">
 						{{ static_fields.title_1 | e }}
 					</h4>
@@ -16,17 +16,17 @@
 					</div>
 				</div>
 				<div class="content__inner content__inner--2">
-					<div class="buttons">
+					<div class="buttons" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
 						<a class="buttons__link buttons__link--primary button primary" href="{{ static_fields.button_1_link | e('html_attr') }}">{{ static_fields.button_1_text | default(default_button_1_label) | e }}<span class="buttons__arrow"></span></a>
 						<a class="buttons__link buttons__link--secondary button secondary" href="{{ static_fields.button_2_link | e('html_attr') }}">{{ static_fields.button_2_text | default(default_button_2_label) | e }}<span class="buttons__arrow"></span></a>
 					</div>
-					<div class="image">
+					<div class="image" data-aos="fade-left">
 						{% if ( static_fields.book_img ) %}
 						<div class="bg" style="background-image: url({{ static_fields.book_img | e('html_attr') }})"></div>
 						{% endif %}
 					</div>
 				</div>
-				<div class="content__inner content__inner--3">
+				<div class="content__inner content__inner--3" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
 					<h4 class="title">
 						{{ static_fields.title_2 | e }}
 					</h4>
