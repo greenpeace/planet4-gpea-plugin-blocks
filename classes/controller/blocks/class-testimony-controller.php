@@ -294,6 +294,9 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 					}
 				}
 				else {
+					if( $last_is_horizontal_card ) {
+						$field_groups[ count($field_groups) - 1 ][ 'end_slide_group' ] = TRUE;
+					}
 					$group[ 'layout_classes' ] = 'tall';
 					$group[ 'start_slide_group' ] = TRUE;
 					$group[ 'end_slide_group' ] = TRUE;
@@ -301,10 +304,6 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 				}
 
 				$field_groups[] = $group;
-			}
-
-			if( $last_is_horizontal_card ) {
-				$field_groups[ count($field_groups) - 1 ][ 'end_slide_group' ] = TRUE;
 			}
 
 			// Extract static fields only.
