@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/planet4-gpea-"
 "plugin-blocks\n"
 "POT-Creation-Date: 2019-06-27T14:02:59+00:00\n"
-"PO-Revision-Date: 2021-12-04 13:57+0800\n"
+"PO-Revision-Date: 2022-01-18 16:46+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_HK\n"
@@ -262,7 +262,7 @@ msgid "Last Name"
 msgstr "姓氏"
 
 msgid "Email"
-msgstr "電郵地址 Emai"
+msgstr "電郵地址 Email"
 
 msgid ""
 "Yes! Please send me important updates from Greenpeace. Greenpeace respects "
@@ -299,6 +299,33 @@ msgstr "請剔選方格以表示同意"
 
 msgid "There was a problem with the submission"
 msgstr "Oops, 訂閱時發生了一點錯誤。"
+
+#. Report Set blocks & Get Involved blocks
+msgid "Act Now"
+msgstr "前往了解"
+
+msgid "Annual report"
+msgstr "繼續閱讀"
+
+msgid "See all reports"
+msgstr "查閱所有機構報告"
+
+#. Get Involved blocks
+msgid "Spotlight of the mounth:"
+msgstr "當下焦點工作："
+
+#. Get Involved Cards blocks
+msgid "hot items"
+msgstr "本季項目"
+
+msgid "See all"
+msgstr "所有環保項目"
+
+msgid "LOCATION"
+msgstr "實施領域"
+
+msgid "PEOPLE"
+msgstr "捐款人數"
 
 #~ msgid "Donation reminder box"
 #~ msgstr "您的每月捐助非常重要！"

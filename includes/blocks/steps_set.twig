@@ -1,14 +1,14 @@
-{% block steps_set %}
+{% block steps_set %}11
 	{% if ( field_groups|length > 0 ) %}
 	<section class="section-steps-set">
 		<div class="ct-container">
-			<div class="title">
+			<div class="title" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
 				<h2 class="title__text title__text--pc">{{ static_fields.title | raw }}</h2>
 				<p class="title__text title__text--mobile">{{ static_fields.title_mobile | default(static_fields.title) | raw }}</p>
 			</div>
 			<div class="grid">
 				{% for group in field_groups %}
-				<div class="grid__box">
+				<div class="grid__box" data-aos="zoom-in-right">
 					<div class="grid__inner">
 						<div class="grid__image" style="background-image: url({{ group.img | e('html_attr') }})"></div>
 						<div class="grid__text">

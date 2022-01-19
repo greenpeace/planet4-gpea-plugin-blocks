@@ -9,13 +9,13 @@
 		</div>
 		<div class="ct-container">
 			<div class="content content--desc">
-				<div class="content__inner content__inner--1">
+				<div class="content__inner content__inner--1" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
 					<div class="desc">
 						<p>{{ static_fields.paragraph | raw }}</p>
 					</div>
-					<div class="image" data-target="geography-set-video" {% if ( static_fields.video_img or static_fields.default_video_img ) %}style="background-image: url({{ static_fields.video_img | default(static_fields.default_video_img) | e('html_attr') }})"{% endif %}>
+					<div class="image" data-aos="zoom-in-right" data-target="geography-set-video" {% if ( static_fields.video_img or static_fields.default_video_img ) %}style="background-image: url({{ static_fields.video_img | default(static_fields.default_video_img) | e('html_attr') }})"{% endif %}>
 					</div>
-					<div class="desc">
+					<div class="desc" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
 						<p>{{ static_fields.video_paragraph | raw }}</p>
 					</div>
 				</div>

@@ -5,7 +5,7 @@
 				<h2 class="title">
 					{{ static_fields.title | e }}
 				</h2>
-				<div class="desc">
+				<div class="desc" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
 					<p>{{ static_fields.paragraph | raw }}</p>
 				</p>
 			</div>
@@ -14,7 +14,7 @@
 				<div class="swiper-wrapper">
 				{% for group in field_groups %}
 					{% if ( group.start_slide_group ) %}
-					<div class="swiper-slide slide-item slide-item--{{ group.layout_classes | e('html_attr') }}">
+					<div class="swiper-slide slide-item slide-item--{{ group.layout_classes | e('html_attr') }}" data-aos="fade-left">
 					{% endif %}
 						<div class="slide-item__inner slide-item__inner--{{ group.layout | e('html_attr') }}">
 							{% if ( group.img ) %}
