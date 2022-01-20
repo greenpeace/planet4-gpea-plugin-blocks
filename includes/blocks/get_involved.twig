@@ -8,38 +8,6 @@
 			</div>
 			<div class="content content--desc content--issue-{{ static_fields.category_slug | e('html_attr') }}">
 				<div class="content__inner content__inner--1">
-					<p class="category">{{ tanslate_strings.category_label | e }}<span class="category__name">{{ static_fields.category | default(default_strings.category) | e }}</span></p>
-					<h4 class="title">{{ static_fields.post_title | default(default_strings.post_title) | raw }}</h4>
-					<div class="desc" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-						<p>{{ static_fields.paragraph | default(default_strings.paragraph) | raw }}</p>
-					</div>
-				</div>
-				<div class="content__inner content__inner--2" data-aos="fade-left">
-					<div class="image">
-						<div class="image__inner">
-							{% if ( static_fields.img or default_strings.img ) %}
-							<div class="bg" style="background-image: url({{ static_fields.img | default(default_strings.img) | e('html_attr') }})"></div>
-							{% endif %}
-						</div>
-					</div>
-				</div>
-				<div class="content__inner content__inner--3" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
-					<div class="buttons">
-						<a class="buttons__link buttons__link--primary button btn-primary" href="{{ static_fields.button_url | default(default_strings.button_url) | e('html_attr') }}">{{ static_fields.button_label | default(tanslate_strings.default_button_label) | e }}</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="section-get-involved">
-		<div class="ct-container">
-			<div class="content content--title">
-				<h2 class="title">
-					{{ static_fields.title | e }}
-				</h2>
-			</div>
-			<div class="content content--desc content--issue-{{ static_fields.category_slug | e('html_attr') }}">
-				<div class="content__inner content__inner--1">
 					<div data-aos="fade-up" data-aos-anchor-placement="top-bottom">
 						<p class="category">{{ tanslate_strings.category_label | e }}<span class="category__name">{{ static_fields.category | default(default_strings.category) | e }}</span></p>
 						<h4 class="title">{{ static_fields.post_title | default(default_strings.post_title) | raw }}</h4>
