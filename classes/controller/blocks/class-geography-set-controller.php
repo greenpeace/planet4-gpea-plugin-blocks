@@ -436,6 +436,7 @@ function ajax_geography_get_ships() {
 					curl_setopt( $curl, CURLOPT_RETURNTRANSFER, TRUE );
 					$ship_data = curl_exec( $curl );
 					curl_close( $curl );
+					unset( $curl );
 					$ship_data = @json_decode($ship_data, TRUE);
 					if( isset( $ship_data[ 'features' ][ 0 ][ 'geometry' ][ 'coordinates' ] ) ) {
 						$ship_position = $ship_data[ 'features' ][ 0 ][ 'geometry' ][ 'coordinates' ];
