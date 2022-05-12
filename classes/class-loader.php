@@ -169,9 +169,9 @@ if ( ! class_exists( 'Loader' ) ) {
 			add_action(
 				'enqueue_shortcode_ui',
 				function () {
-					$js_admin_creation = filectime( P4EABKS_ADMIN_DIR . 'js/blocks/admin-blocks.min.js' );
+					$js_admin_creation = @filectime( P4EABKS_ADMIN_DIR . 'js/blocks/admin-blocks.min.js' );
 					wp_enqueue_script( 'p4nlbks_admin_blocks_script', P4EABKS_ADMIN_DIR . 'js/blocks/admin-blocks.min.js', [ 'shortcode-ui' ], $js_admin_creation, true );
-					$css_admin_creation = filectime( P4EABKS_ADMIN_DIR . 'css/admin_blocks.css' );
+					$css_admin_creation = @filectime( P4EABKS_ADMIN_DIR . 'css/admin_blocks.css' );
 					wp_enqueue_style( 'p4nlbks_admin_blocks_style', P4EABKS_ADMIN_DIR . 'css/admin_blocks.css', array(), $css_admin_creation );
 				}
 			);
@@ -181,8 +181,8 @@ if ( ! class_exists( 'Loader' ) ) {
 				return;
 			}
 
-			$js_creation = filectime( P4EABKS_ADMIN_DIR . 'js/admin.js' );
-			$css_creation = filectime( P4EABKS_ADMIN_DIR . 'css/admin.css' );
+			$js_creation = @filectime( P4EABKS_ADMIN_DIR . 'js/admin.js' );
+			$css_creation = @filectime( P4EABKS_ADMIN_DIR . 'css/admin.css' );
 
 			wp_enqueue_script( 'p4nlbks_admin_jquery', '//code.jquery.com/jquery-3.2.1.min.js', array(), '3.2.1', true );
 			wp_enqueue_style( 'p4nlbks_admin_style', P4EABKS_ADMIN_DIR . 'css/admin.css', array(), $css_creation );
