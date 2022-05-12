@@ -39,6 +39,7 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 			1 => 'Group 1',
 			2 => 'Group 2',
 			3 => 'Group 3',
+			4 => 'Group 4',
 		];
 
 		/**
