@@ -74,8 +74,20 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 			// static fields
 
 			$see_all_label = __( 'See all', 'planet4-gpea-blocks' );
+			$title_label = __( 'hot items', 'planet4-gpea-blocks' );
 
 			$fields = [];
+
+			$fields[] = [
+				'label' => __( 'Section title', 'planet4-gpea-blocks-backend' ),
+				'description' => sprintf(__( 'Leave empty to use default: "%s".', 'planet4-gpea-blocks-backend' ), $title_label),
+				'attr'  => 'title',
+				'type'  => 'text',
+				'meta'  => [
+					'placeholder' => __( 'Section Title', 'planet4-gpea-blocks-backend' ),
+					'data-plugin' => 'planet4-gpea-blocks',
+				],
+			];
 
 			foreach($group_name_list as $i => $group_name) {
 				$fields[] = [
@@ -444,6 +456,9 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 						$static_fields[ $i ] = [];
 					}
 					$static_fields[ $i ][ $field_name_data ] = $field_content;
+				}
+				else {
+					$static_fields[ $field_name ] = $field_content;
 				}
 			}
 			return [

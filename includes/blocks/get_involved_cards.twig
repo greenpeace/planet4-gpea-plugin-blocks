@@ -3,7 +3,7 @@
 		<div class="ct-container ct-container--thin">
 			{% set first_card = true %}
 			<div class="content content--title">
-				<h4 class="title">{{ tanslate_strings.category_label | e }}</h4>
+				<h4 class="title">{{ static_fields.title | default(tanslate_strings.category_label) | e }}</h4>
 				<div class="buttons">
 				{% for i in 1..4 %}
 					{% if ( static_fields[i].enabled ) %}
