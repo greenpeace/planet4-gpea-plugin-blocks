@@ -31,7 +31,12 @@
 							{% for card_key, group in field_groups[group_name] %}
 								{% if ( group.layout ) %}
 								{% set card_count = card_count + 1 %}
-								<a class="swiper-slide grid__box grid__box--issue-{{ group.category_slug | default(default_strings[group_name][card_key].category_slug) | e('html_attr') }}" href="{{ group.url | default(default_strings[group_name][card_key].url) | e('html_attr') }}">
+								<a class="swiper-slide grid__box grid__box--issue-{{ group.category_slug | default(default_strings[group_name][card_key].category_slug) | e('html_attr') }}"
+									{% if ( card_count <= 3 ) %}
+									href="{{ group.url_with_ref | default(default_strings[group_name][card_key].url_with_ref) | e('html_attr') }}"
+									{% else %}
+									href="{{ group.url | default(default_strings[group_name][card_key].url) | e('html_attr') }}"
+									{% endif %}>
 									<div class="grid__inner">
 										<div class="grid__header">
 											<p class="category"><span class="category__name">{{ group.category | default(default_strings[group_name][card_key].category) | e }}</span></p>

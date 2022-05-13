@@ -379,7 +379,10 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 							if( $post ) {
 								$post_default = [];
 								$post_default[ 'post_title' ] = $post->post_title;
-								$post_default[ 'url' ] = get_permalink( $post->ID );
+								$url = get_permalink( $post->ID );
+								$url_with_ref = add_query_arg( 'ref', 'get-involved-cards-' . $safe_name, $url );
+								$post_default[ 'url' ] = $url;
+								$post_default[ 'url_with_ref' ] = $url_with_ref;
 								$post_default[ 'img' ] = get_the_post_thumbnail_url( $post->ID, 'post-thumbnails' );
 								$post_default[ 'percentage' ] = get_post_meta( $post->ID, 'p4-gpea_project_percentage', TRUE );
 								$post_default[ 'location' ] = get_post_meta( $post->ID, 'p4-gpea_project_localization', TRUE );
@@ -411,6 +414,11 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 									$field_groups[ $safe_name ][ $i ][ 'category_slug' ] = $field_content;
 									$field_groups[ $safe_name ][ $i ][ $field_name_data ] = $category->name;
 								}
+							}
+							elseif ( ( 'url' === $field_name_data ) && isset( $field_content ) && strlen( $field_content ) ) {
+								$url_with_ref = add_query_arg( 'ref', 'get-involved-cards-' . $safe_name, $field_content );
+								$field_groups[ $safe_name ][ $i ][ $field_name_data . '_with_ref' ] = $url_with_ref;
+								$field_groups[ $safe_name ][ $i ][ $field_name_data ] = $field_content;
 							}
 							else {
 								$field_groups[ $safe_name ][ $i ][ $field_name_data ] = $field_content;
