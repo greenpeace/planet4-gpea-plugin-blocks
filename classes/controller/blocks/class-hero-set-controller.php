@@ -168,6 +168,15 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 					],
 					[
+						'label' => __( '<i>Background %s Youtube URL (for PC, 1366x768)</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'video_youtube',
+						'type'  => 'text',
+						'meta'  => [
+							'placeholder' => __( 'Youtube URL', 'planet4-gpea-blocks-backend' ),
+							'data-plugin' => 'planet4-gpea-blocks',
+						],
+					],
+					[
 						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Background %s image (for mobile, 375x814)</i>', 'planet4-gpea-blocks-backend' ),
 						'description' => __( 'Leave empty to use PC version.', 'planet4-gpea-blocks-backend' ),
