@@ -186,6 +186,10 @@ if ( ! class_exists( 'Get_Involved_Controller' ) ) {
 				$attributes[ 'paragraph' ] = '<p>' . $attributes[ 'paragraph' ] . '</p>';
 			}
 
+			if ( isset( $attributes[ 'button_url' ] ) && @strlen( $attributes[ 'button_url' ] ) ) {
+				$attributes[ 'button_url' ] = add_query_arg( 'ref', 'get-involved-act-now', $attributes[ 'button_url' ] );
+			}
+
 			$tanslate = [
 				'default_button_label' => __( 'Act Now', 'planet4-gpea-blocks' ),
 				'category_label' => __( 'Spotlight of the mounth:', 'planet4-gpea-blocks' ),
@@ -199,7 +203,8 @@ if ( ! class_exists( 'Get_Involved_Controller' ) ) {
 				$post = get_post( $post_id );
 				if( $post ) {
 					$default[ 'post_title' ] = $post->post_title;
-					$default[ 'button_url' ] = get_permalink( $post_id );
+					$url = get_permalink( $post_id );
+					$default[ 'button_url' ] = add_query_arg( 'ref', 'get-involved-act-now', $url );
 					$default[ 'img' ] = get_the_post_thumbnail_url( $post_id, 'post-thumbnails' );
 					preg_match_all( 
 						'/' . get_shortcode_regex() . '/',

@@ -27,9 +27,21 @@
 					<div class="swiper-slide slide-item slide-item--{{ group.opacity | e('html_attr') }}">
 					{% if ( group.img and group.img_mobile ) %}
 						<div class="bg bg--mobile" style="background-image: url({{ group.img_mobile | e('html_attr') }})"></div>
-						<div class="bg bg--pc" style="background-image: url({{ group.img | e('html_attr') }})"></div>
+						<div class="bg bg--pc" style="background-image: url({{ group.img | e('html_attr') }})">
+							{% if ( group.video_youtube ) %}
+							<div data-youtube-id="{{ group.video_youtube | e('html_attr') }}" class="video">
+								<div class="youtube-embed"></div>
+							</div>
+							{% endif %}
+						</div>
 					{% elseif ( group.img ) %}
-						<div class="bg" style="background-image: url({{ group.img | e('html_attr') }})"></div>
+						<div class="bg" style="background-image: url({{ group.img | e('html_attr') }})">
+							{% if ( group.video_youtube ) %}
+							<div data-youtube-id="{{ group.video_youtube | e('html_attr') }}" class="video">
+								<div class="youtube-embed"></div>
+							</div>
+							{% endif %}
+						</div>
 					{% endif %}
 					</div>
 				{% endfor %}

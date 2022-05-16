@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/planet4-gpea-"
 "plugin-blocks\n"
 "POT-Creation-Date: 2019-06-27T14:02:59+00:00\n"
-"PO-Revision-Date: 2022-01-11 02:36+0800\n"
+"PO-Revision-Date: 2022-05-11 23:11+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_TW\n"
@@ -326,6 +326,21 @@ msgstr "專案地點"
 msgid "PEOPLE"
 msgstr "捐款人數"
 
+msgid "Donation reminder box"
+msgstr "您的每月小額捐款是我們最大的後盾！"
+
+msgid "Donation reminder description"
+msgstr ""
+"誠心邀請您加入每月捐款會員的行列，因為對於非營利團體而言，定期定額捐款具有莫"
+"大的意義：它能提供組織穩定的收入，持續地支援我們的專案研究、檢測、遊說等相關"
+"工作，讓綠色和平改善環境的計畫與工作得以長遠實行。"
+
+msgid "Donation reminder give oneoff"
+msgstr "單次捐款"
+
+msgid "Donation reminder give regular"
+msgstr "每月捐款"
+
 #~ msgid "Witness"
 #~ msgstr "見證者號"
 
@@ -337,23 +352,6 @@ msgstr "捐款人數"
 
 #~ msgid "Arctic Sunrise"
 #~ msgstr "極地曙光號"
-
-#~ msgid "Donation reminder box"
-#~ msgstr "您的每月小額捐款是我們最大的後盾！"
-
-#~ msgid "Donation reminder description"
-#~ msgstr ""
-#~ "您的每月捐款，代表對綠色和平的支持與信心，並為在地、全球環境工作提供穩定資"
-#~ "源。\n"
-#~ "\n"
-#~ "為保持100%公正獨立，綠色和平從不接受政府與企業資助，所以您穩定持續的支持，"
-#~ "是讓環境工作得以長遠實行、為地球帶來更多正向改變的關鍵！"
-
-#~ msgid "Donation reminder give oneoff"
-#~ msgstr "單次捐款"
-
-#~ msgid "Donation reminder give regular"
-#~ msgstr "每月捐款"
 
 #~ msgid "Upload a cover image"
 #~ msgstr "請上傳圖片"

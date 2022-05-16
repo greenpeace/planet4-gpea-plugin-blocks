@@ -39,6 +39,7 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 			1 => 'Group 1',
 			2 => 'Group 2',
 			3 => 'Group 3',
+			4 => 'Group 4',
 		];
 
 		/**
@@ -73,8 +74,20 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 			// static fields
 
 			$see_all_label = __( 'See all', 'planet4-gpea-blocks' );
+			$title_label = __( 'hot items', 'planet4-gpea-blocks' );
 
 			$fields = [];
+
+			$fields[] = [
+				'label' => __( 'Section title', 'planet4-gpea-blocks-backend' ),
+				'description' => sprintf(__( 'Leave empty to use default: "%s".', 'planet4-gpea-blocks-backend' ), $title_label),
+				'attr'  => 'title',
+				'type'  => 'text',
+				'meta'  => [
+					'placeholder' => __( 'Section Title', 'planet4-gpea-blocks-backend' ),
+					'data-plugin' => 'planet4-gpea-blocks',
+				],
+			];
 
 			foreach($group_name_list as $i => $group_name) {
 				$fields[] = [
@@ -378,7 +391,10 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 							if( $post ) {
 								$post_default = [];
 								$post_default[ 'post_title' ] = $post->post_title;
-								$post_default[ 'url' ] = get_permalink( $post->ID );
+								$url = get_permalink( $post->ID );
+								$url_with_ref = add_query_arg( 'ref', 'get-involved-cards-' . $safe_name, $url );
+								$post_default[ 'url' ] = $url;
+								$post_default[ 'url_with_ref' ] = $url_with_ref;
 								$post_default[ 'img' ] = get_the_post_thumbnail_url( $post->ID, 'post-thumbnails' );
 								$post_default[ 'percentage' ] = get_post_meta( $post->ID, 'p4-gpea_project_percentage', TRUE );
 								$post_default[ 'location' ] = get_post_meta( $post->ID, 'p4-gpea_project_localization', TRUE );
@@ -411,6 +427,11 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 									$field_groups[ $safe_name ][ $i ][ $field_name_data ] = $category->name;
 								}
 							}
+							elseif ( ( 'url' === $field_name_data ) && isset( $field_content ) && strlen( $field_content ) ) {
+								$url_with_ref = add_query_arg( 'ref', 'get-involved-cards-' . $safe_name, $field_content );
+								$field_groups[ $safe_name ][ $i ][ $field_name_data . '_with_ref' ] = $url_with_ref;
+								$field_groups[ $safe_name ][ $i ][ $field_name_data ] = $field_content;
+							}
 							else {
 								$field_groups[ $safe_name ][ $i ][ $field_name_data ] = $field_content;
 							}
@@ -435,6 +456,9 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 						$static_fields[ $i ] = [];
 					}
 					$static_fields[ $i ][ $field_name_data ] = $field_content;
+				}
+				else {
+					$static_fields[ $field_name ] = $field_content;
 				}
 			}
 			return [

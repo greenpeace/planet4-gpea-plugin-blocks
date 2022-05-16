@@ -3,9 +3,9 @@
 		<div class="ct-container ct-container--thin">
 			{% set first_card = true %}
 			<div class="content content--title">
-				<h4 class="title">{{ tanslate_strings.category_label | e }}</h4>
+				<h4 class="title">{{ static_fields.title | default(tanslate_strings.category_label) | e }}</h4>
 				<div class="buttons">
-				{% for i in 1..3 %}
+				{% for i in 1..4 %}
 					{% if ( static_fields[i].enabled ) %}
 					<span class="link {% if ( first_card ) %}link--actived{% endif %}" data-group="{{ i | e('html_attr') }}">{{ static_fields[i].label | e }}</span>
 					{% set first_card = false %}
@@ -20,7 +20,7 @@
 		<div class="ct-container" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
 			<div class="content ct-container--wide content--desc">
 			{% set first_card = true %}
-			{% for i in 1..3 %}
+			{% for i in 1..4 %}
 				{% if ( static_fields[i].enabled ) %}
 				<div class="grid__outer2 {% if ( first_card ) %}grid__outer2--actived{% endif %}" data-group="{{ i | e('html_attr') }}">
 					<div class="swiper-container get-involved-cards-swiper grid__outer">
@@ -31,7 +31,12 @@
 							{% for card_key, group in field_groups[group_name] %}
 								{% if ( group.layout ) %}
 								{% set card_count = card_count + 1 %}
-								<a class="swiper-slide grid__box grid__box--issue-{{ group.category_slug | default(default_strings[group_name][card_key].category_slug) | e('html_attr') }}" href="{{ group.url | default(default_strings[group_name][card_key].url) | e('html_attr') }}">
+								<a class="swiper-slide grid__box grid__box--issue-{{ group.category_slug | default(default_strings[group_name][card_key].category_slug) | e('html_attr') }}"
+									{% if ( card_count <= 3 ) %}
+									href="{{ group.url_with_ref | default(default_strings[group_name][card_key].url_with_ref) | e('html_attr') }}"
+									{% else %}
+									href="{{ group.url | default(default_strings[group_name][card_key].url) | e('html_attr') }}"
+									{% endif %}>
 									<div class="grid__inner">
 										<div class="grid__header">
 											<p class="category"><span class="category__name">{{ group.category | default(default_strings[group_name][card_key].category) | e }}</span></p>

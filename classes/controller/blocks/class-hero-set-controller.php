@@ -168,6 +168,15 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 						'frameTitle'  => __( 'Select image', 'planet4-gpea-blocks-backend' ),
 					],
 					[
+						'label' => __( '<i>Background %s Youtube URL (for PC, 1366x768)</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'video_youtube',
+						'type'  => 'text',
+						'meta'  => [
+							'placeholder' => __( 'Youtube URL', 'planet4-gpea-blocks-backend' ),
+							'data-plugin' => 'planet4-gpea-blocks',
+						],
+					],
+					[
 						// translators: placeholder represents the ordinal of the field.
 						'label' => __( '<i>Background %s image (for mobile, 375x814)</i>', 'planet4-gpea-blocks-backend' ),
 						'description' => __( 'Leave empty to use PC version.', 'planet4-gpea-blocks-backend' ),
@@ -292,8 +301,11 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 						$group_type = array_pop($field_name_data);
 						$field_name_data = implode('_', $field_name_data);
 
-						if ( ( 'img' === $field_name_data || 'img_mobile' === $field_name_data ) && isset( $field_content ) ) {
+						if ( ( 'img' === $field_name_data || 'img_mobile' === $field_name_data ) && isset( $field_content ) && strlen( $field_content ) ) {
 							$field_content = wp_get_attachment_url( $field_content );
+						}
+						elseif( 'video_youtube' === $field_name_data && isset( $field_content ) && strlen( $field_content ) ) {
+							$field_content = $this->getYoutubeId( $field_content );
 						}
 
 						$group[ $field_name_data ] = $field_content;
@@ -326,6 +338,22 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 				'static_fields' => $static_fields,
 			];
 
+		}
+
+		private function getYoutubeId($url) {
+			$pattern = '/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/';
+        	preg_match($pattern, $url, $matches);
+        	return (isset($matches[7])) ? $matches[7] : false;
+		}
+
+		private function generateRandomString($length = 10) {
+			$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			$charactersLength = strlen($characters);
+			$randomString = '';
+			for ($i = 0; $i < $length; $i++) {
+				$randomString .= $characters[rand(0, $charactersLength - 1)];
+			}
+			return $randomString;
 		}
 
 		/**
