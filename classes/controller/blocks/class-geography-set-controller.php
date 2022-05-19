@@ -433,7 +433,7 @@ function ajax_geography_get_ships() {
 						continue;
 					}
 					if( !$curl ) {
-						wp_send_json_error();
+						// wp_send_json_error();
 						continue;
 					}
 					curl_setopt( $curl, CURLOPT_URL, $field_value );
@@ -446,7 +446,7 @@ function ajax_geography_get_ships() {
 						$ship_position = $ship_data[ 'features' ][ 0 ][ 'geometry' ][ 'coordinates' ];
 					}
 					if( !isset( $ship_position ) || count( $ship_position ) != 2 ) {
-						wp_send_json_error();
+						// wp_send_json_error();
 						continue;
 					}
 
