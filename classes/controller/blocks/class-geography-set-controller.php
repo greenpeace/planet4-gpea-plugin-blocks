@@ -429,8 +429,11 @@ function ajax_geography_get_ships() {
 					if( isset( $shortcode_attr[ 'enabled_' . $group_name . '_' . $ship_key ] ) && $shortcode_attr[ 'enabled_' . $group_name . '_' . $ship_key ] ) {
 						$curl = curl_init();
 					}
-					if( !isset( $curl ) || !$curl ) {
-						wp_send_json_error();
+					if( !isset( $curl ) ) {
+						continue;
+					}
+					if( !$curl ) {
+						// wp_send_json_error();
 						continue;
 					}
 					curl_setopt( $curl, CURLOPT_URL, $field_value );
@@ -443,7 +446,7 @@ function ajax_geography_get_ships() {
 						$ship_position = $ship_data[ 'features' ][ 0 ][ 'geometry' ][ 'coordinates' ];
 					}
 					if( !isset( $ship_position ) || count( $ship_position ) != 2 ) {
-						wp_send_json_error();
+						// wp_send_json_error();
 						continue;
 					}
 
