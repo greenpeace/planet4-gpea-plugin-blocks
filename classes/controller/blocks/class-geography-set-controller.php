@@ -429,7 +429,10 @@ function ajax_geography_get_ships() {
 					if( isset( $shortcode_attr[ 'enabled_' . $group_name . '_' . $ship_key ] ) && $shortcode_attr[ 'enabled_' . $group_name . '_' . $ship_key ] ) {
 						$curl = curl_init();
 					}
-					if( !isset( $curl ) || !$curl ) {
+					if( !isset( $curl ) ) {
+						continue;
+					}
+					if( !$curl ) {
 						wp_send_json_error();
 						continue;
 					}
