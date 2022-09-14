@@ -9,7 +9,7 @@
 				</div>
 				<!-- one or more milestones, each can be achieved or not achieved -->
 				<div class="project-phase-milestones">
-					{% for i in 1..25 %}
+					{% for i in 1..35 %}
 					{% if fields['paragraph_milestone_'~i] %}
 						<div class="project-phase-milestone {{ fields['achieved_milestone_'~i] ? 'achieved' : '' }}">
 							<div class="project-phase-milestone-date">{{ fields['date_milestone_'~i] }}</div>
