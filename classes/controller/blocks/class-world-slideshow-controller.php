@@ -29,7 +29,7 @@ if ( ! class_exists( 'World_Slideshow_Controller' ) ) {
 		 *
 		 * @const string MAX_REPEATER
 		 */
-		const MAX_REPEATER = 20;
+		const MAX_REPEATER = 35;
 
 		/**
 		 * Shortcode UI setup for the tasks shortcode.
