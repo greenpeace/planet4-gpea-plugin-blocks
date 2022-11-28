@@ -42,7 +42,7 @@
 											<p class="category"><span class="category__name">{{ group.category | default(default_strings[group_name][card_key].category) | e }}</span></p>
 											<h5 class="title">{{ group.post_title | default(default_strings[group_name][card_key].post_title) | raw }}</h5>
 											{% if ( group.img or default_strings[group_name][card_key].img ) %}
-											<div class="lazy img" data-bg="url({{ group.img | default(default_strings[group_name][card_key].img) | e('html_attr') }});"></div>
+											<div class="lazy img" data-bg="url({{ group.img | default(default_strings[group_name][card_key].img) | e('html_attr') }})"></div>
 											{% endif %}
 											<p class="subtitle">{{ group.subtitle | e }}</p>
 											<div class="desc">
