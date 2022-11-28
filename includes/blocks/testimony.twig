@@ -18,9 +18,9 @@
 					{% endif %}
 						<div class="slide-item__inner slide-item__inner--{{ group.layout | e('html_attr') }}">
 							{% if ( group.img ) %}
-							<div class="bg" style="background-image: url({{ group.img | e('html_attr') }})"></div>
+							<div class="lazy bg" data-bg="url({{ group.img | e('html_attr') }})"></div>
 							{% elseif ( default_bg_images[group.layout] ) %}
-							<div class="bg" style="background-image: url({{ default_bg_images[group.layout] | e('html_attr') }})"></div>
+							<div class="lazy bg" data-bg="url({{ default_bg_images[group.layout] | e('html_attr') }})"></div>
 							{% endif %}
 							<div class="text-container">
 								<div class="text text--title">

@@ -22,7 +22,7 @@
 					</div>
 					<div class="image" data-aos="fade-left">
 						{% if ( static_fields.book_img ) %}
-						<div class="bg" style="background-image: url({{ static_fields.book_img | e('html_attr') }})"></div>
+						<div class="lazy bg" data-bg="url({{ static_fields.book_img | e('html_attr') }})"></div>
 						{% endif %}
 					</div>
 				</div>

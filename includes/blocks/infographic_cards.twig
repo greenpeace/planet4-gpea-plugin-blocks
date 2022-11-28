@@ -12,7 +12,7 @@
 							{% endif %}
 							<div class="grid__desc"><p>{{ group.content | raw }}</p></div>
 						</div>
-						<div class="grid__image" style="background-image: url({{ group.img | e('html_attr') }})"></div>
+						<div class="lazy grid__image" data-bg="url({{ group.img | e('html_attr') }})"></div>
 					</div>
 				</div>
 				{% endfor %}

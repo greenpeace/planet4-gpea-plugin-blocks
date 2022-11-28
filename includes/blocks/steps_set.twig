@@ -10,7 +10,7 @@
 				{% for group in field_groups %}
 				<div class="grid__box" data-aos="zoom-in-right">
 					<div class="grid__inner">
-						<div class="grid__image" style="background-image: url({{ group.img | e('html_attr') }})"></div>
+						<div class="lazy grid__image" data-bg="url({{ group.img | e('html_attr') }})"></div>
 						<div class="grid__text">
 							<h4 class="grid__title">{{ group.title | e }}</h4>
 							<div class="grid__desc">
