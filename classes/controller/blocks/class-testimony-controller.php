@@ -265,7 +265,7 @@ if ( ! class_exists( 'Testimony_Controller' ) ) {
 						$field_name_data = implode('_', $field_name_data);
 
 						if ( ( 'img' === $field_name_data ) && isset( $field_content ) ) {
-							$field_content = wp_get_attachment_url( $field_content );
+							$field_content = wp_get_attachment_image_url( $field_content, 'large' );
 						}
 
 						$group[ $field_name_data ] = $field_content;

@@ -302,7 +302,7 @@ if ( ! class_exists( 'Hero_Set_Controller' ) ) {
 						$field_name_data = implode('_', $field_name_data);
 
 						if ( ( 'img' === $field_name_data || 'img_mobile' === $field_name_data ) && isset( $field_content ) && strlen( $field_content ) ) {
-							$field_content = wp_get_attachment_url( $field_content );
+							$field_content = wp_get_attachment_image_url( $field_content, 'large' );
 						}
 						elseif( 'video_youtube' === $field_name_data && isset( $field_content ) && strlen( $field_content ) ) {
 							$field_content = $this->getYoutubeId( $field_content );

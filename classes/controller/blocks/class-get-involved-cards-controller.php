@@ -379,7 +379,7 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 							$post = NULL;
 
 							if ( ( 'img' === $field_name_data ) && isset( $field_content ) && strlen( $field_content ) ) {
-								$field_content = wp_get_attachment_url( $field_content );
+								$field_content = wp_get_attachment_image_url( $field_content, 'medium' );
 							}
 							elseif ( ( 'post_id' === $field_name_data ) && isset( $field_content ) && strlen( $field_content ) ) {
 								$post = get_post( $field_content );

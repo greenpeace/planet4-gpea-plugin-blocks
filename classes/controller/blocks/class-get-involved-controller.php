@@ -179,7 +179,7 @@ if ( ! class_exists( 'Get_Involved_Controller' ) ) {
 			}
 
 			if ( isset( $attributes[ 'img' ] ) && @strlen( $attributes[ 'img' ] ) ) {
-				$attributes[ 'img' ] = wp_get_attachment_url( $attributes[ 'img' ] );
+				$attributes[ 'img' ] = wp_get_attachment_image_url( $attributes[ 'img' ], 'medium' );
 			}
 
 			if ( isset( $attributes[ 'paragraph' ] ) && @strlen( $attributes[ 'paragraph' ] ) ) {

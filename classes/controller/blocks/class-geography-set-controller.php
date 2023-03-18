@@ -289,7 +289,7 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 						$field_name_data = implode('_', $field_name_data);
 
 						if ( ( 'img' === $field_name_data || 'icon' === $field_name_data || 'video' === $field_name_data ) && isset( $field_content ) ) {
-							$field_content = wp_get_attachment_url( $field_content );
+							$field_content = wp_get_attachment_image_url( $field_content, 'icon' === $field_name_data ? 'medium' : 'large' );
 						}
 						elseif( 'video_youtube' === $field_name_data ) {
 							$field_content = $this->getYoutubeId( $field_content );
@@ -317,7 +317,7 @@ if ( ! class_exists( 'Geography_Set_Controller' ) ) {
 				if ( ! preg_match( '/_\d+$/', $field_name ) ) {
 					if( 'video_img' === $field_name || 'video' === $field_name ) {
 						$attachment_id = $field_content;
-						$field_content = wp_get_attachment_url( $attachment_id );
+						$field_content = wp_get_attachment_image_url( $attachment_id, 'large' );
 						if( 'video' === $field_name ) {
 							$static_fields[ 'default_video_title' ] = get_the_title( $attachment_id );
 						}

@@ -173,7 +173,7 @@ if ( ! class_exists( 'Steps_Set_Controller' ) ) {
 						$field_name_data = explode( '_', $field_name );
 
 						if ( ( 'img' === $field_name_data[0] ) && isset( $field_content ) ) {
-							$field_content = wp_get_attachment_url( $field_content );
+							$field_content = wp_get_attachment_image_url( $field_content, 'medium' );
 						}
 
 						$group[ $field_name_data[0] ] = $field_content;
