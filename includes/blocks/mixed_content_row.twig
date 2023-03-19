@@ -68,9 +68,9 @@
 									<span class="issue {{ group.post.main_issue_slug }}">{{ group.post.main_issue }}</span>
 								</div>
 							</div>
-							<p>
+							<h3>
 								{{ group.post.post_title }}
-							</p>
+							</h3>
 						</a>
 					{% elseif group.__group_type__ == 'textonly' %}
 						<div class="swiper-slide card-mini" {{ not static_fields.image ? 'data-aos="fade-left"' : '' }} data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
@@ -78,12 +78,12 @@
 						</div>
 					{% elseif group.__group_type__ == 'titleandtext' %}
 						<div class="swiper-slide card-mini" {{ not static_fields.image ? 'data-aos="fade-left"' : '' }} data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
-							<h4>{{ group.title }}</h4>
+							<h3>{{ group.title }}</h3>
 							<p>{{ group.textblock }}</p>
 						</div>
 					{% elseif group.__group_type__ == 'twolinetitleandtext' %}
 						<div class="swiper-slide card-mini" {{ not static_fields.image ? 'data-aos="fade-left"' : '' }} data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
-							<h4 class="data"><i>{{ group.titlea }}</i> {{ group.titleb }}</h4>
+							<h3 class="data"><i>{{ group.titlea }}</i> {{ group.titleb }}</h3>
 							<p>{{ group.textblock }}</p>
 						</div>
 					{% elseif group.__group_type__ == 'tip' %}
@@ -99,7 +99,7 @@
 						</div>
 					{% elseif group.__group_type__ == 'animatenumber' %}
 						<div class="swiper-slide card-mini" {{ not static_fields.image ? 'data-aos="fade-left"' : '' }} data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
-							<h4 class="counter" data-count="{{ group.number }}"></h4>
+							<h3 class="counter" data-count="{{ group.number }}"></h3>
 							<p>{{ group.description }}</p>
 						</div>
 					{% else %}

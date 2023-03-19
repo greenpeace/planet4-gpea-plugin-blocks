@@ -10,7 +10,7 @@
 			<div class="big-carousel-description">
 				<div class="swiper-pagination"></div>
 				<h2>{{ fields.title|e('wp_kses_post')|raw }}</h2>
-				<p class="subtitle">{{ fields.subtitle|e('wp_kses_post')|raw }}</p>
+				<h3 class="subtitle">{{ fields.subtitle|e('wp_kses_post')|raw }}</h3>
 				<p class="desktop-only">{{ fields.paragraph|e('wp_kses_post')|raw }}</p>
 			</div>
 			<div class="big-carousel-clip">
@@ -37,12 +37,12 @@
 											<!-- TODO -->
 											{% if post.signatures %}<div class="stats">{{ __('%s signers', 'planet4-gpea-blocks')|format(post.signatures)| raw }}</div>{% endif %}
 											<div class="content">
-												<p>{{ post.post_title }}</p>
+												<h3>{{ post.post_title }}</h3>
 												<button class="button">{{ post.cta }}</button>
 											</div>
 										</div>
 									</a>
-									{% else %}
+								{% else %}
 									<a href="{{ post.link }}" class="swiper-slide card-update" data-index="{{ loop.index }}" data-postid="{{ post.ID }}" {{ not is_front_page ? 'data-aos="fade-left"' : '' }} data-aos-delay="{{ 400 + 200 * loop.index0 }}" data-aos-duration="600">
 										<div class="thumbnail" style="background-image: url({{ post.img_url }})"></div>
 										<div class="box">
@@ -69,9 +69,9 @@
 													{% endif %}
 												</div>
 											</div>
-											<p>
+											<h3>
 												{{ post.post_title }}
-											</p>
+											</h3>
 										</div>
 									</a>
 								{% endif %}
