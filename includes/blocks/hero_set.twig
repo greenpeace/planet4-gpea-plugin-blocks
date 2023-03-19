@@ -4,10 +4,10 @@
 			<div class="content content--{{ static_fields.layout | e('html_attr') }}">
 				<div class="content__text">
 					<div class="title">
-						<h2 class="title__inner title__inner--pc">
+						<h1 class="title__inner title__inner--pc">
 							<span class="title__text title__text--1 title__text--{{ static_fields.title_color | e('html_attr') }}">{{ static_fields.title | e }}</span>
 							<span class="title__text title__text--2 title__text--{{ static_fields.secondary_title_color | e('html_attr') }}">{{ static_fields.secondary_title | e }}</span>
-						</h2>
+						</h1>
 						<p class="title__inner title__inner--mobile">
 							<span class="title__text title__text--1 title__text--{{ static_fields.title_color | e('html_attr') }}">{{ static_fields.title_mobile | default(static_fields.title) | e }}</span>
 							<span class="title__text title__text--2 title__text--{{ static_fields.secondary_title_color | e('html_attr') }}">{{ static_fields.secondary_title_mobile | default(static_fields.secondary_title) | e }}</span>
