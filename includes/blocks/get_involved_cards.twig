@@ -3,7 +3,7 @@
 		<div class="ct-container ct-container--thin">
 			{% set first_card = true %}
 			<div class="content content--title">
-				<h4 class="title">{{ static_fields.title | default(tanslate_strings.category_label) | e }}</h4>
+				<h2 class="title">{{ static_fields.title | default(tanslate_strings.category_label) | e }}</h2>
 				<div class="buttons">
 				{% for i in 1..4 %}
 					{% if ( static_fields[i].enabled ) %}
@@ -40,11 +40,11 @@
 									<div class="grid__inner">
 										<div class="grid__header">
 											<p class="category"><span class="category__name">{{ group.category | default(default_strings[group_name][card_key].category) | e }}</span></p>
-											<h5 class="title">{{ group.post_title | default(default_strings[group_name][card_key].post_title) | raw }}</h5>
+											<h3 class="title">{{ group.post_title | default(default_strings[group_name][card_key].post_title) | raw }}</h3>
 											{% if ( group.img or default_strings[group_name][card_key].img ) %}
 											<div class="lazy img" data-bg="url({{ group.img | default(default_strings[group_name][card_key].img) | e('html_attr') }})"></div>
 											{% endif %}
-											<p class="subtitle">{{ group.subtitle | e }}</p>
+											<h4 class="subtitle">{{ group.subtitle | e }}</h4>
 											<div class="desc">
 												<p>{{ group.paragraph | raw }}</p>
 											</div>
