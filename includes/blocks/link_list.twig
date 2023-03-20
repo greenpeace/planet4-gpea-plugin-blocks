@@ -4,9 +4,9 @@
 		<section class="section-link-list">
 			<div class="ct-container slim">
 				{% if fields.main_link_label and fields.main_link_url %}
-					<h5>
+					<h2>
 						<a href="{{ fields.main_link_url }}">{{ fields.main_link_label }}</a>
-					</h5>
+					</h2>
 				{% endif %}
 				{% if fields.link_description %}
 					<p class="caption">{{ fields.link_description }}</p>
@@ -25,12 +25,12 @@
 								{% else %}
 									{% set target_link = fields['url_link_'~i] %}
 								{% endif %}
-								<p class="see-more">
+								<h3 class="see-more">
 									<a href="{{ target_link }}" target="_blank">{{ fields['label_link_'~i] }}</a>
 									{% if fields['description_link_'~i] %}
 										<br /><small>{{ fields['description_link_'~i] }}</small>
 									{% endif %}
-								</p>
+								</h3>
 							{% endif %}
 						{% endfor %}
 					</div>
