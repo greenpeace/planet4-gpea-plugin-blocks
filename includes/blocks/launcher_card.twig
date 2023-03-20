@@ -7,40 +7,40 @@
 				<h2>{{ static_fields.title|e('wp_kses_post')|raw }}</h2>
 			{% endif %}
 			{% if ( static_fields.subtitle ) %}
-				<p>{{ static_fields.subtitle|e('wp_kses_post')|raw }}</p>
+				<h3>{{ static_fields.subtitle|e('wp_kses_post')|raw }}</h3>
 			{% endif %}
 
 			{% if ( field_groups|length > 0 ) %}
-        {% if (static_fields.layout == 'grid') %}
-          <div class="container">
-            <div class="row">
-              {% for group in field_groups %}
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="action as-card">
-                  <div class="thumbnail has-background-image">
-                    <img
-                      src="{{ group.img }}"
-                      alt="{{ group.subtitle|e('wp_kses_post')|raw }}"
-                    />
-                  </div>
-                  <div class="box">
-                    <div class="content">
-                    <h4>{{ group.subtitle|e('wp_kses_post')|raw }}</h4>
+				{% if (static_fields.layout == 'grid') %}
+				<div class="container">
+					<div class="row">
+						{% for group in field_groups %}
+						<div class="col-xs-12 col-sm-6 col-md-4">
+							<div class="action as-card">
+								<div class="thumbnail has-background-image">
+									<img
+										src="{{ group.img }}"
+										alt="{{ group.subtitle|e('wp_kses_post')|raw }}"
+									/>
+								</div>
+								<div class="box">
+									<div class="content">
+										<h3>{{ group.subtitle|e('wp_kses_post')|raw }}</h3>
 										{% if ( group.paragraph ) %}
 										<p>{{ group.paragraph|e('wp_kses_post')|raw }}</p>
 										{% endif %}
 										{% if ( group.btnlabel and group.btnlink ) %}
 										<a href="{{ group.btnlink }}" target="_blank" rel="noopener noreferrer" class="button primary">{{ group.btnlabel|e('wp_kses_post')|raw }}</a>
-                    {% endif %}
-                    </div>
-                  </div>
-                </div>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% else %}
-          <div class="swiper-container maxi-swiper launcher-card-swiper">
+										{% endif %}
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+				{% else %}
+				<div class="swiper-container maxi-swiper launcher-card-swiper">
 					<div class="swiper-wrapper">
 						{% for group in field_groups %}
 							{% if ( group.subtitle ) %}
@@ -54,7 +54,7 @@
 								</div>
 								<div class="box">
 									<div class="content">
-										<h4>{{ group.subtitle|e('wp_kses_post')|raw }}</h4>
+										<h3>{{ group.subtitle|e('wp_kses_post')|raw }}</h3>
 										{% if ( group.paragraph ) %}
 										<p>{{ group.paragraph|e('wp_kses_post')|raw }}</p>
 										{% endif %}
@@ -68,13 +68,13 @@
 						{% endfor %}
 					</div>
 					<div class="swiper-button-next swiper-button-disabled">
-					  <span class="icon-chevron-right"></span>
+						<span class="icon-chevron-right"></span>
 					</div>
 					<div class="swiper-button-prev swiper-button-disabled">
-					  <span class="icon-chevron-right"></span>
+						<span class="icon-chevron-right"></span>
 					</div>
 				</div>
-        {% endif %}
+				{% endif %}
 			{% endif %}
 		</div>
 	</section>
