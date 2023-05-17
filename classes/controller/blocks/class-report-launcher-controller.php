@@ -102,6 +102,11 @@ if ( ! class_exists( 'Report_Launcher_Controller' ) ) {
 					],
 				],
 				[
+					'label' => __( 'Open button link in new tab</i>', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'btn_link_target',
+					'type'  => 'checkbox',
+				],
+				[
 					'label' => __( 'Label "See All"', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'see_all_label',
 					'type'  => 'text',
@@ -118,6 +123,11 @@ if ( ! class_exists( 'Report_Launcher_Controller' ) ) {
 						'placeholder' => __( 'Link "See All"', 'planet4-gpea-blocks-backend' ),
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
+				],
+				[
+					'label' => __( 'Open "See All" link in new tab</i>', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'see_all_link_target',
+					'type'  => 'checkbox',
 				],
 			];
 

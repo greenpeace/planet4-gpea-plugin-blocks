@@ -137,6 +137,12 @@ if ( ! class_exists( 'Launcher_Card_Controller' ) ) {
 							'data-plugin' => 'planet4-gpea-blocks',
 						],
 					],
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => __( '<i>Launcher %s Open button link in new tab</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'btnlinktarget',
+						'type'  => 'checkbox',
+					],
 				],
 			];
 

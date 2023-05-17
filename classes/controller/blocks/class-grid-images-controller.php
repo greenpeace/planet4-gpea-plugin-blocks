@@ -63,6 +63,12 @@ if ( ! class_exists( 'Grid_Images_Controller' ) ) {
 						'attr'  => 'btnlink',
 						'type'  => 'url',
 					],
+					[
+						// translators: placeholder represents the ordinal of the field.
+						'label' => __( '<i>Card %s open link in new tab</i>', 'planet4-gpea-blocks-backend' ),
+						'attr'  => 'btnlinktarget',
+						'type'  => 'checkbox',
+					],
 				],
 			];
 

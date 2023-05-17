@@ -30,7 +30,7 @@
 										<p>{{ group.paragraph|e('wp_kses_post')|raw }}</p>
 										{% endif %}
 										{% if ( group.btnlabel and group.btnlink ) %}
-										<a href="{{ group.btnlink }}" target="_blank" rel="noopener noreferrer" class="button primary">{{ group.btnlabel|e('wp_kses_post')|raw }}</a>
+										<a href="{{ group.btnlink }}" {% if ( group.btnlinktarget ) %}target="_blank"{% endif %} rel="noopener noreferrer" class="button primary">{{ group.btnlabel|e('wp_kses_post')|raw }}</a>
 										{% endif %}
 									</div>
 								</div>
@@ -59,7 +59,7 @@
 										<p>{{ group.paragraph|e('wp_kses_post')|raw }}</p>
 										{% endif %}
 										{% if ( group.btnlabel and group.btnlink ) %}
-										<a href="{{ group.btnlink }}" class="button primary">{{ group.btnlabel|e('wp_kses_post')|raw }}</a>
+										<a href="{{ group.btnlink }}" {% if ( group.btnlinktarget ) %}target="_blank"{% endif %} class="button primary">{{ group.btnlabel|e('wp_kses_post')|raw }}</a>
 										{% endif %}
 									</div>
 								</div>

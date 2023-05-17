@@ -4,7 +4,7 @@
 		{% for group in field_groups %}
 			{% if ( group.img ) %}
 				{% if ( group.btnlink ) %}
-				<a class="grid-box" href="{{ group.btnlink }}" style="background-image: url({{ group.img }})"></a>
+				<a class="grid-box" href="{{ group.btnlink }}" {% if ( group.btnlinktarget ) %}target="_blank"{% endif %} style="background-image: url({{ group.img }})"></a>
 				{% else %}
 				<div class="grid-box" style="background-image: url({{ group.img }})"></div>
 				{% endif %}
