@@ -5,7 +5,7 @@
 			<div class="content content--title">
 				<h2 class="title">{{ static_fields.title | default(tanslate_strings.category_label) | e }}</h2>
 				<div class="buttons">
-				{% for i in 1..4 %}
+				{% for i in group_sorts %}
 					{% if ( static_fields[i].enabled ) %}
 					<span class="link {% if ( first_card ) %}link--actived{% endif %}" data-group="{{ i | e('html_attr') }}">{{ static_fields[i].label | e }}</span>
 					{% set first_card = false %}
@@ -20,7 +20,7 @@
 		<div class="ct-container" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
 			<div class="content ct-container--wide content--desc">
 			{% set first_card = true %}
-			{% for i in 1..4 %}
+			{% for i in group_sorts %}
 				{% if ( static_fields[i].enabled ) %}
 				<div class="grid__outer2 {% if ( first_card ) %}grid__outer2--actived{% endif %}" data-group="{{ i | e('html_attr') }}">
 					<div class="swiper-container get-involved-cards-swiper grid__outer">

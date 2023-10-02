@@ -468,6 +468,7 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 
 			// Extract static fields only.
 			$static_fields = [];
+			$group_sorts = [];
 			foreach ( $attributes as $field_name => $field_content ) {
 				if( preg_match( '/^(button)_([a-z0-9]+)_([a-z]+)$/', $field_name, $matches ) ) {
 					$safe_name = $matches[ 1 ];
@@ -476,13 +477,27 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 					if( !isset( $static_fields[ $i ] ) ) {
 						$static_fields[ $i ] = [];
 					}
-					$static_fields[ $i ][ $field_name_data ] = $field_content;
+					if($field_name_data == 'sort') {
+						$group_sorts[$i] = $field_content;
+					}
+					else {
+						$static_fields[ $i ][ $field_name_data ] = $field_content;
+					}
 				}
 				else {
 					$static_fields[ $field_name ] = $field_content;
 				}
 			}
+			uksort($group_sorts, function($key_a, $key_b) use ($group_sorts) {
+				$value_a = $group_sorts[$key_a];
+				$value_b = $group_sorts[$key_b];
+				if ($value_a == $value_b) {
+					return ($key_a < $key_b) ? -1 : 1;
+				}
+				return ($value_a < $value_b) ? -1 : 1;
+			});
 			return [
+				'group_sorts' => $group_sorts ? array_keys($group_sorts) : range(1, 4),
 				'field_groups' => $field_groups,
 				'static_fields' => $static_fields,
 				'tanslate_strings' => $tanslate,
