@@ -249,11 +249,29 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 			];
 
 			$field_groups = [];
-			foreach($group_name_list as $group_name) {
+			$group_sorting_fields = [];
+			$sort_options = [];
+			foreach($group_name_list as $i => $group_name) {
+				$sort_options[] = [
+					'value' => strval($i),
+					'label' => strval($i),
+				];
+			}
+			foreach($group_name_list as $i => $group_name) {
 				$field_groups[$group_name] = $group_field_list;
+				$group_sorting_fields[$group_name] = [
+					'label'    => __( esc_html($group_name) . ' show order', 'planet4-gpea-blocks-backend' ),
+					'attr'     => 'button_' . $i . '_sort',
+					'type'     => 'select',
+					'options'  => $sort_options,
+					'value'    => strval($i),
+					'meta'     => [
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				];
 			}
 
-			$fields = $this->format_meta_fields( $fields, $field_groups );
+			$fields = $this->format_meta_fields( $fields, $field_groups, $group_sorting_fields );
 
 			// Define the Shortcode UI arguments.
 			$shortcode_ui_args = [
@@ -272,10 +290,11 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 		 *
 		 * @param array $fields This will contain the fields to be rendered.
 		 * @param array $field_groups This contains the field templates to be repeated.
+		 * @param array $group_sorting_fields This contains the group-sorting field templates.
 		 *
 		 * @return array The fields to be rendered
 		 */
-		private function format_meta_fields( $fields, $field_groups ) : array {
+		private function format_meta_fields( $fields, $field_groups, $group_sorting_fields ) : array {
 
 			foreach ( $field_groups as $group_name => $group_fields ) {
 
@@ -289,6 +308,8 @@ if ( ! class_exists( 'Get_Involved_Cards_Controller' ) ) {
 						'data-plugin' => 'planet4-gpea-blocks',
 					],
 				];
+
+				$fields[] = $group_sorting_fields[$group_name];
 
 				for ( $i = 1; $i <= static::MAX_REPEATER; $i++ ) {
 
