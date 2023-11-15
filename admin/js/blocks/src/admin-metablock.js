@@ -292,6 +292,7 @@ jQuery(document).ready(function() {
     'shortcake_infographic_cards', // 5th (bottom)
     'shortcake_testimony', // 6th
     'shortcake_mc_subscription', // 7th
+    'shortcake_mc_subscription_preferences', // 7th with popup
   ];
 
   var required_image = [

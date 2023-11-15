@@ -150,6 +150,7 @@ P4EABKS\Loader::get_instance(
 		'P4EABKS\Controllers\Blocks\Infographic_Cards_Controller', // 5th (bottom)
 		'P4EABKS\Controllers\Blocks\Testimony_Controller', // 6th
 		'P4EABKS\Controllers\Blocks\MC_Subscription_Controller', // 7th
+		'P4EABKS\Controllers\Blocks\MC_Subscription_Preferences_Controller', // 7th with popup
 		'P4EABKS\Models\Taxonomy',
 		'P4EABKS\Models\Tags_Meta',
 	], 'P4EABKS\Views\View'

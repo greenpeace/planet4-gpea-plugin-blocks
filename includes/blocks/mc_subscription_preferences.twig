@@ -1,0 +1,34 @@
+{% block mc_subscription %}
+	<section class="section-mc-subscription section-mc-subscription--with-popup">
+		<div class="ct-container subscribe">
+			<div class="content content--title" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+				<h2>{{ static_fields.title | e('wp_kses_post') | raw }}</h2>
+				<div class="desc">
+					<p>{{ static_fields.subtitle | e('wp_kses_post') | raw }}</p>
+				</div>
+			</div>
+			<div class="content content--form" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+				<form class="form-container">
+
+					<div class="form-column form-column--fields">
+						<div class="form-row email-part">
+							<div class="en__field__element en__field__element--is-required">
+								<input type="text" placeholder="{{ lexicon.email_input_placeholder }}" data-trigger-subscription-popup readonly>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-column form-column--submit">
+						<div class="form-row submit-part">
+							<button type="button" class="submit btn btn-primary btn-block button primary fluid" data-trigger-subscription-popup>
+								{{ static_fields.submit_btn_text|e('wp_kses_post')|raw }}
+							</button>
+							<div class="enform-notice"></div>
+						</div>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</section>
+{% endblock %}
