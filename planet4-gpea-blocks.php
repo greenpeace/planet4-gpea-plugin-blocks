@@ -141,6 +141,7 @@ P4EABKS\Loader::get_instance(
 		'P4EABKS\Controllers\Blocks\Video_Row_Controller',
 		'P4EABKS\Controllers\Blocks\Grid_Images_Controller',
 		'P4EABKS\Controllers\Blocks\Donation_Block_Controller',
+		'P4EABKS\Controllers\Blocks\Subscription_Block_Controller',
 		'P4EABKS\Controllers\Blocks\Hero_Set_Controller', // 1st
 		'P4EABKS\Controllers\Blocks\Steps_Set_Controller', // 2nd
 		'P4EABKS\Controllers\Blocks\Geography_Set_Controller', // 3rd

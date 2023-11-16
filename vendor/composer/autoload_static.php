@@ -74,6 +74,7 @@ class ComposerStaticInit0e1b1e452bbb566bff38328f70865857
         'P4EABKS\\Controllers\\Blocks\\Report_Set_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-report-set-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Slideshow_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-slideshow-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Steps_Set_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-steps-set-controller.php',
+        'P4EABKS\\Controllers\\Blocks\\Subscription_Block_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-subscription-block-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Support_Launcher_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-support-launcher-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Tag_Cloud_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-tag-cloud-controller.php',
         'P4EABKS\\Controllers\\Blocks\\Testimonials_Controller' => __DIR__ . '/../..' . '/classes/controller/blocks/class-testimonials-controller.php',
