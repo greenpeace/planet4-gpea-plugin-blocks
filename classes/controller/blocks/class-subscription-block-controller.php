@@ -127,38 +127,38 @@ if ( ! class_exists( 'Subscription_Block_Controller' ) ) {
 			
 			// Get block options
 
-			$donation_block_options = get_option( 'gpea_sibscription_block_options' );
+			$donation_block_options = get_option( 'gpea_subscription_block_options' );
 
 			$donation_block_default_title = '';
-			if( isset( $main_issue_slug ) && isset( $donation_block_options['gpea_sibscription_block_' . $main_issue_slug . '_title'] ) && @strlen( $donation_block_options['gpea_sibscription_block_' . $main_issue_slug . '_title'] ) ) {
-				$donation_block_default_title = $donation_block_options['gpea_sibscription_block_' . $main_issue_slug . '_title'];
+			if( isset( $main_issue_slug ) && isset( $donation_block_options['gpea_subscription_block_' . $main_issue_slug . '_title'] ) && @strlen( $donation_block_options['gpea_subscription_block_' . $main_issue_slug . '_title'] ) ) {
+				$donation_block_default_title = $donation_block_options['gpea_subscription_block_' . $main_issue_slug . '_title'];
 			}
-			elseif( isset( $donation_block_options['gpea_sibscription_block_default_title'] ) ) {
-				$donation_block_default_title = $donation_block_options['gpea_sibscription_block_default_title'];
+			elseif( isset( $donation_block_options['gpea_subscription_block_default_title'] ) ) {
+				$donation_block_default_title = $donation_block_options['gpea_subscription_block_default_title'];
 			}
 
 			$donation_block_default_desc = '';
-			if( isset( $main_issue_slug ) && isset( $donation_block_options['gpea_sibscription_block_' . $main_issue_slug . '_desc'] ) && @strlen( $donation_block_options['gpea_sibscription_block_' . $main_issue_slug . '_desc'] ) ) {
-				$donation_block_default_desc = $donation_block_options['gpea_sibscription_block_' . $main_issue_slug . '_desc'];
+			if( isset( $main_issue_slug ) && isset( $donation_block_options['gpea_subscription_block_' . $main_issue_slug . '_desc'] ) && @strlen( $donation_block_options['gpea_subscription_block_' . $main_issue_slug . '_desc'] ) ) {
+				$donation_block_default_desc = $donation_block_options['gpea_subscription_block_' . $main_issue_slug . '_desc'];
 			}
-			elseif( isset( $donation_block_options['gpea_sibscription_block_default_desc'] ) ) {
-				$donation_block_default_desc = $donation_block_options['gpea_sibscription_block_default_desc'];
+			elseif( isset( $donation_block_options['gpea_subscription_block_default_desc'] ) ) {
+				$donation_block_default_desc = $donation_block_options['gpea_subscription_block_default_desc'];
 			}
 
 			$donation_block_default_text = '';
-			if( isset( $main_issue_slug ) && isset( $donation_block_options['gpea_sibscription_block_' . $main_issue_slug . '_button_text'] ) && @strlen( $donation_block_options['gpea_sibscription_block_' . $main_issue_slug . '_button_text'] ) ) {
-				$donation_block_default_text = $donation_block_options['gpea_sibscription_block_' . $main_issue_slug . '_button_text'];
+			if( isset( $main_issue_slug ) && isset( $donation_block_options['gpea_subscription_block_' . $main_issue_slug . '_button_text'] ) && @strlen( $donation_block_options['gpea_subscription_block_' . $main_issue_slug . '_button_text'] ) ) {
+				$donation_block_default_text = $donation_block_options['gpea_subscription_block_' . $main_issue_slug . '_button_text'];
 			}
-			elseif( isset( $donation_block_options['gpea_sibscription_block_default_button_text'] ) ) {
-				$donation_block_default_text = $donation_block_options['gpea_sibscription_block_default_button_text'];
+			elseif( isset( $donation_block_options['gpea_subscription_block_default_button_text'] ) ) {
+				$donation_block_default_text = $donation_block_options['gpea_subscription_block_default_button_text'];
 			}
 
 			$donation_block_default_img = '';
-			if( isset( $main_issue_slug ) && isset( $donation_block_options['gpea_sibscription_block_' . $main_issue_slug . '_bg_img'] ) && @strlen( $donation_block_options['gpea_sibscription_block_' . $main_issue_slug . '_bg_img'] ) ) {
-				$donation_block_default_img = $donation_block_options['gpea_sibscription_block_' . $main_issue_slug . '_bg_img'];
+			if( isset( $main_issue_slug ) && isset( $donation_block_options['gpea_subscription_block_' . $main_issue_slug . '_bg_img'] ) && @strlen( $donation_block_options['gpea_subscription_block_' . $main_issue_slug . '_bg_img'] ) ) {
+				$donation_block_default_img = $donation_block_options['gpea_subscription_block_' . $main_issue_slug . '_bg_img'];
 			}
-			elseif( isset( $donation_block_options['gpea_sibscription_block_default_bg_img'] ) ) {
-				$donation_block_default_img = $donation_block_options['gpea_sibscription_block_default_bg_img'];
+			elseif( isset( $donation_block_options['gpea_subscription_block_default_bg_img'] ) ) {
+				$donation_block_default_img = $donation_block_options['gpea_subscription_block_default_bg_img'];
 			}
 
 			if(!is_array($attributes)) {
