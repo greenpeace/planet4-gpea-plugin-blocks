@@ -1,4 +1,4 @@
-{% block donation_block %}
+{% block subscription_block %}
 	{% if ( fields ) %}
 	<section class="section-donate-block section-donate-block--with-popup {{ fields.upper_blur ? 'upper-fade' : '' }}">
 		<div class="bg-image js-parallax-me" style="background-image: url({{ fields.bg_img }})"></div>
@@ -6,7 +6,7 @@
 			<div class="donation-form">
 				<h2>{{ fields.title }}</h2>
 				<p>{{ fields.desc | e('wp_kses_post') | raw }}</p>
-				<a href="javascript:;" class="button primary fluid" data-trigger-subscription-popup>{{ fields.button_text }}</a>
+				<span class="button primary fluid" data-trigger-subscription-popup>{{ fields.button_text }}</span>
 			</div>
 		</div>
 	</section>
