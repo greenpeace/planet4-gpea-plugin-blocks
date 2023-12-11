@@ -42,8 +42,8 @@ if ( ! class_exists( 'Subscription_Block_Controller' ) ) {
 					'description' => sprintf(__( '
 						<ol>
 							<li>Location: it\'s better to set around the middle area of the post.</li>
-							<li>Leave the fields empty to use the default value.</li>
-							<li>Go to the setting &quot;%s > Post/Page Subscription Blocks&quot; to setup default values.</li>
+							<li>Leave empty to use default values.</li>
+							<li>Setup default values on &quot;%s > Post/Page Subscription Blocks&quot;.</li>
 						</ol>
 					', 'planet4-gpea-blocks-backend' ), __( 'Settings' )),
 					'attr'  => 'hint',
