@@ -423,6 +423,13 @@ if ( ! class_exists( 'Hero_Set_Donation_Controller' ) ) {
 		public function prepare_template( $fields, $content, $shortcode_tag ) : string {
 
 			$data = $this->prepare_data( $fields );
+			
+			if( isset( $data['static_fields']['donation_script'] ) ) {
+				wp_enqueue_script(
+					'donation-module',
+					$data['static_fields']['donation_script']
+				);
+			}
 
 			// Shortcode callbacks must return content, hence, output buffering here.
 			ob_start();
