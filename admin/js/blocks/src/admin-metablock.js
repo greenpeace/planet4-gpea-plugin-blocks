@@ -285,6 +285,7 @@ jQuery(document).ready(function() {
     'shortcake_launcher_card',
     'shortcake_grid_images',
     'shortcake_hero_set', // 1st
+    'shortcake_hero_set_donation', // 1st with donation module
     'shortcake_steps_set', // 2nd
     'shortcake_geography_set', // 3rd
     // 'shortcake_get_involved_cards', // 4th (bottom)
@@ -296,6 +297,7 @@ jQuery(document).ready(function() {
   var required_image = [
     'shortcake_grid_images',
     'shortcake_hero_set',
+    'shortcake_hero_set_donation',
     'shortcake_steps_set',
     'shortcake_infographic_cards',
     'shortcake_testimony'
