@@ -1,0 +1,61 @@
+{% block hero_set %}
+	<section class="section-hero-set section-hero-set--donation-module-for-mobile" style="display:none;">
+		<div class="ct-container">
+			<div class="content content--left">
+				<div class="content__text">
+					<div class="title">
+						<h1 class="title__inner title__inner--pc">
+							<span class="title__text title__text--1 title__text--{{ static_fields.title_color | e('html_attr') }}">{{ static_fields.title | e }}</span>
+							<span class="title__text title__text--2 title__text--{{ static_fields.secondary_title_color | e('html_attr') }}">{{ static_fields.secondary_title | e }}</span>
+						</h1>
+						<p class="title__inner title__inner--mobile">
+							<span class="title__text title__text--1 title__text--{{ static_fields.title_color | e('html_attr') }}">{{ static_fields.title_mobile | default(static_fields.title) | e }}</span>
+							<span class="title__text title__text--2 title__text--{{ static_fields.secondary_title_color | e('html_attr') }}">{{ static_fields.secondary_title_mobile | default(static_fields.secondary_title) | e }}</span>
+						</p>
+					</div>
+					<div class="desc">
+						<p>{{ static_fields.subtitle | raw }}</p>
+					</div>
+				</div>
+				<div data-gpea-module="gpea-donation-module"
+					data-gpea-env="{{ static_fields.donation_env | e('html_attr') }}"
+					data-gpea-market="{{ donation_module_market | e('html_attr') }}"
+					data-gpea-language="{{ donation_module_language | e('html_attr') }}"
+					data-gpea-campaign="{{ static_fields.donation_campaign | e('html_attr') }}"
+					data-gpea-campaign-id="{{ static_fields.donation_campaign_id | e('html_attr') }}"
+				></div>
+				<span class="arrow"></span>
+			</div>
+		</div>
+		{% if ( field_groups|length > 0 ) %}
+		    <div class="swiper-container hero-swiper">
+				<div class="swiper-wrapper">
+				{% for group in field_groups %}
+					<div class="swiper-slide slide-item slide-item--{{ group.opacity | e('html_attr') }}">
+					{% if ( group.img and group.img_mobile ) %}
+						<div class="lazy bg bg--mobile" data-bg="url({{ group.img_mobile | e('html_attr') }})"></div>
+						<div class="lazy bg bg--pc" data-bg="url({{ group.img | e('html_attr') }})">
+							{% if ( group.video_youtube ) %}
+							<div data-youtube-id="{{ group.video_youtube | e('html_attr') }}" class="video">
+								<div class="youtube-embed"></div>
+							</div>
+							{% endif %}
+						</div>
+					{% elseif ( group.img ) %}
+						<div class="lazy bg" data-bg="url({{ group.img | e('html_attr') }})">
+							{% if ( group.video_youtube ) %}
+							<div data-youtube-id="{{ group.video_youtube | e('html_attr') }}" class="video">
+								<div class="youtube-embed"></div>
+							</div>
+							{% endif %}
+						</div>
+					{% endif %}
+					</div>
+				{% endfor %}
+				</div>
+			</div>
+		{% endif %}
+	</section>
+{% endblock %}
+
+

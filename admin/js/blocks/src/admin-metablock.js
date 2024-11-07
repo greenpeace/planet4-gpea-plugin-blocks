@@ -286,6 +286,7 @@ jQuery(document).ready(function() {
     'shortcake_grid_images',
     'shortcake_hero_set', // 1st
     'shortcake_hero_set_donation', // 1st with donation module
+    'shortcake_hero_set_donation_mobile', // 1st with donation module for mobile
     'shortcake_steps_set', // 2nd
     'shortcake_geography_set', // 3rd
     // 'shortcake_get_involved_cards', // 4th (bottom)
@@ -296,11 +297,12 @@ jQuery(document).ready(function() {
 
   var required_image = [
     'shortcake_grid_images',
-    'shortcake_hero_set',
-    'shortcake_hero_set_donation',
-    'shortcake_steps_set',
-    'shortcake_infographic_cards',
-    'shortcake_testimony'
+    'shortcake_hero_set', // 1st
+    'shortcake_hero_set_donation', // 1st with donation module
+    'shortcake_hero_set_donation_mobile', // 1st with donation module for mobile
+    'shortcake_steps_set', // 2nd
+    'shortcake_infographic_cards', // 5th (bottom)
+    'shortcake_testimony', // 6th
   ];
 
   // Attach hooks when rendering a new metablock.
