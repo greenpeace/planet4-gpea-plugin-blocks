@@ -110,6 +110,29 @@ if ( ! class_exists( 'Hero_Set_Donation_Mobile_Controller' ) ) {
 				],
 
 				[
+					'label' => __( 'Layout: Place H1, H2 at left, center or right.', 'planet4-gpea-blocks-backend' ),
+					'attr'  => 'layout',
+					'type'  => 'radio',
+					'value' => 'center',
+					'options' => [
+						[
+							'value' => 'left',
+							'label' => __( 'Left', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => 'center',
+							'label' => __( 'Center', 'planet4-gpea-blocks-backend' ),
+						],
+						[
+							'value' => 'right',
+							'label' => __( 'Right', 'planet4-gpea-blocks-backend' ),
+						],
+					],
+					'meta'  => [
+						'data-plugin' => 'planet4-gpea-blocks',
+					],
+				],
+				[
 					'label' => __( 'H1 Part1, first sentence (for PC)', 'planet4-gpea-blocks-backend' ),
 					'attr'  => 'title',
 					'type'  => 'text',
