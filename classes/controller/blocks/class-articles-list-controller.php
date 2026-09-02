@@ -43,13 +43,6 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 		// private $posts_per_page;
 
 		/**
-		 * The nonce string.
-		 *
-		 * @const string NONCE_STRING
-		 */
-		const NONCE_STRING = 'articles_list';
-
-		/**
 		 * The list of allowed layouts to be set upon init.
 		 *
 		 * @var array $allowed_layouts
@@ -209,10 +202,6 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				'orderby'        => 'date',
 				'posts_per_page' => $attributes['posts_per_page'],
 			);
-
-			if ( ! isset( $attributes['_ajax_paged'] ) ) {
-				$attributes['wp_nonce'] = wp_nonce_field( self::NONCE_STRING );
-			}
 
 			if ( isset( $attributes['_ajax_paged'] ) ) {
 				$options['paged'] = $attributes['_ajax_paged'];
@@ -389,11 +378,11 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 				if ( $query ) {
 					$fields = [
 						'layout'              => $query['l'] ?? self::DEFAULT_LAYOUT,
-						'article_post_type'   => $query['apt'],
-						'tag_ids'             => $query['tid'],
-						'_ajax_main_issue_id' => $query['miid'],
-						'_ajax_year'          => $query['year'],
-						'_ajax_paged'         => $query['paged'],
+						'article_post_type'   => $query['apt'] ?? '',
+						'tag_ids'             => $query['tid'] ?? '',
+						'_ajax_main_issue_id' => $query['miid'] ?? '',
+						'_ajax_year'          => $query['year'] ?? '',
+						'_ajax_paged'         => $query['paged'] ?? 1,
 					];
 					$fields = array_filter(
 						$fields, function( $field ) {
@@ -402,7 +391,7 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 					);
 					$data = $this->prepare_data( $fields );
 					$n_posts_found = count( $data['fields']['posts'] );
-					$has_more_posts = $query['paged'] < $data['max_pages'];
+					$has_more_posts = ( $query['paged'] ?? 1 ) < $data['max_pages'];
 					if ( $n_posts_found ) {
 						$this->safe_echo(
 							wp_json_encode(
@@ -470,6 +459,18 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 		/**
 		 * Validate input AJAX data.
 		 *
+		 * This endpoint is public and read-only. It lists posts that are already
+		 * published and returns them as HTML. It writes nothing and returns nothing
+		 * a visitor cannot read on the site already.
+		 *
+		 * There is deliberately no security token here. A token would have to be
+		 * printed into the page HTML. That HTML is served from the edge cache for
+		 * several days, but a token only lives one day. Every visitor would then
+		 * send a token that died before they arrived, and the list would refuse to
+		 * load. The rest of the platform lists posts the same way, without a token.
+		 *
+		 * The checks below still run. They keep the query inside known-safe values.
+		 *
 		 * @return array|bool The query data, or false if unsafe.
 		 */
 		function validate_input() {
@@ -483,24 +484,21 @@ if ( ! class_exists( 'Articles_List_Controller' ) ) {
 			if ( ! $query ) {
 				return false;
 			}
-			if ( ! wp_verify_nonce( $query['_wpnonce'], self::NONCE_STRING ) ) {
-				return false;
-			}
 			$allowed_layouts = array_map(
 				function( $l ) {
 					return $l['value'];
 				}, $this->allowed_layouts
 			);
-			if ( ! in_array( $query['l'], $allowed_layouts, true ) ) {
+			if ( ! in_array( $query['l'] ?? '', $allowed_layouts, true ) ) {
 				return false;
 			}
-			if ( ! preg_match( '/^\d*$/', $query['apt'] ) ) {
+			if ( ! preg_match( '/^\d*$/', $query['apt'] ?? '' ) ) {
 				return false;
 			}
-			if ( ! preg_match( '/^\d*$/', $query['miid'] ) ) {
+			if ( ! preg_match( '/^\d*$/', $query['miid'] ?? '' ) ) {
 				return false;
 			}
-			if ( ! preg_match( '/^(\d+,?)*$/', $query['tid'] ) ) {
+			if ( ! preg_match( '/^(\d+,?)*$/', $query['tid'] ?? '' ) ) {
 				return false;
 			}
 			return $query;
