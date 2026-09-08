@@ -30,10 +30,6 @@ if ( ! defined( 'P4EABKS_REQUIRED_PHP' ) ) {
 if ( ! defined( 'P4EABKS_REQUIRED_PLUGINS' ) ) {
 	define(
 		'P4EABKS_REQUIRED_PLUGINS',    [
-			'timber'    => [
-				'min_version' => '1.3.0',
-				'rel_path'    => 'timber-library/timber.php',
-			],
 			'shortcake' => [
 				'min_version' => '0.7.0',
 				'rel_path'    => 'shortcode-ui/shortcode-ui.php',

@@ -20,7 +20,22 @@ if ( ! class_exists( 'View' ) ) {
 		/**
 		 * Creates the plugin's View object.
 		 */
-		public function __construct() {}
+		public function __construct() {
+			// Timber 2: the static Timber::$locations property was removed.
+			// Register the plugin's template directory via the timber/locations filter instead.
+			add_filter( 'timber/locations', [ $this, 'add_template_location' ] );
+		}
+
+		/**
+		 * Register the plugin's template directory with Timber 2.
+		 *
+		 * @param array $paths Existing Timber template locations.
+		 * @return array
+		 */
+		public function add_template_location( $paths ) {
+			$paths[] = [ $this->template_dir ];
+			return $paths;
+		}
 
 		/**
 		 * Compile and return a template file.
@@ -32,7 +47,6 @@ if ( ! class_exists( 'View' ) ) {
 		 * @return bool|string The returned output
 		 */
 		public function get_template( $template_name, $data, $sub_dir = 'blocks/' ) {
-			Timber::$locations = $this->template_dir;
 			return Timber::compile( [ $sub_dir . $template_name . '.twig' ], $data );
 		}
 
@@ -44,7 +58,6 @@ if ( ! class_exists( 'View' ) ) {
 		 * @param string       $sub_dir The path to a subdirectory where the template is located (relative to $template_dir).
 		 */
 		private function view_template( $template_name, $data, $sub_dir = '' ) {
-			Timber::$locations = $this->template_dir;
 			Timber::render( [ $sub_dir . $template_name . '.twig' ], $data );
 		}
 
@@ -68,7 +81,6 @@ if ( ! class_exists( 'View' ) ) {
 		public function block( $template_name, $data, $template_ext = 'twig', $sub_dir = 'blocks/' ) {
 
 			if ( 'twig' === $template_ext ) {
-				Timber::$locations = $this->template_dir;
 				Timber::render( [ $sub_dir . $template_name . '.' . $template_ext ], $data );
 			} else {
 				include_once $this->template_dir . $sub_dir . $template_name . '.' . $template_ext;
